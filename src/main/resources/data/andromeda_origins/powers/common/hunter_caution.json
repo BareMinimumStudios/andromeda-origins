@@ -1,0 +1,81 @@
+{
+  "type": "origins:multiple",
+  "remove": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 60,
+    "start_value": 60,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+      "bar_index": 23
+    },
+    "min_action": {
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "minecraft:debuff"
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_remove",
+      "change": -1,
+      "operation": "add"
+    }
+  },
+  "exhaustion": {
+    "type": "origins:modify_exhaustion",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": 0.5
+    }
+  },
+  "speed": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "*:*",
+      "attribute": "minecraft:generic.movement_speed",
+      "operation": "add_multiplied_total",
+      "amount": -0.25
+    }
+  },
+  "attackspeed": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "*:*",
+      "attribute": "minecraft:generic.attack_speed",
+      "operation": "add_multiplied_total",
+      "amount": -0.25
+    }
+  },
+  "breakspeed": {
+    "type": "origins:modify_break_speed",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.25
+    }
+  },
+  "damagedown": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.25
+    }
+  },
+  "damagedownprojectile": {
+    "type": "origins:modify_projectile_damage",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.25
+    }
+  },
+  "resistances": {
+    "type": "origins:modify_damage_taken",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.2
+    }
+  }
+}

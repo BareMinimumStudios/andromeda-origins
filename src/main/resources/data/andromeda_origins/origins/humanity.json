@@ -1,0 +1,16 @@
+{
+  "powers": [
+    "andromeda_origins:humanity/passives",
+    "andromeda_origins:humanity/primary",
+    "andromeda_origins:humanity/figura",
+    "andromeda_origins:common/figura"
+  ],
+  "icon": {
+    "id": "andromeda_origins:humanity_icon"
+  },
+  "unchoosable": false,
+  "order": 1,
+  "impact": 3,
+  "name": "The Human",
+  "description": "Humanity has endured in a world increasingly shaped by myth, magic, and creatures far stronger than themselves. Though their numbers have dwindled and their bodies lack supernatural gifts, humans persist through ingenuity, determination, and an unwillingness to surrender. Their greatest strength is not what they are born with, but how far they are willing to go to survive."
+}

@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "dawnoftimerbuilder:waxed_oak_chandelier",
+      "required": false
+    },
+    {
+      "id": "dawnoftimerbuilder:wrought_iron_fence",
+      "required": false
+    }
+  ]
+}

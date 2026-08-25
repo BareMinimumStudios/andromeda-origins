@@ -1,0 +1,67 @@
+{
+  "type": "origins:multiple",
+  "active": {
+    "type": "origins:active_self",
+    "cooldown": 2400,
+    "hud_render": {
+      "should_render": true,
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+      "bar_index": 21,
+      "condition": {
+        "type": "origins:power",
+        "power": "*:selkie/helper/defending",
+        "inverted": true
+      }
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.dolphin.splash",
+          "volume": 1,
+          "pitch": 1
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:block.conduit.activate",
+          "volume": 1,
+          "pitch": 1
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_4",
+          "change": 1
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:selkie/helper/defending",
+          "source": "minecraft:buff"
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:power",
+      "power": "*:common/silenced",
+      "inverted": true
+    },
+    "key": {
+      "key": "key.origins.secondary_active",
+      "continuous": false
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Trigger with ",
+        {
+          "keybind": "key.origins.secondary_active"
+        }
+      ]
+    }
+  ],
+  "name": "Sealskin Bastion",
+  "description": "Press your Secondary Ability key to enter §e§lSealskin Bastion§r for 10 seconds, reducing incoming damage by 99% while reducing your movement speed by 50%."
+}

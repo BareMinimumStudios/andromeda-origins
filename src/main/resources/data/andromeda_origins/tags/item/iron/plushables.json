@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "plushables:plushable_potsy",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "more_useful_copper:moisture_compass",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "powers": [
+    "andromeda_origins:selkie/passives",
+    "andromeda_origins:selkie/primary",
+    "andromeda_origins:selkie/secondary",
+    "andromeda_origins:common/diet_pescatarian",
+    "andromeda_origins:common/figura"
+  ],
+  "icon": {
+    "id": "andromeda_origins:selkie_icon"
+  },
+  "unchoosable": false,
+  "order": 1,
+  "impact": 3,
+  "name": "Selkie",
+  "description": "Selkies are curious seal-folk whose enchanted sealskins bind them closely to the sea. They move effortlessly through water, channel the power held within their sealskins to protect others, and can wrap themselves in powerful defenses when threatened. Away from water, however, a Selkie must carefully preserve the wetness that sustains its strength."
+}

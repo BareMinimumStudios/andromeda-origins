@@ -1,0 +1,204 @@
+{
+  "type": "origins:multiple",
+  "active": {
+    "type": "origins:active_self",
+    "cooldown": 20,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:raycast",
+      "distance": 64,
+      "block": false,
+      "entity": true,
+      "shape_type": "collider",
+      "fluid_handling": "none",
+      "before_action": {
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:change_resource",
+            "resource": "andromeda_origins:common/figura_2",
+            "change": 1
+          },
+          {
+            "type": "origins:play_sound",
+            "sound": "minecraft:entity.illusioner.prepare_mirror",
+            "volume": 1,
+            "pitch": 0.2
+          },
+          {
+            "type": "origins:grant_power",
+            "power": "*:gorgon/helper/intimidating",
+            "source": "minecraft:state"
+          }
+        ]
+      },
+      "hit_action": {
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:play_sound",
+            "sound": "minecraft:entity.warden.roar",
+            "volume": 1,
+            "pitch": 1.5
+          },
+          {
+            "type": "origins:change_resource",
+            "resource": "*:*_charges",
+            "change": -1
+          },
+          {
+            "type": "origins:grant_power",
+            "power": "*:gorgon/helper/speedup",
+            "source": "minecraft:buff"
+          },
+          {
+            "type": "origins:change_resource",
+            "resource": "*:gorgon/helper/speedup_remove",
+            "change": 10
+          }
+        ]
+      },
+      "miss_action": {
+        "type": "origins:execute_command",
+        "command": "title @s actionbar {\"text\": \"You must target an entity!\", \"color\": \"red\"}"
+      },
+      "bientity_action": {
+        "type": "origins:target_action",
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:play_sound",
+              "sound": "minecraft:entity.rabbit.hurt",
+              "volume": 1,
+              "pitch": 0.4
+            },
+            {
+              "type": "origins:grant_power",
+              "power": "*:gorgon/helper/intimidated",
+              "source": "minecraft:debuff"
+            },
+            {
+              "type": "origins:change_resource",
+              "resource": "*:gorgon/helper/intimidated_remove",
+              "change": 10
+            }
+          ]
+        }
+      },
+      "bientity_condition": {
+        "type": "origins:and",
+        "conditions": [
+          {
+            "type": "origins:can_see"
+          },
+          {
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:and",
+              "conditions": [
+                {
+                  "type": "origins:living"
+                },
+                {
+                  "type": "origins:equipped_item",
+                  "equipment_slot": "head",
+                  "inverted": true,
+                  "item_condition": {
+                    "type": "origins:ingredient",
+                    "ingredient": {
+                      "tag": "origins:pumpkin_like/equipment"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "command_step": 1,
+      "command_along_ray": "particle minecraft:happy_villager",
+      "command_along_ray_only_on_hit": true
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "*:common/silenced",
+          "inverted": true
+        },
+        {
+          "type": "origins:resource",
+          "comparison": "==",
+          "resource": "*:*_intimidatecooldown",
+          "compare_to": 0
+        }
+      ]
+    },
+    "key": {
+      "key": "key.origins.secondary_active",
+      "continuous": false
+    }
+  },
+  "charges": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 2,
+    "start_value": 2,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_02.png",
+      "bar_index": 7,
+      "condition": {
+        "type": "origins:resource",
+        "comparison": "==",
+        "resource": "*:*_intimidatecooldown",
+        "compare_to": 0
+      }
+    },
+    "min_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_charges",
+          "change": 2
+        },
+        {
+          "type": "origins:trigger_cooldown",
+          "power": "*:*_intimidatecooldown"
+        }
+      ]
+    }
+  },
+  "intimidatecooldown": {
+    "type": "origins:cooldown",
+    "cooldown": 800,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_02.png",
+      "bar_index": 7,
+      "condition": {
+        "type": "origins:resource",
+        "comparison": ">",
+        "resource": "*:*_intimidatecooldown",
+        "compare_to": 0
+      }
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Trigger with ",
+        {
+          "keybind": "key.origins.secondary_active"
+        }
+      ]
+    }
+  ],
+  "name": "Transference",
+  "description": "Transference has 2 charges. Press your Secondary Ability key while looking at a creature within 32 blocks to reduce its damage dealt by 30% for 15 seconds and double your own movement speed for 15 seconds. Repeated applications can extend the target's damage reduction up to 1 minute."
+}

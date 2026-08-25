@@ -1,0 +1,18 @@
+{
+	"replace": false,
+	"origins": [
+		"andromeda_origins:arachne",
+		"andromeda_origins:faerie",
+		"andromeda_origins:fenrkin",
+		"andromeda_origins:gorgon",
+		"andromeda_origins:humanity",
+		"andromeda_origins:lichling",
+		"andromeda_origins:manticore",
+		"andromeda_origins:nereid",
+		"andromeda_origins:satyr",
+		"andromeda_origins:selkie",
+		"andromeda_origins:siren",
+		"andromeda_origins:veilborn",
+		"andromeda_origins:wyverian"
+	]
+}

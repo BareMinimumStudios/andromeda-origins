@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "alpinerwhispers:arolla_pine_bathtub",
+      "required": false
+    },
+    {
+      "id": "alpinerwhispers:arolla_pine_privy",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "vinery:aegis_wine",
+      "required": false
+    },
+    {
+      "id": "vinery:apple_press",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_big_table",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_hanging_sign",
+      "required": false
+    },
+    {
+      "id": "vinery:dark_cherry_shelf",
+      "required": false
+    },
+    {
+      "id": "vinery:magnetic_wine",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "powers": [
+    "andromeda_origins:satyr/passives",
+    "andromeda_origins:satyr/primary",
+    "andromeda_origins:satyr/secondary",
+    "andromeda_origins:satyr/figura",
+    "andromeda_origins:common/diet_vegetarian",
+    "andromeda_origins:common/figura"
+  ],
+  "icon": {
+    "id": "andromeda_origins:satyr_icon"
+  },
+  "unchoosable": false,
+  "order": 1,
+  "impact": 3,
+  "name": "Satyr",
+  "description": "Satyrs are lively, untamed beings driven by motion, instinct, and momentum. Their hooves and horns turn speed into both mobility and force, rewarding players who remain constantly on the move. Where others seek control, Satyrs thrive in the chaos of continuous movement."
+}

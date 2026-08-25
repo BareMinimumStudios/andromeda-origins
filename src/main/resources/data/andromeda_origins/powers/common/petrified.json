@@ -1,0 +1,132 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_added": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/restrained",
+          "source": "minecraft:ccontrol"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/restrained_sources",
+          "change": 1
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/silenced",
+          "source": "minecraft:ccontrol"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/silenced_sources",
+          "change": 1
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/pacified",
+          "source": "minecraft:ccontrol"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/pacified_sources",
+          "change": 1
+        }
+      ]
+    },
+    "entity_action_lost": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/restrained_sources",
+          "change": -1
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/silenced_sources",
+          "change": -1
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/pacified_sources",
+          "change": -1
+        }
+      ]
+    }
+  },
+  "sources": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 10,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "min_action": {
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "minecraft:ccontrol"
+    }
+  },
+  "knockback": {
+    "type": "origins:modify_attribute",
+    "attribute": "minecraft:generic.knockback_resistance",
+    "modifier": {
+      "operation": "set_total",
+      "amount": 1
+    }
+  },
+  "resistances": {
+    "type": "origins:modify_damage_taken",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.75
+    }
+  },
+  "attackspeed": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "*:*",
+      "attribute": "minecraft:generic.attack_speed",
+      "operation": "add_multiplied_total",
+      "amount": -1
+    }
+  },
+  "mining": {
+    "type": "origins:modify_break_speed",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -1
+    }
+  },
+  "no_regen": {
+    "type": "origins:disable_regen"
+  },
+  "desaturated_vision": {
+    "type": "origins:shader",
+    "shader": "minecraft:shaders/post/desaturate.json"
+  },
+  "prevent_item_use": {
+    "type": "origins:prevent_item_use"
+  },
+  "no_place": {
+    "type": "origins:prevent_block_place"
+  },
+  "overlay": {
+    "type": "origins:overlay",
+    "hidden": true,
+    "sprite": "origins:phantomize_overlay",
+    "red": 0.3,
+    "green": 0.3,
+    "blue": 0.3,
+    "strength": 1,
+    "draw_mode": "nausea",
+    "draw_phase": "above_hud",
+    "visible_in_third_person": true,
+    "hide_with_hud": true
+  }
+}

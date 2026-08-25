@@ -1,0 +1,37 @@
+{
+  "type": "origins:multiple",
+  "time": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 10,
+    "start_value": 10,
+    "hud_render": {
+      "should_render": false
+    },
+    "min_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:passenger_action",
+          "action": {
+            "type": "origins:dismount"
+          }
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:*",
+          "source": "minecraft:state"
+        }
+      ]
+    }
+  },
+  "tick": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_time",
+      "change": -1
+    }
+  }
+}

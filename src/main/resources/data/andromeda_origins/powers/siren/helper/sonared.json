@@ -1,0 +1,59 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_added": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:damage",
+          "amount": 6,
+          "damage_type": "minecraft:sonic_boom"
+        }
+      ]
+    }
+  },
+  "remove": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 5,
+    "start_value": 5,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+      "bar_index": 14
+    },
+    "min_action": {
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "minecraft:debuff"
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:apply_effect",
+          "effect": {
+            "id": "minecraft:darkness",
+            "duration": 30
+          }
+        },
+        {
+          "type": "origins:apply_effect",
+          "effect": {
+            "id": "minecraft:glowing",
+            "duration": 30
+          }
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_remove",
+          "change": -1
+        }
+      ]
+    }
+  }
+}

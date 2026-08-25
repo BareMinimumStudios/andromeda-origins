@@ -1,0 +1,68 @@
+{
+  "type": "origins:multiple",
+  "remove": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 1,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+      "bar_index": 4
+    },
+    "min_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_4",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:common/unstoppable",
+          "source": "minecraft:buff"
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:*",
+          "source": "minecraft:buff"
+        }
+      ]
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_remove",
+      "change": -1
+    }
+  },
+  "overlay": {
+    "type": "origins:overlay",
+    "hidden": true,
+    "sprite": "origins:phantomize_overlay",
+    "red": 0.2,
+    "green": 0.5,
+    "blue": 0.7,
+    "strength": 0.5,
+    "draw_mode": "nausea",
+    "draw_phase": "above_hud",
+    "visible_in_third_person": true,
+    "hide_with_hud": true
+  },
+  "glow": {
+    "type": "origins:self_glow",
+    "use_teams": false,
+    "red": 0.33,
+    "green": 0.57,
+    "blue": 1,
+    "condition": {
+      "type": "origins:power",
+      "power": "*:common/undetectable",
+      "inverted": true
+    }
+  }
+}

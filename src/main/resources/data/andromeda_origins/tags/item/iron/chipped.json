@@ -1,0 +1,425 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "chipped:ancient_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:angry_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:barbed_iron_bars",
+      "required": false
+    },
+    {
+      "id": "chipped:blank_raw_iron_block_carving",
+      "required": false
+    },
+    {
+      "id": "chipped:bolted_iron_bars",
+      "required": false
+    },
+    {
+      "id": "chipped:bordered_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:brick_bordered_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:carpenters_table",
+      "required": false
+    },
+    {
+      "id": "chipped:carved_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:chained_iron_bars",
+      "required": false
+    },
+    {
+      "id": "chipped:checkered_raw_iron_block_tiles",
+      "required": false
+    },
+    {
+      "id": "chipped:chipped_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:chisel",
+      "required": false
+    },
+    {
+      "id": "chipped:cobbled_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:cracked_disordered_raw_iron_block_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:cracked_flat_raw_iron_block_tiles",
+      "required": false
+    },
+    {
+      "id": "chipped:cracked_raw_iron_block_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:creeper_raw_iron_block_carving",
+      "required": false
+    },
+    {
+      "id": "chipped:crossbolted_iron_bars",
+      "required": false
+    },
+    {
+      "id": "chipped:crossed_iron_bars",
+      "required": false
+    },
+    {
+      "id": "chipped:crying_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:curly_raw_iron_block_pillar",
+      "required": false
+    },
+    {
+      "id": "chipped:cut_blank_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:cut_raw_iron_block_column",
+      "required": false
+    },
+    {
+      "id": "chipped:duh_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:edged_raw_iron_block_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:engraved_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:engraved_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:eroded_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:etched_raw_iron_block_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:fine_raw_iron_block_pillar",
+      "required": false
+    },
+    {
+      "id": "chipped:flat_raw_iron_block_tiles",
+      "required": false
+    },
+    {
+      "id": "chipped:floral_iron_bars",
+      "required": false
+    },
+    {
+      "id": "chipped:glad_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:glassblower",
+      "required": false
+    },
+    {
+      "id": "chipped:harp_iron_bars",
+      "required": false
+    },
+    {
+      "id": "chipped:inlayed_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:inscribed_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:iron_bars_top",
+      "required": false
+    },
+    {
+      "id": "chipped:iron_block_panels",
+      "required": false
+    },
+    {
+      "id": "chipped:layed_raw_iron_block_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:layered_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:linked_iron_bars",
+      "required": false
+    },
+    {
+      "id": "chipped:loded_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:loose_iron_bars",
+      "required": false
+    },
+    {
+      "id": "chipped:mason_table",
+      "required": false
+    },
+    {
+      "id": "chipped:massive_raw_iron_block_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:offset_raw_iron_block_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:ornate_raw_iron_block_pillar",
+      "required": false
+    },
+    {
+      "id": "chipped:overlapping_raw_iron_block_tiles",
+      "required": false
+    },
+    {
+      "id": "chipped:piked_iron_bars",
+      "required": false
+    },
+    {
+      "id": "chipped:pillar_raw_iron_block_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:plated_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:polished_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:polished_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:pressed_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:prismal_raw_iron_block_remnants",
+      "required": false
+    },
+    {
+      "id": "chipped:railed_iron_bars",
+      "required": false
+    },
+    {
+      "id": "chipped:raw_iron_block_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:raw_iron_block_mini_tiles",
+      "required": false
+    },
+    {
+      "id": "chipped:raw_iron_block_pillar",
+      "required": false
+    },
+    {
+      "id": "chipped:raw_iron_block_pillar_top",
+      "required": false
+    },
+    {
+      "id": "chipped:raw_iron_block_scales",
+      "required": false
+    },
+    {
+      "id": "chipped:reinforced_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:rough_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:rounded_raw_iron_block_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:runic_carved_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:sad_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:sanded_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:saw",
+      "required": false
+    },
+    {
+      "id": "chipped:sheet_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:shuttered_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:sighthole_iron_bars",
+      "required": false
+    },
+    {
+      "id": "chipped:simple_raw_iron_block_pillar",
+      "required": false
+    },
+    {
+      "id": "chipped:small_raw_iron_block_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:smooth_inlayed_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:smooth_raw_iron_block_column",
+      "required": false
+    },
+    {
+      "id": "chipped:smooth_ringed_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:smoothed_double_inlayed_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:spider_raw_iron_block_carving",
+      "required": false
+    },
+    {
+      "id": "chipped:spiraled_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:stacked_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:stacked_raw_iron_block_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:stepped_iron_bars",
+      "required": false
+    },
+    {
+      "id": "chipped:sturdy_iron_bars",
+      "required": false
+    },
+    {
+      "id": "chipped:supported_iron_bars",
+      "required": false
+    },
+    {
+      "id": "chipped:thick_inlayed_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:thorned_iron_bars",
+      "required": false
+    },
+    {
+      "id": "chipped:tiled_bordered_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:tiled_raw_iron_block_column",
+      "required": false
+    },
+    {
+      "id": "chipped:tiled_raw_iron_blocks",
+      "required": false
+    },
+    {
+      "id": "chipped:tinkering_table",
+      "required": false
+    },
+    {
+      "id": "chipped:tiny_brick_bordered_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:tiny_layered_raw_iron_block_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:tiny_layered_raw_iron_block_slabs",
+      "required": false
+    },
+    {
+      "id": "chipped:tiny_raw_iron_block_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:trodden_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:unamused_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:vertical_cut_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:vertical_disordered_raw_iron_block_bricks",
+      "required": false
+    },
+    {
+      "id": "chipped:victorian_iron_bars_pikes",
+      "required": false
+    },
+    {
+      "id": "chipped:vined_iron_bars",
+      "required": false
+    },
+    {
+      "id": "chipped:weathered_raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "chipped:woven_iron_bars",
+      "required": false
+    },
+    {
+      "id": "chipped:zippered_iron_bars",
+      "required": false
+    }
+  ]
+}

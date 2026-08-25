@@ -1,0 +1,18 @@
+{
+  "powers": [
+    "andromeda_origins:fenrkin/passives",
+    "andromeda_origins:fenrkin/primary",
+    "andromeda_origins:fenrkin/secondary",
+    "andromeda_origins:fenrkin/figura",
+    "andromeda_origins:common/diet_carnivore",
+    "andromeda_origins:common/figura"
+  ],
+  "icon": {
+    "id": "andromeda_origins:fenrkin_icon"
+  },
+  "unchoosable": false,
+  "order": 1,
+  "impact": 3,
+  "name": "Fenrkin",
+  "description": "Descendants of the legendary Dire Wolves, Fenrkin are relentless hunters gifted with keen senses and overwhelming physical strength. Once they catch the trail of their prey, few creatures can escape them. Fiercely loyal and remarkably resilient, a Fenrkin is at its most dangerous when the hunt begins."
+}

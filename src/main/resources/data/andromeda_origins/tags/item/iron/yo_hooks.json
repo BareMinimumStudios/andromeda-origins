@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "yo_hooks:diamond_grappling_hook",
+      "required": false
+    },
+    {
+      "id": "yo_hooks:gold_grappling_hook",
+      "required": false
+    },
+    {
+      "id": "yo_hooks:iron_grappling_hook",
+      "required": false
+    },
+    {
+      "id": "yo_hooks:iron_hook_head",
+      "required": false
+    },
+    {
+      "id": "yo_hooks:netherite_grappling_hook",
+      "required": false
+    }
+  ]
+}

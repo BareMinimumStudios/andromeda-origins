@@ -1,0 +1,46 @@
+{
+  "type": "origins:multiple",
+  "remove": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 30,
+    "start_value": 30,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
+      "bar_index": 7
+    },
+    "min_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:trigger_cooldown",
+          "power": "*:fenrkin/primary_cooldown"
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:*",
+          "source": "minecraft:debuff"
+        }
+      ]
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_remove",
+      "change": -1
+    }
+  },
+  "heartbeat": {
+    "type": "origins:action_over_time",
+    "interval": 60,
+    "entity_action": {
+      "type": "origins:play_sound",
+      "sound": "minecraft:entity.sniffer.scenting",
+      "volume": 1,
+      "pitch": 1
+    }
+  }
+}

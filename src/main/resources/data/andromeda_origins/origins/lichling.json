@@ -1,0 +1,20 @@
+{
+  "powers": [
+    "andromeda_origins:lichling/passives",
+    "andromeda_origins:lichling/primary",
+    "andromeda_origins:lichling/secondary",
+    "andromeda_origins:lichling/figura",
+    "andromeda_origins:common/ironweakness",
+    "andromeda_origins:common/witheringironweakness",
+    "andromeda_origins:common/diet_raw",
+    "andromeda_origins:common/figura"
+  ],
+  "icon": {
+    "id": "andromeda_origins:lichling_icon"
+  },
+  "unchoosable": false,
+  "order": 1,
+  "impact": 3,
+  "name": "Lichling",
+  "description": "Lichlings are death-defying beings bound to necrotic energy that blurs the line between life and undeath. They draw strength from darkness, command the attention of lesser undead, and channel that energy to wither the living or restore those at death's door. To a Lichling, death is less an ending than an obstacle to overcome."
+}

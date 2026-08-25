@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "ubesdelight:kalan",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:rolling_pin_iron",
+      "required": false
+    }
+  ]
+}

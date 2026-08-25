@@ -1,0 +1,38 @@
+{
+  "type": "origins:multiple",
+  "remove": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 10,
+    "start_value": 10,
+    "hud_render": {
+      "should_render": false
+    },
+    "min_action": {
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "minecraft:buff"
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_remove",
+      "change": -1
+    }
+  },
+  "visual": {
+    "type": "origins:particle",
+    "count": 5,
+    "particle": "minecraft:trial_spawner_detection_ominous",
+    "spread": {
+      "x": 0.25,
+      "y": 0.25,
+      "z": 0.25
+    },
+    "offset_y": 1,
+    "frequency": 10
+  }
+}

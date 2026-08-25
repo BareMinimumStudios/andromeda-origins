@@ -1,0 +1,75 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_added": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/silenced",
+          "source": "minecraft:ccontrol"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/silenced_sources",
+          "change": 1
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "title @s actionbar {\"text\": \"You are wet and unstable!\", \"color\": \"red\"}"
+        }
+      ]
+    },
+    "entity_action_lost": {
+      "type": "origins:change_resource",
+      "resource": "*:common/silenced_sources",
+      "change": -1
+    }
+  },
+  "remove": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 180,
+    "start_value": 1,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
+      "bar_index": 3
+    },
+    "min_action": {
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "minecraft:state"
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_remove",
+      "change": -1,
+      "operation": "add"
+    },
+    "condition": {
+      "type": "origins:resource",
+      "resource": "*:veilborn/passives_weaknesstate",
+      "comparison": "==",
+      "compare_to": 0
+    }
+  },
+  "damagedown": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.8
+    }
+  },
+  "damagedownprojectile": {
+    "type": "origins:modify_projectile_damage",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.8
+    }
+  }
+}

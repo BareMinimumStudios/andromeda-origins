@@ -1,0 +1,125 @@
+{
+  "type": "origins:multiple",
+  "blocker": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 1,
+    "hud_render": {
+      "should_render": true,
+      "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_02.png",
+      "bar_index": 7
+    }
+  },
+  "active": {
+    "type": "origins:active_self",
+    "cooldown": 10,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:resource",
+                "resource": "*:*_blocker",
+                "comparison": "==",
+                "compare_to": 0
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "block.enchantment_table.use",
+                    "volume": 1,
+                    "pitch": 0.7
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "*:common/figura_5",
+                    "change": 1
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_blocker",
+                    "change": 1
+                  },
+                  {
+                    "type": "origins:clear_effect",
+                    "effect": "minecraft:blindness"
+                  },
+                  {
+                    "type": "origins:clear_effect",
+                    "effect": "minecraft:darkness"
+                  }
+                ]
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:resource",
+                "resource": "*:*_blocker",
+                "comparison": "==",
+                "compare_to": 1
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "block.beacon.deactivate",
+                    "volume": 1,
+                    "pitch": 2
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "*:common/figura_5",
+                    "change": -1
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_blocker",
+                    "change": -1
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "*:common/silenced",
+          "inverted": true
+        }
+      ]
+    },
+    "key": {
+      "key": "key.origins.secondary_active",
+      "continuous": false
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Trigger with ",
+        {
+          "keybind": "key.origins.secondary_active"
+        }
+      ]
+    }
+  ],
+  "name": "Vigil Perception",
+  "description": "Press your Secondary Ability key to gain Night Vision and immunity to Blindness and Darkness. Press Secondary Ability again to dismiss Vigil Perception."
+}

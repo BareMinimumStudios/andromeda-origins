@@ -1,0 +1,49 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "ropeworks:bunting_anchor",
+      "required": false
+    },
+    {
+      "id": "ropeworks:cable_anchor",
+      "required": false
+    },
+    {
+      "id": "ropeworks:chain_anchor_medium",
+      "required": false
+    },
+    {
+      "id": "ropeworks:chain_anchor_thick",
+      "required": false
+    },
+    {
+      "id": "ropeworks:chain_anchor_thin",
+      "required": false
+    },
+    {
+      "id": "ropeworks:rope_anchor",
+      "required": false
+    },
+    {
+      "id": "ropeworks:rope_anchor_double",
+      "required": false
+    },
+    {
+      "id": "ropeworks:rope_anchor_medium",
+      "required": false
+    },
+    {
+      "id": "ropeworks:rope_anchor_thick",
+      "required": false
+    },
+    {
+      "id": "ropeworks:ropetool",
+      "required": false
+    },
+    {
+      "id": "ropeworks:tinsel_anchor",
+      "required": false
+    }
+  ]
+}

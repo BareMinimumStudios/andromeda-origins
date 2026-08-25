@@ -1,0 +1,93 @@
+{
+  "type": "origins:action_over_time",
+  "interval": 1,
+  "entity_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:area_of_effect",
+        "radius": 2.75,
+        "shape": "sphere",
+        "bientity_action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:damage",
+              "damage_type": "minecraft:cramming",
+              "amount": 2.5
+            },
+            {
+              "type": "origins:target_action",
+              "action": {
+                "type": "origins:grant_power",
+                "power": "andromeda_origins:manticore/helper/charged",
+                "source": "minecraft:ccontrol"
+              }
+            }
+          ]
+        },
+        "bientity_condition": {
+          "type": "origins:and",
+          "conditions": [
+            {
+              "type": "origins:can_see"
+            },
+            {
+              "type": "origins:target_condition",
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:living"
+                  },
+                  {
+                    "type": "origins:power",
+                    "power": "andromeda_origins:common/unstoppable",
+                    "inverted": true
+                  },
+                  {
+                    "type": "origins:power",
+                    "power": "andromeda_origins:manticore/helper/charged",
+                    "inverted": true
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "origins:if_else_list",
+        "actions": [
+          {
+            "condition": {
+              "type": "origins:on_block"
+            },
+            "action": {
+              "type": "origins:and",
+              "actions": [
+                {
+                  "type": "origins:change_resource",
+                  "resource": "andromeda_origins:common/figura_1",
+                  "change": 0,
+                  "operation": "set"
+                },
+                {
+                  "type": "origins:change_resource",
+                  "resource": "*:manticore/primary_animatedspin",
+                  "change": -1
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "condition": {
+    "type": "origins:resource",
+    "comparison": "==",
+    "resource": "*:manticore/primary_animatedspin",
+    "compare_to": 1
+  }
+}

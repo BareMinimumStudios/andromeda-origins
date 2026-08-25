@@ -1,0 +1,65 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "farm_and_charm:cattlegrid",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:chicken_coop",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:chicken_fence",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:cooking_pot",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:crafting_bowl",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:feeding_trough",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:iron_divider",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:mincer",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:pitchfork",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:plow",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:roaster",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:stove",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:supply_cart",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:tool_rack",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:water_sprinkler",
+      "required": false
+    }
+  ]
+}

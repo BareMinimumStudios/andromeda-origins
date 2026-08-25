@@ -1,0 +1,38 @@
+{
+  "type": "origins:action_on_callback",
+  "entity_action_added": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:grant_power",
+        "power": "origins:water_breathing",
+        "source": "minecraft:state"
+      },
+      {
+        "type": "origins:grant_power",
+        "power": "origins:aqua_affinity",
+        "source": "minecraft:state"
+      },
+      {
+        "type": "origins:grant_power",
+        "power": "origins:like_water",
+        "source": "minecraft:state"
+      },
+      {
+        "type": "origins:grant_power",
+        "power": "origins:conduit_power_on_land",
+        "source": "minecraft:state"
+      },
+      {
+        "type": "origins:grant_power",
+        "power": "origins:air_from_potions",
+        "source": "minecraft:state"
+      },
+      {
+        "type": "origins:revoke_power",
+        "power": "*:nereid/helper/merlingplus",
+        "source": "minecraft:state"
+      }
+    ]
+  }
+}

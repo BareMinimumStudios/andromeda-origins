@@ -1,0 +1,107 @@
+{
+  "type": "origins:active_self",
+  "cooldown": 3600,
+  "hud_render": {
+    "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+    "bar_index": 0,
+    "order": 6
+  },
+  "entity_action": {
+    "type": "origins:raycast",
+    "distance": 64,
+    "block": false,
+    "entity": true,
+    "shape_type": "collider",
+    "fluid_handling": "none",
+    "bientity_action": {
+      "type": "origins:target_action",
+      "action": {
+        "type": "origins:grant_power",
+        "power": "*:faerie/helper/hallucinating",
+        "source": "minecraft:debuff"
+      }
+    },
+    "hit_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.allay.item_given",
+          "volume": 1,
+          "pitch": 1
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:common/figura_2",
+          "change": 1
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:faerie/helper/casting",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "miss_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "title @s actionbar {\"text\": \"You must target an entity!\", \"color\": \"red\"}"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:common/figura_2",
+          "change": 1
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:faerie/helper/casting",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:delay",
+          "ticks": 1,
+          "action": {
+            "type": "origins:change_resource",
+            "resource": "*:*",
+            "change": 3580,
+            "operation": "set"
+          }
+        }
+      ]
+    }
+  },
+  "condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:power",
+        "power": "*:common/silenced",
+        "inverted": true
+      },
+      {
+        "type": "origins:sneaking",
+        "inverted": true
+      }
+    ]
+  },
+  "key": {
+    "key": "key.origins.secondary_active",
+    "continuous": false
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Trigger with ",
+        {
+          "keybind": "key.origins.secondary_active"
+        }
+      ]
+    }
+  ],
+  "name": "Fae Illusions",
+  "description": "Press your Secondary Ability key while looking at a creature within 64 blocks to afflict it with §e§lFae Illusions§r for 30 seconds. Faeries can see the affected target through walls, the target cannot perceive entities normally, and it becomes vulnerable to additional effects from §e§lTrickster§r."
+}

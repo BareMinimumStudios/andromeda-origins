@@ -1,0 +1,698 @@
+{
+  "replace": false,
+  "values": [
+    "#andromeda_origins:food/raw_minecraft",
+    {
+      "id": "alpinewhispers:reindeer",
+      "required": false
+    },
+    {
+      "id": "bakery:cake_dough",
+      "required": false
+    },
+    {
+      "id": "bakery:sweet_dough",
+      "required": false
+    },
+    {
+      "id": "crittersandcompanions:acorn",
+      "required": false
+    },
+    {
+      "id": "crittersandcompanions:koi_fish",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:bacon",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:chicken_parts",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:corn",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:dough",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:lamb_ham",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:lettuce",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:minced_beef",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:onion",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:raw_pasta",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:strawberry",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:tomato",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:bacon",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:cabbage",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:cabbage_leaf",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:chicken_cuts",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:cod_slice",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:ham",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:milk_bottle",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:minced_beef",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:mutton_chops",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:onion",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:pie_crust",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:pumpkin_slice",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:raw_pasta",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:rice",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:rotten_tomato",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:salmon_slice",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:tomato",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:wheat_dough",
+      "required": false
+    },
+    {
+      "id": "frightsdelight:soul_berry",
+      "required": false
+    },
+    {
+      "id": "frightsdelight:wither_berry",
+      "required": false
+    },
+    {
+      "id": "herbalbrews:coffee_beans",
+      "required": false
+    },
+    {
+      "id": "herbalbrews:rooibos_leaf",
+      "required": false
+    },
+    {
+      "id": "herbalbrews:tea_blossom",
+      "required": false
+    },
+    {
+      "id": "herbalbrews:yerba_mate_leaf",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:african_butterflyfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:anglerfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:barreleye",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:betta",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:blobfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:blowfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:boxfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:carp",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:cichlid",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:clownfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:coelacanth",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:damselfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:danio",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:discus",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:dragonfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:flashlight_fish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:flying_fish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:golden_dorado",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:goldfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:gourami",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:hagfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:herring",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:john_dory",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:lionfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:mackerel",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:mahi",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:moray_eel",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:needlefish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:oarfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:ocean_sunfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:opah",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:parrotfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:pearlfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:piranha",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:pleco",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:ratfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:raw_crab",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:raw_crayfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:raw_fish_meat",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:raw_fish_steak",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:raw_lobster",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:raw_lobster_tail",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:raw_shrimp",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:raw_tentacle",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:rockfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:sea_bass",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:seahorse",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:sheepshead_wrasse",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:snailfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:squirrelfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:stingray",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:stonefish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:sunfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:surgeonfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:tetra",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:tiger_barb",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:trevally",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:triggerfish",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:trout",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:tuna",
+      "required": false
+    },
+    {
+      "id": "hybrid_delights:carp_roe",
+      "required": false
+    },
+    {
+      "id": "hybrid_delights:cod_roe",
+      "required": false
+    },
+    {
+      "id": "hybrid_delights:pufferfish_slice",
+      "required": false
+    },
+    {
+      "id": "hybrid_delights:ray_wing",
+      "required": false
+    },
+    {
+      "id": "hybrid_delights:salmon_roe",
+      "required": false
+    },
+    {
+      "id": "hybrid_delights:tropical_fish_roe",
+      "required": false
+    },
+    {
+      "id": "meadow:raw_buffalo_meat",
+      "required": false
+    },
+    {
+      "id": "meadow:wooden_amethyst_milk_bucket",
+      "required": false
+    },
+    {
+      "id": "meadow:wooden_buffalo_milk_bucket",
+      "required": false
+    },
+    {
+      "id": "meadow:wooden_goat_milk_bucket",
+      "required": false
+    },
+    {
+      "id": "meadow:wooden_grain_milk_bucket",
+      "required": false
+    },
+    {
+      "id": "meadow:wooden_milk_bucket",
+      "required": false
+    },
+    {
+      "id": "meadow:wooden_sheep_milk_bucket",
+      "required": false
+    },
+    {
+      "id": "meadow:wooden_warped_milk_bucket",
+      "required": false
+    },
+    {
+      "id": "rottencreatures:frozen_rotten_flesh",
+      "required": false
+    },
+    {
+      "id": "rottencreatures:magma_rotten_flesh",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:batter",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:bell_pepper_black",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:bell_pepper_blue",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:bell_pepper_green",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:bell_pepper_orange",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:bell_pepper_pink",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:bell_pepper_purple",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:bell_pepper_red",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:bell_pepper_slice_black",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:bell_pepper_slice_blue",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:bell_pepper_slice_green",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:bell_pepper_slice_orange",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:bell_pepper_slice_pink",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:bell_pepper_slice_purple",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:bell_pepper_slice_red",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:bell_pepper_slice_white",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:bell_pepper_slice_yellow",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:bell_pepper_white",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:bell_pepper_yellow",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:calamari",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:calamari_slice",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:coffee_beans",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:potato_slices",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:ensaymada_raw",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:ensaymada_ube_raw",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:garlic",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:garlic_chop",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:ginger",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:ginger_chop",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:hopia_munggo_raw",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:hopia_ube_raw",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:kinilaw",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:lemongrass",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:pandesal_raw",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:pandesal_ube_raw",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:poisonous_ube",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:raw_polvorone",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:raw_polvorone_cc",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:raw_polvorone_pinipig",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:raw_polvorone_ube",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:ube",
+      "required": false
+    },
+    {
+      "id": "vinery:cherry",
+      "required": false
+    },
+    {
+      "id": "vinery:jungle_grapes_red",
+      "required": false
+    },
+    {
+      "id": "vinery:jungle_grapes_white",
+      "required": false
+    },
+    {
+      "id": "vinery:red_grape",
+      "required": false
+    },
+    {
+      "id": "vinery:rotten_cherry",
+      "required": false
+    },
+    {
+      "id": "vinery:savanna_grapes_red",
+      "required": false
+    },
+    {
+      "id": "vinery:savanna_grapes_white",
+      "required": false
+    },
+    {
+      "id": "vinery:taiga_grapes_red",
+      "required": false
+    },
+    {
+      "id": "vinery:taiga_grapes_white",
+      "required": false
+    },
+    {
+      "id": "vinery:white_grape",
+      "required": false
+    },
+    {
+      "id": "wildernature:bison_meat",
+      "required": false
+    },
+    {
+      "id": "wildernature:cassowary_meat",
+      "required": false
+    },
+    {
+      "id": "wildernature:hazelnut",
+      "required": false
+    },
+    {
+      "id": "wildernature:pelican_meat",
+      "required": false
+    },
+    {
+      "id": "wildernature:turkey_meat",
+      "required": false
+    },
+    {
+      "id": "wildernature:venison",
+      "required": false
+    }
+  ]
+}

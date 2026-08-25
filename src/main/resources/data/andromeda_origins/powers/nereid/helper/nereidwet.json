@@ -1,0 +1,83 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_added": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/wet",
+          "source": "minecraft:debuff"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/wet_sources",
+          "change": 1
+        }
+      ]
+    }
+  },
+  "remove": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 90,
+    "start_value": 1,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
+      "bar_index": 3
+    },
+    "min_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/wet_sources",
+          "change": -1
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:*",
+          "source": "minecraft:debuff"
+        }
+      ]
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_remove",
+      "change": -1,
+      "operation": "add"
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:fluid_height",
+          "fluid": "minecraft:water",
+          "comparison": "==",
+          "compare_to": 0
+        },
+        {
+          "type": "origins:in_rain",
+          "inverted": true
+        }
+      ]
+    }
+  },
+  "visual": {
+    "type": "origins:particle",
+    "count": 5,
+    "particle": "minecraft:falling_water",
+    "spread": {
+      "x": 0.25,
+      "y": 0.25,
+      "z": 0.25
+    },
+    "offset_y": 1,
+    "frequency": 10
+  }
+}

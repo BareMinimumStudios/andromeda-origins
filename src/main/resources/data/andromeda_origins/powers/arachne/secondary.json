@@ -1,0 +1,189 @@
+{
+  "type": "origins:multiple",
+  "raycast": {
+    "type": "origins:active_self",
+    "cooldown": 600,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/resource_bar.png",
+      "bar_index": 5
+    },
+    "entity_action": {
+      "type": "origins:raycast",
+      "distance": 64,
+      "block": true,
+      "entity": true,
+      "shape_type": "collider",
+      "fluid_handling": "none",
+      "hit_action": {
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:play_sound",
+            "sound": "minecraft:entity.llama.spit",
+            "volume": 1,
+            "pitch": 0.2
+          },
+          {
+            "type": "origins:change_resource",
+            "resource": "*:common/figura_2",
+            "change": 1
+          },
+          {
+            "type": "origins:grant_power",
+            "power": "*:arachne/helper/spitting",
+            "source": "minecraft:state"
+          }
+        ]
+      },
+      "miss_action": {
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:execute_command",
+            "command": "title @s actionbar {\"text\": \"You must target an entity or a block!\", \"color\": \"red\"}"
+          },
+          {
+            "type": "origins:delay",
+            "ticks": 1,
+            "action": {
+              "type": "origins:change_resource",
+              "resource": "*:arachne/secondary_raycast",
+              "change": 580,
+              "operation": "set"
+            }
+          }
+        ]
+      },
+      "command_at_hit": "summon bat ~ ~ ~ {attributes: [{id: \"minecraft:generic.scale\", base: 0.1d}],NoGravity:1b,Silent:1b,Tags:[\"helper\"], cardinal_components: {\"apoli:powers\": {powers: [{data: {}, sources: [\"minecraft:helper\"], id: \"andromeda_origins:arachne/helper/webpuller_granter\", type: \"apoli:action_on_callback\"}]}}}",
+      "command_step": 1,
+      "command_along_ray": "particle minecraft:spit",
+      "command_along_ray_only_on_hit": true
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "*:common/silenced",
+          "inverted": true
+        },
+        {
+          "type": "origins:sneaking",
+          "inverted": true
+        }
+      ]
+    },
+    "key": {
+      "key": "key.origins.secondary_active",
+      "continuous": false
+    }
+  },
+  "weave": {
+    "type": "origins:active_self",
+    "cooldown": 20,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:block.wool.place",
+          "volume": 1,
+          "pitch": 1.2
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_3",
+          "change": 1
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:arachne/helper/weaving",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:arachne/helper/weaving_remove",
+          "change": 2
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_progress",
+          "change": 1
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "*:common/silenced",
+          "inverted": true
+        },
+        {
+          "type": "origins:power",
+          "power": "*:arachne/helper/cobweb_fatigue",
+          "inverted": true
+        },
+        {
+          "type": "origins:sneaking"
+        }
+      ]
+    },
+    "key": {
+      "key": "key.origins.secondary_active",
+      "continuous": true
+    }
+  },
+  "progress": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 8,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_3",
+          "change": -1,
+          "operation": "add"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:arachne/helper/cobweb_fatigue",
+          "source": "minecraft:debuff"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "give @s minecraft:cobweb 5"
+        }
+      ]
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Trigger with ",
+        {
+          "keybind": "key.origins.secondary_active"
+        }
+      ]
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
+      "text": "§c§lRestrained:§r§f Prevents movement, movement abilities and elytra flight.\n \n§c§lWebbed:§r§f Obscures vision, counts as being in cobweb.\n \n§e§lStruggle:§r§f Rapidly pressing direction keys.\n \n§c§lCobweb Fatigue:§r§f You have a 25% penalty to your hunger, speed and mining speed."
+    }
+  ],
+  "name": "Weaver's Nest",
+  "description": "Press your Secondary Ability key to create a sphere of webs around a targeted point or creature. Nearby entities are pulled toward the center and become §c§l[Restrained]§r and §c§l[Webbed]§r for 7 seconds. Webbed players may struggle to break free.\n \n§e§lWebspinner:§r\nSneak and hold Secondary Ability to weave a cobweb instead. Completing the weave applies §c§l[Cobweb Fatigue]§r for 30 seconds."
+}

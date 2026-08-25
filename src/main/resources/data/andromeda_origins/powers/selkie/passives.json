@@ -1,0 +1,285 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_chosen": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:selkie/passives_recharge_shawl",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:selkie/primary_active",
+          "change": 3600,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:selkie/primary_active2",
+          "change": 100,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:selkie/primary_dashcooldown",
+          "change": 600,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:selkie/secondary_active",
+          "change": 2400,
+          "operation": "set"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:selkie/helper/selkiewet",
+          "source": "minecraft:debuff"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s add selkie"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:selkie/helper/merlingplus",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "entity_action_lost": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s remove selkie"
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:selkie/helper/selkiewet",
+          "source": "minecraft:debuff"
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:selkie/helper/groundweak",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:selkie/helper/merlingminus",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/debug",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "execute_chosen_when_orb": true
+  },
+  "recharge_shawl": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 30,
+    "start_value": 0,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
+      "bar_index": 3,
+      "condition": {
+        "type": "origins:power",
+        "power": "*:selkie/helper/groundweak"
+      }
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:grant_power",
+          "power": "*:selkie/helper/selkiewet",
+          "source": "minecraft:debuff"
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:selkie/helper/groundweak",
+          "source": "minecraft:state"
+        }
+      ]
+    }
+  },
+  "heart": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:if_else_list",
+      "actions": [
+        {
+          "condition": {
+            "type": "origins:and",
+            "conditions": [
+              {
+                "type": "origins:power",
+                "power": "*:selkie/helper/groundweak"
+              },
+              {
+                "type": "origins:resource",
+                "resource": "*:*_recharge_shawl",
+                "comparison": "<",
+                "compare_to": 30
+              },
+              {
+                "type": "origins:fluid_height",
+                "fluid": "minecraft:water",
+                "comparison": ">=",
+                "compare_to": 1.5
+              }
+            ]
+          },
+          "action": {
+            "type": "origins:change_resource",
+            "resource": "*:*_recharge_shawl",
+            "change": 1
+          }
+        },
+        {
+          "condition": {
+            "type": "origins:and",
+            "conditions": [
+              {
+                "type": "origins:power",
+                "power": "*:selkie/helper/groundweak"
+              },
+              {
+                "type": "origins:resource",
+                "resource": "*:*_recharge_shawl",
+                "comparison": ">",
+                "compare_to": 0
+              },
+              {
+                "type": "origins:fluid_height",
+                "fluid": "minecraft:water",
+                "comparison": "<",
+                "compare_to": 1.5
+              }
+            ]
+          },
+          "action": {
+            "type": "origins:change_resource",
+            "resource": "*:*_recharge_shawl",
+            "change": -1
+          }
+        },
+        {
+          "condition": {
+            "type": "origins:and",
+            "conditions": [
+              {
+                "type": "origins:power",
+                "power": "*:selkie/helper/groundweak",
+                "inverted": true
+              },
+              {
+                "type": "origins:resource",
+                "resource": "*:*_recharge_shawl",
+                "comparison": ">",
+                "compare_to": 0
+              }
+            ]
+          },
+          "action": {
+            "type": "origins:change_resource",
+            "resource": "*:*_recharge_shawl",
+            "change": 0,
+            "operation": "set"
+          }
+        }
+      ]
+    }
+  },
+  "creature_type": {
+    "type": "origins:modify_type_tag",
+    "tag": "aquatic"
+  },
+  "waterspeed": {
+    "type": "origins:modify_swim_speed",
+    "modifier": {
+      "id": "andromeda_origins:selkie_passives_waterspeed",
+      "operation": "add_multiplied_total",
+      "amount": 0.45
+    }
+  },
+  "damagedown": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.15
+    }
+  },
+  "toggle": {
+    "type": "origins:toggle",
+    "key": {
+      "key": "key.andromeda_origins.toggle",
+      "continuous": false
+    }
+  },
+  "darkvision": {
+    "type": "origins:night_vision",
+    "strength": 0.75,
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:submerged_in",
+          "fluid": "minecraft:water"
+        },
+        {
+          "type": "origins:power_active",
+          "power": "*:*_toggle"
+        }
+      ]
+    }
+  },
+  "water_vision": {
+    "type": "origins:modify_camera_submersion",
+    "from": "water",
+    "to": "none",
+    "condition": {
+      "type": "origins:power_active",
+      "power": "*:*_toggle"
+    }
+  },
+  "when_hit": {
+    "type": "origins:action_when_hit",
+    "bientity_action": {
+      "type": "origins:actor_action",
+      "action": {
+        "type": "origins:grant_power",
+        "power": "*:selkie/helper/retaliated",
+        "source": "minecraft:state"
+      }
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
+      "text": "§e§lDamage Resistances:§r§f None.\n \n§c§lDamage Vulnerabilities:§r§f None.\n \n§e§lEffect Immunities:§r§f None."
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
+      "text": "§c§lWet:§r§f Counts as being in water."
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
+      "text": "§c§lSilenced:§r§f Unable to use active abilities."
+    }
+  ],
+  "name": "Passive Features",
+  "description": "§e§lStats:§r\n+45% Swim Speed\n \n§e§lFeatures:§r\n- Your creature type is Aquatic, and you can act in water as though you were on land.\n- Creatures that strike you deal 20% less attack damage and move 15% slower for 5 seconds.\n- Underwater, you have perfect vision and see 75% better in darkness. Toggleable.\n- While not Silenced by your negative passives, you can breathe on land.\n- You suffer -10% movement speed while out of water.\n- Your stored wetness rises while submerged or in rain and falls while dry. After 3 minutes fully dry, you become §c§l[Silenced]§r. Recover by remaining mostly submerged in deep water for 30 seconds; leaving deep water causes the recovery timer to count back down.\n- Being struck by a player while downed can also Silence you. That player is highlighted to affected Selkies, and striking a player who Silenced a downed Selkie can remove the condition.\n- You follow a Pescatarian diet."
+}

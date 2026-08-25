@@ -1,0 +1,51 @@
+{
+  "type": "origins:multiple",
+  "remove": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 31,
+    "start_value": 31,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+      "bar_index": 23
+    },
+    "min_action": {
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "minecraft:debuff"
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_remove",
+      "change": -1,
+      "operation": "add"
+    }
+  },
+  "speed": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "andromeda_origins:arachne_helper_cobweb_fatigue_speed",
+      "attribute": "minecraft:generic.movement_speed",
+      "operation": "add_multiplied_total",
+      "amount": -0.2
+    }
+  },
+  "exhaustion": {
+    "type": "origins:modify_exhaustion",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": 0.2
+    }
+  },
+  "breakspeed": {
+    "type": "origins:modify_break_speed",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.2
+    }
+  }
+}

@@ -1,0 +1,555 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_chosen": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:manticore/passives_weaknesstate",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:manticore/passives_weaknesstate2",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:manticore/passives_flammablent",
+          "change": 9,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:manticore/passives_flammablent2",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:manticore/passives_venomous",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:manticore/passives_devour",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:manticore/primary_primary",
+          "change": 200,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:manticore/primary_animatedspin",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:manticore/secondary_unstoppable",
+          "change": 1800,
+          "operation": "set"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s add manticore"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_weaknesstate",
+          "change": 3
+        }
+      ]
+    },
+    "entity_action_lost": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s remove manticore"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/debug",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "entity_action_added": {
+      "type": "origins:change_resource",
+      "resource": "*:*_weaknesstate",
+      "change": 2
+    },
+    "execute_chosen_when_orb": true
+  },
+  "weaknesstate": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 120,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": true,
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
+      "bar_index": 16,
+      "order": 6,
+      "condition": {
+        "type": "origins:resource",
+        "resource": "*:*_weaknesstate",
+        "comparison": ">",
+        "compare_to": 0
+      }
+    },
+    "min_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:grant_power",
+          "power": "andromeda_origins:manticore/helper/shake",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:common/figura_3",
+          "change": 1,
+          "operation": "set"
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.wolf.shake",
+          "volume": 1,
+          "pitch": 0.9
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:falling_water"
+          },
+          "count": 20,
+          "speed": 0.1,
+          "force": true,
+          "offset_y": 1,
+          "spread": {
+            "x": 0.4,
+            "y": 0.25,
+            "z": 0.4
+          }
+        }
+      ]
+    }
+  },
+  "weaknesstate2": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "heart": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:*_weaknesstate2",
+                    "comparison": "==",
+                    "compare_to": 0
+                  },
+                  {
+                    "type": "origins:block_collision",
+                    "offset_x": 0,
+                    "offset_y": 1,
+                    "offset_z": 0
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:change_resource",
+                "resource": "*:*_weaknesstate2",
+                "change": 1
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:*_weaknesstate2",
+                    "comparison": "==",
+                    "compare_to": 1
+                  },
+                  {
+                    "type": "origins:block_collision",
+                    "offset_x": 0,
+                    "offset_y": 1,
+                    "offset_z": 0,
+                    "inverted": true
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:change_resource",
+                "resource": "*:*_weaknesstate2",
+                "change": -1
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:*_weaknesstate",
+                    "comparison": ">",
+                    "compare_to": 0
+                  },
+                  {
+                    "type": "origins:power",
+                    "power": "andromeda_origins:common/wet",
+                    "inverted": true
+                  },
+                  {
+                    "type": "origins:fluid_height",
+                    "fluid": "minecraft:water",
+                    "comparison": "==",
+                    "compare_to": 0
+                  },
+                  {
+                    "type": "origins:in_rain",
+                    "inverted": true
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:change_resource",
+                "resource": "*:*_weaknesstate",
+                "change": -1
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:*_weaknesstate",
+                    "comparison": "<",
+                    "compare_to": 120
+                  },
+                  {
+                    "type": "origins:or",
+                    "conditions": [
+                      {
+                        "type": "origins:power",
+                        "power": "andromeda_origins:common/wet"
+                      },
+                      {
+                        "type": "origins:fluid_height",
+                        "fluid": "minecraft:water",
+                        "comparison": ">",
+                        "compare_to": 0
+                      },
+                      {
+                        "type": "origins:in_rain"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:change_resource",
+                "resource": "*:*_weaknesstate",
+                "change": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "resistances": {
+    "type": "origins:modify_damage_taken",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.2
+    },
+    "damage_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:projectile",
+          "inverted": true
+        },
+        {
+          "type": "origins:name",
+          "name": "fall",
+          "inverted": true
+        }
+      ]
+    }
+  },
+  "damageup": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": 0.35
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:resource",
+          "resource": "*:*_weaknesstate",
+          "comparison": "==",
+          "compare_to": 0
+        },
+        {
+          "type": "origins:resource",
+          "resource": "*:*_weaknesstate2",
+          "comparison": "==",
+          "compare_to": 0
+        }
+      ]
+    }
+  },
+  "toggle": {
+    "type": "origins:toggle",
+    "key": {
+      "key": "key.andromeda_origins.toggle",
+      "continuous": false
+    }
+  },
+  "darkvision": {
+    "type": "origins:night_vision",
+    "strength": 0.75,
+    "condition": {
+      "type": "origins:power_active",
+      "power": "*:*_toggle"
+    }
+  },
+  "insatiable": {
+    "type": "origins:modify_food",
+    "food_modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.5
+    },
+    "saturation_modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.5
+    }
+  },
+  "speedown": {
+    "type": "origins:conditioned_attribute",
+    "modifier": {
+      "id": "andromeda_origins:manticore_passives_speedown",
+      "attribute": "minecraft:generic.movement_speed",
+      "operation": "add_multiplied_total",
+      "amount": -0.2
+    },
+    "tick_rate": 20,
+    "condition": {
+      "type": "origins:or",
+      "conditions": [
+        {
+          "type": "origins:resource",
+          "resource": "*:*_weaknesstate",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        {
+          "type": "origins:resource",
+          "resource": "*:*_weaknesstate2",
+          "comparison": ">",
+          "compare_to": 0
+        }
+      ]
+    }
+  },
+  "flammablent": {
+    "type": "origins:self_action_when_hit",
+    "cooldown": 9,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_flammablent2",
+      "change": 1
+    },
+    "damage_condition": {
+      "type": "origins:fire"
+    }
+  },
+  "flammablent2": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 3,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_flammablent2",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:extinguish"
+        }
+      ]
+    }
+  },
+  "venomous": {
+    "type": "origins:target_action_on_hit",
+    "cooldown": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:apply_effect",
+      "effect": {
+        "id": "minecraft:poison",
+        "amplifier": 0,
+        "duration": 200
+      }
+    },
+    "condition": {
+      "type": "origins:fall_distance",
+      "comparison": ">",
+      "compare_to": 0
+    }
+  },
+  "lowhealth": {
+    "type": "origins:entity_glow",
+    "entity_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:relative_health",
+          "comparison": ">",
+          "compare_to": 0.25
+        },
+        {
+          "type": "origins:relative_health",
+          "comparison": "<=",
+          "compare_to": 0.5
+        },
+        {
+          "type": "origins:living"
+        },
+        {
+          "type": "origins:power",
+          "power": "*:common/undetectable",
+          "inverted": true
+        }
+      ]
+    },
+    "bientity_condition": {
+      "type": "origins:distance",
+      "comparison": "<=",
+      "compare_to": 16
+    },
+    "use_teams": false,
+    "red": 1.0,
+    "green": 0.6,
+    "blue": 0.0
+  },
+  "criticalhealth": {
+    "type": "origins:entity_glow",
+    "entity_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:relative_health",
+          "comparison": "<=",
+          "compare_to": 0.25
+        },
+        {
+          "type": "origins:living"
+        },
+        {
+          "type": "origins:power",
+          "power": "*:common/undetectable",
+          "inverted": true
+        }
+      ]
+    },
+    "bientity_condition": {
+      "type": "origins:distance",
+      "comparison": "<=",
+      "compare_to": 16
+    },
+    "use_teams": false,
+    "red": 1.0,
+    "green": 0.0,
+    "blue": 0.0
+  },
+  "devour": {
+    "type": "origins:self_action_on_kill",
+    "cooldown": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:feed",
+      "nutrition": 2,
+      "saturation": 2
+    },
+    "damage_condition": {
+      "type": "origins:projectile",
+      "inverted": true
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
+      "text": "§e§lDamage Resistances:§r§f All sources except falling & projectiles (-20%).\n \n§c§lDamage Vulnerabilities:§r§f None.\n \n§e§lEffect Immunities:§r§f None."
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
+      "text": "§c§lWet:§r§f Counts as being in water."
+    }
+  ],
+  "name": "Passive Features",
+  "description": "§e§lStats:§r\n+20% Size\n+35% Melee Damage\n \n§e§lFeatures:§r\n- You can sense wounded creatures within 16 blocks: orange when more than half their health is missing, and red when more than three-quarters is missing. Undetectable creatures are excluded.\n- You see 75% better in darkness than most creatures.\n- Melee attacks inflict Poison I for 10 seconds.\n- Fire extinguishes after no more than 3 fire-damage ticks.\n- Killing a creature with a melee attack restores 2 Hunger and 2 Saturation.\n- While §c§l[Wet]§r or in cramped spaces, you lose your melee damage bonus and suffer -20% movement speed. Contact with water extends this penalty by 1 second per second, up to 2 minutes.\n- Food is 50% less effective, and you are a Carnivore.",
+  "size": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "andromeda_origins:manticore_passives_size",
+      "attribute": "minecraft:generic.scale",
+      "operation": "add_multiplied_total",
+      "amount": 0.2
+    }
+  }
+}

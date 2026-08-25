@@ -1,0 +1,417 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "alpinewhispers:cooked_reindeer_dish",
+      "required": false
+    },
+    {
+      "id": "bakery:apple_pie",
+      "required": false
+    },
+    {
+      "id": "bakery:bread_crate",
+      "required": false
+    },
+    {
+      "id": "bakery:bundt_cake",
+      "required": false
+    },
+    {
+      "id": "bakery:chocolate_box",
+      "required": false
+    },
+    {
+      "id": "bakery:chocolate_cake",
+      "required": false
+    },
+    {
+      "id": "bakery:chocolate_gateau",
+      "required": false
+    },
+    {
+      "id": "bakery:chocolate_tart",
+      "required": false
+    },
+    {
+      "id": "bakery:glowberry_tart",
+      "required": false
+    },
+    {
+      "id": "bakery:linzer_tart",
+      "required": false
+    },
+    {
+      "id": "bakery:pudding",
+      "required": false
+    },
+    {
+      "id": "bakery:strawberry_cake",
+      "required": false
+    },
+    {
+      "id": "bakery:sweetberry_cake",
+      "required": false
+    },
+    {
+      "id": "bakery:waffle",
+      "required": false
+    },
+    {
+      "id": "brewery:dumplings",
+      "required": false
+    },
+    {
+      "id": "brewery:fried_chicken",
+      "required": false
+    },
+    {
+      "id": "brewery:half_chicken",
+      "required": false
+    },
+    {
+      "id": "brewery:mashed_potatoes",
+      "required": false
+    },
+    {
+      "id": "brewery:pork_knuckle",
+      "required": false
+    },
+    {
+      "id": "brewery:potato_salad",
+      "required": false
+    },
+    {
+      "id": "candlelight:beef_wellington",
+      "required": false
+    },
+    {
+      "id": "candlelight:chocolate_box",
+      "required": false
+    },
+    {
+      "id": "candlelight:fresh_garden_salad",
+      "required": false
+    },
+    {
+      "id": "candlelight:lasagne",
+      "required": false
+    },
+    {
+      "id": "candlelight:pork_ribs",
+      "required": false
+    },
+    {
+      "id": "candlelight:tomato_mozzarella_salad",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:baked_lamb_ham",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:farmers_bread",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:farmers_breakfast",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:grandmothers_strawberry_cake",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:oat_pancake",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:potato_with_roast_meat",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:roasted_corn",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:stuffed_chicken",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:stuffed_rabbit",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:apple_pie",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:chocolate_pie",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:gleaming_salad_block",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:honey_glazed_ham_block",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:rice_roll_medley_block",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:roast_chicken_block",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:shepherds_pie_block",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:stuffed_pumpkin_block",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:sweet_berry_cheesecake",
+      "required": false
+    },
+    {
+      "id": "frightsdelight:cobweb_pie",
+      "required": false
+    },
+    {
+      "id": "frightsdelight:ghasttear_pie",
+      "required": false
+    },
+    {
+      "id": "frightsdelight:punchbowl_cobweb",
+      "required": false
+    },
+    {
+      "id": "frightsdelight:punchbowl_ghasttear",
+      "required": false
+    },
+    {
+      "id": "frightsdelight:punchbowl_rotten_flesh",
+      "required": false
+    },
+    {
+      "id": "frightsdelight:punchbowl_slimeapple",
+      "required": false
+    },
+    {
+      "id": "frightsdelight:punchbowl_soul_berry",
+      "required": false
+    },
+    {
+      "id": "frightsdelight:punchbowl_spidereye",
+      "required": false
+    },
+    {
+      "id": "frightsdelight:punchbowl_wither_berry",
+      "required": false
+    },
+    {
+      "id": "frightsdelight:rotten_flesh_pie",
+      "required": false
+    },
+    {
+      "id": "frightsdelight:slimeapple_pie",
+      "required": false
+    },
+    {
+      "id": "frightsdelight:soul_berry_cheesecake",
+      "required": false
+    },
+    {
+      "id": "frightsdelight:spidereye_pie",
+      "required": false
+    },
+    {
+      "id": "frightsdelight:wither_berry_cheesecake",
+      "required": false
+    },
+    {
+      "id": "meadow:amethyst_cheese_wheel",
+      "required": false
+    },
+    {
+      "id": "meadow:buffalo_cheese_wheel",
+      "required": false
+    },
+    {
+      "id": "meadow:cheese_tart",
+      "required": false
+    },
+    {
+      "id": "meadow:cheese_wheel",
+      "required": false
+    },
+    {
+      "id": "meadow:cheesecake",
+      "required": false
+    },
+    {
+      "id": "meadow:goat_cheese_wheel",
+      "required": false
+    },
+    {
+      "id": "meadow:grain_cheese_wheel",
+      "required": false
+    },
+    {
+      "id": "meadow:roasted_buffalo_ham",
+      "required": false
+    },
+    {
+      "id": "meadow:sheep_cheese_wheel",
+      "required": false
+    },
+    {
+      "id": "meadow:warped_cheese_wheel",
+      "required": false
+    },
+    {
+      "id": "minecraft:cake",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:cherry_blossom_cheesecake",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:cherry_blossom_pancakes",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:chocolate_pancakes",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:coffee_cheesecake",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:coffee_pancakes",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:honey_pancakes",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:pancakes",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:pumpkin_pancakes",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:syrup_cheesecake",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:vegetable_pancakes",
+      "required": false
+    },
+    {
+      "id": "supplementaries:pancake",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:halo_halo_feast",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:leaf_feast_cooked_rice",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:leaf_feast_cooked_rice_half",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:leaf_feast_ensaymada",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:leaf_feast_ensaymada_half",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:leaf_feast_ensaymada_ube",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:leaf_feast_ensaymada_ube_half",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:leaf_feast_fried_rice",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:leaf_feast_fried_rice_half",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:leaf_feast_hopia_munggo",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:leaf_feast_hopia_munggo_half",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:leaf_feast_hopia_ube",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:leaf_feast_hopia_ube_half",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:leaf_feast_pandesal",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:leaf_feast_pandesal_half",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:leaf_feast_pandesal_ube",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:leaf_feast_pandesal_ube_half",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:leaf_feast_sinangag",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:leaf_feast_sinangag_half",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:leche_flan_feast",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:lumpia_feast",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:milk_tea_ube_feast",
+      "required": false
+    },
+    {
+      "id": "ubesdelight:ube_cake",
+      "required": false
+    }
+  ]
+}

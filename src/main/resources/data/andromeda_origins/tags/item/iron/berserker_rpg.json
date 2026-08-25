@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "berserker_rpg:iron_berserker_axe",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:northling_chest",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:northling_feet",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:northling_head",
+      "required": false
+    },
+    {
+      "id": "berserker_rpg:northling_legs",
+      "required": false
+    }
+  ]
+}

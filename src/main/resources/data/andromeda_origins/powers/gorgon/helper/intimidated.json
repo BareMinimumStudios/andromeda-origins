@@ -1,0 +1,61 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_added": {
+      "type": "origins:execute_command",
+      "command": "title @s actionbar {\"text\": \"You are being intimidated!\", \"color\": \"red\"}"
+    }
+  },
+  "remove": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 60,
+    "start_value": 1,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+      "bar_index": 5
+    },
+    "min_action": {
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "minecraft:debuff"
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_remove",
+      "change": -1,
+      "operation": "add"
+    }
+  },
+  "damagedown": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.3
+    }
+  },
+  "damagedownrojectile": {
+    "type": "origins:modify_projectile_damage",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.3
+    }
+  },
+  "visual": {
+    "type": "origins:particle",
+    "count": 5,
+    "particle": "minecraft:soul",
+    "spread": {
+      "x": 0.25,
+      "y": 0.25,
+      "z": 0.25
+    },
+    "offset_y": 1,
+    "frequency": 10
+  }
+}

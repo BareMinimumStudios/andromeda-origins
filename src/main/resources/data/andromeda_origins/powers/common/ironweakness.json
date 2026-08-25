@@ -1,0 +1,53 @@
+{
+  "type": "origins:modify_damage_taken",
+  "modifier": {
+    "operation": "multiply_total_multiplicative",
+    "amount": 0.2
+  },
+  "damage_condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:projectile",
+        "inverted": true
+      },
+      {
+        "type": "origins:attacker",
+        "entity_condition": {
+          "type": "origins:or",
+          "conditions": [
+            {
+              "type": "origins:equipped_item",
+              "equipment_slot": "mainhand",
+              "item_condition": {
+                "type": "origins:ingredient",
+                "ingredient": {
+                  "tag": "andromeda_origins:iron/alliron"
+                }
+              }
+            },
+            {
+              "type": "origins:equipped_item",
+              "equipment_slot": "offhand",
+              "item_condition": {
+                "type": "origins:ingredient",
+                "ingredient": {
+                  "tag": "andromeda_origins:iron/alliron"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "self_action": {
+    "type": "origins:play_sound",
+    "sound": "minecraft:entity.generic.burn",
+    "volume": 0.6,
+    "pitch": 1
+  },
+  "hidden": true,
+  "name": "Iron Weakness",
+  "description": "Iron weapons deal 20% more damage to you, and you gain the Wither status effect when struck by such items."
+}

@@ -1,0 +1,184 @@
+{
+  "type": "origins:multiple",
+  "astamina": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 10,
+    "start_value": 10,
+    "hud_render": {
+      "should_render": true,
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
+      "bar_index": 20
+    },
+    "min_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_breathlock",
+      "change": 1
+    },
+    "max_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_breathlock",
+      "change": -1
+    }
+  },
+  "breathlock": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:execute_command",
+      "command": "title @s actionbar {\"text\": \"You have run out of dust!\", \"color\": \"red\"}"
+    },
+    "min_action": {
+      "type": "origins:execute_command",
+      "command": "title @s actionbar {\"text\": \"You can use Flutter again!\", \"color\": \"green\"}"
+    }
+  },
+  "soundcooldown": {
+    "type": "origins:cooldown",
+    "cooldown": 20,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "grrr": {
+    "type": "origins:active_self",
+    "cooldown": 60,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:if_else",
+      "condition": {
+        "type": "origins:resource",
+        "comparison": "==",
+        "resource": "*:*_breathlock",
+        "compare_to": 0
+      },
+      "if_action": {
+        "type": "origins:play_sound",
+        "sound": "minecraft:entity.allay.ambient_with_item",
+        "volume": 1,
+        "pitch": 0.5
+      },
+      "else_action": {
+        "type": "origins:execute_command",
+        "command": "title @s actionbar {\"text\": \"Your wings are out of dust, let it fully regenerate!\", \"color\": \"red\"}"
+      }
+    },
+    "key": {
+      "key": "key.origins.primary_active",
+      "continuous": false
+    }
+  },
+  "active": {
+    "type": "origins:active_self",
+    "cooldown": 2,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:resource",
+                "comparison": "==",
+                "resource": "*:*_soundcooldown",
+                "compare_to": 0
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:trigger_cooldown",
+                    "power": "*:*_soundcooldown"
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_astamina",
+                    "change": -1
+                  },
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:entity.parrot.fly",
+                    "volume": 2,
+                    "pitch": 0.8
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_1",
+          "change": 1,
+          "operation": "set"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:faerie/helper/hover",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:faerie/helper/hover_remove",
+          "change": 2
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "*:common/silenced",
+          "inverted": true
+        },
+        {
+          "type": "origins:power",
+          "power": "*:common/restrained",
+          "inverted": true
+        },
+        {
+          "type": "origins:resource",
+          "comparison": ">",
+          "resource": "*:*_astamina",
+          "compare_to": 0
+        },
+        {
+          "type": "origins:resource",
+          "comparison": "==",
+          "resource": "*:*_breathlock",
+          "compare_to": 0
+        }
+      ]
+    },
+    "key": {
+      "key": "key.origins.primary_active",
+      "continuous": true
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Trigger with ",
+        {
+          "keybind": "key.origins.primary_active"
+        }
+      ]
+    }
+  ],
+  "name": "Flutter",
+  "description": "Faerie Dust regenerates while this ability is not in use. Hold your Primary Ability key to flutter, dramatically slowing your fall while allowing free horizontal movement. Flutter cannot gain altitude. §e§lMovement Ability§r."
+}

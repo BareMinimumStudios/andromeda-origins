@@ -1,0 +1,23 @@
+{
+  "type": "origins:simple",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/green.png",
+      "text": "§c§lfigura_1:§r§f Primary ability. Plays for 1 second."
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/yellow.png",
+      "text": "§c§lfigura_2:§r§f Primary ability, actually hitting a creature. 1 second long."
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
+      "text": "§c§lfigura_3:§r§f Secondary ability, shrieking. Plays for 1 second."
+    }
+  ],
+  "name": "Figura Anims",
+  "description": "You can link this origin to your Figura Model. Check for 1 or 0 on the powers: §c§landromeda_origins:common/figura_1§r\nall the way to\n§c§landromeda_origins:common/figura_3§r\nYour animation should play when those powers are 1 and turn off when they are 0.",
+  "hidden": true
+}

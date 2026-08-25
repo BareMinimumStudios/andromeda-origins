@@ -1,0 +1,31 @@
+{
+  "type": "origins:multiple",
+  "sources": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 10,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "min_action": {
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "minecraft:ccontrol"
+    }
+  },
+  "melee": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -1
+    }
+  },
+  "projectile": {
+    "type": "origins:modify_projectile_damage",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -1
+    }
+  }
+}

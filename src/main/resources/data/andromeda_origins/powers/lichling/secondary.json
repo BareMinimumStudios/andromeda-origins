@@ -1,0 +1,246 @@
+{
+  "type": "origins:multiple",
+  "astamina": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 10,
+    "start_value": 10,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
+      "bar_index": 4
+    },
+    "min_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_breathlock",
+      "change": 1
+    },
+    "max_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_breathlock",
+      "change": -1
+    }
+  },
+  "breathlock": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:execute_command",
+      "command": "title @s actionbar {\"text\": \"Your energy has been depleted!\", \"color\": \"red\"}"
+    },
+    "min_action": {
+      "type": "origins:execute_command",
+      "command": "title @s actionbar {\"text\": \"Your energy has fully recovered!\", \"color\": \"green\"}"
+    }
+  },
+  "soundcooldown": {
+    "type": "origins:cooldown",
+    "cooldown": 20,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "grrr": {
+    "type": "origins:active_self",
+    "cooldown": 60,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:if_else",
+      "condition": {
+        "type": "origins:resource",
+        "comparison": "==",
+        "resource": "*:*_breathlock",
+        "compare_to": 0
+      },
+      "if_action": {
+        "type": "origins:play_sound",
+        "sound": "minecraft:entity.illusioner.prepare_blindness",
+        "volume": 1,
+        "pitch": 0.8
+      },
+      "else_action": {
+        "type": "origins:execute_command",
+        "command": "title @s actionbar {\"text\": \"Your energy is depleted. Let it fully regenerate!\", \"color\": \"red\"}"
+      }
+    },
+    "key": {
+      "key": "key.origins.secondary_active",
+      "continuous": false
+    }
+  },
+  "active": {
+    "type": "origins:active_self",
+    "cooldown": 2,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:resource",
+                "comparison": "==",
+                "resource": "*:*_soundcooldown",
+                "compare_to": 0
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:execute_command",
+                    "command": "function andromeda_origins:big_sphere"
+                  },
+                  {
+                    "type": "origins:trigger_cooldown",
+                    "power": "*:*_soundcooldown"
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_astamina",
+                    "change": -1
+                  },
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "block.bell.use",
+                    "volume": 1,
+                    "pitch": 0.6
+                  },
+                  {
+                    "type": "origins:area_of_effect",
+                    "radius": 10,
+                    "shape": "sphere",
+                    "bientity_action": {
+                      "type": "origins:target_action",
+                      "action": {
+                        "type": "origins:and",
+                        "actions": [
+                          {
+                            "type": "origins:apply_effect",
+                            "effect": {
+                              "id": "minecraft:wither",
+                              "amplifier": 1,
+                              "duration": 21
+                            }
+                          },
+                          {
+                            "type": "origins:grant_power",
+                            "power": "*:lichling/helper/doom",
+                            "source": "minecraft:debuff"
+                          },
+                          {
+                            "type": "origins:change_resource",
+                            "resource": "*:lichling/helper/doom_remove",
+                            "change": 1
+                          },
+                          {
+                            "type": "origins:trigger_cooldown",
+                            "power": "*:lichling/helper/doom_unremove"
+                          }
+                        ]
+                      }
+                    },
+                    "bientity_condition": {
+                      "type": "origins:and",
+                      "conditions": [
+                        {
+                          "type": "origins:can_see"
+                        },
+                        {
+                          "type": "origins:target_condition",
+                          "condition": {
+                            "type": "origins:and",
+                            "conditions": [
+                              {
+                                "type": "origins:living"
+                              },
+                              {
+                                "type": "origins:in_tag",
+                                "tag": "minecraft:undead",
+                                "inverted": true
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_3",
+          "change": 1,
+          "operation": "set"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:lichling/helper/aurafarming",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:lichling/helper/aurafarming_remove",
+          "change": 2
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "*:common/silenced",
+          "inverted": true
+        },
+        {
+          "type": "origins:resource",
+          "comparison": ">",
+          "resource": "*:*_astamina",
+          "compare_to": 0
+        },
+        {
+          "type": "origins:resource",
+          "comparison": "==",
+          "resource": "*:*_breathlock",
+          "compare_to": 0
+        }
+      ]
+    },
+    "key": {
+      "key": "key.origins.secondary_active",
+      "continuous": true
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Trigger with ",
+        {
+          "keybind": "key.origins.secondary_active"
+        }
+      ]
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
+      "text": "§c§lDoom:§r§f A creature can have up to 10 stacks, which decay over time. When a creature gains the 10th Doom stack, it takes 20 magical damage, gains Wither II for 5 seconds and loses its Doom stacks."
+    }
+  ],
+  "name": "Chimes of Necros",
+  "description": "Energy regenerates while this ability is not in use. Hold your Secondary Ability key to afflict every visible non-Undead creature within 10 blocks with Wither I and 1 stack of §c§l[Doom]§r.\n \nYou suffer -20% movement speed while channeling Chimes of Necros. Undead creatures are immune."
+}

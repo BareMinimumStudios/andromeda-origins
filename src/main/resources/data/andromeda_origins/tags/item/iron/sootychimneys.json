@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "sootychimneys:iron_chimney",
+      "required": false
+    }
+  ]
+}

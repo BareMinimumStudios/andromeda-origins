@@ -1,0 +1,61 @@
+{
+  "type": "origins:multiple",
+  "active": {
+    "type": "origins:active_self",
+    "cooldown": 1800,
+    "hud_render": {
+      "should_render": true,
+      "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_02.png",
+      "bar_index": 1,
+      "condition": {
+        "type": "origins:power",
+        "power": "*:nereid/helper/whirlpoolstate",
+        "inverted": true
+      }
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_3",
+          "change": 1,
+          "operation": "set"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:nereid/helper/whirlpoolstate",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:power",
+      "power": "*:common/silenced",
+      "inverted": true
+    },
+    "key": {
+      "key": "key.origins.secondary_active",
+      "continuous": false
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Trigger with ",
+        {
+          "keybind": "key.origins.secondary_active"
+        }
+      ]
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
+      "text": "§c§lWet:§r§f Counts as being in water."
+    }
+  ],
+  "name": "Submersion",
+  "description": "Press your Secondary Ability key to empower your attacks for 10 seconds. Hits cause creatures to suffocate, become §c§l[Wet]§r, and lose the ability to swim for 5 seconds. Repeated hits extend the effect by 5 seconds, up to 1 minute.\n \nAquatic creatures and players with Water Breathing are immune."
+}

@@ -1,0 +1,65 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "furniture:acacia_desk_chair",
+      "required": false
+    },
+    {
+      "id": "furniture:arolla_pine_desk_chair",
+      "required": false
+    },
+    {
+      "id": "furniture:birch_desk_chair",
+      "required": false
+    },
+    {
+      "id": "furniture:cherry_desk_chair",
+      "required": false
+    },
+    {
+      "id": "furniture:dark_cherry_desk_chair",
+      "required": false
+    },
+    {
+      "id": "furniture:dark_oak_desk_chair",
+      "required": false
+    },
+    {
+      "id": "furniture:iron_fish_tank",
+      "required": false
+    },
+    {
+      "id": "furniture:jungle_desk_chair",
+      "required": false
+    },
+    {
+      "id": "furniture:mangrove_desk_chair",
+      "required": false
+    },
+    {
+      "id": "furniture:oak_desk_chair",
+      "required": false
+    },
+    {
+      "id": "furniture:pine_desk_chair",
+      "required": false
+    },
+    {
+      "id": "furniture:spruce_desk_chair",
+      "required": false
+    },
+    {
+      "id": "furniture:steam_vent",
+      "required": false
+    },
+    {
+      "id": "furniture:street_lantern_item",
+      "required": false
+    },
+    {
+      "id": "furniture:tool_box",
+      "required": false
+    }
+  ]
+}

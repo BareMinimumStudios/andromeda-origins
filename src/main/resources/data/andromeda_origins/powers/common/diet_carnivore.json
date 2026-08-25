@@ -1,0 +1,27 @@
+{
+  "type": "origins:prevent_item_use",
+  "item_condition": {
+    "type": "origins:all_of",
+    "conditions": [
+      {
+        "type": "origins:ingredient",
+        "ingredient": {
+          "tag": "origins:ignore_diet"
+        },
+        "inverted": true
+      },
+      {
+        "type": "origins:ingredient",
+        "ingredient": {
+          "tag": "origins:meat"
+        },
+        "inverted": true
+      },
+      {
+        "type": "origins:food"
+      }
+    ]
+  },
+  "name": "Carnivorous Diet",
+  "description": "You can only consume foods classified as meat. Diet-exempt foods and drinks are unaffected."
+}

@@ -1,0 +1,24 @@
+{
+  "type": "origins:action_on_callback",
+  "entity_action_added": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:revoke_all_powers",
+        "source": "minecraft:buff"
+      },
+      {
+        "type": "origins:revoke_all_powers",
+        "source": "minecraft:debuff"
+      },
+      {
+        "type": "origins:revoke_all_powers",
+        "source": "minecraft:ccontrol"
+      },
+      {
+        "type": "origins:revoke_all_powers",
+        "source": "minecraft:state"
+      }
+    ]
+  }
+}

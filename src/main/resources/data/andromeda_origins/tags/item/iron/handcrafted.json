@@ -1,0 +1,29 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "handcrafted:bench",
+      "required": false
+    },
+    {
+      "id": "handcrafted:hammer",
+      "required": false
+    },
+    {
+      "id": "handcrafted:kitchen_hood",
+      "required": false
+    },
+    {
+      "id": "handcrafted:kitchen_hood_pipe",
+      "required": false
+    },
+    {
+      "id": "handcrafted:oven",
+      "required": false
+    },
+    {
+      "id": "handcrafted:phantom_trophy",
+      "required": false
+    }
+  ]
+}

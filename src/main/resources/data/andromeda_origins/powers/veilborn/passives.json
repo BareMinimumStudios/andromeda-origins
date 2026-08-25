@@ -1,0 +1,514 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_chosen": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:veilborn/passives_weaknesstate",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:veilborn/passives_daytime",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:veilborn/primary_active",
+          "change": 60,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:veilborn/primary_active3",
+          "change": 600,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:veilborn/secondary_unstoppable",
+          "change": 20,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:veilborn/secondary_cooldown",
+          "change": 2400,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:veilborn/secondary_uncloak",
+          "change": 20,
+          "operation": "set"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s add veilborn"
+        }
+      ]
+    },
+    "entity_action_lost": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s remove veilborn"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/debug",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "execute_chosen_when_orb": true
+  },
+  "weaknesstate": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": true,
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
+      "bar_index": 16,
+      "order": 6,
+      "condition": {
+        "type": "origins:resource",
+        "resource": "*:*_weaknesstate",
+        "comparison": ">",
+        "compare_to": 0
+      }
+    },
+    "min_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:grant_power",
+          "power": "*:veilborn/helper/shake",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_3",
+          "change": 1
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.wolf.shake",
+          "volume": 1,
+          "pitch": 0.9
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:falling_water"
+          },
+          "count": 20,
+          "speed": 0.1,
+          "force": true,
+          "offset_y": 1,
+          "spread": {
+            "x": 0.4,
+            "y": 0.25,
+            "z": 0.4
+          }
+        }
+      ]
+    }
+  },
+  "daytime": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "heart": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:*_daytime",
+                    "comparison": "==",
+                    "compare_to": 0
+                  },
+                  {
+                    "type": "origins:exposed_to_sun"
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_daytime",
+                    "change": 1
+                  },
+                  {
+                    "type": "origins:grant_power",
+                    "power": "*:veilborn/helper/daypower",
+                    "source": "minecraft:state"
+                  },
+                  {
+                    "type": "origins:revoke_power",
+                    "power": "*:veilborn/helper/nightpower",
+                    "source": "minecraft:state"
+                  }
+                ]
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:*_daytime",
+                    "comparison": "==",
+                    "compare_to": 1
+                  },
+                  {
+                    "type": "origins:exposed_to_sun",
+                    "inverted": true
+                  },
+                  {
+                    "type": "origins:exposed_to_sky"
+                  },
+                  {
+                    "type": "origins:in_rain",
+                    "inverted": true
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_daytime",
+                    "change": -1
+                  },
+                  {
+                    "type": "origins:revoke_power",
+                    "power": "*:veilborn/helper/daypower",
+                    "source": "minecraft:state"
+                  },
+                  {
+                    "type": "origins:grant_power",
+                    "power": "*:veilborn/helper/nightpower",
+                    "source": "minecraft:state"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:*_weaknesstate",
+                    "comparison": ">",
+                    "compare_to": 0
+                  },
+                  {
+                    "type": "origins:power",
+                    "power": "andromeda_origins:common/wet",
+                    "inverted": true
+                  },
+                  {
+                    "type": "origins:fluid_height",
+                    "fluid": "minecraft:water",
+                    "comparison": "==",
+                    "compare_to": 0
+                  },
+                  {
+                    "type": "origins:in_rain",
+                    "inverted": true
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:change_resource",
+                "resource": "*:*_weaknesstate",
+                "change": -1
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:*_weaknesstate",
+                    "comparison": "<",
+                    "compare_to": 120
+                  },
+                  {
+                    "type": "origins:or",
+                    "conditions": [
+                      {
+                        "type": "origins:power",
+                        "power": "andromeda_origins:common/wet"
+                      },
+                      {
+                        "type": "origins:fluid_height",
+                        "fluid": "minecraft:water",
+                        "comparison": ">",
+                        "compare_to": 0
+                      },
+                      {
+                        "type": "origins:in_rain"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_weaknesstate",
+                    "change": 1
+                  },
+                  {
+                    "type": "origins:grant_power",
+                    "power": "*:veilborn/helper/watered",
+                    "source": "minecraft:state"
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "*:veilborn/helper/watered_remove",
+                    "change": 3
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:attribute",
+                    "attribute": "minecraft:generic.armor",
+                    "comparison": ">=",
+                    "compare_to": 13.0
+                  },
+                  {
+                    "type": "origins:power",
+                    "power": "*:veilborn/helper/irondebuff",
+                    "inverted": true
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:grant_power",
+                "power": "*:veilborn/helper/irondebuff",
+                "source": "minecraft:state"
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:attribute",
+                    "attribute": "minecraft:generic.armor",
+                    "comparison": ">=",
+                    "compare_to": 16.0
+                  },
+                  {
+                    "type": "origins:power",
+                    "power": "*:veilborn/helper/diamondebuff",
+                    "inverted": true
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:grant_power",
+                "power": "*:veilborn/helper/diamondebuff",
+                "source": "minecraft:state"
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:attribute",
+                    "attribute": "minecraft:generic.armor_toughness",
+                    "comparison": ">=",
+                    "compare_to": 9
+                  },
+                  {
+                    "type": "origins:power",
+                    "power": "*:veilborn/helper/netheritedebuff",
+                    "inverted": true
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:grant_power",
+                "power": "*:veilborn/helper/netheritedebuff",
+                "source": "minecraft:state"
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:attribute",
+                    "attribute": "minecraft:generic.armor_toughness",
+                    "comparison": "<",
+                    "compare_to": 9
+                  },
+                  {
+                    "type": "origins:power",
+                    "power": "*:veilborn/helper/netheritedebuff"
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:revoke_power",
+                "power": "*:veilborn/helper/netheritedebuff",
+                "source": "minecraft:state"
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:attribute",
+                    "attribute": "minecraft:generic.armor",
+                    "comparison": "<",
+                    "compare_to": 16.0
+                  },
+                  {
+                    "type": "origins:power",
+                    "power": "*:veilborn/helper/diamondebuff"
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:revoke_power",
+                "power": "*:veilborn/helper/diamondebuff",
+                "source": "minecraft:state"
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:attribute",
+                    "attribute": "minecraft:generic.armor",
+                    "comparison": "<",
+                    "compare_to": 13.0
+                  },
+                  {
+                    "type": "origins:power",
+                    "power": "*:veilborn/helper/irondebuff"
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:revoke_power",
+                "power": "*:veilborn/helper/irondebuff",
+                "source": "minecraft:state"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "hp": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "*:*",
+      "attribute": "minecraft:generic.max_health",
+      "operation": "add_value",
+      "amount": -4
+    }
+  },
+  "toggle": {
+    "type": "origins:toggle",
+    "key": {
+      "key": "key.andromeda_origins.toggle",
+      "continuous": false
+    }
+  },
+  "translucent": {
+    "type": "origins:model_color",
+    "alpha": 0.6,
+    "condition": {
+      "type": "origins:power_active",
+      "power": "*:*_toggle"
+    }
+  },
+  "noshields": {
+    "type": "origins:prevent_item_use",
+    "item_condition": {
+      "type": "origins:ingredient",
+      "ingredient": {
+        "tag": "origins:shields"
+      }
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
+      "text": "§e§lDamage Resistances:§r§f None.\n \n§c§lDamage Vulnerabilities:§r§f None.\n \n§e§lEffect Immunities:§r§f None."
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
+      "text": "§c§lSilenced:§r§f Unable to use Active Abilities."
+    }
+  ],
+  "name": "Passive Features",
+  "description": "§e§lStats:§r\n+20% Size\n-4 Max HP\n \n§e§lFeatures:§r\n- Sunlight grants +25% movement speed.\n- Moonlight grants +20% damage dealt.\n- Your body is naturally 60% opaque. Toggleable.\n- You suffer -15% movement speed for each threshold exceeded: more than 12 Armor, more than 15 Armor, and more than 8 Armor Toughness.\n- You cannot use shields.\n- Contact with water reduces your damage dealt by 80% and applies §c§l[Silenced]§r for 3 seconds. Each additional second in water adds 3 seconds to the duration, up to 3 minutes.",
+  "size": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "andromeda_origins:veilborn_passives_size",
+      "attribute": "minecraft:generic.scale",
+      "operation": "add_multiplied_total",
+      "amount": 0.2
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_added": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "summon minecraft:marker ~ ~ ~ {Tags:[origin]}"
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.enderman.teleport",
+          "volume": 1,
+          "pitch": 1.5
+        },
+        {
+          "type": "origins:delay",
+          "ticks": 1,
+          "action": {
+            "type": "origins:execute_command",
+            "command": "tp @s @e[tag=destination,sort=nearest,limit=1]"
+          }
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:block.amethyst_cluster.break",
+          "volume": 1,
+          "pitch": 1.3
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:flash"
+          },
+          "count": 1,
+          "speed": 0,
+          "force": true,
+          "spread": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:end_rod"
+          },
+          "count": 10,
+          "speed": 0.1,
+          "force": true,
+          "spread": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 0.5
+          }
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:*",
+          "source": "minecraft:state"
+        }
+      ]
+    }
+  }
+}

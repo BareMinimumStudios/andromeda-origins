@@ -1,0 +1,16 @@
+{
+  "powers": [
+    "andromeda_origins:veilborn/passives",
+    "andromeda_origins:veilborn/primary",
+    "andromeda_origins:veilborn/secondary",
+    "andromeda_origins:common/figura"
+  ],
+  "icon": {
+    "id": "andromeda_origins:veilborn_icon"
+  },
+  "unchoosable": false,
+  "order": 1,
+  "impact": 3,
+  "name": "Veilborn",
+  "description": "Veilborn are esoteric beings attuned to the thin boundaries between one place and another. They slip through reality, trade positions in an instant, and disappear from perception when the veil around them grows thin. Their power is greatest when they keep moving, never remaining where their enemies expect them to be."
+}

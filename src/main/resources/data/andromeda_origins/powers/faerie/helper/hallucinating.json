@@ -1,0 +1,1785 @@
+{
+  "type": "origins:multiple",
+  "remove": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 30,
+    "start_value": 30,
+    "hud_render": {
+      "should_render": false
+    },
+    "min_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:revoke_power",
+          "power": "*:*",
+          "source": "minecraft:debuff"
+        },
+        {
+          "type": "origins:clear_effect"
+        }
+      ]
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_remove",
+          "change": -1
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:resource",
+                    "comparison": "==",
+                    "resource": "*:*_waterswap",
+                    "compare_to": 1
+                  },
+                  {
+                    "type": "origins:fluid_height",
+                    "fluid": "minecraft:water",
+                    "comparison": "<",
+                    "compare_to": 1.8
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:spawn_particles",
+                    "particle": "minecraft:underwater",
+                    "count": 64,
+                    "speed": 0.1,
+                    "spread": {
+                      "x": 5,
+                      "y": 5,
+                      "z": 5
+                    }
+                  },
+                  {
+                    "type": "origins:spawn_particles",
+                    "particle": "minecraft:bubble_pop",
+                    "count": 10,
+                    "speed": 0.1,
+                    "spread": {
+                      "x": 1,
+                      "y": 1,
+                      "z": 1
+                    }
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:choice",
+                      "actions": [
+                        {
+                          "element": {
+                            "type": "origins:play_sound",
+                            "sound": "minecraft:ambient.underwater.loop",
+                            "volume": 1,
+                            "pitch": 1
+                          },
+                          "weight": 50
+                        },
+                        {
+                          "element": {
+                            "type": "origins:play_sound",
+                            "sound": "minecraft:ambient.underwater.loop.additions",
+                            "volume": 1,
+                            "pitch": 1
+                          },
+                          "weight": 10
+                        },
+                        {
+                          "element": {
+                            "type": "origins:play_sound",
+                            "sound": "minecraft:ambient.underwater.loop.additions.rare",
+                            "volume": 1,
+                            "pitch": 1
+                          },
+                          "weight": 5
+                        },
+                        {
+                          "element": {
+                            "type": "origins:play_sound",
+                            "sound": "minecraft:ambient.underwater.loop.additions.ultra_rare",
+                            "volume": 1,
+                            "pitch": 1
+                          },
+                          "weight": 1
+                        }
+                      ]
+                    },
+                    "chance": 0.1
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:resource",
+                "comparison": "==",
+                "resource": "*:*_warden",
+                "compare_to": 1
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:entity.warden.step"
+                  },
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:entity.warden.heartbeat"
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.warden.angry",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.warden.hurt",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:resource",
+                "comparison": "==",
+                "resource": "*:*_blaze",
+                "compare_to": 1
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.blaze.ambient",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.blaze.shoot",
+                      "volume": 0.5
+                    },
+                    "chance": 0.15
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.blaze.hurt",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:resource",
+                "comparison": "==",
+                "resource": "*:*_phantom",
+                "compare_to": 1
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.phantom.swoop"
+                    },
+                    "chance": 0.15
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.phantom.hurt"
+                    },
+                    "chance": 0.1
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:resource",
+                "comparison": "==",
+                "resource": "*:*_cow",
+                "compare_to": 1
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:entity.cow.step",
+                    "volume": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.cow.ambient",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.cow.hurt",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:resource",
+                "comparison": "==",
+                "resource": "*:*_skeleton",
+                "compare_to": 1
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:entity.skeleton.step",
+                    "volume": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.skeleton.ambient",
+                      "volume": 0.5
+                    },
+                    "chance": 0.15
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:and",
+                      "actions": [
+                        {
+                          "type": "origins:play_sound",
+                          "sound": "minecraft:entity.skeleton.shoot"
+                        },
+                        {
+                          "type": "origins:play_sound",
+                          "sound": "minecraft:entity.arrow.hit"
+                        }
+                      ]
+                    },
+                    "chance": 0.15
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.skeleton.hurt",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:resource",
+                "comparison": "==",
+                "resource": "*:*_wskeleton",
+                "compare_to": 1
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:entity.wither_skeleton.step",
+                    "volume": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.wither_skeleton.ambient",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.wither_skeleton.hurt",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:resource",
+                "comparison": "==",
+                "resource": "*:*_enderman",
+                "compare_to": 1
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.enderman.scream",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.enderman.teleport",
+                      "volume": 0.5
+                    },
+                    "chance": 0.3
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.enderman.hurt",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:resource",
+                "comparison": "==",
+                "resource": "*:*_spider",
+                "compare_to": 1
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:entity.spider.step",
+                    "volume": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.spider.ambient",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.spider.hurt",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:resource",
+                "comparison": "==",
+                "resource": "*:*_zombie",
+                "compare_to": 1
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:entity.zombie.step",
+                    "volume": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.zombie.ambient",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.zombie.hurt",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:resource",
+                "comparison": "==",
+                "resource": "*:*_creeper",
+                "compare_to": 1
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.creeper.primed",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:and",
+                      "actions": [
+                        {
+                          "type": "origins:play_sound",
+                          "sound": "minecraft:entity.creeper.primed"
+                        },
+                        {
+                          "type": "origins:play_sound",
+                          "sound": "minecraft:entity.generic.explode",
+                          "volume": 0.5
+                        },
+                        {
+                          "type": "origins:spawn_particles",
+                          "particle": "minecraft:explosion",
+                          "count": 1
+                        }
+                      ]
+                    },
+                    "chance": 0.05
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.creeper.hurt",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:resource",
+                "comparison": "==",
+                "resource": "*:*_stray",
+                "compare_to": 1
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:entity.stray.step",
+                    "volume": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.stray.ambient",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:and",
+                      "actions": [
+                        {
+                          "type": "origins:play_sound",
+                          "sound": "minecraft:entity.skeleton.shoot"
+                        },
+                        {
+                          "type": "origins:play_sound",
+                          "sound": "minecraft:entity.arrow.hit"
+                        }
+                      ]
+                    },
+                    "chance": 0.15
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.stray.hurt",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:resource",
+                "comparison": "==",
+                "resource": "*:*_drowned",
+                "compare_to": 1
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:entity.drowned.step",
+                    "volume": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.drowned.ambient",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:and",
+                      "actions": [
+                        {
+                          "type": "origins:play_sound",
+                          "sound": "minecraft:item.trident.throw"
+                        },
+                        {
+                          "type": "origins:play_sound",
+                          "sound": "minecraft:item.trident.hit"
+                        }
+                      ]
+                    },
+                    "chance": 0.05
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.drowned.hurt",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:resource",
+                "comparison": "==",
+                "resource": "*:*_strider",
+                "compare_to": 1
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:entity.strider.step",
+                    "volume": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.strider.ambient",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.strider.hurt",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:resource",
+                "comparison": "==",
+                "resource": "*:*_breeze",
+                "compare_to": 1
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.breeze.ambient",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:and",
+                      "actions": [
+                        {
+                          "type": "origins:play_sound",
+                          "sound": "minecraft:entity.breeze.charge"
+                        },
+                        {
+                          "type": "origins:play_sound",
+                          "sound": "minecraft:entity.breeze.shoot"
+                        }
+                      ]
+                    },
+                    "chance": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.breeze.hurt",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:resource",
+                "comparison": "==",
+                "resource": "*:*_pufferfish",
+                "compare_to": 1
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.puffer_fish.blow_up",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.puffer_fish.blow_out",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.puffer_fish.hurt",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:resource",
+                "comparison": "==",
+                "resource": "*:*_shulker",
+                "compare_to": 1
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.shulker.ambient",
+                      "volume": 0.5
+                    },
+                    "chance": 0.15
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.shulker.close",
+                      "volume": 0.5
+                    },
+                    "chance": 0.15
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.shulker.open",
+                      "volume": 0.5
+                    },
+                    "chance": 0.15
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.shulker.shoot",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.shulker_bullet.hit",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.shulker.hurt",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:resource",
+                "comparison": "==",
+                "resource": "*:*_axolotl",
+                "compare_to": 1
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.axolotl.idle_air"
+                    },
+                    "chance": 0.15
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.axolotl.attack"
+                    },
+                    "chance": 0.15
+                  },
+                  {
+                    "type": "origins:chance",
+                    "action": {
+                      "type": "origins:play_sound",
+                      "sound": "minecraft:entity.axolotl.hurt",
+                      "volume": 0.5
+                    },
+                    "chance": 0.1
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "unsee": {
+    "type": "origins:prevent_entity_render"
+  },
+  "glow": {
+    "type": "origins:self_glow",
+    "use_teams": false,
+    "red": 0.5,
+    "blue": 0.5,
+    "green": 0.1,
+    "entity_condition": {
+      "type": "origins:origin",
+      "origin": "andromeda_origins:faerie",
+      "layer": "origins:origin"
+    },
+    "condition": {
+      "type": "origins:power",
+      "power": "*:common/undetectable",
+      "inverted": true
+    }
+  },
+  "air_is_water": {
+    "type": "origins:modify_camera_submersion",
+    "from": "none",
+    "to": "water",
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:fluid_height",
+          "fluid": "minecraft:water",
+          "comparison": "<=",
+          "compare_to": 1.8
+        },
+        {
+          "type": "origins:resource",
+          "comparison": "==",
+          "resource": "*:*_waterswap",
+          "compare_to": 1
+        }
+      ]
+    }
+  },
+  "water_is_air": {
+    "type": "origins:modify_camera_submersion",
+    "from": "water",
+    "to": "none",
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:submerged_in",
+          "fluid": "minecraft:water"
+        },
+        {
+          "type": "origins:resource",
+          "comparison": "==",
+          "resource": "*:*_waterswap",
+          "compare_to": 1
+        }
+      ]
+    }
+  },
+  "water_is_air_two": {
+    "type": "origins:ignore_water",
+    "hidden": true,
+    "condition": {
+      "type": "origins:resource",
+      "comparison": "==",
+      "resource": "*:*_waterswap",
+      "compare_to": 1
+    }
+  },
+  "jump": {
+    "type": "origins:modify_jump",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": 1.5
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:fluid_height",
+          "fluid": "minecraft:water",
+          "comparison": "<=",
+          "compare_to": 1.8
+        },
+        {
+          "type": "origins:resource",
+          "comparison": "==",
+          "resource": "*:*_waterswap",
+          "compare_to": 1
+        }
+      ]
+    }
+  },
+  "immunities": {
+    "type": "origins:modify_damage_taken",
+    "modifier": {
+      "amount": -1,
+      "operation": "multiply_total_multiplicative"
+    },
+    "damage_condition": {
+      "type": "origins:or",
+      "conditions": [
+        {
+          "type": "origins:name",
+          "name": "dryOut"
+        },
+        {
+          "type": "origins:name",
+          "name": "drown"
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:resource",
+      "comparison": "==",
+      "resource": "*:*_waterswap",
+      "compare_to": 1
+    }
+  },
+  "buoyancy": {
+    "type": "origins:walk_on_fluid",
+    "fluid": "minecraft:water",
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:fluid_height",
+          "fluid": "minecraft:water",
+          "comparison": "<=",
+          "compare_to": 1.8
+        },
+        {
+          "type": "origins:sneaking",
+          "inverted": true
+        },
+        {
+          "type": "origins:resource",
+          "comparison": "==",
+          "resource": "*:*_strider",
+          "compare_to": 1
+        }
+      ]
+    }
+  },
+  "buoyancy2": {
+    "type": "origins:walk_on_fluid",
+    "fluid": "minecraft:lava",
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:fluid_height",
+          "fluid": "minecraft:lava",
+          "comparison": "<=",
+          "compare_to": 1.8
+        },
+        {
+          "type": "origins:sneaking",
+          "inverted": true
+        },
+        {
+          "type": "origins:resource",
+          "comparison": "==",
+          "resource": "*:*_strider",
+          "compare_to": 1
+        }
+      ]
+    }
+  },
+  "slow_falling": {
+    "type": "origins:modify_falling",
+    "velocity": 0.01,
+    "take_fall_damage": false,
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:fluid_height",
+          "fluid": "minecraft:water",
+          "comparison": "<=",
+          "compare_to": 1.8
+        },
+        {
+          "type": "origins:resource",
+          "comparison": "==",
+          "resource": "*:*_waterswap",
+          "compare_to": 1
+        }
+      ]
+    }
+  },
+  "noelytra": {
+    "type": "origins:prevent_elytra_flight",
+    "condition": {
+      "type": "origins:resource",
+      "comparison": "==",
+      "resource": "*:*_waterswap",
+      "compare_to": 1
+    }
+  },
+  "waterswap": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:ambient.underwater.enter"
+        },
+        {
+          "type": "origins:extinguish"
+        }
+      ]
+    }
+  },
+  "prankdmg": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "warden": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.warden.roar"
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.warden.heartbeat"
+        },
+        {
+          "type": "origins:apply_effect",
+          "effect": {
+            "id": "minecraft:darkness",
+            "duration": 600,
+            "amplifier": 0
+          }
+        }
+      ]
+    }
+  },
+  "blaze": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.blaze.ambient"
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.blaze.shoot"
+        },
+        {
+          "type": "origins:damage",
+          "amount": 1,
+          "damage_type": "minecraft:magic"
+        },
+        {
+          "type": "origins:set_on_fire",
+          "duration": 2
+        }
+      ]
+    }
+  },
+  "phantom": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.phantom.ambient"
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.phantom.bite"
+        },
+        {
+          "type": "origins:damage",
+          "amount": 1,
+          "damage_type": "minecraft:magic"
+        }
+      ]
+    }
+  },
+  "cow": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.cow.ambient"
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.cow.milk"
+        },
+        {
+          "type": "origins:clear_effect"
+        }
+      ]
+    }
+  },
+  "skeleton": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.skeleton.ambient"
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.skeleton.shoot"
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.arrow.hit"
+        },
+        {
+          "type": "origins:damage",
+          "amount": 1,
+          "damage_type": "minecraft:magic"
+        }
+      ]
+    }
+  },
+  "wskeleton": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.wither_skeleton.ambient"
+        },
+        {
+          "type": "origins:apply_effect",
+          "effect": {
+            "id": "minecraft:wither",
+            "duration": 40,
+            "amplifier": 0
+          }
+        }
+      ]
+    }
+  },
+  "enderman": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.enderman.stare"
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.enderman.teleport"
+        },
+        {
+          "type": "origins:random_teleport",
+          "area_width": 5,
+          "area_height": 0.1,
+          "success_action": {
+            "type": "origins:spawn_particles",
+            "particle": "minecraft:portal",
+            "count": 8
+          }
+        }
+      ]
+    }
+  },
+  "spider": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.spider.ambient"
+        },
+        {
+          "type": "origins:damage",
+          "amount": 1,
+          "damage_type": "minecraft:magic"
+        },
+        {
+          "type": "origins:apply_effect",
+          "effect": {
+            "id": "minecraft:poison",
+            "duration": 40,
+            "amplifier": 0
+          }
+        }
+      ]
+    }
+  },
+  "zombie": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.zombie.ambient"
+        },
+        {
+          "type": "origins:damage",
+          "amount": 1,
+          "damage_type": "minecraft:magic"
+        }
+      ]
+    }
+  },
+  "creeper": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.creeper.primed"
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.generic.explode"
+        },
+        {
+          "type": "origins:damage",
+          "amount": 1,
+          "damage_type": "minecraft:magic"
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": "minecraft:explosion",
+          "count": 1
+        },
+        {
+          "type": "origins:choice",
+          "actions": [
+            {
+              "element": {
+                "type": "origins:add_velocity",
+                "y": 0.4,
+                "x": 1,
+                "space": "world",
+                "set": true
+              },
+              "weight": 1
+            },
+            {
+              "element": {
+                "type": "origins:add_velocity",
+                "y": 0.4,
+                "x": -1,
+                "space": "world",
+                "set": true
+              },
+              "weight": 1
+            },
+            {
+              "element": {
+                "type": "origins:add_velocity",
+                "y": 0.4,
+                "z": 1,
+                "space": "world",
+                "set": true
+              },
+              "weight": 1
+            },
+            {
+              "element": {
+                "type": "origins:add_velocity",
+                "y": 0.4,
+                "z": -1,
+                "space": "world",
+                "set": true
+              },
+              "weight": 1
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "stray": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.stray.ambient"
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.skeleton.shoot"
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.arrow.hit"
+        },
+        {
+          "type": "origins:damage",
+          "amount": 1,
+          "damage_type": "minecraft:magic"
+        },
+        {
+          "type": "origins:apply_effect",
+          "effect": {
+            "id": "minecraft:slowness",
+            "duration": 40,
+            "amplifier": 0
+          }
+        }
+      ]
+    }
+  },
+  "drowned": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.drowned.ambient"
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:item.trident.throw"
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:item.trident.hit"
+        },
+        {
+          "type": "origins:damage",
+          "amount": 1,
+          "damage_type": "minecraft:magic"
+        }
+      ]
+    }
+  },
+  "strider": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:play_sound",
+      "sound": "minecraft:entity.strider.ambient",
+      "volume": 1,
+      "pitch": 1
+    }
+  },
+  "pufferfish": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.puffer_fish.blow_up"
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.puffer_fish.sting"
+        },
+        {
+          "type": "origins:damage",
+          "amount": 1,
+          "damage_type": "minecraft:magic"
+        },
+        {
+          "type": "origins:apply_effect",
+          "effect": {
+            "id": "minecraft:poison",
+            "duration": 40,
+            "amplifier": 0
+          }
+        },
+        {
+          "type": "origins:apply_effect",
+          "effect": {
+            "id": "minecraft:nausea",
+            "duration": 600,
+            "amplifier": 0
+          }
+        }
+      ]
+    }
+  },
+  "breeze": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.breeze.inhale"
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.breeze.shoot"
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": "minecraft:explosion",
+          "count": 1
+        },
+        {
+          "type": "origins:choice",
+          "actions": [
+            {
+              "element": {
+                "type": "origins:add_velocity",
+                "y": 0.4,
+                "x": 1.5,
+                "space": "world",
+                "set": true
+              },
+              "weight": 1
+            },
+            {
+              "element": {
+                "type": "origins:add_velocity",
+                "y": 0.4,
+                "x": -1.5,
+                "space": "world",
+                "set": true
+              },
+              "weight": 1
+            },
+            {
+              "element": {
+                "type": "origins:add_velocity",
+                "y": 0.4,
+                "z": 1.5,
+                "space": "world",
+                "set": true
+              },
+              "weight": 1
+            },
+            {
+              "element": {
+                "type": "origins:add_velocity",
+                "y": 0.4,
+                "z": -1.5,
+                "space": "world",
+                "set": true
+              },
+              "weight": 1
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "shulker": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.shulker.ambient"
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.shulker.shoot"
+        },
+        {
+          "type": "origins:damage",
+          "amount": 1,
+          "damage_type": "minecraft:magic"
+        },
+        {
+          "type": "origins:apply_effect",
+          "effect": {
+            "id": "minecraft:levitation",
+            "duration": 40,
+            "amplifier": 0
+          }
+        }
+      ]
+    }
+  },
+  "axolotl": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.axolotl.idle_air"
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.axolotl.attack"
+        },
+        {
+          "type": "origins:apply_effect",
+          "effect": {
+            "id": "minecraft:regeneration",
+            "duration": 60,
+            "amplifier": 1
+          }
+        }
+      ]
+    }
+  }
+}

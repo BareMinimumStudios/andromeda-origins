@@ -1,0 +1,33 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "bakery:bread_knife",
+      "required": false
+    },
+    {
+      "id": "bakery:cupcake_display",
+      "required": false
+    },
+    {
+      "id": "bakery:iron_bench",
+      "required": false
+    },
+    {
+      "id": "bakery:iron_chair",
+      "required": false
+    },
+    {
+      "id": "bakery:iron_table",
+      "required": false
+    },
+    {
+      "id": "bakery:kitchen_sink",
+      "required": false
+    },
+    {
+      "id": "bakery:small_cooking_pot",
+      "required": false
+    }
+  ]
+}

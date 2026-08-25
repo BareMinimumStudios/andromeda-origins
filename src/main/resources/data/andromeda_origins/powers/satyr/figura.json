@@ -1,0 +1,33 @@
+{
+  "type": "origins:simple",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/green.png",
+      "text": "§c§lfigura_1:§r§f Sprinting at maximum momentum. Plays for the duration."
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/yellow.png",
+      "text": "§c§lfigura_2:§r§f Jumping with max momentum or bouncing from stomp. Plays for the duration."
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
+      "text": "§c§lfigura_3:§r§f Stomping downwards. Plays for the duration."
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/magenta.png",
+      "text": "§c§lfigura_4:§r§f Primary ability, charging. 1 second long."
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/magenta.png",
+      "text": "§c§lfigura_5:§r§f Secondary ability, charging. Plays for the duration."
+    }
+  ],
+  "name": "Figura Anims",
+  "description": "You can link this origin to your Figura Model. Check for 1 or 0 on the powers: §c§landromeda_origins:common/figura_1§r\nall the way to\n§c§landromeda_origins:common/figura_5§r\nYour animation should play when those powers are 1 and turn off when they are 0.",
+  "hidden": true
+}

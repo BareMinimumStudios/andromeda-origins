@@ -1,0 +1,64 @@
+{
+  "type": "origins:action_on_callback",
+  "entity_action_added": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:play_sound",
+        "sound": "entity.dragon_fireball.explode",
+        "volume": 5,
+        "pitch": 1
+      },
+      {
+        "type": "origins:spawn_particles",
+        "particle": {
+          "type": "minecraft:lava"
+        },
+        "count": 50,
+        "speed": 0.0,
+        "force": true,
+        "offset_y": 1,
+        "spread": {
+          "x": 3,
+          "y": 1,
+          "z": 3
+        }
+      },
+      {
+        "type": "origins:spawn_particles",
+        "particle": {
+          "type": "minecraft:flash"
+        },
+        "count": 4,
+        "speed": 0.0,
+        "force": true,
+        "offset_y": 1,
+        "spread": {
+          "x": 1,
+          "y": 0,
+          "z": 1
+        }
+      },
+      {
+        "type": "origins:spawn_particles",
+        "particle": {
+          "type": "minecraft:explosion"
+        },
+        "count": 4,
+        "speed": 0.0,
+        "force": true,
+        "offset_y": 1,
+        "spread": {
+          "x": 1,
+          "y": 0,
+          "z": 1
+        }
+      },
+      {
+        "type": "origins:grant_power",
+        "power": "andromeda_origins:wyverian/helper/fireball",
+        "source": "minecraft:helper"
+      }
+    ]
+  }
+}

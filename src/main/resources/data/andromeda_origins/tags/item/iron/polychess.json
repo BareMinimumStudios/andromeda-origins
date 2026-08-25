@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "polychess:chess_queen_black",
+      "required": false
+    },
+    {
+      "id": "polychess:chess_queen_white",
+      "required": false
+    }
+  ]
+}

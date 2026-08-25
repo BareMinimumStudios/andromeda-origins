@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "reframed:hammer",
+      "required": false
+    },
+    {
+      "id": "reframed:screwdriver",
+      "required": false
+    }
+  ]
+}

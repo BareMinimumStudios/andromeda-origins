@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "icarus:orange_mechanical_leather_wings",
+      "required": false
+    },
+    {
+      "id": "icarus:white_mechanical_feathered_wings",
+      "required": false
+    }
+  ]
+}

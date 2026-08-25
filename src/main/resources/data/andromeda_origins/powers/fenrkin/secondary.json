@@ -1,0 +1,305 @@
+{
+  "type": "origins:multiple",
+  "astamina": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 20,
+    "start_value": 20,
+    "hud_render": {
+      "should_render": true,
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+      "bar_index": 20
+    },
+    "min_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_breathlock",
+      "change": 1
+    },
+    "max_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_breathlock",
+      "change": -1
+    }
+  },
+  "breathlock": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:execute_command",
+      "command": "title @s actionbar {\"text\": \"You are out of breath!\", \"color\": \"red\"}"
+    },
+    "min_action": {
+      "type": "origins:execute_command",
+      "command": "title @s actionbar {\"text\": \"You can use Stamina Surge again!\", \"color\": \"green\"}"
+    }
+  },
+  "soundcooldown": {
+    "type": "origins:cooldown",
+    "cooldown": 10,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "grrr": {
+    "type": "origins:active_self",
+    "cooldown": 60,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:if_else",
+      "condition": {
+        "type": "origins:resource",
+        "comparison": "==",
+        "resource": "*:*_breathlock",
+        "compare_to": 0
+      },
+      "if_action": {
+        "type": "origins:play_sound",
+        "sound": "minecraft:entity.wolf.growl",
+        "volume": 0.3,
+        "pitch": 0.7
+      },
+      "else_action": {
+        "type": "origins:execute_command",
+        "command": "title @s actionbar {\"text\": \"You are out of breath, let your Stamina fully regenerate!\", \"color\": \"red\"}"
+      }
+    },
+    "key": {
+      "key": "key.origins.secondary_active",
+      "continuous": false
+    }
+  },
+  "active": {
+    "type": "origins:active_self",
+    "cooldown": 2,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:grant_power",
+          "power": "andromeda_origins:common/dash_projectile_penalty",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:common/dash_projectile_penalty_remove",
+          "change": 3,
+          "operation": "set"
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:resource",
+                "comparison": "==",
+                "resource": "*:*_soundcooldown",
+                "compare_to": 0
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:trigger_cooldown",
+                    "power": "*:*_soundcooldown"
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_astamina",
+                    "change": -1
+                  },
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:entity.wolf.pant",
+                    "volume": 0.3,
+                    "pitch": 0.7
+                  },
+                  {
+                    "type": "origins:if_else_list",
+                    "actions": [
+                      {
+                        "condition": {
+                          "type": "origins:and",
+                          "conditions": [
+                            {
+                              "type": "origins:on_block",
+                              "inverted": true
+                            },
+                            {
+                              "type": "origins:fluid_height",
+                              "fluid": "minecraft:lava",
+                              "comparison": "==",
+                              "compare_to": 0
+                            },
+                            {
+                              "type": "origins:fluid_height",
+                              "fluid": "minecraft:water",
+                              "comparison": "==",
+                              "compare_to": 0
+                            },
+                            {
+                              "type": "origins:resource",
+                              "resource": "*:common/figura_5",
+                              "comparison": "==",
+                              "compare_to": 0
+                            }
+                          ]
+                        },
+                        "action": {
+                          "type": "origins:and",
+                          "actions": [
+                            {
+                              "type": "origins:change_resource",
+                              "resource": "*:*_astamina",
+                              "change": -9
+                            },
+                            {
+                              "type": "origins:play_sound",
+                              "sound": "item.armor.equip_leather",
+                              "volume": 2,
+                              "pitch": 0.7
+                            },
+                            {
+                              "type": "origins:spawn_particles",
+                              "particle": {
+                                "type": "minecraft:cloud"
+                              },
+                              "count": 6,
+                              "speed": 0.5,
+                              "force": true,
+                              "offset_y": 0,
+                              "spread": {
+                                "x": 0.1,
+                                "y": 0,
+                                "z": 0.1
+                              }
+                            },
+                            {
+                              "type": "origins:add_velocity",
+                              "y": 0.2,
+                              "z": 1.5,
+                              "space": "local",
+                              "set": true
+                            },
+                            {
+                              "type": "origins:set_fall_distance",
+                              "fall_distance": 0
+                            },
+                            {
+                              "type": "origins:change_resource",
+                              "resource": "*:common/figura_5",
+                              "change": 1,
+                              "operation": "set"
+                            },
+                            {
+                              "type": "origins:grant_power",
+                              "power": "*:fenrkin/helper/pouncing",
+                              "source": "minecraft:state"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:or",
+                "conditions": [
+                  {
+                    "type": "origins:on_block"
+                  },
+                  {
+                    "type": "origins:swimming"
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "*:common/figura_3",
+                    "change": 1,
+                    "operation": "set"
+                  },
+                  {
+                    "type": "origins:grant_power",
+                    "power": "*:fenrkin/helper/rushing",
+                    "source": "minecraft:state"
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "*:fenrkin/helper/rushing_remove",
+                    "change": 4
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "*:common/silenced",
+          "inverted": true
+        },
+        {
+          "type": "origins:power",
+          "power": "*:common/restrained",
+          "inverted": true
+        },
+        {
+          "type": "origins:resource",
+          "comparison": ">",
+          "resource": "*:*_astamina",
+          "compare_to": 0
+        },
+        {
+          "type": "origins:resource",
+          "comparison": "==",
+          "resource": "*:*_breathlock",
+          "compare_to": 0
+        }
+      ]
+    },
+    "key": {
+      "key": "key.origins.secondary_active",
+      "continuous": true
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Trigger with ",
+        {
+          "keybind": "key.origins.secondary_active"
+        }
+      ]
+    }
+  ],
+  "name": "Stamina Surge",
+  "description": "Stamina regenerates while this ability is not in use. Hold your Secondary Ability key to double your movement speed at the cost of 1 Stamina per second. Tap Secondary Ability while airborne to perform a powerful mid-air leap at the cost of 50% of your maximum Stamina.\n \nYour projectile damage is reduced by 50% while using Stamina Surge and for 3 seconds afterward. §e§lMovement Ability§r."
+}

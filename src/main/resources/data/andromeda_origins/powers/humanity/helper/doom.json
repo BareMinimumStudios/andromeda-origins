@@ -1,0 +1,93 @@
+{
+  "type": "origins:multiple",
+  "remove": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 11,
+    "start_value": 1,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
+      "bar_index": 4
+    },
+    "min_action": {
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "minecraft:debuff"
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "item.trident.thunder",
+          "volume": 1,
+          "pitch": 0.6
+        },
+        {
+          "type": "origins:damage",
+          "amount": 20,
+          "damage_type": "minecraft:magic"
+        },
+        {
+          "type": "origins:apply_effect",
+          "effect": {
+            "id": "minecraft:wither",
+            "amplifier": 1,
+            "duration": 100
+          }
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:*",
+          "source": "minecraft:debuff"
+        }
+      ]
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_remove",
+      "change": -1,
+      "operation": "add"
+    },
+    "condition": {
+      "type": "origins:resource",
+      "comparison": "==",
+      "resource": "*:*_unremove",
+      "compare_to": 0
+    }
+  },
+  "unremove": {
+    "type": "origins:cooldown",
+    "cooldown": 21,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "indicator1": {
+    "type": "origins:self_glow",
+    "use_teams": false,
+    "red": 0.3,
+    "green": 0,
+    "blue": 0.3,
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:resource",
+          "comparison": ">",
+          "resource": "*:*_unremove",
+          "compare_to": 0
+        },
+        {
+          "type": "origins:power",
+          "power": "*:common/undetectable",
+          "inverted": true
+        }
+      ]
+    }
+  }
+}

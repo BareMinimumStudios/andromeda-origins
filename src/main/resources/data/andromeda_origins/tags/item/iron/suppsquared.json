@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "suppsquared:iron_plaque",
+      "required": false
+    },
+    {
+      "id": "suppsquared:metal_brace",
+      "required": false
+    },
+    {
+      "id": "suppsquared:metal_cross_brace",
+      "required": false
+    },
+    {
+      "id": "suppsquared:metal_frame",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "powers": [
+    "andromeda_origins:wyverian/passives",
+    "andromeda_origins:wyverian/primary",
+    "andromeda_origins:wyverian/secondary",
+    "andromeda_origins:wyverian/sneakair",
+    "andromeda_origins:wyverian/figura",
+    "andromeda_origins:common/diet_carnivore",
+    "andromeda_origins:common/figura"
+  ],
+  "icon": {
+    "id": "andromeda_origins:wyverian_icon"
+  },
+  "unchoosable": false,
+  "order": 1,
+  "impact": 3,
+  "name": "Wyverian",
+  "description": "Wyverians are draconic beings descended from ancient flame and open skies. Their scaled wings carry them above the battlefield while their ember breath scorches anything beneath them. Brilliant, swift, and destructive, a Wyverian is at its strongest when given room to soar."
+}

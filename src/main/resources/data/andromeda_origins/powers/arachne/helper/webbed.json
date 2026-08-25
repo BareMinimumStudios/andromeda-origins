@@ -1,0 +1,316 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_added": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "title @s actionbar {\"text\": \"You have been webbed! Press each direction key once to break free faster!\", \"color\": \"red\"}"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/restrained",
+          "source": "minecraft:ccontrol"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/restrained_sources",
+          "change": 1
+        }
+      ]
+    },
+    "entity_action_lost": {
+      "type": "origins:change_resource",
+      "resource": "*:common/restrained_sources",
+      "change": -1
+    }
+  },
+  "remove": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 8,
+    "start_value": 8,
+    "hud_render": {
+      "should_render": false
+    },
+    "min_action": {
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "minecraft:ccontrol"
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_remove",
+      "change": -1,
+      "operation": "add"
+    }
+  },
+  "visual": {
+    "type": "origins:particle",
+    "count": 5,
+    "particle": "minecraft:spit",
+    "spread": {
+      "x": 0.25,
+      "y": 0.25,
+      "z": 0.25
+    },
+    "offset_y": 1,
+    "frequency": 10
+  },
+  "frame1": {
+    "type": "origins:overlay",
+    "texture": "andromeda_origins:webbed1",
+    "strength": 1.0,
+    "red": 1.0,
+    "green": 1.0,
+    "blue": 1.0,
+    "draw_mode": "texture",
+    "draw_phase": "below_hud",
+    "hide_with_hud": false,
+    "visible_in_third_person": true,
+    "condition": {
+      "type": "origins:any_of",
+      "conditions": [
+        {
+          "type": "origins:resource",
+          "comparison": "==",
+          "resource": "*:*_remove",
+          "compare_to": 7
+        },
+        {
+          "type": "origins:resource",
+          "comparison": "==",
+          "resource": "*:*_remove",
+          "compare_to": 5
+        },
+        {
+          "type": "origins:resource",
+          "comparison": "==",
+          "resource": "*:*_remove",
+          "compare_to": 3
+        },
+        {
+          "type": "origins:resource",
+          "comparison": "==",
+          "resource": "*:*_remove",
+          "compare_to": 1
+        }
+      ]
+    }
+  },
+  "frame2": {
+    "type": "origins:overlay",
+    "texture": "andromeda_origins:webbed2",
+    "strength": 1.0,
+    "red": 1.0,
+    "green": 1.0,
+    "blue": 1.0,
+    "draw_mode": "texture",
+    "draw_phase": "below_hud",
+    "hide_with_hud": false,
+    "visible_in_third_person": true,
+    "condition": {
+      "type": "origins:any_of",
+      "conditions": [
+        {
+          "type": "origins:resource",
+          "comparison": "==",
+          "resource": "*:*_remove",
+          "compare_to": 8
+        },
+        {
+          "type": "origins:resource",
+          "comparison": "==",
+          "resource": "*:*_remove",
+          "compare_to": 6
+        },
+        {
+          "type": "origins:resource",
+          "comparison": "==",
+          "resource": "*:*_remove",
+          "compare_to": 4
+        },
+        {
+          "type": "origins:resource",
+          "comparison": "==",
+          "resource": "*:*_remove",
+          "compare_to": 2
+        }
+      ]
+    }
+  },
+  "w_detect": {
+    "type": "origins:active_self",
+    "cooldown": 40,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_remove",
+          "change": -1
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:end_rod"
+          },
+          "count": 5,
+          "speed": 0.1,
+          "force": true,
+          "offset_y": 1,
+          "spread": {
+            "x": 0.4,
+            "y": 0.25,
+            "z": 0.4
+          }
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:block.honey_block.place",
+          "volume": 1,
+          "pitch": 0.2
+        }
+      ]
+    },
+    "key": {
+      "key": "key.forward",
+      "continuous": true
+    }
+  },
+  "s_detect": {
+    "type": "origins:active_self",
+    "cooldown": 40,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_remove",
+          "change": -1
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:end_rod"
+          },
+          "count": 5,
+          "speed": 0.1,
+          "force": true,
+          "offset_y": 1,
+          "spread": {
+            "x": 0.4,
+            "y": 0.25,
+            "z": 0.4
+          }
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:block.honey_block.place",
+          "volume": 1,
+          "pitch": 0.2
+        }
+      ]
+    },
+    "key": {
+      "key": "key.back",
+      "continuous": true
+    }
+  },
+  "a_detect": {
+    "type": "origins:active_self",
+    "cooldown": 40,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_remove",
+          "change": -1
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:end_rod"
+          },
+          "count": 5,
+          "speed": 0.1,
+          "force": true,
+          "offset_y": 1,
+          "spread": {
+            "x": 0.4,
+            "y": 0.25,
+            "z": 0.4
+          }
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:block.honey_block.place",
+          "volume": 1,
+          "pitch": 0.2
+        }
+      ]
+    },
+    "key": {
+      "key": "key.left",
+      "continuous": true
+    }
+  },
+  "d_detect": {
+    "type": "origins:active_self",
+    "cooldown": 40,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_remove",
+          "change": -1
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:end_rod"
+          },
+          "count": 5,
+          "speed": 0.1,
+          "force": true,
+          "offset_y": 1,
+          "spread": {
+            "x": 0.4,
+            "y": 0.25,
+            "z": 0.4
+          }
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:block.honey_block.place",
+          "volume": 1,
+          "pitch": 0.2
+        }
+      ]
+    },
+    "key": {
+      "key": "key.right",
+      "continuous": true
+    }
+  }
+}

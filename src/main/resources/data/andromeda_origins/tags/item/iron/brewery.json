@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "brewery:breathalyzer",
+      "required": false
+    },
+    {
+      "id": "brewery:wooden_brewingstation",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "alpinewhispers:arolla_pine_sink",
+      "required": false
+    },
+    {
+      "id": "alpinewhispers:arolla_pine_washbasin",
+      "required": false
+    },
+    {
+      "id": "alpinewhispers:fireplace_cornice",
+      "required": false
+    }
+  ]
+}

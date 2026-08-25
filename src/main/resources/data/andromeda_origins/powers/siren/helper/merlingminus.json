@@ -1,0 +1,23 @@
+{
+  "type": "origins:action_on_callback",
+  "entity_action_added": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:revoke_power",
+        "power": "origins:aqua_affinity",
+        "source": "minecraft:state"
+      },
+      {
+        "type": "origins:revoke_power",
+        "power": "origins:conduit_power_on_land",
+        "source": "minecraft:state"
+      },
+      {
+        "type": "origins:revoke_power",
+        "power": "*:siren/helper/merlingminus",
+        "source": "minecraft:state"
+      }
+    ]
+  }
+}

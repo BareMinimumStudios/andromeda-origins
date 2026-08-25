@@ -1,0 +1,77 @@
+{
+  "type": "origins:multiple",
+  "unstoppable": {
+    "type": "origins:active_self",
+    "cooldown": 1800,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+      "bar_index": 18
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.ender_dragon.growl",
+          "volume": 0.2,
+          "pitch": 1.5
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:common/figura_2",
+          "change": 1,
+          "operation": "set"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "andromeda_origins:manticore/helper/unstoppable_anim",
+          "source": "minecraft:buff"
+        },
+        {
+          "type": "origins:clear_effect"
+        },
+        {
+          "type": "origins:revoke_all_powers",
+          "source": "minecraft:ccontrol"
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "*:common/silenced",
+          "inverted": true
+        },
+        {
+          "type": "origins:sneaking",
+          "inverted": true
+        }
+      ]
+    },
+    "key": {
+      "key": "key.origins.secondary_active",
+      "continuous": false
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Trigger with ",
+        {
+          "keybind": "key.origins.secondary_active"
+        }
+      ]
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
+      "text": "§e§lUnstoppable:§r§f Immune to crowd control effects, slowness and knockback.\n \n§c§lFamished:§r§f You have a 75% penalty to your hunger."
+    }
+  ],
+  "name": "Beast of Blood",
+  "description": "Press your Secondary Ability key to purge potion and Crowd Control effects from yourself and become Unstoppable for 30 seconds. When Beast of Blood ends, you become §c§l[Famished]§r for 1 minute."
+}

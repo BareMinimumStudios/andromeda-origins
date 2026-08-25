@@ -1,0 +1,26 @@
+{
+  "type": "origins:multiple",
+  "speed": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "andromeda_origins:lichling_helper_sunweak_speed",
+      "attribute": "minecraft:generic.movement_speed",
+      "operation": "add_multiplied_total",
+      "amount": -0.35
+    }
+  },
+  "damage": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.35
+    }
+  },
+  "damageprojectile": {
+    "type": "origins:modify_projectile_damage",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.35
+    }
+  }
+}

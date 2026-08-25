@@ -1,0 +1,235 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_added": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "title @s actionbar {\"text\": \"You have been petrified! Press direction keys to break free faster!\", \"color\": \"red\"}"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/petrified",
+          "source": "minecraft:ccontrol"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/petrified_sources",
+          "change": 1
+        }
+      ]
+    },
+    "entity_action_lost": {
+      "type": "origins:change_resource",
+      "resource": "*:common/petrified_sources",
+      "change": -1
+    }
+  },
+  "remove": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 60,
+    "start_value": 1,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+      "bar_index": 22
+    },
+    "min_action": {
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "minecraft:ccontrol"
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_remove",
+      "change": -1,
+      "operation": "add"
+    }
+  },
+  "visual": {
+    "type": "origins:particle",
+    "count": 5,
+    "particle": "minecraft:electric_spark",
+    "spread": {
+      "x": 0.25,
+      "y": 0.25,
+      "z": 0.25
+    },
+    "offset_y": 1,
+    "frequency": 10
+  },
+  "w_detect": {
+    "type": "origins:active_self",
+    "cooldown": 40,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_remove",
+          "change": -1
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:smoke"
+          },
+          "count": 5,
+          "speed": 0.1,
+          "force": true,
+          "offset_y": 1,
+          "spread": {
+            "x": 0.4,
+            "y": 0.25,
+            "z": 0.4
+          }
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:block.stone.hit",
+          "volume": 1,
+          "pitch": 0.2
+        }
+      ]
+    },
+    "key": {
+      "key": "key.forward",
+      "continuous": true
+    }
+  },
+  "s_detect": {
+    "type": "origins:active_self",
+    "cooldown": 40,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_remove",
+          "change": -1
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:smoke"
+          },
+          "count": 5,
+          "speed": 0.1,
+          "force": true,
+          "offset_y": 1,
+          "spread": {
+            "x": 0.4,
+            "y": 0.25,
+            "z": 0.4
+          }
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:block.stone.hit",
+          "volume": 1,
+          "pitch": 0.2
+        }
+      ]
+    },
+    "key": {
+      "key": "key.back",
+      "continuous": true
+    }
+  },
+  "a_detect": {
+    "type": "origins:active_self",
+    "cooldown": 40,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_remove",
+          "change": -1
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:smoke"
+          },
+          "count": 5,
+          "speed": 0.1,
+          "force": true,
+          "offset_y": 1,
+          "spread": {
+            "x": 0.4,
+            "y": 0.25,
+            "z": 0.4
+          }
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:block.stone.hit",
+          "volume": 1,
+          "pitch": 0.2
+        }
+      ]
+    },
+    "key": {
+      "key": "key.left",
+      "continuous": true
+    }
+  },
+  "d_detect": {
+    "type": "origins:active_self",
+    "cooldown": 40,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_remove",
+          "change": -1
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:smoke"
+          },
+          "count": 5,
+          "speed": 0.1,
+          "force": true,
+          "offset_y": 1,
+          "spread": {
+            "x": 0.4,
+            "y": 0.25,
+            "z": 0.4
+          }
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:block.stone.hit",
+          "volume": 1,
+          "pitch": 0.2
+        }
+      ]
+    },
+    "key": {
+      "key": "key.right",
+      "continuous": true
+    }
+  }
+}

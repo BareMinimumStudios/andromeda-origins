@@ -1,0 +1,36 @@
+{
+  "type": "origins:multiple",
+  "sources": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 10,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "min_action": {
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "minecraft:ccontrol"
+    }
+  },
+  "speed": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "andromeda_origins:common_restrained_speed",
+      "attribute": "minecraft:generic.movement_speed",
+      "operation": "add_multiplied_total",
+      "amount": -1
+    }
+  },
+  "jump": {
+    "type": "origins:modify_jump",
+    "modifier": {
+      "operation": "max_total",
+      "amount": -1
+    }
+  },
+  "elytra_disable": {
+    "type": "origins:prevent_elytra_flight"
+  }
+}

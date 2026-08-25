@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "spudaciousshops:hook_shop",
+      "required": false
+    }
+  ]
+}

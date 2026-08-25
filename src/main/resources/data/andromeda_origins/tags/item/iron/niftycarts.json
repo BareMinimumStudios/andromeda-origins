@@ -1,0 +1,49 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "niftycarts:acacia_reaper",
+      "required": false
+    },
+    {
+      "id": "niftycarts:bamboo_reaper",
+      "required": false
+    },
+    {
+      "id": "niftycarts:birch_reaper",
+      "required": false
+    },
+    {
+      "id": "niftycarts:cherry_reaper",
+      "required": false
+    },
+    {
+      "id": "niftycarts:crimson_reaper",
+      "required": false
+    },
+    {
+      "id": "niftycarts:dark_oak_reaper",
+      "required": false
+    },
+    {
+      "id": "niftycarts:jungle_reaper",
+      "required": false
+    },
+    {
+      "id": "niftycarts:mangrove_reaper",
+      "required": false
+    },
+    {
+      "id": "niftycarts:oak_reaper",
+      "required": false
+    },
+    {
+      "id": "niftycarts:spruce_reaper",
+      "required": false
+    },
+    {
+      "id": "niftycarts:warped_reaper",
+      "required": false
+    }
+  ]
+}

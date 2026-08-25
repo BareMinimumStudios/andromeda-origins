@@ -1,0 +1,1005 @@
+{
+  "type": "origins:active_self",
+  "cooldown": 15,
+  "hud_render": {
+    "should_render": false
+  },
+  "entity_action": {
+    "type": "origins:if_else_list",
+    "actions": [
+      {
+        "condition": {
+          "type": "origins:equipped_item",
+          "equipment_slot": "mainhand",
+          "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+              "item": "minecraft:nautilus_shell"
+            }
+          }
+        },
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "origins:sneaking"
+              },
+              "if_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:ambient.underwater.enter"
+              },
+              "else_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:block.bubble_column.whirlpool_inside"
+              }
+            },
+            {
+              "type": "origins:area_of_effect",
+              "radius": 2,
+              "bientity_action": {
+                "type": "origins:target_action",
+                "action": {
+                  "type": "origins:change_resource",
+                  "resource": "*:faerie/helper/hallucinating_waterswap",
+                  "change": 1
+                }
+              },
+              "bientity_condition": {
+                "type": "origins:target_condition",
+                "condition": {
+                  "type": "origins:power",
+                  "power": "*:faerie/helper/hallucinating"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "condition": {
+          "type": "origins:equipped_item",
+          "equipment_slot": "mainhand",
+          "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+              "item": "minecraft:echo_shard"
+            }
+          }
+        },
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "origins:sneaking"
+              },
+              "if_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.warden.nearby_closest"
+              },
+              "else_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:block.sculk_shrieker.shriek"
+              }
+            },
+            {
+              "type": "origins:area_of_effect",
+              "radius": 2,
+              "bientity_action": {
+                "type": "origins:target_action",
+                "action": {
+                  "type": "origins:change_resource",
+                  "resource": "*:faerie/helper/hallucinating_warden",
+                  "change": 1
+                }
+              },
+              "bientity_condition": {
+                "type": "origins:target_condition",
+                "condition": {
+                  "type": "origins:power",
+                  "power": "*:faerie/helper/hallucinating"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "condition": {
+          "type": "origins:equipped_item",
+          "equipment_slot": "mainhand",
+          "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+              "item": "minecraft:white_dye"
+            }
+          }
+        },
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "origins:sneaking"
+              },
+              "if_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.skeleton.ambient"
+              },
+              "else_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.skeleton.step"
+              }
+            },
+            {
+              "type": "origins:area_of_effect",
+              "radius": 2,
+              "bientity_action": {
+                "type": "origins:target_action",
+                "action": {
+                  "type": "origins:change_resource",
+                  "resource": "*:faerie/helper/hallucinating_skeleton",
+                  "change": 1
+                }
+              },
+              "bientity_condition": {
+                "type": "origins:target_condition",
+                "condition": {
+                  "type": "origins:power",
+                  "power": "*:faerie/helper/hallucinating"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "condition": {
+          "type": "origins:equipped_item",
+          "equipment_slot": "mainhand",
+          "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+              "item": "minecraft:light_gray_dye"
+            }
+          }
+        },
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "origins:sneaking"
+              },
+              "if_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.stray.ambient"
+              },
+              "else_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.stray.step"
+              }
+            },
+            {
+              "type": "origins:area_of_effect",
+              "radius": 2,
+              "bientity_action": {
+                "type": "origins:target_action",
+                "action": {
+                  "type": "origins:change_resource",
+                  "resource": "*:faerie/helper/hallucinating_stray",
+                  "change": 1
+                }
+              },
+              "bientity_condition": {
+                "type": "origins:target_condition",
+                "condition": {
+                  "type": "origins:power",
+                  "power": "*:faerie/helper/hallucinating"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "condition": {
+          "type": "origins:equipped_item",
+          "equipment_slot": "mainhand",
+          "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+              "item": "minecraft:gray_dye"
+            }
+          }
+        },
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "origins:sneaking"
+              },
+              "if_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.drowned.ambient"
+              },
+              "else_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.drowned.swim"
+              }
+            },
+            {
+              "type": "origins:area_of_effect",
+              "radius": 2,
+              "bientity_action": {
+                "type": "origins:target_action",
+                "action": {
+                  "type": "origins:change_resource",
+                  "resource": "*:faerie/helper/hallucinating_drowned",
+                  "change": 1
+                }
+              },
+              "bientity_condition": {
+                "type": "origins:target_condition",
+                "condition": {
+                  "type": "origins:power",
+                  "power": "*:faerie/helper/hallucinating"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "condition": {
+          "type": "origins:equipped_item",
+          "equipment_slot": "mainhand",
+          "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+              "item": "minecraft:black_dye"
+            }
+          }
+        },
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "origins:sneaking"
+              },
+              "if_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.wither_skeleton.ambient"
+              },
+              "else_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.wither_skeleton.step"
+              }
+            },
+            {
+              "type": "origins:area_of_effect",
+              "radius": 2,
+              "bientity_action": {
+                "type": "origins:target_action",
+                "action": {
+                  "type": "origins:change_resource",
+                  "resource": "*:faerie/helper/hallucinating_wskeleton",
+                  "change": 1
+                }
+              },
+              "bientity_condition": {
+                "type": "origins:target_condition",
+                "condition": {
+                  "type": "origins:power",
+                  "power": "*:faerie/helper/hallucinating"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "condition": {
+          "type": "origins:equipped_item",
+          "equipment_slot": "mainhand",
+          "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+              "item": "minecraft:brown_dye"
+            }
+          }
+        },
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "origins:sneaking"
+              },
+              "if_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.cow.ambient"
+              },
+              "else_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.cow.step"
+              }
+            },
+            {
+              "type": "origins:area_of_effect",
+              "radius": 2,
+              "bientity_action": {
+                "type": "origins:target_action",
+                "action": {
+                  "type": "origins:change_resource",
+                  "resource": "*:faerie/helper/hallucinating_cow",
+                  "change": 1
+                }
+              },
+              "bientity_condition": {
+                "type": "origins:target_condition",
+                "condition": {
+                  "type": "origins:power",
+                  "power": "*:faerie/helper/hallucinating"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "condition": {
+          "type": "origins:equipped_item",
+          "equipment_slot": "mainhand",
+          "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+              "item": "minecraft:red_dye"
+            }
+          }
+        },
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "origins:sneaking"
+              },
+              "if_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.strider.ambient"
+              },
+              "else_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.strider.step"
+              }
+            },
+            {
+              "type": "origins:area_of_effect",
+              "radius": 2,
+              "bientity_action": {
+                "type": "origins:target_action",
+                "action": {
+                  "type": "origins:change_resource",
+                  "resource": "*:faerie/helper/hallucinating_strider",
+                  "change": 1
+                }
+              },
+              "bientity_condition": {
+                "type": "origins:target_condition",
+                "condition": {
+                  "type": "origins:power",
+                  "power": "*:faerie/helper/hallucinating"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "condition": {
+          "type": "origins:equipped_item",
+          "equipment_slot": "mainhand",
+          "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+              "item": "minecraft:orange_dye"
+            }
+          }
+        },
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "origins:sneaking"
+              },
+              "if_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.blaze.ambient"
+              },
+              "else_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.blaze.shoot"
+              }
+            },
+            {
+              "type": "origins:area_of_effect",
+              "radius": 2,
+              "bientity_action": {
+                "type": "origins:target_action",
+                "action": {
+                  "type": "origins:change_resource",
+                  "resource": "*:faerie/helper/hallucinating_blaze",
+                  "change": 1
+                }
+              },
+              "bientity_condition": {
+                "type": "origins:target_condition",
+                "condition": {
+                  "type": "origins:power",
+                  "power": "*:faerie/helper/hallucinating"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "condition": {
+          "type": "origins:equipped_item",
+          "equipment_slot": "mainhand",
+          "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+              "item": "minecraft:yellow_dye"
+            }
+          }
+        },
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "origins:sneaking"
+              },
+              "if_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.puffer_fish.blow_out"
+              },
+              "else_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.puffer_fish.blow_up"
+              }
+            },
+            {
+              "type": "origins:area_of_effect",
+              "radius": 2,
+              "bientity_action": {
+                "type": "origins:target_action",
+                "action": {
+                  "type": "origins:change_resource",
+                  "resource": "*:faerie/helper/hallucinating_pufferfish",
+                  "change": 1
+                }
+              },
+              "bientity_condition": {
+                "type": "origins:target_condition",
+                "condition": {
+                  "type": "origins:power",
+                  "power": "*:faerie/helper/hallucinating"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "condition": {
+          "type": "origins:equipped_item",
+          "equipment_slot": "mainhand",
+          "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+              "item": "minecraft:lime_dye"
+            }
+          }
+        },
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "origins:sneaking"
+              },
+              "if_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.creeper.primed"
+              },
+              "else_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.creeper.hurt"
+              }
+            },
+            {
+              "type": "origins:area_of_effect",
+              "radius": 2,
+              "bientity_action": {
+                "type": "origins:target_action",
+                "action": {
+                  "type": "origins:change_resource",
+                  "resource": "*:faerie/helper/hallucinating_creeper",
+                  "change": 1
+                }
+              },
+              "bientity_condition": {
+                "type": "origins:target_condition",
+                "condition": {
+                  "type": "origins:power",
+                  "power": "*:faerie/helper/hallucinating"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "condition": {
+          "type": "origins:equipped_item",
+          "equipment_slot": "mainhand",
+          "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+              "item": "minecraft:green_dye"
+            }
+          }
+        },
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "origins:sneaking"
+              },
+              "if_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.zombie.ambient"
+              },
+              "else_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.zombie.step"
+              }
+            },
+            {
+              "type": "origins:area_of_effect",
+              "radius": 2,
+              "bientity_action": {
+                "type": "origins:target_action",
+                "action": {
+                  "type": "origins:change_resource",
+                  "resource": "*:faerie/helper/hallucinating_zombie",
+                  "change": 1
+                }
+              },
+              "bientity_condition": {
+                "type": "origins:target_condition",
+                "condition": {
+                  "type": "origins:power",
+                  "power": "*:faerie/helper/hallucinating"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "condition": {
+          "type": "origins:equipped_item",
+          "equipment_slot": "mainhand",
+          "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+              "item": "minecraft:cyan_dye"
+            }
+          }
+        },
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "origins:sneaking"
+              },
+              "if_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.spider.ambient"
+              },
+              "else_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.spider.step"
+              }
+            },
+            {
+              "type": "origins:area_of_effect",
+              "radius": 2,
+              "bientity_action": {
+                "type": "origins:target_action",
+                "action": {
+                  "type": "origins:change_resource",
+                  "resource": "*:faerie/helper/hallucinating_spider",
+                  "change": 1
+                }
+              },
+              "bientity_condition": {
+                "type": "origins:target_condition",
+                "condition": {
+                  "type": "origins:power",
+                  "power": "*:faerie/helper/hallucinating"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "condition": {
+          "type": "origins:equipped_item",
+          "equipment_slot": "mainhand",
+          "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+              "item": "minecraft:light_blue_dye"
+            }
+          }
+        },
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "origins:sneaking"
+              },
+              "if_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.breeze.charge"
+              },
+              "else_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.breeze.shoot"
+              }
+            },
+            {
+              "type": "origins:area_of_effect",
+              "radius": 2,
+              "bientity_action": {
+                "type": "origins:target_action",
+                "action": {
+                  "type": "origins:change_resource",
+                  "resource": "*:faerie/helper/hallucinating_breeze",
+                  "change": 1
+                }
+              },
+              "bientity_condition": {
+                "type": "origins:target_condition",
+                "condition": {
+                  "type": "origins:power",
+                  "power": "*:faerie/helper/hallucinating"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "condition": {
+          "type": "origins:equipped_item",
+          "equipment_slot": "mainhand",
+          "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+              "item": "minecraft:blue_dye"
+            }
+          }
+        },
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "origins:sneaking"
+              },
+              "if_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.phantom.swoop"
+              },
+              "else_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.phantom.flap"
+              }
+            },
+            {
+              "type": "origins:area_of_effect",
+              "radius": 2,
+              "bientity_action": {
+                "type": "origins:target_action",
+                "action": {
+                  "type": "origins:change_resource",
+                  "resource": "*:faerie/helper/hallucinating_phantom",
+                  "change": 1
+                }
+              },
+              "bientity_condition": {
+                "type": "origins:target_condition",
+                "condition": {
+                  "type": "origins:power",
+                  "power": "*:faerie/helper/hallucinating"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "condition": {
+          "type": "origins:equipped_item",
+          "equipment_slot": "mainhand",
+          "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+              "item": "minecraft:purple_dye"
+            }
+          }
+        },
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "origins:sneaking"
+              },
+              "if_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.shulker.ambient"
+              },
+              "else_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.shulker.open"
+              }
+            },
+            {
+              "type": "origins:area_of_effect",
+              "radius": 2,
+              "bientity_action": {
+                "type": "origins:target_action",
+                "action": {
+                  "type": "origins:change_resource",
+                  "resource": "*:faerie/helper/hallucinating_shulker",
+                  "change": 1
+                }
+              },
+              "bientity_condition": {
+                "type": "origins:target_condition",
+                "condition": {
+                  "type": "origins:power",
+                  "power": "*:faerie/helper/hallucinating"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "condition": {
+          "type": "origins:equipped_item",
+          "equipment_slot": "mainhand",
+          "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+              "item": "minecraft:magenta_dye"
+            }
+          }
+        },
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "origins:sneaking"
+              },
+              "if_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.enderman.ambient"
+              },
+              "else_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.enderman.teleport"
+              }
+            },
+            {
+              "type": "origins:area_of_effect",
+              "radius": 2,
+              "bientity_action": {
+                "type": "origins:target_action",
+                "action": {
+                  "type": "origins:change_resource",
+                  "resource": "*:faerie/helper/hallucinating_enderman",
+                  "change": 1
+                }
+              },
+              "bientity_condition": {
+                "type": "origins:target_condition",
+                "condition": {
+                  "type": "origins:power",
+                  "power": "*:faerie/helper/hallucinating"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "condition": {
+          "type": "origins:equipped_item",
+          "equipment_slot": "mainhand",
+          "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+              "item": "minecraft:pink_dye"
+            }
+          }
+        },
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "origins:sneaking"
+              },
+              "if_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.axolotl.idle_air"
+              },
+              "else_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.axolotl.swim"
+              }
+            },
+            {
+              "type": "origins:area_of_effect",
+              "radius": 2,
+              "bientity_action": {
+                "type": "origins:target_action",
+                "action": {
+                  "type": "origins:change_resource",
+                  "resource": "*:faerie/helper/hallucinating_axolotl",
+                  "change": 1
+                }
+              },
+              "bientity_condition": {
+                "type": "origins:target_condition",
+                "condition": {
+                  "type": "origins:power",
+                  "power": "*:faerie/helper/hallucinating"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "condition": {
+          "type": "origins:equipped_item",
+          "equipment_slot": "mainhand",
+          "item_condition": {
+            "type": "origins:ingredient",
+            "ingredient": {
+              "item": "minecraft:amethyst_shard"
+            }
+          }
+        },
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:if_else",
+              "condition": {
+                "type": "origins:sneaking"
+              },
+              "if_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:block.amethyst_cluster.break"
+              },
+              "else_action": {
+                "type": "origins:play_sound",
+                "sound": "minecraft:block.trial_spawner.spawn_item"
+              }
+            },
+            {
+              "type": "origins:area_of_effect",
+              "radius": 2,
+              "bientity_action": {
+                "type": "origins:target_action",
+                "action": {
+                  "type": "origins:change_resource",
+                  "resource": "*:faerie/helper/hallucinating_remove",
+                  "change": -30
+                }
+              },
+              "bientity_condition": {
+                "type": "origins:target_condition",
+                "condition": {
+                  "type": "origins:power",
+                  "power": "*:faerie/helper/hallucinating"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:power",
+        "power": "*:common/silenced",
+        "inverted": true
+      },
+      {
+        "type": "origins:equipped_item",
+        "equipment_slot": "mainhand",
+        "item_condition": {
+          "type": "origins:or",
+          "conditions": [
+            {
+              "type": "origins:ingredient",
+              "ingredient": {
+                "tag": "andromeda_origins:pranksteritems"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "key": {
+    "key": "key.use",
+    "continuous": true
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Trigger with ",
+        {
+          "keybind": "key.use"
+        }
+      ]
+    }
+  ],
+  "name": "Trickster",
+  "description": "Use a dye, Nautilus Shell, or Echo Shard to create deceptive sounds. Sneaking changes the sounds you produce.\n \nCreatures within 2 blocks that are affected by §e§lFae Illusions§r can suffer additional one-time trick effects. Use an Amethyst Shard to clear Fae Illusions from a target."
+}

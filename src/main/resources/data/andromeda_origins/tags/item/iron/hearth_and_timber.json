@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "hearth_and_timber:sliding_stable_door",
+      "required": false
+    }
+  ]
+}

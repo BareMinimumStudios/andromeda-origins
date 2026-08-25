@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "comforts:rope_and_nail",
+      "required": false
+    }
+  ]
+}

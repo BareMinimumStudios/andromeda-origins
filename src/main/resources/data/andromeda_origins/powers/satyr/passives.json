@@ -1,0 +1,665 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_chosen": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:satyr/passives_sprintmeter",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:satyr/passives_jumps",
+          "change": 1,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:satyr/passives_bigjump",
+          "change": 5,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:satyr/passives_stompcd",
+          "change": 60,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:satyr/passives_stomp",
+          "change": 10,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:satyr/primary_active",
+          "change": 200,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:satyr/secondary_blocker",
+          "change": 1,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:satyr/secondary_active",
+          "change": 10,
+          "operation": "set"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s add satyr"
+        }
+      ]
+    },
+    "entity_action_lost": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s remove satyr"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/debug",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "execute_chosen_when_orb": true
+  },
+  "sprintmeter": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 5,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": true,
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+      "bar_index": 20
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "entity.wind_charge.wind_burst",
+          "volume": 1,
+          "pitch": 1.6
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:flash"
+          },
+          "count": 1,
+          "speed": 0.0,
+          "force": true,
+          "offset_y": 1,
+          "spread": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_1",
+          "change": 1
+        }
+      ]
+    }
+  },
+  "heart": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:*_sprintmeter",
+                    "comparison": "<",
+                    "compare_to": 5
+                  },
+                  {
+                    "type": "origins:sprinting"
+                  },
+                  {
+                    "type": "origins:power_active",
+                    "power": "*:*_toggle"
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_sprintmeter",
+                    "change": 1
+                  },
+                  {
+                    "type": "origins:if_else_list",
+                    "actions": [
+                      {
+                        "condition": {
+                          "type": "origins:resource",
+                          "resource": "*:*_sprintmeter",
+                          "comparison": "==",
+                          "compare_to": 1
+                        },
+                        "action": {
+                          "type": "origins:grant_power",
+                          "power": "*:satyr/helper/rushing",
+                          "source": "minecraft:state"
+                        }
+                      },
+                      {
+                        "condition": {
+                          "type": "origins:resource",
+                          "resource": "*:*_sprintmeter",
+                          "comparison": "==",
+                          "compare_to": 2
+                        },
+                        "action": {
+                          "type": "origins:grant_power",
+                          "power": "*:satyr/helper/rushing2",
+                          "source": "minecraft:state"
+                        }
+                      },
+                      {
+                        "condition": {
+                          "type": "origins:resource",
+                          "resource": "*:*_sprintmeter",
+                          "comparison": "==",
+                          "compare_to": 3
+                        },
+                        "action": {
+                          "type": "origins:grant_power",
+                          "power": "*:satyr/helper/rushing3",
+                          "source": "minecraft:state"
+                        }
+                      },
+                      {
+                        "condition": {
+                          "type": "origins:resource",
+                          "resource": "*:*_sprintmeter",
+                          "comparison": "==",
+                          "compare_to": 4
+                        },
+                        "action": {
+                          "type": "origins:grant_power",
+                          "power": "*:satyr/helper/rushing4",
+                          "source": "minecraft:state"
+                        }
+                      },
+                      {
+                        "condition": {
+                          "type": "origins:resource",
+                          "resource": "*:*_sprintmeter",
+                          "comparison": "==",
+                          "compare_to": 5
+                        },
+                        "action": {
+                          "type": "origins:grant_power",
+                          "power": "*:satyr/helper/rushing5",
+                          "source": "minecraft:state"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:*_sprintmeter",
+                    "comparison": ">",
+                    "compare_to": 0
+                  },
+                  {
+                    "type": "origins:or",
+                    "conditions": [
+                      {
+                        "type": "origins:sprinting",
+                        "inverted": true
+                      },
+                      {
+                        "type": "origins:power_active",
+                        "power": "*:*_toggle",
+                        "inverted": true
+                      }
+                    ]
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_sprintmeter",
+                    "change": -1
+                  },
+                  {
+                    "type": "origins:if_else_list",
+                    "actions": [
+                      {
+                        "condition": {
+                          "type": "origins:resource",
+                          "resource": "*:*_sprintmeter",
+                          "comparison": "==",
+                          "compare_to": 4
+                        },
+                        "action": {
+                          "type": "origins:and",
+                          "actions": [
+                            {
+                              "type": "origins:revoke_power",
+                              "power": "*:satyr/helper/rushing5",
+                              "source": "minecraft:state"
+                            },
+                            {
+                              "type": "origins:change_resource",
+                              "resource": "*:common/figura_1",
+                              "change": -1
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "condition": {
+                          "type": "origins:resource",
+                          "resource": "*:*_sprintmeter",
+                          "comparison": "==",
+                          "compare_to": 3
+                        },
+                        "action": {
+                          "type": "origins:revoke_power",
+                          "power": "*:satyr/helper/rushing4",
+                          "source": "minecraft:state"
+                        }
+                      },
+                      {
+                        "condition": {
+                          "type": "origins:resource",
+                          "resource": "*:*_sprintmeter",
+                          "comparison": "==",
+                          "compare_to": 2
+                        },
+                        "action": {
+                          "type": "origins:revoke_power",
+                          "power": "*:satyr/helper/rushing3",
+                          "source": "minecraft:state"
+                        }
+                      },
+                      {
+                        "condition": {
+                          "type": "origins:resource",
+                          "resource": "*:*_sprintmeter",
+                          "comparison": "==",
+                          "compare_to": 1
+                        },
+                        "action": {
+                          "type": "origins:revoke_power",
+                          "power": "*:satyr/helper/rushing2",
+                          "source": "minecraft:state"
+                        }
+                      },
+                      {
+                        "condition": {
+                          "type": "origins:resource",
+                          "resource": "*:*_sprintmeter",
+                          "comparison": "==",
+                          "compare_to": 0
+                        },
+                        "action": {
+                          "type": "origins:revoke_power",
+                          "power": "*:satyr/helper/rushing",
+                          "source": "minecraft:state"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "weaknesses": {
+    "type": "origins:modify_damage_taken",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": 0.2
+    },
+    "damage_condition": {
+      "type": "origins:projectile"
+    }
+  },
+  "nofall": {
+    "type": "origins:invulnerability",
+    "damage_condition": {
+      "type": "origins:name",
+      "name": "fall"
+    }
+  },
+  "toggle": {
+    "type": "origins:toggle",
+    "key": {
+      "key": "key.andromeda_origins.toggle",
+      "continuous": false
+    }
+  },
+  "darkvision": {
+    "type": "origins:night_vision",
+    "strength": 1,
+    "condition": {
+      "type": "origins:resource",
+      "resource": "*:satyr/secondary_blocker",
+      "comparison": "==",
+      "compare_to": 1
+    }
+  },
+  "effect_immunities": {
+    "type": "origins:effect_immunity",
+    "effects": [
+      "minecraft:blindness",
+      "minecraft:darkness"
+    ],
+    "condition": {
+      "type": "origins:resource",
+      "resource": "*:satyr/secondary_blocker",
+      "comparison": "==",
+      "compare_to": 1
+    }
+  },
+  "hp": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "*:*",
+      "attribute": "minecraft:generic.max_health",
+      "operation": "add_value",
+      "amount": -2
+    }
+  },
+  "waterspeed": {
+    "type": "origins:modify_swim_speed",
+    "modifier": {
+      "id": "*:*",
+      "operation": "add_multiplied_total",
+      "amount": -0.5
+    }
+  },
+  "noshoes": {
+    "type": "origins:restrict_armor",
+    "feet": {
+      "type": "origins:armor_value",
+      "comparison": ">=",
+      "compare_to": 0
+    }
+  },
+  "jumps": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 1,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "bigjump": {
+    "type": "origins:active_self",
+    "cooldown": 5,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_1",
+          "change": -1
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_2",
+          "change": 1
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_jumps",
+          "change": -1
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "entity.wind_charge.wind_burst",
+          "volume": 1,
+          "pitch": 0.6
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "entity.goat.long_jump",
+          "volume": 1,
+          "pitch": 1
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:cloud"
+          },
+          "count": 10,
+          "speed": 0.0,
+          "force": true,
+          "offset_y": 0.1,
+          "spread": {
+            "x": 0.3,
+            "y": 0,
+            "z": 0.3
+          }
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:explosion"
+          },
+          "count": 1,
+          "speed": 0.0,
+          "force": true,
+          "offset_y": 0.1,
+          "spread": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "type": "origins:add_velocity",
+          "y": 0.8,
+          "z": 0.4,
+          "space": "local_horizontal_normalized",
+          "set": true
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:fall_distance",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        {
+          "type": "origins:power",
+          "power": "*:common/silenced",
+          "inverted": true
+        },
+        {
+          "type": "origins:power",
+          "power": "*:common/restrained",
+          "inverted": true
+        },
+        {
+          "type": "origins:resource",
+          "resource": "*:*_sprintmeter",
+          "comparison": "==",
+          "compare_to": 5
+        },
+        {
+          "type": "origins:resource",
+          "resource": "*:*_jumps",
+          "comparison": ">",
+          "compare_to": 0
+        }
+      ]
+    },
+    "key": {
+      "key": "key.jump",
+      "continuous": true
+    }
+  },
+  "stompcd": {
+    "type": "origins:cooldown",
+    "cooldown": 60,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "stomp": {
+    "type": "origins:active_self",
+    "cooldown": 10,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "entity.wind_charge.wind_burst",
+          "volume": 1,
+          "pitch": 1.6
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:satyr/helper/stomping",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:satyr/helper/stomping_remove",
+          "change": 10
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:fall_distance",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        {
+          "type": "origins:resource",
+          "resource": "*:*_stompcd",
+          "comparison": "==",
+          "compare_to": 0
+        }
+      ]
+    },
+    "key": {
+      "key": "key.sneak",
+      "continuous": false
+    }
+  },
+  "landactions": {
+    "type": "origins:action_on_land",
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_jumps",
+          "change": 1
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.goat.step",
+          "volume": 1,
+          "pitch": 0.6
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_2",
+          "change": -1
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_3",
+          "change": -1
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_4",
+          "change": -1
+        }
+      ]
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
+      "text": "§e§lDamage Resistances:§r§f Falling (-100%).\n \n§c§lDamage Vulnerabilities:§r§f Projectiles (+20%).\n \n§e§lEffect Immunities:§r§f None."
+    }
+  ],
+  "name": "Passive Features",
+  "description": "§e§lStats:§r\n-17% Size\n-2 Max HP\n-50% Swim Speed\n \n§e§lFeatures:§r\n- Sprinting builds §e§lMomentum§r, which fuels your movement abilities. Each stack grants +20% movement speed. At maximum Momentum, your Hunger drains 33% faster. Toggleable.\n- You cannot wear boots, and boots provide no protection or benefit.\n- You are a Vegetarian.",
+  "size": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "andromeda_origins:satyr_passives_size",
+      "attribute": "minecraft:generic.scale",
+      "operation": "add_multiplied_total",
+      "amount": -0.17
+    }
+  },
+  "step_assist": {
+    "type": "origins:conditioned_attribute",
+    "tick_rate": 1,
+    "modifier": {
+      "id": "andromeda_origins:satyr_passives_step_assist",
+      "attribute": "minecraft:generic.step_height",
+      "operation": "add_multiplied_total",
+      "amount": 1.0
+    },
+    "condition": {
+      "type": "origins:power_active",
+      "power": "*:*_toggle"
+    }
+  }
+}

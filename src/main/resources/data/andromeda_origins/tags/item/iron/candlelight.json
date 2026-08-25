@@ -1,0 +1,225 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "candlelight:acacia_big_table",
+      "required": false
+    },
+    {
+      "id": "candlelight:acacia_shelf",
+      "required": false
+    },
+    {
+      "id": "candlelight:bamboo_big_table",
+      "required": false
+    },
+    {
+      "id": "candlelight:bamboo_shelf",
+      "required": false
+    },
+    {
+      "id": "candlelight:basalt_counter",
+      "required": false
+    },
+    {
+      "id": "candlelight:basalt_kitchen_sink",
+      "required": false
+    },
+    {
+      "id": "candlelight:basalt_stove",
+      "required": false
+    },
+    {
+      "id": "candlelight:birch_big_table",
+      "required": false
+    },
+    {
+      "id": "candlelight:birch_shelf",
+      "required": false
+    },
+    {
+      "id": "candlelight:cherry_big_table",
+      "required": false
+    },
+    {
+      "id": "candlelight:cherry_shelf",
+      "required": false
+    },
+    {
+      "id": "candlelight:cloche",
+      "required": false
+    },
+    {
+      "id": "candlelight:cobblestone_counter",
+      "required": false
+    },
+    {
+      "id": "candlelight:cobblestone_sink",
+      "required": false
+    },
+    {
+      "id": "candlelight:cobblestone_stove",
+      "required": false
+    },
+    {
+      "id": "candlelight:crimson_big_table",
+      "required": false
+    },
+    {
+      "id": "candlelight:crimson_shelf",
+      "required": false
+    },
+    {
+      "id": "candlelight:dark_oak_big_table",
+      "required": false
+    },
+    {
+      "id": "candlelight:dark_oak_shelf",
+      "required": false
+    },
+    {
+      "id": "candlelight:deepslate_counter",
+      "required": false
+    },
+    {
+      "id": "candlelight:deepslate_kitchen_sink",
+      "required": false
+    },
+    {
+      "id": "candlelight:deepslate_stove",
+      "required": false
+    },
+    {
+      "id": "candlelight:dinner_bell",
+      "required": false
+    },
+    {
+      "id": "candlelight:end_counter",
+      "required": false
+    },
+    {
+      "id": "candlelight:end_kitchen_sink",
+      "required": false
+    },
+    {
+      "id": "candlelight:end_stove",
+      "required": false
+    },
+    {
+      "id": "candlelight:granite_counter",
+      "required": false
+    },
+    {
+      "id": "candlelight:granite_kitchen_sink",
+      "required": false
+    },
+    {
+      "id": "candlelight:granite_stove",
+      "required": false
+    },
+    {
+      "id": "candlelight:jungle_big_table",
+      "required": false
+    },
+    {
+      "id": "candlelight:jungle_shelf",
+      "required": false
+    },
+    {
+      "id": "candlelight:mangrove_big_table",
+      "required": false
+    },
+    {
+      "id": "candlelight:mangrove_shelf",
+      "required": false
+    },
+    {
+      "id": "candlelight:mud_counter",
+      "required": false
+    },
+    {
+      "id": "candlelight:mud_kitchen_sink",
+      "required": false
+    },
+    {
+      "id": "candlelight:mud_stove",
+      "required": false
+    },
+    {
+      "id": "candlelight:oak_big_table",
+      "required": false
+    },
+    {
+      "id": "candlelight:oak_shelf",
+      "required": false
+    },
+    {
+      "id": "candlelight:quartz_counter",
+      "required": false
+    },
+    {
+      "id": "candlelight:quartz_kitchen_sink",
+      "required": false
+    },
+    {
+      "id": "candlelight:quartz_stove",
+      "required": false
+    },
+    {
+      "id": "candlelight:red_nether_bricks_counter",
+      "required": false
+    },
+    {
+      "id": "candlelight:red_nether_bricks_sink",
+      "required": false
+    },
+    {
+      "id": "candlelight:red_nether_bricks_stove",
+      "required": false
+    },
+    {
+      "id": "candlelight:sandstone_counter",
+      "required": false
+    },
+    {
+      "id": "candlelight:sandstone_kitchen_sink",
+      "required": false
+    },
+    {
+      "id": "candlelight:sandstone_stove",
+      "required": false
+    },
+    {
+      "id": "candlelight:spruce_big_table",
+      "required": false
+    },
+    {
+      "id": "candlelight:spruce_shelf",
+      "required": false
+    },
+    {
+      "id": "candlelight:stone_bricks_counter",
+      "required": false
+    },
+    {
+      "id": "candlelight:stone_bricks_kitchen_sink",
+      "required": false
+    },
+    {
+      "id": "candlelight:stone_bricks_stove",
+      "required": false
+    },
+    {
+      "id": "candlelight:typewriter_iron",
+      "required": false
+    },
+    {
+      "id": "candlelight:warped_big_table",
+      "required": false
+    },
+    {
+      "id": "candlelight:warped_shelf",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,258 @@
+{
+  "type": "origins:multiple",
+  "unstoppable": {
+    "type": "origins:active_self",
+    "cooldown": 20,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:if_else_list",
+      "actions": [
+        {
+          "condition": {
+            "type": "origins:power",
+            "power": "*:common/undetectable"
+          },
+          "action": {
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:play_sound",
+                "sound": "minecraft:block.amethyst_cluster.break",
+                "volume": 1,
+                "pitch": 1.3
+              },
+              {
+                "type": "origins:revoke_power",
+                "power": "*:common/undetectable",
+                "source": "minecraft:buff"
+              },
+              {
+                "type": "origins:revoke_power",
+                "power": "*:veilborn/helper/veilpower",
+                "source": "minecraft:state"
+              },
+              {
+                "type": "origins:trigger_cooldown",
+                "power": "*:veilborn/secondary_cooldown"
+              },
+              {
+                "type": "origins:spawn_particles",
+                "particle": {
+                  "type": "minecraft:flash"
+                },
+                "count": 1,
+                "speed": 0,
+                "force": true,
+                "spread": {
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
+                }
+              },
+              {
+                "type": "origins:spawn_particles",
+                "particle": {
+                  "type": "minecraft:end_rod"
+                },
+                "count": 10,
+                "speed": 0.1,
+                "force": true,
+                "spread": {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "z": 0.5
+                }
+              }
+            ]
+          }
+        },
+        {
+          "condition": {
+            "type": "origins:power",
+            "power": "*:common/undetectable",
+            "inverted": true
+          },
+          "action": {
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:play_sound",
+                "sound": "minecraft:block.enchantment_table.use",
+                "volume": 1,
+                "pitch": 1.3
+              },
+              {
+                "type": "origins:grant_power",
+                "power": "*:common/undetectable",
+                "source": "minecraft:buff"
+              },
+              {
+                "type": "origins:grant_power",
+                "power": "*:veilborn/helper/veilpower",
+                "source": "minecraft:state"
+              },
+              {
+                "type": "origins:spawn_particles",
+                "particle": {
+                  "type": "minecraft:flash"
+                },
+                "count": 1,
+                "speed": 0,
+                "force": true,
+                "spread": {
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "*:common/silenced",
+          "inverted": true
+        },
+        {
+          "type": "origins:resource",
+          "comparison": "==",
+          "resource": "*:*_cooldown",
+          "compare_to": 0
+        }
+      ]
+    },
+    "key": {
+      "key": "key.origins.secondary_active",
+      "continuous": false
+    }
+  },
+  "cooldown": {
+    "type": "origins:cooldown",
+    "cooldown": 2400,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
+      "bar_index": 1
+    }
+  },
+  "damage": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": 0.5
+    },
+    "condition": {
+      "type": "origins:power",
+      "power": "*:common/undetectable"
+    }
+  },
+  "damageprojectile": {
+    "type": "origins:modify_projectile_damage",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": 0.5
+    },
+    "condition": {
+      "type": "origins:power",
+      "power": "*:common/undetectable"
+    }
+  },
+  "uncloak": {
+    "type": "origins:self_action_on_hit",
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:block.amethyst_cluster.break",
+          "volume": 1,
+          "pitch": 1.3
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:common/undetectable",
+          "source": "minecraft:buff"
+        },
+        {
+          "type": "origins:trigger_cooldown",
+          "power": "*:veilborn/secondary_cooldown"
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:flash"
+          },
+          "count": 1,
+          "speed": 0,
+          "force": true,
+          "spread": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:end_rod"
+          },
+          "count": 10,
+          "speed": 0.1,
+          "force": true,
+          "spread": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 0.5
+          }
+        }
+      ]
+    },
+    "cooldown": 20,
+    "condition": {
+      "type": "origins:power",
+      "power": "*:common/undetectable"
+    }
+  },
+  "overlay": {
+    "type": "origins:overlay",
+    "hidden": true,
+    "sprite": "origins:phantomize_overlay",
+    "red": 0.2,
+    "green": 0.5,
+    "blue": 0.7,
+    "strength": 0.5,
+    "draw_mode": "nausea",
+    "draw_phase": "above_hud",
+    "visible_in_third_person": true,
+    "hide_with_hud": true,
+    "condition": {
+      "type": "origins:power",
+      "power": "*:common/undetectable"
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Trigger with ",
+        {
+          "keybind": "key.origins.secondary_active"
+        }
+      ]
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
+      "text": "§e§lUndetectable:§r§f Immune to detection effects, glowing and entity collision. Invisible for the duration."
+    }
+  ],
+  "name": "Auroral Mirage",
+  "description": "Press your Secondary Ability key to become §e§lUndetectable§r while gaining +25% movement speed and +50% damage dealt. Detection and glow abilities cannot reveal you while Undetectable.\n \nDealing damage immediately ends Auroral Mirage. Press Secondary Ability again to dismiss it early."
+}

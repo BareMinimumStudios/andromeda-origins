@@ -1,0 +1,204 @@
+{
+  "type": "origins:multiple",
+  "active": {
+    "type": "origins:active_self",
+    "cooldown": 20,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:raycast",
+      "distance": 64,
+      "block": false,
+      "entity": true,
+      "shape_type": "collider",
+      "fluid_handling": "none",
+      "before_action": {
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:change_resource",
+            "resource": "andromeda_origins:common/figura_1",
+            "change": 1
+          },
+          {
+            "type": "origins:play_sound",
+            "sound": "minecraft:entity.illusioner.prepare_mirror",
+            "volume": 1,
+            "pitch": 0.2
+          },
+          {
+            "type": "origins:grant_power",
+            "power": "*:gorgon/helper/staring",
+            "source": "minecraft:state"
+          }
+        ]
+      },
+      "hit_action": {
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:play_sound",
+            "sound": "minecraft:entity.illusioner.cast_spell",
+            "volume": 1,
+            "pitch": 0.2
+          },
+          {
+            "type": "origins:change_resource",
+            "resource": "*:*_charges",
+            "change": -1
+          }
+        ]
+      },
+      "miss_action": {
+        "type": "origins:execute_command",
+        "command": "title @s actionbar {\"text\": \"You must target an entity!\", \"color\": \"red\"}"
+      },
+      "bientity_action": {
+        "type": "origins:target_action",
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:play_sound",
+              "sound": "minecraft:entity.illusioner.mirror_move",
+              "volume": 1,
+              "pitch": 0.2
+            },
+            {
+              "type": "origins:grant_power",
+              "power": "*:gorgon/helper/ophidianed",
+              "source": "minecraft:ccontrol"
+            },
+            {
+              "type": "origins:change_resource",
+              "resource": "*:gorgon/helper/ophidianed_remove",
+              "change": 10
+            }
+          ]
+        }
+      },
+      "bientity_condition": {
+        "type": "origins:and",
+        "conditions": [
+          {
+            "type": "origins:can_see"
+          },
+          {
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:and",
+              "conditions": [
+                {
+                  "type": "origins:living"
+                },
+                {
+                  "type": "origins:power",
+                  "power": "*:common/unstoppable",
+                  "inverted": true
+                },
+                {
+                  "type": "origins:equipped_item",
+                  "equipment_slot": "head",
+                  "inverted": true,
+                  "item_condition": {
+                    "type": "origins:ingredient",
+                    "ingredient": {
+                      "tag": "origins:pumpkin_like/equipment"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "command_step": 1,
+      "command_along_ray": "particle minecraft:happy_villager",
+      "command_along_ray_only_on_hit": true
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "*:common/silenced",
+          "inverted": true
+        },
+        {
+          "type": "origins:resource",
+          "comparison": "==",
+          "resource": "*:*_petrifycooldown",
+          "compare_to": 0
+        }
+      ]
+    },
+    "key": {
+      "key": "key.origins.primary_active",
+      "continuous": false
+    }
+  },
+  "charges": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 2,
+    "start_value": 2,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+      "bar_index": 22,
+      "condition": {
+        "type": "origins:resource",
+        "comparison": "==",
+        "resource": "*:*_petrifycooldown",
+        "compare_to": 0
+      }
+    },
+    "min_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_charges",
+          "change": 2
+        },
+        {
+          "type": "origins:trigger_cooldown",
+          "power": "*:*_petrifycooldown"
+        }
+      ]
+    }
+  },
+  "petrifycooldown": {
+    "type": "origins:cooldown",
+    "cooldown": 2400,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+      "bar_index": 22,
+      "condition": {
+        "type": "origins:resource",
+        "comparison": ">",
+        "resource": "*:*_petrifycooldown",
+        "compare_to": 0
+      }
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Trigger with ",
+        {
+          "keybind": "key.origins.primary_active"
+        }
+      ]
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
+      "text": "§c§lPetrified:§r§f For the duration: §c§lRestrained§r§f, §c§lSilenced§r§f and §c§lPacified§r§f. Prevents interaction with the world and knockback, and reduces damage taken by 75%. Affected creatures can §e§lStruggle§r§f.\n \n§e§lStruggle:§r§f Rapidly pressing direction keys.\n \n§c§lPacified:§r§f Unable to deal damage.\n \n§c§lRestrained:§r§f Prevents movement, movement abilities and elytra flight.\n \n§c§lSilenced:§r§f Inability to use Active Features."
+    }
+  ],
+  "name": "Ophidian Gaze",
+  "description": "Ophidian Gaze has 2 charges. Press your Primary Ability key while looking at a creature within 32 blocks to apply §c§l[Petrified]§r for 10 seconds. Targeting an already Petrified creature extends the effect by another 10 seconds.\n \nThe ability begins recharging after both charges have been spent. §e§lCrowd Control§r."
+}

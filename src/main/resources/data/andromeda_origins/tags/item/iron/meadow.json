@@ -1,0 +1,61 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "meadow:alpine_iron_ore",
+      "required": false
+    },
+    {
+      "id": "meadow:climbing_rope",
+      "required": false
+    },
+    {
+      "id": "meadow:cooking_frame",
+      "required": false
+    },
+    {
+      "id": "meadow:cookpot",
+      "required": false
+    },
+    {
+      "id": "meadow:felting_needle",
+      "required": false
+    },
+    {
+      "id": "meadow:fondue_pot",
+      "required": false
+    },
+    {
+      "id": "meadow:milk_can",
+      "required": false
+    },
+    {
+      "id": "meadow:oil_lantern",
+      "required": false
+    },
+    {
+      "id": "meadow:pine_hanging_sign",
+      "required": false
+    },
+    {
+      "id": "meadow:stove_tiles",
+      "required": false
+    },
+    {
+      "id": "meadow:stove_tiles_bench",
+      "required": false
+    },
+    {
+      "id": "meadow:stove_tiles_lid",
+      "required": false
+    },
+    {
+      "id": "meadow:stove_tiles_wood",
+      "required": false
+    },
+    {
+      "id": "meadow:wooden_cauldron",
+      "required": false
+    }
+  ]
+}

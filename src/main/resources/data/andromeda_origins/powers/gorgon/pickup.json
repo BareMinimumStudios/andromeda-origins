@@ -1,0 +1,194 @@
+{
+  "type": "origins:multiple",
+  "grab": {
+    "type": "origins:active_self",
+    "cooldown": 5,
+    "key": {
+      "key": "key.pickItem",
+      "continuous": false
+    },
+    "entity_action": {
+      "type": "origins:if_else_list",
+      "actions": [
+        {
+          "condition": {
+            "type": "origins:passenger",
+            "inverted": true
+          },
+          "action": {
+            "type": "origins:raycast",
+            "distance": 4.5,
+            "shape_type": "outline",
+            "hit_action": {
+              "type": "origins:and",
+              "actions": [
+                {
+                  "type": "origins:play_sound",
+                  "sound": "entity.bat.takeoff",
+                  "volume": 0.33,
+                  "pitch": 0.65
+                },
+                {
+                  "type": "origins:swing_hand",
+                  "hand": "OFF_HAND"
+                },
+                {
+                  "type": "origins:change_resource",
+                  "resource": "andromeda_origins:common/figura_3",
+                  "change": 1
+                },
+                {
+                  "type": "origins:grant_power",
+                  "power": "*:gorgon/helper/picking",
+                  "source": "minecraft:state"
+                }
+              ]
+            },
+            "bientity_action": {
+              "type": "origins:and",
+              "actions": [
+                {
+                  "type": "origins:invert",
+                  "action": {
+                    "type": "origins:mount"
+                  }
+                },
+                {
+                  "type": "origins:actor_action",
+                  "action": {
+                    "type": "origins:grant_power",
+                    "power": "*:gorgon/helper/carry_limit",
+                    "source": "minecraft:state"
+                  }
+                }
+              ]
+            },
+            "bientity_condition": {
+              "type": "origins:target_condition",
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:living"
+                  },
+                  {
+                    "type": "origins:power",
+                    "power": "*:common/unstoppable",
+                    "inverted": true
+                  },
+                  {
+                    "type": "origins:power",
+                    "power": "*:common/restrained"
+                  },
+                  {
+                    "type": "origins:riding",
+                    "inverted": true
+                  },
+                  {
+                    "type": "origins:passenger",
+                    "inverted": true
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "condition": {
+            "type": "origins:passenger"
+          },
+          "action": {
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:swing_hand",
+                "hand": "OFF_HAND"
+              },
+              {
+                "type": "origins:passenger_action",
+                "action": {
+                  "type": "origins:and",
+                  "actions": [
+                    {
+                      "type": "origins:play_sound",
+                      "sound": "entity.ender_dragon.flap",
+                      "volume": 0.75,
+                      "pitch": 2
+                    },
+                    {
+                      "type": "origins:dismount"
+                    },
+                    {
+                      "type": "origins:add_velocity",
+                      "y": 0.66
+                    }
+                  ]
+                },
+                "bientity_action": {
+                  "type": "origins:add_velocity",
+                  "y": -2
+                }
+              },
+              {
+                "type": "origins:revoke_power",
+                "power": "*:gorgon/helper/carry_limit",
+                "source": "minecraft:state"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "kick_rider_out": {
+    "type": "origins:active_self",
+    "cooldown": 1,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:passenger_action",
+          "action": {
+            "type": "origins:dismount"
+          }
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:gorgon/helper/carry_limit",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:sneaking"
+        },
+        {
+          "type": "origins:passenger"
+        }
+      ]
+    },
+    "key": {
+      "key": "key.jump"
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Trigger with ",
+        {
+          "keybind": "key.pickItem"
+        }
+      ]
+    }
+  ],
+  "name": "Grab",
+  "description": "Press your Pick Item key to grab a §c§l[Restrained]§r creature for up to 10 seconds. Press Pick Item again to throw it, or press Sneak + Jump to place it down safely."
+}

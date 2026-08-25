@@ -1,0 +1,465 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_chosen": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:arachne/passives_webbing",
+          "change": 200,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:arachne/passives_flammable",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:arachne/passives_venomous",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:arachne/primary_primary",
+          "change": 200,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:arachne/secondary_raycast",
+          "change": 600,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:arachne/secondary_weave",
+          "change": 20,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:arachne/secondary_progress",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s add arachne"
+        }
+      ]
+    },
+    "entity_action_lost": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s remove arachne"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/debug",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "execute_chosen_when_orb": true
+  },
+  "creature_type": {
+    "type": "origins:modify_type_tag",
+    "tag": "minecraft:arthropod"
+  },
+  "health": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "andromeda_origins:arachne_passives_health",
+      "attribute": "minecraft:generic.max_health",
+      "operation": "add_multiplied_total",
+      "amount": -0.3
+    }
+  },
+  "speed": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "andromeda_origins:arachne_passives_speed",
+      "attribute": "minecraft:generic.movement_speed",
+      "operation": "add_multiplied_total",
+      "amount": 0.2
+    }
+  },
+  "airspeed": {
+    "type": "origins:attribute_modify_transfer",
+    "class": "modify_air_speed",
+    "attribute": "minecraft:generic.movement_speed",
+    "multiplier": 1
+  },
+  "effect_immunities": {
+    "type": "origins:effect_immunity",
+    "effects": [
+      "minecraft:poison"
+    ]
+  },
+  "immunities": {
+    "type": "origins:invulnerability",
+    "damage_condition": {
+      "type": "origins:name",
+      "name": "fall"
+    }
+  },
+  "vulnerabilities": {
+    "type": "origins:modify_damage_taken",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": 0.2
+    }
+  },
+  "damageup": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": 0.2
+    },
+    "target_condition": {
+      "type": "origins:any_of",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "*:arachne/helper/webbed"
+        },
+        {
+          "type": "origins:all_of",
+          "conditions": [
+            {
+              "type": "origins:in_block_anywhere",
+              "block_condition": {
+                "type": "origins:in_tag",
+                "tag": "origins:cobwebs"
+              }
+            },
+            {
+              "type": "origins:in_tag",
+              "tag": "arthropod",
+              "inverted": true
+            }
+          ]
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:exposed_to_sun",
+      "inverted": true
+    }
+  },
+  "damageuprojectile": {
+    "type": "origins:modify_projectile_damage",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": 0.2
+    },
+    "target_condition": {
+      "type": "origins:any_of",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "*:arachne/helper/webbed"
+        },
+        {
+          "type": "origins:all_of",
+          "conditions": [
+            {
+              "type": "origins:in_block_anywhere",
+              "block_condition": {
+                "type": "origins:in_tag",
+                "tag": "origins:cobwebs"
+              }
+            },
+            {
+              "type": "origins:in_tag",
+              "tag": "arthropod",
+              "inverted": true
+            }
+          ]
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:exposed_to_sun",
+      "inverted": true
+    }
+  },
+  "damagedown": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.1
+    },
+    "condition": {
+      "type": "origins:exposed_to_sun"
+    }
+  },
+  "damagedownprojectile": {
+    "type": "origins:modify_projectile_damage",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.1
+    },
+    "condition": {
+      "type": "origins:exposed_to_sun"
+    }
+  },
+  "webbing": {
+    "type": "origins:target_action_on_hit",
+    "cooldown": 200,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:block_action_at",
+      "block_action": {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:replaceable"
+        },
+        "if_action": {
+          "type": "origins:set_block",
+          "block": "origins:temporary_cobweb"
+        }
+      }
+    },
+    "condition": {
+      "type": "origins:sneaking",
+      "inverted": true
+    }
+  },
+  "no_slowdown": {
+    "type": "origins:phasing",
+    "block_condition": {
+      "type": "origins:in_tag",
+      "tag": "origins:cobwebs"
+    },
+    "render_type": "none"
+  },
+  "toggle": {
+    "type": "origins:toggle",
+    "key": {
+      "key": "key.andromeda_origins.toggle",
+      "continuous": false
+    }
+  },
+  "darkvision": {
+    "type": "origins:night_vision",
+    "strength": 0.75,
+    "condition": {
+      "type": "origins:power_active",
+      "power": "*:*_toggle"
+    }
+  },
+  "climbing": {
+    "type": "origins:climbing",
+    "condition": {
+      "type": "origins:all_of",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "*:*_toggle"
+        },
+        {
+          "type": "origins:any_of",
+          "conditions": [
+            {
+              "type": "origins:in_block_anywhere",
+              "block_condition": {
+                "type": "origins:in_tag",
+                "tag": "origins:cobwebs"
+              }
+            },
+            {
+              "type": "origins:all_of",
+              "conditions": [
+                {
+                  "type": "origins:sneaking",
+                  "inverted": true
+                },
+                {
+                  "type": "origins:collided_horizontally"
+                }
+              ]
+            },
+            {
+              "type": "origins:all_of",
+              "conditions": [
+                {
+                  "type": "origins:sneaking"
+                },
+                {
+                  "type": "origins:any_of",
+                  "conditions": [
+                    {
+                      "type": "origins:block_collision",
+                      "offset_x": 0.01,
+                      "offset_z": 0.01
+                    },
+                    {
+                      "type": "origins:block_collision",
+                      "offset_x": -0.01,
+                      "offset_z": -0.01
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "hold_condition": {
+      "type": "origins:sneaking",
+      "inverted": true
+    }
+  },
+  "punch_through": {
+    "type": "origins:prevent_block_selection",
+    "block_condition": {
+      "type": "origins:in_tag",
+      "tag": "origins:cobwebs"
+    },
+    "condition": {
+      "type": "origins:sneaking",
+      "inverted": true
+    }
+  },
+  "sense": {
+    "type": "origins:entity_glow",
+    "entity_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:any_of",
+          "conditions": [
+            {
+              "type": "origins:power",
+              "power": "*:arachne/helper/webbed"
+            },
+            {
+              "type": "origins:all_of",
+              "conditions": [
+                {
+                  "type": "origins:in_block_anywhere",
+                  "block_condition": {
+                    "type": "origins:in_tag",
+                    "tag": "origins:cobwebs"
+                  }
+                },
+                {
+                  "type": "origins:in_tag",
+                  "tag": "arthropod",
+                  "inverted": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "origins:power",
+          "power": "*:common/undetectable",
+          "inverted": true
+        }
+      ]
+    }
+  },
+  "web_crafting": {
+    "type": "origins:recipe",
+    "recipe": {
+      "id": "origins:master_of_webs/web_crafting",
+      "type": "minecraft:crafting_shapeless",
+      "ingredients": [
+        {
+          "item": "minecraft:string"
+        },
+        {
+          "item": "minecraft:string"
+        }
+      ],
+      "result": {
+        "id": "minecraft:cobweb"
+      }
+    }
+  },
+  "flammable": {
+    "type": "origins:self_action_when_hit",
+    "cooldown": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:set_on_fire",
+      "duration": 5
+    },
+    "damage_condition": {
+      "type": "origins:fire"
+    }
+  },
+  "venomous": {
+    "type": "origins:target_action_on_hit",
+    "cooldown": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:apply_effect",
+      "effect": {
+        "id": "minecraft:poison",
+        "amplifier": 1,
+        "duration": 60
+      }
+    }
+  },
+  "exhaustion": {
+    "type": "origins:modify_exhaustion",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": 0.35
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
+      "text": "§e§lDamage Resistances:§r§f Falling (-100%).\n \n§c§lDamage Vulnerabilities:§r§f All damage (+20%).\n \n§e§lEffect Immunities:§r§f Poison."
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
+      "text": "§c§lWebbed:§r§f Obscures vision, counts as being in cobweb."
+    }
+  ],
+  "name": "Passive Features",
+  "description": "§e§lStats:§r\n-30% Max Health\n+20% Ground & Air Speed\n-20% Height\n \n§e§lFeatures:§r\n- You are an Arthropod and can climb vertical surfaces.\n- Cobwebs do not slow you. Your melee attacks briefly trap targets in cobwebs and inflict Poison for 3 seconds.\n- You can sense creatures trapped in cobwebs or affected by §c§l[Webbed]§r. Undetectable creatures are excluded.\n- Outside sunlight, you deal 20% more damage to creatures trapped in cobwebs or affected by §c§l[Webbed]§r.\n- You can craft cobwebs.\n- Fire does not extinguish on its own.\n- You see better in darkness than most creatures.",
+  "size": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "andromeda_origins:arachne_passives_size",
+      "attribute": "minecraft:generic.scale",
+      "operation": "add_multiplied_total",
+      "amount": -0.2
+    }
+  },
+  "step_assist": {
+    "type": "origins:conditioned_attribute",
+    "tick_rate": 1,
+    "modifier": {
+      "id": "andromeda_origins:arachne_passives_step_assist",
+      "attribute": "minecraft:generic.step_height",
+      "operation": "add_multiplied_total",
+      "amount": 1.0
+    },
+    "condition": {
+      "type": "origins:power_active",
+      "power": "*:*_toggle"
+    }
+  }
+}

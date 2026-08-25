@@ -1,0 +1,18 @@
+{
+  "powers": [
+    "andromeda_origins:arachne/passives",
+    "andromeda_origins:arachne/primary",
+    "andromeda_origins:arachne/secondary",
+    "andromeda_origins:arachne/figura",
+    "andromeda_origins:common/figura",
+    "andromeda_origins:common/diet_carnivore"
+  ],
+  "icon": {
+    "id": "andromeda_origins:arachne_icon"
+  },
+  "unchoosable": false,
+  "order": 1,
+  "impact": 3,
+  "name": "Arachne",
+  "description": "Arachne are swift, silk-bound hunters shaped by patience and precision. They control the battlefield through webs, poison, and sudden bursts of movement, turning trapped prey into easy targets. In darkness and confined spaces, few creatures are better suited to dictate the flow of a fight."
+}

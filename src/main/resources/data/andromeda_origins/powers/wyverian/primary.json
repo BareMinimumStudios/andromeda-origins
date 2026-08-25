@@ -1,0 +1,452 @@
+{
+  "type": "origins:multiple",
+  "firemode": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:execute_command",
+      "command": "title @s actionbar {\"text\": \"Fire mode: Fireball\", \"color\": \"green\"}"
+    },
+    "min_action": {
+      "type": "origins:execute_command",
+      "command": "title @s actionbar {\"text\": \"Fire mode: Line\", \"color\": \"green\"}"
+    }
+  },
+  "fireball": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 20,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_ember",
+          "change": -10
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_fireball",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.wither.shoot",
+          "volume": 0.4,
+          "pitch": 0.6
+        },
+        {
+          "type": "origins:raycast",
+          "distance": 64,
+          "block": true,
+          "entity": true,
+          "shape_type": "collider",
+          "fluid_handling": "any",
+          "hit_action": {
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:change_resource",
+                "resource": "andromeda_origins:common/figura_2",
+                "change": -1
+              },
+              {
+                "type": "origins:revoke_power",
+                "power": "andromeda_origins:wyverian/helper/breathing2",
+                "source": "minecraft:state"
+              },
+              {
+                "type": "origins:change_resource",
+                "resource": "andromeda_origins:common/figura_3",
+                "change": 1,
+                "operation": "add"
+              },
+              {
+                "type": "origins:grant_power",
+                "power": "andromeda_origins:wyverian/helper/spitting",
+                "source": "minecraft:state"
+              }
+            ]
+          },
+          "command_at_hit": "summon bat ~ ~1 ~ {attributes: [{id: \"minecraft:generic.scale\", base: 0.1d}],NoGravity:1b,Silent:1b,Tags:[\"helper\"], cardinal_components: {\"apoli:powers\": {powers: [{data: {}, sources: [\"minecraft:helper\"], id: \"andromeda_origins:wyverian/helper/fireball_granter\", type: \"apoli:action_on_callback\"}]}}}",
+          "command_step": 1,
+          "command_along_ray": "function andromeda_origins:fireball_trajectory",
+          "command_along_ray_only_on_hit": false
+        },
+        {
+          "type": "origins:add_velocity",
+          "z": -0.6,
+          "space": "local"
+        }
+      ]
+    }
+  },
+  "interrupt": {
+    "type": "origins:action_when_damage_taken",
+    "cooldown": 0,
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "title @s actionbar {\"text\": \"Ember Pyroclast interrupted!\", \"color\": \"red\"}"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_fireball",
+          "change": 0,
+          "operation": "set"
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:resource",
+          "comparison": "==",
+          "resource": "*:*_firemode",
+          "compare_to": 1
+        },
+        {
+          "type": "origins:resource",
+          "comparison": ">",
+          "resource": "*:*_fireball",
+          "compare_to": 0
+        }
+      ]
+    }
+  },
+  "fireselect": {
+    "type": "origins:active_self",
+    "cooldown": 20,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:if_else",
+      "condition": {
+        "type": "origins:resource",
+        "comparison": "==",
+        "resource": "*:*_firemode",
+        "compare_to": 0
+      },
+      "if_action": {
+        "type": "origins:change_resource",
+        "resource": "*:*_firemode",
+        "change": 1
+      },
+      "else_action": {
+        "type": "origins:change_resource",
+        "resource": "*:*_firemode",
+        "change": -1
+      }
+    },
+    "key": {
+      "key": "key.andromeda_origins.toggle",
+      "continuous": false
+    }
+  },
+  "ember": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 20,
+    "start_value": 20,
+    "hud_render": {
+      "should_render": true,
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
+      "bar_index": 15
+    },
+    "min_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_breathlock",
+      "change": 1
+    },
+    "max_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_breathlock",
+      "change": -1
+    }
+  },
+  "breathlock": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:execute_command",
+      "command": "title @s actionbar {\"text\": \"You are out of breath!\", \"color\": \"red\"}"
+    },
+    "min_action": {
+      "type": "origins:execute_command",
+      "command": "title @s actionbar {\"text\": \"You can use your breath again!\", \"color\": \"green\"}"
+    }
+  },
+  "breathcooldown": {
+    "type": "origins:cooldown",
+    "cooldown": 6,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "rawr": {
+    "type": "origins:active_self",
+    "cooldown": 60,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:if_else",
+      "condition": {
+        "type": "origins:resource",
+        "comparison": "==",
+        "resource": "*:*_breathlock",
+        "compare_to": 0
+      },
+      "if_action": {
+        "type": "origins:play_sound",
+        "sound": "minecraft:entity.ender_dragon.growl",
+        "volume": 0.3,
+        "pitch": 1.7
+      },
+      "else_action": {
+        "type": "origins:execute_command",
+        "command": "title @s actionbar {\"text\": \"You are out of breath, let your Ember fully regenerate!\", \"color\": \"red\"}"
+      }
+    },
+    "key": {
+      "key": "key.origins.primary_active",
+      "continuous": false
+    }
+  },
+  "active": {
+    "type": "origins:active_self",
+    "cooldown": 2,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:if_else_list",
+      "actions": [
+        {
+          "condition": {
+            "type": "origins:resource",
+            "comparison": "==",
+            "resource": "*:*_firemode",
+            "compare_to": 0
+          },
+          "action": {
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:change_resource",
+                "resource": "andromeda_origins:common/figura_1",
+                "change": 1,
+                "operation": "set"
+              },
+              {
+                "type": "origins:grant_power",
+                "power": "andromeda_origins:wyverian/helper/breathing",
+                "source": "minecraft:state"
+              },
+              {
+                "type": "origins:change_resource",
+                "resource": "andromeda_origins:wyverian/helper/breathing_remove",
+                "change": 2
+              },
+              {
+                "type": "origins:if_else_list",
+                "actions": [
+                  {
+                    "condition": {
+                      "type": "origins:resource",
+                      "comparison": "==",
+                      "resource": "*:*_breathcooldown",
+                      "compare_to": 0
+                    },
+                    "action": {
+                      "type": "origins:and",
+                      "actions": [
+                        {
+                          "type": "origins:trigger_cooldown",
+                          "power": "*:*_breathcooldown"
+                        },
+                        {
+                          "type": "origins:change_resource",
+                          "resource": "*:*_ember",
+                          "change": -1
+                        },
+                        {
+                          "type": "origins:play_sound",
+                          "sound": "minecraft:block.candle.extinguish",
+                          "volume": 4,
+                          "pitch": 0.5
+                        },
+                        {
+                          "type": "origins:spawn_particles",
+                          "particle": {
+                            "type": "minecraft:campfire_cosy_smoke"
+                          },
+                          "count": 1,
+                          "speed": 0.0,
+                          "force": true,
+                          "offset_y": 0,
+                          "spread": {
+                            "x": 0.2,
+                            "y": 0,
+                            "z": 0.2
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "origins:raycast",
+                "distance": 32,
+                "block": true,
+                "entity": true,
+                "shape_type": "collider",
+                "fluid_handling": "any",
+                "bientity_action": {
+                  "type": "origins:target_action",
+                  "action": {
+                    "type": "origins:set_on_fire",
+                    "duration": 10
+                  }
+                },
+                "command_at_hit": "function andromeda_origins:breath_collide",
+                "command_step": 1,
+                "command_along_ray": "function andromeda_origins:breath_fire",
+                "command_along_ray_only_on_hit": false
+              }
+            ]
+          }
+        },
+        {
+          "condition": {
+            "type": "origins:resource",
+            "comparison": "==",
+            "resource": "*:*_firemode",
+            "compare_to": 1
+          },
+          "action": {
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:spawn_particles",
+                "particle": {
+                  "type": "minecraft:flame"
+                },
+                "count": 2,
+                "speed": 0.01,
+                "force": true,
+                "spread": {
+                  "x": 0.25,
+                  "y": 0.5,
+                  "z": 0.25
+                }
+              },
+              {
+                "type": "origins:change_resource",
+                "resource": "andromeda_origins:common/figura_2",
+                "change": 1,
+                "operation": "set"
+              },
+              {
+                "type": "origins:grant_power",
+                "power": "andromeda_origins:wyverian/helper/breathing2",
+                "source": "minecraft:state"
+              },
+              {
+                "type": "origins:change_resource",
+                "resource": "andromeda_origins:wyverian/helper/breathing2_remove",
+                "change": 2
+              },
+              {
+                "type": "origins:change_resource",
+                "resource": "*:*_fireball",
+                "change": 1
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "*:common/silenced",
+          "inverted": true
+        },
+        {
+          "type": "origins:submerged_in",
+          "fluid": "minecraft:water",
+          "inverted": true
+        },
+        {
+          "type": "origins:resource",
+          "comparison": ">",
+          "resource": "*:*_ember",
+          "compare_to": 0
+        },
+        {
+          "type": "origins:resource",
+          "comparison": "==",
+          "resource": "*:*_breathlock",
+          "compare_to": 0
+        },
+        {
+          "type": "origins:resource",
+          "resource": "*:common/figura_3",
+          "comparison": "==",
+          "compare_to": 0
+        }
+      ]
+    },
+    "key": {
+      "key": "key.origins.primary_active",
+      "continuous": true
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/active.png",
+      "text": [
+        "Trigger with ",
+        {
+          "keybind": "key.origins.primary_active"
+        }
+      ]
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Toggle firing mode with ",
+        {
+          "keybind": "key.andromeda_origins.toggle"
+        }
+      ]
+    }
+  ],
+  "name": "Ember Flames",
+  "description": "Ember Flames cannot be used underwater and consumes §e§lEmber§r, which regenerates while not in use. Completely emptying Ember locks the ability until the resource fully regenerates. Creatures killed by Ember Flames drop no experience, and the flames may destroy dropped items.\n \n§e§lEmber Ray:§r\nHold Primary Ability to project a 32-block ray of flame. Creatures near the ray take 0.5 fire damage, creatures within 3 blocks of the impact point take 1.5 fire damage, and direct hits ignite targets for 10 seconds. Consumes 1 Ember every 0.6 seconds.\n \n§e§lEmber Pyroclast:§r\nHold Primary Ability for 2 seconds without taking damage to charge a projectile that explodes on impact in a 4-block radius. It dissipates harmlessly after traveling more than 64 blocks. Creatures caught in the explosion take 10 explosion damage. Consumes 10 Ember."
+}

@@ -1,0 +1,170 @@
+{
+  "type": "origins:multiple",
+  "active": {
+    "type": "origins:active_self",
+    "cooldown": 2400,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+      "bar_index": 14
+    },
+    "entity_action": {
+      "type": "origins:raycast",
+      "distance": 30,
+      "block": false,
+      "entity": true,
+      "shape_type": "collider",
+      "fluid_handling": "none",
+      "before_action": {
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:change_resource",
+            "resource": "andromeda_origins:common/figura_1",
+            "change": 1
+          },
+          {
+            "type": "origins:play_sound",
+            "sound": "minecraft:entity.illusioner.prepare_mirror",
+            "volume": 1,
+            "pitch": 0.2
+          },
+          {
+            "type": "origins:grant_power",
+            "power": "*:siren/helper/staring",
+            "source": "minecraft:state"
+          }
+        ]
+      },
+      "hit_action": {
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:play_sound",
+            "sound": "minecraft:entity.illusioner.cast_spell",
+            "volume": 1,
+            "pitch": 0.2
+          },
+          {
+            "type": "origins:change_resource",
+            "resource": "*:common/figura_1",
+            "change": -1
+          },
+          {
+            "type": "origins:revoke_power",
+            "power": "*:siren/helper/staring",
+            "source": "minecraft:state"
+          },
+          {
+            "type": "origins:change_resource",
+            "resource": "*:common/figura_2",
+            "change": 1
+          },
+          {
+            "type": "origins:grant_power",
+            "power": "*:siren/helper/finishcasting",
+            "source": "minecraft:state"
+          }
+        ]
+      },
+      "miss_action": {
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:execute_command",
+            "command": "title @s actionbar {\"text\": \"You must target an entity!\", \"color\": \"red\"}"
+          },
+          {
+            "type": "origins:delay",
+            "ticks": 1,
+            "action": {
+              "type": "origins:change_resource",
+              "resource": "*:*_active",
+              "change": 2399,
+              "operation": "set"
+            }
+          }
+        ]
+      },
+      "bientity_action": {
+        "type": "origins:target_action",
+        "action": {
+          "type": "origins:and",
+          "actions": [
+            {
+              "type": "origins:play_sound",
+              "sound": "minecraft:entity.illusioner.mirror_move",
+              "volume": 1,
+              "pitch": 0.2
+            },
+            {
+              "type": "origins:grant_power",
+              "power": "*:siren/helper/infatuated",
+              "source": "minecraft:ccontrol"
+            },
+            {
+              "type": "origins:change_resource",
+              "resource": "*:siren/helper/infatuated_remove",
+              "change": 15,
+              "operation": "set"
+            }
+          ]
+        }
+      },
+      "bientity_condition": {
+        "type": "origins:and",
+        "conditions": [
+          {
+            "type": "origins:can_see"
+          },
+          {
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:living"
+            }
+          }
+        ]
+      },
+      "command_step": 1,
+      "command_along_ray": "particle minecraft:happy_villager",
+      "command_along_ray_only_on_hit": true
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "*:common/silenced",
+          "inverted": true
+        }
+      ]
+    },
+    "key": {
+      "key": "key.origins.primary_active",
+      "continuous": false
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Trigger with ",
+        {
+          "keybind": "key.origins.primary_active"
+        }
+      ]
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
+      "text": "§c§lPacified:§r§f Unable to deal damage."
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
+      "text": "§c§lSilenced:§r§f Unable to use active abilities."
+    }
+  ],
+  "name": "Infatuation Tempo",
+  "description": "Press your Primary Ability key while looking at a creature within 30 blocks to Infatuate it for 15 seconds, applying §c§l[Pacified]§r and §c§l[Silenced]§r.\n \nInfatuation lasts the full 15 seconds and cannot be broken early by movement or by taking damage."
+}

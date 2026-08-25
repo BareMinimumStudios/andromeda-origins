@@ -1,0 +1,301 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_chosen": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:nereid/passives_weaknesstate",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:nereid/primary_soundcooldown",
+          "change": 20,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:nereid/primary_actualcooldown",
+          "change": 1800,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:nereid/primary_grrr",
+          "change": 60,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:nereid/primary_active",
+          "change": 2,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:nereid/secondary_active",
+          "change": 1800,
+          "operation": "set"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s add nereid"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:nereid/helper/merlingplus",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "entity_action_lost": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s remove nereid"
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:nereid/helper/groundweak",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:nereid/helper/waterstrong",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:nereid/helper/merlingminus",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/debug",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "execute_chosen_when_orb": true
+  },
+  "weaknesstate": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:revoke_power",
+          "power": "*:nereid/helper/groundweak",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:nereid/helper/waterstrong",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "min_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:grant_power",
+          "power": "*:nereid/helper/groundweak",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:nereid/helper/waterstrong",
+          "source": "minecraft:state"
+        }
+      ]
+    }
+  },
+  "heart": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:*_weaknesstate",
+                    "comparison": "==",
+                    "compare_to": 1
+                  },
+                  {
+                    "type": "origins:power",
+                    "power": "andromeda_origins:common/wet",
+                    "inverted": true
+                  },
+                  {
+                    "type": "origins:fluid_height",
+                    "fluid": "minecraft:water",
+                    "comparison": "==",
+                    "compare_to": 0
+                  },
+                  {
+                    "type": "origins:in_rain",
+                    "inverted": true
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:change_resource",
+                "resource": "*:*_weaknesstate",
+                "change": -1
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:*_weaknesstate",
+                    "comparison": "==",
+                    "compare_to": 0
+                  },
+                  {
+                    "type": "origins:or",
+                    "conditions": [
+                      {
+                        "type": "origins:power",
+                        "power": "andromeda_origins:common/wet"
+                      },
+                      {
+                        "type": "origins:fluid_height",
+                        "fluid": "minecraft:water",
+                        "comparison": ">",
+                        "compare_to": 0
+                      },
+                      {
+                        "type": "origins:in_rain"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:change_resource",
+                "resource": "*:*_weaknesstate",
+                "change": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "creature_type": {
+    "type": "origins:modify_type_tag",
+    "tag": "aquatic"
+  },
+  "waterspeed": {
+    "type": "origins:modify_swim_speed",
+    "modifier": {
+      "id": "andromeda_origins:nereid_passives_waterspeed",
+      "operation": "add_multiplied_total",
+      "amount": 0.35
+    }
+  },
+  "manage_friends": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "apoli:multiply_base_multiplicative",
+      "amount": -1
+    },
+    "target_action": {
+      "type": "origins:if_else",
+      "condition": {
+        "type": "origins:power",
+        "power": "*:nereid/helper/seafriend"
+      },
+      "if_action": {
+        "type": "origins:revoke_power",
+        "power": "*:nereid/helper/seafriend",
+        "source": "minecraft:state"
+      },
+      "else_action": {
+        "type": "origins:grant_power",
+        "power": "*:nereid/helper/seafriend",
+        "source": "minecraft:state"
+      }
+    },
+    "condition": {
+      "type": "origins:equipped_item",
+      "equipment_slot": "mainhand",
+      "item_condition": {
+        "type": "origins:ingredient",
+        "ingredient": {
+          "item": "minecraft:kelp"
+        }
+      }
+    }
+  },
+  "toggle": {
+    "type": "origins:toggle",
+    "key": {
+      "key": "key.andromeda_origins.toggle",
+      "continuous": false
+    }
+  },
+  "darkvision": {
+    "type": "origins:night_vision",
+    "strength": 1,
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:submerged_in",
+          "fluid": "minecraft:water"
+        },
+        {
+          "type": "origins:power_active",
+          "power": "*:*_toggle"
+        }
+      ]
+    }
+  },
+  "water_vision": {
+    "type": "origins:modify_camera_submersion",
+    "from": "water",
+    "to": "none",
+    "condition": {
+      "type": "origins:power_active",
+      "power": "*:*_toggle"
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
+      "text": "§e§lDamage Resistances:§r§f None.\n \n§c§lDamage Vulnerabilities:§r§f None.\n \n§e§lEffect Immunities:§r§f None."
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
+      "text": "§c§lWet:§r§f Counts as being in water."
+    }
+  ],
+  "name": "Passive Features",
+  "description": "§e§lStats:§r\n+35% Swim Speed\n \n§e§lFeatures:§r\n- Your creature type is Aquatic.\n- While in water, you take 25% less damage and can move and act as though you were on land.\n- You have perfect underwater vision. Toggleable.\n \n§e§lNereid's Mark:§r\nHit a creature with kelp to mark or unmark it as an ally. Marked creatures are visible through walls to all Nereids and can be healed by Convalescing Aura. Undetectable creatures cannot be revealed by the mark.\n \n- On land, you suffer -10% movement speed, -10% damage dealt, and +40% damage taken.\n- You follow a Pescatarian diet."
+}

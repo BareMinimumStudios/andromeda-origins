@@ -1,0 +1,77 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "beautify:iron_blinds",
+      "required": false
+    },
+    {
+      "id": "beautify:lamp_candelabra",
+      "required": false
+    },
+    {
+      "id": "beautify:lamp_candelabra_black",
+      "required": false
+    },
+    {
+      "id": "beautify:lamp_candelabra_blue",
+      "required": false
+    },
+    {
+      "id": "beautify:lamp_candelabra_brown",
+      "required": false
+    },
+    {
+      "id": "beautify:lamp_candelabra_cyan",
+      "required": false
+    },
+    {
+      "id": "beautify:lamp_candelabra_gray",
+      "required": false
+    },
+    {
+      "id": "beautify:lamp_candelabra_green",
+      "required": false
+    },
+    {
+      "id": "beautify:lamp_candelabra_light_blue",
+      "required": false
+    },
+    {
+      "id": "beautify:lamp_candelabra_light_grey",
+      "required": false
+    },
+    {
+      "id": "beautify:lamp_candelabra_lime",
+      "required": false
+    },
+    {
+      "id": "beautify:lamp_candelabra_magenta",
+      "required": false
+    },
+    {
+      "id": "beautify:lamp_candelabra_orange",
+      "required": false
+    },
+    {
+      "id": "beautify:lamp_candelabra_pink",
+      "required": false
+    },
+    {
+      "id": "beautify:lamp_candelabra_purple",
+      "required": false
+    },
+    {
+      "id": "beautify:lamp_candelabra_red",
+      "required": false
+    },
+    {
+      "id": "beautify:lamp_candelabra_white",
+      "required": false
+    },
+    {
+      "id": "beautify:lamp_candelabra_yellow",
+      "required": false
+    }
+  ]
+}

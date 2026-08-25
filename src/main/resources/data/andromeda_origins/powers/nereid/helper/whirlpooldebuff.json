@@ -1,0 +1,144 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_removed": {
+      "type": "origins:delay",
+      "ticks": 1,
+      "action": {
+        "type": "origins:revoke_power",
+        "power": "origins:water_breathing",
+        "source": "minecraft:state"
+      }
+    }
+  },
+  "remove": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 240,
+    "start_value": 24,
+    "hud_render": {
+      "should_render": true
+    },
+    "min_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:revoke_power",
+          "power": "origins:water_breathing",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:*",
+          "source": "minecraft:debuff"
+        }
+      ]
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 5,
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_remove",
+          "change": -1
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:power",
+                    "power": "andromeda_origins:common/wet",
+                    "inverted": true
+                  },
+                  {
+                    "type": "origins:submerged_in",
+                    "fluid": "minecraft:water",
+                    "inverted": true
+                  },
+                  {
+                    "type": "origins:in_rain",
+                    "inverted": true
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:grant_power",
+                "power": "origins:water_breathing",
+                "source": "minecraft:state"
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:or",
+                "conditions": [
+                  {
+                    "type": "origins:power",
+                    "power": "andromeda_origins:common/wet"
+                  },
+                  {
+                    "type": "origins:submerged_in",
+                    "fluid": "minecraft:water"
+                  },
+                  {
+                    "type": "origins:in_rain"
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:if_else_list",
+                    "actions": [
+                      {
+                        "condition": {
+                          "type": "origins:entity_type",
+                          "entity_type": "minecraft:player",
+                          "inverted": true
+                        },
+                        "action": {
+                          "type": "origins:add_velocity",
+                          "y": -2,
+                          "space": "local_horizontal"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "origins:revoke_power",
+                    "power": "origins:water_breathing",
+                    "source": "minecraft:state"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "type": "origins:particle",
+    "count": 5,
+    "particle": "minecraft:bubble_pop",
+    "spread": {
+      "x": 0.25,
+      "y": 0.25,
+      "z": 0.25
+    },
+    "offset_y": 1,
+    "frequency": 10
+  },
+  "sink": {
+    "type": "origins:ignore_water"
+  }
+}

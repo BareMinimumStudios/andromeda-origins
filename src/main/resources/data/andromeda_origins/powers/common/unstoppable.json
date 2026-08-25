@@ -1,0 +1,34 @@
+{
+  "type": "origins:multiple",
+  "sources": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 10,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "min_action": {
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "minecraft:buff"
+    }
+  },
+  "immunities": {
+    "type": "origins:effect_immunity",
+    "effects": [
+      "minecraft:slowness"
+    ]
+  },
+  "knockback": {
+    "type": "origins:modify_attribute",
+    "attribute": "minecraft:generic.knockback_resistance",
+    "modifier": {
+      "operation": "set_total",
+      "amount": 1
+    }
+  },
+  "unpushable": {
+    "type": "origins:prevent_entity_collision"
+  }
+}

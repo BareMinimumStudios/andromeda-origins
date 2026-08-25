@@ -1,0 +1,77 @@
+{
+  "type": "origins:multiple",
+  "withering": {
+    "type": "origins:self_action_when_hit",
+    "entity_action": {
+      "type": "origins:apply_effect",
+      "effect": {
+        "id": "minecraft:wither",
+        "duration": 40
+      }
+    },
+    "damage_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:projectile",
+          "inverted": true
+        },
+        {
+          "type": "origins:attacker",
+          "entity_condition": {
+            "type": "origins:or",
+            "conditions": [
+              {
+                "type": "origins:equipped_item",
+                "equipment_slot": "mainhand",
+                "item_condition": {
+                  "type": "origins:ingredient",
+                  "ingredient": {
+                    "tag": "andromeda_origins:iron/alliron"
+                  }
+                }
+              },
+              {
+                "type": "origins:equipped_item",
+                "equipment_slot": "offhand",
+                "item_condition": {
+                  "type": "origins:ingredient",
+                  "ingredient": {
+                    "tag": "andromeda_origins:iron/alliron"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "cooldown": 20
+  },
+  "overtime": {
+    "type": "origins:action_over_time",
+    "entity_action": {
+      "type": "origins:apply_effect",
+      "effect": {
+        "id": "minecraft:wither",
+        "duration": 200
+      }
+    },
+    "interval": 200,
+    "condition": {
+      "type": "origins:inventory",
+      "process_mode": "items",
+      "item_condition": {
+        "type": "origins:ingredient",
+        "ingredient": {
+          "tag": "andromeda_origins:iron/alliron"
+        }
+      },
+      "comparison": ">",
+      "compare_to": 0
+    }
+  },
+  "hidden": true,
+  "name": "Withering Iron Weakness",
+  "description": "You gain Wither when struck by an iron weapon. Carrying any iron-tagged item anywhere in your inventory also applies Wither while it remains in your inventory."
+}

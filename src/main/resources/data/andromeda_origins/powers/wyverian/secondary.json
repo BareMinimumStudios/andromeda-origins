@@ -1,0 +1,144 @@
+{
+  "type": "origins:multiple",
+  "charges": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 20,
+    "start_value": 20,
+    "hud_render": {
+      "should_render": true,
+      "bar_index": 4
+    },
+    "min_action": {
+      "type": "origins:execute_command",
+      "command": "title @s actionbar {\"text\": \"Your wings feel tired...\", \"color\": \"red\"}"
+    }
+  },
+  "soundcooldown": {
+    "type": "origins:cooldown",
+    "cooldown": 20,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "active": {
+    "type": "origins:active_self",
+    "cooldown": 1,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:grant_power",
+          "power": "andromeda_origins:common/dash_projectile_penalty",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:common/dash_projectile_penalty_remove",
+          "change": 3,
+          "operation": "set"
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:resource",
+                "comparison": "==",
+                "resource": "*:*_soundcooldown",
+                "compare_to": 0
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:trigger_cooldown",
+                    "power": "*:*_soundcooldown"
+                  },
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "entity.ender_dragon.flap",
+                    "volume": 1,
+                    "pitch": 0.8
+                  },
+                  {
+                    "type": "origins:spawn_particles",
+                    "particle": {
+                      "type": "minecraft:cloud"
+                    },
+                    "count": 6,
+                    "speed": 0.01,
+                    "force": true,
+                    "spread": {
+                      "x": 0.25,
+                      "y": 0.5,
+                      "z": 0.25
+                    }
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_charges",
+                    "change": -1
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:wyverian/helper/hover_remove",
+          "change": -10
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:common/figura_4",
+          "change": 1,
+          "operation": "set"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "andromeda_origins:wyverian/helper/propulsion",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:wyverian/helper/propulsion_remove",
+          "change": 10
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:resource",
+          "resource": "*:wyverian/passives_weaknesstate",
+          "comparison": "==",
+          "compare_to": 0
+        }
+      ]
+    },
+    "key": {
+      "key": "key.origins.secondary_active",
+      "continuous": true
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Trigger with ",
+        {
+          "keybind": "key.origins.primary_active"
+        }
+      ]
+    }
+  ],
+  "name": "Gusts of Freedom",
+  "description": "Hold your Secondary Ability key while flying to surge forward for up to 20 seconds. You recover 1 second of flight time for every second spent on the ground.\n \n§e§lHover:§r\nHold Sneak while flying to stop your forward movement and hover in place, consuming flight time at half the normal rate.\n \nProjectile damage is reduced by 50% while using Gusts of Freedom and for 3 seconds afterward. §e§lMovement Ability§r."
+}

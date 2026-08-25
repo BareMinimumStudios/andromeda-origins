@@ -1,0 +1,50 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_added": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:apply_effect",
+          "effect": {
+            "id": "minecraft:darkness",
+            "amplifier": 0,
+            "duration": 40
+          }
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "title @s actionbar {\"text\": \"You feel unstable!\", \"color\": \"red\"}"
+        }
+      ]
+    },
+    "entity_action_lost": {
+      "type": "origins:execute_command",
+      "command": "title @s actionbar {\"text\": \"You feel stable again!\", \"color\": \"green\"}"
+    }
+  },
+  "remove": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 120,
+    "start_value": 1,
+    "hud_render": {
+      "should_render": false
+    },
+    "min_action": {
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "minecraft:debuff"
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_remove",
+      "change": -1
+    }
+  }
+}

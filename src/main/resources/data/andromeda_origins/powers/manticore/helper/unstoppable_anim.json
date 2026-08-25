@@ -1,0 +1,121 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_added": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:grant_power",
+          "power": "andromeda_origins:common/unstoppable",
+          "source": "minecraft:buff"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/unstoppable_sources",
+          "change": 1
+        }
+      ]
+    }
+  },
+  "remove": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 30,
+    "start_value": 30,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+      "bar_index": 4
+    },
+    "min_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:common/figura_2",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/unstoppable_sources",
+          "change": -1
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "andromeda_origins:common/famished",
+          "source": "minecraft:debuff"
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:*",
+          "source": "minecraft:buff"
+        }
+      ]
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:crimson_spore"
+          },
+          "count": 10,
+          "speed": 0.0,
+          "force": true,
+          "offset_y": 1,
+          "spread": {
+            "x": 0.2,
+            "y": 0,
+            "z": 0.2
+          }
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_remove",
+          "change": -1
+        }
+      ]
+    }
+  },
+  "heartbeat": {
+    "type": "origins:action_over_time",
+    "interval": 15,
+    "entity_action": {
+      "type": "origins:play_sound",
+      "sound": "minecraft:entity.warden.heartbeat",
+      "volume": 0.1,
+      "pitch": 0.5
+    }
+  },
+  "overlay": {
+    "type": "origins:overlay",
+    "hidden": true,
+    "sprite": "origins:phantomize_overlay",
+    "red": 0.7,
+    "green": 0.5,
+    "blue": 0.2,
+    "strength": 0.5,
+    "draw_mode": "nausea",
+    "draw_phase": "above_hud",
+    "visible_in_third_person": true,
+    "hide_with_hud": true
+  },
+  "glow": {
+    "type": "origins:self_glow",
+    "use_teams": false,
+    "red": 1,
+    "green": 0.57,
+    "blue": 0.33,
+    "condition": {
+      "type": "origins:power",
+      "power": "*:common/undetectable",
+      "inverted": true
+    }
+  }
+}

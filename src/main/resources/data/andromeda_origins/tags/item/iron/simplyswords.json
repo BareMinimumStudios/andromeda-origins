@@ -1,0 +1,129 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "simplyswords:contained_remnant",
+      "required": false
+    },
+    {
+      "id": "simplyswords:diamond_chakram",
+      "required": false
+    },
+    {
+      "id": "simplyswords:diamond_claymore",
+      "required": false
+    },
+    {
+      "id": "simplyswords:diamond_cutlass",
+      "required": false
+    },
+    {
+      "id": "simplyswords:diamond_greataxe",
+      "required": false
+    },
+    {
+      "id": "simplyswords:diamond_greathammer",
+      "required": false
+    },
+    {
+      "id": "simplyswords:diamond_halberd",
+      "required": false
+    },
+    {
+      "id": "simplyswords:diamond_warglaive",
+      "required": false
+    },
+    {
+      "id": "simplyswords:gold_chakram",
+      "required": false
+    },
+    {
+      "id": "simplyswords:gold_claymore",
+      "required": false
+    },
+    {
+      "id": "simplyswords:gold_cutlass",
+      "required": false
+    },
+    {
+      "id": "simplyswords:gold_greataxe",
+      "required": false
+    },
+    {
+      "id": "simplyswords:gold_greathammer",
+      "required": false
+    },
+    {
+      "id": "simplyswords:gold_halberd",
+      "required": false
+    },
+    {
+      "id": "simplyswords:gold_warglaive",
+      "required": false
+    },
+    {
+      "id": "simplyswords:iron_chakram",
+      "required": false
+    },
+    {
+      "id": "simplyswords:iron_claymore",
+      "required": false
+    },
+    {
+      "id": "simplyswords:iron_cutlass",
+      "required": false
+    },
+    {
+      "id": "simplyswords:iron_glaive",
+      "required": false
+    },
+    {
+      "id": "simplyswords:iron_greataxe",
+      "required": false
+    },
+    {
+      "id": "simplyswords:iron_greathamer",
+      "required": false
+    },
+    {
+      "id": "simplyswords:iron_greathammer",
+      "required": false
+    },
+    {
+      "id": "simplyswords:iron_halberd",
+      "required": false
+    },
+    {
+      "id": "simplyswords:iron_katana",
+      "required": false
+    },
+    {
+      "id": "simplyswords:iron_longsword",
+      "required": false
+    },
+    {
+      "id": "simplyswords:iron_rapier",
+      "required": false
+    },
+    {
+      "id": "simplyswords:iron_sai",
+      "required": false
+    },
+    {
+      "id": "simplyswords:iron_scythe",
+      "required": false
+    },
+    {
+      "id": "simplyswords:iron_spear",
+      "required": false
+    },
+    {
+      "id": "simplyswords:iron_twinblade",
+      "required": false
+    },
+    {
+      "id": "simplyswords:iron_warglaive",
+      "required": false
+    }
+  ]
+}

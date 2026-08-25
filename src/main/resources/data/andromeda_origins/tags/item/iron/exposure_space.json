@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "exposure_space:analyzer",
+      "required": false
+    },
+    {
+      "id": "exposure_space:space_filter",
+      "required": false
+    }
+  ]
+}

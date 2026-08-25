@@ -1,0 +1,18 @@
+{
+  "powers": [
+    "andromeda_origins:manticore/passives",
+    "andromeda_origins:manticore/primary",
+    "andromeda_origins:manticore/secondary",
+    "andromeda_origins:manticore/figura",
+    "andromeda_origins:common/diet_carnivore",
+    "andromeda_origins:common/figura"
+  ],
+  "icon": {
+    "id": "andromeda_origins:manticore_icon"
+  },
+  "unchoosable": false,
+  "order": 1,
+  "impact": 3,
+  "name": "Manticore",
+  "description": "Manticores are feral hybrid predators born for direct and brutal combat. Their imposing frames, venomous attacks, and keen senses make wounded prey nearly impossible to hide. Once a Manticore commits to the chase, it closes the distance with overwhelming force."
+}

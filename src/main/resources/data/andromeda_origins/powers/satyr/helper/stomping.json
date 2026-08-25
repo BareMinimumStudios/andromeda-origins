@@ -1,0 +1,329 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_added": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_2",
+          "change": -1
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_3",
+          "change": 1
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "entity.firework_rocket.blast_far",
+          "volume": 1,
+          "pitch": 1
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:cloud"
+          },
+          "count": 10,
+          "speed": 0.0,
+          "force": true,
+          "offset_y": 0.1,
+          "spread": {
+            "x": 0.3,
+            "y": 0,
+            "z": 0.3
+          }
+        },
+        {
+          "type": "origins:add_velocity",
+          "y": -1.5,
+          "space": "world",
+          "set": true
+        }
+      ]
+    }
+  },
+  "remove": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 10,
+    "start_value": 10,
+    "hud_render": {
+      "should_render": false
+    },
+    "min_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:trigger_cooldown",
+          "power": "*:satyr/passives_stompcd"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_3",
+          "change": -1
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:*",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_2",
+          "change": -1
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_3",
+          "change": 1
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "entity.firework_rocket.blast_far",
+          "volume": 1,
+          "pitch": 1
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:cloud"
+          },
+          "count": 10,
+          "speed": 0.0,
+          "force": true,
+          "offset_y": 0.1,
+          "spread": {
+            "x": 0.3,
+            "y": 0,
+            "z": 0.3
+          }
+        },
+        {
+          "type": "origins:add_velocity",
+          "y": -1.5,
+          "space": "world",
+          "set": true
+        }
+      ]
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_remove",
+      "change": -1
+    }
+  },
+  "bounces": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 2,
+    "start_value": 2,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "stomping": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "entity_action": {
+      "type": "origins:area_of_effect",
+      "radius": 2,
+      "shape": "sphere",
+      "bientity_action": {
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:add_velocity",
+            "z": 2
+          },
+          {
+            "type": "origins:damage",
+            "damage_type": "minecraft:cramming",
+            "amount": 7
+          },
+          {
+            "type": "origins:actor_action",
+            "action": {
+              "type": "origins:and",
+              "actions": [
+                {
+                  "type": "origins:grant_power",
+                  "power": "*:satyr/helper/reduce_stomp",
+                  "source": "minecraft:state"
+                },
+                {
+                  "type": "origins:change_resource",
+                  "resource": "*:common/figura_3",
+                  "change": -1
+                },
+                {
+                  "type": "origins:change_resource",
+                  "resource": "*:common/figura_2",
+                  "change": 1
+                },
+                {
+                  "type": "origins:spawn_particles",
+                  "particle": {
+                    "type": "minecraft:cloud"
+                  },
+                  "count": 10,
+                  "speed": 0.0,
+                  "force": true,
+                  "offset_y": 0.1,
+                  "spread": {
+                    "x": 0.3,
+                    "y": 0,
+                    "z": 0.3
+                  }
+                },
+                {
+                  "type": "origins:spawn_particles",
+                  "particle": {
+                    "type": "minecraft:explosion"
+                  },
+                  "count": 1,
+                  "speed": 0.0,
+                  "force": true,
+                  "offset_y": 0.1,
+                  "spread": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                  }
+                },
+                {
+                  "type": "origins:play_sound",
+                  "sound": "entity.firework_rocket.blast_far",
+                  "volume": 1,
+                  "pitch": 1
+                },
+                {
+                  "type": "origins:add_velocity",
+                  "y": 1,
+                  "space": "world",
+                  "set": true
+                },
+                {
+                  "type": "origins:change_resource",
+                  "resource": "*:satyr/passives_jumps",
+                  "change": 1
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "bientity_condition": {
+        "type": "origins:and",
+        "conditions": [
+          {
+            "type": "origins:can_see"
+          },
+          {
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:living"
+            }
+          }
+        ]
+      }
+    },
+    "condition": {
+      "type": "origins:resource",
+      "comparison": ">",
+      "resource": "*:*_bounces",
+      "compare_to": 0
+    }
+  },
+  "landactions": {
+    "type": "origins:action_on_land",
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_remove",
+          "change": -10
+        },
+        {
+          "type": "origins:area_of_effect",
+          "radius": 3,
+          "shape": "sphere",
+          "bientity_action": {
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:add_velocity",
+                "z": 2
+              },
+              {
+                "type": "origins:damage",
+                "damage_type": "minecraft:cramming",
+                "amount": 7
+              },
+              {
+                "type": "origins:actor_action",
+                "action": {
+                  "type": "origins:and",
+                  "actions": [
+                    {
+                      "type": "origins:change_resource",
+                      "resource": "*:common/figura_3",
+                      "change": -1
+                    },
+                    {
+                      "type": "origins:spawn_particles",
+                      "particle": {
+                        "type": "minecraft:cloud"
+                      },
+                      "count": 10,
+                      "speed": 0.0,
+                      "force": true,
+                      "offset_y": 0.1,
+                      "spread": {
+                        "x": 0.3,
+                        "y": 0,
+                        "z": 0.3
+                      }
+                    },
+                    {
+                      "type": "origins:play_sound",
+                      "sound": "entity.firework_rocket.blast_far",
+                      "volume": 1,
+                      "pitch": 1
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "bientity_condition": {
+            "type": "origins:and",
+            "conditions": [
+              {
+                "type": "origins:can_see"
+              },
+              {
+                "type": "origins:target_condition",
+                "condition": {
+                  "type": "origins:living"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

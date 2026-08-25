@@ -1,0 +1,20 @@
+{
+  "powers": [
+    "andromeda_origins:faerie/passives",
+    "andromeda_origins:faerie/primary",
+    "andromeda_origins:faerie/secondary",
+    "andromeda_origins:faerie/prankster",
+    "andromeda_origins:faerie/figura",
+    "andromeda_origins:common/ironweakness",
+    "andromeda_origins:common/witheringironweakness",
+    "andromeda_origins:common/figura"
+  ],
+  "icon": {
+    "id": "andromeda_origins:faerie_icon"
+  },
+  "unchoosable": false,
+  "order": 1,
+  "impact": 3,
+  "name": "Faerie",
+  "description": "Faeries are tiny, luminous beings carried by wind, mischief, and curiosity. Their small frames make them fragile, but their speed, concealment, and fae illusions allow them to slip through danger before their enemies can react. A clever Faerie survives by remaining difficult to find and even harder to predict."
+}

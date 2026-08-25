@@ -1,0 +1,97 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "dawnoftimebuilder:candlestick",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:cast_iron_teacup_decorated",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:cast_iron_teacup_gray",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:cast_iron_teacup_green",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:cast_iron_teapot_decorated",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:cast_iron_teapot_gray",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:cast_iron_teapot_green",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_door",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_shutters",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:charred_spruce_tall_shutters",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:fireplace",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:iron_column",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:iron_fancy_lantern",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:iron_portcullis",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:irori_fireplace",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_painted_door",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:red_painted_windowed_door",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:reinforced_red_painted_relief",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:stone_bricks_faucet",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:stone_bricks_water_jet",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_acacia_door",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_acacia_small_shutters",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_door",
+      "required": false
+    }
+  ]
+}

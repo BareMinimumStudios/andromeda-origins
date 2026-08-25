@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "shutter:iron_shutter",
+      "required": false
+    }
+  ]
+}

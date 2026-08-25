@@ -1,0 +1,60 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_added": {
+      "type": "origins:spawn_particles",
+      "particle": {
+        "type": "minecraft:electric_spark"
+      },
+      "count": 10,
+      "speed": 0.1,
+      "force": true,
+      "offset_y": 1,
+      "spread": {
+        "x": 0.4,
+        "y": 0.25,
+        "z": 0.4
+      }
+    }
+  },
+  "remove": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 10,
+    "start_value": 10,
+    "hud_render": {
+      "should_render": false
+    },
+    "min_action": {
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "minecraft:ccontrol"
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "tp @s @p[tag=mantileap,distance=0.1..10]"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_remove",
+          "change": -1
+        }
+      ]
+    }
+  },
+  "nofall": {
+    "type": "origins:invulnerability",
+    "damage_condition": {
+      "type": "origins:name",
+      "name": "fall"
+    }
+  }
+}

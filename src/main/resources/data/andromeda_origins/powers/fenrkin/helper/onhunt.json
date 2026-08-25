@@ -1,0 +1,130 @@
+{
+  "type": "origins:multiple",
+  "remove": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 30,
+    "start_value": 30,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
+      "bar_index": 7
+    },
+    "min_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:common/figura_2",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:*",
+          "source": "minecraft:buff"
+        }
+      ]
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:portal"
+          },
+          "count": 10,
+          "speed": 0.1,
+          "force": true,
+          "offset_y": 1,
+          "spread": {
+            "x": 0.2,
+            "y": 0,
+            "z": 0.2
+          }
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_remove",
+          "change": -1
+        }
+      ]
+    }
+  },
+  "heartbeat": {
+    "type": "origins:action_over_time",
+    "interval": 30,
+    "entity_action": {
+      "type": "origins:play_sound",
+      "sound": "minecraft:entity.sniffer.scenting",
+      "volume": 1,
+      "pitch": 1.3
+    }
+  },
+  "overlay": {
+    "type": "origins:overlay",
+    "hidden": true,
+    "sprite": "origins:phantomize_overlay",
+    "red": 0.2,
+    "green": 0.5,
+    "blue": 0.7,
+    "strength": 0.5,
+    "draw_mode": "nausea",
+    "draw_phase": "above_hud",
+    "visible_in_third_person": true,
+    "hide_with_hud": true
+  },
+  "speed": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "andromeda_origins:fenrkin_helper_onhunt_speed",
+      "attribute": "minecraft:generic.movement_speed",
+      "operation": "add_multiplied_total",
+      "amount": 0.25
+    }
+  },
+  "attackspeed": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "andromeda_origins:fenrkin_helper_onhunt_attackspeed",
+      "attribute": "minecraft:generic.attack_speed",
+      "operation": "add_multiplied_total",
+      "amount": 0.25
+    }
+  },
+  "breakspeed": {
+    "type": "origins:modify_break_speed",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": 0.25
+    }
+  },
+  "damageup": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": 0.25
+    }
+  },
+  "xray": {
+    "type": "origins:entity_glow",
+    "bientity_condition": {
+      "type": "origins:distance",
+      "comparison": "<=",
+      "compare_to": 64
+    },
+    "use_teams": false,
+    "red": 0.2,
+    "green": 0.5,
+    "blue": 1.0,
+    "entity_condition": {
+      "type": "origins:power",
+      "power": "*:common/undetectable",
+      "inverted": true
+    }
+  }
+}

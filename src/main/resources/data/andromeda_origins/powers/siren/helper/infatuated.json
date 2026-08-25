@@ -1,0 +1,86 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_added": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "title @s actionbar {\"text\": \"You have been infatuated for 15 seconds!\", \"color\": \"red\"}"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/pacified",
+          "source": "minecraft:ccontrol"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/silenced",
+          "source": "minecraft:ccontrol"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/pacified_sources",
+          "change": 1
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/silenced_sources",
+          "change": 1
+        }
+      ]
+    },
+    "entity_action_lost": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/pacified_sources",
+          "change": -1
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/silenced_sources",
+          "change": -1
+        }
+      ]
+    }
+  },
+  "remove": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 15,
+    "start_value": 15,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+      "bar_index": 4
+    },
+    "min_action": {
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "minecraft:ccontrol"
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_remove",
+      "change": -1
+    }
+  },
+  "visual": {
+    "type": "origins:particle",
+    "count": 5,
+    "particle": "minecraft:heart",
+    "spread": {
+      "x": 0.25,
+      "y": 0.25,
+      "z": 0.25
+    },
+    "offset_y": 1,
+    "frequency": 10
+  }
+}

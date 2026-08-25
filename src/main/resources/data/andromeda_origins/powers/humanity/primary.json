@@ -1,0 +1,68 @@
+{
+  "type": "origins:multiple",
+  "active": {
+    "type": "origins:active_self",
+    "cooldown": 18000,
+    "hud_render": {
+      "should_render": true
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_1",
+          "change": 1,
+          "operation": "set"
+        },
+        {
+          "type": "origins:apply_effect",
+          "effect": {
+            "id": "minecraft:absorption",
+            "amplifier": 1,
+            "duration": 1200
+          }
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:humanity/helper/indomitable",
+          "source": "minecraft:buff"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_1",
+          "change": 1,
+          "operation": "set"
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:power",
+      "power": "*:common/silenced",
+      "inverted": true
+    },
+    "key": {
+      "key": "key.origins.primary_active",
+      "continuous": false
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Trigger with ",
+        {
+          "keybind": "key.origins.primary_active"
+        }
+      ]
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
+      "text": "§c§lWet:§r§f Counts as being in water."
+    }
+  ],
+  "name": "Indomitable",
+  "description": "Press your Primary Ability key to gain Absorption II for 1 minute and survive the next otherwise-fatal hit.\n \n§e§lCooldown:§r 15 minutes."
+}

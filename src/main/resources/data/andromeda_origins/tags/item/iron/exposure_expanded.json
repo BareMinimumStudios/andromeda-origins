@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "exposure_expanded:hicap_black_and_white_film",
+      "required": false
+    },
+    {
+      "id": "exposure_expanded:hires_black_and_white_film",
+      "required": false
+    }
+  ]
+}

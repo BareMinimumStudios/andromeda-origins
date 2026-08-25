@@ -1,0 +1,97 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "convenientdecor:allerts_umbrella",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:black_umbrella",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:blue_umbrella",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:brown_umbrella",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:copper_weather_vane",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:cyan_umbrella",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:gold_weather_vane",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:gray_umbrella",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:green_umbrella",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:iron_weather_vane",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:light_blue_umbrella",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:light_gray_umbrella",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:lime_umbrella",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:magenta_umbrella",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:netherite_weather_vane",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:orange_umbrella",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:pink_umbrella",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:pitchfork",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:purple_umbrella",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:red_umbrella",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:umbrella_stand",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:white_umbrella",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:yellow_umbrella",
+      "required": false
+    }
+  ]
+}

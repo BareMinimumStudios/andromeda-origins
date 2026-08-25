@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "andromeda_origins",
+  "version": "${version}",
+  "name": "Andromeda Origins",
+  "description": "Custom Origins and compatibility content for Andromeda MC on Minecraft 1.21.1.",
+  "environment": "*",
+  "depends": {
+    "fabricloader": ">=0.16.5",
+    "minecraft": "1.21.1",
+    "java": ">=21",
+    "fabric-api": "*",
+    "origins": "*",
+    "apoli": ">=2.11.11"
+  },
+  "entrypoints": {
+    "main": [
+      "andromeda.origins.AndromedaOrigins"
+    ],
+    "client": [
+      "andromeda.origins.client.AndromedaOriginsClient"
+    ]
+  },
+  "icon": "assets/andromeda_origins/icon.png",
+  "suggests": {
+    "incapacitated": "*"
+  },
+  "authors": [
+    "jaselumena",
+    "pokesmells",
+    "aulatris"
+  ],
+  "license": "Bare Minimum License (BML) v1.0"
+}

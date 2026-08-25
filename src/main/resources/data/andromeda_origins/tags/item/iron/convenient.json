@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "convenient:watering_can",
+      "required": false
+    }
+  ]
+}

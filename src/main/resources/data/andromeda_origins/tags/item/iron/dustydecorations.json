@@ -1,0 +1,41 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "dustydecorations:anchor",
+      "required": false
+    },
+    {
+      "id": "dustydecorations:cooking_pot",
+      "required": false
+    },
+    {
+      "id": "dustydecorations:corrugated_metal_block",
+      "required": false
+    },
+    {
+      "id": "dustydecorations:corrugated_metal_fence",
+      "required": false
+    },
+    {
+      "id": "dustydecorations:corrugated_metal_fence_gate",
+      "required": false
+    },
+    {
+      "id": "dustydecorations:frying_pan",
+      "required": false
+    },
+    {
+      "id": "dustydecorations:hanging_knives",
+      "required": false
+    },
+    {
+      "id": "dustydecorations:wedged_cleaver",
+      "required": false
+    },
+    {
+      "id": "dustydecorations:wedged_knife",
+      "required": false
+    }
+  ]
+}

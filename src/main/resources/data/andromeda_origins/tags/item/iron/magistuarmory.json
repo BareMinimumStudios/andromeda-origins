@@ -1,0 +1,405 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "magistuarmory:barbedclub",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:blacksmith_hammer",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:bronze_buckler",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:bronze_target",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:copper_buckler",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:copper_target",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:darkening_template",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:diamond_buckler",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:diamond_target",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:ecranche_decoration",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:gilding_template",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:gold_buckler",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:gold_target",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:heavy_crossbow",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_ahlspiess",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_bastardsword",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_buckler",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_chainmorgenstern",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_chivalrylance",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_claymore",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_concavehalberd",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_ellipticalshield",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_estoc",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_flamebaldedsword",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_guisarme",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_heater_shield",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_heatershield",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_heavymace",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_heavywarhammer",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_katzbalger",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_kiteshield",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_lochaberaxe",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_lucernhammer",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_morgenstern",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_pavese",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_pavise",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_pike",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_ranseur",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_rondache",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_roundshield",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_shortsword",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_stylet",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_targe",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_target",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_tartsche",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:iron_zweihander",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:lamellar_rows",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:messer_sword",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:noble_sword",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:pitchfork",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:rondel_decoration",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:silver_buckler",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:silver_target",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:small_steel_plate",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:spike_decoration",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_ahlspiess",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_bastardsword",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_buckler",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_chain",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_chainmail",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_chivalrylance",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_claymore",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_concavehalberd",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_ellipticalshield",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_estoc",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_guisarme",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_heatershield",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_heavymace",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_heavywarhammer",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_ingot",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_katzbalger",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_kiteshield",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_lochaberaxe",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_lucernhammer",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_morgenstern",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_nugget",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_pavese",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_pike",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_plate",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_ranseur",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_ring",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_rondache",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_roundshield",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_shortsword",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_stylet",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_target",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_tartsche",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:steel_zweihander",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:stone_buckler",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:stone_target",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:tin_buckler",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:tin_target",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:wood_buckler",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:wood_ellipticalshield",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:wood_heatershield",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:wood_kiteshield",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:wood_pavese",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:wood_roundshield",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:wood_target",
+      "required": false
+    },
+    {
+      "id": "magistuarmory:wood_tartsche",
+      "required": false
+    }
+  ]
+}

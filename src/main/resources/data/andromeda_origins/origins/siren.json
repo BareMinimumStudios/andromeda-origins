@@ -1,0 +1,19 @@
+{
+  "powers": [
+    "andromeda_origins:siren/passives",
+    "andromeda_origins:siren/primary",
+    "andromeda_origins:siren/secondary",
+    "andromeda_origins:siren/figura",
+    "andromeda_origins:common/ironweakness",
+    "andromeda_origins:common/diet_carnivore",
+    "andromeda_origins:common/figura"
+  ],
+  "icon": {
+    "id": "andromeda_origins:siren_icon"
+  },
+  "unchoosable": false,
+  "order": 1,
+  "impact": 3,
+  "name": "Siren",
+  "description": "Sirens are aquatic beings whose voices carry an unnatural, compelling resonance. Their songs can silence resistance, pacify enemies, and erupt into devastating sonic force when persuasion fails. Cunning and composed, a Siren is most dangerous when its target has already stopped fighting back."
+}

@@ -1,0 +1,21 @@
+{
+  "powers": [
+    "andromeda_origins:gorgon/passives",
+    "andromeda_origins:gorgon/primary",
+    "andromeda_origins:gorgon/secondary",
+    "andromeda_origins:gorgon/pickup",
+    "andromeda_origins:gorgon/figura",
+    "andromeda_origins:common/ironweakness",
+    "andromeda_origins:common/witheringironweakness",
+    "andromeda_origins:common/diet_raw",
+    "andromeda_origins:common/figura"
+  ],
+  "icon": {
+    "id": "andromeda_origins:gorgon_icon"
+  },
+  "unchoosable": false,
+  "order": 1,
+  "impact": 3,
+  "name": "Gorgon",
+  "description": "Gorgons descend from ancient serpentine beings whose gaze could bring living creatures to a halt. Their venom grows more dangerous with repeated strikes, while their esoteric power lets them suppress and siphon the strength of their enemies. Facing a Gorgon directly is often the first mistake a foe makes."
+}

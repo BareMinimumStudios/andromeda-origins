@@ -1,0 +1,38 @@
+{
+  "type": "origins:multiple",
+  "sources": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 10,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "min_action": {
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "minecraft:buff"
+    }
+  },
+  "immunities": {
+    "type": "origins:effect_immunity",
+    "effects": [
+      "minecraft:glowing"
+    ]
+  },
+  "invisible1": {
+    "type": "origins:model_color",
+    "red": 0.1,
+    "green": 0.1,
+    "blue": 0.1,
+    "alpha": 0
+  },
+  "invisible2": {
+    "type": "origins:invisibility",
+    "render_armor": false,
+    "render_outline": false
+  },
+  "unpushable": {
+    "type": "origins:prevent_entity_collision"
+  }
+}

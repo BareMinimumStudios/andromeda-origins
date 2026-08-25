@@ -1,0 +1,93 @@
+{
+  "type": "origins:multiple",
+  "remove": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 10,
+    "start_value": 10,
+    "hud_render": {
+      "should_render": true,
+      "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_02.png",
+      "bar_index": 1
+    },
+    "min_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_3",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:*",
+          "source": "minecraft:state"
+        }
+      ]
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_remove",
+      "change": -1,
+      "operation": "add"
+    }
+  },
+  "strike": {
+    "type": "origins:target_action_on_hit",
+    "cooldown": 10,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:grant_power",
+          "power": "*:nereid/helper/whirlpooldebuff",
+          "source": "minecraft:debuff"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:nereid/helper/whirlpooldebuff_remove",
+          "change": 20
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:nereid/helper/nereidwet",
+          "source": "minecraft:debuff"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:nereid/helper/nereidwet_remove",
+          "change": 5
+        },
+        {
+          "type": "origins:add_velocity",
+          "y": -2,
+          "space": "local_horizontal",
+          "set": true
+        }
+      ]
+    },
+    "target_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "origins:water_breathing",
+          "inverted": true
+        },
+        {
+          "type": "origins:in_tag",
+          "tag": "minecraft:aquatic",
+          "inverted": true
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,369 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_chosen": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:lichling/passives_weaknesstate",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:lichling/passives_flammable",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:lichling/passives_weakening",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:lichling/passives_undeadinfluence",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:lichling/passives_devour",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:lichling/primary_primary",
+          "change": 7200,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:lichling/secondary_astamina",
+          "change": 10,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:lichling/secondary_breathlock",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:lichling/secondary_soundcooldown",
+          "change": 20,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:lichling/secondary_grrr",
+          "change": 60,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:lichling/secondary_active",
+          "change": 2,
+          "operation": "set"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s add lichling"
+        }
+      ]
+    },
+    "entity_action_lost": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:revoke_power",
+          "power": "*:lichling/helper/sunweak",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s remove lichling"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/debug",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "execute_chosen_when_orb": true
+  },
+  "weaknesstate": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": true,
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
+      "bar_index": 14,
+      "order": 6,
+      "condition": {
+        "type": "origins:resource",
+        "resource": "*:*_weaknesstate",
+        "comparison": ">",
+        "compare_to": 0
+      }
+    },
+    "max_action": {
+      "type": "origins:grant_power",
+      "power": "*:lichling/helper/sunweak",
+      "source": "minecraft:state"
+    },
+    "min_action": {
+      "type": "origins:revoke_power",
+      "power": "*:lichling/helper/sunweak",
+      "source": "minecraft:state"
+    }
+  },
+  "heart": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:*_weaknesstate",
+                    "comparison": "==",
+                    "compare_to": 0
+                  },
+                  {
+                    "type": "origins:exposed_to_sun"
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:change_resource",
+                "resource": "*:*_weaknesstate",
+                "change": 1
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:*_weaknesstate",
+                    "comparison": "==",
+                    "compare_to": 1
+                  },
+                  {
+                    "type": "origins:exposed_to_sun",
+                    "inverted": true
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:change_resource",
+                "resource": "*:*_weaknesstate",
+                "change": -1
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:lichling/secondary_astamina",
+                    "comparison": "<",
+                    "compare_to": 10
+                  },
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:common/figura_3",
+                    "comparison": "==",
+                    "compare_to": 0
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:chance",
+                "action": {
+                  "type": "origins:change_resource",
+                  "resource": "*:lichling/secondary_astamina",
+                  "change": 1
+                },
+                "chance": 0.1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "creature_type": {
+    "type": "origins:modify_type_tag",
+    "tag": "undead"
+  },
+  "effect_immunities": {
+    "type": "origins:effect_immunity",
+    "effects": [
+      "minecraft:slowness",
+      "minecraft:weakness",
+      "minecraft:mining_fatigue",
+      "minecraft:nausea",
+      "minecraft:darkness",
+      "minecraft:blindness"
+    ]
+  },
+  "toggle": {
+    "type": "origins:toggle",
+    "key": {
+      "key": "key.andromeda_origins.toggle",
+      "continuous": false
+    }
+  },
+  "hp": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "*:*",
+      "attribute": "minecraft:generic.max_health",
+      "operation": "add_value",
+      "amount": 8
+    }
+  },
+  "exhaustion": {
+    "type": "origins:modify_exhaustion",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.35
+    }
+  },
+  "flammable": {
+    "type": "origins:self_action_when_hit",
+    "cooldown": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:set_on_fire",
+      "duration": 5
+    },
+    "damage_condition": {
+      "type": "origins:fire"
+    }
+  },
+  "weakening": {
+    "type": "origins:target_action_on_hit",
+    "cooldown": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:grant_power",
+      "power": "*:lichling/helper/weakened",
+      "source": "minecraft:debuff"
+    },
+    "condition": {
+      "type": "origins:fall_distance",
+      "comparison": ">",
+      "compare_to": 0
+    }
+  },
+  "undeadinfluence": {
+    "type": "origins:target_action_on_hit",
+    "cooldown": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:area_of_effect",
+      "radius": 16,
+      "shape": "sphere",
+      "bientity_action": {
+        "type": "origins:damage",
+        "damage_type": "minecraft:cramming",
+        "amount": 0
+      },
+      "bientity_condition": {
+        "type": "origins:and",
+        "conditions": [
+          {
+            "type": "origins:can_see"
+          },
+          {
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:and",
+              "conditions": [
+                {
+                  "type": "origins:living"
+                },
+                {
+                  "type": "origins:in_tag",
+                  "tag": "minecraft:undead"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "condition": {
+      "type": "origins:power_active",
+      "power": "*:*_toggle"
+    }
+  },
+  "devour": {
+    "type": "origins:self_action_on_kill",
+    "cooldown": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:feed",
+      "nutrition": 2,
+      "saturation": 1
+    }
+  },
+  "good_digestion": {
+    "type": "origins:modify_food",
+    "food_modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": 3
+    },
+    "saturation_modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": 3
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
+      "text": "§e§lDamage Resistances:§r§f None.\n \n§c§lDamage Vulnerabilities:§r§f Iron weapons (+20%).\n \n§e§lEffect Immunities:§r§f Poison, Regeneration, Slowness, Weakness, Mining Fatigue, Nausea, Darkness, and Blindness. Instant Damage and Instant Healing are inverted."
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
+      "text": "§c§lWet:§r§f Counts as being in water."
+    }
+  ],
+  "name": "Passive Features",
+  "description": "§e§lStats:§r\n+8 Max HP\n-35% Hunger Drain\n \n§e§lFeatures:§r\n- Your creature type is Undead.\n- Hitting a creature while falling reduces its damage dealt by 20% for 10 seconds.\n- Killing a creature restores 2 Hunger and 4 Saturation.\n- When you strike a creature, nearby unoccupied Undead within 16 blocks are compelled to attack it. Toggleable.\n- Carrying or wearing any iron-tagged item anywhere in your inventory applies Wither I. Iron weapons also deal 20% more damage to you and apply Wither I on hit.\n- Sunlight reduces your movement speed and damage dealt by 35%.\n- Fire does not extinguish on its own.\n- You can only eat raw foods; valid foods are four times as effective."
+}

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "lilis_pottery:pottery_table",
+      "required": false
+    }
+  ]
+}

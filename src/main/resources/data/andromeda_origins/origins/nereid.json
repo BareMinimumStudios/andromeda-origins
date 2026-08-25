@@ -1,0 +1,18 @@
+{
+  "powers": [
+    "andromeda_origins:nereid/passives",
+    "andromeda_origins:nereid/primary",
+    "andromeda_origins:nereid/secondary",
+    "andromeda_origins:lichling/figura",
+    "andromeda_origins:common/diet_pescatarian",
+    "andromeda_origins:common/figura"
+  ],
+  "icon": {
+    "id": "andromeda_origins:nereid_icon"
+  },
+  "unchoosable": false,
+  "order": 1,
+  "impact": 3,
+  "name": "Nereid",
+  "description": "Nereids are sea spirits who carry the restorative power of the ocean wherever they travel. Though strongest beneath the waves, they have learned to survive on land and can mark trusted companions for protection and healing. Calm and watchful, a Nereid turns the battlefield itself into a tide that favors its allies."
+}

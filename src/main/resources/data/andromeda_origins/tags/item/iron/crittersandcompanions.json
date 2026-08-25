@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "crittersandcompanions:iron_dragonfly_armor",
+      "required": false
+    }
+  ]
+}

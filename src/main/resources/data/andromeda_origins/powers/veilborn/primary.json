@@ -1,0 +1,301 @@
+{
+  "type": "origins:multiple",
+  "active": {
+    "type": "origins:fire_projectile",
+    "cooldown": 60,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_type": "origins:enderian_pearl",
+    "sound": "minecraft:entity.ender_pearl.throw",
+    "speed": 1.5,
+    "divergence": 1,
+    "tag": "{Item: {id: 'minecraft:purple_glazed_terracotta', Count: 1b}}",
+    "shooter_action": {
+      "type": "origins:if_else_list",
+      "actions": [
+        {
+          "condition": {
+            "type": "origins:power",
+            "power": "*:veilborn/helper/realityshatter"
+          },
+          "action": {
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:change_resource",
+                "resource": "*:veilborn/helper/realityshatter_remove",
+                "change": 10
+              },
+              {
+                "type": "origins:change_resource",
+                "resource": "*:veilborn/helper/realityshatter1_remove",
+                "change": 10
+              }
+            ]
+          }
+        },
+        {
+          "condition": {
+            "type": "origins:and",
+            "conditions": [
+              {
+                "type": "origins:power",
+                "power": "*:veilborn/helper/realityshatter1"
+              },
+              {
+                "type": "origins:power",
+                "power": "*:veilborn/helper/realityshatter",
+                "inverted": true
+              }
+            ]
+          },
+          "action": {
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:grant_power",
+                "power": "*:veilborn/helper/realityshatter",
+                "source": "minecraft:debuff"
+              },
+              {
+                "type": "origins:change_resource",
+                "resource": "*:veilborn/helper/realityshatter_remove",
+                "change": 10
+              },
+              {
+                "type": "origins:change_resource",
+                "resource": "*:veilborn/helper/realityshatter1_remove",
+                "change": 10
+              }
+            ]
+          }
+        },
+        {
+          "condition": {
+            "type": "origins:power",
+            "power": "*:veilborn/helper/realityshatter1",
+            "inverted": true
+          },
+          "action": {
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:grant_power",
+                "power": "*:veilborn/helper/realityshatter1",
+                "source": "minecraft:debuff"
+              },
+              {
+                "type": "origins:change_resource",
+                "resource": "*:veilborn/helper/realityshatter1_remove",
+                "change": 14
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "*:common/silenced",
+          "inverted": true
+        },
+        {
+          "type": "origins:sneaking",
+          "inverted": true
+        }
+      ]
+    },
+    "key": {
+      "key": "key.origins.primary_active",
+      "continuous": false
+    }
+  },
+  "active3": {
+    "type": "origins:active_self",
+    "cooldown": 600,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
+      "bar_index": 17
+    },
+    "entity_action": {
+      "type": "origins:raycast",
+      "distance": 32,
+      "block": false,
+      "entity": true,
+      "shape_type": "collider",
+      "fluid_handling": "none",
+      "before_action": {
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:change_resource",
+            "resource": "andromeda_origins:common/figura_1",
+            "change": 1
+          },
+          {
+            "type": "origins:play_sound",
+            "sound": "minecraft:entity.illusioner.prepare_mirror",
+            "volume": 1,
+            "pitch": 0.2
+          },
+          {
+            "type": "origins:grant_power",
+            "power": "*:veilborn/helper/staring",
+            "source": "minecraft:state"
+          }
+        ]
+      },
+      "miss_action": {
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:execute_command",
+            "command": "title @s actionbar {\"text\": \"You must target an entity!\", \"color\": \"red\"}"
+          },
+          {
+            "type": "origins:delay",
+            "ticks": 1,
+            "action": {
+              "type": "origins:change_resource",
+              "resource": "*:*_active3",
+              "change": 599,
+              "operation": "set"
+            }
+          }
+        ]
+      },
+      "bientity_action": {
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:actor_action",
+            "action": {
+              "type": "origins:and",
+              "actions": [
+                {
+                  "type": "origins:play_sound",
+                  "sound": "minecraft:entity.illusioner.cast_spell",
+                  "volume": 1,
+                  "pitch": 0.2
+                },
+                {
+                  "type": "origins:grant_power",
+                  "power": "*:veilborn/helper/warp2",
+                  "source": "minecraft:state"
+                },
+                {
+                  "type": "origins:delay",
+                  "ticks": 2,
+                  "action": {
+                    "type": "origins:and",
+                    "actions": [
+                      {
+                        "type": "origins:execute_command",
+                        "command": "kill @e[tag=origin]"
+                      },
+                      {
+                        "type": "origins:execute_command",
+                        "command": "kill @e[tag=destination]"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "origins:target_action",
+            "action": {
+              "type": "origins:and",
+              "actions": [
+                {
+                  "type": "origins:grant_power",
+                  "power": "*:veilborn/helper/warp",
+                  "source": "minecraft:state"
+                },
+                {
+                  "type": "origins:play_sound",
+                  "sound": "minecraft:entity.illusioner.mirror_move",
+                  "volume": 1,
+                  "pitch": 0.2
+                },
+                {
+                  "type": "origins:grant_power",
+                  "power": "*:veilborn/helper/realityshatter",
+                  "source": "minecraft:debuff"
+                },
+                {
+                  "type": "origins:change_resource",
+                  "resource": "*:veilborn/helper/realityshatter_remove",
+                  "change": 4
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "bientity_condition": {
+        "type": "origins:and",
+        "conditions": [
+          {
+            "type": "origins:can_see"
+          },
+          {
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:and",
+              "conditions": [
+                {
+                  "type": "origins:living"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "command_step": 1,
+      "command_along_ray": "particle minecraft:end_rod",
+      "command_along_ray_only_on_hit": true
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "*:common/silenced",
+          "inverted": true
+        },
+        {
+          "type": "origins:sneaking"
+        }
+      ]
+    },
+    "key": {
+      "key": "key.origins.primary_active",
+      "continuous": false
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Trigger with ",
+        {
+          "keybind": "key.origins.primary_active"
+        }
+      ]
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
+      "text": "§c§lReality Shatter:§r§f Gain Darkness, -30% movement speed and -40% damage dealt. Its duration increases when Curtain Step is used again while the effect is active."
+    }
+  ],
+  "name": "Curtain Step & Veil Transposition",
+  "description": "§e§lCurtain Step:§r\nPress your Primary Ability key to throw a harmless veil pearl. Curtain Step has a 3-second cooldown and grants §c§l[Reality Shatter]§r for 15 seconds. Using Curtain Step again while Reality Shatter is active extends it by 10 seconds, up to 2 minutes.\n \n§e§lVeil Transposition:§r\nSneak and press your Primary Ability key while looking at a creature within 32 blocks to exchange positions with it and apply §c§l[Reality Shatter]§r to the target for 5 seconds."
+}

@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "herbalbrews:cauldron",
+      "required": false
+    },
+    {
+      "id": "herbalbrews:stove",
+      "required": false
+    },
+    {
+      "id": "herbalbrews:tea_kettle",
+      "required": false
+    }
+  ]
+}
