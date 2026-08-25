@@ -1,3 +1,21 @@
+# 1.4.7
+
+### Wyverian flight and Selkie water-state fixes
+- Fixed Wyverian **Gusts of Freedom** continuing to apply propulsion after its 20-second flight-time resource reached 0.
+- Gusts of Freedom now requires active fall-flying, at least 1 remaining charge, no water submersion, and no Restrained state before it can fire.
+- Fixed Selkie land-weakness recovery decrementing while the player was actively swimming. Swimming/full submersion now counts as valid recovery alongside the existing deep-water check.
+- Fixed Selkie **Surging Tides** incorrectly receiving its 5-second cooldown on land while stored Wet status was active.
+- Surging Tides now uses one 30-second base cooldown and shortens that same cooldown to 5 seconds only when the dash is activated while physically in water.
+- Removed the obsolete auxiliary `primary_dashcooldown` sub-power.
+
+# 1.4.6
+
+### Compatibility tag and Nereid fixes
+- Merged the misspelled `alpinerwhispers` iron compatibility file into the canonical `alpinewhispers` tag.
+- Corrected `arolla_pine_bathtub` and `arolla_pine_privy` to the `alpinewhispers:` namespace.
+- Removed the duplicate/misspelled `andromeda_origins:iron/alpinerwhispers` child tag from `alliron`.
+- Fixed Nereid accidentally referencing `andromeda_origins:lichling/figura`; it now uses `andromeda_origins:nereid/figura`.
+
 # 1.4.5
 
 ### Rebindable origin toggle

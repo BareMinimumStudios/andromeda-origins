@@ -2,6 +2,14 @@
   "replace": false,
   "values": [
     {
+      "id": "alpinewhispers:arolla_pine_privy",
+      "required": false
+    },
+    {
+      "id": "alpinewhispers:arolla_pine_bathtub",
+      "required": false
+    },
+    {
       "id": "alpinewhispers:arolla_pine_sink",
       "required": false
     },

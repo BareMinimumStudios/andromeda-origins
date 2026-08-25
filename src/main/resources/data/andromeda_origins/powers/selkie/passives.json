@@ -20,12 +20,6 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:selkie/primary_active2",
-          "change": 100,
-          "operation": "set"
-        },
-        {
-          "type": "origins:change_resource",
-          "resource": "andromeda_origins:selkie/primary_dashcooldown",
           "change": 600,
           "operation": "set"
         },
@@ -132,10 +126,19 @@
                 "compare_to": 30
               },
               {
-                "type": "origins:fluid_height",
-                "fluid": "minecraft:water",
-                "comparison": ">=",
-                "compare_to": 1.5
+                "type": "origins:or",
+                "conditions": [
+                  {
+                    "type": "origins:fluid_height",
+                    "fluid": "minecraft:water",
+                    "comparison": ">=",
+                    "compare_to": 1.5
+                  },
+                  {
+                    "type": "origins:submerged_in",
+                    "fluid": "minecraft:water"
+                  }
+                ]
               }
             ]
           },
@@ -164,6 +167,11 @@
                 "fluid": "minecraft:water",
                 "comparison": "<",
                 "compare_to": 1.5
+              },
+              {
+                "type": "origins:submerged_in",
+                "fluid": "minecraft:water",
+                "inverted": true
               }
             ]
           },
@@ -281,5 +289,5 @@
     }
   ],
   "name": "Passive Features",
-  "description": "§e§lStats:§r\n+45% Swim Speed\n \n§e§lFeatures:§r\n- Your creature type is Aquatic, and you can act in water as though you were on land.\n- Creatures that strike you deal 20% less attack damage and move 15% slower for 5 seconds.\n- Underwater, you have perfect vision and see 75% better in darkness. Toggleable.\n- While not Silenced by your negative passives, you can breathe on land.\n- You suffer -10% movement speed while out of water.\n- Your stored wetness rises while submerged or in rain and falls while dry. After 3 minutes fully dry, you become §c§l[Silenced]§r. Recover by remaining mostly submerged in deep water for 30 seconds; leaving deep water causes the recovery timer to count back down.\n- Being struck by a player while downed can also Silence you. That player is highlighted to affected Selkies, and striking a player who Silenced a downed Selkie can remove the condition.\n- You follow a Pescatarian diet."
+  "description": "§e§lStats:§r\n+45% Swim Speed\n \n§e§lFeatures:§r\n- Your creature type is Aquatic, and you can act in water as though you were on land.\n- Creatures that strike you deal 20% less attack damage and move 15% slower for 5 seconds.\n- Underwater, you have perfect vision and see 75% better in darkness. Toggleable.\n- While not Silenced by your negative passives, you can breathe on land.\n- You suffer -10% movement speed while out of water.\n- Your stored wetness rises while submerged or in rain and falls while dry. After 3 minutes fully dry, you become §c§l[Silenced]§r. Recover by remaining in deep water or fully submerged/swimming for 30 seconds; leaving qualifying water causes the recovery timer to count back down.\n- Being struck by a player while downed can also Silence you. That player is highlighted to affected Selkies, and striking a player who Silenced a downed Selkie can remove the condition.\n- You follow a Pescatarian diet."
 }

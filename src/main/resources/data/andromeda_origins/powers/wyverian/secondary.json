@@ -119,6 +119,25 @@
           "resource": "*:wyverian/passives_weaknesstate",
           "comparison": "==",
           "compare_to": 0
+        },
+        {
+          "type": "origins:fall_flying"
+        },
+        {
+          "type": "origins:resource",
+          "resource": "*:*_charges",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        {
+          "type": "origins:submerged_in",
+          "fluid": "minecraft:water",
+          "inverted": true
+        },
+        {
+          "type": "origins:power",
+          "power": "andromeda_origins:common/restrained",
+          "inverted": true
         }
       ]
     },

@@ -143,16 +143,10 @@
   },
   "active2": {
     "type": "origins:active_self",
-    "cooldown": 100,
+    "cooldown": 600,
     "hud_render": {
       "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
-      "bar_index": 10,
-      "condition": {
-        "type": "origins:resource",
-        "comparison": "==",
-        "resource": "*:*_dashcooldown",
-        "compare_to": 0
-      }
+      "bar_index": 10
     },
     "entity_action": {
       "type": "origins:and",
@@ -178,24 +172,10 @@
           "actions": [
             {
               "condition": {
-                "type": "origins:and",
-                "conditions": [
-                  {
-                    "type": "origins:fluid_height",
-                    "fluid": "minecraft:water",
-                    "comparison": "==",
-                    "compare_to": 0
-                  },
-                  {
-                    "type": "origins:in_rain",
-                    "inverted": true
-                  },
-                  {
-                    "type": "origins:power",
-                    "power": "andromeda_origins:common/wet",
-                    "inverted": true
-                  }
-                ]
+                "type": "origins:fluid_height",
+                "fluid": "minecraft:water",
+                "comparison": "==",
+                "compare_to": 0
               },
               "action": {
                 "type": "origins:and",
@@ -211,32 +191,16 @@
                     "z": 2,
                     "space": "local",
                     "set": true
-                  },
-                  {
-                    "type": "origins:trigger_cooldown",
-                    "power": "*:*_dashcooldown"
                   }
                 ]
               }
             },
             {
               "condition": {
-                "type": "origins:or",
-                "conditions": [
-                  {
-                    "type": "origins:fluid_height",
-                    "fluid": "minecraft:water",
-                    "comparison": ">",
-                    "compare_to": 0
-                  },
-                  {
-                    "type": "origins:in_rain"
-                  },
-                  {
-                    "type": "origins:power",
-                    "power": "andromeda_origins:common/wet"
-                  }
-                ]
+                "type": "origins:fluid_height",
+                "fluid": "minecraft:water",
+                "comparison": ">",
+                "compare_to": 0
               },
               "action": {
                 "type": "origins:and",
@@ -258,6 +222,11 @@
                     "z": 2.5,
                     "space": "local",
                     "set": true
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "andromeda_origins:selkie/primary_active2",
+                    "change": -500
                   }
                 ]
               }
@@ -277,32 +246,12 @@
         {
           "type": "origins:sneaking",
           "inverted": true
-        },
-        {
-          "type": "origins:resource",
-          "comparison": "==",
-          "resource": "*:*_dashcooldown",
-          "compare_to": 0
         }
       ]
     },
     "key": {
       "key": "key.origins.primary_active",
       "continuous": true
-    }
-  },
-  "dashcooldown": {
-    "type": "origins:cooldown",
-    "cooldown": 600,
-    "hud_render": {
-      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
-      "bar_index": 10,
-      "condition": {
-        "type": "origins:resource",
-        "comparison": ">",
-        "resource": "*:*_dashcooldown",
-        "compare_to": 0
-      }
     }
   },
   "badges": [
@@ -318,5 +267,5 @@
     }
   ],
   "name": "Coastal Phalanx & Surging Tides",
-  "description": "§e§lCoastal Phalanx:§r\nSneak and press your Primary Ability key while looking at a creature within 30 blocks to grant both of you Absorption II for 1 minute. The Absorption effect refreshes every 10 seconds.\n \n§e§lSurging Tides:§r\nPress your Primary Ability key while not sneaking to dash in the direction you are looking. Its cooldown is extended to 30 seconds while out of water.\n \nYour projectile damage is reduced by 50% during Surging Tides and for 3 seconds afterward. §e§lMovement Ability§r."
+  "description": "§e§lCoastal Phalanx:§r\nSneak and press your Primary Ability key while looking at a creature within 30 blocks to grant both of you Absorption II for 1 minute. The Absorption effect refreshes every 10 seconds.\n \n§e§lSurging Tides:§r\nPress your Primary Ability key while not sneaking to dash in the direction you are looking. Cooldown: 5 seconds while physically in water, 30 seconds on land.\n \nYour projectile damage is reduced by 50% during Surging Tides and for 3 seconds afterward. §e§lMovement Ability§r."
 }

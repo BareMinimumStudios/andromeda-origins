@@ -49,10 +49,25 @@ gradlew.bat build
 The jar will be written to:
 
 ```text
-build/libs/andromeda-origins-1.21.1-1.4.5.jar
+build/libs/andromeda-origins-1.21.1-1.4.7.jar
 ```
 
 
+
+
+## 1.4.7 Wyverian flight and Selkie water-state fixes
+
+- Fixed Wyverian **Gusts of Freedom** continuing to grant propulsion after its flight-time meter reached 0. The thrust now requires remaining charges and active fall-flying, and cannot activate while submerged or Restrained.
+- Fixed Selkie dry-state recovery counting backward while actively swimming. Full submersion/swimming now qualifies for the 30-second recovery even when the swimming pose reports less than 1.5 blocks of fluid height.
+- Fixed Selkie **Surging Tides** using the 5-second cooldown on land while the Selkie still had stored Wet status. Cooldown is now based on actual water contact: **5 seconds in water, 30 seconds on land**.
+- Simplified Surging Tides to one authoritative cooldown resource instead of a 5-second active cooldown plus a separate 30-second land cooldown.
+
+## 1.4.6 compatibility tag and Nereid fixes
+
+- Merged the misspelled `alpinerwhispers` iron compatibility file into the canonical `alpinewhispers` tag.
+- Corrected `arolla_pine_bathtub` and `arolla_pine_privy` to the `alpinewhispers:` namespace.
+- Removed the duplicate/misspelled `andromeda_origins:iron/alpinerwhispers` child tag from `alliron`.
+- Fixed Nereid accidentally referencing `andromeda_origins:lichling/figura`; it now uses `andromeda_origins:nereid/figura`.
 
 ## 1.4.5 rebindable origin toggle
 
