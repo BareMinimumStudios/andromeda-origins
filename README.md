@@ -49,11 +49,39 @@ gradlew.bat build
 The jar will be written to:
 
 ```text
-build/libs/andromeda-origins-1.21.1-1.4.7.jar
+build/libs/andromeda-origins-1.21.1-1.4.11.jar
 ```
 
 
 
+
+## 1.4.11 Fenrkin Stamina Surge leap height
+
+- Increased the upward boost of the Jump-triggered **Stamina Surge** leap from `0.2` to `0.3` world-relative velocity so the leap reaches a little more height.
+- Forward momentum, stamina costs, the 5-second follow-up window, and all other Stamina Surge behavior are unchanged.
+
+
+## 1.4.10 Fenrkin chained-leap stamina fix
+
+- Fixed the second **Stamina Surge** leap being blocked when the held sprint consumed a small amount of Stamina after the first 50% leap.
+- A near-full first leap now opens a short 5-second follow-up window. During that window, the second Jump-triggered leap can spend the remaining Stamina even if the sprint drain reduced it slightly below 50%.
+- This keeps the intended shared Stamina pool: sprinting still costs Stamina, the first leap still costs 10/20, and the follow-up consumes the remainder instead of requiring an untouched 10/20.
+- The follow-up window is only created when the first leap begins with at least 18/20 Stamina, preventing low-Stamina double-leap abuse.
+
+
+## 1.4.9 Fenrkin Stamina Surge input fix
+
+- Hold **Secondary Ability** to keep Stamina Surge active, then press the normal **Jump** key to perform the 50%-stamina leap.
+- The leap no longer requires releasing/re-pressing Secondary, making the sprint-to-leap flow reliable and natural.
+- Existing stamina costs, projectile penalty, and corrected leap velocity are unchanged.
+
+## 1.4.8 Movement and Gorgon Grab fixes
+
+- Selkie **Surging Tides** now receives its 5-second cooldown while physically in water **or exposed to rain**; dry land remains 30 seconds.
+- Fenrkin **Stamina Surge** no longer mistakes brief airborne transitions while running over blocks for an intentional leap. The high-cost mid-air leap now triggers only from a fresh Secondary Ability press while airborne.
+- Fenrkin's intentional mid-air leap uses horizontal-facing velocity so looking down cannot drive the player downward.
+- Satyr **Swift Leap** now adds its jump impulse instead of replacing the player's existing velocity, preserving horizontal momentum even when looking straight ahead or downward.
+- Gorgon **Grab** now prevents grabbed players from dismounting themselves with Sneak/vehicle dismount controls. Gorgon throw, safe placement, and the 10-second carry timeout still release the target normally.
 
 ## 1.4.7 Wyverian flight and Selkie water-state fixes
 

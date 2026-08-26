@@ -94,6 +94,12 @@
           "operation": "set"
         },
         {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:fenrkin/secondary_leap_chain",
+          "change": 0,
+          "operation": "set"
+        },
+        {
           "type": "origins:execute_command",
           "command": "tag @s add fenrkin"
         },

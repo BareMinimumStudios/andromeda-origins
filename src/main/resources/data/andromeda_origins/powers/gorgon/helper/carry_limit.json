@@ -14,7 +14,16 @@
         {
           "type": "origins:passenger_action",
           "action": {
-            "type": "origins:dismount"
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:execute_command",
+                "command": "tag @s remove andromeda_gorgon_grabbed"
+              },
+              {
+                "type": "origins:dismount"
+              }
+            ]
           }
         },
         {

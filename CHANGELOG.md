@@ -1,3 +1,33 @@
+# 1.4.11
+
+### Fenrkin Stamina Surge leap height
+- Increased the upward impulse of the Jump-triggered **Stamina Surge** leap from `0.2` to `0.3` world-relative velocity.
+- Horizontal launch strength, stamina costs, chained-leap rules, and all other Stamina Surge behavior are unchanged.
+
+# 1.4.10
+
+### Fenrkin chained-leap stamina fix
+- Fixed the second **Stamina Surge** leap being rejected when the continuously held sprint consumed a small amount of Stamina after the first leap.
+- A first leap started at 18/20 Stamina or higher now opens a 5-second follow-up window.
+- During that window, a second Jump-triggered leap may consume the remaining Stamina even if it has fallen below the normal 10-Stamina threshold.
+- This preserves the shared sprint/leap Stamina pool without allowing low-Stamina players to chain a cheap second leap.
+
+# 1.4.9
+
+### Fenrkin Stamina Surge leap input
+- Fenrkin **Stamina Surge** now uses the normal **Jump** key for its high-cost leap while Secondary Ability is being held.
+- The player no longer has to release/re-press Secondary Ability to leap, so the sprint portion of Stamina Surge remains continuously held.
+- The leap still costs 50% of maximum Stamina, retains its horizontal-facing/world-up velocity fix, and cannot activate in water or lava.
+
+# 1.4.8
+
+### Movement, rain cooldown, and Gorgon Grab fixes
+- Selkie **Surging Tides** now shortens to a 5-second cooldown while physically in water or exposed to rain; dry land remains 30 seconds.
+- Fenrkin **Stamina Surge** no longer automatically triggers the 50%-stamina airborne leap when briefly leaving the ground while running over block edges.
+- Fenrkin's airborne leap is now a discrete Secondary Ability press while airborne and uses horizontal-facing velocity so looking downward cannot push the Fenrkin into the ground.
+- Satyr **Swift Leap** now preserves existing momentum instead of replacing it when the double jump fires.
+- Gorgon **Grab** now marks carried players and prevents self-dismount while the grab is active. Intentional throw, Sneak + Jump placement, and the 10-second timeout remove the grab lock before dismounting.
+
 # 1.4.7
 
 ### Wyverian flight and Selkie water-state fixes

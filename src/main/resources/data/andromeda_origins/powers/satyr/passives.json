@@ -498,9 +498,14 @@
         {
           "type": "origins:add_velocity",
           "y": 0.8,
+          "space": "world",
+          "set": false
+        },
+        {
+          "type": "origins:add_velocity",
           "z": 0.4,
           "space": "local_horizontal_normalized",
-          "set": true
+          "set": false
         }
       ]
     },

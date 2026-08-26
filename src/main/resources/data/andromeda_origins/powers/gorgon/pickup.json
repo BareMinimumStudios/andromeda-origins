@@ -60,6 +60,13 @@
                     "power": "*:gorgon/helper/carry_limit",
                     "source": "minecraft:state"
                   }
+                },
+                {
+                  "type": "origins:target_action",
+                  "action": {
+                    "type": "origins:execute_command",
+                    "command": "tag @s add andromeda_gorgon_grabbed"
+                  }
                 }
               ]
             },
@@ -116,6 +123,10 @@
                       "pitch": 2
                     },
                     {
+                      "type": "origins:execute_command",
+                      "command": "tag @s remove andromeda_gorgon_grabbed"
+                    },
+                    {
                       "type": "origins:dismount"
                     },
                     {
@@ -152,7 +163,16 @@
         {
           "type": "origins:passenger_action",
           "action": {
-            "type": "origins:dismount"
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:execute_command",
+                "command": "tag @s remove andromeda_gorgon_grabbed"
+              },
+              {
+                "type": "origins:dismount"
+              }
+            ]
           }
         },
         {
@@ -190,5 +210,5 @@
     }
   ],
   "name": "Grab",
-  "description": "Press your Pick Item key to grab a §c§l[Restrained]§r creature for up to 10 seconds. Press Pick Item again to throw it, or press Sneak + Jump to place it down safely."
+  "description": "Press your Pick Item key to grab a §c§l[Restrained]§r creature for up to 10 seconds. Grabbed players cannot dismount themselves. Press Pick Item again to throw the target, or press Sneak + Jump to place it down safely."
 }

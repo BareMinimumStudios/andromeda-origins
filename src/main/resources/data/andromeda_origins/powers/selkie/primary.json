@@ -222,16 +222,33 @@
                     "z": 2.5,
                     "space": "local",
                     "set": true
-                  },
-                  {
-                    "type": "origins:change_resource",
-                    "resource": "andromeda_origins:selkie/primary_active2",
-                    "change": -500
                   }
                 ]
               }
             }
           ]
+        },
+        {
+          "type": "origins:if_else",
+          "condition": {
+            "type": "origins:or",
+            "conditions": [
+              {
+                "type": "origins:fluid_height",
+                "fluid": "minecraft:water",
+                "comparison": ">",
+                "compare_to": 0
+              },
+              {
+                "type": "origins:in_rain"
+              }
+            ]
+          },
+          "if_action": {
+            "type": "origins:change_resource",
+            "resource": "andromeda_origins:selkie/primary_active2",
+            "change": -500
+          }
         }
       ]
     },
@@ -267,5 +284,5 @@
     }
   ],
   "name": "Coastal Phalanx & Surging Tides",
-  "description": "§e§lCoastal Phalanx:§r\nSneak and press your Primary Ability key while looking at a creature within 30 blocks to grant both of you Absorption II for 1 minute. The Absorption effect refreshes every 10 seconds.\n \n§e§lSurging Tides:§r\nPress your Primary Ability key while not sneaking to dash in the direction you are looking. Cooldown: 5 seconds while physically in water, 30 seconds on land.\n \nYour projectile damage is reduced by 50% during Surging Tides and for 3 seconds afterward. §e§lMovement Ability§r."
+  "description": "§e§lCoastal Phalanx:§r\nSneak and press your Primary Ability key while looking at a creature within 30 blocks to grant both of you Absorption II for 1 minute. The Absorption effect refreshes every 10 seconds.\n \n§e§lSurging Tides:§r\nPress your Primary Ability key while not sneaking to dash in the direction you are looking. Cooldown: 5 seconds while physically in water or exposed to rain, 30 seconds otherwise on land.\n \nYour projectile damage is reduced by 50% during Surging Tides and for 3 seconds afterward. §e§lMovement Ability§r."
 }

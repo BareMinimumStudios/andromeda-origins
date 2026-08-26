@@ -30,5 +30,8 @@
     "pokesmells",
     "aulatris"
   ],
-  "license": "Bare Minimum License (BML) v1.0"
+  "license": "Bare Minimum License (BML) v1.0",
+  "mixins": [
+    "andromeda_origins.mixins.json"
+  ]
 }
