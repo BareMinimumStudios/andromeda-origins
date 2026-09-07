@@ -33,8 +33,8 @@
     "max": 180,
     "start_value": 180,
     "hud_render": {
-      "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
-      "bar_index": 3
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 1
     },
     "min_action": {
       "type": "origins:and",

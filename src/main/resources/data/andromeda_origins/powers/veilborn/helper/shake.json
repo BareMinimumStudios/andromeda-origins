@@ -14,7 +14,8 @@
         {
           "type": "origins:change_resource",
           "resource": "*:common/figura_3",
-          "change": -1
+          "change": 0,
+          "operation": "set"
         },
         {
           "type": "origins:revoke_power",

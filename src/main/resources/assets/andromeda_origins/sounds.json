@@ -1,0 +1,237 @@
+{
+  "ability.arachne.silk_snap": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/arachne/silk_snap"
+      }
+    ]
+  },
+  "ability.arachne.web_pull": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/arachne/web_pull"
+      }
+    ]
+  },
+  "ability.faerie.fae_chime": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/faerie/fae_chime"
+      }
+    ]
+  },
+  "ability.faerie.dust_depleted": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/faerie/dust_depleted"
+      }
+    ]
+  },
+  "ability.fenrkin.on_the_hunt_howl": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/fenrkin/on_the_hunt_howl"
+      }
+    ]
+  },
+  "ability.gorgon.hiss": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/gorgon/hiss"
+      }
+    ]
+  },
+  "ability.gorgon.stone_form": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/gorgon/stone_form"
+      }
+    ]
+  },
+  "ability.humanity.mortal_resolve_ignite": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/humanity/mortal_resolve_ignite"
+      }
+    ]
+  },
+  "ability.humanity.mortal_resolve_heartbeat": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/humanity/mortal_resolve_heartbeat"
+      }
+    ]
+  },
+  "ability.lichling.chimes_of_necros": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/lichling/chimes_of_necros",
+        "stream": true
+      }
+    ]
+  },
+  "ability.manticore.ravenous_lunge": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/manticore/ravenous_lunge"
+      }
+    ]
+  },
+  "ability.manticore.beast_of_blood": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/manticore/beast_of_blood"
+      }
+    ]
+  },
+  "ability.manticore.lunge_impact": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/manticore/lunge_impact"
+      }
+    ]
+  },
+  "ability.nereid.convalescing_aura": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/nereid/convalescing_aura",
+        "stream": true
+      }
+    ]
+  },
+  "ability.satyr.rush_wind": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/satyr/rush_wind"
+      }
+    ]
+  },
+  "ability.satyr.hoof_launch": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/satyr/hoof_launch"
+      }
+    ]
+  },
+  "ability.satyr.satyrs_landing": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/satyr/satyrs_landing"
+      }
+    ]
+  },
+  "ability.selkie.surging_tides": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/selkie/surging_tides"
+      }
+    ]
+  },
+  "ability.siren.infatuation_charm": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/siren/infatuation_charm",
+        "stream": true
+      }
+    ]
+  },
+  "ability.siren.infatuation_whisper": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/siren/infatuation_whisper",
+        "stream": true
+      }
+    ]
+  },
+  "ability.siren.shrieking_wail": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/siren/shrieking_wail"
+      }
+    ]
+  },
+  "ability.siren.wail_impact": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/siren/wail_impact"
+      }
+    ]
+  },
+  "ability.veilborn.veil_open": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/veilborn/veil_open"
+      }
+    ]
+  },
+  "ability.veilborn.veil_close": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/veilborn/veil_close"
+      }
+    ]
+  },
+  "ability.veilborn.transposition": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/veilborn/transposition"
+      }
+    ]
+  },
+  "ability.veilborn.auroral_mirage_activate": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/veilborn/auroral_mirage_activate"
+      }
+    ]
+  },
+  "ability.veilborn.reality_fracture": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/veilborn/reality_fracture"
+      }
+    ]
+  },
+  "ability.veilborn.auroral_mirage_break": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/veilborn/auroral_mirage_break"
+      }
+    ]
+  },
+  "ability.wyverian.dragon_wing_rush": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/wyverian/dragon_wing_rush"
+      }
+    ]
+  },
+  "ability.wyverian.roar": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/wyverian/roar"
+      }
+    ]
+  },
+  "ability.lichling.final_bell_toll": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/lichling/final_bell_toll"
+      }
+    ]
+  },
+  "ability.manticore.ravenous_lunge_airborne": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/manticore/ravenous_lunge_airborne"
+      }
+    ]
+  },
+  "ability.fenrkin.marked": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/fenrkin/marked"
+      }
+    ]
+  }
+}

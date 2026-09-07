@@ -1,6 +1,8 @@
 package andromeda.origins;
 
 import andromeda.origins.command.AndromedaOriginsCommands;
+import andromeda.origins.compat.MortalResolveManager;
+import andromeda.origins.compat.FiguraCompatManager;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.Settings;
@@ -34,7 +36,10 @@ public final class AndromedaOrigins implements ModInitializer {
         registerIcon("veilborn_icon");
         registerIcon("wyverian_icon");
 
+        AndromedaSounds.register();
         AndromedaOriginsCommands.register();
+        MortalResolveManager.register();
+        FiguraCompatManager.register();
 
     }
 }

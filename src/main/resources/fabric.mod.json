@@ -3,7 +3,7 @@
   "id": "andromeda_origins",
   "version": "${version}",
   "name": "Andromeda Origins",
-  "description": "Custom Origins and compatibility content for Andromeda MC on Minecraft 1.21.1.",
+  "description": "Custom Origins, Champion variants, HUD/audio presentation, and compatibility systems for Andromeda MC on Minecraft 1.21.1.",
   "environment": "*",
   "depends": {
     "fabricloader": ">=0.16.5",
@@ -23,7 +23,10 @@
   },
   "icon": "assets/andromeda_origins/icon.png",
   "suggests": {
-    "incapacitated": "*"
+    "incapacitated": "*",
+    "figura": "*",
+    "figuraextrabone": "*",
+    "armor_model_api": "*"
   },
   "authors": [
     "jaselumena",

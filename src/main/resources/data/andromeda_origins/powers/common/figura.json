@@ -50,7 +50,81 @@
       "bar_index": 5
     }
   },
-  "name": "Figura Backend",
-  "description": "This version of origins is buggy, and it won't let me hide backend powers. I hope you are having a nice day, and that I get to hide this one day.",
-  "hidden": true
+  "name": "Figura Compatibility",
+  "description": "Legacy numbered Figura hooks remain supported for existing avatars. New avatars should use the semantic state names and Lua helper documented in FIGURA_COMPAT.md.",
+  "hidden": true,
+  "reset": {
+    "type": "origins:action_on_callback",
+    "entity_action_chosen": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:common/figura_1",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:common/figura_2",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:common/figura_3",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:common/figura_4",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:common/figura_5",
+          "change": 0,
+          "operation": "set"
+        }
+      ]
+    },
+    "entity_action_added": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:common/figura_1",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:common/figura_2",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:common/figura_3",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:common/figura_4",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:common/figura_5",
+          "change": 0,
+          "operation": "set"
+        }
+      ]
+    },
+    "execute_chosen_when_orb": true
+  }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "andromeda_origins:item/origin_icon/gorgon"
+    "layer0": "andromeda_origins:item/origin_icon/gorgon_eye_2"
   }
 }

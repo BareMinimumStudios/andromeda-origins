@@ -1,0 +1,438 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_chosen": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:champion/gorgon_passives_flammablent",
+          "change": 9,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:champion/gorgon_passives_flammablent2",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:champion/gorgon_passives_stonevenom",
+          "change": 20,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:gorgon/primary_active",
+          "change": 20,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:gorgon/primary_charges",
+          "change": 2,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:gorgon/primary_petrifycooldown",
+          "change": 2400,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:gorgon/secondary_active",
+          "change": 20,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:gorgon/secondary_charges",
+          "change": 2,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:gorgon/secondary_intimidatecooldown",
+          "change": 800,
+          "operation": "set"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s add gorgon"
+        }
+      ]
+    },
+    "entity_action_lost": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s remove gorgon"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/debug",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "execute_chosen_when_orb": true
+  },
+  "resistances": {
+    "type": "origins:modify_damage_taken",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.15
+    }
+  },
+  "toggle": {
+    "type": "origins:toggle",
+    "key": {
+      "key": "key.andromeda_origins.toggle",
+      "continuous": false
+    }
+  },
+  "darkvision": {
+    "type": "origins:night_vision",
+    "strength": 1,
+    "condition": {
+      "type": "origins:power_active",
+      "power": "*:*_toggle"
+    }
+  },
+  "speed": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "andromeda_origins:champion_gorgon_passives_speed",
+      "attribute": "minecraft:generic.movement_speed",
+      "operation": "add_multiplied_total",
+      "amount": 0.15
+    }
+  },
+  "scales": {
+    "type": "origins:modify_damage_taken",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.2
+    },
+    "damage_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:name",
+          "name": "magic",
+          "inverted": true
+        },
+        {
+          "type": "origins:name",
+          "name": "wither",
+          "inverted": true
+        },
+        {
+          "type": "origins:name",
+          "name": "freeze",
+          "inverted": true
+        },
+        {
+          "type": "origins:name",
+          "name": "inWall",
+          "inverted": true
+        },
+        {
+          "type": "origins:name",
+          "name": "outOfWorld",
+          "inverted": true
+        },
+        {
+          "type": "origins:fire",
+          "inverted": true
+        },
+        {
+          "type": "origins:name",
+          "name": "drown",
+          "inverted": true
+        },
+        {
+          "type": "origins:name",
+          "name": "dryout",
+          "inverted": true
+        }
+      ]
+    }
+  },
+  "flammablent": {
+    "type": "origins:self_action_when_hit",
+    "cooldown": 9,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_flammablent2",
+      "change": 1
+    },
+    "damage_condition": {
+      "type": "origins:fire"
+    }
+  },
+  "flammablent2": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 3,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_flammablent2",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:extinguish"
+        }
+      ]
+    }
+  },
+  "climbing": {
+    "type": "origins:climbing",
+    "condition": {
+      "type": "origins:all_of",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "*:*_toggle"
+        },
+        {
+          "type": "origins:any_of",
+          "conditions": [
+            {
+              "type": "origins:all_of",
+              "conditions": [
+                {
+                  "type": "origins:sneaking",
+                  "inverted": true
+                },
+                {
+                  "type": "origins:collided_horizontally"
+                }
+              ]
+            },
+            {
+              "type": "origins:all_of",
+              "conditions": [
+                {
+                  "type": "origins:sneaking"
+                },
+                {
+                  "type": "origins:any_of",
+                  "conditions": [
+                    {
+                      "type": "origins:block_collision",
+                      "offset_x": 0.01,
+                      "offset_z": 0.01
+                    },
+                    {
+                      "type": "origins:block_collision",
+                      "offset_x": -0.01,
+                      "offset_z": -0.01
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "hold_condition": {
+      "type": "origins:sneaking",
+      "inverted": true
+    }
+  },
+  "stonevenom": {
+    "type": "origins:target_action_on_hit",
+    "cooldown": 20,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:apply_effect",
+          "effect": {
+            "id": "minecraft:poison",
+            "amplifier": 0,
+            "duration": 40
+          }
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:status_effect",
+                "effect": "minecraft:slowness",
+                "min_amplifier": 0,
+                "inverted": true
+              },
+              "action": {
+                "type": "origins:apply_effect",
+                "effect": {
+                  "id": "minecraft:slowness",
+                  "amplifier": 0,
+                  "duration": 40
+                }
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:status_effect",
+                "effect": "minecraft:slowness",
+                "min_amplifier": 0,
+                "max_amplifier": 0
+              },
+              "action": {
+                "type": "origins:apply_effect",
+                "effect": {
+                  "id": "minecraft:slowness",
+                  "amplifier": 1,
+                  "duration": 40
+                }
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:status_effect",
+                "effect": "minecraft:slowness",
+                "min_amplifier": 1,
+                "max_amplifier": 1
+              },
+              "action": {
+                "type": "origins:apply_effect",
+                "effect": {
+                  "id": "minecraft:slowness",
+                  "amplifier": 2,
+                  "duration": 40
+                }
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:status_effect",
+                "effect": "minecraft:slowness",
+                "min_amplifier": 2,
+                "max_amplifier": 2
+              },
+              "action": {
+                "type": "origins:apply_effect",
+                "effect": {
+                  "id": "minecraft:slowness",
+                  "amplifier": 3,
+                  "duration": 40
+                }
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:status_effect",
+                "effect": "minecraft:slowness",
+                "min_amplifier": 3,
+                "max_amplifier": 3
+              },
+              "action": {
+                "type": "origins:apply_effect",
+                "effect": {
+                  "id": "minecraft:slowness",
+                  "amplifier": 4,
+                  "duration": 40
+                }
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:status_effect",
+                "effect": "minecraft:slowness",
+                "min_amplifier": 4,
+                "max_amplifier": 4
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:grant_power",
+                    "power": "*:gorgon/helper/constricted",
+                    "source": "minecraft:ccontrol"
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "*:gorgon/helper/constricted_remove",
+                    "change": 5
+                  },
+                  {
+                    "type": "origins:apply_effect",
+                    "effect": {
+                      "id": "minecraft:slowness",
+                      "amplifier": 4,
+                      "duration": 40
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "target_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "*:common/unstoppable",
+          "inverted": true
+        },
+        {
+          "type": "origins:power",
+          "power": "*:gorgon/helper/constrictcd",
+          "inverted": true
+        }
+      ]
+    }
+  },
+  "good_digestion": {
+    "type": "origins:modify_food",
+    "food_modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": 3
+    },
+    "saturation_modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": 3
+    }
+  },
+  "step_assist": {
+    "type": "origins:conditioned_attribute",
+    "tick_rate": 1,
+    "modifier": {
+      "id": "andromeda_origins:champion_gorgon_passives_step_assist",
+      "attribute": "minecraft:generic.step_height",
+      "operation": "add_multiplied_total",
+      "amount": 1.0
+    },
+    "condition": {
+      "type": "origins:power_active",
+      "power": "*:*_toggle"
+    }
+  },
+  "name": "Champion Passive Features",
+  "description": "§e§lChampion Features:§r\n+15% Movement Speed\n \n- Retains venom, climbing, darkvision, scales and raw-food bonuses.\n- No iron sensitivity, falling slowdown or dietary restriction."
+}

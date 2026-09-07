@@ -23,6 +23,15 @@
                 "power": "andromeda_origins:manticore/helper/charged",
                 "source": "minecraft:ccontrol"
               }
+            },
+            {
+              "type": "origins:target_action",
+              "action": {
+                "type": "origins:play_sound",
+                "sound": "andromeda_origins:ability.manticore.lunge_impact",
+                "volume": 1.15,
+                "pitch": 1.0
+              }
             }
           ]
         },
@@ -31,6 +40,11 @@
           "conditions": [
             {
               "type": "origins:can_see"
+            },
+            {
+              "type": "origins:distance",
+              "comparison": ">",
+              "compare_to": 0
             },
             {
               "type": "origins:target_condition",

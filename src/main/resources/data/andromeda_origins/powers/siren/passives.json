@@ -156,5 +156,23 @@
     }
   ],
   "name": "Passive Features",
-  "description": "§e§lStats:§r\n+25% Swim Speed\n-10% Damage Dealt\n \n§e§lFeatures:§r\n- Your creature type is Aquatic.\n- You can breathe both air and water and can act in water as though you were on land.\n- You see 75% better in darkness and have perfect underwater vision. Toggleable.\n- You are permanently affected by Haste I.\n- Fire does not extinguish on its own.\n- Iron weapons deal 20% more damage to you and inflict Wither I.\n- You are a Carnivore."
+  "description": "§e§lStats:§r\n+25% Swim Speed\n-10% Damage Dealt\n \n§e§lFeatures:§r\n- Your creature type is Aquatic.\n- You can breathe both air and water and can act in water as though you were on land.\n- You see 75% better in darkness and have perfect underwater vision. Toggleable.\n- You are permanently affected by Haste I.\n- Fire does not extinguish on its own.\n- Iron weapons deal 20% more damage to you and inflict Wither I.\n- You are a Carnivore.",
+  "infatuation_guard": {
+    "type": "origins:invulnerability",
+    "damage_condition": {
+      "type": "origins:attacker",
+      "entity_condition": {
+        "type": "origins:and",
+        "conditions": [
+          {
+            "type": "origins:living"
+          },
+          {
+            "type": "origins:power",
+            "power": "andromeda_origins:siren/helper/infatuated"
+          }
+        ]
+      }
+    }
+  }
 }

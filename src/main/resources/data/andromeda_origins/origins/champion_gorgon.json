@@ -1,0 +1,18 @@
+{
+  "powers": [
+    "andromeda_origins:champion/gorgon_passives",
+    "andromeda_origins:common/champion",
+    "andromeda_origins:gorgon/primary",
+    "andromeda_origins:gorgon/secondary",
+    "andromeda_origins:gorgon/figura",
+    "andromeda_origins:common/figura"
+  ],
+  "icon": {
+    "id": "andromeda_origins:gorgon_icon"
+  },
+  "unchoosable": true,
+  "order": 103,
+  "impact": 3,
+  "name": "Champion Gorgon",
+  "description": "A command-only Champion variant of Gorgon. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Cooldowns, charge times and resource costs remain."
+}

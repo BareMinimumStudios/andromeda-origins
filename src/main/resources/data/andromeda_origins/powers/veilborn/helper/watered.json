@@ -33,8 +33,8 @@
     "max": 180,
     "start_value": 1,
     "hud_render": {
-      "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
-      "bar_index": 3
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 2
     },
     "min_action": {
       "type": "origins:revoke_power",
@@ -62,14 +62,14 @@
     "type": "origins:modify_damage_dealt",
     "modifier": {
       "operation": "multiply_total_multiplicative",
-      "amount": -0.8
+      "amount": -0.6
     }
   },
   "damagedownprojectile": {
     "type": "origins:modify_projectile_damage",
     "modifier": {
       "operation": "multiply_total_multiplicative",
-      "amount": -0.8
+      "amount": -0.6
     }
   }
 }

@@ -1,0 +1,18 @@
+{
+  "powers": [
+    "andromeda_origins:champion/lichling_passives",
+    "andromeda_origins:common/champion",
+    "andromeda_origins:lichling/primary",
+    "andromeda_origins:lichling/secondary",
+    "andromeda_origins:lichling/figura",
+    "andromeda_origins:common/figura"
+  ],
+  "icon": {
+    "id": "andromeda_origins:lichling_icon"
+  },
+  "unchoosable": true,
+  "order": 105,
+  "impact": 3,
+  "name": "Champion Lichling",
+  "description": "A command-only Champion variant of Lichling. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Cooldowns, charge times and resource costs remain."
+}

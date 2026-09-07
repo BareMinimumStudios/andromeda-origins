@@ -1,0 +1,18 @@
+{
+  "powers": [
+    "andromeda_origins:champion/fenrkin_passives",
+    "andromeda_origins:common/champion",
+    "andromeda_origins:fenrkin/primary",
+    "andromeda_origins:fenrkin/secondary",
+    "andromeda_origins:fenrkin/figura",
+    "andromeda_origins:common/figura"
+  ],
+  "icon": {
+    "id": "andromeda_origins:fenrkin_icon"
+  },
+  "unchoosable": true,
+  "order": 102,
+  "impact": 3,
+  "name": "Champion Fenrkin",
+  "description": "A command-only Champion variant of Fenrkin. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Cooldowns, charge times and resource costs remain."
+}

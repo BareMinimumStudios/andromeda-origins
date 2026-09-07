@@ -1,0 +1,291 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_chosen": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "attribute @s minecraft:generic.movement_speed modifier remove andromeda_origins:fenrkin_primary_stalking_slow"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:champion/fenrkin_passives_undercooldown",
+          "change": 3600,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:fenrkin/primary_active",
+          "change": 3600,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:fenrkin/primary_mark",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:fenrkin/primary_cooldown",
+          "change": 3000,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:fenrkin/primary_active2",
+          "change": 20,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:fenrkin/primary_stalking_state",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:fenrkin/primary_stalking_slow_refresh",
+          "change": 1,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:fenrkin/secondary_astamina",
+          "change": 20,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:fenrkin/secondary_breathlock",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:fenrkin/secondary_soundcooldown",
+          "change": 10,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:fenrkin/secondary_grrr",
+          "change": 60,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:fenrkin/secondary_active",
+          "change": 2,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:fenrkin/secondary_leap_chain",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s add fenrkin"
+        }
+      ]
+    },
+    "entity_action_lost": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "attribute @s minecraft:generic.movement_speed modifier remove andromeda_origins:fenrkin_primary_stalking_slow"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s remove fenrkin"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/debug",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "entity_action_added": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "attribute @s minecraft:generic.movement_speed modifier remove andromeda_origins:fenrkin_primary_stalking_slow"
+        }
+      ]
+    },
+    "execute_chosen_when_orb": true
+  },
+  "heart": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:fenrkin/secondary_astamina",
+                    "comparison": "<",
+                    "compare_to": 20
+                  },
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:common/figura_3",
+                    "comparison": "==",
+                    "compare_to": 0
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:change_resource",
+                "resource": "*:fenrkin/secondary_astamina",
+                "change": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "resistances": {
+    "type": "origins:modify_damage_taken",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.25
+    }
+  },
+  "toggle": {
+    "type": "origins:toggle",
+    "key": {
+      "key": "key.andromeda_origins.toggle",
+      "continuous": false
+    }
+  },
+  "darkvision": {
+    "type": "origins:night_vision",
+    "strength": 0.75,
+    "condition": {
+      "type": "origins:power_active",
+      "power": "*:*_toggle"
+    }
+  },
+  "speedup": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "andromeda_origins:champion_fenrkin_passives_speedup",
+      "attribute": "minecraft:generic.movement_speed",
+      "operation": "add_multiplied_total",
+      "amount": 0.2
+    }
+  },
+  "undercooldown": {
+    "type": "origins:cooldown",
+    "cooldown": 3600,
+    "hud_render": {
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 13
+    }
+  },
+  "underdog": {
+    "type": "origins:prevent_death",
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.wolf.howl",
+          "volume": 1,
+          "pitch": 0.7
+        },
+        {
+          "type": "origins:extinguish"
+        },
+        {
+          "type": "origins:trigger_cooldown",
+          "power": "*:*_undercooldown"
+        },
+        {
+          "type": "origins:heal",
+          "amount": 5
+        },
+        {
+          "type": "origins:apply_effect",
+          "effect": {
+            "id": "minecraft:instant_health",
+            "duration": 1,
+            "amplifier": 1
+          }
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:common/figura_4",
+          "change": 1,
+          "operation": "set"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/resistance",
+          "source": "minecraft:buff"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:fenrkin/helper/unstoppable_anim",
+          "source": "minecraft:buff"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/unstoppable",
+          "source": "minecraft:buff"
+        },
+        {
+          "type": "origins:revoke_all_powers",
+          "source": "minecraft:ccontrol"
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:resource",
+      "resource": "*:*_undercooldown",
+      "comparison": "==",
+      "compare_to": 0
+    }
+  },
+  "size": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "andromeda_origins:champion_fenrkin_passives_size",
+      "attribute": "minecraft:generic.scale",
+      "operation": "add_multiplied_total",
+      "amount": 0.2
+    }
+  },
+  "step_assist": {
+    "type": "origins:conditioned_attribute",
+    "tick_rate": 1,
+    "modifier": {
+      "id": "andromeda_origins:champion_fenrkin_passives_step_assist",
+      "attribute": "minecraft:generic.step_height",
+      "operation": "add_multiplied_total",
+      "amount": 1.0
+    },
+    "condition": {
+      "type": "origins:power_active",
+      "power": "*:*_toggle"
+    }
+  },
+  "name": "Champion Passive Features",
+  "description": "§e§lChampion Features:§r\n+20% Size\n+20% Melee Damage\n \n- Retains hunting senses, venom, devouring, darkvision and Adrenaline.\n- No Wet, cramped-space, armor, food-efficiency or dietary penalties."
+}

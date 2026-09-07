@@ -1,0 +1,182 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_chosen": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:nereid/primary_soundcooldown",
+          "change": 20,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:nereid/primary_actualcooldown",
+          "change": 1800,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:nereid/primary_grrr",
+          "change": 60,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:nereid/primary_active",
+          "change": 2,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:nereid/secondary_active",
+          "change": 1800,
+          "operation": "set"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s add nereid"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:nereid/helper/merlingplus",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "entity_action_lost": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s remove nereid"
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:nereid/helper/groundweak",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:nereid/helper/waterstrong",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:nereid/helper/merlingminus",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/debug",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "execute_chosen_when_orb": true
+  },
+  "creature_type": {
+    "type": "origins:modify_type_tag",
+    "tag": "aquatic"
+  },
+  "waterspeed": {
+    "type": "origins:modify_swim_speed",
+    "modifier": {
+      "id": "andromeda_origins:champion_nereid_passives_waterspeed",
+      "operation": "add_multiplied_total",
+      "amount": 0.35
+    }
+  },
+  "manage_friends": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "apoli:multiply_base_multiplicative",
+      "amount": -1
+    },
+    "target_action": {
+      "type": "origins:if_else",
+      "condition": {
+        "type": "origins:power",
+        "power": "*:nereid/helper/seafriend"
+      },
+      "if_action": {
+        "type": "origins:revoke_power",
+        "power": "*:nereid/helper/seafriend",
+        "source": "minecraft:state"
+      },
+      "else_action": {
+        "type": "origins:grant_power",
+        "power": "*:nereid/helper/seafriend",
+        "source": "minecraft:state"
+      }
+    },
+    "condition": {
+      "type": "origins:equipped_item",
+      "equipment_slot": "mainhand",
+      "item_condition": {
+        "type": "origins:ingredient",
+        "ingredient": {
+          "item": "minecraft:kelp"
+        }
+      }
+    }
+  },
+  "toggle": {
+    "type": "origins:toggle",
+    "key": {
+      "key": "key.andromeda_origins.toggle",
+      "continuous": false
+    }
+  },
+  "darkvision": {
+    "type": "origins:night_vision",
+    "strength": 1,
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:submerged_in",
+          "fluid": "minecraft:water"
+        },
+        {
+          "type": "origins:power_active",
+          "power": "*:*_toggle"
+        }
+      ]
+    }
+  },
+  "water_vision": {
+    "type": "origins:modify_camera_submersion",
+    "from": "water",
+    "to": "none",
+    "condition": {
+      "type": "origins:power_active",
+      "power": "*:*_toggle"
+    }
+  },
+  "water_resistance": {
+    "type": "origins:modify_damage_taken",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.25
+    },
+    "condition": {
+      "type": "origins:fluid_height",
+      "fluid": "minecraft:water",
+      "comparison": ">",
+      "compare_to": 0
+    }
+  },
+  "breathing": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:gain_air",
+      "value": 200
+    }
+  },
+  "name": "Champion Passive Features",
+  "description": "§e§lChampion Features:§r\n+35% Swim Speed\n \n- Retains aquatic movement, underwater vision, marking and water resistance.\n- No land penalties or dietary restriction."
+}

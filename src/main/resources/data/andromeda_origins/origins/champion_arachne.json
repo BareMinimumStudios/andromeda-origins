@@ -1,0 +1,18 @@
+{
+  "powers": [
+    "andromeda_origins:champion/arachne_passives",
+    "andromeda_origins:common/champion",
+    "andromeda_origins:arachne/primary",
+    "andromeda_origins:arachne/secondary",
+    "andromeda_origins:arachne/figura",
+    "andromeda_origins:common/figura"
+  ],
+  "icon": {
+    "id": "andromeda_origins:arachne_icon"
+  },
+  "unchoosable": true,
+  "order": 100,
+  "impact": 3,
+  "name": "Champion Arachne",
+  "description": "A command-only Champion variant of Arachne. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Cooldowns, charge times and resource costs remain."
+}

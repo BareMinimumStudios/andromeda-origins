@@ -6,8 +6,8 @@
     "max": 10,
     "start_value": 10,
     "hud_render": {
-      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
-      "bar_index": 21
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_2.png",
+      "bar_index": 3
     },
     "min_action": {
       "type": "origins:and",
@@ -15,7 +15,8 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:common/figura_4",
-          "change": -1
+          "change": 0,
+          "operation": "set"
         },
         {
           "type": "origins:revoke_power",
@@ -36,13 +37,19 @@
     }
   },
   "speed": {
-    "type": "origins:attribute",
+    "type": "origins:conditioned_attribute",
     "modifier": {
       "id": "*:*",
       "attribute": "minecraft:generic.movement_speed",
       "operation": "add_multiplied_total",
       "amount": -0.5
-    }
+    },
+    "condition": {
+      "type": "origins:power",
+      "power": "andromeda_origins:common/champion",
+      "inverted": true
+    },
+    "tick_rate": 1
   },
   "waterspeed": {
     "type": "origins:modify_swim_speed",
@@ -50,6 +57,11 @@
       "id": "*:*",
       "operation": "add_multiplied_total",
       "amount": -0.5
+    },
+    "condition": {
+      "type": "origins:power",
+      "power": "andromeda_origins:common/champion",
+      "inverted": true
     }
   },
   "resistances": {

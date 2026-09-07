@@ -146,8 +146,8 @@
     "start_value": 0,
     "hud_render": {
       "should_render": true,
-      "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
-      "bar_index": 16,
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 2,
       "order": 6,
       "condition": {
         "type": "origins:resource",

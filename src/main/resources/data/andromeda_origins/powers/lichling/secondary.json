@@ -6,13 +6,18 @@
     "max": 10,
     "start_value": 10,
     "hud_render": {
-      "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
-      "bar_index": 4
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 16
     },
     "min_action": {
-      "type": "origins:change_resource",
-      "resource": "*:*_breathlock",
-      "change": 1
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_breathlock",
+          "change": 1
+        }
+      ]
     },
     "max_action": {
       "type": "origins:change_resource",
@@ -44,36 +49,6 @@
       "should_render": false
     }
   },
-  "grrr": {
-    "type": "origins:active_self",
-    "cooldown": 60,
-    "hud_render": {
-      "should_render": false
-    },
-    "entity_action": {
-      "type": "origins:if_else",
-      "condition": {
-        "type": "origins:resource",
-        "comparison": "==",
-        "resource": "*:*_breathlock",
-        "compare_to": 0
-      },
-      "if_action": {
-        "type": "origins:play_sound",
-        "sound": "minecraft:entity.illusioner.prepare_blindness",
-        "volume": 1,
-        "pitch": 0.8
-      },
-      "else_action": {
-        "type": "origins:execute_command",
-        "command": "title @s actionbar {\"text\": \"Your energy is depleted. Let it fully regenerate!\", \"color\": \"red\"}"
-      }
-    },
-    "key": {
-      "key": "key.origins.secondary_active",
-      "continuous": false
-    }
-  },
   "active": {
     "type": "origins:active_self",
     "cooldown": 2,
@@ -83,6 +58,35 @@
     "entity_action": {
       "type": "origins:and",
       "actions": [
+        {
+          "type": "origins:if_else",
+          "condition": {
+            "type": "origins:power",
+            "power": "*:lichling/helper/aurafarming",
+            "inverted": true
+          },
+          "if_action": {
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:execute_command",
+                "command": "stopsound @s master andromeda_origins:ability.lichling.chimes_of_necros"
+              },
+              {
+                "type": "origins:execute_command",
+                "command": "stopsound @a[distance=..48] player andromeda_origins:ability.lichling.chimes_of_necros"
+              },
+              {
+                "type": "origins:execute_command",
+                "command": "playsound andromeda_origins:ability.lichling.chimes_of_necros master @s ~ ~ ~ 1.15 1.0 1.0"
+              },
+              {
+                "type": "origins:execute_command",
+                "command": "playsound andromeda_origins:ability.lichling.chimes_of_necros player @a[distance=0.1..48] ~ ~ ~ 1.15 1.0 0"
+              }
+            ]
+          }
+        },
         {
           "type": "origins:if_else_list",
           "actions": [
@@ -108,12 +112,6 @@
                     "type": "origins:change_resource",
                     "resource": "*:*_astamina",
                     "change": -1
-                  },
-                  {
-                    "type": "origins:play_sound",
-                    "sound": "block.bell.use",
-                    "volume": 1,
-                    "pitch": 0.6
                   },
                   {
                     "type": "origins:area_of_effect",
@@ -173,6 +171,51 @@
                         }
                       ]
                     }
+                  },
+                  {
+                    "type": "origins:spawn_particles",
+                    "particle": {
+                      "type": "minecraft:soul"
+                    },
+                    "count": 4,
+                    "speed": 0.03,
+                    "force": true,
+                    "spread": {
+                      "x": 0.25,
+                      "y": 0.4,
+                      "z": 0.25
+                    },
+                    "offset_y": 1
+                  },
+                  {
+                    "type": "origins:spawn_particles",
+                    "particle": {
+                      "type": "minecraft:sculk_soul"
+                    },
+                    "count": 2,
+                    "speed": 0.025,
+                    "force": true,
+                    "spread": {
+                      "x": 0.25,
+                      "y": 0.45,
+                      "z": 0.25
+                    },
+                    "offset_y": 1
+                  },
+                  {
+                    "type": "origins:spawn_particles",
+                    "particle": {
+                      "type": "minecraft:reverse_portal"
+                    },
+                    "count": 3,
+                    "speed": 0.02,
+                    "force": true,
+                    "spread": {
+                      "x": 0.25,
+                      "y": 0.45,
+                      "z": 0.25
+                    },
+                    "offset_y": 1
                   }
                 ]
               }
@@ -242,5 +285,5 @@
     }
   ],
   "name": "Chimes of Necros",
-  "description": "Energy regenerates while this ability is not in use. Hold your Secondary Ability key to afflict every visible non-Undead creature within 10 blocks with Wither I and 1 stack of §c§l[Doom]§r.\n \nYou suffer -20% movement speed while channeling Chimes of Necros. Undead creatures are immune."
+  "description": "Energy regenerates while this ability is not in use. Hold your Secondary Ability key to afflict every visible non-Undead creature within 10 blocks with Wither I and 1 stack of §c§l[Doom]§r.\n \nStandard Lichlings move 20% slower while channeling Chimes of Necros; Champion Lichlings do not. Undead creatures are immune."
 }

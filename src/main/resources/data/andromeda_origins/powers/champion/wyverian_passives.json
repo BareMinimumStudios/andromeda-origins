@@ -1,0 +1,290 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_chosen": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:champion/wyverian_passives_fiery",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:wyverian/primary_firemode",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:wyverian/primary_fireball",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:wyverian/primary_interrupt",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:wyverian/primary_fireselect",
+          "change": 20,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:wyverian/primary_ember",
+          "change": 20,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:wyverian/primary_breathlock",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:wyverian/primary_breathcooldown",
+          "change": 6,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:wyverian/primary_rawr",
+          "change": 60,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:wyverian/primary_active",
+          "change": 2,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:wyverian/secondary_charges",
+          "change": 20,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:wyverian/secondary_soundcooldown",
+          "change": 20,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:wyverian/secondary_active",
+          "change": 1,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:wyverian/sneakair_chargecooldown",
+          "change": 40,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:wyverian/sneakair_active",
+          "change": 1,
+          "operation": "set"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s add wyverian"
+        }
+      ]
+    },
+    "entity_action_lost": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s remove wyverian"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/debug",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "execute_chosen_when_orb": true
+  },
+  "heart": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:wyverian/secondary_charges",
+                    "comparison": "<",
+                    "compare_to": 20
+                  },
+                  {
+                    "type": "origins:on_block"
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:change_resource",
+                "resource": "*:wyverian/secondary_charges",
+                "change": 1
+              }
+            }
+          ]
+        },
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:wyverian/primary_ember",
+                    "comparison": "<",
+                    "compare_to": 20
+                  },
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:common/figura_1",
+                    "comparison": "==",
+                    "compare_to": 0
+                  },
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:common/figura_2",
+                    "comparison": "==",
+                    "compare_to": 0
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:change_resource",
+                "resource": "*:wyverian/primary_ember",
+                "change": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "scales": {
+    "type": "origins:modify_damage_taken",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.2
+    },
+    "damage_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:name",
+          "name": "magic",
+          "inverted": true
+        },
+        {
+          "type": "origins:name",
+          "name": "wither",
+          "inverted": true
+        },
+        {
+          "type": "origins:name",
+          "name": "freeze",
+          "inverted": true
+        },
+        {
+          "type": "origins:name",
+          "name": "inWall",
+          "inverted": true
+        },
+        {
+          "type": "origins:name",
+          "name": "outOfWorld",
+          "inverted": true
+        },
+        {
+          "type": "origins:name",
+          "name": "drown",
+          "inverted": true
+        },
+        {
+          "type": "origins:name",
+          "name": "dryout",
+          "inverted": true
+        }
+      ]
+    }
+  },
+  "immunities": {
+    "type": "origins:invulnerability",
+    "damage_condition": {
+      "type": "origins:fire"
+    }
+  },
+  "damageup": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": 0.2
+    }
+  },
+  "fiery": {
+    "type": "origins:target_action_on_hit",
+    "cooldown": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:set_on_fire",
+      "duration": 10
+    },
+    "condition": {
+      "type": "origins:or",
+      "conditions": [
+        {
+          "type": "origins:fall_flying"
+        },
+        {
+          "type": "origins:fall_distance",
+          "comparison": ">",
+          "compare_to": 0
+        }
+      ]
+    }
+  },
+  "elytra_flight": {
+    "type": "origins:elytra_flight",
+    "render_elytra": true,
+    "texture_location": "andromeda_origins:textures/entity/elytra.png"
+  },
+  "size": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "andromeda_origins:champion_wyverian_passives_size",
+      "attribute": "minecraft:generic.scale",
+      "operation": "add_multiplied_total",
+      "amount": 0.2
+    }
+  },
+  "name": "Champion Passive Features",
+  "description": "§e§lChampion Features:§r\n+20% Size\n+20% Melee Damage\n \n- Retains scales, fire immunity, flight and ember powers.\n- No movement, Wet, cramped-space, propulsion or dietary penalties."
+}

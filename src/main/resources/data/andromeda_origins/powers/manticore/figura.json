@@ -17,7 +17,7 @@
       "text": "§c§lfigura_3:§r§f Shaking after being wet. 1 second long."
     }
   ],
-  "name": "Figura Anims",
-  "description": "You can link this origin to your Figura Model. Check for 1 or 0 on the powers: §c§landromeda_origins:common/figura_1§r\nall the way to\n§c§landromeda_origins:common/figura_3§r\nYour animation should play when those powers are 1 and turn off when they are 0.",
+  "name": "Figura Compatibility",
+  "description": "Legacy numbered Figura hooks remain supported for existing avatars. New avatars should use the semantic state names and Lua helper documented in FIGURA_COMPAT.md.",
   "hidden": true
 }

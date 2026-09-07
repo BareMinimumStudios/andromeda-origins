@@ -1,0 +1,33 @@
+{
+  "type": "origins:multiple",
+  "active": {
+    "type": "origins:active_self",
+    "cooldown": 1,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:execute_command",
+      "command": "andromedaorigins internal_champion_mortal_resolve"
+    },
+    "key": {
+      "key": "key.origins.secondary_active",
+      "continuous": false
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Trigger with ",
+        {
+          "keybind": "key.origins.secondary_active"
+        },
+        " while Incapacitated"
+      ]
+    }
+  ],
+  "name": "Mortal Triumph",
+  "description": "While Incapacitated, press your Secondary Ability key to rise with Resistance IV and Strength IV for 1 minute. Unlike ordinary Mortal Resolve, a Champion Human does not die when the minute ends and can be Incapacitated normally afterward."
+}

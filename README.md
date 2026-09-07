@@ -1,6 +1,236 @@
 # Andromeda Origins
 
-Fabric 1.21.1 custom Origins content for Andromeda MC.
+**Andromeda Origins** is the Fabric 1.21.1 Origins/Apoli content mod used by Andromeda MC. It contains the server's 13 custom Origins, command-only Champion variants, custom ability presentation, HUD resources, compatibility hooks, and supporting Java systems.
+
+## Current release
+
+**v1.4.46** — HUD resource-bar mapping correction. The v1.4.45 Veilborn balance and Undetectable stealth behavior are unchanged. The 31-style HUD catalog now correctly uses 25 styles on sheet 1 and 6 styles on sheet 2: Wyverian Wings is sheet 1 `bar_index: 24`, while sheet 2 begins with Nereid Halo at `bar_index: 0`.
+
+## Features
+
+- 13 standard custom Origins.
+- 13 command-only Champion variants hidden from normal Origin selection.
+- Active/passive powers built with Origins and Apoli.
+- Native Minecraft scale and step-height attributes; **Pehkui is not required**.
+- Custom 64×64 registered Origin icon items.
+- Two custom 256×256 HUD resource-bar sheets with 31 catalogued styles.
+- 33 registered custom ability sounds plus layered vanilla audio.
+- Optional Incapacitated integration for downed/revival mechanics.
+- Optional Figura compatibility with legacy hooks and a semantic Lua helper.
+- Optional Figura ExtraBone interoperability guidance for PlayerAnimator/Emotecraft blending.
+- Optional Figura ↔ Armor Model API visibility bridge so custom geo armor can stay hidden on full-body Figura avatars.
+- Shared **Undetectable** state with mob-target immunity plus hidden armor/held-item rendering.
+- Dietary compatibility tags, including carnivore, vegetarian, raw-food, and pescatarian restrictions.
+- Iron-weakness compatibility tags for vanilla and modded iron items.
+- A rebindable Andromeda-specific **Origin Toggle** control.
+- Staff recovery command for interrupted crowd-control/downed-state problems.
+
+## Origin roster
+
+| Origin | Primary | Secondary / additional active | Identity |
+|---|---|---|---|
+| Arachne | Eightfold Swiftness | Weaver's Nest / Webspinner | Fast arthropod movement, webs, venom, climbing |
+| Faerie | Flutter | Fae Illusions / Trickster | Small fae mobility, concealment, illusion tricks |
+| Fenrkin | On the Hunt / Mark of Fenrir | Stamina Surge | Predator tracking, stamina movement, venom, Adrenaline |
+| Gorgon | Ophidian Gaze | Transference | Petrification, poison/slowness pressure, speed transfer |
+| Humanity | Indomitable | Mortal Resolve | Fragile mortal baseline with powerful last-stand tools |
+| Lichling | Death's Defiance | Chimes of Necros | Undead sustain, revival, Doom/Wither channeling |
+| Manticore | Ravenous Lunge | Beast of Blood | Heavy predator melee, pounce, Unstoppable state |
+| Nereid | Convalescing Aura | Submersion | Aquatic support, healing, Wet application |
+| Satyr | Rush / Swift Leap / Satyr's Landing | Vigil Perception | Momentum-driven mobility and wind/gust movement |
+| Selkie | Coastal Phalanx / Surging Tides | Sealskin Bastion | Aquatic mobility, wetness management, defensive support |
+| Siren | Infatuation Tempo | Shrieking Wail | Pacification/Silence and sonic crowd control |
+| Veilborn | Curtain Step / Veil Transposition | Auroral Mirage | 9-heart veil skirmisher; position swapping, Undetectable burst |
+| Wyverian | Ember Flames | Gusts of Freedom / Hover | Fire, Ember resource, elytra-style aerial mobility |
+
+Player-facing ability details remain in the Origin/power descriptions in game.
+
+### Veilborn balance (v1.4.45)
+
+Standard Veilborn now use the following drawback values:
+
+- **18 HP / 9 hearts** (`-2 Max HP`).
+- Armor-weight thresholds apply **-10% movement and swim speed each** instead of -15%.
+- Wet/Unstable reduces melee and projectile damage dealt by **60%** instead of 80%; its Silence and lingering-duration rules are unchanged.
+- Repeated Curtain Step uses can extend self-applied Reality Shatter to a maximum of **90 seconds** instead of 120 seconds.
+
+Champion Veilborn remain unaffected by these drawback changes because the Champion variant already removes the corresponding penalties.
+
+## Champion Origins
+
+Every standard Origin has a **Champion** variant. Champions retain the Origin's identity-defining strengths and active abilities while removing racial weaknesses and clear self-debuffs. Ability cooldowns, charge times, resources, and target-facing counterplay are still preserved.
+
+Champion entries use `unchoosable: true`, so they do **not** appear in the normal Origins GUI. Assign them with operator permissions:
+
+```mcfunction
+/origin set <player> origins:origin andromeda_origins:champion_<origin>
+```
+
+Example:
+
+```mcfunction
+/origin set <player> origins:origin andromeda_origins:champion_fenrkin
+```
+
+See [CHAMPION_ORIGINS.md](CHAMPION_ORIGINS.md) for every ID, removed drawback, and Champion-specific safety behavior.
+
+## Requirements
+
+- Minecraft **1.21.1**
+- Java **21**
+- Fabric Loader **0.16.5+**
+- Fabric API
+- Origins
+- Apoli
+
+The development properties currently target:
+
+- Origins `1.13.0-pre.3+mc.1.21.1`
+- Apoli `2.12.0-pre.3+mc.1.21.1`
+
+### Optional integrations
+
+- **Incapacitated** — downed/revive compatibility is enabled automatically when installed.
+- **Figura** — optional avatar animation compatibility; not required on server or client.
+- **Figura ExtraBone** — optional avatar skeleton/blending aid; not a dependency of Andromeda Origins.
+- **Armor Model API** — optional custom-armor compatibility; its geo armor renderer will respect Figura armor visibility when both mods are installed.
+
+## Controls
+
+Origins supplies the standard Primary and Secondary Ability keys.
+
+Andromeda Origins additionally registers:
+
+- **Origin Toggle** — defaults to **C**, independently rebindable under **Controls → Andromeda Origins**.
+
+Minecraft's Creative Save Hotbar Activator also uses C by default, so Creative players may want to rebind one of them.
+
+## Custom HUD bars
+
+The custom HUD art is stored in:
+
+```text
+assets/andromeda_origins/textures/gui/resource_bars_1.png
+assets/andromeda_origins/textures/gui/resource_bars_2.png
+```
+
+- Sheet 1 contains global styles **01–25** using Origins `bar_index` **0–24**.
+- Sheet 2 contains global styles **26–31** using Origins `bar_index` **0–5**.
+
+See [RESOURCE_BARS.md](RESOURCE_BARS.md) for the full 31-style assignment table and the Nereid shared-Wet-resource exception.
+
+## Custom ability audio
+
+Andromeda Origins currently registers **33 custom SoundEvents** under:
+
+```text
+andromeda_origins:ability.*
+```
+
+Assets live under:
+
+```text
+assets/andromeda_origins/sounds/abilities/
+```
+
+Long channel/ambience sounds use explicit local/positional playback and stop handling where needed. See [CUSTOM_SOUNDS.md](CUSTOM_SOUNDS.md) for the complete current sound list and behavior.
+
+## Figura compatibility
+
+Figura remains optional. Existing avatars can continue reading:
+
+```text
+andromeda_origins:common/figura_1
+...
+andromeda_origins:common/figura_5
+```
+
+New avatars should use the bundled semantic Lua helper instead of hard-coding numbered states:
+
+```text
+assets/andromeda_origins/figura/andromeda_origins.lua
+```
+
+As of v1.4.44, Armor Model API custom geo armor also respects Figura's armor visibility. An avatar can keep using:
+
+```lua
+vanilla_model.ARMOR:setVisible(false)
+```
+
+and Armor Model API-rendered armor will be suppressed for that avatar when Figura permits vanilla-model editing.
+
+See [FIGURA_COMPAT.md](FIGURA_COMPAT.md) for state names, helper functions, Mortal Resolve support, ExtraBone/PlayerAnimator guidance, and custom-armor behavior.
+
+## Compatibility and safety
+
+Important compatibility behavior includes:
+
+- safe Incapacitated revive integration,
+- Mortal Resolve final-death handling,
+- Undetectable-aware detection/glow checks, mob-target rejection, held-item hiding, and Armor Model API geo-armor suppression,
+- shared crowd-control source-counter protection,
+- Champion AoE self-hit safeguards,
+- no Gorgon player/entity carry system,
+- Siren Shrieking Wail using direct raycasts instead of spawned armor-stand helpers,
+- native Minecraft scaling without Pehkui,
+- Figura-aware suppression of Armor Model API custom geo armor when an avatar hides vanilla armor.
+
+See [COMPATIBILITY.md](COMPATIBILITY.md) for the implementation notes.
+
+## Admin recovery command
+
+```mcfunction
+/andromedaorigins repair <player>
+```
+
+Use this for a player stuck in an interrupted Andromeda crowd-control/downed state instead of deleting playerdata.
+
+## Content namespace
+
+All active project content uses:
+
+```text
+andromeda_origins:
+```
+
+The project does not ship a migration layer for unsupported prototype namespaces.
+
+## Origin-selection initialization
+
+Selecting, reselecting, or command-assigning a standard/Champion Andromeda Origin resets that Origin's owned cooldown/resources to its configured starting state. Figura compatibility states are also cleared so interrupted animations do not remain stuck after an Origin change or respawn.
+
+A normal reconnect does not intentionally refresh active ability cooldowns.
+
+## Building
+
+The source includes the Gradle 8.8 wrapper.
+
+### Windows PowerShell / Command Prompt
+
+```bat
+gradlew.bat build
+```
+
+### Linux / macOS
+
+```bash
+./gradlew build
+```
+
+Use **Java 21**. The release JAR is written to:
+
+```text
+build/libs/andromeda-origins-1.21.1-1.4.46.jar
+```
+
+## Documentation
+
+- [CHANGELOG.md](CHANGELOG.md) — release history
+- [CHAMPION_ORIGINS.md](CHAMPION_ORIGINS.md) — Champion IDs and removed drawbacks
+- [COMPATIBILITY.md](COMPATIBILITY.md) — compatibility/state-safety implementation notes
+- [CUSTOM_SOUNDS.md](CUSTOM_SOUNDS.md) — complete custom-audio registry and behavior
+- [FIGURA_COMPAT.md](FIGURA_COMPAT.md) — Figura/avatar integration
+- [RESOURCE_BARS.md](RESOURCE_BARS.md) — custom HUD sheet/index catalog
 
 ## Authors
 
@@ -10,176 +240,4 @@ Fabric 1.21.1 custom Origins content for Andromeda MC.
 
 ## License
 
-Licensed under the Bare Minimum License (BML) v1.0. See [LICENSE](LICENSE).
-
-## Requirements
-
-- Minecraft 1.21.1
-- Java 21
-- Fabric Loader 0.16.5+
-- Fabric API
-- Origins
-- Apoli 2.11.11+
-- Incapacitated is optional; compatibility is enabled automatically when it is installed.
-
-## Controls
-
-- **Origin Toggle** — defaults to **C** and is independently rebindable under **Controls → Andromeda Origins**.
-- This replaces the old power toggles that were attached to the vanilla Player List binding.
-- C is also the vanilla Save Hotbar Activator default, so Creative-mode users may wish to rebind one of the two controls.
-
-## Building
-
-This project includes the Gradle 8.8 wrapper.
-
-### IntelliJ
-
-1. Open this folder as a Gradle project.
-2. Set the Gradle JVM to Java 21.
-3. Set Gradle distribution to **Wrapper**.
-4. Reload Gradle.
-5. Run the `build` task.
-
-### Windows terminal
-
-```bat
-gradlew.bat build
-```
-
-The jar will be written to:
-
-```text
-build/libs/andromeda-origins-1.21.1-1.4.11.jar
-```
-
-
-
-
-## 1.4.11 Fenrkin Stamina Surge leap height
-
-- Increased the upward boost of the Jump-triggered **Stamina Surge** leap from `0.2` to `0.3` world-relative velocity so the leap reaches a little more height.
-- Forward momentum, stamina costs, the 5-second follow-up window, and all other Stamina Surge behavior are unchanged.
-
-
-## 1.4.10 Fenrkin chained-leap stamina fix
-
-- Fixed the second **Stamina Surge** leap being blocked when the held sprint consumed a small amount of Stamina after the first 50% leap.
-- A near-full first leap now opens a short 5-second follow-up window. During that window, the second Jump-triggered leap can spend the remaining Stamina even if the sprint drain reduced it slightly below 50%.
-- This keeps the intended shared Stamina pool: sprinting still costs Stamina, the first leap still costs 10/20, and the follow-up consumes the remainder instead of requiring an untouched 10/20.
-- The follow-up window is only created when the first leap begins with at least 18/20 Stamina, preventing low-Stamina double-leap abuse.
-
-
-## 1.4.9 Fenrkin Stamina Surge input fix
-
-- Hold **Secondary Ability** to keep Stamina Surge active, then press the normal **Jump** key to perform the 50%-stamina leap.
-- The leap no longer requires releasing/re-pressing Secondary, making the sprint-to-leap flow reliable and natural.
-- Existing stamina costs, projectile penalty, and corrected leap velocity are unchanged.
-
-## 1.4.8 Movement and Gorgon Grab fixes
-
-- Selkie **Surging Tides** now receives its 5-second cooldown while physically in water **or exposed to rain**; dry land remains 30 seconds.
-- Fenrkin **Stamina Surge** no longer mistakes brief airborne transitions while running over blocks for an intentional leap. The high-cost mid-air leap now triggers only from a fresh Secondary Ability press while airborne.
-- Fenrkin's intentional mid-air leap uses horizontal-facing velocity so looking down cannot drive the player downward.
-- Satyr **Swift Leap** now adds its jump impulse instead of replacing the player's existing velocity, preserving horizontal momentum even when looking straight ahead or downward.
-- Gorgon **Grab** now prevents grabbed players from dismounting themselves with Sneak/vehicle dismount controls. Gorgon throw, safe placement, and the 10-second carry timeout still release the target normally.
-
-## 1.4.7 Wyverian flight and Selkie water-state fixes
-
-- Fixed Wyverian **Gusts of Freedom** continuing to grant propulsion after its flight-time meter reached 0. The thrust now requires remaining charges and active fall-flying, and cannot activate while submerged or Restrained.
-- Fixed Selkie dry-state recovery counting backward while actively swimming. Full submersion/swimming now qualifies for the 30-second recovery even when the swimming pose reports less than 1.5 blocks of fluid height.
-- Fixed Selkie **Surging Tides** using the 5-second cooldown on land while the Selkie still had stored Wet status. Cooldown is now based on actual water contact: **5 seconds in water, 30 seconds on land**.
-- Simplified Surging Tides to one authoritative cooldown resource instead of a 5-second active cooldown plus a separate 30-second land cooldown.
-
-## 1.4.6 compatibility tag and Nereid fixes
-
-- Merged the misspelled `alpinerwhispers` iron compatibility file into the canonical `alpinewhispers` tag.
-- Corrected `arolla_pine_bathtub` and `arolla_pine_privy` to the `alpinewhispers:` namespace.
-- Removed the duplicate/misspelled `andromeda_origins:iron/alpinerwhispers` child tag from `alliron`.
-- Fixed Nereid accidentally referencing `andromeda_origins:lichling/figura`; it now uses `andromeda_origins:nereid/figura`.
-
-## 1.4.5 rebindable origin toggle
-
-- Added a dedicated **Origin Toggle** client keybinding for all former Player List-based power toggles.
-- Defaults to C and can be rebound independently under the Andromeda Origins control category.
-- Wyverian firing-mode toggle now uses the same dedicated binding.
-
-## 1.4.4 license and Siren passive correction
-
-- Replaced the MIT License with the Bare Minimum License (BML) v1.0.
-- Corrected the intended Siren passive: Siren now has permanent Haste I instead of Luck.
-- Removed the mistakenly assigned permanent Haste I from Gorgon.
-
-## 1.4.3 repository metadata
-
-- Added the initial repository license (superseded by BML v1.0 in 1.4.4).
-- Added jaselumena, pokesmells, and aulatris as project authors.
-- Added author/license metadata to `fabric.mod.json`.
-
-
-## 1.4.2 native namespace cleanup
-
-- All mod-owned content uses the single native namespace `andromeda_origins:`.
-- The project is treated as a new mod: no old-save namespace migration or compatibility Mixin layer is shipped.
-- `/andromedaorigins repair <player>` remains available for current transient crowd-control/Incapacitated recovery.
-
-
-## 1.3.9 Weaver's Nest pull fix
-
-- Weaver's Nest now uses a controlled pull instead of a large additive velocity impulse.
-- The pull sets target velocity toward the nest center, preventing sprinting, jumping, falling, or other existing momentum from turning the restraint into a launch.
-
-## 1.3.8 lore terminology polish
-
-- Refined Faerie, Gorgon, Lichling, Selkie, Siren, and Veilborn origin descriptions to better match Andromeda lore terminology.
-- Lichling **Chimes of Necros** now calls its player-facing resource **Energy** instead of Mana. Internal power/resource IDs are unchanged for compatibility.
-- Updated Chimes of Necros depletion/recovery actionbar messages to use Energy consistently.
-
-## 1.3.5 Fenrkin weakness fix
-
-- Fenrkin no longer initializes with its weakness state active when selected or re-added.
-- Removed the unrelated night/sky logic that was driving Fenrkin weakness.
-- Fenrkin weakness now tracks the behavior described in the GUI: wetness builds a lingering timer up to 2 minutes, dries down 1 second per second, and cramped overhead spaces apply the weakness only while cramped.
-
-## 1.3.0 balance and behavior changes
-
-- Fenrkin On the Hunt no longer causes post-hunt slowness; stalking is the slowed state.
-- Fenrkin Adrenaline: 35 seconds, 3 minute cooldown.
-- Selkie is pescatarian and now has a rebuilt wetness/land-weakness timer.
-- Remaining flat damage modifiers were converted to percentages.
-- Curtain Step has a 3 second cooldown.
-- High-momentum dashes apply a temporary projectile-damage correction.
-- Gorgon receives Haste I.
-- Siren Shrieking Wail reaches about 10 blocks and deals 6 sonic damage.
-- Siren Infatuation lasts 15 seconds and cannot be broken early.
-- Iron carried anywhere in the inventory now counts for the persistent iron-withering weakness on affected origins.
-
-## 1.2.2 Undetectable fixes
-
-- `Undetectable` now blocks Origins-based aura/glow detection, not only the vanilla Glowing status effect.
-- Fenrkin **On the Hunt** no longer reveals Undetectable Faeries/Veilborn.
-- Fenrkin manual marking cannot acquire an Undetectable target.
-- Existing marks stop rendering while the target is Undetectable and resume when the effect ends.
-- Arachne sense, Manticore health-sense auras, Nereid friend outlines, and other Origins self/entity glow renderers also respect Undetectable.
-
-## 1.2.1 safety changes
-
-- Unique IDs for all explicitly named persistent attribute modifiers.
-- `/andromedaorigins repair <player>` recovery command for broken health/downed state.
-- Lichling revive now checks Incapacitated state before reviving and resets its transient damage tracking afterward.
-- Lichling full heal now uses `origins:heal` instead of Instant Damage.
-- Fixed Arachne Webbed restraint source double-decrement.
-- Fixed Gorgon Constricted restraint source double-decrement.
-
-See [COMPATIBILITY.md](COMPATIBILITY.md) for details.
-
-## Content namespace
-
-The Fabric mod ID and all active Andromeda content now use the same namespace: `andromeda_origins:`.
-Origins, powers, tags, functions, icon items, textures/models, Figura helper powers, and internal cross-references all use this namespace.
-
-This source is treated as a new mod: no prototype namespace or save-data migration layer is shipped. External content should reference `andromeda_origins:` directly.
-
-## Origin selection initialization
-
-When a player chooses or re-chooses one of the 13 Andromeda origins, that origin's ability cooldowns are refreshed and its origin-owned temporary resources are restored to their configured starting values. This runs through Origins' `entity_action_chosen` callback, not ordinary login callbacks, so reconnecting does not refresh abilities.
-
+Licensed under the **Bare Minimum License (BML) v1.0**. See [LICENSE](LICENSE).

@@ -1,0 +1,18 @@
+{
+  "powers": [
+    "andromeda_origins:champion/siren_passives",
+    "andromeda_origins:common/champion",
+    "andromeda_origins:siren/primary",
+    "andromeda_origins:siren/secondary",
+    "andromeda_origins:siren/figura",
+    "andromeda_origins:common/figura"
+  ],
+  "icon": {
+    "id": "andromeda_origins:siren_icon"
+  },
+  "unchoosable": true,
+  "order": 110,
+  "impact": 3,
+  "name": "Champion Siren",
+  "description": "A command-only Champion variant of Siren. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Cooldowns, charge times and resource costs remain."
+}

@@ -6,7 +6,7 @@
       "id": "*:*",
       "attribute": "minecraft:generic.movement_speed",
       "operation": "add_multiplied_base",
-      "amount": -0.15
+      "amount": -0.1
     }
   },
   "waterspeed": {
@@ -14,7 +14,7 @@
     "modifier": {
       "id": "*:*",
       "operation": "add_multiplied_base",
-      "amount": -0.15
+      "amount": -0.1
     }
   }
 }

@@ -4,11 +4,54 @@
     "type": "origins:active_self",
     "cooldown": 18000,
     "hud_render": {
-      "should_render": true
+      "should_render": true,
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 4
     },
     "entity_action": {
       "type": "origins:and",
       "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.warden.heartbeat",
+          "volume": 0.8,
+          "pitch": 0.8
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:item.shield.block",
+          "volume": 0.9,
+          "pitch": 0.7
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:flash"
+          },
+          "count": 1,
+          "speed": 0.0,
+          "force": true,
+          "spread": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:electric_spark"
+          },
+          "count": 8,
+          "speed": 0.05,
+          "force": true,
+          "spread": {
+            "x": 0.35,
+            "y": 0.6,
+            "z": 0.35
+          },
+          "offset_y": 1
+        },
         {
           "type": "origins:change_resource",
           "resource": "*:common/figura_1",
@@ -33,6 +76,36 @@
           "resource": "*:common/figura_1",
           "change": 1,
           "operation": "set"
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:totem_of_undying"
+          },
+          "count": 10,
+          "speed": 0.08,
+          "force": true,
+          "spread": {
+            "x": 0.35,
+            "y": 0.55,
+            "z": 0.35
+          },
+          "offset_y": 1
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:end_rod"
+          },
+          "count": 6,
+          "speed": 0.04,
+          "force": true,
+          "spread": {
+            "x": 0.3,
+            "y": 0.5,
+            "z": 0.3
+          },
+          "offset_y": 1
         }
       ]
     },

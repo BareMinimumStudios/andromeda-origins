@@ -1,0 +1,42 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_chosen": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:humanity/primary_active",
+          "change": 18000,
+          "operation": "set"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s add human"
+        }
+      ]
+    },
+    "entity_action_lost": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_stop_champion_mortal_resolve"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s remove human"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/debug",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "execute_chosen_when_orb": true
+  },
+  "name": "Champion Passive Features",
+  "description": "§e§lChampion Features:§r\n- Champion Humanity has normal health and hunger efficiency.\n- Mortal Resolve becomes a victorious final effort rather than a forced death."
+}

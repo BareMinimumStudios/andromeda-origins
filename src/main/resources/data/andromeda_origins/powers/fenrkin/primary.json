@@ -4,8 +4,8 @@
     "type": "origins:active_self",
     "cooldown": 3600,
     "hud_render": {
-      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
-      "bar_index": 18,
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 4,
       "condition": {
         "type": "origins:power",
         "power": "*:fenrkin/helper/onhunt",
@@ -17,9 +17,9 @@
       "actions": [
         {
           "type": "origins:play_sound",
-          "sound": "minecraft:entity.wolf.howl",
-          "volume": 1,
-          "pitch": 1
+          "sound": "andromeda_origins:ability.fenrkin.on_the_hunt_howl",
+          "volume": 1.0,
+          "pitch": 1.0
         },
         {
           "type": "origins:change_resource",
@@ -36,6 +36,66 @@
           "type": "origins:grant_power",
           "power": "*:fenrkin/helper/onhunt",
           "source": "minecraft:buff"
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:cloud"
+          },
+          "count": 8,
+          "speed": 0.05,
+          "force": true,
+          "spread": {
+            "x": 0.35,
+            "y": 0.2,
+            "z": 0.35
+          },
+          "offset_y": 0.2
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:crit"
+          },
+          "count": 6,
+          "speed": 0.1,
+          "force": true,
+          "spread": {
+            "x": 0.3,
+            "y": 0.6,
+            "z": 0.3
+          },
+          "offset_y": 1
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:sweep_attack"
+          },
+          "count": 2,
+          "speed": 0.0,
+          "force": true,
+          "spread": {
+            "x": 0.15,
+            "y": 0.15,
+            "z": 0.15
+          },
+          "offset_y": 0.9
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:smoke"
+          },
+          "count": 5,
+          "speed": 0.02,
+          "force": true,
+          "spread": {
+            "x": 0.3,
+            "y": 0.2,
+            "z": 0.3
+          },
+          "offset_y": 0.5
         }
       ]
     },
@@ -64,8 +124,8 @@
     "max": 5,
     "start_value": 0,
     "hud_render": {
-      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
-      "bar_index": 5,
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 10,
       "condition": {
         "type": "origins:resource",
         "resource": "*:*_cooldown",
@@ -78,8 +138,8 @@
     "type": "origins:cooldown",
     "cooldown": 3000,
     "hud_render": {
-      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
-      "bar_index": 5
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 11
     }
   },
   "active2": {
@@ -91,6 +151,21 @@
     "entity_action": {
       "type": "origins:and",
       "actions": [
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:cloud"
+          },
+          "count": 2,
+          "speed": 0.01,
+          "force": true,
+          "spread": {
+            "x": 0.15,
+            "y": 0.1,
+            "z": 0.15
+          },
+          "offset_y": 0.8
+        },
         {
           "type": "origins:play_sound",
           "sound": "minecraft:entity.sniffer.scenting",
@@ -159,6 +234,10 @@
                   "command": "title @s actionbar {\"text\": \"Target marked!\", \"color\": \"green\"}"
                 },
                 {
+                  "type": "origins:execute_command",
+                  "command": "playsound andromeda_origins:ability.fenrkin.marked master @s ~ ~ ~ 1.15 1.0 1.0"
+                },
+                {
                   "type": "origins:grant_power",
                   "power": "*:fenrkin/helper/stalkdog",
                   "source": "minecraft:debuff"
@@ -177,9 +256,18 @@
             "bientity_action": {
               "type": "origins:target_action",
               "action": {
-                "type": "origins:grant_power",
-                "power": "*:fenrkin/helper/stalked",
-                "source": "minecraft:debuff"
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:grant_power",
+                    "power": "*:fenrkin/helper/stalked",
+                    "source": "minecraft:debuff"
+                  },
+                  {
+                    "type": "origins:execute_command",
+                    "command": "playsound andromeda_origins:ability.fenrkin.marked master @s ~ ~ ~ 1.15 1.0 1.0"
+                  }
+                ]
               }
             },
             "bientity_condition": {
@@ -353,10 +441,20 @@
     },
     "tick_rate": 1,
     "condition": {
-      "type": "origins:resource",
-      "resource": "*:*_stalking_state",
-      "comparison": ">",
-      "compare_to": 0
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:resource",
+          "resource": "*:*_stalking_state",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        {
+          "type": "origins:power",
+          "power": "andromeda_origins:common/champion",
+          "inverted": true
+        }
+      ]
     }
   },
   "badges": [
@@ -377,5 +475,5 @@
     }
   ],
   "name": "On the Hunt",
-  "description": "Press your Primary Ability key to enter §e§lOn the Hunt§r for 30 seconds, gaining +25% movement speed, attack speed, mining speed, and melee damage while sensing creatures within 64 blocks. Undetectable creatures cannot be revealed.\n \n§e§lMark of Fenrir:§r\nSneak and hold Primary Ability while focusing on a valid target. Stalking reduces your movement speed by 75% only while you maintain focus. After 5 seconds, the target is marked for 30 seconds, revealed to you unless Undetectable, and takes 25% more damage from you."
+  "description": "Press your Primary Ability key to enter §e§lOn the Hunt§r for 30 seconds, gaining +25% movement speed, attack speed, mining speed, and melee damage while sensing creatures within 64 blocks. Undetectable creatures cannot be revealed.\n \n§e§lMark of Fenrir:§r\nSneak and hold Primary Ability while focusing on a valid target. Standard Fenrkin move 75% slower while stalking; Champion Fenrkin do not. After 5 seconds, the target is marked for 30 seconds, revealed to you unless Undetectable, and takes 25% more damage from you."
 }

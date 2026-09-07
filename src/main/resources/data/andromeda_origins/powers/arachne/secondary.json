@@ -4,8 +4,8 @@
     "type": "origins:active_self",
     "cooldown": 600,
     "hud_render": {
-      "sprite_location": "origins:textures/gui/resource_bar.png",
-      "bar_index": 5
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 3
     },
     "entity_action": {
       "type": "origins:raycast",
@@ -26,12 +26,70 @@
           {
             "type": "origins:change_resource",
             "resource": "*:common/figura_2",
-            "change": 1
+            "change": 1,
+            "operation": "set"
           },
           {
             "type": "origins:grant_power",
             "power": "*:arachne/helper/spitting",
             "source": "minecraft:state"
+          },
+          {
+            "type": "origins:spawn_particles",
+            "particle": {
+              "type": "minecraft:cloud"
+            },
+            "count": 8,
+            "speed": 0.03,
+            "force": true,
+            "spread": {
+              "x": 0.3,
+              "y": 0.35,
+              "z": 0.3
+            },
+            "offset_y": 1
+          },
+          {
+            "type": "origins:play_sound",
+            "sound": "minecraft:item.armor.equip_leather",
+            "volume": 0.8,
+            "pitch": 0.8
+          },
+          {
+            "type": "origins:play_sound",
+            "sound": "andromeda_origins:ability.arachne.silk_snap",
+            "volume": 1.1,
+            "pitch": 1.0
+          },
+          {
+            "type": "origins:spawn_particles",
+            "particle": {
+              "type": "minecraft:spit"
+            },
+            "count": 8,
+            "speed": 0.08,
+            "force": true,
+            "spread": {
+              "x": 0.3,
+              "y": 0.4,
+              "z": 0.3
+            },
+            "offset_y": 1
+          },
+          {
+            "type": "origins:spawn_particles",
+            "particle": {
+              "type": "minecraft:enchanted_hit"
+            },
+            "count": 5,
+            "speed": 0.04,
+            "force": true,
+            "spread": {
+              "x": 0.25,
+              "y": 0.35,
+              "z": 0.25
+            },
+            "offset_y": 1
           }
         ]
       },
@@ -96,7 +154,8 @@
         {
           "type": "origins:change_resource",
           "resource": "*:common/figura_3",
-          "change": 1
+          "change": 1,
+          "operation": "set"
         },
         {
           "type": "origins:grant_power",
@@ -152,13 +211,21 @@
         {
           "type": "origins:change_resource",
           "resource": "*:common/figura_3",
-          "change": -1,
-          "operation": "add"
+          "change": 0,
+          "operation": "set"
         },
         {
-          "type": "origins:grant_power",
-          "power": "*:arachne/helper/cobweb_fatigue",
-          "source": "minecraft:debuff"
+          "type": "origins:if_else",
+          "condition": {
+            "type": "origins:power",
+            "power": "andromeda_origins:common/champion",
+            "inverted": true
+          },
+          "if_action": {
+            "type": "origins:grant_power",
+            "power": "*:arachne/helper/cobweb_fatigue",
+            "source": "minecraft:debuff"
+          }
         },
         {
           "type": "origins:execute_command",
@@ -181,9 +248,9 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "§c§lRestrained:§r§f Prevents movement, movement abilities and elytra flight.\n \n§c§lWebbed:§r§f Obscures vision, counts as being in cobweb.\n \n§e§lStruggle:§r§f Rapidly pressing direction keys.\n \n§c§lCobweb Fatigue:§r§f You have a 25% penalty to your hunger, speed and mining speed."
+      "text": "§c§lRestrained:§r§f Prevents movement, movement abilities and elytra flight.\n \n§c§lWebbed:§r§f Obscures vision, counts as being in cobweb.\n \n§e§lStruggle:§r§f Rapidly pressing direction keys.\n \n§c§lCobweb Fatigue:§r§f Standard Arachne have a 25% penalty to hunger, speed and mining speed. Champion Arachne are exempt."
     }
   ],
   "name": "Weaver's Nest",
-  "description": "Press your Secondary Ability key to create a sphere of webs around a targeted point or creature. Nearby entities are pulled toward the center and become §c§l[Restrained]§r and §c§l[Webbed]§r for 7 seconds. Webbed players may struggle to break free.\n \n§e§lWebspinner:§r\nSneak and hold Secondary Ability to weave a cobweb instead. Completing the weave applies §c§l[Cobweb Fatigue]§r for 30 seconds."
+  "description": "Press your Secondary Ability key to create a sphere of webs around a targeted point or creature. Nearby entities are pulled toward the center and become §c§l[Restrained]§r and §c§l[Webbed]§r for 7 seconds. Webbed players may struggle to break free.\n \n§e§lWebspinner:§r\nSneak and hold Secondary Ability to weave a cobweb instead. Standard Arachne receive §c§l[Cobweb Fatigue]§r for 30 seconds after completing the weave; Champion Arachne do not."
 }

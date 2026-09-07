@@ -12,8 +12,8 @@
     "cooldown": 1800,
     "hud_render": {
       "should_render": true,
-      "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
-      "bar_index": 16
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_2.png",
+      "bar_index": 0
     }
   },
   "grrr": {
@@ -23,10 +23,51 @@
       "should_render": false
     },
     "entity_action": {
-      "type": "origins:play_sound",
-      "sound": "block.conduit.activate",
-      "volume": 1,
-      "pitch": 1.3
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "stopsound @s master andromeda_origins:ability.nereid.convalescing_aura"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "playsound andromeda_origins:ability.nereid.convalescing_aura master @s ~ ~ ~ 1.20 1.0 1.0"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "playsound andromeda_origins:ability.nereid.convalescing_aura player @a[distance=0.1..40] ~ ~ ~ 1.00 1.0 0"
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:glow"
+          },
+          "count": 8,
+          "speed": 0.015,
+          "force": true,
+          "spread": {
+            "x": 0.35,
+            "y": 0.55,
+            "z": 0.35
+          },
+          "offset_y": 1
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:nautilus"
+          },
+          "count": 6,
+          "speed": 0.04,
+          "force": true,
+          "spread": {
+            "x": 0.3,
+            "y": 0.45,
+            "z": 0.3
+          },
+          "offset_y": 1
+        }
+      ]
     },
     "condition": {
       "type": "origins:and",
@@ -59,6 +100,21 @@
       "type": "origins:and",
       "actions": [
         {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:nautilus"
+          },
+          "count": 6,
+          "speed": 0.03,
+          "force": true,
+          "spread": {
+            "x": 0.35,
+            "y": 0.4,
+            "z": 0.35
+          },
+          "offset_y": 1
+        },
+        {
           "type": "origins:if_else_list",
           "actions": [
             {
@@ -79,12 +135,6 @@
                     "type": "origins:change_resource",
                     "resource": "*:nereid/helper/aurafarming_remove2",
                     "change": 1
-                  },
-                  {
-                    "type": "origins:play_sound",
-                    "sound": "block.conduit.ambient.short",
-                    "volume": 1,
-                    "pitch": 1
                   },
                   {
                     "type": "origins:spawn_particles",
@@ -206,6 +256,66 @@
                         }
                       ]
                     }
+                  },
+                  {
+                    "type": "origins:spawn_particles",
+                    "particle": {
+                      "type": "minecraft:bubble"
+                    },
+                    "count": 8,
+                    "speed": 0.03,
+                    "force": true,
+                    "spread": {
+                      "x": 0.35,
+                      "y": 0.45,
+                      "z": 0.35
+                    },
+                    "offset_y": 1
+                  },
+                  {
+                    "type": "origins:spawn_particles",
+                    "particle": {
+                      "type": "minecraft:nautilus"
+                    },
+                    "count": 4,
+                    "speed": 0.03,
+                    "force": true,
+                    "spread": {
+                      "x": 0.35,
+                      "y": 0.45,
+                      "z": 0.35
+                    },
+                    "offset_y": 1
+                  },
+                  {
+                    "type": "origins:spawn_particles",
+                    "particle": {
+                      "type": "minecraft:glow"
+                    },
+                    "count": 3,
+                    "speed": 0.01,
+                    "force": true,
+                    "spread": {
+                      "x": 0.25,
+                      "y": 0.4,
+                      "z": 0.25
+                    },
+                    "offset_y": 1
+                  },
+                  {
+                    "type": "origins:spawn_particles",
+                    "particle": {
+                      "type": "minecraft:splash"
+                    },
+                    "count": 4,
+                    "speed": 0.04,
+                    "force": true,
+                    "spread": {
+                      "x": 0.3,
+                      "y": 0.25,
+                      "z": 0.3
+                    },
+                    "offset_y": 0.7
                   }
                 ]
               }

@@ -1,11 +1,18 @@
 {
-  "required": true,
+  "required": false,
   "package": "andromeda.origins.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [
-    "GorgonGrabDismountMixin"
+  "client": [
+    "compat.ArmorModelApiRenderMixin",
+    "UndetectableHeldItemRendererMixin",
+    "UndetectableHeldItemFeatureRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "mixins": [
+    "UndetectableTargetPredicateMixin",
+    "UndetectableSensorMixin",
+    "UndetectableMobTargetMixin"
+  ]
 }

@@ -1,0 +1,18 @@
+{
+  "powers": [
+    "andromeda_origins:champion/nereid_passives",
+    "andromeda_origins:common/champion",
+    "andromeda_origins:nereid/primary",
+    "andromeda_origins:nereid/secondary",
+    "andromeda_origins:nereid/figura",
+    "andromeda_origins:common/figura"
+  ],
+  "icon": {
+    "id": "andromeda_origins:nereid_icon"
+  },
+  "unchoosable": true,
+  "order": 107,
+  "impact": 3,
+  "name": "Champion Nereid",
+  "description": "A command-only Champion variant of Nereid. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Cooldowns, charge times and resource costs remain."
+}

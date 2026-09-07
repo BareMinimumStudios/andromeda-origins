@@ -1,18 +1,31 @@
 {
-	"replace": false,
-	"origins": [
-		"andromeda_origins:arachne",
-		"andromeda_origins:faerie",
-		"andromeda_origins:fenrkin",
-		"andromeda_origins:gorgon",
-		"andromeda_origins:humanity",
-		"andromeda_origins:lichling",
-		"andromeda_origins:manticore",
-		"andromeda_origins:nereid",
-		"andromeda_origins:satyr",
-		"andromeda_origins:selkie",
-		"andromeda_origins:siren",
-		"andromeda_origins:veilborn",
-		"andromeda_origins:wyverian"
-	]
+  "replace": false,
+  "origins": [
+    "andromeda_origins:arachne",
+    "andromeda_origins:faerie",
+    "andromeda_origins:fenrkin",
+    "andromeda_origins:gorgon",
+    "andromeda_origins:humanity",
+    "andromeda_origins:lichling",
+    "andromeda_origins:manticore",
+    "andromeda_origins:nereid",
+    "andromeda_origins:satyr",
+    "andromeda_origins:selkie",
+    "andromeda_origins:siren",
+    "andromeda_origins:veilborn",
+    "andromeda_origins:wyverian",
+    "andromeda_origins:champion_arachne",
+    "andromeda_origins:champion_faerie",
+    "andromeda_origins:champion_fenrkin",
+    "andromeda_origins:champion_gorgon",
+    "andromeda_origins:champion_humanity",
+    "andromeda_origins:champion_lichling",
+    "andromeda_origins:champion_manticore",
+    "andromeda_origins:champion_nereid",
+    "andromeda_origins:champion_satyr",
+    "andromeda_origins:champion_selkie",
+    "andromeda_origins:champion_siren",
+    "andromeda_origins:champion_veilborn",
+    "andromeda_origins:champion_wyverian"
+  ]
 }

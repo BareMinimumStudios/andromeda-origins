@@ -18,7 +18,9 @@
     "max": 240,
     "start_value": 24,
     "hud_render": {
-      "should_render": true
+      "should_render": true,
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_2.png",
+      "bar_index": 1
     },
     "min_action": {
       "type": "origins:and",

@@ -5,12 +5,69 @@
     "cooldown": 400,
     "hud_render": {
       "should_render": true,
-      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
-      "bar_index": 21
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_2.png",
+      "bar_index": 5
     },
     "entity_action": {
       "type": "origins:and",
       "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "andromeda_origins:ability.siren.shrieking_wail",
+          "volume": 1.0,
+          "pitch": 1.0
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:block.amethyst_cluster.hit",
+          "volume": 0.9,
+          "pitch": 0.5
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:sonic_boom"
+          },
+          "count": 1,
+          "speed": 0.0,
+          "force": true,
+          "spread": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "offset_y": 1
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:note"
+          },
+          "count": 10,
+          "speed": 0.04,
+          "force": true,
+          "spread": {
+            "x": 0.45,
+            "y": 0.45,
+            "z": 0.45
+          },
+          "offset_y": 1
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:glow"
+          },
+          "count": 6,
+          "speed": 0.04,
+          "force": true,
+          "spread": {
+            "x": 0.35,
+            "y": 0.45,
+            "z": 0.35
+          },
+          "offset_y": 1
+        },
         {
           "type": "origins:play_sound",
           "sound": "minecraft:block.sculk_shrieker.shriek",
@@ -20,7 +77,8 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:common/figura_3",
-          "change": 1
+          "change": 1,
+          "operation": "set"
         },
         {
           "type": "origins:grant_power",
@@ -29,160 +87,681 @@
         },
         {
           "type": "origins:execute_command",
-          "command": "summon armor_stand ^-1 ^ ^2 {Invisible:1b,Tags:[\"shriek\"]}"
+          "command": "kill @e[type=minecraft:armor_stand,tag=shriek,distance=..64]"
         },
         {
-          "type": "origins:execute_command",
-          "command": "summon armor_stand ^1 ^ ^2 {Invisible:1b,Tags:[\"shriek\"]}"
-        },
-        {
-          "type": "origins:execute_command",
-          "command": "summon armor_stand ^ ^ ^3 {Invisible:1b,Tags:[\"shriek\"]}"
-        },
-        {
-          "type": "origins:execute_command",
-          "command": "summon armor_stand ^-2.5 ^ ^3 {Invisible:1b,Tags:[\"shriek\"]}"
-        },
-        {
-          "type": "origins:execute_command",
-          "command": "summon armor_stand ^2.5 ^ ^3 {Invisible:1b,Tags:[\"shriek\"]}"
-        },
-        {
-          "type": "origins:execute_command",
-          "command": "summon armor_stand ^ ^ ^1 {Invisible:1b,Tags:[\"shriek\"]}"
-        },
-        {
-          "type": "origins:execute_command",
-          "command": "summon armor_stand ^ ^ ^5 {Invisible:1b,Tags:[\"shriek\"]}"
-        },
-        {
-          "type": "origins:execute_command",
-          "command": "summon armor_stand ^-2.5 ^ ^5 {Invisible:1b,Tags:[\"shriek\"]}"
-        },
-        {
-          "type": "origins:execute_command",
-          "command": "summon armor_stand ^2.5 ^ ^5 {Invisible:1b,Tags:[\"shriek\"]}"
-        },
-        {
-          "type": "origins:execute_command",
-          "command": "summon armor_stand ^ ^ ^7 {Invisible:1b,Tags:[\"shriek\"]}"
-        },
-        {
-          "type": "origins:execute_command",
-          "command": "summon armor_stand ^-4 ^ ^7 {Invisible:1b,Tags:[\"shriek\"]}"
-        },
-        {
-          "type": "origins:execute_command",
-          "command": "summon armor_stand ^4 ^ ^7 {Invisible:1b,Tags:[\"shriek\"]}"
-        },
-        {
-          "type": "origins:execute_command",
-          "command": "summon armor_stand ^ ^ ^8 {Invisible:1b,Tags:[\"shriek\"]}"
-        },
-        {
-          "type": "origins:execute_command",
-          "command": "summon armor_stand ^-5.5 ^ ^8 {Invisible:1b,Tags:[\"shriek\"]}"
-        },
-        {
-          "type": "origins:execute_command",
-          "command": "summon armor_stand ^5.5 ^ ^8 {Invisible:1b,Tags:[\"shriek\"]}"
-        },
-        {
-          "type": "origins:area_of_effect",
-          "radius": 11,
-          "shape": "sphere",
+          "type": "origins:raycast",
+          "distance": 11,
+          "block": true,
+          "entity": true,
+          "shape_type": "visual",
+          "fluid_handling": "none",
+          "space": "local",
+          "direction": {
+            "x": -0.7,
+            "y": 0.0,
+            "z": 1.0
+          },
           "bientity_action": {
             "type": "origins:target_action",
             "action": {
-              "type": "origins:and",
-              "actions": [
-                {
-                  "type": "origins:area_of_effect",
-                  "radius": 2,
-                  "shape": "sphere",
-                  "bientity_action": {
-                    "type": "origins:target_action",
-                    "action": {
-                      "type": "origins:and",
-                      "actions": [
-                        {
-                          "type": "origins:grant_power",
-                          "power": "*:siren/helper/sonared",
-                          "source": "minecraft:debuff"
-                        },
-                        {
-                          "type": "origins:spawn_particles",
-                          "particle": {
-                            "type": "minecraft:sonic_boom"
-                          },
-                          "count": 1,
-                          "speed": 0.0,
-                          "force": true,
-                          "offset_y": 1,
-                          "spread": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  "bientity_condition": {
-                    "type": "origins:and",
-                    "conditions": [
-                      {
-                        "type": "origins:can_see"
-                      },
-                      {
-                        "type": "origins:target_condition",
-                        "condition": {
-                          "type": "origins:and",
-                          "conditions": [
-                            {
-                              "type": "origins:living"
-                            },
-                            {
-                              "type": "origins:origin",
-                              "origin": "andromeda_origins:siren",
-                              "layer": "origins:origin",
-                              "inverted": true
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                },
-                {
-                  "type": "origins:execute_command",
-                  "command": "kill @s[tag=shriek]"
-                }
-              ]
+              "type": "origins:grant_power",
+              "power": "andromeda_origins:siren/helper/sonared",
+              "source": "minecraft:debuff"
             }
           },
           "bientity_condition": {
-            "type": "origins:and",
-            "conditions": [
-              {
-                "type": "origins:can_see"
-              },
-              {
-                "type": "origins:target_condition",
-                "condition": {
-                  "type": "origins:and",
-                  "conditions": [
-                    {
-                      "type": "origins:living"
-                    },
-                    {
-                      "type": "origins:entity_type",
-                      "entity_type": "minecraft:armor_stand"
-                    }
-                  ]
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:and",
+              "conditions": [
+                {
+                  "type": "origins:living"
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:champion_siren",
+                  "layer": "origins:origin",
+                  "inverted": true
                 }
-              }
-            ]
+              ]
+            }
+          }
+        },
+        {
+          "type": "origins:raycast",
+          "distance": 11,
+          "block": true,
+          "entity": true,
+          "shape_type": "visual",
+          "fluid_handling": "none",
+          "space": "local",
+          "direction": {
+            "x": -0.52,
+            "y": 0.0,
+            "z": 1.0
+          },
+          "bientity_action": {
+            "type": "origins:target_action",
+            "action": {
+              "type": "origins:grant_power",
+              "power": "andromeda_origins:siren/helper/sonared",
+              "source": "minecraft:debuff"
+            }
+          },
+          "bientity_condition": {
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:and",
+              "conditions": [
+                {
+                  "type": "origins:living"
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:champion_siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "origins:raycast",
+          "distance": 11,
+          "block": true,
+          "entity": true,
+          "shape_type": "visual",
+          "fluid_handling": "none",
+          "space": "local",
+          "direction": {
+            "x": -0.36,
+            "y": 0.0,
+            "z": 1.0
+          },
+          "bientity_action": {
+            "type": "origins:target_action",
+            "action": {
+              "type": "origins:grant_power",
+              "power": "andromeda_origins:siren/helper/sonared",
+              "source": "minecraft:debuff"
+            }
+          },
+          "bientity_condition": {
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:and",
+              "conditions": [
+                {
+                  "type": "origins:living"
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:champion_siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "origins:raycast",
+          "distance": 11,
+          "block": true,
+          "entity": true,
+          "shape_type": "visual",
+          "fluid_handling": "none",
+          "space": "local",
+          "direction": {
+            "x": -0.2,
+            "y": 0.0,
+            "z": 1.0
+          },
+          "bientity_action": {
+            "type": "origins:target_action",
+            "action": {
+              "type": "origins:grant_power",
+              "power": "andromeda_origins:siren/helper/sonared",
+              "source": "minecraft:debuff"
+            }
+          },
+          "bientity_condition": {
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:and",
+              "conditions": [
+                {
+                  "type": "origins:living"
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:champion_siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "origins:raycast",
+          "distance": 11,
+          "block": true,
+          "entity": true,
+          "shape_type": "visual",
+          "fluid_handling": "none",
+          "space": "local",
+          "direction": {
+            "x": 0,
+            "y": 0,
+            "z": 1.0
+          },
+          "bientity_action": {
+            "type": "origins:target_action",
+            "action": {
+              "type": "origins:grant_power",
+              "power": "andromeda_origins:siren/helper/sonared",
+              "source": "minecraft:debuff"
+            }
+          },
+          "bientity_condition": {
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:and",
+              "conditions": [
+                {
+                  "type": "origins:living"
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:champion_siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "origins:raycast",
+          "distance": 11,
+          "block": true,
+          "entity": true,
+          "shape_type": "visual",
+          "fluid_handling": "none",
+          "space": "local",
+          "direction": {
+            "x": 0.2,
+            "y": 0.0,
+            "z": 1.0
+          },
+          "bientity_action": {
+            "type": "origins:target_action",
+            "action": {
+              "type": "origins:grant_power",
+              "power": "andromeda_origins:siren/helper/sonared",
+              "source": "minecraft:debuff"
+            }
+          },
+          "bientity_condition": {
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:and",
+              "conditions": [
+                {
+                  "type": "origins:living"
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:champion_siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "origins:raycast",
+          "distance": 11,
+          "block": true,
+          "entity": true,
+          "shape_type": "visual",
+          "fluid_handling": "none",
+          "space": "local",
+          "direction": {
+            "x": 0.36,
+            "y": 0.0,
+            "z": 1.0
+          },
+          "bientity_action": {
+            "type": "origins:target_action",
+            "action": {
+              "type": "origins:grant_power",
+              "power": "andromeda_origins:siren/helper/sonared",
+              "source": "minecraft:debuff"
+            }
+          },
+          "bientity_condition": {
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:and",
+              "conditions": [
+                {
+                  "type": "origins:living"
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:champion_siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "origins:raycast",
+          "distance": 11,
+          "block": true,
+          "entity": true,
+          "shape_type": "visual",
+          "fluid_handling": "none",
+          "space": "local",
+          "direction": {
+            "x": 0.52,
+            "y": 0.0,
+            "z": 1.0
+          },
+          "bientity_action": {
+            "type": "origins:target_action",
+            "action": {
+              "type": "origins:grant_power",
+              "power": "andromeda_origins:siren/helper/sonared",
+              "source": "minecraft:debuff"
+            }
+          },
+          "bientity_condition": {
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:and",
+              "conditions": [
+                {
+                  "type": "origins:living"
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:champion_siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "origins:raycast",
+          "distance": 11,
+          "block": true,
+          "entity": true,
+          "shape_type": "visual",
+          "fluid_handling": "none",
+          "space": "local",
+          "direction": {
+            "x": 0.7,
+            "y": 0.0,
+            "z": 1.0
+          },
+          "bientity_action": {
+            "type": "origins:target_action",
+            "action": {
+              "type": "origins:grant_power",
+              "power": "andromeda_origins:siren/helper/sonared",
+              "source": "minecraft:debuff"
+            }
+          },
+          "bientity_condition": {
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:and",
+              "conditions": [
+                {
+                  "type": "origins:living"
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:champion_siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "origins:raycast",
+          "distance": 11,
+          "block": true,
+          "entity": true,
+          "shape_type": "visual",
+          "fluid_handling": "none",
+          "space": "local",
+          "direction": {
+            "x": -0.42,
+            "y": 0.18,
+            "z": 1.0
+          },
+          "bientity_action": {
+            "type": "origins:target_action",
+            "action": {
+              "type": "origins:grant_power",
+              "power": "andromeda_origins:siren/helper/sonared",
+              "source": "minecraft:debuff"
+            }
+          },
+          "bientity_condition": {
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:and",
+              "conditions": [
+                {
+                  "type": "origins:living"
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:champion_siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "origins:raycast",
+          "distance": 11,
+          "block": true,
+          "entity": true,
+          "shape_type": "visual",
+          "fluid_handling": "none",
+          "space": "local",
+          "direction": {
+            "x": 0,
+            "y": 0.2,
+            "z": 1.0
+          },
+          "bientity_action": {
+            "type": "origins:target_action",
+            "action": {
+              "type": "origins:grant_power",
+              "power": "andromeda_origins:siren/helper/sonared",
+              "source": "minecraft:debuff"
+            }
+          },
+          "bientity_condition": {
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:and",
+              "conditions": [
+                {
+                  "type": "origins:living"
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:champion_siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "origins:raycast",
+          "distance": 11,
+          "block": true,
+          "entity": true,
+          "shape_type": "visual",
+          "fluid_handling": "none",
+          "space": "local",
+          "direction": {
+            "x": 0.42,
+            "y": 0.18,
+            "z": 1.0
+          },
+          "bientity_action": {
+            "type": "origins:target_action",
+            "action": {
+              "type": "origins:grant_power",
+              "power": "andromeda_origins:siren/helper/sonared",
+              "source": "minecraft:debuff"
+            }
+          },
+          "bientity_condition": {
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:and",
+              "conditions": [
+                {
+                  "type": "origins:living"
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:champion_siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "origins:raycast",
+          "distance": 11,
+          "block": true,
+          "entity": true,
+          "shape_type": "visual",
+          "fluid_handling": "none",
+          "space": "local",
+          "direction": {
+            "x": -0.42,
+            "y": -0.18,
+            "z": 1.0
+          },
+          "bientity_action": {
+            "type": "origins:target_action",
+            "action": {
+              "type": "origins:grant_power",
+              "power": "andromeda_origins:siren/helper/sonared",
+              "source": "minecraft:debuff"
+            }
+          },
+          "bientity_condition": {
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:and",
+              "conditions": [
+                {
+                  "type": "origins:living"
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:champion_siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "origins:raycast",
+          "distance": 11,
+          "block": true,
+          "entity": true,
+          "shape_type": "visual",
+          "fluid_handling": "none",
+          "space": "local",
+          "direction": {
+            "x": 0,
+            "y": -0.2,
+            "z": 1.0
+          },
+          "bientity_action": {
+            "type": "origins:target_action",
+            "action": {
+              "type": "origins:grant_power",
+              "power": "andromeda_origins:siren/helper/sonared",
+              "source": "minecraft:debuff"
+            }
+          },
+          "bientity_condition": {
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:and",
+              "conditions": [
+                {
+                  "type": "origins:living"
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:champion_siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "origins:raycast",
+          "distance": 11,
+          "block": true,
+          "entity": true,
+          "shape_type": "visual",
+          "fluid_handling": "none",
+          "space": "local",
+          "direction": {
+            "x": 0.42,
+            "y": -0.18,
+            "z": 1.0
+          },
+          "bientity_action": {
+            "type": "origins:target_action",
+            "action": {
+              "type": "origins:grant_power",
+              "power": "andromeda_origins:siren/helper/sonared",
+              "source": "minecraft:debuff"
+            }
+          },
+          "bientity_condition": {
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:and",
+              "conditions": [
+                {
+                  "type": "origins:living"
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                },
+                {
+                  "type": "origins:origin",
+                  "origin": "andromeda_origins:champion_siren",
+                  "layer": "origins:origin",
+                  "inverted": true
+                }
+              ]
+            }
           }
         }
       ]
@@ -210,5 +789,5 @@
     }
   ],
   "name": "Shrieking Wail",
-  "description": "Press your Secondary Ability key to unleash a sonic wail in a cone reaching roughly 10 blocks in front of you. Creatures caught in the cone take 6 sonic damage and gain Darkness and Glowing for 5 seconds."
+  "description": "Press your Secondary Ability key to unleash a sonic wail in a raycast fan reaching roughly 10 blocks in front of you. Creatures caught in the cone take 6 sonic damage and gain Darkness and Glowing for 5 seconds. The wail no longer spawns helper entities."
 }

@@ -126,6 +126,106 @@ public final class IncapacitatedCompat {
     }
 
     /**
+     * Starts Humanity's Mortal Resolve only from a real Incapacitated downed state.
+     */
+    public static boolean beginMortalResolve(ServerPlayerEntity player) {
+        if (MortalResolveManager.isActive(player) || !safeRevive(player)) {
+            return false;
+        }
+
+        MortalResolveManager.start(player);
+        // Mortal Resolve is a final stand from the moment the revive succeeds. This also makes
+        // direct kill paths final; the Fabric fatal-damage event reasserts the value for ordinary
+        // damage in case another Incapacitated mechanic changes the down counter mid-stand.
+        prepareMortalResolveDeath(player);
+
+        ServerCommandSource silentSource = player.getCommandSource()
+            .withLevel(4)
+            .withOutput(CommandOutput.DUMMY);
+
+        // Amplifier 3 is level IV in vanilla status-effect numbering.
+        player.getServerWorld().getServer().getCommandManager()
+            .executeWithPrefix(silentSource, "effect give @s minecraft:resistance 60 3 false");
+        player.getServerWorld().getServer().getCommandManager()
+            .executeWithPrefix(silentSource, "effect give @s minecraft:strength 60 3 false");
+
+        MortalResolveEffects.playActivation(player);
+        return true;
+    }
+
+
+    /**
+     * Champion Humanity version of Mortal Resolve: safely revives and grants the same one-minute
+     * combat effects without arming Mortal Resolve's forced-death/finality manager.
+     */
+    public static boolean beginChampionMortalResolve(ServerPlayerEntity player) {
+        if (MortalResolveManager.isActive(player)
+            || MortalResolveManager.isChampionActive(player)
+            || !safeRevive(player)) {
+            return false;
+        }
+
+        MortalResolveManager.startChampion(player);
+
+        ServerCommandSource silentSource = player.getCommandSource()
+            .withLevel(4)
+            .withOutput(CommandOutput.DUMMY);
+
+        player.getServerWorld().getServer().getCommandManager()
+            .executeWithPrefix(silentSource, "effect give @s minecraft:resistance 60 3 false");
+        player.getServerWorld().getServer().getCommandManager()
+            .executeWithPrefix(silentSource, "effect give @s minecraft:strength 60 3 false");
+
+        MortalResolveEffects.playActivation(player);
+        return true;
+    }
+
+    /**
+     * Marks the next death as final for Incapacitated. The mod's own death hook checks its
+     * downs-until-death value, so setting it below zero immediately before death prevents a second
+     * down without replacing or hard-depending on Incapacitated's classes. Its Fabric player
+     * component resets to configured defaults on a normal death/respawn.
+     */
+    public static void prepareMortalResolveDeath(ServerPlayerEntity player) {
+        if (!isLoaded()) {
+            return;
+        }
+
+        try {
+            Object platform = getPlatform();
+            Object playerData = getPlayerData(platform, player);
+            if (playerData == null) {
+                return;
+            }
+
+            playerData.getClass().getMethod("setIncapacitated", boolean.class).invoke(playerData, false);
+            playerData.getClass().getMethod("setDownsUntilDeath", int.class).invoke(playerData, -1);
+
+            Method writePlayerData = Arrays.stream(platform.getClass().getMethods())
+                .filter(method -> method.getName().equals("writePlayerData") && method.getParameterCount() == 2)
+                .findFirst()
+                .orElseThrow(() -> new NoSuchMethodException("writePlayerData"));
+            writePlayerData.invoke(platform, player, playerData);
+
+            resetDamageTracking(player);
+        } catch (ReflectiveOperationException | RuntimeException exception) {
+            if (!reflectionWarningLogged) {
+                reflectionWarningLogged = true;
+                LOGGER.warn("Could not prepare Mortal Resolve's final death for Incapacitated.", exception);
+            }
+        }
+    }
+
+    /**
+     * Ends Mortal Resolve after one minute. Any earlier death is handled by MortalResolveDeathMixin.
+     */
+    public static void forceMortalResolveDeath(ServerPlayerEntity player) {
+        MortalResolveEffects.playExpiry(player);
+        prepareMortalResolveDeath(player);
+        player.kill();
+    }
+
+    /**
      * Admin recovery path. Unlike safeRevive, this intentionally asks Incapacitated to rebuild its
      * revive state even when the downed flag is already false, then restores health. This is meant
      * for the observed "0 hearts after next damage" state.

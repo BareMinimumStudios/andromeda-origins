@@ -61,12 +61,6 @@
         },
         {
           "type": "origins:change_resource",
-          "resource": "andromeda_origins:lichling/secondary_grrr",
-          "change": 60,
-          "operation": "set"
-        },
-        {
-          "type": "origins:change_resource",
           "resource": "andromeda_origins:lichling/secondary_active",
           "change": 2,
           "operation": "set"
@@ -105,8 +99,8 @@
     "start_value": 0,
     "hud_render": {
       "should_render": true,
-      "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
-      "bar_index": 14,
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 17,
       "order": 6,
       "condition": {
         "type": "origins:resource",

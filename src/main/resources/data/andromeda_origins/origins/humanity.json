@@ -2,7 +2,9 @@
   "powers": [
     "andromeda_origins:humanity/passives",
     "andromeda_origins:humanity/primary",
+    "andromeda_origins:humanity/secondary",
     "andromeda_origins:humanity/figura",
+    "andromeda_origins:humanity/figura_mortal_resolve",
     "andromeda_origins:common/figura"
   ],
   "icon": {

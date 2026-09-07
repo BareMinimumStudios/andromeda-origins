@@ -1,0 +1,137 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_chosen": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:siren/primary_active",
+          "change": 2400,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:siren/secondary_active",
+          "change": 400,
+          "operation": "set"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s add siren"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:siren/helper/merlingplus",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "entity_action_lost": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s remove siren"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:siren/helper/merlingminus",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/debug",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "execute_chosen_when_orb": true
+  },
+  "heart": {
+    "type": "origins:action_over_time",
+    "interval": 200,
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:apply_effect",
+          "effects": [
+            {
+              "id": "minecraft:water_breathing",
+              "duration": 220,
+              "is_ambient": true,
+              "show_particles": false,
+              "show_icon": false
+            },
+            {
+              "id": "minecraft:haste",
+              "duration": 220,
+              "is_ambient": true,
+              "show_particles": false,
+              "show_icon": true,
+              "amplifier": 0
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "creature_type": {
+    "type": "origins:modify_type_tag",
+    "tag": "aquatic"
+  },
+  "waterspeed": {
+    "type": "origins:modify_swim_speed",
+    "modifier": {
+      "id": "andromeda_origins:champion_siren_passives_waterspeed",
+      "operation": "add_multiplied_total",
+      "amount": 0.25
+    }
+  },
+  "toggle": {
+    "type": "origins:toggle",
+    "key": {
+      "key": "key.andromeda_origins.toggle",
+      "continuous": false
+    }
+  },
+  "darkvision": {
+    "type": "origins:night_vision",
+    "strength": 0.75,
+    "condition": {
+      "type": "origins:power_active",
+      "power": "*:*_toggle"
+    }
+  },
+  "water_vision": {
+    "type": "origins:modify_camera_submersion",
+    "from": "water",
+    "to": "none",
+    "condition": {
+      "type": "origins:power_active",
+      "power": "*:*_toggle"
+    }
+  },
+  "name": "Champion Passive Features",
+  "description": "§e§lChampion Features:§r\n+25% Swim Speed\n \n- Retains amphibious breathing, Haste, vision and vocal powers.\n- No damage, fire-duration, iron or dietary penalties.",
+  "infatuation_guard": {
+    "type": "origins:invulnerability",
+    "damage_condition": {
+      "type": "origins:attacker",
+      "entity_condition": {
+        "type": "origins:and",
+        "conditions": [
+          {
+            "type": "origins:living"
+          },
+          {
+            "type": "origins:power",
+            "power": "andromeda_origins:siren/helper/infatuated"
+          }
+        ]
+      }
+    }
+  }
+}

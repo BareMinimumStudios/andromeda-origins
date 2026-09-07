@@ -1,0 +1,154 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_chosen": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:champion/selkie_passives_recharge_shawl",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:selkie/primary_active",
+          "change": 3600,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:selkie/primary_active2",
+          "change": 600,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:selkie/secondary_active",
+          "change": 2400,
+          "operation": "set"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s add selkie"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:selkie/helper/merlingplus",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "entity_action_lost": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s remove selkie"
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:selkie/helper/selkiewet",
+          "source": "minecraft:debuff"
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:selkie/helper/groundweak",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:selkie/helper/merlingminus",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/debug",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "execute_chosen_when_orb": true
+  },
+  "recharge_shawl": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 30,
+    "start_value": 0,
+    "hud_render": {
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 1,
+      "condition": {
+        "type": "origins:power",
+        "power": "*:selkie/helper/groundweak"
+      }
+    }
+  },
+  "creature_type": {
+    "type": "origins:modify_type_tag",
+    "tag": "aquatic"
+  },
+  "waterspeed": {
+    "type": "origins:modify_swim_speed",
+    "modifier": {
+      "id": "andromeda_origins:champion_selkie_passives_waterspeed",
+      "operation": "add_multiplied_total",
+      "amount": 0.45
+    }
+  },
+  "toggle": {
+    "type": "origins:toggle",
+    "key": {
+      "key": "key.andromeda_origins.toggle",
+      "continuous": false
+    }
+  },
+  "darkvision": {
+    "type": "origins:night_vision",
+    "strength": 0.75,
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:submerged_in",
+          "fluid": "minecraft:water"
+        },
+        {
+          "type": "origins:power_active",
+          "power": "*:*_toggle"
+        }
+      ]
+    }
+  },
+  "water_vision": {
+    "type": "origins:modify_camera_submersion",
+    "from": "water",
+    "to": "none",
+    "condition": {
+      "type": "origins:power_active",
+      "power": "*:*_toggle"
+    }
+  },
+  "when_hit": {
+    "type": "origins:action_when_hit",
+    "bientity_action": {
+      "type": "origins:actor_action",
+      "action": {
+        "type": "origins:grant_power",
+        "power": "*:selkie/helper/retaliated",
+        "source": "minecraft:state"
+      }
+    }
+  },
+  "land_breathing": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:gain_air",
+      "value": 200
+    }
+  },
+  "name": "Champion Passive Features",
+  "description": "§e§lChampion Features:§r\n+45% Swim Speed\n \n- Retains aquatic movement, retaliation, underwater vision and land breathing.\n- No dry-out, Silenced, land-speed, damage or dietary penalties."
+}

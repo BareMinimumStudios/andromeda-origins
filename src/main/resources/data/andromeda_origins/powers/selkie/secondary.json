@@ -5,8 +5,8 @@
     "cooldown": 2400,
     "hud_render": {
       "should_render": true,
-      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
-      "bar_index": 21,
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 11,
       "condition": {
         "type": "origins:power",
         "power": "*:selkie/helper/defending",
@@ -31,12 +31,73 @@
         {
           "type": "origins:change_resource",
           "resource": "*:common/figura_4",
-          "change": 1
+          "change": 1,
+          "operation": "set"
         },
         {
           "type": "origins:grant_power",
           "power": "*:selkie/helper/defending",
           "source": "minecraft:buff"
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:nautilus"
+          },
+          "count": 10,
+          "speed": 0.03,
+          "force": true,
+          "spread": {
+            "x": 0.35,
+            "y": 0.45,
+            "z": 0.35
+          },
+          "offset_y": 1
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:bubble"
+          },
+          "count": 10,
+          "speed": 0.03,
+          "force": true,
+          "spread": {
+            "x": 0.35,
+            "y": 0.45,
+            "z": 0.35
+          },
+          "offset_y": 1
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:splash"
+          },
+          "count": 10,
+          "speed": 0.08,
+          "force": true,
+          "spread": {
+            "x": 0.4,
+            "y": 0.25,
+            "z": 0.4
+          },
+          "offset_y": 0.6
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:glow"
+          },
+          "count": 6,
+          "speed": 0.02,
+          "force": true,
+          "spread": {
+            "x": 0.3,
+            "y": 0.5,
+            "z": 0.3
+          },
+          "offset_y": 1
         }
       ]
     },
@@ -63,5 +124,5 @@
     }
   ],
   "name": "Sealskin Bastion",
-  "description": "Press your Secondary Ability key to enter §e§lSealskin Bastion§r for 10 seconds, reducing incoming damage by 99% while reducing your movement speed by 50%."
+  "description": "Press your Secondary Ability key to enter §e§lSealskin Bastion§r for 10 seconds, reducing incoming damage by 99%. Standard Selkies also lose 50% movement and swim speed during the stance; Champion Selkies do not."
 }

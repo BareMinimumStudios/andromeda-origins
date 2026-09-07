@@ -14,7 +14,8 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:common/figura_2",
-          "change": -1
+          "change": 0,
+          "operation": "set"
         },
         {
           "type": "origins:revoke_power",

@@ -5,6 +5,11 @@
     "modifier": {
       "operation": "multiply_total_multiplicative",
       "amount": 0.33
+    },
+    "condition": {
+      "type": "origins:power",
+      "power": "andromeda_origins:common/champion",
+      "inverted": true
     }
   },
   "speed": {

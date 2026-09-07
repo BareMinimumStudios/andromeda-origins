@@ -7,7 +7,8 @@
     "start_value": 20,
     "hud_render": {
       "should_render": true,
-      "bar_index": 4
+      "bar_index": 24,
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png"
     },
     "min_action": {
       "type": "origins:execute_command",
@@ -60,9 +61,9 @@
                   },
                   {
                     "type": "origins:play_sound",
-                    "sound": "entity.ender_dragon.flap",
-                    "volume": 1,
-                    "pitch": 0.8
+                    "sound": "andromeda_origins:ability.wyverian.dragon_wing_rush",
+                    "volume": 0.9,
+                    "pitch": 1.0
                   },
                   {
                     "type": "origins:spawn_particles",
@@ -82,6 +83,51 @@
                     "type": "origins:change_resource",
                     "resource": "*:*_charges",
                     "change": -1
+                  },
+                  {
+                    "type": "origins:spawn_particles",
+                    "particle": {
+                      "type": "minecraft:cloud"
+                    },
+                    "count": 4,
+                    "speed": 0.02,
+                    "force": true,
+                    "spread": {
+                      "x": 0.3,
+                      "y": 0.5,
+                      "z": 0.3
+                    },
+                    "offset_y": 1
+                  },
+                  {
+                    "type": "origins:spawn_particles",
+                    "particle": {
+                      "type": "minecraft:electric_spark"
+                    },
+                    "count": 2,
+                    "speed": 0.02,
+                    "force": true,
+                    "spread": {
+                      "x": 0.2,
+                      "y": 0.4,
+                      "z": 0.2
+                    },
+                    "offset_y": 1
+                  },
+                  {
+                    "type": "origins:spawn_particles",
+                    "particle": {
+                      "type": "minecraft:gust"
+                    },
+                    "count": 1,
+                    "speed": 0.03,
+                    "force": true,
+                    "spread": {
+                      "x": 0.2,
+                      "y": 0.2,
+                      "z": 0.2
+                    },
+                    "offset_y": 0.8
                   }
                 ]
               }
@@ -115,10 +161,19 @@
       "type": "origins:and",
       "conditions": [
         {
-          "type": "origins:resource",
-          "resource": "*:wyverian/passives_weaknesstate",
-          "comparison": "==",
-          "compare_to": 0
+          "type": "origins:or",
+          "conditions": [
+            {
+              "type": "origins:resource",
+              "resource": "*:wyverian/passives_weaknesstate",
+              "comparison": "==",
+              "compare_to": 0
+            },
+            {
+              "type": "origins:power",
+              "power": "andromeda_origins:common/champion"
+            }
+          ]
         },
         {
           "type": "origins:fall_flying"
@@ -130,9 +185,18 @@
           "compare_to": 0
         },
         {
-          "type": "origins:submerged_in",
-          "fluid": "minecraft:water",
-          "inverted": true
+          "type": "origins:or",
+          "conditions": [
+            {
+              "type": "origins:submerged_in",
+              "fluid": "minecraft:water",
+              "inverted": true
+            },
+            {
+              "type": "origins:power",
+              "power": "andromeda_origins:common/champion"
+            }
+          ]
         },
         {
           "type": "origins:power",
@@ -153,11 +217,11 @@
       "text": [
         "Trigger with ",
         {
-          "keybind": "key.origins.primary_active"
+          "keybind": "key.origins.secondary_active"
         }
       ]
     }
   ],
   "name": "Gusts of Freedom",
-  "description": "Hold your Secondary Ability key while flying to surge forward for up to 20 seconds. You recover 1 second of flight time for every second spent on the ground.\n \n§e§lHover:§r\nHold Sneak while flying to stop your forward movement and hover in place, consuming flight time at half the normal rate.\n \nProjectile damage is reduced by 50% while using Gusts of Freedom and for 3 seconds afterward. §e§lMovement Ability§r."
+  "description": "Hold your Secondary Ability key while flying to surge forward for up to 20 seconds. You recover 1 second of flight time for every second spent on the ground.\n \n§e§lHover:§r\nHold Sneak while flying to stop your forward movement and hover in place, consuming flight time at half the normal rate.\n \nStandard Wyverians deal 50% less projectile damage while using Gusts of Freedom and for 3 seconds afterward; Champion Wyverians ignore that penalty. §e§lMovement Ability§r."
 }

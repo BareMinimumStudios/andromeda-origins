@@ -13,8 +13,8 @@
     "max": 60,
     "start_value": 1,
     "hud_render": {
-      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
-      "bar_index": 5
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 15
     },
     "min_action": {
       "type": "origins:revoke_power",

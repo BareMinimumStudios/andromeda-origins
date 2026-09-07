@@ -1,0 +1,18 @@
+{
+  "powers": [
+    "andromeda_origins:champion/manticore_passives",
+    "andromeda_origins:common/champion",
+    "andromeda_origins:manticore/primary",
+    "andromeda_origins:manticore/secondary",
+    "andromeda_origins:manticore/figura",
+    "andromeda_origins:common/figura"
+  ],
+  "icon": {
+    "id": "andromeda_origins:manticore_icon"
+  },
+  "unchoosable": true,
+  "order": 106,
+  "impact": 3,
+  "name": "Champion Manticore",
+  "description": "A command-only Champion variant of Manticore. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Cooldowns, charge times and resource costs remain."
+}

@@ -27,7 +27,7 @@
   "remove": {
     "type": "origins:resource",
     "min": 0,
-    "max": 120,
+    "max": 90,
     "start_value": 1,
     "hud_render": {
       "should_render": false

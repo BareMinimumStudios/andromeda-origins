@@ -1,0 +1,265 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_chosen": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:champion/manticore_passives_flammablent",
+          "change": 9,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:champion/manticore_passives_flammablent2",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:champion/manticore_passives_venomous",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:champion/manticore_passives_devour",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:manticore/primary_primary",
+          "change": 200,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:manticore/primary_animatedspin",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:manticore/secondary_unstoppable",
+          "change": 1800,
+          "operation": "set"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s add manticore"
+        }
+      ]
+    },
+    "entity_action_lost": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s remove manticore"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/debug",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "execute_chosen_when_orb": true
+  },
+  "resistances": {
+    "type": "origins:modify_damage_taken",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.2
+    },
+    "damage_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:projectile",
+          "inverted": true
+        },
+        {
+          "type": "origins:name",
+          "name": "fall",
+          "inverted": true
+        }
+      ]
+    }
+  },
+  "damageup": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": 0.35
+    }
+  },
+  "toggle": {
+    "type": "origins:toggle",
+    "key": {
+      "key": "key.andromeda_origins.toggle",
+      "continuous": false
+    }
+  },
+  "darkvision": {
+    "type": "origins:night_vision",
+    "strength": 0.75,
+    "condition": {
+      "type": "origins:power_active",
+      "power": "*:*_toggle"
+    }
+  },
+  "flammablent": {
+    "type": "origins:self_action_when_hit",
+    "cooldown": 9,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_flammablent2",
+      "change": 1
+    },
+    "damage_condition": {
+      "type": "origins:fire"
+    }
+  },
+  "flammablent2": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 3,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "max_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_flammablent2",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:extinguish"
+        }
+      ]
+    }
+  },
+  "venomous": {
+    "type": "origins:target_action_on_hit",
+    "cooldown": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:apply_effect",
+      "effect": {
+        "id": "minecraft:poison",
+        "amplifier": 0,
+        "duration": 200
+      }
+    },
+    "condition": {
+      "type": "origins:fall_distance",
+      "comparison": ">",
+      "compare_to": 0
+    }
+  },
+  "lowhealth": {
+    "type": "origins:entity_glow",
+    "entity_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:relative_health",
+          "comparison": ">",
+          "compare_to": 0.25
+        },
+        {
+          "type": "origins:relative_health",
+          "comparison": "<=",
+          "compare_to": 0.5
+        },
+        {
+          "type": "origins:living"
+        },
+        {
+          "type": "origins:power",
+          "power": "*:common/undetectable",
+          "inverted": true
+        }
+      ]
+    },
+    "bientity_condition": {
+      "type": "origins:distance",
+      "comparison": "<=",
+      "compare_to": 16
+    },
+    "use_teams": false,
+    "red": 1.0,
+    "green": 0.6,
+    "blue": 0.0
+  },
+  "criticalhealth": {
+    "type": "origins:entity_glow",
+    "entity_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:relative_health",
+          "comparison": "<=",
+          "compare_to": 0.25
+        },
+        {
+          "type": "origins:living"
+        },
+        {
+          "type": "origins:power",
+          "power": "*:common/undetectable",
+          "inverted": true
+        }
+      ]
+    },
+    "bientity_condition": {
+      "type": "origins:distance",
+      "comparison": "<=",
+      "compare_to": 16
+    },
+    "use_teams": false,
+    "red": 1.0,
+    "green": 0.0,
+    "blue": 0.0
+  },
+  "devour": {
+    "type": "origins:self_action_on_kill",
+    "cooldown": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:feed",
+      "nutrition": 2,
+      "saturation": 2
+    },
+    "damage_condition": {
+      "type": "origins:projectile",
+      "inverted": true
+    }
+  },
+  "size": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "andromeda_origins:champion_manticore_passives_size",
+      "attribute": "minecraft:generic.scale",
+      "operation": "add_multiplied_total",
+      "amount": 0.2
+    }
+  },
+  "name": "Champion Passive Features",
+  "description": "§e§lChampion Features:§r\n+20% Size\n+35% Melee Damage\n \n- Retains predatory senses, venom, devouring and physical resistance.\n- No Wet, cramped-space, food-efficiency or dietary penalties."
+}

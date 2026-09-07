@@ -1,0 +1,18 @@
+{
+  "powers": [
+    "andromeda_origins:champion/selkie_passives",
+    "andromeda_origins:common/champion",
+    "andromeda_origins:selkie/primary",
+    "andromeda_origins:selkie/secondary",
+    "andromeda_origins:selkie/figura",
+    "andromeda_origins:common/figura"
+  ],
+  "icon": {
+    "id": "andromeda_origins:selkie_icon"
+  },
+  "unchoosable": true,
+  "order": 109,
+  "impact": 3,
+  "name": "Champion Selkie",
+  "description": "A command-only Champion variant of Selkie. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Cooldowns, charge times and resource costs remain."
+}

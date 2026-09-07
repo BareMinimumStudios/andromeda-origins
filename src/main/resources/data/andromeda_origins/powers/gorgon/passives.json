@@ -60,18 +60,6 @@
           "operation": "set"
         },
         {
-          "type": "origins:change_resource",
-          "resource": "andromeda_origins:gorgon/pickup_grab",
-          "change": 5,
-          "operation": "set"
-        },
-        {
-          "type": "origins:change_resource",
-          "resource": "andromeda_origins:gorgon/pickup_kick_rider_out",
-          "change": 1,
-          "operation": "set"
-        },
-        {
           "type": "origins:execute_command",
           "command": "tag @s add gorgon"
         }

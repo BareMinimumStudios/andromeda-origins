@@ -5,8 +5,8 @@
     "cooldown": 200,
     "hud_render": {
       "should_render": true,
-      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
-      "bar_index": 20
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 0
     },
     "entity_action": {
       "type": "origins:if_else_list",
@@ -33,7 +33,7 @@
                 "type": "origins:change_resource",
                 "resource": "andromeda_origins:common/figura_1",
                 "change": 1,
-                "operation": "add"
+                "operation": "set"
               },
               {
                 "type": "origins:spawn_particles",
@@ -60,6 +60,21 @@
                 "type": "origins:grant_power",
                 "power": "andromeda_origins:arachne/helper/dash_horizontal",
                 "source": "minecraft:state"
+              },
+              {
+                "type": "origins:spawn_particles",
+                "particle": {
+                  "type": "minecraft:enchanted_hit"
+                },
+                "count": 5,
+                "speed": 0.04,
+                "force": true,
+                "spread": {
+                  "x": 0.25,
+                  "y": 0.3,
+                  "z": 0.25
+                },
+                "offset_y": 0.9
               }
             ]
           }
@@ -223,5 +238,5 @@
     }
   ],
   "name": "Eightfold Swiftness",
-  "description": "Press your Primary Ability key on the ground to burst forward for 0.5 seconds. Use it while airborne to fire a strand of silk that pulls you toward a block or creature.\n \nYour projectile damage is reduced by 50% while using this movement and for 3 seconds afterward. §e§lMovement Ability§r."
+  "description": "Press your Primary Ability key on the ground to burst forward for 0.5 seconds. Use it while airborne to fire a strand of silk that pulls you toward a block or creature.\n \nStandard Arachne deal 50% less projectile damage while using this movement and for 3 seconds afterward; Champion Arachne ignore that penalty. §e§lMovement Ability§r."
 }

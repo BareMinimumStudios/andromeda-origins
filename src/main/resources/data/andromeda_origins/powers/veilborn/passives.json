@@ -76,8 +76,8 @@
     "start_value": 0,
     "hud_render": {
       "should_render": true,
-      "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
-      "bar_index": 16,
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 17,
       "order": 6,
       "condition": {
         "type": "origins:resource",
@@ -97,7 +97,8 @@
         {
           "type": "origins:change_resource",
           "resource": "*:common/figura_3",
-          "change": 1
+          "change": 1,
+          "operation": "set"
         },
         {
           "type": "origins:play_sound",
@@ -461,7 +462,7 @@
       "id": "*:*",
       "attribute": "minecraft:generic.max_health",
       "operation": "add_value",
-      "amount": -4
+      "amount": -2
     }
   },
   "toggle": {
@@ -501,7 +502,7 @@
     }
   ],
   "name": "Passive Features",
-  "description": "§e§lStats:§r\n+20% Size\n-4 Max HP\n \n§e§lFeatures:§r\n- Sunlight grants +25% movement speed.\n- Moonlight grants +20% damage dealt.\n- Your body is naturally 60% opaque. Toggleable.\n- You suffer -15% movement speed for each threshold exceeded: more than 12 Armor, more than 15 Armor, and more than 8 Armor Toughness.\n- You cannot use shields.\n- Contact with water reduces your damage dealt by 80% and applies §c§l[Silenced]§r for 3 seconds. Each additional second in water adds 3 seconds to the duration, up to 3 minutes.",
+  "description": "§e§lStats:§r\n+20% Size\n-2 Max HP\n \n§e§lFeatures:§r\n- Sunlight grants +25% movement speed.\n- Moonlight grants +20% damage dealt.\n- Your body is naturally 60% opaque. Toggleable.\n- You suffer -10% movement and swim speed for each threshold exceeded: more than 12 Armor, more than 15 Armor, and more than 8 Armor Toughness.\n- You cannot use shields.\n- Contact with water reduces your damage dealt by 60% and applies §c§l[Silenced]§r for 3 seconds. Each additional second in water adds 3 seconds to the duration, up to 3 minutes.",
   "size": {
     "type": "origins:attribute",
     "modifier": {

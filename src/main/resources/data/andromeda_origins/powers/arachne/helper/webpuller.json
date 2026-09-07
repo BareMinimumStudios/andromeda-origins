@@ -43,6 +43,12 @@
                   "type": "origins:and",
                   "actions": [
                     {
+                      "type": "origins:play_sound",
+                      "sound": "andromeda_origins:ability.arachne.web_pull",
+                      "volume": 1.05,
+                      "pitch": 1.0
+                    },
+                    {
                       "type": "origins:spawn_particles",
                       "particle": {
                         "type": "minecraft:spit"

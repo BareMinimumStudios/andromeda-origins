@@ -12,9 +12,26 @@
       "type": "origins:and",
       "actions": [
         {
+          "type": "origins:execute_command",
+          "command": "stopsound @s master andromeda_origins:ability.lichling.chimes_of_necros"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "stopsound @a[distance=..48] player andromeda_origins:ability.lichling.chimes_of_necros"
+        },
+        {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:common/figura_3",
-          "change": -1
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "playsound andromeda_origins:ability.lichling.final_bell_toll master @s ~ ~ ~ 1.15 1.0 1.0"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "playsound andromeda_origins:ability.lichling.final_bell_toll player @a[distance=0.1..32] ~ ~ ~ 1.15 1.0 0"
         },
         {
           "type": "origins:revoke_power",
@@ -35,12 +52,18 @@
     }
   },
   "speed": {
-    "type": "origins:attribute",
+    "type": "origins:conditioned_attribute",
     "modifier": {
       "id": "*:*",
       "attribute": "minecraft:generic.movement_speed",
       "operation": "add_multiplied_total",
       "amount": -0.2
+    },
+    "tick_rate": 1,
+    "condition": {
+      "type": "origins:power",
+      "power": "andromeda_origins:common/champion",
+      "inverted": true
     }
   }
 }

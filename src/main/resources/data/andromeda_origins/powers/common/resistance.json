@@ -6,8 +6,8 @@
     "max": 35,
     "start_value": 35,
     "hud_render": {
-      "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_02.png",
-      "bar_index": 0
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 12
     },
     "min_action": {
       "type": "origins:revoke_power",

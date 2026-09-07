@@ -5,8 +5,8 @@
     "cooldown": 200,
     "hud_render": {
       "should_render": true,
-      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
-      "bar_index": 20
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 0
     },
     "entity_action": {
       "type": "origins:if_else_list",
@@ -41,7 +41,13 @@
                 "operation": "set"
               },
               {
-                "type": "origins:revoke_power",
+                "type": "origins:play_sound",
+                "sound": "andromeda_origins:ability.manticore.ravenous_lunge",
+                "volume": 1.35,
+                "pitch": 1.0
+              },
+              {
+                "type": "origins:grant_power",
                 "power": "andromeda_origins:manticore/helper/chargelogic",
                 "source": "minecraft:state"
               },
@@ -100,6 +106,15 @@
                         "power": "andromeda_origins:manticore/helper/charged",
                         "source": "minecraft:ccontrol"
                       }
+                    },
+                    {
+                      "type": "origins:target_action",
+                      "action": {
+                        "type": "origins:play_sound",
+                        "sound": "andromeda_origins:ability.manticore.lunge_impact",
+                        "volume": 1.15,
+                        "pitch": 1.0
+                      }
                     }
                   ]
                 },
@@ -134,21 +149,247 @@
                 }
               },
               {
-                "type": "origins:play_sound",
-                "sound": "minecraft:entity.ender_dragon.growl",
-                "volume": 0.3,
-                "pitch": 1.5
+                "type": "origins:if_else_list",
+                "actions": [
+                  {
+                    "condition": {
+                      "type": "origins:raycast",
+                      "distance": 5.0,
+                      "block": true,
+                      "entity": false,
+                      "shape_type": "collider",
+                      "fluid_handling": "none",
+                      "space": "world",
+                      "direction": {
+                        "x": 0.0,
+                        "y": -1.0,
+                        "z": 0.0
+                      }
+                    },
+                    "action": {
+                      "type": "origins:if_else_list",
+                      "actions": [
+                        {
+                          "condition": {
+                            "type": "origins:command",
+                            "command": "execute if entity @s[x_rotation=-90..-50]",
+                            "comparison": "==",
+                            "compare_to": 1
+                          },
+                          "action": {
+                            "type": "origins:add_velocity",
+                            "y": 1.2,
+                            "z": 1.1,
+                            "space": "local_horizontal_normalized",
+                            "set": true
+                          }
+                        },
+                        {
+                          "condition": {
+                            "type": "origins:command",
+                            "command": "execute if entity @s[x_rotation=-50..-30]",
+                            "comparison": "==",
+                            "compare_to": 1
+                          },
+                          "action": {
+                            "type": "origins:add_velocity",
+                            "y": 0.95,
+                            "z": 1.35,
+                            "space": "local_horizontal_normalized",
+                            "set": true
+                          }
+                        },
+                        {
+                          "condition": {
+                            "type": "origins:command",
+                            "command": "execute if entity @s[x_rotation=-30..-10]",
+                            "comparison": "==",
+                            "compare_to": 1
+                          },
+                          "action": {
+                            "type": "origins:add_velocity",
+                            "y": 0.65,
+                            "z": 1.55,
+                            "space": "local_horizontal_normalized",
+                            "set": true
+                          }
+                        },
+                        {
+                          "condition": {
+                            "type": "origins:command",
+                            "command": "execute if entity @s[x_rotation=-10..90]",
+                            "comparison": "==",
+                            "compare_to": 1
+                          },
+                          "action": {
+                            "type": "origins:add_velocity",
+                            "y": 0.35,
+                            "z": 1.65,
+                            "space": "local_horizontal_normalized",
+                            "set": true
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "condition": {
+                      "type": "origins:raycast",
+                      "distance": 5.0,
+                      "block": true,
+                      "entity": false,
+                      "shape_type": "collider",
+                      "fluid_handling": "none",
+                      "space": "world",
+                      "direction": {
+                        "x": 0.0,
+                        "y": -1.0,
+                        "z": 0.0
+                      },
+                      "inverted": true
+                    },
+                    "action": {
+                      "type": "origins:if_else_list",
+                      "actions": [
+                        {
+                          "condition": {
+                            "type": "origins:command",
+                            "command": "execute if entity @s[x_rotation=-90..-65]",
+                            "comparison": "==",
+                            "compare_to": 1
+                          },
+                          "action": {
+                            "type": "origins:add_velocity",
+                            "y": 1.55,
+                            "z": 0.45,
+                            "space": "local_horizontal_normalized",
+                            "set": true
+                          }
+                        },
+                        {
+                          "condition": {
+                            "type": "origins:command",
+                            "command": "execute if entity @s[x_rotation=-65..-40]",
+                            "comparison": "==",
+                            "compare_to": 1
+                          },
+                          "action": {
+                            "type": "origins:add_velocity",
+                            "y": 1.35,
+                            "z": 1.0,
+                            "space": "local_horizontal_normalized",
+                            "set": true
+                          }
+                        },
+                        {
+                          "condition": {
+                            "type": "origins:command",
+                            "command": "execute if entity @s[x_rotation=-40..-15]",
+                            "comparison": "==",
+                            "compare_to": 1
+                          },
+                          "action": {
+                            "type": "origins:add_velocity",
+                            "y": 0.95,
+                            "z": 1.45,
+                            "space": "local_horizontal_normalized",
+                            "set": true
+                          }
+                        },
+                        {
+                          "condition": {
+                            "type": "origins:command",
+                            "command": "execute if entity @s[x_rotation=-15..20]",
+                            "comparison": "==",
+                            "compare_to": 1
+                          },
+                          "action": {
+                            "type": "origins:add_velocity",
+                            "y": 0.25,
+                            "z": 1.65,
+                            "space": "local_horizontal_normalized",
+                            "set": true
+                          }
+                        },
+                        {
+                          "condition": {
+                            "type": "origins:command",
+                            "command": "execute if entity @s[x_rotation=20..50]",
+                            "comparison": "==",
+                            "compare_to": 1
+                          },
+                          "action": {
+                            "type": "origins:add_velocity",
+                            "y": -0.55,
+                            "z": 1.35,
+                            "space": "local_horizontal_normalized",
+                            "set": true
+                          }
+                        },
+                        {
+                          "condition": {
+                            "type": "origins:command",
+                            "command": "execute if entity @s[x_rotation=50..90]",
+                            "comparison": "==",
+                            "compare_to": 1
+                          },
+                          "action": {
+                            "type": "origins:add_velocity",
+                            "y": -1.1,
+                            "z": 0.8,
+                            "space": "local_horizontal_normalized",
+                            "set": true
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
               },
               {
-                "type": "origins:add_velocity",
-                "y": 0.5,
-                "set": true
+                "type": "origins:spawn_particles",
+                "particle": {
+                  "type": "minecraft:crit"
+                },
+                "count": 10,
+                "speed": 0.18,
+                "force": true,
+                "spread": {
+                  "x": 0.35,
+                  "y": 0.45,
+                  "z": 0.35
+                },
+                "offset_y": 1
               },
               {
-                "type": "origins:add_velocity",
-                "z": 3.5,
-                "space": "local",
-                "set": true
+                "type": "origins:spawn_particles",
+                "particle": {
+                  "type": "minecraft:damage_indicator"
+                },
+                "count": 5,
+                "speed": 0.08,
+                "force": true,
+                "spread": {
+                  "x": 0.25,
+                  "y": 0.35,
+                  "z": 0.25
+                },
+                "offset_y": 1
+              },
+              {
+                "type": "origins:spawn_particles",
+                "particle": {
+                  "type": "minecraft:sweep_attack"
+                },
+                "count": 2,
+                "speed": 0.0,
+                "force": true,
+                "spread": {
+                  "x": 0.15,
+                  "y": 0.15,
+                  "z": 0.15
+                },
+                "offset_y": 0.9
               }
             ]
           }
@@ -175,17 +416,6 @@
       "continuous": true
     }
   },
-  "gravity_down": {
-    "type": "origins:modify_falling",
-    "velocity": 0.1,
-    "take_fall_damage": false,
-    "condition": {
-      "type": "origins:resource",
-      "comparison": ">",
-      "resource": "*:*_animatedspin",
-      "compare_to": 0
-    }
-  },
   "animatedspin": {
     "type": "origins:resource",
     "min": 0,
@@ -196,7 +426,7 @@
     },
     "max_action": {
       "type": "origins:delay",
-      "ticks": 61,
+      "ticks": 20,
       "action": {
         "type": "origins:change_resource",
         "resource": "*:*_animatedspin",
@@ -206,6 +436,12 @@
     "min_action": {
       "type": "origins:and",
       "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "andromeda_origins:ability.manticore.ravenous_lunge_airborne",
+          "volume": 1.1,
+          "pitch": 1.0
+        },
         {
           "type": "origins:grant_power",
           "power": "andromeda_origins:manticore/helper/featherfall",
@@ -284,5 +520,5 @@
     }
   ],
   "name": "Ravenous Lunge",
-  "description": "Press your Primary Ability key to launch forward, repeatedly dealing 2.5 damage to creatures you collide with and dragging them along your path. You gain Feather Falling for 2 seconds after the lunge.\n \nYour projectile damage is reduced by 50% during the lunge and for 3 seconds afterward. §e§lMovement Ability§r, §e§lCrowd Control§r & §e§lInvincibility Frames§r."
+  "description": "Press your Primary Ability key to launch roughly 16 blocks in a controlled pounce, repeatedly dealing 2.5 damage to creatures you collide with and dragging them along your path. Near the ground, upward aim is softly capped so looking steeply upward still produces a forward pounce instead of a vertical rocket. Once you are roughly 3 blocks off the ground, the lunge follows your aim more strongly while keeping its vertical reach capped below 16 blocks. Gain Feather Falling for 2 seconds afterward.\n \nStandard Manticores deal 50% less projectile damage during the lunge and for 3 seconds afterward; Champion Manticores ignore that penalty. §e§lMovement Ability§r, §e§lCrowd Control§r & §e§lInvincibility Frames§r."
 }

@@ -1,0 +1,195 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_chosen": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:champion/veilborn_passives_daytime",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:veilborn/primary_active",
+          "change": 60,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:veilborn/primary_active3",
+          "change": 600,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:veilborn/secondary_unstoppable",
+          "change": 20,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:veilborn/secondary_cooldown",
+          "change": 2400,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:veilborn/secondary_uncloak",
+          "change": 20,
+          "operation": "set"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s add veilborn"
+        }
+      ]
+    },
+    "entity_action_lost": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s remove veilborn"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:common/debug",
+          "source": "minecraft:state"
+        }
+      ]
+    },
+    "execute_chosen_when_orb": true
+  },
+  "daytime": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "heart": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:*_daytime",
+                    "comparison": "==",
+                    "compare_to": 0
+                  },
+                  {
+                    "type": "origins:exposed_to_sun"
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_daytime",
+                    "change": 1
+                  },
+                  {
+                    "type": "origins:grant_power",
+                    "power": "*:veilborn/helper/daypower",
+                    "source": "minecraft:state"
+                  },
+                  {
+                    "type": "origins:revoke_power",
+                    "power": "*:veilborn/helper/nightpower",
+                    "source": "minecraft:state"
+                  }
+                ]
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:resource",
+                    "resource": "*:*_daytime",
+                    "comparison": "==",
+                    "compare_to": 1
+                  },
+                  {
+                    "type": "origins:exposed_to_sun",
+                    "inverted": true
+                  },
+                  {
+                    "type": "origins:exposed_to_sky"
+                  },
+                  {
+                    "type": "origins:in_rain",
+                    "inverted": true
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "*:*_daytime",
+                    "change": -1
+                  },
+                  {
+                    "type": "origins:revoke_power",
+                    "power": "*:veilborn/helper/daypower",
+                    "source": "minecraft:state"
+                  },
+                  {
+                    "type": "origins:grant_power",
+                    "power": "*:veilborn/helper/nightpower",
+                    "source": "minecraft:state"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "toggle": {
+    "type": "origins:toggle",
+    "key": {
+      "key": "key.andromeda_origins.toggle",
+      "continuous": false
+    }
+  },
+  "translucent": {
+    "type": "origins:model_color",
+    "alpha": 0.6,
+    "condition": {
+      "type": "origins:power_active",
+      "power": "*:*_toggle"
+    }
+  },
+  "size": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "andromeda_origins:champion_veilborn_passives_size",
+      "attribute": "minecraft:generic.scale",
+      "operation": "add_multiplied_total",
+      "amount": 0.2
+    }
+  },
+  "name": "Champion Passive Features",
+  "description": "§e§lChampion Features:§r\n+20% Size\n \n- Retains sunlight speed, moonlight damage, translucency and veil powers.\n- No health, armor-weight, shield, water-damage or water-Silence penalties."
+}
