@@ -2,6 +2,7 @@
   "powers": [
     "andromeda_origins:champion/satyr_passives",
     "andromeda_origins:common/champion",
+    "andromeda_origins:common/champion_cooldowns",
     "andromeda_origins:satyr/primary",
     "andromeda_origins:satyr/secondary",
     "andromeda_origins:satyr/figura",
@@ -14,5 +15,5 @@
   "order": 108,
   "impact": 3,
   "name": "Champion Satyr",
-  "description": "A command-only Champion variant of Satyr. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Cooldowns, charge times and resource costs remain."
+  "description": "A command-only Champion variant of Satyr. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Player-facing ability cooldowns recover twice as fast; charge times and resource costs remain unchanged."
 }

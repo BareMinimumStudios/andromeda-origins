@@ -17,6 +17,10 @@
       "type": "origins:and",
       "actions": [
         {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx selkie.bastion"
+        },
+        {
           "type": "origins:play_sound",
           "sound": "minecraft:entity.dolphin.splash",
           "volume": 1,
@@ -124,5 +128,5 @@
     }
   ],
   "name": "Sealskin Bastion",
-  "description": "Press your Secondary Ability key to enter §e§lSealskin Bastion§r for 10 seconds, reducing incoming damage by 99%. Standard Selkies also lose 50% movement and swim speed during the stance; Champion Selkies do not."
+  "description": "Press your Secondary Ability key to enter §e§lSealskin Bastion§r for 10 seconds, reducing incoming damage by 75%. You also lose 50% movement and swim speed during the stance."
 }

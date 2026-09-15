@@ -66,6 +66,10 @@
                     "pitch": 1.0
                   },
                   {
+                    "type": "origins:execute_command",
+                    "command": "andromedaorigins internal_fx wyverian.gust"
+                  },
+                  {
                     "type": "origins:spawn_particles",
                     "particle": {
                       "type": "minecraft:cloud"
@@ -223,5 +227,5 @@
     }
   ],
   "name": "Gusts of Freedom",
-  "description": "Hold your Secondary Ability key while flying to surge forward for up to 20 seconds. You recover 1 second of flight time for every second spent on the ground.\n \n§e§lHover:§r\nHold Sneak while flying to stop your forward movement and hover in place, consuming flight time at half the normal rate.\n \nStandard Wyverians deal 50% less projectile damage while using Gusts of Freedom and for 3 seconds afterward; Champion Wyverians ignore that penalty. §e§lMovement Ability§r."
+  "description": "Hold your Secondary Ability key while flying to surge forward for up to 20 seconds. You recover 1 second of flight time for every second spent on the ground.\n \n§e§lHover:§r\nHold Sneak while flying to stop your forward movement and hover in place, consuming flight time at half the normal rate.\n \nYou deal 50% less projectile damage while using Gusts of Freedom and for 3 seconds afterward. §e§lMovement Ability§r."
 }

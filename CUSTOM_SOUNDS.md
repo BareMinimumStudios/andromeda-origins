@@ -1,8 +1,14 @@
 # Custom Sound Integration
 
-**Current state: v1.4.46**. Custom-audio behavior is unchanged from v1.4.45; this release only corrects HUD resource-bar routing.
+**Current state: v1.4.70**. The 33 bundled Andromeda SoundEvents remain unchanged. When the optional enhanced-FX layer is active, selected Spell Engine / More RPG Library sounds are mixed underneath the existing Origin audio; they do not replace or re-register Andromeda's custom sounds.
 
 Andromeda Origins registers **33 custom SoundEvents**. Bundled ability audio is stored under `assets/andromeda_origins/sounds/abilities/` and registered in `assets/andromeda_origins/sounds.json`.
+
+## Optional external sound layers
+
+Spell Engine / More RPG Library sounds are looked up from Minecraft's SoundEvent registry at runtime. Missing IDs or absent optional mods are skipped safely. The enhanced definitions keep their volumes intentionally below the main Andromeda cues so character-specific custom audio remains dominant.
+
+Examples in v1.4.60 include soul casting/release under Lichling, water release/bubble accents under Nereid/Selkie/Siren, air impacts under Satyr, stealth/arcane accents under Veilborn, and generic fire/wind accents under Wyverian. These mappings are stored with the particle definitions in `data/andromeda_origins/andromeda_fx/`.
 
 ## Playback rules
 
@@ -18,7 +24,7 @@ Andromeda Origins registers **33 custom SoundEvents**. Bundled ability audio is 
 - **Fenrkin:** successful Mark of Fenrir gives the marker and target their own audible marked cue.
 - **Humanity:** Mortal Resolve heartbeat is a short positional pulse replayed from the Human’s current position rather than one static minute-long bed.
 - **Lichling:** Chimes of Necros plays while channeling and is explicitly stopped when the channel ends; the Final Bell Toll now plays at the **end of the ability**, not on initial Doom application.
-- **Manticore:** Ravenous Lunge uses one activation roar and one end-of-lunge roar; there is no repeating airborne roar loop. Collision impacts have their own cue.
+- **Manticore:** Ravenous Lunge uses one activation roar and one end-of-lunge roar; there is no repeating airborne roar loop. Collision impacts have their own cue. Champion Bloodrift reuses the Manticore roar immediately after reappearance.
 - **Nereid:** Convalescing Aura has local/positional playback and end-of-channel stop cleanup.
 - **Siren:** Infatuation long audio begins only on successful targeting; the target whisper stops if Infatuation ends early. Shrieking Wail victim impact is intentionally mixed louder than earlier builds.
 - **Satyr:** ordinary foot contact uses vanilla horse-step/clop audio; the custom landing sound is reserved for Satyr’s Landing.
@@ -64,3 +70,5 @@ Andromeda Origins registers **33 custom SoundEvents**. Bundled ability audio is 
 ## Validation expectations
 
 The release audit checks that every registered custom SoundEvent has a matching OGG asset and that the custom OGG files are readable mono 48 kHz Vorbis.
+
+- **Lichling screech:** `andromeda_origins:ability.lichling.screech` plays as the opening cue when Chimes of Necros begins; the supplied `lichlingscreech.ogg` remains bundled as its source asset.

@@ -4,8 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "compat.ArmorModelApiRenderMixin",
-    "UndetectableHeldItemRendererMixin",
-    "UndetectableHeldItemFeatureRendererMixin"
+    "UndetectableHeldItemRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
@@ -13,6 +12,8 @@
   "mixins": [
     "UndetectableTargetPredicateMixin",
     "UndetectableSensorMixin",
-    "UndetectableMobTargetMixin"
+    "UndetectableMobTargetMixin",
+    "ApoliPowerHolderCacheMixin",
+    "ApoliEntitySetUnloadMixin"
   ]
 }

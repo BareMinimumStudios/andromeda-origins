@@ -263,10 +263,19 @@
         "compare_to": 0
       },
       "if_action": {
-        "type": "origins:play_sound",
-        "sound": "andromeda_origins:ability.wyverian.roar",
-        "volume": 1.1,
-        "pitch": 1.0
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:play_sound",
+            "sound": "andromeda_origins:ability.wyverian.roar",
+            "volume": 1.1,
+            "pitch": 1.0
+          },
+          {
+            "type": "origins:execute_command",
+            "command": "andromedaorigins internal_fx wyverian.ember"
+          }
+        ]
       },
       "else_action": {
         "type": "origins:execute_command",
@@ -469,6 +478,59 @@
                 "change": 2
               },
               {
+                "type": "origins:if_else_list",
+                "actions": [
+                  {
+                    "condition": {
+                      "type": "origins:resource",
+                      "resource": "*:*_fireball",
+                      "comparison": "==",
+                      "compare_to": 0
+                    },
+                    "action": {
+                      "type": "origins:execute_command",
+                      "command": "andromedaorigins internal_fx wyverian.pyroclast_charge_1"
+                    }
+                  },
+                  {
+                    "condition": {
+                      "type": "origins:resource",
+                      "resource": "*:*_fireball",
+                      "comparison": "==",
+                      "compare_to": 5
+                    },
+                    "action": {
+                      "type": "origins:execute_command",
+                      "command": "andromedaorigins internal_fx wyverian.pyroclast_charge_2"
+                    }
+                  },
+                  {
+                    "condition": {
+                      "type": "origins:resource",
+                      "resource": "*:*_fireball",
+                      "comparison": "==",
+                      "compare_to": 10
+                    },
+                    "action": {
+                      "type": "origins:execute_command",
+                      "command": "andromedaorigins internal_fx wyverian.pyroclast_charge_3"
+                    }
+                  },
+                  {
+                    "condition": {
+                      "type": "origins:resource",
+                      "resource": "*:*_fireball",
+                      "comparison": "==",
+                      "compare_to": 15
+                    },
+                    "action": {
+                      "type": "origins:execute_command",
+                      "command": "andromedaorigins internal_fx wyverian.pyroclast_charge_4"
+                    }
+                  }
+                ]
+              },
+              {
                 "type": "origins:change_resource",
                 "resource": "*:*_fireball",
                 "change": 1
@@ -563,5 +625,5 @@
     }
   ],
   "name": "Ember Flames",
-  "description": "Ember Flames consumes §e§lEmber§r, which regenerates while not in use. Standard Wyverians cannot use Ember Flames underwater; Champion Wyverians can. Completely emptying Ember locks the ability until the resource fully regenerates. Creatures killed by Ember Flames drop no experience, and the flames may destroy dropped items.\n \n§e§lEmber Ray:§r\nHold Primary Ability to project a 32-block ray of flame. Creatures near the ray take 0.5 fire damage, creatures within 3 blocks of the impact point take 1.5 fire damage, and direct hits ignite targets for 10 seconds. Consumes 1 Ember every 0.6 seconds.\n \n§e§lEmber Pyroclast:§r\nHold Primary Ability for 2 seconds without taking damage to charge a projectile that explodes on impact in a 4-block radius. It dissipates harmlessly after traveling more than 64 blocks. Creatures caught in the explosion take 10 explosion damage. Consumes 10 Ember."
+  "description": "Ember Flames consumes \u00a7e\u00a7lEmber\u00a7r, which regenerates while not in use. Ember Flames cannot be used underwater. Completely emptying Ember locks the ability until the resource fully regenerates. Creatures killed by Ember Flames drop no experience, and the flames may destroy dropped items.\n \n\u00a7e\u00a7lEmber Ray:\u00a7r\nHold Primary Ability to project a 32-block ray of flame. Creatures near the ray take 0.5 fire damage, creatures within 3 blocks of the impact point take 1.5 fire damage, and direct hits ignite targets for 10 seconds. Consumes 1 Ember every 0.6 seconds.\n \n\u00a7e\u00a7lEmber Pyroclast:\u00a7r\nHold Primary Ability for 2 seconds without taking damage to charge a projectile that explodes on impact in a 4-block radius. It dissipates harmlessly after traveling more than 64 blocks. Creatures caught in the explosion take 10 explosion damage. Consumes 10 Ember."
 }

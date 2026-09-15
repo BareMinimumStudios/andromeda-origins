@@ -115,7 +115,7 @@
     }
   },
   "name": "Champion Passive Features",
-  "description": "§e§lChampion Features:§r\n+25% Swim Speed\n \n- Retains amphibious breathing, Haste, vision and vocal powers.\n- No damage, fire-duration, iron or dietary penalties.",
+  "description": "§e§lChampion Features:§r\n+25% Swim Speed\n \n- Retains amphibious breathing, Haste, vision and vocal powers.\n- No damage, fire-duration, iron or dietary penalties.\n- Player-facing ability cooldowns recover at 2× rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged.",
   "infatuation_guard": {
     "type": "origins:invulnerability",
     "damage_condition": {

@@ -30,6 +30,10 @@
             "operation": "set"
           },
           {
+            "type": "origins:execute_command",
+            "command": "andromedaorigins internal_fx selkie.phalanx_cast"
+          },
+          {
             "type": "origins:play_sound",
             "sound": "minecraft:entity.illusioner.prepare_mirror",
             "volume": 1,
@@ -147,6 +151,10 @@
               "pitch": 0.2
             },
             {
+              "type": "origins:execute_command",
+              "command": "andromedaorigins internal_fx selkie.phalanx_target"
+            },
+            {
               "type": "origins:grant_power",
               "power": "*:selkie/helper/lifetide",
               "source": "minecraft:buff"
@@ -210,6 +218,34 @@
           "sound": "andromeda_origins:ability.selkie.surging_tides",
           "volume": 0.9,
           "pitch": 1.0
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx selkie.surging_tides"
+        },
+        {
+          "type": "origins:delay",
+          "ticks": 2,
+          "action": {
+            "type": "origins:execute_command",
+            "command": "andromedaorigins internal_fx selkie.surging_trail"
+          }
+        },
+        {
+          "type": "origins:delay",
+          "ticks": 4,
+          "action": {
+            "type": "origins:execute_command",
+            "command": "andromedaorigins internal_fx selkie.surging_trail"
+          }
+        },
+        {
+          "type": "origins:delay",
+          "ticks": 6,
+          "action": {
+            "type": "origins:execute_command",
+            "command": "andromedaorigins internal_fx selkie.surging_trail"
+          }
         },
         {
           "type": "origins:play_sound",
@@ -396,5 +432,5 @@
     }
   ],
   "name": "Coastal Phalanx & Surging Tides",
-  "description": "§e§lCoastal Phalanx:§r\nSneak and press your Primary Ability key while looking at a creature within 30 blocks to grant both of you Absorption II for 1 minute. The Absorption effect refreshes every 10 seconds.\n \n§e§lSurging Tides:§r\nPress your Primary Ability key while not sneaking to dash in the direction you are looking. Cooldown: 5 seconds while physically in water or exposed to rain, 30 seconds otherwise on land.\n \nYour projectile damage is reduced by 50% during Surging Tides and for 3 seconds afterward. §e§lMovement Ability§r."
+  "description": "\u00a7e\u00a7lCoastal Phalanx:\u00a7r\nSneak and press your Primary Ability key while looking at a creature within 30 blocks to grant both of you Absorption II for 1 minute. The Absorption effect refreshes every 10 seconds.\n \n\u00a7e\u00a7lSurging Tides:\u00a7r\nPress your Primary Ability key while not sneaking to dash in the direction you are looking. Base cooldown: 5 seconds while physically in water or exposed to rain, 30 seconds otherwise on land.\n \nYour projectile damage is reduced by 50% during Surging Tides and for 3 seconds afterward. \u00a7e\u00a7lMovement Ability\u00a7r."
 }

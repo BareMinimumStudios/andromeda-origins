@@ -15,9 +15,6 @@
           "type": "origins:revoke_power",
           "power": "*:*",
           "source": "minecraft:debuff"
-        },
-        {
-          "type": "origins:clear_effect"
         }
       ]
     }
@@ -961,9 +958,19 @@
     "blue": 0.5,
     "green": 0.1,
     "entity_condition": {
-      "type": "origins:origin",
-      "origin": "andromeda_origins:faerie",
-      "layer": "origins:origin"
+      "type": "origins:or",
+      "conditions": [
+        {
+          "type": "origins:origin",
+          "origin": "andromeda_origins:faerie",
+          "layer": "origins:origin"
+        },
+        {
+          "type": "origins:origin",
+          "origin": "andromeda_origins:champion_faerie",
+          "layer": "origins:origin"
+        }
+      ]
     },
     "condition": {
       "type": "origins:power",
@@ -1171,6 +1178,10 @@
         },
         {
           "type": "origins:extinguish"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx faerie.trickster_waterswap"
         }
       ]
     }
@@ -1210,6 +1221,10 @@
             "duration": 600,
             "amplifier": 0
           }
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx faerie.trickster_warden"
         }
       ]
     }
@@ -1241,6 +1256,10 @@
         {
           "type": "origins:set_on_fire",
           "duration": 2
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx faerie.trickster_blaze"
         }
       ]
     }
@@ -1268,6 +1287,10 @@
           "type": "origins:damage",
           "amount": 1,
           "damage_type": "minecraft:magic"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx faerie.trickster_phantom"
         }
       ]
     }
@@ -1293,6 +1316,10 @@
         },
         {
           "type": "origins:clear_effect"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx faerie.trickster_cow"
         }
       ]
     }
@@ -1324,6 +1351,10 @@
           "type": "origins:damage",
           "amount": 1,
           "damage_type": "minecraft:magic"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx faerie.trickster_skeleton"
         }
       ]
     }
@@ -1350,6 +1381,10 @@
             "duration": 40,
             "amplifier": 0
           }
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx faerie.trickster_wskeleton"
         }
       ]
     }
@@ -1382,6 +1417,10 @@
             "particle": "minecraft:portal",
             "count": 8
           }
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx faerie.trickster_enderman"
         }
       ]
     }
@@ -1413,6 +1452,10 @@
             "duration": 40,
             "amplifier": 0
           }
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx faerie.trickster_spider"
         }
       ]
     }
@@ -1436,6 +1479,10 @@
           "type": "origins:damage",
           "amount": 1,
           "damage_type": "minecraft:magic"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx faerie.trickster_zombie"
         }
       ]
     }
@@ -1513,6 +1560,10 @@
               "weight": 1
             }
           ]
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx faerie.trickster_creeper"
         }
       ]
     }
@@ -1552,6 +1603,10 @@
             "duration": 40,
             "amplifier": 0
           }
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx faerie.trickster_stray"
         }
       ]
     }
@@ -1583,6 +1638,10 @@
           "type": "origins:damage",
           "amount": 1,
           "damage_type": "minecraft:magic"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx faerie.trickster_drowned"
         }
       ]
     }
@@ -1596,10 +1655,19 @@
       "should_render": false
     },
     "max_action": {
-      "type": "origins:play_sound",
-      "sound": "minecraft:entity.strider.ambient",
-      "volume": 1,
-      "pitch": 1
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.strider.ambient",
+          "volume": 1,
+          "pitch": 1
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx faerie.trickster_strider"
+        }
+      ]
     }
   },
   "pufferfish": {
@@ -1641,6 +1709,10 @@
             "duration": 600,
             "amplifier": 0
           }
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx faerie.trickster_pufferfish"
         }
       ]
     }
@@ -1713,6 +1785,10 @@
               "weight": 1
             }
           ]
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx faerie.trickster_breeze"
         }
       ]
     }
@@ -1748,6 +1824,10 @@
             "duration": 40,
             "amplifier": 0
           }
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx faerie.trickster_shulker"
         }
       ]
     }
@@ -1778,6 +1858,10 @@
             "duration": 60,
             "amplifier": 1
           }
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx faerie.trickster_axolotl"
         }
       ]
     }

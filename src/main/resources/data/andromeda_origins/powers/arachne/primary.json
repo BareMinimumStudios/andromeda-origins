@@ -57,6 +57,10 @@
                 "pitch": 0.2
               },
               {
+                "type": "origins:execute_command",
+                "command": "andromedaorigins internal_fx arachne.eightfold_dash"
+              },
+              {
                 "type": "origins:grant_power",
                 "power": "andromeda_origins:arachne/helper/dash_horizontal",
                 "source": "minecraft:state"
@@ -97,7 +101,7 @@
           },
           "action": {
             "type": "origins:raycast",
-            "distance": 32,
+            "distance": 16,
             "block": true,
             "entity": true,
             "shape_type": "collider",
@@ -129,6 +133,10 @@
                   "pitch": 0.7
                 },
                 {
+                  "type": "origins:execute_command",
+                  "command": "andromedaorigins internal_fx arachne.eightfold_grapple"
+                },
+                {
                   "type": "origins:spawn_particles",
                   "particle": {
                     "type": "minecraft:cloud"
@@ -145,8 +153,8 @@
                 },
                 {
                   "type": "origins:add_velocity",
-                  "y": 0.2,
-                  "z": 2.5,
+                  "y": 0.0,
+                  "z": 1.45,
                   "space": "local",
                   "set": true
                 },
@@ -238,5 +246,5 @@
     }
   ],
   "name": "Eightfold Swiftness",
-  "description": "Press your Primary Ability key on the ground to burst forward for 0.5 seconds. Use it while airborne to fire a strand of silk that pulls you toward a block or creature.\n \nStandard Arachne deal 50% less projectile damage while using this movement and for 3 seconds afterward; Champion Arachne ignore that penalty. §e§lMovement Ability§r."
+  "description": "Press your Primary Ability key on the ground to burst forward for 0.5 seconds without forcing you downward; the dash retains Arachne step assistance. Use it while airborne to fire a strand of silk toward a block or creature within 16 blocks and pull yourself in that direction.\n \nWhile using this movement and for 3 seconds afterward, you take 50% less projectile damage. §e§lMovement Ability§r."
 }

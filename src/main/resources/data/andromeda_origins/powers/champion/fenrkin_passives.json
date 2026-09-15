@@ -11,8 +11,14 @@
         },
         {
           "type": "origins:change_resource",
+          "resource": "andromeda_origins:champion/fenrkin_passives_toggle_state",
+          "change": 1,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
           "resource": "andromeda_origins:champion/fenrkin_passives_undercooldown",
-          "change": 3600,
+          "change": 7200,
           "operation": "set"
         },
         {
@@ -167,8 +173,42 @@
       "amount": -0.25
     }
   },
-  "toggle": {
-    "type": "origins:toggle",
+  "toggle_state": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 1,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "toggle_action": {
+    "type": "origins:active_self",
+    "cooldown": 1,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:if_else",
+      "condition": {
+        "type": "origins:resource",
+        "resource": "*:*_toggle_state",
+        "comparison": "==",
+        "compare_to": 0
+      },
+      "if_action": {
+        "type": "origins:change_resource",
+        "resource": "*:*_toggle_state",
+        "change": 1,
+        "operation": "set"
+      },
+      "else_action": {
+        "type": "origins:change_resource",
+        "resource": "*:*_toggle_state",
+        "change": 0,
+        "operation": "set"
+      }
+    },
     "key": {
       "key": "key.andromeda_origins.toggle",
       "continuous": false
@@ -178,8 +218,10 @@
     "type": "origins:night_vision",
     "strength": 0.75,
     "condition": {
-      "type": "origins:power_active",
-      "power": "*:*_toggle"
+      "type": "origins:resource",
+      "resource": "*:*_toggle_state",
+      "comparison": "==",
+      "compare_to": 1
     }
   },
   "speedup": {
@@ -193,7 +235,7 @@
   },
   "undercooldown": {
     "type": "origins:cooldown",
-    "cooldown": 3600,
+    "cooldown": 7200,
     "hud_render": {
       "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
       "bar_index": 13
@@ -211,6 +253,10 @@
           "pitch": 0.7
         },
         {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx fenrkin.adrenaline"
+        },
+        {
           "type": "origins:extinguish"
         },
         {
@@ -218,15 +264,11 @@
           "power": "*:*_undercooldown"
         },
         {
-          "type": "origins:heal",
-          "amount": 5
-        },
-        {
-          "type": "origins:apply_effect",
-          "effect": {
-            "id": "minecraft:instant_health",
-            "duration": 1,
-            "amplifier": 1
+          "type": "origins:delay",
+          "ticks": 1,
+          "action": {
+            "type": "origins:execute_command",
+            "command": "andromedaorigins internal_set_health_8"
           }
         },
         {
@@ -282,10 +324,12 @@
       "amount": 1.0
     },
     "condition": {
-      "type": "origins:power_active",
-      "power": "*:*_toggle"
+      "type": "origins:resource",
+      "resource": "*:*_toggle_state",
+      "comparison": "==",
+      "compare_to": 1
     }
   },
   "name": "Champion Passive Features",
-  "description": "§e§lChampion Features:§r\n+20% Size\n+20% Melee Damage\n \n- Retains hunting senses, venom, devouring, darkvision and Adrenaline.\n- No Wet, cramped-space, armor, food-efficiency or dietary penalties."
+  "description": "\u00a7e\u00a7lChampion Features:\u00a7r\n+20% Size\n+20% Movement Speed\n-25% Damage Taken from all sources\n \n- Retains darkvision, hunting abilities, Stamina Surge and Adrenaline. Adrenaline restores you to 8 health, breaks Crowd Control, briefly makes you Unstoppable, and grants its 35-second resistance buff. Its base cooldown is 6 minutes (3 minutes effective with Champion cooldown recovery).\n- Mark of Fenrir retains its mark/reveal and +25% damage interaction without the stalking movement penalty.\n- No Wet, cramped-space, armor-Wither or dietary penalties.\n- Player-facing ability cooldowns recover at 2\u00d7 rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
 }

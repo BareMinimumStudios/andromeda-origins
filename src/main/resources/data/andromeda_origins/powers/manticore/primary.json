@@ -47,6 +47,34 @@
                 "pitch": 1.0
               },
               {
+                "type": "origins:execute_command",
+                "command": "andromedaorigins internal_fx manticore.lunge_start"
+              },
+              {
+                "type": "origins:delay",
+                "ticks": 2,
+                "action": {
+                  "type": "origins:execute_command",
+                  "command": "andromedaorigins internal_fx manticore.lunge_trail"
+                }
+              },
+              {
+                "type": "origins:delay",
+                "ticks": 4,
+                "action": {
+                  "type": "origins:execute_command",
+                  "command": "andromedaorigins internal_fx manticore.lunge_trail"
+                }
+              },
+              {
+                "type": "origins:delay",
+                "ticks": 6,
+                "action": {
+                  "type": "origins:execute_command",
+                  "command": "andromedaorigins internal_fx manticore.lunge_trail"
+                }
+              },
+              {
                 "type": "origins:grant_power",
                 "power": "andromeda_origins:manticore/helper/chargelogic",
                 "source": "minecraft:state"
@@ -516,9 +544,9 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "§e§lFeather Falling:§r§f Immune to falling damage."
+      "text": "\u00a7e\u00a7lFeather Falling:\u00a7r\u00a7f Immune to falling damage."
     }
   ],
   "name": "Ravenous Lunge",
-  "description": "Press your Primary Ability key to launch roughly 16 blocks in a controlled pounce, repeatedly dealing 2.5 damage to creatures you collide with and dragging them along your path. Near the ground, upward aim is softly capped so looking steeply upward still produces a forward pounce instead of a vertical rocket. Once you are roughly 3 blocks off the ground, the lunge follows your aim more strongly while keeping its vertical reach capped below 16 blocks. Gain Feather Falling for 2 seconds afterward.\n \nStandard Manticores deal 50% less projectile damage during the lunge and for 3 seconds afterward; Champion Manticores ignore that penalty. §e§lMovement Ability§r, §e§lCrowd Control§r & §e§lInvincibility Frames§r."
+  "description": "Press your Primary Ability key to launch roughly 16 blocks in a controlled pounce, repeatedly dealing 2.5 damage to creatures you collide with and dragging them along your path. Near the ground, upward aim is softly capped so looking steeply upward still produces a forward pounce instead of a vertical rocket. Once you are roughly 3 blocks off the ground, the lunge follows your aim more strongly while keeping its vertical reach capped below 16 blocks. Gain Feather Falling for 2 seconds afterward.\n \nYou deal 50% less projectile damage during the lunge and for 3 seconds afterward. \u00a7e\u00a7lMovement Ability\u00a7r, \u00a7e\u00a7lCrowd Control\u00a7r & \u00a7e\u00a7lInvincibility Frames\u00a7r."
 }

@@ -38,9 +38,18 @@
   "how": {
     "type": "origins:prevent_death",
     "entity_action": {
-      "type": "origins:change_resource",
-      "resource": "*:*_remove",
-      "change": -60
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx humanity.indomitable_save"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_remove",
+          "change": -60
+        }
+      ]
     }
   },
   "hittake": {

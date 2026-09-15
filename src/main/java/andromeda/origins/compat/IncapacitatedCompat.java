@@ -92,15 +92,100 @@ public final class IncapacitatedCompat {
             playerData.getClass().getMethod("setLastHealthBeforeDamage", float.class)
                 .invoke(playerData, Math.max(1.0F, player.getHealth()));
 
-            Method writePlayerData = Arrays.stream(platform.getClass().getMethods())
-                .filter(method -> method.getName().equals("writePlayerData") && method.getParameterCount() == 2)
-                .findFirst()
-                .orElseThrow(() -> new NoSuchMethodException("writePlayerData"));
-            writePlayerData.invoke(platform, player, playerData);
+            writePlayerData(platform, player, playerData);
         } catch (ReflectiveOperationException | RuntimeException exception) {
             if (!reflectionWarningLogged) {
                 reflectionWarningLogged = true;
                 LOGGER.warn("Could not reset Incapacitated transient damage tracking.", exception);
+            }
+        }
+    }
+
+    private static Object getConfigData() throws ReflectiveOperationException {
+        Class<?> incapacitatedClass = Class.forName("com.cartoonishvillain.incapacitated.Incapacitated");
+        Field configField = incapacitatedClass.getField("configData");
+        return configField.get(null);
+    }
+
+    private static void writePlayerData(Object platform, ServerPlayerEntity player, Object playerData)
+        throws ReflectiveOperationException {
+        Method writePlayerData = Arrays.stream(platform.getClass().getMethods())
+            .filter(method -> method.getName().equals("writePlayerData") && method.getParameterCount() == 2)
+            .findFirst()
+            .orElseThrow(() -> new NoSuchMethodException("writePlayerData"));
+        writePlayerData.invoke(platform, player, playerData);
+    }
+
+    /**
+     * Restores Incapacitated's normal post-death counters after Mortal Resolve temporarily forces
+     * downsUntilDeath to -1. This prevents the final-stand sentinel from leaking into later lives.
+     */
+    public static void restorePostMortalResolveState(ServerPlayerEntity player) {
+        if (!isLoaded()) {
+            return;
+        }
+
+        try {
+            Object platform = getPlatform();
+            Object playerData = getPlayerData(platform, player);
+            Object configData = getConfigData();
+            if (playerData == null || configData == null) {
+                return;
+            }
+
+            int downCounter = ((Number) configData.getClass().getMethod("getDownCounter").invoke(configData)).intValue();
+            int downTicks = ((Number) configData.getClass().getMethod("getDownTicks").invoke(configData)).intValue();
+
+            playerData.getClass().getMethod("setIncapacitated", boolean.class).invoke(playerData, false);
+            playerData.getClass().getMethod("setDownsUntilDeath", int.class).invoke(playerData, Math.max(0, downCounter));
+            playerData.getClass().getMethod("setTicksUntilDeath", int.class).invoke(playerData, Math.max(1, downTicks));
+            writePlayerData(platform, player, playerData);
+            resetDamageTracking(player);
+        } catch (ReflectiveOperationException | RuntimeException exception) {
+            if (!reflectionWarningLogged) {
+                reflectionWarningLogged = true;
+                LOGGER.warn("Could not restore Incapacitated state after Mortal Resolve death.", exception);
+            }
+        }
+    }
+
+    /**
+     * Self-heals the stale -1 counter produced by older Andromeda versions when Incapacitated is
+     * configured for UnlimitedDowns. Unlimited downs still requires a non-negative stored counter
+     * in Incapacitated's death gate; it merely stops decrementing that counter.
+     */
+    public static void repairUnlimitedDownCounter(ServerPlayerEntity player) {
+        if (!isLoaded()) {
+            return;
+        }
+
+        try {
+            Object configData = getConfigData();
+            boolean unlimited = Boolean.TRUE.equals(configData.getClass().getMethod("isUnlimitedDowns").invoke(configData));
+            if (!unlimited) {
+                return;
+            }
+
+            Object platform = getPlatform();
+            Object playerData = getPlayerData(platform, player);
+            if (playerData == null) {
+                return;
+            }
+
+            int current = ((Number) playerData.getClass().getMethod("getDownsUntilDeath").invoke(playerData)).intValue();
+            if (current >= 0) {
+                return;
+            }
+
+            int downCounter = ((Number) configData.getClass().getMethod("getDownCounter").invoke(configData)).intValue();
+            playerData.getClass().getMethod("setDownsUntilDeath", int.class).invoke(playerData, Math.max(0, downCounter));
+            writePlayerData(platform, player, playerData);
+            resetDamageTracking(player);
+            LOGGER.info("Repaired stale Incapacitated unlimited-down counter for {}.", player.getGameProfile().getName());
+        } catch (ReflectiveOperationException | RuntimeException exception) {
+            if (!reflectionWarningLogged) {
+                reflectionWarningLogged = true;
+                LOGGER.warn("Could not repair Incapacitated unlimited-down counter.", exception);
             }
         }
     }
@@ -183,8 +268,9 @@ public final class IncapacitatedCompat {
     /**
      * Marks the next death as final for Incapacitated. The mod's own death hook checks its
      * downs-until-death value, so setting it below zero immediately before death prevents a second
-     * down without replacing or hard-depending on Incapacitated's classes. Its Fabric player
-     * component resets to configured defaults on a normal death/respawn.
+     * down without replacing or hard-depending on Incapacitated's classes. Andromeda explicitly
+     * restores the configured counter after the final death so this temporary sentinel cannot leak
+     * into a later life.
      */
     public static void prepareMortalResolveDeath(ServerPlayerEntity player) {
         if (!isLoaded()) {
@@ -201,11 +287,7 @@ public final class IncapacitatedCompat {
             playerData.getClass().getMethod("setIncapacitated", boolean.class).invoke(playerData, false);
             playerData.getClass().getMethod("setDownsUntilDeath", int.class).invoke(playerData, -1);
 
-            Method writePlayerData = Arrays.stream(platform.getClass().getMethods())
-                .filter(method -> method.getName().equals("writePlayerData") && method.getParameterCount() == 2)
-                .findFirst()
-                .orElseThrow(() -> new NoSuchMethodException("writePlayerData"));
-            writePlayerData.invoke(platform, player, playerData);
+            writePlayerData(platform, player, playerData);
 
             resetDamageTracking(player);
         } catch (ReflectiveOperationException | RuntimeException exception) {
@@ -273,6 +355,7 @@ public final class IncapacitatedCompat {
             if (isLoaded()) {
                 player.getServerWorld().getServer().getCommandManager()
                     .executeWithPrefix(silentSource, "incapacitated setDowned false");
+                repairUnlimitedDownCounter(player);
                 resetDamageTracking(player);
             }
         }

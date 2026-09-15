@@ -48,6 +48,12 @@
           "operation": "set"
         },
         {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:champion/manticore_passives_bloodriftstate",
+          "change": 0,
+          "operation": "set"
+        },
+        {
           "type": "origins:execute_command",
           "command": "tag @s add manticore"
         }
@@ -261,5 +267,365 @@
     }
   },
   "name": "Champion Passive Features",
-  "description": "§e§lChampion Features:§r\n+20% Size\n+35% Melee Damage\n \n- Retains predatory senses, venom, devouring and physical resistance.\n- No Wet, cramped-space, food-efficiency or dietary penalties."
+  "description": "\u00a7e\u00a7lChampion Features:\u00a7r\n+20% Size\n+35% Melee Damage\n \n- Retains predatory senses, venom, devouring and physical resistance.\n- No Wet, cramped-space, food-efficiency or dietary penalties.\n- Beast of Blood still grants 30 seconds of Unstoppable, but does not inflict Famished afterward.\n- Sneak + Secondary activates \u00a7c\u00a7lBloodrift\u00a7r: lightning strikes as the Champion tears into reality, becomes [Undetectable], and erupts back out with another lightning strike, a roar, and a nearby 3-second Darkness burst. Attacking or taking damage also forces Bloodrift to end. Bloodrift has a 10-second cooldown.\n- Player-facing ability cooldowns recover at 2\u00d7 rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged.",
+  "bloodriftcooldown": {
+    "type": "origins:cooldown",
+    "cooldown": 200,
+    "hud_render": {
+      "should_render": true,
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 4
+    }
+  },
+  "bloodriftstate": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "min_action": {
+      "type": "origins:revoke_power",
+      "power": "*:common/undetectable",
+      "source": "minecraft:buff"
+    },
+    "max_action": {
+      "type": "origins:grant_power",
+      "power": "*:common/undetectable",
+      "source": "minecraft:buff"
+    }
+  },
+  "bloodrift": {
+    "type": "origins:active_self",
+    "cooldown": 0,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:if_else",
+      "condition": {
+        "type": "origins:resource",
+        "resource": "*:*_bloodriftstate",
+        "comparison": "==",
+        "compare_to": 0
+      },
+      "if_action": {
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:play_sound",
+            "sound": "andromeda_origins:ability.manticore.beast_of_blood",
+            "volume": 1.05,
+            "pitch": 0.85
+          },
+          {
+            "type": "origins:execute_command",
+            "command": "andromedaorigins internal_cosmetic_lightning"
+          },
+          {
+            "type": "origins:execute_command",
+            "command": "andromedaorigins internal_fx manticore.bloodrift_enter"
+          },
+          {
+            "type": "origins:delay",
+            "ticks": 2,
+            "action": {
+              "type": "origins:execute_command",
+              "command": "andromedaorigins internal_fx_at manticore.bloodrift_tear ^ ^1.0 ^2.25"
+            }
+          },
+          {
+            "type": "origins:delay",
+            "ticks": 3,
+            "action": {
+              "type": "origins:change_resource",
+              "resource": "*:*_bloodriftstate",
+              "change": 1,
+              "operation": "set"
+            }
+          }
+        ]
+      },
+      "else_action": {
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:change_resource",
+            "resource": "*:*_bloodriftstate",
+            "change": 0,
+            "operation": "set"
+          },
+          {
+            "type": "origins:execute_command",
+            "command": "andromedaorigins internal_cosmetic_lightning"
+          },
+          {
+            "type": "origins:execute_command",
+            "command": "andromedaorigins internal_fx manticore.bloodrift_exit"
+          },
+          {
+            "type": "origins:execute_command",
+            "command": "andromedaorigins internal_fx_at manticore.bloodrift_tear ^ ^1.0 ^2.25"
+          },
+          {
+            "type": "origins:delay",
+            "ticks": 2,
+            "action": {
+              "type": "origins:play_sound",
+              "sound": "andromeda_origins:ability.manticore.ravenous_lunge",
+              "volume": 1.2,
+              "pitch": 0.78
+            }
+          },
+          {
+            "type": "origins:delay",
+            "ticks": 4,
+            "action": {
+              "type": "origins:execute_command",
+              "command": "andromedaorigins internal_fx manticore.bloodrift_aftershock"
+            }
+          },
+          {
+            "type": "origins:area_of_effect",
+            "shape": "sphere",
+            "radius": 6,
+            "include_actor": false,
+            "bientity_action": {
+              "type": "origins:target_action",
+              "action": {
+                "type": "origins:apply_effect",
+                "effect": {
+                  "id": "minecraft:darkness",
+                  "duration": 60,
+                  "amplifier": 0
+                }
+              }
+            },
+            "bientity_condition": {
+              "type": "origins:target_condition",
+              "condition": {
+                "type": "origins:living"
+              }
+            }
+          },
+          {
+            "type": "origins:trigger_cooldown",
+            "power": "*:*_bloodriftcooldown"
+          }
+        ]
+      }
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "*:common/silenced",
+          "inverted": true
+        },
+        {
+          "type": "origins:sneaking"
+        },
+        {
+          "type": "origins:power",
+          "power": "andromeda_origins:manticore/helper/unstoppable_anim",
+          "inverted": true
+        },
+        {
+          "type": "origins:or",
+          "conditions": [
+            {
+              "type": "origins:resource",
+              "resource": "*:*_bloodriftstate",
+              "comparison": "==",
+              "compare_to": 1
+            },
+            {
+              "type": "origins:resource",
+              "resource": "*:*_bloodriftcooldown",
+              "comparison": "==",
+              "compare_to": 0
+            }
+          ]
+        }
+      ]
+    },
+    "key": {
+      "key": "key.origins.secondary_active",
+      "continuous": false
+    }
+  },
+  "bloodrift_break_attack": {
+    "type": "origins:self_action_on_hit",
+    "cooldown": 5,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_bloodriftstate",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_cosmetic_lightning"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx manticore.bloodrift_exit"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx_at manticore.bloodrift_tear ^ ^1.0 ^2.25"
+        },
+        {
+          "type": "origins:delay",
+          "ticks": 2,
+          "action": {
+            "type": "origins:play_sound",
+            "sound": "andromeda_origins:ability.manticore.ravenous_lunge",
+            "volume": 1.2,
+            "pitch": 0.78
+          }
+        },
+        {
+          "type": "origins:delay",
+          "ticks": 4,
+          "action": {
+            "type": "origins:execute_command",
+            "command": "andromedaorigins internal_fx manticore.bloodrift_aftershock"
+          }
+        },
+        {
+          "type": "origins:area_of_effect",
+          "shape": "sphere",
+          "radius": 6,
+          "include_actor": false,
+          "bientity_action": {
+            "type": "origins:target_action",
+            "action": {
+              "type": "origins:apply_effect",
+              "effect": {
+                "id": "minecraft:darkness",
+                "duration": 60,
+                "amplifier": 0
+              }
+            }
+          },
+          "bientity_condition": {
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:living"
+            }
+          }
+        },
+        {
+          "type": "origins:trigger_cooldown",
+          "power": "*:*_bloodriftcooldown"
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:resource",
+      "resource": "*:*_bloodriftstate",
+      "comparison": "==",
+      "compare_to": 1
+    }
+  },
+  "bloodrift_break_damage": {
+    "type": "origins:self_action_when_hit",
+    "cooldown": 5,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_bloodriftstate",
+          "change": 0,
+          "operation": "set"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_cosmetic_lightning"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx manticore.bloodrift_exit"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx_at manticore.bloodrift_tear ^ ^1.0 ^2.25"
+        },
+        {
+          "type": "origins:delay",
+          "ticks": 2,
+          "action": {
+            "type": "origins:play_sound",
+            "sound": "andromeda_origins:ability.manticore.ravenous_lunge",
+            "volume": 1.2,
+            "pitch": 0.78
+          }
+        },
+        {
+          "type": "origins:delay",
+          "ticks": 4,
+          "action": {
+            "type": "origins:execute_command",
+            "command": "andromedaorigins internal_fx manticore.bloodrift_aftershock"
+          }
+        },
+        {
+          "type": "origins:area_of_effect",
+          "shape": "sphere",
+          "radius": 6,
+          "include_actor": false,
+          "bientity_action": {
+            "type": "origins:target_action",
+            "action": {
+              "type": "origins:apply_effect",
+              "effect": {
+                "id": "minecraft:darkness",
+                "duration": 60,
+                "amplifier": 0
+              }
+            }
+          },
+          "bientity_condition": {
+            "type": "origins:target_condition",
+            "condition": {
+              "type": "origins:living"
+            }
+          }
+        },
+        {
+          "type": "origins:trigger_cooldown",
+          "power": "*:*_bloodriftcooldown"
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:resource",
+      "resource": "*:*_bloodriftstate",
+      "comparison": "==",
+      "compare_to": 1
+    }
+  },
+  "bloodrift_vision": {
+    "type": "origins:night_vision",
+    "strength": 0.75,
+    "condition": {
+      "type": "origins:resource",
+      "resource": "*:*_bloodriftstate",
+      "comparison": "==",
+      "compare_to": 1
+    }
+  }
 }

@@ -8,5 +8,5 @@
   },
   "hidden": true,
   "name": "Mortal Resolve Figura State",
-  "description": "Semantic Figura compatibility state. 1 while Mortal Resolve or Champion Mortal Resolve is active; otherwise 0."
+  "description": "Semantic Figura compatibility state. 1 while Mortal Resolve is active; otherwise 0."
 }

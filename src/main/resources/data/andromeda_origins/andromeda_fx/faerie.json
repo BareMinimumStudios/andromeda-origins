@@ -1,0 +1,527 @@
+{
+  "faerie.flutter": {
+    "particles": [
+      {
+        "id": "spell_engine:magic_star",
+        "preset": "helix",
+        "count": 7,
+        "speed": 0.05,
+        "degrees_per_tick": 18,
+        "offset": 0,
+        "scale": 0.7,
+        "scale_to": 1.2,
+        "color": "#FFE7FF",
+        "opacity": 0.82,
+        "fade_out_hold": 0.18,
+        "glow": true,
+        "motion": "float"
+      },
+      {
+        "id": "spell_engine:magic_star",
+        "preset": "helix",
+        "count": 7,
+        "speed": 0.05,
+        "degrees_per_tick": -18,
+        "offset": 180,
+        "scale": 0.7,
+        "scale_to": 1.2,
+        "color": "#FFD1F5",
+        "opacity": 0.82,
+        "fade_out_hold": 0.18,
+        "glow": true,
+        "motion": "float"
+      },
+      {
+        "id": "spell_engine:magic_stripe",
+        "preset": "cone",
+        "count": 16,
+        "speed": 0.16,
+        "angle": 30,
+        "scale": 0.8,
+        "color": "#FFF5FF",
+        "opacity": 0.8,
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "more_rpg_classes:rainbow_music_note",
+        "preset": "cloud",
+        "count": 8,
+        "speed": 0.03,
+        "scale": 0.8,
+        "motion": "float",
+        "requires_mod": "more_rpg_classes"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "spell_engine:generic_arcane_release",
+        "volume": 0.26,
+        "pitch": 1.22
+      },
+      {
+        "id": "more_rpg_classes:water_release_2",
+        "volume": 0.18,
+        "pitch": 1.35,
+        "requires_mod": "more_rpg_classes"
+      }
+    ]
+  },
+  "faerie.fae_illusions": {
+    "particles": [
+      {
+        "id": "spell_engine:area_swirl",
+        "preset": "ground",
+        "count": 1,
+        "scale": 1.7,
+        "color": "#F4C2FF",
+        "opacity": 0.84,
+        "fade_out_hold": 0.24,
+        "glow": true
+      },
+      {
+        "id": "spell_engine:magic_arcane",
+        "preset": "casting",
+        "count": 28,
+        "speed": 0.09,
+        "scale": 1.05,
+        "scale_to": 1.25,
+        "color": "#D8A8FF",
+        "glow": true,
+        "motion": "ascend",
+        "lifetime_variance": 0.4
+      },
+      {
+        "id": "spell_engine:magic_star",
+        "preset": "impact",
+        "count": 18,
+        "speed": 0.11,
+        "scale": 0.95,
+        "color": "#FFF1FF",
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "more_rpg_classes:music_note",
+        "preset": "cloud",
+        "count": 10,
+        "speed": 0.03,
+        "scale": 0.9,
+        "motion": "float",
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:rainbow_music_note",
+        "preset": "cloud",
+        "count": 8,
+        "speed": 0.025,
+        "scale": 0.85,
+        "motion": "float",
+        "requires_mod": "more_rpg_classes"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "spell_engine:generic_arcane_release",
+        "volume": 0.42,
+        "pitch": 1.18
+      },
+      {
+        "id": "more_rpg_classes:arcane_strong_impact",
+        "volume": 0.22,
+        "pitch": 1.25,
+        "requires_mod": "more_rpg_classes"
+      }
+    ]
+  },
+  "faerie.trickster_waterswap": {
+    "particles": [
+      {
+        "id": "more_rpg_classes:water_circle",
+        "preset": "ground",
+        "count": 1,
+        "scale": 1.25,
+        "opacity": 0.72,
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:bubble",
+        "preset": "impact",
+        "count": 12,
+        "speed": 0.07,
+        "scale": 0.78,
+        "motion": "ascend",
+        "requires_mod": "more_rpg_classes"
+      }
+    ],
+    "sounds": []
+  },
+  "faerie.trickster_warden": {
+    "particles": [
+      {
+        "id": "spell_engine:area_swirl",
+        "preset": "ground",
+        "count": 1,
+        "scale": 1.35,
+        "color": "#28445C",
+        "opacity": 0.8,
+        "glow": true
+      },
+      {
+        "id": "spell_engine:magic_arcane",
+        "preset": "impact",
+        "count": 14,
+        "speed": 0.09,
+        "scale": 0.8,
+        "color": "#487F9A",
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "spell_engine:smoke_medium",
+        "preset": "cloud",
+        "count": 9,
+        "speed": 0.025,
+        "scale": 0.78,
+        "motion": "ascend"
+      }
+    ],
+    "sounds": []
+  },
+  "faerie.trickster_blaze": {
+    "particles": [
+      {
+        "id": "spell_engine:flame_spark",
+        "preset": "impact",
+        "count": 18,
+        "speed": 0.12,
+        "scale": 0.85,
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "spell_engine:flame_medium_a",
+        "preset": "casting",
+        "count": 8,
+        "speed": 0.06,
+        "scale": 0.76,
+        "glow": true,
+        "motion": "ascend"
+      }
+    ],
+    "sounds": []
+  },
+  "faerie.trickster_phantom": {
+    "particles": [
+      {
+        "id": "spell_engine:magic_stripe",
+        "preset": "helix",
+        "count": 12,
+        "speed": 0.05,
+        "degrees_per_tick": 24,
+        "offset": 0,
+        "scale": 0.72,
+        "color": "#8EB5FF",
+        "opacity": 0.76,
+        "glow": true,
+        "motion": "float"
+      },
+      {
+        "id": "spell_engine:magic_star",
+        "preset": "cloud",
+        "count": 8,
+        "speed": 0.03,
+        "scale": 0.7,
+        "color": "#C7D8FF",
+        "glow": true,
+        "motion": "float"
+      }
+    ],
+    "sounds": []
+  },
+  "faerie.trickster_cow": {
+    "particles": [
+      {
+        "id": "spell_engine:magic_spell",
+        "preset": "impact",
+        "count": 12,
+        "speed": 0.08,
+        "scale": 0.75,
+        "color": "#B88A67",
+        "glow": true,
+        "motion": "burst"
+      }
+    ],
+    "sounds": []
+  },
+  "faerie.trickster_skeleton": {
+    "particles": [
+      {
+        "id": "spell_engine:magic_spell",
+        "preset": "impact",
+        "count": 14,
+        "speed": 0.09,
+        "scale": 0.76,
+        "color": "#F1F1E6",
+        "glow": true,
+        "motion": "burst"
+      }
+    ],
+    "sounds": []
+  },
+  "faerie.trickster_wskeleton": {
+    "particles": [
+      {
+        "id": "spell_engine:magic_skull",
+        "preset": "impact",
+        "count": 14,
+        "speed": 0.09,
+        "scale": 0.82,
+        "color": "#5B5263",
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "spell_engine:smoke_medium",
+        "preset": "cloud",
+        "count": 8,
+        "speed": 0.03,
+        "scale": 0.72,
+        "motion": "ascend"
+      }
+    ],
+    "sounds": []
+  },
+  "faerie.trickster_enderman": {
+    "particles": [
+      {
+        "id": "spell_engine:area_swirl",
+        "preset": "ground",
+        "count": 1,
+        "scale": 1.3,
+        "color": "#B34DFF",
+        "opacity": 0.78,
+        "glow": true
+      },
+      {
+        "id": "spell_engine:magic_arcane",
+        "preset": "impact",
+        "count": 14,
+        "speed": 0.1,
+        "scale": 0.8,
+        "color": "#E48AFF",
+        "glow": true,
+        "motion": "burst"
+      }
+    ],
+    "sounds": []
+  },
+  "faerie.trickster_spider": {
+    "particles": [
+      {
+        "id": "more_rpg_classes:fatal_poison",
+        "preset": "impact",
+        "count": 16,
+        "speed": 0.1,
+        "scale": 0.82,
+        "motion": "burst",
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "spell_engine:magic_star",
+        "preset": "cloud",
+        "count": 7,
+        "speed": 0.025,
+        "scale": 0.65,
+        "color": "#71E66C",
+        "glow": true,
+        "motion": "float"
+      }
+    ],
+    "sounds": []
+  },
+  "faerie.trickster_zombie": {
+    "particles": [
+      {
+        "id": "spell_engine:roots",
+        "preset": "impact",
+        "count": 12,
+        "speed": 0.08,
+        "scale": 0.8,
+        "color": "#71965A",
+        "glow": true,
+        "motion": "burst"
+      }
+    ],
+    "sounds": []
+  },
+  "faerie.trickster_creeper": {
+    "particles": [
+      {
+        "id": "spell_engine:magic_spell",
+        "preset": "shockwave",
+        "count": 18,
+        "speed": 0.14,
+        "pre_travel": 0.08,
+        "scale": 0.85,
+        "color": "#70E05A",
+        "glow": true,
+        "motion": "burst"
+      }
+    ],
+    "sounds": []
+  },
+  "faerie.trickster_stray": {
+    "particles": [
+      {
+        "id": "spell_engine:magic_star",
+        "preset": "impact",
+        "count": 16,
+        "speed": 0.1,
+        "scale": 0.8,
+        "color": "#B9E9FF",
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "spell_engine:magic_stripe",
+        "preset": "cloud",
+        "count": 7,
+        "speed": 0.025,
+        "scale": 0.65,
+        "color": "#E6FAFF",
+        "opacity": 0.7,
+        "glow": true,
+        "motion": "float"
+      }
+    ],
+    "sounds": []
+  },
+  "faerie.trickster_drowned": {
+    "particles": [
+      {
+        "id": "more_rpg_classes:water_splash",
+        "preset": "impact",
+        "count": 14,
+        "speed": 0.1,
+        "scale": 0.82,
+        "motion": "burst",
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:bubble",
+        "preset": "cloud",
+        "count": 8,
+        "speed": 0.035,
+        "scale": 0.72,
+        "motion": "ascend",
+        "requires_mod": "more_rpg_classes"
+      }
+    ],
+    "sounds": []
+  },
+  "faerie.trickster_strider": {
+    "particles": [
+      {
+        "id": "spell_engine:flame_medium_a",
+        "preset": "impact",
+        "count": 12,
+        "speed": 0.08,
+        "scale": 0.8,
+        "glow": true,
+        "motion": "float"
+      }
+    ],
+    "sounds": []
+  },
+  "faerie.trickster_pufferfish": {
+    "particles": [
+      {
+        "id": "more_rpg_classes:fatal_poison",
+        "preset": "impact",
+        "count": 18,
+        "speed": 0.1,
+        "scale": 0.85,
+        "motion": "burst",
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "spell_engine:magic_star",
+        "preset": "cloud",
+        "count": 8,
+        "speed": 0.03,
+        "scale": 0.7,
+        "color": "#E7EA67",
+        "glow": true,
+        "motion": "float"
+      }
+    ],
+    "sounds": []
+  },
+  "faerie.trickster_breeze": {
+    "particles": [
+      {
+        "id": "more_rpg_classes:small_gust",
+        "preset": "shockwave",
+        "count": 14,
+        "speed": 0.13,
+        "pre_travel": 0.08,
+        "scale": 0.86,
+        "motion": "burst",
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "spell_engine:magic_stripe",
+        "preset": "impact",
+        "count": 9,
+        "speed": 0.1,
+        "scale": 0.68,
+        "color": "#E7FBFF",
+        "glow": true,
+        "motion": "burst"
+      }
+    ],
+    "sounds": []
+  },
+  "faerie.trickster_shulker": {
+    "particles": [
+      {
+        "id": "spell_engine:magic_arcane",
+        "preset": "helix",
+        "count": 14,
+        "speed": 0.05,
+        "degrees_per_tick": 22,
+        "offset": 0,
+        "scale": 0.78,
+        "color": "#E65CFF",
+        "glow": true,
+        "motion": "ascend"
+      }
+    ],
+    "sounds": []
+  },
+  "faerie.trickster_axolotl": {
+    "particles": [
+      {
+        "id": "more_rpg_classes:water_heal",
+        "preset": "casting",
+        "count": 14,
+        "speed": 0.06,
+        "scale": 0.82,
+        "motion": "ascend",
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "spell_engine:magic_star",
+        "preset": "cloud",
+        "count": 8,
+        "speed": 0.03,
+        "scale": 0.7,
+        "color": "#FFBDE8",
+        "glow": true,
+        "motion": "float"
+      }
+    ],
+    "sounds": []
+  }
+}

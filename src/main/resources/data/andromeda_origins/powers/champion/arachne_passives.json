@@ -381,10 +381,19 @@
       "amount": 1.0
     },
     "condition": {
-      "type": "origins:power_active",
-      "power": "*:*_toggle"
+      "type": "origins:or",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "*:*_toggle"
+        },
+        {
+          "type": "origins:power",
+          "power": "*:arachne/helper/dash_horizontal"
+        }
+      ]
     }
   },
   "name": "Champion Passive Features",
-  "description": "\u00a7e\u00a7lChampion Features:\u00a7r\n+20% Ground & Air Speed\n-20% Height\n \n- Retains all Arachne web, venom, climbing, darkvision and ambush traits.\n- No health, damage-taken, sunlight, fire-duration, exhaustion or dietary penalties."
+  "description": "§e§lChampion Features:§r\n+20% Ground & Air Speed\n-20% Size\n \n- Retains all Arachne web, venom, climbing, darkvision and ambush traits.\n- No health, damage-taken, sunlight, fire-duration, exhaustion or dietary penalties.\n- Webspinner still creates 5 cobwebs, but completing it does not inflict Cobweb Fatigue.\n- Player-facing ability cooldowns recover at 2× rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
 }

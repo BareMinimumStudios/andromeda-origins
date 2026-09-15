@@ -1,0 +1,737 @@
+{
+  "lichling.deaths_defiance": {
+    "particles": [
+      {
+        "id": "spell_engine:area_swirl",
+        "preset": "ground",
+        "count": 1,
+        "scale": 1.7,
+        "color": "#6D44C8",
+        "opacity": 0.8,
+        "fade_out_hold": 0.25,
+        "glow": true
+      },
+      {
+        "id": "spell_engine:magic_skull",
+        "preset": "casting",
+        "count": 26,
+        "speed": 0.1,
+        "scale": 1.05,
+        "color": "#B48CFF",
+        "glow": true,
+        "motion": "ascend"
+      },
+      {
+        "id": "spell_engine:smoke_medium",
+        "preset": "impact",
+        "count": 16,
+        "speed": 0.1,
+        "scale": 0.95,
+        "motion": "decelerate"
+      },
+      {
+        "id": "spell_engine:magic_stripe",
+        "preset": "impact",
+        "count": 12,
+        "speed": 0.1,
+        "scale": 0.8,
+        "color": "#EFE0FF",
+        "glow": true,
+        "motion": "burst"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "spell_engine:generic_soul_release",
+        "volume": 0.48,
+        "pitch": 0.78
+      },
+      {
+        "id": "more_rpg_classes:arcane_strong_impact",
+        "volume": 0.18,
+        "pitch": 0.72,
+        "requires_mod": "more_rpg_classes"
+      }
+    ]
+  },
+  "lichling.chimes_start": {
+    "particles": [
+      {
+        "id": "spell_engine:area_swirl",
+        "preset": "ground",
+        "count": 1,
+        "scale": 2.0,
+        "color": "#6F4BBE",
+        "opacity": 0.84,
+        "fade_out_hold": 0.28,
+        "glow": true
+      },
+      {
+        "id": "spell_engine:magic_skull",
+        "preset": "helix",
+        "count": 7,
+        "speed": 0.05,
+        "degrees_per_tick": 18,
+        "offset": 0,
+        "scale": 0.95,
+        "glow": true,
+        "motion": "float"
+      },
+      {
+        "id": "spell_engine:magic_skull",
+        "preset": "helix",
+        "count": 7,
+        "speed": 0.05,
+        "degrees_per_tick": -18,
+        "offset": 180,
+        "scale": 0.95,
+        "glow": true,
+        "motion": "float"
+      },
+      {
+        "id": "spell_engine:smoke_medium",
+        "preset": "cloud",
+        "count": 10,
+        "speed": 0.03,
+        "scale": 0.8,
+        "motion": "ascend"
+      },
+      {
+        "id": "spell_engine:magic_arcane",
+        "preset": "impact",
+        "count": 10,
+        "speed": 0.08,
+        "scale": 0.82,
+        "color": "#BBA0FF",
+        "glow": true,
+        "motion": "decelerate"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "spell_engine:generic_soul_casting",
+        "volume": 0.34,
+        "pitch": 0.78
+      }
+    ]
+  },
+  "lichling.chimes_end": {
+    "particles": [
+      {
+        "id": "spell_engine:area_circle_1",
+        "preset": "ground",
+        "count": 1,
+        "scale": 1.9,
+        "color": "#8C67E1",
+        "opacity": 0.84,
+        "fade_out_hold": 0.22,
+        "glow": true
+      },
+      {
+        "id": "spell_engine:magic_skull",
+        "preset": "impact",
+        "count": 28,
+        "speed": 0.13,
+        "scale": 1.05,
+        "color": "#C3A7FF",
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "spell_engine:smoke_medium",
+        "preset": "cloud",
+        "count": 20,
+        "speed": 0.03,
+        "scale": 1.0,
+        "motion": "ascend"
+      },
+      {
+        "id": "spell_engine:magic_arcane",
+        "preset": "impact",
+        "count": 12,
+        "speed": 0.08,
+        "scale": 0.9,
+        "color": "#A98CFF",
+        "glow": true,
+        "motion": "decelerate"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "spell_engine:generic_soul_release",
+        "volume": 0.56,
+        "pitch": 0.72
+      },
+      {
+        "id": "more_rpg_classes:arcane_strong_impact",
+        "volume": 0.18,
+        "pitch": 0.76,
+        "requires_mod": "more_rpg_classes"
+      }
+    ]
+  },
+  "lichling.chimes_pulse_1": {
+    "particles": [
+      {
+        "id": "spell_engine:magic_skull",
+        "preset": "helix",
+        "count": 8,
+        "speed": 0.038,
+        "degrees_per_tick": 18,
+        "offset": 0,
+        "scale": 0.755,
+        "color": "#B18CFF",
+        "opacity": 0.705,
+        "glow": true,
+        "motion": "float"
+      },
+      {
+        "id": "spell_engine:smoke_medium",
+        "preset": "cloud",
+        "count": 5,
+        "speed": 0.025,
+        "scale": 0.705,
+        "color": "#442D59",
+        "opacity": 0.62,
+        "motion": "ascend"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "spell_engine:generic_soul_casting",
+        "volume": 0.158,
+        "pitch": 1.015
+      }
+    ]
+  },
+  "lichling.chimes_pulse_2": {
+    "particles": [
+      {
+        "id": "spell_engine:magic_skull",
+        "preset": "helix",
+        "count": 10,
+        "speed": 0.041,
+        "degrees_per_tick": 20,
+        "offset": 0,
+        "scale": 0.79,
+        "color": "#B18CFF",
+        "opacity": 0.73,
+        "glow": true,
+        "motion": "float"
+      },
+      {
+        "id": "spell_engine:smoke_medium",
+        "preset": "cloud",
+        "count": 6,
+        "speed": 0.025,
+        "scale": 0.73,
+        "color": "#442D59",
+        "opacity": 0.62,
+        "motion": "ascend"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "spell_engine:generic_soul_casting",
+        "volume": 0.176,
+        "pitch": 0.99
+      }
+    ]
+  },
+  "lichling.chimes_pulse_3": {
+    "particles": [
+      {
+        "id": "spell_engine:magic_skull",
+        "preset": "helix",
+        "count": 12,
+        "speed": 0.044,
+        "degrees_per_tick": 22,
+        "offset": 0,
+        "scale": 0.825,
+        "color": "#B18CFF",
+        "opacity": 0.755,
+        "glow": true,
+        "motion": "float"
+      },
+      {
+        "id": "spell_engine:smoke_medium",
+        "preset": "cloud",
+        "count": 7,
+        "speed": 0.025,
+        "scale": 0.755,
+        "color": "#442D59",
+        "opacity": 0.62,
+        "motion": "ascend"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "spell_engine:generic_soul_casting",
+        "volume": 0.194,
+        "pitch": 0.965
+      }
+    ]
+  },
+  "lichling.chimes_pulse_4": {
+    "particles": [
+      {
+        "id": "spell_engine:magic_skull",
+        "preset": "helix",
+        "count": 14,
+        "speed": 0.047,
+        "degrees_per_tick": 24,
+        "offset": 0,
+        "scale": 0.86,
+        "color": "#B18CFF",
+        "opacity": 0.78,
+        "glow": true,
+        "motion": "float"
+      },
+      {
+        "id": "spell_engine:smoke_medium",
+        "preset": "cloud",
+        "count": 8,
+        "speed": 0.025,
+        "scale": 0.78,
+        "color": "#442D59",
+        "opacity": 0.62,
+        "motion": "ascend"
+      },
+      {
+        "id": "spell_engine:magic_arcane",
+        "preset": "impact",
+        "count": 2,
+        "speed": 0.084,
+        "scale": 0.84,
+        "color": "#8D54D6",
+        "opacity": 0.78,
+        "glow": true,
+        "motion": "decelerate"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "spell_engine:generic_soul_casting",
+        "volume": 0.212,
+        "pitch": 0.94
+      }
+    ]
+  },
+  "lichling.chimes_pulse_5": {
+    "particles": [
+      {
+        "id": "spell_engine:magic_skull",
+        "preset": "helix",
+        "count": 16,
+        "speed": 0.05,
+        "degrees_per_tick": 26,
+        "offset": 0,
+        "scale": 0.895,
+        "color": "#B18CFF",
+        "opacity": 0.805,
+        "glow": true,
+        "motion": "float"
+      },
+      {
+        "id": "spell_engine:smoke_medium",
+        "preset": "cloud",
+        "count": 9,
+        "speed": 0.025,
+        "scale": 0.805,
+        "color": "#442D59",
+        "opacity": 0.62,
+        "motion": "ascend"
+      },
+      {
+        "id": "spell_engine:magic_arcane",
+        "preset": "impact",
+        "count": 4,
+        "speed": 0.09,
+        "scale": 0.87,
+        "color": "#8D54D6",
+        "opacity": 0.78,
+        "glow": true,
+        "motion": "decelerate"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "spell_engine:generic_soul_casting",
+        "volume": 0.23,
+        "pitch": 0.915
+      }
+    ]
+  },
+  "lichling.chimes_pulse_6": {
+    "particles": [
+      {
+        "id": "spell_engine:magic_skull",
+        "preset": "helix",
+        "count": 18,
+        "speed": 0.053,
+        "degrees_per_tick": 28,
+        "offset": 0,
+        "scale": 0.93,
+        "color": "#B18CFF",
+        "opacity": 0.83,
+        "glow": true,
+        "motion": "float"
+      },
+      {
+        "id": "spell_engine:smoke_medium",
+        "preset": "cloud",
+        "count": 10,
+        "speed": 0.025,
+        "scale": 0.83,
+        "color": "#442D59",
+        "opacity": 0.62,
+        "motion": "ascend"
+      },
+      {
+        "id": "spell_engine:magic_arcane",
+        "preset": "impact",
+        "count": 6,
+        "speed": 0.096,
+        "scale": 0.9,
+        "color": "#8D54D6",
+        "opacity": 0.78,
+        "glow": true,
+        "motion": "decelerate"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "spell_engine:generic_soul_casting",
+        "volume": 0.248,
+        "pitch": 0.89
+      }
+    ]
+  },
+  "lichling.chimes_pulse_7": {
+    "particles": [
+      {
+        "id": "spell_engine:magic_skull",
+        "preset": "helix",
+        "count": 20,
+        "speed": 0.056,
+        "degrees_per_tick": 30,
+        "offset": 0,
+        "scale": 0.965,
+        "color": "#B18CFF",
+        "opacity": 0.855,
+        "glow": true,
+        "motion": "float"
+      },
+      {
+        "id": "spell_engine:smoke_medium",
+        "preset": "cloud",
+        "count": 11,
+        "speed": 0.025,
+        "scale": 0.855,
+        "color": "#442D59",
+        "opacity": 0.62,
+        "motion": "ascend"
+      },
+      {
+        "id": "spell_engine:magic_arcane",
+        "preset": "impact",
+        "count": 8,
+        "speed": 0.102,
+        "scale": 0.93,
+        "color": "#8D54D6",
+        "opacity": 0.78,
+        "glow": true,
+        "motion": "decelerate"
+      },
+      {
+        "id": "spell_engine:area_swirl",
+        "preset": "ground",
+        "count": 1,
+        "scale": 2.15,
+        "color": "#5B328C",
+        "opacity": 0.72,
+        "fade_out_hold": 0.16,
+        "glow": true
+      }
+    ],
+    "sounds": [
+      {
+        "id": "spell_engine:generic_soul_casting",
+        "volume": 0.266,
+        "pitch": 0.865
+      }
+    ]
+  },
+  "lichling.chimes_pulse_8": {
+    "particles": [
+      {
+        "id": "spell_engine:magic_skull",
+        "preset": "helix",
+        "count": 22,
+        "speed": 0.059,
+        "degrees_per_tick": 32,
+        "offset": 0,
+        "scale": 1.0,
+        "color": "#B18CFF",
+        "opacity": 0.88,
+        "glow": true,
+        "motion": "float"
+      },
+      {
+        "id": "spell_engine:smoke_medium",
+        "preset": "cloud",
+        "count": 12,
+        "speed": 0.025,
+        "scale": 0.88,
+        "color": "#442D59",
+        "opacity": 0.62,
+        "motion": "ascend"
+      },
+      {
+        "id": "spell_engine:magic_arcane",
+        "preset": "impact",
+        "count": 10,
+        "speed": 0.108,
+        "scale": 0.96,
+        "color": "#8D54D6",
+        "opacity": 0.78,
+        "glow": true,
+        "motion": "decelerate"
+      },
+      {
+        "id": "spell_engine:area_swirl",
+        "preset": "ground",
+        "count": 1,
+        "scale": 2.25,
+        "color": "#5B328C",
+        "opacity": 0.72,
+        "fade_out_hold": 0.16,
+        "glow": true
+      }
+    ],
+    "sounds": [
+      {
+        "id": "spell_engine:generic_soul_casting",
+        "volume": 0.284,
+        "pitch": 0.84
+      }
+    ]
+  },
+  "lichling.chimes_pulse_9": {
+    "particles": [
+      {
+        "id": "spell_engine:magic_skull",
+        "preset": "helix",
+        "count": 24,
+        "speed": 0.062,
+        "degrees_per_tick": 34,
+        "offset": 0,
+        "scale": 1.035,
+        "color": "#B18CFF",
+        "opacity": 0.905,
+        "glow": true,
+        "motion": "float"
+      },
+      {
+        "id": "spell_engine:smoke_medium",
+        "preset": "cloud",
+        "count": 13,
+        "speed": 0.025,
+        "scale": 0.905,
+        "color": "#442D59",
+        "opacity": 0.62,
+        "motion": "ascend"
+      },
+      {
+        "id": "spell_engine:magic_arcane",
+        "preset": "impact",
+        "count": 12,
+        "speed": 0.114,
+        "scale": 0.99,
+        "color": "#8D54D6",
+        "opacity": 0.78,
+        "glow": true,
+        "motion": "decelerate"
+      },
+      {
+        "id": "spell_engine:area_swirl",
+        "preset": "ground",
+        "count": 1,
+        "scale": 2.35,
+        "color": "#5B328C",
+        "opacity": 0.72,
+        "fade_out_hold": 0.16,
+        "glow": true
+      }
+    ],
+    "sounds": [
+      {
+        "id": "spell_engine:generic_soul_casting",
+        "volume": 0.302,
+        "pitch": 0.815
+      }
+    ]
+  },
+  "lichling.chimes_pulse_10": {
+    "particles": [
+      {
+        "id": "spell_engine:magic_skull",
+        "preset": "helix",
+        "count": 26,
+        "speed": 0.065,
+        "degrees_per_tick": 36,
+        "offset": 0,
+        "scale": 1.07,
+        "color": "#B18CFF",
+        "opacity": 0.93,
+        "glow": true,
+        "motion": "float"
+      },
+      {
+        "id": "spell_engine:smoke_medium",
+        "preset": "cloud",
+        "count": 14,
+        "speed": 0.025,
+        "scale": 0.93,
+        "color": "#442D59",
+        "opacity": 0.62,
+        "motion": "ascend"
+      },
+      {
+        "id": "spell_engine:magic_arcane",
+        "preset": "impact",
+        "count": 14,
+        "speed": 0.12,
+        "scale": 1.02,
+        "color": "#8D54D6",
+        "opacity": 0.78,
+        "glow": true,
+        "motion": "decelerate"
+      },
+      {
+        "id": "spell_engine:area_swirl",
+        "preset": "ground",
+        "count": 1,
+        "scale": 2.45,
+        "color": "#5B328C",
+        "opacity": 0.72,
+        "fade_out_hold": 0.16,
+        "glow": true
+      }
+    ],
+    "sounds": [
+      {
+        "id": "spell_engine:generic_soul_casting",
+        "volume": 0.32,
+        "pitch": 0.79
+      }
+    ]
+  },
+  "lichling.doom_mark": {
+    "particles": [
+      {
+        "id": "spell_engine:magic_skull",
+        "preset": "impact",
+        "count": 8,
+        "speed": 0.07,
+        "scale": 0.78,
+        "color": "#B18CFF",
+        "opacity": 0.8,
+        "glow": true,
+        "motion": "decelerate"
+      },
+      {
+        "id": "spell_engine:magic_arcane",
+        "preset": "cloud",
+        "count": 6,
+        "speed": 0.025,
+        "scale": 0.68,
+        "color": "#7540A6",
+        "opacity": 0.7,
+        "glow": true,
+        "motion": "ascend"
+      }
+    ],
+    "sounds": []
+  },
+  "lichling.doom_detonate": {
+    "particles": [
+      {
+        "id": "spell_engine:area_circle_1",
+        "preset": "ground",
+        "count": 1,
+        "scale": 2.6,
+        "scale_to": 1.1,
+        "color": "#4E1F72",
+        "opacity": 0.94,
+        "fade_out_hold": 0.18,
+        "glow": true
+      },
+      {
+        "id": "spell_engine:magic_skull",
+        "preset": "impact",
+        "count": 38,
+        "speed": 0.17,
+        "scale": 1.18,
+        "color": "#D1B6FF",
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "spell_engine:magic_arcane",
+        "preset": "shockwave",
+        "count": 24,
+        "speed": 0.14,
+        "pre_travel": 0.12,
+        "scale": 1.05,
+        "color": "#8D54D6",
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "spell_engine:smoke_medium",
+        "preset": "cloud",
+        "count": 24,
+        "speed": 0.05,
+        "scale": 1.05,
+        "color": "#2A1735",
+        "opacity": 0.82,
+        "motion": "ascend"
+      },
+      {
+        "id": "spell_engine:area_circle_1",
+        "preset": "ground",
+        "count": 1,
+        "scale": 2.1,
+        "scale_to": 1.1,
+        "color": "#8C67E1",
+        "opacity": 0.9,
+        "fade_out_hold": 0.16,
+        "glow": true
+      },
+      {
+        "id": "spell_engine:magic_arcane",
+        "preset": "impact",
+        "count": 22,
+        "speed": 0.14,
+        "scale": 1.05,
+        "color": "#C9B3FF",
+        "glow": true,
+        "motion": "burst"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "spell_engine:generic_soul_release",
+        "volume": 0.68,
+        "pitch": 0.66
+      },
+      {
+        "id": "more_rpg_classes:arcane_strong_impact",
+        "volume": 0.32,
+        "pitch": 0.62,
+        "requires_mod": "more_rpg_classes"
+      }
+    ]
+  }
+}

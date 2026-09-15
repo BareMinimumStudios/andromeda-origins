@@ -4,6 +4,10 @@
     "type": "origins:and",
     "actions": [
       {
+        "type": "origins:execute_command",
+        "command": "andromedaorigins internal_fx wyverian.pyroclast_impact"
+      },
+      {
         "type": "origins:play_sound",
         "sound": "entity.dragon_fireball.explode",
         "volume": 5,

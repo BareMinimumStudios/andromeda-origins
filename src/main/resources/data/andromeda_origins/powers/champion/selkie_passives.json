@@ -7,12 +7,6 @@
       "actions": [
         {
           "type": "origins:change_resource",
-          "resource": "andromeda_origins:champion/selkie_passives_recharge_shawl",
-          "change": 0,
-          "operation": "set"
-        },
-        {
-          "type": "origins:change_resource",
           "resource": "andromeda_origins:selkie/primary_active",
           "change": 3600,
           "operation": "set"
@@ -70,20 +64,6 @@
       ]
     },
     "execute_chosen_when_orb": true
-  },
-  "recharge_shawl": {
-    "type": "origins:resource",
-    "min": 0,
-    "max": 30,
-    "start_value": 0,
-    "hud_render": {
-      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
-      "bar_index": 1,
-      "condition": {
-        "type": "origins:power",
-        "power": "*:selkie/helper/groundweak"
-      }
-    }
   },
   "creature_type": {
     "type": "origins:modify_type_tag",
@@ -150,5 +130,5 @@
     }
   },
   "name": "Champion Passive Features",
-  "description": "§e§lChampion Features:§r\n+45% Swim Speed\n \n- Retains aquatic movement, retaliation, underwater vision and land breathing.\n- No dry-out, Silenced, land-speed, damage or dietary penalties."
+  "description": "§e§lChampion Features:§r\n+45% Swim Speed\n \n- Retains aquatic movement, retaliation, underwater vision and land breathing.\n- No dry-out, Silenced, land-speed, damage or dietary penalties.\n- Player-facing ability cooldowns recover at 2× rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
 }

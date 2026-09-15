@@ -3,8 +3,8 @@
   "remove": {
     "type": "origins:resource",
     "min": 0,
-    "max": 10,
-    "start_value": 10,
+    "max": 15,
+    "start_value": 15,
     "hud_render": {
       "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
       "bar_index": 0

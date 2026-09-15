@@ -245,5 +245,5 @@
     }
   },
   "name": "Champion Passive Features",
-  "description": "§e§lChampion Features:§r\n+8 Max HP\n-35% Hunger Drain\n \n- Retains Undead traits, necrotic influence and raw-food bonuses.\n- No sunlight, fire-duration, iron or dietary penalties."
+  "description": "§e§lChampion Features:§r\n+8 Max HP\n-35% Hunger Drain\n \n- Retains Undead traits, necrotic influence and 4× food effectiveness without the raw-only restriction.\n- No sunlight, fire-duration, iron or dietary penalties.\n- Player-facing ability cooldowns recover at 2× rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
 }

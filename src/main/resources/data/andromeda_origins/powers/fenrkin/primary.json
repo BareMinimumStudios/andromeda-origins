@@ -22,6 +22,10 @@
           "pitch": 1.0
         },
         {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx fenrkin.on_the_hunt"
+        },
+        {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:common/figura_1",
           "change": 1,
@@ -238,6 +242,10 @@
                   "command": "playsound andromeda_origins:ability.fenrkin.marked master @s ~ ~ ~ 1.15 1.0 1.0"
                 },
                 {
+                  "type": "origins:execute_command",
+                  "command": "andromedaorigins internal_fx fenrkin.mark"
+                },
+                {
                   "type": "origins:grant_power",
                   "power": "*:fenrkin/helper/stalkdog",
                   "source": "minecraft:debuff"
@@ -266,6 +274,10 @@
                   {
                     "type": "origins:execute_command",
                     "command": "playsound andromeda_origins:ability.fenrkin.marked master @s ~ ~ ~ 1.15 1.0 1.0"
+                  },
+                  {
+                    "type": "origins:execute_command",
+                    "command": "andromedaorigins internal_fx fenrkin.mark"
                   }
                 ]
               }
@@ -467,13 +479,8 @@
           "keybind": "key.origins.primary_active"
         }
       ]
-    },
-    {
-      "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "§c§lHunter's Caution:§r§f You have a 50% penalty to your hunger and a 25% penalty to your speed, attack speed, mining speed and damage dealt, but you take 20% less damage from all sources."
     }
   ],
   "name": "On the Hunt",
-  "description": "Press your Primary Ability key to enter §e§lOn the Hunt§r for 30 seconds, gaining +25% movement speed, attack speed, mining speed, and melee damage while sensing creatures within 64 blocks. Undetectable creatures cannot be revealed.\n \n§e§lMark of Fenrir:§r\nSneak and hold Primary Ability while focusing on a valid target. Standard Fenrkin move 75% slower while stalking; Champion Fenrkin do not. After 5 seconds, the target is marked for 30 seconds, revealed to you unless Undetectable, and takes 25% more damage from you."
+  "description": "Press your Primary Ability key to enter §e§lOn the Hunt§r for 30 seconds, gaining +25% movement speed, attack speed, mining speed, and melee damage while sensing creatures within 64 blocks. Undetectable creatures cannot be revealed.\n \n§e§lMark of Fenrir:§r\nSneak and hold Primary Ability while focusing on a valid target. You move 75% slower while stalking. After 5 seconds, the target is marked for 30 seconds, revealed to you unless Undetectable, and takes 25% more damage from you."
 }

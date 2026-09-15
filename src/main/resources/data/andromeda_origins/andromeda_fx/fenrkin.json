@@ -1,0 +1,214 @@
+{
+  "fenrkin.on_the_hunt": {
+    "particles": [
+      {
+        "id": "spell_engine:ground_glow",
+        "preset": "ground",
+        "count": 1,
+        "scale": 2.0,
+        "color": "#9D0C18",
+        "opacity": 0.9,
+        "fade_out_hold": 0.5,
+        "glow": true,
+        "attached_to_ground": true
+      },
+      {
+        "id": "more_rpg_classes:rage_particle",
+        "preset": "casting",
+        "count": 28,
+        "speed": 0.09,
+        "scale": 1.15,
+        "motion": "ascend",
+        "attached": true,
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "spell_engine:magic_stripe",
+        "preset": "cone",
+        "count": 20,
+        "speed": 0.16,
+        "angle": 28,
+        "scale": 0.85,
+        "color": "#E55A5A",
+        "opacity": 0.85,
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "spell_engine:sign_speed",
+        "preset": "pop_up",
+        "count": 1,
+        "scale": 1.0,
+        "color": "#FF6666",
+        "glow": true
+      }
+    ],
+    "sounds": [
+      {
+        "id": "spell_engine:speed_boost",
+        "volume": 0.38,
+        "pitch": 0.84
+      },
+      {
+        "id": "more_rpg_classes:strong_attack",
+        "volume": 0.18,
+        "pitch": 1.18,
+        "requires_mod": "more_rpg_classes"
+      }
+    ]
+  },
+  "fenrkin.mark": {
+    "particles": [
+      {
+        "id": "spell_engine:sign_aggro",
+        "preset": "pop_up",
+        "count": 1,
+        "scale": 1.1,
+        "color": "#FF3636",
+        "glow": true
+      },
+      {
+        "id": "spell_engine:area_circle_1",
+        "preset": "ground",
+        "count": 1,
+        "scale": 1.6,
+        "color": "#8E1019",
+        "opacity": 0.82,
+        "fade_out_hold": 0.28,
+        "glow": true
+      },
+      {
+        "id": "more_rpg_classes:rage_particle",
+        "preset": "impact",
+        "count": 18,
+        "speed": 0.13,
+        "scale": 0.95,
+        "motion": "burst",
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "spell_engine:magic_stripe",
+        "preset": "impact",
+        "count": 12,
+        "speed": 0.09,
+        "scale": 0.75,
+        "color": "#FFB0B0",
+        "opacity": 0.75,
+        "glow": true,
+        "motion": "decelerate"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "spell_engine:signal_spell_crit",
+        "volume": 0.34,
+        "pitch": 0.84
+      }
+    ]
+  },
+  "fenrkin.adrenaline": {
+    "particles": [
+      {
+        "id": "spell_engine:area_circle_1",
+        "preset": "ground",
+        "count": 1,
+        "scale": 2.0,
+        "scale_to": 1.1,
+        "color": "#C7262D",
+        "opacity": 0.92,
+        "fade_out_hold": 0.35,
+        "glow": true
+      },
+      {
+        "id": "more_rpg_classes:rage_particle",
+        "preset": "casting",
+        "count": 40,
+        "speed": 0.11,
+        "scale": 1.2,
+        "motion": "ascend",
+        "attached": true,
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "spell_engine:magic_stripe",
+        "preset": "impact",
+        "count": 18,
+        "speed": 0.13,
+        "scale": 0.9,
+        "color": "#FFD6D6",
+        "opacity": 0.82,
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "spell_engine:sign_speed",
+        "preset": "pop_up",
+        "count": 1,
+        "scale": 1.15,
+        "color": "#FF7070",
+        "glow": true
+      },
+      {
+        "id": "spell_engine:ground_glow",
+        "preset": "ground",
+        "count": 1,
+        "scale": 1.45,
+        "color": "#8F0F15",
+        "opacity": 0.62,
+        "fade_out_hold": 0.18,
+        "glow": true,
+        "attached_to_ground": true
+      }
+    ],
+    "sounds": [
+      {
+        "id": "more_rpg_classes:strong_attack",
+        "volume": 0.34,
+        "pitch": 0.82,
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "spell_engine:signal_spell_crit",
+        "volume": 0.26,
+        "pitch": 0.72
+      }
+    ]
+  },
+  "fenrkin.hunt_pulse": {
+    "particles": [
+      {
+        "id": "spell_engine:ground_glow",
+        "preset": "ground",
+        "count": 1,
+        "scale": 1.45,
+        "color": "#8B151C",
+        "opacity": 0.48,
+        "fade_out_hold": 0.16,
+        "glow": true,
+        "attached_to_ground": true
+      },
+      {
+        "id": "more_rpg_classes:rage_particle",
+        "preset": "casting",
+        "count": 8,
+        "speed": 0.04,
+        "scale": 0.72,
+        "motion": "ascend",
+        "attached": true,
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "spell_engine:magic_stripe",
+        "preset": "travel",
+        "count": 5,
+        "speed": 0.08,
+        "scale": 0.58,
+        "color": "#FF8B76",
+        "opacity": 0.58,
+        "glow": true,
+        "motion": "decelerate"
+      }
+    ],
+    "sounds": []
+  }
+}

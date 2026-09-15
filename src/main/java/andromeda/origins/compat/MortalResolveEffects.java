@@ -30,6 +30,7 @@ public final class MortalResolveEffects {
         // stand keeps it audible while the Human moves instead of leaving a 60-second sound
         // source behind at the revival location.
         playHeartbeatPulse(player);
+        EnhancedFxCompat.play(player, "humanity.mortal_resolve");
         run(player, "playsound andromeda_origins:ability.humanity.mortal_resolve_ignite player @a[distance=..32] ~ ~ ~ 0.95 1.0 0");
         run(player, "playsound minecraft:block.beacon.activate player @a[distance=..32] ~ ~ ~ 0.65 0.78 0");
         run(player, "playsound minecraft:entity.player.levelup player @a[distance=..32] ~ ~ ~ 0.35 0.68 0");
@@ -65,6 +66,7 @@ public final class MortalResolveEffects {
     /** Contrasting cue for the forced death when the borrowed minute runs out. */
     public static void playExpiry(ServerPlayerEntity player) {
         stopHeartbeat(player);
+        EnhancedFxCompat.play(player, "humanity.mortal_resolve_expiry");
         run(player, "playsound minecraft:entity.warden.heartbeat player @a[distance=..40] ~ ~ ~ 0.55 0.55 0");
         run(player, "particle minecraft:smoke ~ ~1 ~ 0.35 0.65 0.35 0.02 18 force @a[distance=..48]");
     }

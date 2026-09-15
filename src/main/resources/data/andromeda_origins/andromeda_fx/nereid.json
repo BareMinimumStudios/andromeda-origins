@@ -1,0 +1,231 @@
+{
+  "nereid.aura_start": {
+    "particles": [
+      {
+        "id": "more_rpg_classes:water_circle",
+        "preset": "ground",
+        "count": 1,
+        "scale": 2.2,
+        "opacity": 0.9,
+        "fade_out_hold": 0.4,
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:water_heal",
+        "preset": "casting",
+        "count": 20,
+        "speed": 0.06,
+        "scale": 1.05,
+        "motion": "ascend",
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:water_mist",
+        "preset": "cloud",
+        "count": 14,
+        "speed": 0.03,
+        "scale": 0.95,
+        "motion": "float",
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:bubble",
+        "preset": "cloud",
+        "count": 12,
+        "speed": 0.04,
+        "scale": 0.9,
+        "motion": "ascend",
+        "requires_mod": "more_rpg_classes"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "more_rpg_classes:water_bubbles",
+        "volume": 0.3,
+        "pitch": 1.04,
+        "requires_mod": "more_rpg_classes"
+      }
+    ]
+  },
+  "nereid.submersion": {
+    "particles": [
+      {
+        "id": "more_rpg_classes:big_splash",
+        "preset": "placed",
+        "count": 1,
+        "scale": 1.2,
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:water_splash",
+        "preset": "impact",
+        "count": 18,
+        "speed": 0.12,
+        "scale": 1.05,
+        "motion": "burst",
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:bubble",
+        "preset": "cloud",
+        "count": 12,
+        "speed": 0.05,
+        "scale": 0.95,
+        "motion": "ascend",
+        "requires_mod": "more_rpg_classes"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "more_rpg_classes:water_release_1",
+        "volume": 0.42,
+        "pitch": 0.9,
+        "requires_mod": "more_rpg_classes"
+      }
+    ]
+  },
+  "nereid.aura_tick": {
+    "particles": [
+      {
+        "id": "more_rpg_classes:water_circle",
+        "preset": "ground",
+        "count": 1,
+        "scale": 1.85,
+        "opacity": 0.72,
+        "fade_out_hold": 0.2,
+        "attached_to_ground": true,
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:water_mist",
+        "preset": "cloud",
+        "count": 10,
+        "speed": 0.025,
+        "scale": 0.82,
+        "motion": "float",
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:bubble",
+        "preset": "cloud",
+        "count": 7,
+        "speed": 0.035,
+        "scale": 0.75,
+        "motion": "ascend",
+        "requires_mod": "more_rpg_classes"
+      }
+    ],
+    "sounds": []
+  },
+  "nereid.aura_heal": {
+    "particles": [
+      {
+        "id": "more_rpg_classes:water_heal",
+        "preset": "casting",
+        "count": 12,
+        "speed": 0.055,
+        "scale": 0.95,
+        "motion": "ascend",
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "spell_engine:magic_star",
+        "preset": "impact",
+        "count": 6,
+        "speed": 0.045,
+        "scale": 0.7,
+        "color": "#A8F4FF",
+        "opacity": 0.75,
+        "glow": true,
+        "motion": "float"
+      }
+    ],
+    "sounds": []
+  },
+  "nereid.aura_end": {
+    "particles": [
+      {
+        "id": "more_rpg_classes:water_circle",
+        "preset": "ground",
+        "count": 1,
+        "scale": 2.8,
+        "scale_to": 1.15,
+        "opacity": 0.9,
+        "fade_out_hold": 0.18,
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:big_splash",
+        "preset": "placed",
+        "count": 1,
+        "scale": 1.4,
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:water_heal",
+        "preset": "impact",
+        "count": 26,
+        "speed": 0.13,
+        "scale": 1.1,
+        "motion": "burst",
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:bubble",
+        "preset": "impact",
+        "count": 18,
+        "speed": 0.09,
+        "scale": 0.9,
+        "motion": "ascend",
+        "requires_mod": "more_rpg_classes"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "more_rpg_classes:water_release_2",
+        "volume": 0.38,
+        "pitch": 1.06,
+        "requires_mod": "more_rpg_classes"
+      }
+    ]
+  },
+  "nereid.submersion_hit": {
+    "particles": [
+      {
+        "id": "more_rpg_classes:water_circle",
+        "preset": "ground",
+        "count": 1,
+        "scale": 1.15,
+        "opacity": 0.78,
+        "fade_out_hold": 0.16,
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:water_splash",
+        "preset": "impact",
+        "count": 14,
+        "speed": 0.12,
+        "scale": 0.95,
+        "motion": "burst",
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:bubble",
+        "preset": "cloud",
+        "count": 9,
+        "speed": 0.04,
+        "scale": 0.8,
+        "motion": "ascend",
+        "requires_mod": "more_rpg_classes"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "more_rpg_classes:water_bubbles",
+        "volume": 0.2,
+        "pitch": 0.96,
+        "requires_mod": "more_rpg_classes"
+      }
+    ]
+  }
+}

@@ -169,6 +169,10 @@
                     "pitch": 1.6
                   },
                   {
+                    "type": "origins:execute_command",
+                    "command": "andromedaorigins internal_fx faerie.flutter"
+                  },
+                  {
                     "type": "origins:spawn_particles",
                     "particle": {
                       "type": "minecraft:end_rod"
@@ -281,5 +285,5 @@
     }
   ],
   "name": "Flutter",
-  "description": "Faerie Dust regenerates while this ability is not in use. Hold your Primary Ability key to flutter, dramatically slowing your fall while allowing free horizontal movement. Flutter cannot gain altitude. §e§lMovement Ability§r."
+  "description": "Faerie Dust regenerates while this ability is not in use. Hold your Primary Ability key to flutter, dramatically slowing your fall while allowing free horizontal movement. Flutter cannot gain altitude. \u00a7e\u00a7lMovement Ability\u00a7r."
 }

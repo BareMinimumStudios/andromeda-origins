@@ -1,6 +1,6 @@
 # Custom Resource Bars
 
-**Current release: v1.4.46.** The 31-style catalog is now mapped as **25 styles on sheet 1 + 6 styles on sheet 2**. Wyverian Wings is global style 25 on sheet 1 at `bar_index: 24`; sheet 2 begins with Halo at `bar_index: 0`. Gameplay values are unchanged from v1.4.45.
+**Current release: v1.4.70.** The authoritative HUD mapping remains **25 styles on sheet 1 + 6 styles on sheet 2**. Champion Veilborn reuses the existing Auroral Mirage cooldown bar for its 5-second cooldown; sprite indices are unchanged.
 
 Andromeda Origins uses two 256×256 Origins HUD sprite sheets and a global **01–31** art catalog. The global style number is for documentation; Origins itself uses zero-based `bar_index` values within each individual sheet.
 
@@ -32,7 +32,7 @@ Global style 25 is the final style on sheet 1 (`bar_index: 24`). Global style 26
 | 15 | `resource_bars_1.png` | 14 | Eye Bar | Gorgon Ophidian Gaze charges; recharge; Petrified duration |
 | 16 | `resource_bars_1.png` | 15 | Transference Bar | Gorgon Transference charges; recharge; target debuff duration |
 | 17 | `resource_bars_1.png` | 16 | Skull Bar | Lichling Energy / Chimes of Necros; Doom duration |
-| 18 | `resource_bars_1.png` | 17 | Weakness Bar | Lichling weakness-state duration; Veilborn weakness-state duration |
+| 18 | `resource_bars_1.png` | 17 | Weakness Bar | Lichling weakness-state duration |
 | 19 | `resource_bars_1.png` | 18 | Blood Moon Bar | Manticore Beast of Blood active duration |
 | 20 | `resource_bars_1.png` | 19 | Veil Swap Bar | Veilborn Veil Transposition cooldown |
 | 21 | `resource_bars_1.png` | 20 | Veil Curtain Bar | Veilborn Auroral Mirage cooldown |
@@ -59,9 +59,7 @@ Champion resources that mirror standard visible HUD resources use the same custo
 
 A handful of internal/legacy visible resources were never assigned a dedicated style in the 01–31 art catalog and intentionally remain on upstream Origins sheets rather than being guessed into a custom slot. These include:
 
-- common Hunter Caution,
 - Fenrkin helper activation animation,
-- Humanity helper Doom timer,
 - Selkie retaliated timer.
 
 ## Editing rules
@@ -70,3 +68,8 @@ A handful of internal/legacy visible resources were never assigned a dedicated s
 - Keep each Origins indexed row aligned to the sheet layout used by the existing PNG.
 - Sheet 2 restarts its Origins index at `0`.
 - Do not renumber the global 01–31 catalog when adding another sheet; continue the global art numbering and document the new sheet/index mapping here.
+
+
+## v1.4.56 Wet accumulation fix
+- Veilborn Wet/Unstable uses `veilborn/helper/watered_remove` on sheet 1 `bar_index: 2`. While exposure continues, the resource now gains 3 seconds every second up to 90 seconds; once exposure ends, it counts down normally.
+- The shared `common/silenced_sources` reference counter is internal-only and no longer renders a fallback/default HUD bar.

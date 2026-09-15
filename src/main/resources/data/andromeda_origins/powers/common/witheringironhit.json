@@ -1,0 +1,52 @@
+{
+  "type": "origins:self_action_when_hit",
+  "entity_action": {
+    "type": "origins:apply_effect",
+    "effect": {
+      "id": "minecraft:wither",
+      "amplifier": 0,
+      "duration": 40
+    }
+  },
+  "damage_condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:projectile",
+        "inverted": true
+      },
+      {
+        "type": "origins:attacker",
+        "entity_condition": {
+          "type": "origins:or",
+          "conditions": [
+            {
+              "type": "origins:equipped_item",
+              "equipment_slot": "mainhand",
+              "item_condition": {
+                "type": "origins:ingredient",
+                "ingredient": {
+                  "tag": "andromeda_origins:iron/alliron"
+                }
+              }
+            },
+            {
+              "type": "origins:equipped_item",
+              "equipment_slot": "offhand",
+              "item_condition": {
+                "type": "origins:ingredient",
+                "ingredient": {
+                  "tag": "andromeda_origins:iron/alliron"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "cooldown": 20,
+  "hidden": true,
+  "name": "Iron-Struck Wither",
+  "description": "Iron weapon hits inflict Wither I for 2 seconds."
+}

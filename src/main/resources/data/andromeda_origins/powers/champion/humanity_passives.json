@@ -38,5 +38,5 @@
     "execute_chosen_when_orb": true
   },
   "name": "Champion Passive Features",
-  "description": "§e§lChampion Features:§r\n- Champion Humanity has normal health and hunger efficiency.\n- Mortal Resolve becomes a victorious final effort rather than a forced death."
+  "description": "§e§lChampion Features:§r\n- Champion Humanity has normal health and hunger efficiency.\n- Mortal Resolve becomes a victorious final effort rather than a forced death.\n- Player-facing ability cooldowns recover at 2× rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
 }

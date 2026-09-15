@@ -163,10 +163,22 @@
       "amount": -0.25
     },
     "condition": {
-      "type": "origins:fluid_height",
-      "fluid": "minecraft:water",
-      "comparison": ">",
-      "compare_to": 0
+      "type": "origins:or",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "andromeda_origins:common/wet"
+        },
+        {
+          "type": "origins:fluid_height",
+          "fluid": "minecraft:water",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        {
+          "type": "origins:in_rain"
+        }
+      ]
     }
   },
   "breathing": {
@@ -178,5 +190,5 @@
     }
   },
   "name": "Champion Passive Features",
-  "description": "§e§lChampion Features:§r\n+35% Swim Speed\n \n- Retains aquatic movement, underwater vision, marking and water resistance.\n- No land penalties or dietary restriction."
+  "description": "§e§lChampion Features:§r\n+35% Swim Speed\n \n- Retains aquatic movement, underwater vision, marking and water resistance.\n- No land penalties or dietary restriction.\n- Player-facing ability cooldowns recover at 2× rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
 }

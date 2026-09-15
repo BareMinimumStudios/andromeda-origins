@@ -6,6 +6,10 @@
       "type": "origins:and",
       "actions": [
         {
+          "type": "origins:execute_command",
+          "command": "tag @s remove andromeda_dragon_caster"
+        },
+        {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:champion/wyverian_passives_fiery",
           "change": 0,
@@ -13,55 +17,55 @@
         },
         {
           "type": "origins:change_resource",
-          "resource": "andromeda_origins:wyverian/primary_firemode",
+          "resource": "andromeda_origins:champion/wyverian_primary_firemode",
           "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
-          "resource": "andromeda_origins:wyverian/primary_fireball",
+          "resource": "andromeda_origins:champion/wyverian_primary_fireball",
           "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
-          "resource": "andromeda_origins:wyverian/primary_interrupt",
+          "resource": "andromeda_origins:champion/wyverian_primary_interrupt",
           "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
-          "resource": "andromeda_origins:wyverian/primary_fireselect",
+          "resource": "andromeda_origins:champion/wyverian_primary_fireselect",
           "change": 20,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
-          "resource": "andromeda_origins:wyverian/primary_ember",
+          "resource": "andromeda_origins:champion/wyverian_primary_ember",
           "change": 20,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
-          "resource": "andromeda_origins:wyverian/primary_breathlock",
+          "resource": "andromeda_origins:champion/wyverian_primary_breathlock",
           "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
-          "resource": "andromeda_origins:wyverian/primary_breathcooldown",
+          "resource": "andromeda_origins:champion/wyverian_primary_breathcooldown",
           "change": 6,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
-          "resource": "andromeda_origins:wyverian/primary_rawr",
+          "resource": "andromeda_origins:champion/wyverian_primary_rawr",
           "change": 60,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
-          "resource": "andromeda_origins:wyverian/primary_active",
+          "resource": "andromeda_origins:champion/wyverian_primary_active",
           "change": 2,
           "operation": "set"
         },
@@ -104,6 +108,10 @@
     "entity_action_lost": {
       "type": "origins:and",
       "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "tag @s remove andromeda_dragon_caster"
+        },
         {
           "type": "origins:execute_command",
           "command": "tag @s remove wyverian"
@@ -158,7 +166,7 @@
                 "conditions": [
                   {
                     "type": "origins:resource",
-                    "resource": "*:wyverian/primary_ember",
+                    "resource": "*:champion/wyverian_primary_ember",
                     "comparison": "<",
                     "compare_to": 20
                   },
@@ -178,7 +186,7 @@
               },
               "action": {
                 "type": "origins:change_resource",
-                "resource": "*:wyverian/primary_ember",
+                "resource": "*:champion/wyverian_primary_ember",
                 "change": 1
               }
             }
@@ -286,5 +294,5 @@
     }
   },
   "name": "Champion Passive Features",
-  "description": "§e§lChampion Features:§r\n+20% Size\n+20% Melee Damage\n \n- Retains scales, fire immunity, flight and ember powers.\n- No movement, Wet, cramped-space, propulsion or dietary penalties."
+  "description": "§e§lChampion Features:§r\n+20% Size\n+20% Melee Damage\n \n- Retains scales, fire immunity, flight and draconic breath powers.\n- Ember Flames are replaced by §d§lDragon's Breath§r and §d§lDragon Charge§r, which deal magic damage and use dragon-breath effects instead of flame/ignition.\n- No movement, Wet, cramped-space, propulsion or dietary penalties.\n- Wet and cramped-space checks do not suppress your movement bonus, melee bonus, or Gusts of Freedom.\n- Player-facing ability cooldowns recover at 2× rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
 }

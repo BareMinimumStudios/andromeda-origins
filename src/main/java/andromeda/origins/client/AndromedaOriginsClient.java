@@ -12,6 +12,8 @@ public final class AndromedaOriginsClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        VersionHandshakeClient.register();
+
         // C mirrors the vanilla Save Hotbar Activator default, but this is a separate
         // keybinding so players can rebind the Andromeda toggle independently.
         KeyBindingHelper.registerKeyBinding(new KeyBinding(

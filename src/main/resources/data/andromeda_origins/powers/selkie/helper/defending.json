@@ -30,10 +30,19 @@
     "type": "origins:action_over_time",
     "interval": 20,
     "entity_action": {
-      "type": "origins:change_resource",
-      "resource": "*:*_remove",
-      "change": -1,
-      "operation": "add"
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx selkie.bastion_pulse"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "*:*_remove",
+          "change": -1,
+          "operation": "add"
+        }
+      ]
     }
   },
   "speed": {

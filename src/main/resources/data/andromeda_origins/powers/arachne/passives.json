@@ -438,7 +438,7 @@
     }
   ],
   "name": "Passive Features",
-  "description": "§e§lStats:§r\n-30% Max Health\n+20% Ground & Air Speed\n-20% Height\n \n§e§lFeatures:§r\n- You are an Arthropod and can climb vertical surfaces.\n- Cobwebs do not slow you. Your melee attacks briefly trap targets in cobwebs and inflict Poison for 3 seconds.\n- You can sense creatures trapped in cobwebs or affected by §c§l[Webbed]§r. Undetectable creatures are excluded.\n- Outside sunlight, you deal 20% more damage to creatures trapped in cobwebs or affected by §c§l[Webbed]§r.\n- You can craft cobwebs.\n- Fire does not extinguish on its own.\n- You see better in darkness than most creatures.",
+  "description": "§e§lStats:§r\n-30% Max Health\n+20% Ground & Air Speed\n-20% Size\n+35% Hunger Drain\n+20% Damage Taken\n \n§e§lFeatures:§r\n- You are an Arthropod and can climb vertical surfaces.\n- You are immune to fall damage and Poison.\n- Cobwebs do not slow you. Once every 10 seconds, a non-sneaking melee hit places a temporary cobweb at the target; melee hits also inflict Poison II for 3 seconds.\n- You can sense creatures trapped in cobwebs or affected by §c§l[Webbed]§r. Undetectable creatures are excluded.\n- Outside sunlight, you deal 20% more damage to creatures trapped in cobwebs or affected by §c§l[Webbed]§r. In sunlight, your damage dealt is reduced by 10%.\n- You can craft cobwebs and attack through cobwebs while not sneaking.\n- Fire does not extinguish on its own.\n- You see 75% better in darkness than most creatures. Toggleable.\n- You are a Carnivore.",
   "size": {
     "type": "origins:attribute",
     "modifier": {
@@ -458,8 +458,17 @@
       "amount": 1.0
     },
     "condition": {
-      "type": "origins:power_active",
-      "power": "*:*_toggle"
+      "type": "origins:or",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "*:*_toggle"
+        },
+        {
+          "type": "origins:power",
+          "power": "*:arachne/helper/dash_horizontal"
+        }
+      ]
     }
   }
 }

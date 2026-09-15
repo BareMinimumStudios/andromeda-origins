@@ -1,6 +1,40 @@
 # Andromeda Origins — Compatibility & State Safety
 
-This document describes the compatibility and state-safety behavior in **v1.4.46**. Compatibility behavior is unchanged from v1.4.45; v1.4.46 only corrects HUD resource-bar sheet/index routing.
+This document describes the compatibility and state-safety behavior in **v1.4.70**. Optional Spell Engine / More RPG Library audiovisual compatibility remains additive; Figura, Armor Model API, Incapacitated, and gameplay-state compatibility remain unchanged.
+
+### v1.4.70 legacy iron-power migration
+Existing standard Faerie, Gorgon, and Lichling players are checked once when they join. If their already-selected Origin is missing any current child of `andromeda_origins:common/witheringironweakness`, Andromeda grants only the missing child powers under the existing Origin source and syncs Apoli once. It does not re-select the Origin, reset cooldowns/resources, or run a recurring tick scan. The same narrow reconciliation is also performed by `/andromedaorigins repair <player>` before the existing attribute repair.
+
+## Spell Engine / More RPG Library (optional enhanced FX)
+
+- `spell_engine` and `more_rpg_classes` are `suggests`, not `depends`.
+- No Spell Engine or More RPG Java class is referenced from Andromeda's normal class-loading path. Spell Engine particle calls are resolved reflectively only after Fabric reports the mod as loaded.
+- More RPG-specific entries are skipped unless `more_rpg_classes` is loaded; More RPG's own Spell Engine / Spell Power dependencies remain More RPG's responsibility.
+- Existing Andromeda custom sounds and vanilla particles are left in place as the fallback. Enhanced FX are additive rather than replacements.
+- FX selection is server-data-driven through `data/andromeda_origins/andromeda_fx/*.json`; Java only handles optional-library detection, registry safety, packet emission, and sound playback.
+- The Spell Engine helper already checks whether its S2C particle packet can be sent to each tracking client.
+- A malformed or missing optional FX definition does not invalidate an Origin power; the internal FX command simply produces no enhanced layer.
+- Runtime switches are stored in `config/andromeda_origins_fx.json` and can be changed with `/andromedaorigins enhanced_fx ...`.
+
+This layer does not grant spells, attributes, spell power, or RPG classes. Andromeda uses only the libraries' registered audiovisual assets/particle transport for presentation.
+
+## Apoli server performance
+
+Andromeda v1.4.65 includes two compatibility optimizations for Apoli 2.12.x hot paths observed in server profiling:
+
+- `PowerHolderComponentImpl#getPowerTypes(Class, boolean)` caches only the list of owned power objects matching a requested power-type class. Active/conditioned state is still checked on every query, so a power becoming active or inactive is not cached incorrectly. The membership cache is invalidated whenever powers are added, removed, loaded from NBT, or synchronized.
+- `EntitySetPowerType.integrateUnloadCallback` is replaced with an indexed-holder equivalent. Apoli's stock callback walks every loaded entity in every dimension whenever a non-player entity is destroyed; Andromeda keeps a weak index of living entities that actually own an EntitySet power and checks only those holders. If reflection cannot resolve the expected Apoli API, the optimization declines to cancel the original callback.
+
+The server profiler supplied for this issue was running **Apoli 2.12.0-pre.2**. Andromeda intentionally remains on and now pins **Origins 1.13.0-pre.2+mc.1.21.1 / Apoli 2.12.0-pre.2+mc.1.21.1**. The local performance compatibility layer backports targeted hot-path relief for pre.2 instead of requiring the pre.3 release line. Andromeda's own login handshake still enforces an exact Andromeda Origins version match.
+
+### Apoli pre.2 performance backport
+
+Because the server must remain on Origins/Apoli pre.2, Andromeda provides narrow compatibility mixins instead of requiring pre.3:
+
+- class-specific `getPowerTypes(Class, includeInactive)` membership is cached and invalidated when the holder's powers change; active conditions are still checked live;
+- `EntitySetPowerType.integrateUnloadCallback` tracks actual EntitySet holders instead of scanning every loaded entity in every world for each destroyed non-player entity;
+- every optimization is optional/fail-open: if the expected pre.2 internals are unavailable, Apoli's stock implementation is allowed to run.
+
 
 ## Incapacitated
 
@@ -18,7 +52,7 @@ Lichling self-healing uses Origins' native heal action rather than intentionally
 
 ### Humanity — Mortal Resolve
 
-Mortal Resolve can activate only while Incapacitated reports the Human as downed. During the one-minute final stand, Andromeda prepares Incapacitated's down counter before a real death so the player does not simply enter another downed state. When Mortal Resolve expires, the ordinary Human follows the forced-death path; Champion Humanity's Mortal Triumph does not.
+Mortal Resolve can activate only while Incapacitated reports the Human as downed. During the one-minute final stand, Andromeda temporarily arms Incapacitated's down counter so a real death cannot simply become another downed state. v1.4.47 tracks that temporary sentinel through the final death and restores Incapacitated's configured counter/timer after respawn. A persistent recovery tag also protects the handoff across a server restart or delayed respawn. Champion Humanity's Mortal Triumph never arms the forced-death sentinel.
 
 ## Champion Origins
 
@@ -74,7 +108,7 @@ See [FIGURA_COMPAT.md](FIGURA_COMPAT.md).
 - The shared power hides armor/outline as before and additionally suppresses the standard held-item feature. Client mixins also suppress first-person and vanilla third-person held-item rendering while the synchronized `andromeda_undetectable` command tag is present.
 - The optional Armor Model API dispatcher bridge also treats Undetectable as hidden, so registered custom geo armor is cancelled instead of floating around an invisible player.
 
-The marker tag is added/removed by the shared power and refreshed once per second while active. Origins/Apoli 1.13.0-pre.3 includes client synchronization for command tags, allowing the same state to drive client rendering without a hard Apoli Java dependency.
+The marker tag is added/removed by the shared power and refreshed once per second while active. On the pinned pre.2 runtime, server-side mob targeting and the data-driven `prevent_feature_render` power remain the authoritative stealth behavior. Client-only helpers that rely on the command-tag mirror are best-effort compatibility hooks rather than a reason to require pre.3.
 
 This is target immunity, not general invulnerability: area damage, projectiles already in flight, traps, commands, and environmental damage are not cancelled merely because the player is Undetectable. Arbitrary custom renderers that do not use vanilla held-item rendering may require their own compatibility hook.
 
@@ -128,13 +162,25 @@ Explicit persistent modifier IDs use the `andromeda_origins:` namespace. Context
 
 When a standard or Champion Andromeda Origin is selected/reselected/command-assigned, its owned cooldowns/resources are restored to configured starting values. Figura compatibility resources are also reset. This is selection-time initialization, not an intentional reconnect refresh.
 
+## Exact Andromeda Origins version handshake
+
+Andromeda Origins uses Fabric's login-query networking stage to require an exact client/server mod-version match before world join. The server sends an `andromeda_origins:version_check` query; a client without Andromeda Origins does not understand the channel and is disconnected, while a client with the mod responds with its runtime Fabric Loader metadata version. Any version/protocol mismatch is disconnected with a message showing the server and client versions. This is separate from `fabric.mod.json` dependency checks, which only validate each installation locally.
+
 ## Admin recovery command
 
 ```mcfunction
 /andromedaorigins repair <player>
 ```
 
-The command is intended for interrupted/broken current-state recovery. It clears known temporary Andromeda control states/source counters, removes a stale `andromeda_undetectable` marker if present, invokes Incapacitated repair behavior when available, resets Incapacitated transient damage tracking, and restores the player's current maximum health. A legitimately active Undetectable power reasserts its marker on the next one-second sync.
+The command is intended for interrupted/broken current-state recovery. Before the existing state cleanup, it rebuilds the raw player attributes Andromeda currently manages (`max_health`, `movement_speed`, `scale`, `step_height`, `armor`, `armor_toughness`, `knockback_resistance`, and `attack_speed`) from Minecraft's clean player defaults, removes/re-applies the currently granted Apoli `AttributeModifying` powers, and then heals to the newly reconstructed maximum health. The effective result is the clean player base plus the currently selected Origin/Champion modifiers, not a vanilla-player final stat line. It does **not** re-run `/origin set`, so selection callbacks, cooldowns, resources, and active timers are preserved.
+
+The full repair then clears known temporary Andromeda control states/source counters, removes a stale `andromeda_undetectable` marker if present, invokes Incapacitated repair behavior when available, repairs a stale negative unlimited-down counter, and resets Incapacitated transient damage tracking. A legitimately active Undetectable power reasserts its marker on the next one-second sync.
+
+Attribute-only recovery is also available with:
+
+```mcfunction
+/andromedaorigins repair_attributes <player>
+```
 
 ## Namespace / migration
 
@@ -145,3 +191,15 @@ andromeda_origins:
 ```
 
 The project does not ship a migration layer for unsupported prototype namespaces or arbitrary old player NBT.
+
+## Incapacitated hard-death notes (v1.4.47)
+
+- Mortal Resolve temporarily forces Incapacitated's internal down counter negative so the final-stand death cannot become another down. v1.4.47 explicitly restores the configured counter after that death.
+- Players carrying a stale negative counter from older Andromeda versions are repaired automatically on join/respawn when `UnlimitedDowns=true`.
+- `UnlimitedDowns` only prevents Incapacitated from consuming its down counter. Incapacitated can still intentionally hard-kill through its own instant-kill damage tag/config, overkill-damage rule, bleed-out timeout, give-up behavior, or full-server-kill rule when those options are enabled. Andromeda does not override those settings.
+
+### Incapacitated overkill damage
+
+In Incapacitated 2.0.x, `ShouldDieOnOverkillDamage` / `shouldDieOnOverkillDamage` is an upstream Incapacitated setting and defaults to `true`. Its documented rule hard-kills instead of downing when the lethal hit's recorded damage is greater than **max health + current health**. At full health that threshold is greater than 2× max health; when already injured, the threshold is lower. Andromeda Origins neither implements nor overrides this rule.
+
+The upstream public README/changelog does not state whether the recorded damage used by this comparison is sampled before or after armor/protection mitigation. Andromeda therefore leaves that implementation detail to Incapacitated rather than adding a competing damage hook.

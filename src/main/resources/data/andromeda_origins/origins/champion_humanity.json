@@ -2,6 +2,7 @@
   "powers": [
     "andromeda_origins:champion/humanity_passives",
     "andromeda_origins:common/champion",
+    "andromeda_origins:common/champion_cooldowns",
     "andromeda_origins:humanity/primary",
     "andromeda_origins:champion/humanity_secondary",
     "andromeda_origins:humanity/figura",
@@ -15,5 +16,5 @@
   "order": 104,
   "impact": 3,
   "name": "Champion Human",
-  "description": "A command-only Champion variant of The Human. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Cooldowns, charge times and resource costs remain."
+  "description": "A command-only Champion variant of The Human. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Player-facing ability cooldowns recover twice as fast; charge times and resource costs remain unchanged."
 }

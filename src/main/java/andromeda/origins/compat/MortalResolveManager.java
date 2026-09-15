@@ -2,11 +2,14 @@ package andromeda.origins.compat;
 
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -20,10 +23,12 @@ public final class MortalResolveManager {
 
     public static final String ACTIVE_TAG = "andromeda_mortal_resolve";
     public static final String CHAMPION_ACTIVE_TAG = "andromeda_champion_mortal_resolve";
+    private static final String FINAL_DEATH_PENDING_TAG = "andromeda_mortal_resolve_restore_incap";
     public static final int DURATION_TICKS = 20 * 60;
 
     private static final Map<UUID, Integer> ACTIVE = new HashMap<>();
     private static final Map<UUID, Integer> CHAMPION_ACTIVE = new HashMap<>();
+    private static final Set<UUID> FINAL_DEATH_PENDING = new HashSet<>();
 
     private MortalResolveManager() {}
 
@@ -80,8 +85,19 @@ public final class MortalResolveManager {
                     MortalResolveEffects.playHeartbeatPulse(player);
                 }
 
+                // Cosmetic escalation: the borrowed minute grows increasingly unstable as it runs out.
+                if (remaining == 800) {
+                    EnhancedFxCompat.play(player, "humanity.mortal_resolve_stage_1");
+                } else if (remaining == 400) {
+                    EnhancedFxCompat.play(player, "humanity.mortal_resolve_stage_2");
+                } else if (remaining == 200) {
+                    EnhancedFxCompat.play(player, "humanity.mortal_resolve_stage_3");
+                }
+
                 if (remaining <= 1) {
                     iterator.remove();
+                    FINAL_DEATH_PENDING.add(player.getUuid());
+                    player.addCommandTag(FINAL_DEATH_PENDING_TAG);
                     player.removeCommandTag(ACTIVE_TAG);
                     IncapacitatedCompat.forceMortalResolveDeath(player);
                 } else {
@@ -114,6 +130,13 @@ public final class MortalResolveManager {
                 if (elapsed > 0 && elapsed % 30 == 0) {
                     MortalResolveEffects.playHeartbeatPulse(player);
                 }
+                if (remaining == 800) {
+                    EnhancedFxCompat.play(player, "humanity.mortal_resolve_stage_1");
+                } else if (remaining == 400) {
+                    EnhancedFxCompat.play(player, "humanity.mortal_resolve_stage_2");
+                } else if (remaining == 200) {
+                    EnhancedFxCompat.play(player, "humanity.mortal_resolve_stage_3");
+                }
 
                 if (remaining <= 1) {
                     championIterator.remove();
@@ -131,6 +154,8 @@ public final class MortalResolveManager {
         ServerPlayerEvents.ALLOW_DEATH.register((player, damageSource, damageAmount) -> {
             if (player.getCommandTags().contains(ACTIVE_TAG)) {
                 MortalResolveEffects.stopHeartbeat(player);
+                FINAL_DEATH_PENDING.add(player.getUuid());
+                player.addCommandTag(FINAL_DEATH_PENDING_TAG);
                 IncapacitatedCompat.prepareMortalResolveDeath(player);
             }
             if (player.getCommandTags().contains(CHAMPION_ACTIVE_TAG)) {
@@ -140,8 +165,32 @@ public final class MortalResolveManager {
         });
 
         ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
+            boolean mortalResolveDeath = FINAL_DEATH_PENDING.remove(oldPlayer.getUuid())
+                || oldPlayer.getCommandTags().contains(ACTIVE_TAG)
+                || oldPlayer.getCommandTags().contains(FINAL_DEATH_PENDING_TAG)
+                || newPlayer.getCommandTags().contains(FINAL_DEATH_PENDING_TAG);
+            oldPlayer.removeCommandTag(FINAL_DEATH_PENDING_TAG);
+            newPlayer.removeCommandTag(FINAL_DEATH_PENDING_TAG);
             stop(newPlayer);
             stopChampion(newPlayer);
+            if (mortalResolveDeath) {
+                IncapacitatedCompat.restorePostMortalResolveState(newPlayer);
+            } else {
+                IncapacitatedCompat.repairUnlimitedDownCounter(newPlayer);
+            }
+        });
+
+        // Repair legacy stale counters when the server play handler is ready. Using the long-lived
+        // networking join event keeps this compatible with the project's Fabric API baseline.
+        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
+            ServerPlayerEntity player = handler.getPlayer();
+            if (player.getCommandTags().contains(FINAL_DEATH_PENDING_TAG)) {
+                player.removeCommandTag(FINAL_DEATH_PENDING_TAG);
+                stop(player);
+                IncapacitatedCompat.restorePostMortalResolveState(player);
+            } else if (!isActive(player)) {
+                IncapacitatedCompat.repairUnlimitedDownCounter(player);
+            }
         });
     }
 

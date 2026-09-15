@@ -16,6 +16,10 @@
         {
           "type": "origins:execute_command",
           "command": "title @s actionbar {\"text\": \"You feel unstable!\", \"color\": \"red\"}"
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx veilborn.unstable"
         }
       ]
     },

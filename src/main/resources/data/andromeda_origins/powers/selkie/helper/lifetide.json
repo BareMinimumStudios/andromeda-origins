@@ -7,7 +7,7 @@
       "actions": [
         {
           "type": "origins:clear_effect",
-          "id": "minecraft:absorption"
+          "effect": "minecraft:absorption"
         },
         {
           "type": "origins:apply_effect",
@@ -34,7 +34,7 @@
       "actions": [
         {
           "type": "origins:clear_effect",
-          "id": "minecraft:absorption"
+          "effect": "minecraft:absorption"
         },
         {
           "type": "origins:apply_effect",
@@ -89,7 +89,7 @@
                 "actions": [
                   {
                     "type": "origins:clear_effect",
-                    "id": "minecraft:absorption"
+                    "effect": "minecraft:absorption"
                   },
                   {
                     "type": "origins:apply_effect",
@@ -98,6 +98,10 @@
                       "amplifier": 1,
                       "duration": 1200
                     }
+                  },
+                  {
+                    "type": "origins:execute_command",
+                    "command": "andromedaorigins internal_fx selkie.phalanx_pulse"
                   }
                 ]
               }

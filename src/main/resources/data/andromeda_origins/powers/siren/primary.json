@@ -82,6 +82,10 @@
               },
               {
                 "type": "origins:execute_command",
+                "command": "andromedaorigins internal_fx siren.infatuation"
+              },
+              {
+                "type": "origins:execute_command",
                 "command": "playsound andromeda_origins:ability.siren.infatuation_charm player @a[distance=0.1..36] ~ ~ ~ 0.95 1.0 0"
               },
               {
@@ -190,6 +194,10 @@
           "type": "origins:and",
           "actions": [
             {
+              "type": "origins:execute_command",
+              "command": "andromedaorigins internal_fx siren.infatuation_target"
+            },
+            {
               "type": "origins:delay",
               "ticks": 4,
               "action": {
@@ -207,7 +215,7 @@
             {
               "type": "origins:change_resource",
               "resource": "*:siren/helper/infatuated_remove",
-              "change": 15,
+              "change": 10,
               "operation": "set"
             },
             {
@@ -331,5 +339,5 @@
     }
   ],
   "name": "Infatuation Tempo",
-  "description": "Press your Primary Ability key while looking at a creature within 30 blocks to Infatuate it for 15 seconds, applying §c§l[Pacified]§r and §c§l[Silenced]§r. While a creature is Infatuated, its attacks and origin-ability damage cannot harm Sirens.\n \nInfatuation lasts the full 15 seconds and cannot be broken early by movement or by taking damage."
+  "description": "Press your Primary Ability key while looking at a creature within 30 blocks to Infatuate it for 10 seconds, applying §c§l[Pacified]§r and §c§l[Silenced]§r. While a creature is Infatuated, its attacks and origin-ability damage cannot harm Sirens.\n \nInfatuation lasts the full 10 seconds and cannot be broken early by movement or by taking damage."
 }

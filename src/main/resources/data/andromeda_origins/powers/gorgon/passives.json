@@ -452,7 +452,7 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
-      "text": "§e§lDamage Resistances:§r§f All damage (-15%). Most damage except fire, freezing, magic, void, and wither receives an additional -20%.\n \n§c§lDamage Vulnerabilities:§r§f Iron weapons (+20%).\n \n§e§lEffect Immunities:§r§f None."
+      "text": "§e§lDamage Resistances:§r§f All damage (-15%). Most sources receive an additional -20%, excluding fire, freezing, magic, void, wither, suffocation, drowning, and dry-out damage.\n \n§c§lDamage Vulnerabilities:§r§f Iron weapons (+20%).\n \n§e§lEffect Immunities:§r§f None."
     },
     {
       "type": "origins:tooltip",

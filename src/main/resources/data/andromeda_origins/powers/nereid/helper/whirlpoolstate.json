@@ -47,6 +47,10 @@
       "type": "origins:and",
       "actions": [
         {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx nereid.submersion_hit"
+        },
+        {
           "type": "origins:grant_power",
           "power": "*:nereid/helper/whirlpooldebuff",
           "source": "minecraft:debuff"

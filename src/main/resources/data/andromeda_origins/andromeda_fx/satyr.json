@@ -1,0 +1,165 @@
+{
+  "satyr.rush": {
+    "particles": [
+      {
+        "id": "more_rpg_classes:wind_vacuum",
+        "preset": "placed",
+        "count": 1,
+        "scale": 1.15,
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:small_gust",
+        "preset": "cone",
+        "count": 14,
+        "speed": 0.14,
+        "scale": 0.95,
+        "angle": 38,
+        "motion": "burst",
+        "requires_mod": "more_rpg_classes"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "more_rpg_classes:air_magic_cast1",
+        "volume": 0.32,
+        "pitch": 1.08,
+        "requires_mod": "more_rpg_classes"
+      }
+    ]
+  },
+  "satyr.landing": {
+    "particles": [
+      {
+        "id": "more_rpg_classes:gust",
+        "preset": "shockwave",
+        "count": 18,
+        "speed": 0.16,
+        "scale": 1.2,
+        "pre_travel": 0.15,
+        "motion": "burst",
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:small_thunder",
+        "preset": "placed",
+        "count": 1,
+        "scale": 0.95,
+        "requires_mod": "more_rpg_classes"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "more_rpg_classes:air_explosion",
+        "volume": 0.44,
+        "pitch": 0.84,
+        "requires_mod": "more_rpg_classes"
+      }
+    ]
+  },
+  "satyr.swift_leap": {
+    "particles": [
+      {
+        "id": "more_rpg_classes:small_gust",
+        "preset": "shockwave",
+        "count": 16,
+        "speed": 0.13,
+        "pre_travel": 0.08,
+        "scale": 0.95,
+        "motion": "burst",
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:gust",
+        "preset": "placed",
+        "count": 1,
+        "scale": 1.0,
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "spell_engine:magic_stripe",
+        "preset": "cone",
+        "count": 10,
+        "speed": 0.13,
+        "angle": 26,
+        "scale": 0.7,
+        "color": "#E9FAFF",
+        "opacity": 0.7,
+        "glow": true,
+        "motion": "burst"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "spell_engine:generic_wind_gust",
+        "volume": 0.24,
+        "pitch": 1.12
+      }
+    ]
+  },
+  "satyr.landing_bounce": {
+    "particles": [
+      {
+        "id": "more_rpg_classes:gust",
+        "preset": "shockwave",
+        "count": 18,
+        "speed": 0.15,
+        "pre_travel": 0.08,
+        "scale": 1.05,
+        "motion": "burst",
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:small_thunder",
+        "preset": "placed",
+        "count": 1,
+        "scale": 0.7,
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "spell_engine:magic_stripe",
+        "preset": "impact",
+        "count": 10,
+        "speed": 0.1,
+        "scale": 0.72,
+        "color": "#F4FDFF",
+        "opacity": 0.7,
+        "glow": true,
+        "motion": "ascend"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "more_rpg_classes:air_explosion",
+        "volume": 0.2,
+        "pitch": 1.16,
+        "requires_mod": "more_rpg_classes"
+      }
+    ]
+  },
+  "satyr.rush_trail": {
+    "particles": [
+      {
+        "id": "more_rpg_classes:small_gust",
+        "preset": "travel",
+        "count": 8,
+        "speed": 0.11,
+        "scale": 0.72,
+        "motion": "decelerate",
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "spell_engine:magic_stripe",
+        "preset": "travel",
+        "count": 6,
+        "speed": 0.1,
+        "scale": 0.58,
+        "color": "#F1FCFF",
+        "opacity": 0.58,
+        "glow": true,
+        "motion": "decelerate"
+      }
+    ],
+    "sounds": []
+  }
+}

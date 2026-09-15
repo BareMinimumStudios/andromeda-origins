@@ -33,6 +33,10 @@
       "type": "origins:and",
       "actions": [
         {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx fenrkin.hunt_pulse"
+        },
+        {
           "type": "origins:spawn_particles",
           "particle": {
             "type": "minecraft:portal"

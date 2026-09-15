@@ -553,5 +553,5 @@
     }
   },
   "name": "Champion Passive Features",
-  "description": "§e§lChampion Features:§r\n-17% Size\n+33% Ground & Air Speed\n \n- Retains concealment, fae movement and illusion traits. While Undetectable, mobs cannot target you and held items are hidden.\n- No health, damage, iron or inventory-Wither penalties."
+  "description": "§e§lChampion Features:§r\n-17% Size\n+33% Ground & Air Speed\n \n- Retains concealment, fae movement and illusion traits, including up to 4 mid-air jumps; each mid-air jump clears Levitation and Slow Falling. While Undetectable, mobs cannot target you and held items are hidden.\n- No health, damage, iron or inventory-Wither penalties.\n- Player-facing ability cooldowns recover at 2× rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
 }

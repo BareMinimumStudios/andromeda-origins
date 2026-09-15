@@ -18,6 +18,10 @@
       "type": "origins:and",
       "actions": [
         {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx lichling.doom_detonate"
+        },
+        {
           "type": "origins:damage",
           "amount": 20,
           "damage_type": "minecraft:magic"

@@ -8,7 +8,7 @@
     },
     "entity_action": {
       "type": "origins:raycast",
-      "distance": 64,
+      "distance": 32,
       "block": false,
       "entity": true,
       "shape_type": "collider",
@@ -98,6 +98,10 @@
         "type": "origins:and",
         "actions": [
           {
+            "type": "origins:execute_command",
+            "command": "andromedaorigins internal_fx gorgon.transference"
+          },
+          {
             "type": "origins:delay",
             "ticks": 3,
             "action": {
@@ -113,14 +117,22 @@
             "change": -1
           },
           {
-            "type": "origins:grant_power",
-            "power": "*:gorgon/helper/speedup",
-            "source": "minecraft:buff"
-          },
-          {
-            "type": "origins:change_resource",
-            "resource": "*:gorgon/helper/speedup_remove",
-            "change": 10
+            "type": "origins:if_else",
+            "condition": {
+              "type": "origins:power",
+              "power": "*:gorgon/helper/speedup"
+            },
+            "if_action": {
+              "type": "origins:change_resource",
+              "resource": "*:gorgon/helper/speedup_remove",
+              "change": 15,
+              "operation": "set"
+            },
+            "else_action": {
+              "type": "origins:grant_power",
+              "power": "*:gorgon/helper/speedup",
+              "source": "minecraft:buff"
+            }
           },
           {
             "type": "origins:spawn_particles",
@@ -149,6 +161,10 @@
           "type": "origins:and",
           "actions": [
             {
+              "type": "origins:execute_command",
+              "command": "andromedaorigins internal_fx gorgon.transference_target"
+            },
+            {
               "type": "origins:delay",
               "ticks": 5,
               "action": {
@@ -159,14 +175,21 @@
               }
             },
             {
-              "type": "origins:grant_power",
-              "power": "*:gorgon/helper/intimidated",
-              "source": "minecraft:debuff"
-            },
-            {
-              "type": "origins:change_resource",
-              "resource": "*:gorgon/helper/intimidated_remove",
-              "change": 10
+              "type": "origins:if_else",
+              "condition": {
+                "type": "origins:power",
+                "power": "*:gorgon/helper/intimidated"
+              },
+              "if_action": {
+                "type": "origins:change_resource",
+                "resource": "*:gorgon/helper/intimidated_remove",
+                "change": 15
+              },
+              "else_action": {
+                "type": "origins:grant_power",
+                "power": "*:gorgon/helper/intimidated",
+                "source": "minecraft:debuff"
+              }
             },
             {
               "type": "origins:delay",

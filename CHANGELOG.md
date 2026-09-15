@@ -1,3 +1,450 @@
+# v1.4.70
+
+## Migration-safe iron weakness
+- Existing standard **Faerie, Gorgon, and Lichling** players are now reconciled automatically when they join. If their current selected Origin is missing any current child power from `andromeda_origins:common/witheringironweakness`, Andromeda grants only the missing pieces under that Origin's existing power source.
+- This specifically fixes legacy players whose saved Apoli power membership predates the newer iron sampler/resource/damage children and previously required an Origin reselect before the updated weakness worked.
+- The migration does **not** re-select the Origin, revoke/regrant already-correct powers, reset ability cooldowns/resources, or rebuild every player power. If nothing is missing, it performs no mutation and no Apoli sync.
+- `/andromedaorigins repair <player>` now runs the same narrow iron-power reconciliation before the existing Origin-aware attribute rebuild, allowing staff to repair an already-online affected player without forcing a reconnect or Origin reselect.
+
+## Performance / compatibility
+- The automatic migration is a **one-shot join check**, not a tick callback. It inspects only the player's selected Origin and the single iron-weakness multiple power; no world/entity scan or inventory scan is added.
+- Kept Andromeda's reflection-based Apoli/Origins compatibility boundary and fail-closed behavior. Origins/Apoli remain pinned to **Origins 1.13.0-pre.2+mc.1.21.1 / Apoli 2.12.0-pre.2+mc.1.21.1**.
+- Existing v1.4.69 iron damage remains unchanged: 1 wither damage every 20 ticks while sampled iron is present, with a 5-tick inventory sampler and fast Wither removal after the final iron item is dropped.
+
+# v1.4.69
+
+## Iron weakness passive damage + sampler cleanup
+- Standard **Faerie, Gorgon, and Lichling** inventory iron weakness now deals **1 wither damage (half a heart) every 20 ticks / 1 second** while an iron-tagged item remains anywhere in the inventory, restoring a more noticeable passive health drain.
+- The short Wither I marker is still refreshed for only **10 ticks**, so the inventory-caused Wither icon/effect clears within roughly **0.5 seconds** after the final iron-tagged item is removed. The damage state is cleared by the same 5-tick sampler, so passive iron damage also stops within at most about 0.25 seconds of the next sample.
+- Moved the expensive `origins:inventory` condition inside the 5-tick periodic action instead of leaving it as the `action_over_time` power condition. Apoli checks a power condition every server tick, so this change makes the full inventory scan genuinely run only **4 times per second per affected player**, while the per-tick active check remains a cheap resource/state check.
+- Iron-weapon hit Wither and Champion iron exemptions are unchanged. Origins/Apoli remain pinned to pre.2.
+
+# v1.4.68
+
+## Siren carnivore enforcement
+- Standard **Siren** now uses a dedicated strict carnivore rule instead of the shared diet-exemption set. Non-meat foods such as golden apples and golden carrots are no longer valid Siren food.
+- Actual beverages and potion-style consumables remain usable through a Siren-specific drink exemption tag, so the diet change does not block normal drinks.
+- Champion Siren remains unchanged and retains the established Champion exemption from racial diet restrictions.
+
+## Fenrkin Origin Toggle isolation
+- Replaced standard and Champion Fenrkin's Apoli `TogglePowerType` dependency with a dedicated persisted 0/1 toggle resource controlled only by the **Origin Toggle** key.
+- Fenrkin darkvision and step assistance now read that dedicated resource directly. Using **Primary / On the Hunt** can no longer re-enable step assistance while the Origin Toggle is off.
+- The toggle still defaults to ON when Fenrkin is selected/re-selected, matching the previous behavior, and the dedicated Origin Toggle binding remains independently rebindable.
+
+## Validation
+- Revalidated all modified power/origin/tag JSON after the diet and toggle changes.
+- Origins/Apoli remain pinned to **Origins 1.13.0-pre.2+mc.1.21.1 / Apoli 2.12.0-pre.2+mc.1.21.1**.
+
+# v1.4.67
+
+## Responsive iron weakness
+- Reworked the inventory-based iron weakness used by standard **Faerie, Gorgon, and Lichling**. Iron inventory checks now run every **5 ticks** and refresh a short Wither I marker, so inventory-caused Wither disappears within roughly **0.5 seconds** after the final iron-tagged item is removed instead of lingering for up to 10 seconds.
+- Preserved normal Wither I damage cadence with a lightweight 40-tick damage pulse while the short iron-caused Wither marker is active. This avoids the short refresh duration accidentally suppressing Wither's normal damage.
+- The damage pulse deliberately yields to any longer or stronger external Wither effect, so ordinary Wither from other sources is not replaced or cleared when iron is removed.
+- Fixed **standard Siren** so iron-weapon hits now actually inflict the Wither I described by its existing ability text. Siren still does **not** gain the inventory-carrying iron weakness.
+- Champion variants remain unchanged and continue to have their iron weaknesses removed.
+
+## Performance / safety
+- The responsive inventory check applies only to Origins that actually own the inventory iron-weakness power and runs four times per second; no global entity scan or per-tick inventory scan was added.
+- Revalidated all data JSON and iron-weakness references after the change.
+
+# v1.4.66
+
+## Origins / Apoli pre.2 compatibility
+- Restored the supported runtime to **Origins 1.13.0-pre.2+mc.1.21.1 / Apoli 2.12.0-pre.2+mc.1.21.1** and pinned both exact versions so the mod will not require or silently accept the pre.3 line.
+- Kept Andromeda's server-side Apoli hot-path optimizations from v1.4.65. These now act as a targeted performance backport for pre.2 rather than depending on pre.3's upstream lookup changes.
+- Verified the compatibility layer against the actual upstream **Apoli 2.12.0-pre.2** source shape: `PowerHolderComponentImpl#getPowerTypes(Class, boolean)` still performs the full power scan, and `EntitySetPowerType#integrateUnloadCallback` still scans every loaded entity in every server world when a non-player entity is destroyed.
+- No Origin balance, powers, Champion behavior, FX, repair logic, or Andromeda version-handshake behavior changed in this release.
+
+## Performance compatibility notes
+- `ApoliPowerHolderCacheMixin` continues to cache only **power-type class membership**. Dynamic `isActive()` conditions are still evaluated for each lookup so conditioned powers keep their normal behavior.
+- `ApoliEntitySetUnloadMixin` continues to replace the pre.2 world-wide unload scan with an indexed holder path. If the expected pre.2 internals cannot be resolved, it falls back to Apoli's stock behavior instead of hard-failing.
+
+## Validation
+- Revalidated all JSON resources after the dependency rollback.
+- Confirmed the mixin target names and reflected pre.2 fields/methods against upstream commit `c88fac3` (Apoli 2.12.0-pre.2).
+- Static validation only in this environment; the Gradle wrapper still cannot download Gradle 8.8 here.
+
+# v1.4.65
+
+## Server-side Apoli performance
+- Added a compatibility cache for Apoli power-type lookups. The cache stores only class membership and still evaluates each power's active condition on every query, preserving conditioned-power behavior while avoiding repeated scans across every power on an entity from hot attribute, collision, invisibility, fire, tag, and movement hooks.
+- Replaced Apoli's EntitySet unload cleanup scan with an indexed holder path. Instead of walking every loaded entity in every dimension whenever a non-player entity is destroyed, the compatibility layer visits only living entities that currently own an `EntitySetPowerType`. If the upstream API cannot be resolved, Andromeda falls back to Apoli's original callback.
+- Tightened the required Apoli version to **2.12.0-pre.3+mc.1.21.1 or newer**. Apoli pre.3 itself includes upstream power-lookup optimizations; servers still running pre.2 must update Apoli on both server and client installations.
+- These optimizations do not alter Origin balance, power conditions, cooldowns, FX, Champion behavior, or the v1.4.64 Origin-aware repair/version-sync systems.
+
+## Validation
+- Verified the new compatibility mixins against the method shapes used by Apoli 2.12.0-pre.2 and the supplied 2.12.0-pre.3 source.
+- The new Java compatibility classes pass a standalone syntax compile against minimal Minecraft/Mixin API stubs.
+- Revalidated all JSON resources and mixin configuration after the performance changes.
+- Static validation only in this environment; the Gradle wrapper still cannot download Gradle 8.8 here.
+
+# v1.4.64
+
+## Origin-aware attribute repair
+- Rebuilt `/andromedaorigins repair <player>` so it no longer treats the player's current effective stats as trustworthy. The command now resets the raw vanilla bases for the attributes Andromeda actively owns, then re-applies the player's currently granted Apoli attribute powers.
+- The final repaired values therefore match the **currently selected standard or Champion Origin** instead of leaving the player at vanilla-player stats. Example: a repaired Arachne receives the clean player base plus Arachne's max-health/scale/movement modifiers; a repaired Lichling receives the clean base plus Lichling's health modifier.
+- The rebuild uses Minecraft's PLAYER default-attribute container rather than a hand-maintained per-Origin stat table, so future balance changes in the Origin power files remain authoritative.
+- The repair does **not** re-select the Origin and therefore does not intentionally reset selection callbacks, player-facing cooldowns, charge resources, or active timers.
+- Added `/andromedaorigins repair_attributes <player>` for attribute-only recovery/debugging. The normal `repair` command still performs the existing crowd-control, Undetectable-marker, Incapacitated, and health recovery after the attribute rebuild.
+- Equipment/status modifiers are not blanket-wiped. Apoli-owned attribute modifiers are removed/re-applied through Apoli's own runtime modifier methods, while unrelated non-Apoli modifiers remain in place.
+
+## Exact client/server version sync
+- Added a mandatory Fabric login-query handshake on `andromeda_origins:version_check`.
+- A client without Andromeda Origins is disconnected before joining and told which server version is required.
+- A client with a different Andromeda Origins version is disconnected before joining with the server/client versions shown.
+- Version comparison uses each side's runtime Fabric Loader mod metadata, so the check follows the built jar's real `mod_version` instead of a duplicated hard-coded string.
+
+## Validation
+- Updated the packaged mod version to **1.4.64** and refreshed current-version documentation.
+- Revalidated all JSON resources; gameplay data/Enhanced FX definitions are otherwise unchanged from v1.4.63.
+- Static/source validation only in this environment; the Gradle wrapper still cannot fetch Gradle 8.8 here.
+
+# v1.4.63
+
+## Champion Wyverian — draconic primary
+- Champion Wyverian now uses a dedicated Primary ability instead of sharing standard Ember Flames. Standard Wyverian is unchanged.
+- **Dragon's Breath** replaces Ember Ray for Champion Wyverian: the 32-block stream uses dragon-breath/arcane presentation and deals magic damage instead of fire damage or ignition.
+- **Dragon Charge** replaces Ember Pyroclast: the 2-second charge, 64-block maximum range, 4-block impact radius, 10-resource cost, and interruption behavior are retained, but the impact deals **10 magic damage** with draconic/arcane effects instead of the standard fire/explosion presentation.
+- Added separate Champion-only charge helpers and ray functions so the standard Wyverian fire implementation is not altered. Caster tagging prevents the new magic breath/charge AoE from striking the Champion that fired it.
+- Added six Champion Wyverian Enhanced FX definitions for Dragon's Breath, four escalating Dragon Charge stages, and the Dragon Charge impact.
+
+## Validation
+- Revalidated all JSON resources and Champion Wyverian resource references after splitting the primary power.
+- Enhanced FX definitions now total **109** events.
+- Static validation only in this environment; the Gradle wrapper still cannot download Gradle 8.8 here.
+
+# v1.4.62
+
+## Champion Manticore — Bloodrift tuning
+- Reduced Bloodrift's fixed cooldown from **30 seconds to 10 seconds** and changed its HUD style to use the same resource-bar style as Beast of Blood.
+- Added **cosmetic lightning** on both Bloodrift entry and reappearance; the bolt is visual/audio presentation only and does not deal lightning damage or ignite blocks.
+- Repositioned Bloodrift's claw-tear FX **in front of the player** instead of centered on the player model so the rupture reads as a forward slicing motion.
+- Reappearance now plays a dedicated Manticore roar shortly after visibility returns, followed by the existing delayed aftershock.
+- Bloodrift still ends on manual toggle, attack, or incoming damage, and still applies the existing 3-second Darkness burst within 6 blocks when it ends.
+
+## Validation
+- Revalidated all modified JSON resources.
+- Kept Bloodrift outside the generic Champion 2× cooldown helper; its 10-second cooldown is the actual fixed cooldown.
+- Static validation only in this environment; Gradle 8.8 is still unavailable locally.
+
+# v1.4.61
+
+## Champion Manticore — Bloodrift
+- Added **Bloodrift** as a Champion Manticore-only secondary variant on **Sneak + Secondary Active**. While sneaking, the Champion tears into reality, becomes **Undetectable**, and can press the same input again to rupture back out.
+- Bloodrift ends immediately if the Champion attacks or takes damage. When it ends, nearby entities within **6 blocks** receive **Darkness for 3 seconds**, and the cooldown begins.
+- Bloodrift uses its own dedicated **30-second cooldown** and does **not** consume Beast of Blood or alter Beast of Blood's cadence. Beast of Blood remains on normal Secondary while not sneaking.
+
+## Cinematic FX pass
+- Expanded the presentation of several existing Enhanced FX events for readability and impact without changing gameplay values.
+- **Manticore:** added a dedicated four-stage Bloodrift presentation (`enter`, `tear`, `exit`, `aftershock`) and slightly strengthened Beast of Blood / Lunge impact layering.
+- **Fenrkin / Humanity / Lichling / Siren / Veilborn / Wyverian:** strengthened selected signature events with extra rings, helixes, impact layers, and follow-through bursts for a more dramatic presentation.
+
+## Validation
+- Revalidated all modified JSON resources after the Champion Manticore and Enhanced FX updates.
+- Champion parity remains otherwise unchanged from the prior audit: outside of established Champion exceptions and the new Champion Manticore Bloodrift, shared origin abilities remain 1:1.
+- Enhanced FX definitions now total **103** events.
+- Static validation only in this environment; the Gradle wrapper still cannot download Gradle 8.8 here.
+
+# v1.4.60
+
+## Nereid / Selkie hydration integration
+- Fixed Convalescing Aura creating a second Nereid Wet timer/HUD bar on standard Selkies instead of feeding the Selkie's native hydration system.
+- A hydrated standard Selkie now gains **3 seconds of native stored wetness per Aura pulse**, matching the Aura's normal 3-seconds-of-Wet-per-second behavior.
+- A fully dried-out standard Selkie now gains **1 second per Aura pulse** toward its existing 30-second dry-state recovery meter rather than being instantly cured.
+- Marked aquatic targets can now receive both the Aura heal and aquatic Wet/hydration processing in the same pulse; the old `if_else_list` layout stopped after the first matching branch.
+- Any stale generic Nereid Wet timer already present on a standard Selkie is cleanly expired when the Aura reaches them, and the generic Nereid Wet HUD is suppressed on standard Selkies so only their native hydration bar is shown. Champion Selkie keeps generic Wet handling because it intentionally has no standard hydration weakness/bar.
+
+## Arachne Eightfold Swiftness
+- Reduced the airborne silk-latch raycast from **32 blocks to 16 blocks**.
+- Reduced the airborne pull velocity so a successful latch no longer carries Arachne far beyond the intended 16-block movement scale.
+- Removed the forced downward velocity from the ground dash (`y -2` -> `y 0`).
+- Arachne step assistance is now automatically active during the ground dash for both standard and Champion Arachne, while the normal Origin Toggle behavior remains unchanged.
+
+## Siren Infatuation Tempo
+- Reduced Infatuation duration from **15 seconds to 10 seconds** for standard and Champion Siren.
+- Updated the target timer, actionbar message, and player-facing ability description together.
+
+## Veilborn Auroral Mirage
+- Removed the repeating attached Enhanced FX pulse that followed Veilborn while Auroral Mirage was active.
+- Moved all one-shot activation particle bursts (including Champion Mirage's Darkness presentation) before Undetectable is granted. Once the Veilborn becomes invisible, Auroral Mirage itself emits no tracking particles; exit/break FX still play when stealth ends.
+
+## Incapacitated diagnosis
+- Confirmed the reported large-hit instant death is an **upstream Incapacitated configuration mechanic**, not an Andromeda Origins damage/downing rule. Incapacitated 2.0.x exposes `ShouldDieOnOverkillDamage` / `shouldDieOnOverkillDamage`, enabled by default; when enabled, a lethal hit whose recorded damage is greater than **max health + current health** hard-kills instead of downing.
+- Andromeda Origins does not override that setting. Public Incapacitated documentation does not specify whether the compared damage value is captured before or after armor/enchantment mitigation, so this release does not claim or alter that detail.
+
+## Validation
+- Revalidated all JSON resources after the gameplay/HUD changes.
+- Re-audited the new standard/Champion shared paths for Arachne, Nereid, Siren, and Veilborn so Champion parity remains intact aside from established Champion exceptions.
+- Enhanced FX definitions now total **99** after removing the persistent Auroral Mirage pulse.
+- Static validation only in this environment; the Gradle wrapper still cannot download Gradle 8.8 here.
+
+# v1.4.59
+
+## Fenrkin Adrenaline selection reset
+- Fixed both normal and Champion Fenrkin selection initialization after the v1.4.57 cooldown increase. Adrenaline now resets to the full **7200-tick / 6-minute** base cooldown when the Origin is selected instead of being initialized at the old 3600-tick value.
+- Champion Fenrkin still recovers that cooldown at the normal Champion 2× rate, so the effective wait remains **3 minutes**.
+
+## Champion parity audit
+- Re-audited all 13 Champion Origins against their standard counterparts. Shared active powers remain shared 1:1; Champion-only passive copies differ only where a standard mechanic is a racial weakness/self-debuff or where an explicit Champion exception already exists.
+- Fixed a real parity regression in `common/dash_projectile_penalty`: Champion movement abilities now retain the same **50% projectile-damage reduction during the movement ability and its 3-second tail** as the corresponding standard Origin. This affects Arachne, Fenrkin, Manticore, Satyr, Selkie, and Wyverian movement abilities that use the shared helper.
+- Restored the missing Enhanced FX parity for **Champion Fenrkin Adrenaline** and **Champion Satyr Swift Leap**. These cosmetic hooks had been added to the standard duplicated passive files but not their Champion copies during the v1.4.58 FX expansion.
+- Retained the established intentional Champion exceptions: removed weaknesses/self-debuffs, 2× player-facing cooldown recovery, Champion Humanity Mortal Triumph, and Champion Veilborn's dedicated Mirage/Darkness behavior and fixed 5-second Mirage cooldown.
+
+## Validation
+- Verified every Champion origin file contains exactly one Champion marker and one Champion cooldown-recovery power.
+- Verified standard/Champion active ability files are shared wherever no explicit Champion override is required.
+- Verified duplicated Champion passive strengths match their standard counterparts after excluding documented weakness/self-debuff removals and explicit Champion exceptions.
+- Revalidated all JSON resources after the parity fixes.
+
+# v1.4.58
+
+## Major Enhanced FX expansion
+- Expanded the optional Spell Engine / More RPG Library presentation layer from one-shot cast bursts into more persistent, staged, target-side, and state-aware visuals.
+- **Nereid:** Convalescing Aura now pulses while channeling, shows healing FX on healed targets, has a larger release burst, and Submersion hits produce target-side water effects.
+- **Selkie:** Coastal Phalanx now has matching caster/target water-shield effects and refresh pulses; Surging Tides leaves short trails; Sealskin Bastion pulses while active.
+- **Veilborn:** added dedicated purple/magenta FX for target-side Veil Transposition, Unstable, Reality Shatter, active Auroral Mirage, and Champion Mirage Darkness bursts.
+- **Lichling:** Chimes of Necros now has ten escalating visual pulse stages as Energy is consumed; every Doom application marks the target and the 10-stack detonation has its own large necromantic burst.
+- **Wyverian:** Ember Pyroclast now has four visible charging stages, a dedicated impact explosion, and hover produces a wind-vortex effect.
+- **Humanity:** Indomitable's prevented-death trigger now has a unique holy/shield burst. Mortal Resolve gains three escalating late-stage FX cues plus an enhanced expiry effect.
+- **Faerie:** Trickster prank families now have item-specific enhanced particle signatures without changing any gameplay effects.
+- **Fenrkin / Manticore / Satyr / Siren / Gorgon:** added On the Hunt and Beast of Blood pulses, movement trails/bounce cues, staggered Wail waves and target Infatuation FX, plus stronger repeated Gaze and target-side Transference FX.
+- Renamed the internal Enhanced FX status wording from `recipes` to `definitions`; these files are FX definitions, not Minecraft crafting recipes.
+
+## Safety / behavior
+- This pass is cosmetic-only: no cooldowns, damage, status durations, resource costs, or Origin balance values were changed from v1.4.57.
+- Repeating cosmetic hooks are intentionally low-frequency (generally once per second or a few short delayed pulses) to avoid per-tick particle spam.
+- Base Andromeda particles and custom sounds remain the fallback when optional FX libraries are unavailable or disabled.
+
+# v1.4.57
+
+## Fenrkin Adrenaline
+- Increased Adrenaline's base cooldown from **3 minutes to 6 minutes** for both normal and Champion Fenrkin.
+- Champion cooldown recovery still applies at 2× rate, making Champion Adrenaline effectively **3 minutes**.
+- Recovery amount and the existing Crowd Control break, brief Unstoppable state, and 35-second resistance buff are unchanged.
+
+## Lichling — Chimes of Necros
+- Increased Chimes of Necros range from **10 blocks to 15 blocks**.
+- Each one-second Energy consumption now applies **Wither I for 2 seconds** on the first pulse; the duration increases by 1 second on each subsequent Energy consumption, capping at **10 seconds**.
+- Chimes continues to add **1 Doom stack per pulse** to visible non-Undead targets.
+- The 10th Doom stack still deals **20 magic damage**, applies **Wither II for 5 seconds**, and clears all Doom stacks.
+- The existing Chimes visual sphere was scaled from 10 to 15 blocks without increasing its particle-command count.
+- The Lichling screech opener and enhanced Chimes FX remain unchanged.
+
+## Cleanup / validation
+- Removed the obsolete `V2_0_CROSS_REFERENCE.md` file from the packaged source.
+- Revalidated JSON syntax and the modified cooldown / Chimes resource flow.
+
+# v1.4.56
+
+## Veilborn Wet HUD / internal HUD fix
+- Fixed Veilborn Wet/Unstable duration accumulation. While Veilborn is Wet, physically in water, or exposed to rain, `veilborn/helper/watered_remove` now gains **3 seconds every second** up to the existing 90-second cap instead of only receiving one +3-second increment when the state first started.
+- The Wet Status bar now therefore fills upward while exposure continues and counts down after exposure ends. The resource starts at 0 so the first second of exposure represents exactly 3 seconds.
+- Hid the shared `common/silenced_sources` internal source counter. It was the stray default HUD bar (the gunpowder-looking icon/bar) shown while Veilborn Wet granted Silenced; the counter remains fully functional but is no longer player-facing.
+
+## v2.0.0 design-document cross-reference
+- Cross-referenced the current runtime against the supplied **Andromeda Origins v2.0.0** design document across all 13 standard Origins.
+- Corrected Chimes of Necros' normal pulse from **Wither II** to the documented **Wither I**. The 10th Doom-stack payoff remains 20 magic damage + Wither II for 5 seconds.
+
+## Validation
+- Revalidated all JSON resources after the changes.
+- Audited all rendered HUD resources: no visible HUD entry now falls back to an unspecified/default sprite, and all custom resource-bar indices remain within their sheet ranges.
+- No Java changes were required for this pass.
+
+# v1.4.55
+
+## Veilborn Enhanced FX color correction
+- Fixed the Enhanced FX hex-color bridge to pack colors in Spell Engine's expected **RGBA** order instead of incorrectly treating six-digit colors like ARGB. This was why Veilborn's authored purple/violet tints were rendering as the wrong hue in game.
+- Retuned Veilborn Enhanced FX around a saturated arcane palette using Spell Engine's own arcane magenta (`#FF66FF`) plus violet/purple accents, and added an extra `magic_spell` layer to Curtain Step, Veil Transposition, and Auroral Mirage enter/exit.
+- The RGBA packing correction also makes the authored tint colors on other Origins render as originally specified.
+
+## Lichling Chimes of Necros
+- Added the supplied `lichlingscreech.ogg` as a registered bundled sound: `andromeda_origins:ability.lichling.screech`.
+- Chimes of Necros now plays the screech immediately when the channel starts, with a local caster copy plus a positional copy for nearby players. The existing Chimes audio bed and Enhanced FX remain unchanged.
+
+## Validation
+- Revalidated JSON resources after the sound registration and Veilborn FX edits.
+- Confirmed the bundled OGG is stereo, 44.1 kHz, approximately 7.06 seconds long, and is referenced by `sounds.json`.
+- Static only in this environment; please run the normal local/server Gradle build before deployment.
+
+# v1.4.54
+
+## Enhanced FX flashy pass II
+- Expanded the optional Enhanced FX layer again with a much flashier presentation pass focused on the previously subtler Origins.
+- Added new enhanced events for **Faerie Flutter**, **Fenrkin Adrenaline**, and **Lichling Chimes pulse** so those abilities now produce more readable and expressive audiovisual feedback instead of only relying on their original vanilla/custom presentation.
+- Reworked the Faerie, Fenrkin, Gorgon, Lichling, Siren, and Wyverian Enhanced FX definition files with larger bursts, more layered particles, brighter glow/color treatment, stronger cone/travel usage, extra sound layering, and more persistent-looking channel visuals.
+- The new pass intentionally remains cosmetic-only and optional. Gameplay logic, cooldowns, and damage values are unchanged.
+
+## Validation
+- Revalidated all Enhanced FX JSON definitions after the flashy pass.
+- Confirmed the newly referenced internal FX events are wired into the relevant Origin powers.
+- Static only in this environment; please run your normal local/server Gradle build before deployment.
+
+# v1.4.53
+
+## Enhanced FX flash pass
+- Expanded the optional Spell Engine / More RPG Library presentation layer from a restrained prototype into a more visibly dramatic pass across the Origin roster. Particle counts, scale, glow, layering, and motion were increased for most events while still remaining cosmetic-only.
+- Enhanced FX definitions now support richer data fields including color tinting, glow, opacity envelopes, scale variance/growth, playback speed, lifetime variance, motion presets, gravity/drag overrides, collision, attachment, `travel` and `helix` presets, and attached-to-ground decals.
+- Added a new internal `/andromedaorigins internal_fx_at <event> <pos>` hook so effects can be spawned at a world position instead of only on the caster.
+- Arachne received the largest pass: Weaver's Nest now erupts at the raycast impact point through a dedicated function hook, Webspinner now pulses while weaving and bursts more strongly on completion, and Eightfold Swiftness now has dedicated enhanced FX for both the grounded dash and the airborne grapple.
+- Rebalanced the recipe coverage count upward with the new Arachne-specific events and updated the datapack JSON definitions accordingly.
+
+## Validation
+- Revalidated JSON syntax after the recipe rewrite and new Arachne helper function.
+- Cross-checked the newly used Spell Engine / More RPG Library particle and sound identifiers against the uploaded library sources.
+- Static only in this environment; please run a normal local/server Gradle build before deployment.
+
+# v1.4.52
+
+## Optional Spell Engine / More RPG Library enhanced FX
+- Added an optional enhanced audiovisual layer for Origin abilities. Spell Engine and More RPG Library are listed as `suggests`, not hard dependencies; the base mod still loads and behaves normally without either library.
+- The Spell Engine particle bridge is reflection-only, so no Spell Engine classes are linked from Andromeda's normal startup path. If the external API is absent or changes, the compatibility layer fails closed and the existing Andromeda/vanilla effects continue to work.
+- Added **30 datapack-defined FX events** across all 13 Origins, including web/illusion/hunt/stone/holy/soul/blood/water/wind/music/veil/fire themes. Existing custom Andromeda sounds remain the primary identity layer; library sounds are mixed underneath at restrained volume.
+- Added `data/andromeda_origins/andromeda_fx/*.json` recipes so particle/sound selection is data-driven instead of being hardcoded per Origin in Java.
+- Added a persistent `config/andromeda_origins_fx.json` with independent `enabled`, `particles`, and `sounds` switches.
+- Added operator test controls: `/andromedaorigins enhanced_fx`, plus `enabled`, `particles`, and `sounds` boolean subcommands.
+- Added an internal `andromedaorigins internal_fx <event>` hook used by the Apoli powers; it only invokes cosmetic compatibility and does not change gameplay.
+- Mortal Resolve invokes its enhanced activation directly from the existing Java presentation manager; all other recipes are attached at their existing Apoli cast/impact points.
+
+## FX coverage in this prototype
+- Arachne: Weaver's Nest and Webspinner completion.
+- Faerie: Fae Illusions.
+- Fenrkin: On the Hunt and Mark of Fenrir.
+- Gorgon: Ophidian Gaze and Transference.
+- Humanity: Indomitable and Mortal Resolve.
+- Lichling: Death's Defiance plus Chimes of Necros start/end.
+- Manticore: Ravenous Lunge start/impact and Beast of Blood.
+- Nereid: Convalescing Aura start and Submersion.
+- Satyr: Rush and Satyr's Landing.
+- Selkie: Surging Tides and Sealskin Bastion.
+- Siren: Infatuation Tempo and Shrieking Wail cast/impact.
+- Veilborn: Curtain Step, Veil Transposition, and Auroral Mirage enter/exit.
+- Wyverian: Ember Flames opening cue and Gusts of Freedom pulse.
+
+## Validation
+- Parsed all JSON resources after the FX additions.
+- Confirmed every `internal_fx` event used by powers has a matching datapack recipe and every recipe is referenced.
+- Cross-checked the external sound/particle identifiers against the uploaded Spell Engine 1.10.5 and More RPG Library 2.7.2 sources.
+
+# v1.4.51
+
+## Champion Veilborn
+- Champion Veilborn Auroral Mirage now uses a fixed **5-second cooldown** after the Mirage ends, whether it is dismissed manually or broken by attacking.
+- Standard Veilborn remains unchanged at the normal **2-minute** Auroral Mirage cooldown.
+- Auroral Mirage is excluded from the generic Champion 2× cooldown accelerator so its Champion cooldown remains exactly 100 ticks / 5 seconds rather than being shortened again.
+- The existing 8-block, 5-second Darkness burst on Champion Auroral Mirage entry and exit is unchanged.
+- Updated Champion-facing descriptions and current-release documentation to disclose the cooldown exception.
+
+## Validation
+- Revalidated JSON syntax and confirmed both Auroral Mirage exit paths trigger the base cooldown and then reduce the Champion cooldown to 100 remaining ticks / 5 seconds.
+- Confirmed the generic Champion cooldown accelerator no longer modifies `veilborn/secondary_cooldown`.
+
+# v1.4.50
+
+## Champion cooldowns
+- Champion variants now recover player-facing ability cooldowns at **2× the normal rate**, producing a 50% shorter effective cooldown.
+- The reduction is implemented as a shared Champion cooldown-recovery power so Champions continue using the same normal active-ability JSON instead of maintaining divergent copies.
+- Charge times, resource costs, channel cadence, input-debounce cooldowns, and other internal timing gates are intentionally unchanged.
+- Named passive cooldowns that function as real gameplay cooldowns are included, including Fenrkin Adrenaline, Arachne's periodic web-on-hit proc, Faerie concealment recovery, and Satyr's Landing reset gate.
+- Champion Origin and passive descriptions now disclose the 2× cooldown recovery rule. Shared descriptions with explicit numbers label those values as **base cooldowns**.
+
+## Arachne Webspinner
+- Fixed the Webspinner progress resource remaining at its maximum after a successful weave. The progress now resets to 0 after awarding 5 cobwebs, allowing both normal and Champion Arachne to complete Webspinner repeatedly.
+- Champion Arachne still skips Cobweb Fatigue as intended.
+
+## Fenrkin Adrenaline
+- Reworked Adrenaline's recovery so both normal and Champion Fenrkin are set to **exactly 8 health** one tick after lethal damage is prevented.
+- Apoli's `prevent_death` first places the holder at 1 health; the previous additive heal could be overwritten by later death/downed-state hooks. The delayed internal exact-health command removes that race while preserving the documented 8-health result.
+- Normal Adrenaline retains its 3-minute base cooldown; Champion cooldown recovery reduces the Champion effective cooldown to 90 seconds.
+
+## Champion Veilborn
+- Champion Auroral Mirage now emits an **8-block spherical Darkness burst** both when entering and when leaving the state.
+- Nearby entities receive Darkness for **5 seconds**; the Champion themselves is excluded.
+- The exit burst runs for both manual dismissal and attack-triggered uncloaking.
+- Standard Veilborn Auroral Mirage is unchanged.
+
+## Validation
+- Revalidated Champion origin power grants, new cooldown-resource references, JSON syntax, and modified descriptions after the v1.4.50 changes.
+
+# v1.4.49
+
+## Design decisions resolved against v1.3.6
+- Step assistance for Arachne and Fenrkin remains tied to the Origin Toggle behavior in the current implementation; the older document will be revised rather than moving step assistance back into their actives.
+- Faerie does not have passive Levitation immunity. Its mid-air jump clears Levitation and Slow Falling when the jump is used; normal and Champion descriptions now state this directly.
+- Expanded Trickster's in-game description to list the mechanical effect currently implemented for every dye/item prank instead of treating the newer effects as undocumented drift.
+- Fenrkin Adrenaline now resolves to exactly 8 health after preventing lethal damage. The redundant Instant Health II application was removed; normal and Champion Fenrkin use the same recovery amount.
+- Veilborn Wet/Silenced duration now caps at 90 seconds (1.5 minutes) instead of 180 seconds. The hidden `weaknesstate` boolean comparison was also normalized from a stale `< 120` check to `< 1` without changing its role as an internal state flag.
+- Lichling's +8 Max HP, current Gorgon resistance exceptions, current Siren redesign, current Wyverian stats, and Selkie rain interaction remain authoritative in code; the v1.3.6 document is expected to be revised for those items.
+
+## Champion parity fixes
+- Fixed `fenrkin/helper/stalked` so both normal and Champion Fenrkin can see the Mark of Fenrir target glow and receive the intended +25% damage interaction.
+- Audited `fenrkin/helper/onhunt`: Champion Fenrkin already uses the exact same On the Hunt helper, overlay, buffs, and 64-block entity glow as normal Fenrkin. No Champion-only divergence exists in that helper; the confirmed origin-gating defect was in Mark of Fenrir.
+- Fixed Fae Illusions target glow so Champion Faerie is recognized as a valid viewer.
+- Fixed Nereid's Mark ally glow so Champion Nereid is recognized as a valid viewer.
+- Fixed Weaver's Nest filtering so Champion Arachne receives the same Arachne self-exemption as normal Arachne instead of being pulled/webbed by its own shared ability.
+
+## Runtime corrections confirmed by both documentation and UI
+- Restored Arachne Cobweb Fatigue to the documented/current-tooltip values: +25% hunger drain, -25% movement speed, and -25% mining speed. The implementation had drifted to 20% in all three modifiers.
+- Restored Gorgon Ophidian Gaze and Transference targeting to 32 blocks. Both the supplied v1.3.6 document and current player-facing descriptions specify 32 blocks, while the runtime raycasts had drifted to 64.
+
+## Description and documentation accuracy
+- Removed Fae Illusions' bare natural-expiry `origins:clear_effect`; expiration now only removes the illusion helper itself, while Brown Dye remains the intentional full status-effect purge prank.
+- Re-audited every player-facing Origin/power description and tooltip against the v1.4.49 runtime data after the design decisions were resolved.
+- Corrected Nereid hydration text/tooltips to state that water, rain, or the shared Wet state grants the 25% resistance, while the dry state carries the land penalties.
+- Corrected Veilborn's passive text to include Wet/rain exposure and the resolved 90-second cap.
+- Clarified Champion Arachne, Manticore, Satyr, Veilborn, and Wyverian passive descriptions where shared active descriptions still mention drawbacks that Champions intentionally suppress.
+- Replaced the stale Fenrkin passive text that had accidentally described Manticore mechanics. Fenrkin now documents its actual movement bonus, global damage resistance, Wet/cramped penalty, armor threshold, carnivore diet, and Adrenaline behavior.
+- Removed the obsolete Hunter's Caution badge from On the Hunt; the associated power was not granted anywhere.
+- Corrected Nereid Convalescing Aura from 10 blocks to the implemented 20-block radius.
+- Corrected Selkie Sealskin Bastion from 99% to the implemented 75% incoming-damage reduction.
+- Corrected Manticore venom text to state that Poison I is applied by melee attacks while falling.
+- Restored Veilborn Curtain Step wording to the implemented two-stage Unstable -> Reality Shatter flow.
+- Expanded Arachne, Faerie, Satyr, Siren, Lichling, and Wyverian passive descriptions to expose mechanics already present in code.
+- Removed Faerie's unsupported Levitation-immunity tooltip claim; the current code clears Levitation when performing an air jump but does not provide continuous Levitation immunity.
+- Corrected Gorgon/Wyverian resistance tooltips to include the damage types excluded by their current damage-condition filters.
+
+## Internal cleanup
+- Removed dead `common/hunter_caution` and legacy `humanity/helper/doom` powers after confirming they have no live references.
+- Removed `UndetectableHeldItemFeatureRendererMixin`. Apoli already suppresses third-person `held_item` feature rendering through `origins:prevent_feature_render`; Andromeda's first-person held-item mixin remains because it covers a separate renderer path.
+- Kept the Undetectable AI-target mixins and Armor Model API/Figura bridge; the uploaded Origins/Apoli, Figura 0.1.6, Armor Model API, and Rogues sources confirm those still cover behavior not replaced by the removed mixin.
+
+## Audit scope
+- Compared v1.4.48 runtime data/code and player-facing descriptions against the supplied v1.3.6 design document. Mechanics with unresolved design intent were documented for decision rather than silently rebalanced.
+- Gradle compilation still requires the Gradle 8.8 distribution; the audit environment cannot download it, so this release is statically validated here but should receive a normal local/server build before deployment.
+
+# v1.4.48
+
+## Veilborn HUD cleanup
+- Hid the internal `veilborn/passives_weaknesstate` boolean HUD resource. It is state bookkeeping, not a duration timer, and was causing a second leftover bar whenever Veilborn became wet.
+- Veilborn Wet / Unstable duration is now represented only by `veilborn/helper/watered_remove` using the intended **Wet Status Bar (03)** on sheet 1 at `bar_index: 2`.
+- Removed the obsolete Veilborn assignment from the Weakness Bar (18) documentation.
+
+## Selection descriptions
+- Removed all Champion comparisons/references from player-facing descriptions and badges used by the 13 standard selectable Origins.
+- Standard descriptions now state only the behavior that actually applies to the selected Origin. Champion mechanics, internal conditions, command-only origin files, and administrative documentation are unchanged.
+- Also removed Champion wording from Humanity's hidden Figura compatibility strings for consistency.
+
+## Documentation
+- Updated all current-release Markdown headers/notes to v1.4.48 without rewriting historical changelog entries.
+- The authoritative HUD sheet mapping remains 25 styles on sheet 1 and 6 on sheet 2.
+
+# v1.4.47
+
+## Manticore Beast of Blood
+- Replaced the blanket `origins:clear_effect` activation cleanse with a Java harmful-effect filter.
+- Beast of Blood now removes only status effects whose Minecraft category is `HARMFUL`, including modded harmful effects that use the normal category system.
+- Beneficial and neutral effects such as Resistance, Strength, Absorption, Regeneration, Night Vision, and custom non-harmful effects are preserved.
+- Existing Crowd Control cleanup remains intact through the `minecraft:ccontrol` power source, and the 30-second Unstoppable state is unchanged.
+
+## Incapacitated reliability
+- Fixed a real Mortal Resolve compatibility leak: its temporary `downsUntilDeath = -1` final-death sentinel is now tracked and restored to Incapacitated's configured post-death counter after respawn.
+- Added a join/respawn self-repair for legacy negative counters when Incapacitated has `UnlimitedDowns=true`. This fixes players already affected by the pre-v1.4.47 stale-state bug.
+- Reset of Incapacitated transient damage tracking is retained after the repair.
+- Andromeda does **not** override Incapacitated's own instant-kill, overkill, timeout, give-up, or full-party-death configuration; those remain controlled by Incapacitated.
+
+## Documentation
+- Updated all current-release Markdown documentation to v1.4.47 while preserving the historical changelog and v1.4.46 HUD mapping.
+
 # v1.4.46
 
 ## HUD resource-bar mapping correction

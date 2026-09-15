@@ -1,0 +1,298 @@
+{
+  "humanity.indomitable": {
+    "particles": [
+      {
+        "id": "spell_engine:shield_small",
+        "preset": "casting",
+        "count": 16,
+        "speed": 0.08,
+        "scale": 1.1,
+        "color": "#FFE599",
+        "glow": true,
+        "motion": "ascend"
+      },
+      {
+        "id": "spell_engine:ground_glow",
+        "preset": "ground",
+        "count": 1,
+        "scale": 1.75,
+        "color": "#FFD46B",
+        "opacity": 0.9,
+        "fade_out_hold": 0.4,
+        "glow": true
+      },
+      {
+        "id": "spell_engine:magic_holy",
+        "preset": "impact",
+        "count": 14,
+        "speed": 0.08,
+        "scale": 0.95,
+        "glow": true,
+        "motion": "burst"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "more_rpg_classes:holy_release",
+        "volume": 0.36,
+        "pitch": 1.02,
+        "requires_mod": "more_rpg_classes"
+      }
+    ]
+  },
+  "humanity.mortal_resolve": {
+    "particles": [
+      {
+        "id": "spell_engine:area_circle_1",
+        "preset": "ground",
+        "count": 1,
+        "scale": 2.4,
+        "scale_to": 1.2,
+        "color": "#FFF4B0",
+        "opacity": 0.95,
+        "fade_out_hold": 0.4,
+        "glow": true
+      },
+      {
+        "id": "spell_engine:magic_holy",
+        "preset": "casting",
+        "count": 36,
+        "speed": 0.1,
+        "scale": 1.2,
+        "glow": true,
+        "motion": "ascend",
+        "lifetime_variance": 0.45
+      },
+      {
+        "id": "spell_engine:lightning_arc_a",
+        "preset": "impact",
+        "count": 12,
+        "speed": 0.12,
+        "scale": 0.9,
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "spell_engine:shield_small",
+        "preset": "impact",
+        "count": 18,
+        "speed": 0.1,
+        "scale": 1.02,
+        "color": "#FFF6C9",
+        "glow": true,
+        "motion": "burst"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "spell_engine:generic_healing_release_2",
+        "volume": 0.44,
+        "pitch": 0.82
+      }
+    ]
+  },
+  "humanity.indomitable_save": {
+    "particles": [
+      {
+        "id": "spell_engine:area_circle_1",
+        "preset": "ground",
+        "count": 1,
+        "scale": 2.25,
+        "scale_to": 1.1,
+        "color": "#FFD66B",
+        "opacity": 0.94,
+        "fade_out_hold": 0.18,
+        "glow": true
+      },
+      {
+        "id": "spell_engine:shield_small",
+        "preset": "impact",
+        "count": 26,
+        "speed": 0.14,
+        "scale": 1.1,
+        "color": "#FFF1B0",
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "spell_engine:magic_holy",
+        "preset": "impact",
+        "count": 26,
+        "speed": 0.12,
+        "scale": 1.05,
+        "color": "#FFF0A8",
+        "glow": true,
+        "motion": "ascend"
+      },
+      {
+        "id": "spell_engine:lightning_arc_a",
+        "preset": "impact",
+        "count": 14,
+        "speed": 0.1,
+        "scale": 0.95,
+        "color": "#FFF9D9",
+        "glow": true,
+        "motion": "burst"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "more_rpg_classes:holy_release",
+        "volume": 0.44,
+        "pitch": 0.9,
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "spell_engine:signal_spell_crit",
+        "volume": 0.26,
+        "pitch": 0.88
+      }
+    ]
+  },
+  "humanity.mortal_resolve_stage_1": {
+    "particles": [
+      {
+        "id": "spell_engine:magic_holy",
+        "preset": "cloud",
+        "count": 10,
+        "speed": 0.035,
+        "scale": 0.75,
+        "color": "#FFE8A6",
+        "opacity": 0.68,
+        "glow": true,
+        "motion": "ascend"
+      },
+      {
+        "id": "spell_engine:flame_spark",
+        "preset": "impact",
+        "count": 8,
+        "speed": 0.06,
+        "scale": 0.68,
+        "glow": true,
+        "motion": "float"
+      }
+    ],
+    "sounds": []
+  },
+  "humanity.mortal_resolve_stage_2": {
+    "particles": [
+      {
+        "id": "spell_engine:magic_holy",
+        "preset": "casting",
+        "count": 16,
+        "speed": 0.055,
+        "scale": 0.88,
+        "color": "#FFE484",
+        "opacity": 0.78,
+        "glow": true,
+        "motion": "ascend"
+      },
+      {
+        "id": "spell_engine:flame_spark",
+        "preset": "impact",
+        "count": 14,
+        "speed": 0.09,
+        "scale": 0.82,
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "spell_engine:lightning_arc_a",
+        "preset": "impact",
+        "count": 5,
+        "speed": 0.06,
+        "scale": 0.72,
+        "color": "#FFF8D6",
+        "glow": true,
+        "motion": "burst"
+      }
+    ],
+    "sounds": []
+  },
+  "humanity.mortal_resolve_stage_3": {
+    "particles": [
+      {
+        "id": "spell_engine:area_circle_1",
+        "preset": "ground",
+        "count": 1,
+        "scale": 1.7,
+        "color": "#FFD251",
+        "opacity": 0.78,
+        "fade_out_hold": 0.18,
+        "glow": true
+      },
+      {
+        "id": "spell_engine:magic_holy",
+        "preset": "casting",
+        "count": 24,
+        "speed": 0.08,
+        "scale": 1.0,
+        "color": "#FFF0A8",
+        "glow": true,
+        "motion": "ascend"
+      },
+      {
+        "id": "spell_engine:flame_spark",
+        "preset": "impact",
+        "count": 20,
+        "speed": 0.12,
+        "scale": 0.94,
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "spell_engine:lightning_arc_a",
+        "preset": "impact",
+        "count": 9,
+        "speed": 0.08,
+        "scale": 0.82,
+        "color": "#FFFFFF",
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "spell_engine:shield_small",
+        "preset": "casting",
+        "count": 10,
+        "speed": 0.06,
+        "scale": 0.76,
+        "color": "#FFF2B5",
+        "glow": true,
+        "motion": "ascend"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "spell_engine:signal_spell_crit",
+        "volume": 0.18,
+        "pitch": 0.72
+      }
+    ]
+  },
+  "humanity.mortal_resolve_expiry": {
+    "particles": [
+      {
+        "id": "spell_engine:area_circle_1",
+        "preset": "ground",
+        "count": 1,
+        "scale": 2.0,
+        "scale_to": 0.8,
+        "color": "#6B5A49",
+        "opacity": 0.7,
+        "fade_out_hold": 0.1,
+        "glow": false
+      },
+      {
+        "id": "spell_engine:smoke_medium",
+        "preset": "impact",
+        "count": 24,
+        "speed": 0.08,
+        "scale": 1.05,
+        "color": "#52473F",
+        "opacity": 0.8,
+        "motion": "ascend"
+      }
+    ],
+    "sounds": []
+  }
+}

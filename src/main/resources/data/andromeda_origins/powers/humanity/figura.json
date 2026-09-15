@@ -9,7 +9,7 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/yellow.png",
-      "text": "§e§lSemantic: human_mortal_resolve§r§f Dedicated state: andromeda_origins:humanity/figura_mortal_resolve is 1 while Mortal Resolve or Champion Mortal Resolve is active."
+      "text": "§e§lSemantic: human_mortal_resolve§r§f Dedicated state: andromeda_origins:humanity/figura_mortal_resolve is 1 while Mortal Resolve is active."
     }
   ],
   "name": "Figura Compatibility",

@@ -191,5 +191,5 @@
     }
   },
   "name": "Champion Passive Features",
-  "description": "§e§lChampion Features:§r\n+20% Size\n \n- Retains sunlight speed, moonlight damage, translucency and veil powers.\n- No health, armor-weight, shield, water-damage or water-Silence penalties."
+  "description": "§e§lChampion Features:§r\n+20% Size\n \n- Retains sunlight speed, moonlight damage, translucency and veil powers.\n- No health, armor-weight, shield, water-damage or water-Silence penalties.\n- Curtain Step does not make you Unstable or self-apply Reality Shatter; Veil Transposition still applies Reality Shatter to its target.\n- Entering or leaving Auroral Mirage releases an 8-block Darkness burst, applying Darkness to nearby entities for 5 seconds.\n- Auroral Mirage has a fixed 5-second cooldown. Other player-facing ability cooldowns recover at 2× rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
 }

@@ -1,0 +1,387 @@
+{
+  "type": "origins:action_over_time",
+  "interval": 10,
+  "entity_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:arachne/primary_primary",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:arachne/primary_primary",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:arachne/secondary_raycast",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:arachne/secondary_raycast",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:champion/arachne_passives_webbing",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:champion/arachne_passives_webbing",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:faerie/secondary",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:faerie/secondary",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:champion/faerie_passives_stealthcooldown",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:champion/faerie_passives_stealthcooldown",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:fenrkin/primary_active",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:fenrkin/primary_active",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:fenrkin/primary_cooldown",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:fenrkin/primary_cooldown",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:champion/fenrkin_passives_undercooldown",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:champion/fenrkin_passives_undercooldown",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:gorgon/primary_petrifycooldown",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:gorgon/primary_petrifycooldown",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:gorgon/secondary_intimidatecooldown",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:gorgon/secondary_intimidatecooldown",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:humanity/primary_active",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:humanity/primary_active",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:lichling/primary_primary",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:lichling/primary_primary",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:manticore/primary_primary",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:manticore/primary_primary",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:manticore/secondary_unstoppable",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:manticore/secondary_unstoppable",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:nereid/primary_actualcooldown",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:nereid/primary_actualcooldown",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:nereid/secondary_active",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:nereid/secondary_active",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:satyr/primary_active",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:satyr/primary_active",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:champion/satyr_passives_stompcd",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:champion/satyr_passives_stompcd",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:selkie/primary_active",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:selkie/primary_active",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:selkie/primary_active2",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:selkie/primary_active2",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:selkie/secondary_active",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:selkie/secondary_active",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:siren/primary_active",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:siren/primary_active",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:siren/secondary_active",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:siren/secondary_active",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:veilborn/primary_active",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:veilborn/primary_active",
+          "change": -10,
+          "operation": "add"
+        }
+      },
+      {
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:resource",
+          "resource": "andromeda_origins:veilborn/primary_active3",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:veilborn/primary_active3",
+          "change": -10,
+          "operation": "add"
+        }
+      }
+    ]
+  },
+  "hidden": true,
+  "name": "Champion Cooldown Recovery",
+  "description": "Champion player-facing ability cooldowns recover at twice the normal rate, except Champion Veilborn Auroral Mirage, which uses a fixed 5-second cooldown. Charge times, resource costs, and internal ability cadence are unchanged."
+}

@@ -412,6 +412,10 @@
           "pitch": 1.0
         },
         {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx satyr.swift_leap"
+        },
+        {
           "type": "origins:change_resource",
           "resource": "*:common/figura_1",
           "change": 0,
@@ -641,5 +645,5 @@
     }
   },
   "name": "Champion Passive Features",
-  "description": "§e§lChampion Features:§r\n-17% Size\n \n- Retains Momentum, fall immunity, movement abilities and Vigil Perception.\n- No health, swimming, boot, hunger-at-maximum-Momentum or dietary penalties."
+  "description": "\u00a7e\u00a7lChampion Features:\u00a7r\n-17% Size\n \n- Retains Momentum, fall immunity, movement abilities and Vigil Perception.\n- No health, swimming, boot, hunger-at-maximum-Momentum or dietary penalties.\n- Reaching maximum Momentum does not increase Hunger drain.\n- Player-facing ability cooldowns recover at 2\u00d7 rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
 }

@@ -55,7 +55,7 @@
         {
           "type": "origins:add_velocity",
           "z": 3,
-          "y": -2,
+          "y": 0,
           "space": "local_horizontal",
           "set": true
         },

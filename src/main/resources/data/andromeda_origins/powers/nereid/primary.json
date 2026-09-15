@@ -35,6 +35,10 @@
         },
         {
           "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx nereid.aura_start"
+        },
+        {
+          "type": "origins:execute_command",
           "command": "playsound andromeda_origins:ability.nereid.convalescing_aura player @a[distance=0.1..40] ~ ~ ~ 1.00 1.0 0"
         },
         {
@@ -132,6 +136,10 @@
                     "power": "*:*_soundcooldown"
                   },
                   {
+                    "type": "origins:execute_command",
+                    "command": "andromedaorigins internal_fx nereid.aura_tick"
+                  },
+                  {
                     "type": "origins:change_resource",
                     "resource": "*:nereid/helper/aurafarming_remove2",
                     "change": 1
@@ -153,6 +161,10 @@
                   {
                     "type": "origins:heal",
                     "amount": 1
+                  },
+                  {
+                    "type": "origins:execute_command",
+                    "command": "andromedaorigins internal_fx nereid.aura_heal"
                   },
                   {
                     "type": "origins:grant_power",
@@ -199,10 +211,24 @@
                                         "power": "*:nereid/helper/seafriend"
                                       },
                                       "action": {
-                                        "type": "origins:heal",
-                                        "amount": 1
+                                        "type": "origins:and",
+                                        "actions": [
+                                          {
+                                            "type": "origins:heal",
+                                            "amount": 1
+                                          },
+                                          {
+                                            "type": "origins:execute_command",
+                                            "command": "andromedaorigins internal_fx nereid.aura_heal"
+                                          }
+                                        ]
                                       }
-                                    },
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "origins:if_else_list",
+                                  "actions": [
                                     {
                                       "condition": {
                                         "type": "origins:or",
@@ -219,19 +245,75 @@
                                         ]
                                       },
                                       "action": {
-                                        "type": "origins:and",
-                                        "actions": [
-                                          {
-                                            "type": "origins:grant_power",
-                                            "power": "*:nereid/helper/nereidwet",
-                                            "source": "minecraft:debuff"
-                                          },
-                                          {
-                                            "type": "origins:change_resource",
-                                            "resource": "*:nereid/helper/nereidwet_remove",
-                                            "change": 3
-                                          }
-                                        ]
+                                        "type": "origins:if_else",
+                                        "condition": {
+                                          "type": "origins:power",
+                                          "power": "*:selkie/passives"
+                                        },
+                                        "if_action": {
+                                          "type": "origins:and",
+                                          "actions": [
+                                            {
+                                              "type": "origins:if_else_list",
+                                              "actions": [
+                                                {
+                                                  "condition": {
+                                                    "type": "origins:power",
+                                                    "power": "*:nereid/helper/nereidwet"
+                                                  },
+                                                  "action": {
+                                                    "type": "origins:change_resource",
+                                                    "resource": "*:nereid/helper/nereidwet_remove",
+                                                    "change": 0,
+                                                    "operation": "set"
+                                                  }
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "origins:if_else_list",
+                                              "actions": [
+                                                {
+                                                  "condition": {
+                                                    "type": "origins:power",
+                                                    "power": "*:selkie/helper/selkiewet"
+                                                  },
+                                                  "action": {
+                                                    "type": "origins:change_resource",
+                                                    "resource": "*:selkie/helper/selkiewet_remove",
+                                                    "change": 3
+                                                  }
+                                                },
+                                                {
+                                                  "condition": {
+                                                    "type": "origins:power",
+                                                    "power": "*:selkie/helper/groundweak"
+                                                  },
+                                                  "action": {
+                                                    "type": "origins:change_resource",
+                                                    "resource": "*:selkie/passives_recharge_shawl",
+                                                    "change": 1
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "else_action": {
+                                          "type": "origins:and",
+                                          "actions": [
+                                            {
+                                              "type": "origins:grant_power",
+                                              "power": "*:nereid/helper/nereidwet",
+                                              "source": "minecraft:debuff"
+                                            },
+                                            {
+                                              "type": "origins:change_resource",
+                                              "resource": "*:nereid/helper/nereidwet_remove",
+                                              "change": 3
+                                            }
+                                          ]
+                                        }
                                       }
                                     }
                                   ]
@@ -381,9 +463,9 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "§c§lWet:§r§f Counts as being in water."
+      "text": "\u00a7c\u00a7lWet:\u00a7r\u00a7f Counts as being in water."
     }
   ],
   "name": "Convalescing Aura",
-  "description": "Hold your Primary Ability key for up to 10 seconds to heal yourself and marked creatures within 10 blocks for 1 HP each second. When the channel ends, those targets receive an additional heal equal to the number of seconds channeled.\n \nAquatic and unmarked creatures caught in the aura become §c§l[Wet]§r for 3 seconds per second channeled. Sneak while channeling to target only yourself and increase Wet to 9 seconds per second channeled. Taking damage interrupts the ability."
+  "description": "Hold your Primary Ability key for up to 10 seconds to heal yourself and marked creatures within 20 blocks for 1 HP each second. When the channel ends, those targets receive an additional heal equal to the number of seconds channeled.\n \nAquatic and unmarked creatures caught in the aura become \u00a7c\u00a7l[Wet]\u00a7r for 3 seconds per second channeled. On standard Selkies, the aura feeds their native stored wetness (or their existing dry-state recovery meter) instead of creating a second Wet timer. Sneak while channeling to target only yourself and increase Wet to 9 seconds per second channeled. Taking damage interrupts the ability."
 }

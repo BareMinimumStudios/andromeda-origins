@@ -288,7 +288,7 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
-      "text": "§e§lDamage Resistances:§r§f None.\n \n§c§lDamage Vulnerabilities:§r§f None.\n \n§e§lEffect Immunities:§r§f None."
+      "text": "§e§lDamage Resistances:§r§f While hydrated by water, rain, or Wet (-25%).\n \n§c§lDamage Vulnerabilities:§r§f While dry/on land (+40%).\n \n§e§lEffect Immunities:§r§f None."
     },
     {
       "type": "origins:tooltip",
@@ -297,5 +297,5 @@
     }
   ],
   "name": "Passive Features",
-  "description": "§e§lStats:§r\n+35% Swim Speed\n \n§e§lFeatures:§r\n- Your creature type is Aquatic.\n- While in water, you take 25% less damage and can move and act as though you were on land.\n- You have perfect underwater vision. Toggleable.\n \n§e§lNereid's Mark:§r\nHit a creature with kelp to mark or unmark it as an ally. Marked creatures are visible through walls to all Nereids and can be healed by Convalescing Aura. Undetectable creatures cannot be revealed by the mark.\n \n- On land, you suffer -10% movement speed, -10% damage dealt, and +40% damage taken.\n- You follow a Pescatarian diet."
+  "description": "§e§lStats:§r\n+35% Swim Speed\n \n§e§lFeatures:§r\n- Your creature type is Aquatic.\n- While hydrated by water, rain, or §c§l[Wet]§r, you take 25% less damage and can move and act as though you were on land.\n- You have perfect underwater vision. Toggleable.\n \n§e§lNereid's Mark:§r\nHit a creature with kelp to mark or unmark it as an ally. Marked creatures are visible through walls to all Nereids and can be healed by Convalescing Aura. Undetectable creatures cannot be revealed by the mark.\n \n- While dry/on land, you suffer -10% movement speed, -10% damage dealt, and +40% damage taken.\n- You follow a Pescatarian diet."
 }

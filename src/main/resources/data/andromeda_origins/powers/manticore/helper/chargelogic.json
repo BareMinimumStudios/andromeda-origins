@@ -27,10 +27,19 @@
             {
               "type": "origins:target_action",
               "action": {
-                "type": "origins:play_sound",
-                "sound": "andromeda_origins:ability.manticore.lunge_impact",
-                "volume": 1.15,
-                "pitch": 1.0
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:play_sound",
+                    "sound": "andromeda_origins:ability.manticore.lunge_impact",
+                    "volume": 1.15,
+                    "pitch": 1.0
+                  },
+                  {
+                    "type": "origins:execute_command",
+                    "command": "andromedaorigins internal_fx manticore.lunge_impact"
+                  }
+                ]
               }
             }
           ]

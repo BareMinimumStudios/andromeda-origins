@@ -447,6 +447,10 @@
           "pitch": 1.0
         },
         {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx satyr.swift_leap"
+        },
+        {
           "type": "origins:change_resource",
           "resource": "*:common/figura_1",
           "change": 0,
@@ -656,11 +660,11 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
-      "text": "§e§lDamage Resistances:§r§f Falling (-100%).\n \n§c§lDamage Vulnerabilities:§r§f Projectiles (+20%).\n \n§e§lEffect Immunities:§r§f None."
+      "text": "\u00a7e\u00a7lDamage Resistances:\u00a7r\u00a7f Falling (-100%).\n \n\u00a7c\u00a7lDamage Vulnerabilities:\u00a7r\u00a7f Projectiles (+20%).\n \n\u00a7e\u00a7lEffect Immunities:\u00a7r\u00a7f None."
     }
   ],
   "name": "Passive Features",
-  "description": "§e§lStats:§r\n-17% Size\n-2 Max HP\n-50% Swim Speed\n \n§e§lFeatures:§r\n- Sprinting builds §e§lMomentum§r, which fuels your movement abilities. Each stack grants +20% movement speed. At maximum Momentum, your Hunger drains 33% faster. Toggleable.\n- You cannot wear boots, and boots provide no protection or benefit.\n- You are a Vegetarian.",
+  "description": "\u00a7e\u00a7lStats:\u00a7r\n-17% Size\n-2 Max HP\n-50% Swim Speed\n+20% Projectile Damage Taken\n \n\u00a7e\u00a7lFeatures:\u00a7r\n- You are immune to fall damage.\n- Sprinting builds \u00a7e\u00a7lMomentum\u00a7r, which fuels your movement abilities. Each stack grants +20% movement speed. At maximum Momentum, your Hunger drains 33% faster. Toggleable.\n- You cannot wear boots, and boots provide no protection or benefit.\n- You are a Vegetarian.",
   "size": {
     "type": "origins:attribute",
     "modifier": {

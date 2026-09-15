@@ -47,6 +47,10 @@
           "pitch": 1.0
         },
         {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx manticore.beast_of_blood"
+        },
+        {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:common/figura_2",
           "change": 1,
@@ -58,7 +62,8 @@
           "source": "minecraft:buff"
         },
         {
-          "type": "origins:clear_effect"
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_clear_harmful_effects"
         },
         {
           "type": "origins:revoke_all_powers",
@@ -99,9 +104,9 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "§e§lUnstoppable:§r§f Immune to crowd control effects, slowness and knockback.\n \n§c§lFamished:§r§f Standard Manticores have a 75% hunger penalty afterward. Champion Manticores are exempt."
+      "text": "§e§lUnstoppable:§r§f Immune to crowd control effects, slowness and knockback.\n \n§c§lFamished:§r§f 75% hunger penalty for 1 minute afterward."
     }
   ],
   "name": "Beast of Blood",
-  "description": "Press your Secondary Ability key to purge potion and Crowd Control effects from yourself and become Unstoppable for 30 seconds. Standard Manticores become §c§l[Famished]§r for 1 minute afterward; Champion Manticores do not."
+  "description": "Press your Secondary Ability key to purge harmful potion and Crowd Control effects from yourself and become Unstoppable for 30 seconds. You become §c§l[Famished]§r for 1 minute afterward."
 }

@@ -48,30 +48,73 @@
     },
     "cooldown": 20
   },
-  "overtime": {
+  "inventory_wither": {
     "type": "origins:action_over_time",
     "entity_action": {
-      "type": "origins:apply_effect",
-      "effect": {
-        "id": "minecraft:wither",
-        "duration": 200
+      "type": "origins:if_else",
+      "condition": {
+        "type": "origins:inventory",
+        "process_mode": "items",
+        "item_condition": {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "andromeda_origins:iron/alliron"
+          }
+        },
+        "comparison": ">",
+        "compare_to": 0
+      },
+      "if_action": {
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:change_resource",
+            "resource": "andromeda_origins:common/witheringironweakness_inventory_iron_present",
+            "change": 1
+          },
+          {
+            "type": "origins:apply_effect",
+            "effect": {
+              "id": "minecraft:wither",
+              "amplifier": 0,
+              "duration": 10
+            }
+          }
+        ]
+      },
+      "else_action": {
+        "type": "origins:change_resource",
+        "resource": "andromeda_origins:common/witheringironweakness_inventory_iron_present",
+        "change": -1
       }
     },
-    "interval": 200,
+    "interval": 5
+  },
+  "inventory_wither_damage": {
+    "type": "origins:action_over_time",
+    "entity_action": {
+      "type": "origins:damage",
+      "amount": 1.0,
+      "damage_type": "minecraft:wither"
+    },
+    "interval": 20,
     "condition": {
-      "type": "origins:inventory",
-      "process_mode": "items",
-      "item_condition": {
-        "type": "origins:ingredient",
-        "ingredient": {
-          "tag": "andromeda_origins:iron/alliron"
-        }
-      },
+      "type": "origins:resource",
+      "resource": "andromeda_origins:common/witheringironweakness_inventory_iron_present",
       "comparison": ">",
       "compare_to": 0
     }
   },
   "hidden": true,
   "name": "Withering Iron Weakness",
-  "description": "You gain Wither when struck by an iron weapon. Carrying any iron-tagged item anywhere in your inventory also applies Wither while it remains in your inventory."
+  "description": "You gain Wither I when struck by an iron weapon. Carrying any iron-tagged item anywhere in your inventory inflicts a strong passive Wither drain; inventory-caused Wither clears within about half a second after the last iron-tagged item is removed.",
+  "inventory_iron_present": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  }
 }

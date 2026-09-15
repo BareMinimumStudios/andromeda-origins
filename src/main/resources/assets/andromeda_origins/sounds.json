@@ -233,5 +233,13 @@
         "name": "andromeda_origins:abilities/fenrkin/marked"
       }
     ]
+  },
+  "ability.lichling.screech": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/lichling/lichlingscreech",
+        "stream": true
+      }
+    ]
   }
 }

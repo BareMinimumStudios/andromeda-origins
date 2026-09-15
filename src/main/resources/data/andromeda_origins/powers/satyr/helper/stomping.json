@@ -221,6 +221,10 @@
                   }
                 },
                 {
+                  "type": "origins:execute_command",
+                  "command": "andromedaorigins internal_fx satyr.landing_bounce"
+                },
+                {
                   "type": "origins:play_sound",
                   "sound": "entity.firework_rocket.blast_far",
                   "volume": 1,
@@ -286,6 +290,10 @@
           "sound": "andromeda_origins:ability.satyr.satyrs_landing",
           "volume": 1.0,
           "pitch": 1.0
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx satyr.landing"
         },
         {
           "type": "origins:change_resource",

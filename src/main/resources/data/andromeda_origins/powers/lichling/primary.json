@@ -20,6 +20,10 @@
             "type": "origins:and",
             "actions": [
               {
+                "type": "origins:execute_command",
+                "command": "andromedaorigins internal_fx lichling.deaths_defiance"
+              },
+              {
                 "type": "origins:play_sound",
                 "sound": "minecraft:block.sculk_shrieker.shriek",
                 "volume": 0.55,
@@ -162,6 +166,10 @@
           "action": {
             "type": "origins:and",
             "actions": [
+              {
+                "type": "origins:execute_command",
+                "command": "andromedaorigins internal_fx lichling.deaths_defiance"
+              },
               {
                 "type": "origins:spawn_particles",
                 "particle": {

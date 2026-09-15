@@ -31,6 +31,10 @@
         },
         {
           "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx lichling.chimes_end"
+        },
+        {
+          "type": "origins:execute_command",
           "command": "playsound andromeda_origins:ability.lichling.final_bell_toll player @a[distance=0.1..32] ~ ~ ~ 1.15 1.0 0"
         },
         {

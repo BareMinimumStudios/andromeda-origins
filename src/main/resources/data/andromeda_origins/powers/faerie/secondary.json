@@ -72,6 +72,10 @@
           "pitch": 1.05
         },
         {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx faerie.fae_illusions"
+        },
+        {
           "type": "origins:delay",
           "ticks": 3,
           "action": {

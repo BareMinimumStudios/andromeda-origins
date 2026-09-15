@@ -18,6 +18,26 @@
           "pitch": 1.0
         },
         {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx siren.wail"
+        },
+        {
+          "type": "origins:delay",
+          "ticks": 2,
+          "action": {
+            "type": "origins:execute_command",
+            "command": "andromedaorigins internal_fx siren.wail_echo"
+          }
+        },
+        {
+          "type": "origins:delay",
+          "ticks": 4,
+          "action": {
+            "type": "origins:execute_command",
+            "command": "andromedaorigins internal_fx siren.wail_echo"
+          }
+        },
+        {
           "type": "origins:play_sound",
           "sound": "minecraft:block.amethyst_cluster.hit",
           "volume": 0.9,

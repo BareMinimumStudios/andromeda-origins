@@ -8,7 +8,7 @@
     },
     "entity_action": {
       "type": "origins:raycast",
-      "distance": 64,
+      "distance": 32,
       "block": false,
       "entity": true,
       "shape_type": "collider",
@@ -151,6 +151,10 @@
               "pitch": 1.0
             },
             {
+              "type": "origins:execute_command",
+              "command": "andromedaorigins internal_fx gorgon.gaze"
+            },
+            {
               "type": "origins:delay",
               "ticks": 4,
               "action": {
@@ -161,14 +165,30 @@
               }
             },
             {
-              "type": "origins:grant_power",
-              "power": "*:gorgon/helper/ophidianed",
-              "source": "minecraft:ccontrol"
-            },
-            {
-              "type": "origins:change_resource",
-              "resource": "*:gorgon/helper/ophidianed_remove",
-              "change": 10
+              "type": "origins:if_else",
+              "condition": {
+                "type": "origins:power",
+                "power": "*:gorgon/helper/ophidianed"
+              },
+              "if_action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:execute_command",
+                    "command": "andromedaorigins internal_fx gorgon.gaze_extend"
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "*:gorgon/helper/ophidianed_remove",
+                    "change": 10
+                  }
+                ]
+              },
+              "else_action": {
+                "type": "origins:grant_power",
+                "power": "*:gorgon/helper/ophidianed",
+                "source": "minecraft:ccontrol"
+              }
             },
             {
               "type": "origins:delay",
@@ -346,9 +366,9 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "§c§lPetrified:§r§f For the duration: §c§lRestrained§r§f, §c§lSilenced§r§f and §c§lPacified§r§f. Prevents interaction with the world and knockback, and reduces damage taken by 75%. Affected creatures can §e§lStruggle§r§f.\n \n§e§lStruggle:§r§f Rapidly pressing direction keys.\n \n§c§lPacified:§r§f Unable to deal damage.\n \n§c§lRestrained:§r§f Prevents movement, movement abilities and elytra flight.\n \n§c§lSilenced:§r§f Inability to use Active Features."
+      "text": "\u00a7c\u00a7lPetrified:\u00a7r\u00a7f For the duration: \u00a7c\u00a7lRestrained\u00a7r\u00a7f, \u00a7c\u00a7lSilenced\u00a7r\u00a7f and \u00a7c\u00a7lPacified\u00a7r\u00a7f. Prevents interaction with the world and knockback, and reduces damage taken by 75%. Affected creatures can \u00a7e\u00a7lStruggle\u00a7r\u00a7f.\n \n\u00a7e\u00a7lStruggle:\u00a7r\u00a7f Rapidly pressing direction keys.\n \n\u00a7c\u00a7lPacified:\u00a7r\u00a7f Unable to deal damage.\n \n\u00a7c\u00a7lRestrained:\u00a7r\u00a7f Prevents movement, movement abilities and elytra flight.\n \n\u00a7c\u00a7lSilenced:\u00a7r\u00a7f Inability to use Active Features."
     }
   ],
   "name": "Ophidian Gaze",
-  "description": "Ophidian Gaze has 2 charges. Press your Primary Ability key while looking at a creature within 32 blocks to apply §c§l[Petrified]§r for 10 seconds. Targeting an already Petrified creature extends the effect by another 10 seconds.\n \nThe ability begins recharging after both charges have been spent. §e§lCrowd Control§r."
+  "description": "Ophidian Gaze has 2 charges. Press your Primary Ability key while looking at a creature within 32 blocks to apply \u00a7c\u00a7l[Petrified]\u00a7r for 10 seconds. Targeting an already Petrified creature extends the effect by another 10 seconds.\n \nThe ability begins recharging after both charges have been spent. \u00a7e\u00a7lCrowd Control\u00a7r."
 }

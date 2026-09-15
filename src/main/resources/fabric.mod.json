@@ -10,8 +10,8 @@
     "minecraft": "1.21.1",
     "java": ">=21",
     "fabric-api": "*",
-    "origins": "*",
-    "apoli": ">=2.11.11"
+    "origins": "1.13.0-pre.2+mc.1.21.1",
+    "apoli": "2.12.0-pre.2+mc.1.21.1"
   },
   "entrypoints": {
     "main": [
@@ -26,7 +26,9 @@
     "incapacitated": "*",
     "figura": "*",
     "figuraextrabone": "*",
-    "armor_model_api": "*"
+    "armor_model_api": "*",
+    "spell_engine": "*",
+    "more_rpg_classes": "*"
   },
   "authors": [
     "jaselumena",

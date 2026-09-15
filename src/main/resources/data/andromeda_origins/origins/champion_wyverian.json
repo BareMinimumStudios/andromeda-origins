@@ -2,7 +2,8 @@
   "powers": [
     "andromeda_origins:champion/wyverian_passives",
     "andromeda_origins:common/champion",
-    "andromeda_origins:wyverian/primary",
+    "andromeda_origins:common/champion_cooldowns",
+    "andromeda_origins:champion/wyverian_primary",
     "andromeda_origins:wyverian/secondary",
     "andromeda_origins:wyverian/sneakair",
     "andromeda_origins:wyverian/figura",
@@ -15,5 +16,5 @@
   "order": 112,
   "impact": 3,
   "name": "Champion Wyverian",
-  "description": "A command-only Champion variant of Wyverian. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Cooldowns, charge times and resource costs remain."
+  "description": "A command-only Champion variant of Wyverian. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Its Ember Flames are replaced by Dragon's Breath and Dragon Charge, using draconic/magic damage instead of fire. Player-facing ability cooldowns recover twice as fast; charge times and resource costs remain unchanged."
 }

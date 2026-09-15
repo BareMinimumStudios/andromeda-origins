@@ -17,6 +17,10 @@
       "type": "origins:and",
       "actions": [
         {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx nereid.submersion"
+        },
+        {
           "type": "origins:play_sound",
           "sound": "minecraft:block.conduit.activate",
           "volume": 0.8,

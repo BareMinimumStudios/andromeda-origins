@@ -4,7 +4,7 @@
 
 ## Current release
 
-**v1.4.46** — HUD resource-bar mapping correction. The v1.4.45 Veilborn balance and Undetectable stealth behavior are unchanged. The 31-style HUD catalog now correctly uses 25 styles on sheet 1 and 6 styles on sheet 2: Wyverian Wings is sheet 1 `bar_index: 24`, while sheet 2 begins with Nereid Halo at `bar_index: 0`.
+**v1.4.70** — migration-safe iron weakness. Existing standard Faerie, Gorgon, and Lichling players now receive any missing current children of the iron-weakness multiple power automatically when they join, without reselecting their Origin or resetting existing cooldowns/resources. `/andromedaorigins repair <player>` performs the same narrow reconciliation before its existing Origin-aware attribute repair. The half-heart-per-second iron drain, fast removal, 5-tick inventory sampler, Siren carnivore enforcement, Fenrkin toggle isolation, pre.2 Apoli performance backports, and exact version handshake remain unchanged.
 
 ## Features
 
@@ -15,7 +15,9 @@
 - Custom 64×64 registered Origin icon items.
 - Two custom 256×256 HUD resource-bar sheets with 31 catalogued styles.
 - 33 registered custom ability sounds plus layered vanilla audio.
+- Optional Spell Engine / More RPG Library enhanced audiovisual layer with data-driven Origin FX definitions, impact-position support, extra flashy event hooks, and no hard runtime dependency.
 - Optional Incapacitated integration for downed/revival mechanics.
+- Mortal Resolve restores Incapacitated counters after its final-death handoff and repairs legacy stale unlimited-down counters on join.
 - Optional Figura compatibility with legacy hooks and a semantic Lua helper.
 - Optional Figura ExtraBone interoperability guidance for PlayerAnimator/Emotecraft blending.
 - Optional Figura ↔ Armor Model API visibility bridge so custom geo armor can stay hidden on full-body Figura avatars.
@@ -24,6 +26,7 @@
 - Iron-weakness compatibility tags for vanilla and modded iron items.
 - A rebindable Andromeda-specific **Origin Toggle** control.
 - Staff recovery command for interrupted crowd-control/downed-state problems.
+- Server-side Apoli hot-path caching and EntitySet unload indexing to reduce repeated full-power/full-world scans.
 
 ## Origin roster
 
@@ -58,7 +61,7 @@ Champion Veilborn remain unaffected by these drawback changes because the Champi
 
 ## Champion Origins
 
-Every standard Origin has a **Champion** variant. Champions retain the Origin's identity-defining strengths and active abilities while removing racial weaknesses and clear self-debuffs. Ability cooldowns, charge times, resources, and target-facing counterplay are still preserved.
+Every standard Origin has a **Champion** variant. Champions retain the Origin's identity-defining strengths and active abilities while removing racial weaknesses and clear self-debuffs. The current parity audit also confirms that positive ability-side protections such as the shared 50% movement-ability projectile reduction remain intact on Champions. Charge times, resources, and target-facing counterplay are still preserved. Champion cooldowns generally recover at 2× rate, with explicit Champion-specific overrides documented separately (currently Champion Veilborn Auroral Mirage at 5 seconds).
 
 Champion entries use `unchoosable: true`, so they do **not** appear in the normal Origins GUI. Assign them with operator permissions:
 
@@ -74,6 +77,21 @@ Example:
 
 See [CHAMPION_ORIGINS.md](CHAMPION_ORIGINS.md) for every ID, removed drawback, and Champion-specific safety behavior.
 
+## Optional enhanced Origin FX
+
+Spell Engine and More RPG Library are **suggested, not required**. Andromeda checks for them at runtime and loads its particle bridge only when Spell Engine is present. Existing bundled sounds and vanilla particles are never replaced, so removing the libraries or disabling enhanced FX returns the mod to its normal presentation.
+
+Enhanced FX definitions are data-driven under `data/andromeda_origins/andromeda_fx/` and currently cover 109 enhanced events across all 13 Origins. Operators can compare the two presentation modes without restarting:
+
+```mcfunction
+/andromedaorigins enhanced_fx
+/andromedaorigins enhanced_fx enabled false
+/andromedaorigins enhanced_fx particles false
+/andromedaorigins enhanced_fx sounds false
+```
+
+The switches persist in `config/andromeda_origins_fx.json`. See [ENHANCED_FX.md](ENHANCED_FX.md) for the event/asset mapping and architecture.
+
 ## Requirements
 
 - Minecraft **1.21.1**
@@ -81,12 +99,12 @@ See [CHAMPION_ORIGINS.md](CHAMPION_ORIGINS.md) for every ID, removed drawback, a
 - Fabric Loader **0.16.5+**
 - Fabric API
 - Origins
-- Apoli
+- Apoli **2.12.0-pre.2+mc.1.21.1**
 
 The development properties currently target:
 
-- Origins `1.13.0-pre.3+mc.1.21.1`
-- Apoli `2.12.0-pre.3+mc.1.21.1`
+- Origins `1.13.0-pre.2+mc.1.21.1`
+- Apoli `2.12.0-pre.2+mc.1.21.1`
 
 ### Optional integrations
 
@@ -94,6 +112,8 @@ The development properties currently target:
 - **Figura** — optional avatar animation compatibility; not required on server or client.
 - **Figura ExtraBone** — optional avatar skeleton/blending aid; not a dependency of Andromeda Origins.
 - **Armor Model API** — optional custom-armor compatibility; its geo armor renderer will respect Figura armor visibility when both mods are installed.
+- **Spell Engine** — optional enhanced Origin particles and supporting sound layers; base Andromeda FX remain the fallback.
+- **More RPG Library** — optional additional water, wind, stone, claw, music, and other themed FX assets used when available. More RPG Library manages its own dependencies.
 
 ## Controls
 
@@ -181,9 +201,14 @@ See [COMPATIBILITY.md](COMPATIBILITY.md) for the implementation notes.
 
 ```mcfunction
 /andromedaorigins repair <player>
+/andromedaorigins repair_attributes <player>
 ```
 
-Use this for a player stuck in an interrupted Andromeda crowd-control/downed state instead of deleting playerdata.
+`repair` is the full recovery command. It now rebuilds the player's Andromeda-managed raw attributes and re-applies the currently granted Apoli/Origin attribute powers before performing the existing crowd-control/Incapacitated cleanup. This means an Arachne, Lichling, Champion variant, etc. is repaired back to that Origin's effective stats rather than being left at vanilla-player values. `repair_attributes` runs only the attribute rebuild. Neither command re-selects the Origin, so ability cooldowns/resources are not reset.
+
+## Exact client/server version sync
+
+Andromeda Origins now performs a Fabric login-query handshake before a player joins. The server rejects clients that do not have Andromeda Origins installed, and it rejects clients whose Andromeda Origins version does not exactly match the server. The disconnect message shows the required/server version and the client's reported version when available.
 
 ## Content namespace
 
@@ -220,7 +245,7 @@ gradlew.bat build
 Use **Java 21**. The release JAR is written to:
 
 ```text
-build/libs/andromeda-origins-1.21.1-1.4.46.jar
+build/libs/andromeda-origins-1.21.1-1.4.52.jar
 ```
 
 ## Documentation
@@ -241,3 +266,5 @@ build/libs/andromeda-origins-1.21.1-1.4.46.jar
 ## License
 
 Licensed under the **Bare Minimum License (BML) v1.0**. See [LICENSE](LICENSE).
+
+

@@ -75,16 +75,7 @@
     "max": 1,
     "start_value": 0,
     "hud_render": {
-      "should_render": true,
-      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
-      "bar_index": 17,
-      "order": 6,
-      "condition": {
-        "type": "origins:resource",
-        "resource": "*:*_weaknesstate",
-        "comparison": ">",
-        "compare_to": 0
-      }
+      "should_render": false
     },
     "min_action": {
       "type": "origins:and",
@@ -225,93 +216,79 @@
           ]
         },
         {
-          "type": "origins:if_else_list",
-          "actions": [
-            {
-              "condition": {
-                "type": "origins:and",
-                "conditions": [
-                  {
-                    "type": "origins:resource",
-                    "resource": "*:*_weaknesstate",
-                    "comparison": ">",
-                    "compare_to": 0
-                  },
-                  {
-                    "type": "origins:power",
-                    "power": "andromeda_origins:common/wet",
-                    "inverted": true
-                  },
-                  {
-                    "type": "origins:fluid_height",
-                    "fluid": "minecraft:water",
-                    "comparison": "==",
-                    "compare_to": 0
-                  },
-                  {
-                    "type": "origins:in_rain",
-                    "inverted": true
-                  }
-                ]
+          "type": "origins:if_else",
+          "condition": {
+            "type": "origins:or",
+            "conditions": [
+              {
+                "type": "origins:power",
+                "power": "andromeda_origins:common/wet"
               },
-              "action": {
+              {
+                "type": "origins:fluid_height",
+                "fluid": "minecraft:water",
+                "comparison": ">",
+                "compare_to": 0
+              },
+              {
+                "type": "origins:in_rain"
+              }
+            ]
+          },
+          "if_action": {
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:if_else",
+                "condition": {
+                  "type": "origins:resource",
+                  "resource": "*:*_weaknesstate",
+                  "comparison": "<",
+                  "compare_to": 1
+                },
+                "if_action": {
+                  "type": "origins:change_resource",
+                  "resource": "*:*_weaknesstate",
+                  "change": 1,
+                  "operation": "set"
+                }
+              },
+              {
+                "type": "origins:if_else",
+                "condition": {
+                  "type": "origins:power",
+                  "power": "*:veilborn/helper/watered",
+                  "inverted": true
+                },
+                "if_action": {
+                  "type": "origins:grant_power",
+                  "power": "*:veilborn/helper/watered",
+                  "source": "minecraft:state"
+                }
+              },
+              {
                 "type": "origins:change_resource",
-                "resource": "*:*_weaknesstate",
-                "change": -1
+                "resource": "*:veilborn/helper/watered_remove",
+                "change": 3,
+                "operation": "add"
               }
+            ]
+          },
+          "else_action": {
+            "type": "origins:if_else",
+            "condition": {
+              "type": "origins:resource",
+              "resource": "*:*_weaknesstate",
+              "comparison": ">",
+              "compare_to": 0
             },
-            {
-              "condition": {
-                "type": "origins:and",
-                "conditions": [
-                  {
-                    "type": "origins:resource",
-                    "resource": "*:*_weaknesstate",
-                    "comparison": "<",
-                    "compare_to": 120
-                  },
-                  {
-                    "type": "origins:or",
-                    "conditions": [
-                      {
-                        "type": "origins:power",
-                        "power": "andromeda_origins:common/wet"
-                      },
-                      {
-                        "type": "origins:fluid_height",
-                        "fluid": "minecraft:water",
-                        "comparison": ">",
-                        "compare_to": 0
-                      },
-                      {
-                        "type": "origins:in_rain"
-                      }
-                    ]
-                  }
-                ]
-              },
-              "action": {
-                "type": "origins:and",
-                "actions": [
-                  {
-                    "type": "origins:change_resource",
-                    "resource": "*:*_weaknesstate",
-                    "change": 1
-                  },
-                  {
-                    "type": "origins:grant_power",
-                    "power": "*:veilborn/helper/watered",
-                    "source": "minecraft:state"
-                  },
-                  {
-                    "type": "origins:change_resource",
-                    "resource": "*:veilborn/helper/watered_remove",
-                    "change": 3
-                  }
-                ]
-              }
+            "if_action": {
+              "type": "origins:change_resource",
+              "resource": "*:*_weaknesstate",
+              "change": 0,
+              "operation": "set"
             }
-          ]
+          }
         },
         {
           "type": "origins:if_else_list",
@@ -493,16 +470,16 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
-      "text": "§e§lDamage Resistances:§r§f None.\n \n§c§lDamage Vulnerabilities:§r§f None.\n \n§e§lEffect Immunities:§r§f None."
+      "text": "\u00a7e\u00a7lDamage Resistances:\u00a7r\u00a7f None.\n \n\u00a7c\u00a7lDamage Vulnerabilities:\u00a7r\u00a7f None.\n \n\u00a7e\u00a7lEffect Immunities:\u00a7r\u00a7f None."
     },
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "§c§lSilenced:§r§f Unable to use Active Abilities."
+      "text": "\u00a7c\u00a7lSilenced:\u00a7r\u00a7f Unable to use Active Abilities."
     }
   ],
   "name": "Passive Features",
-  "description": "§e§lStats:§r\n+20% Size\n-2 Max HP\n \n§e§lFeatures:§r\n- Sunlight grants +25% movement speed.\n- Moonlight grants +20% damage dealt.\n- Your body is naturally 60% opaque. Toggleable.\n- You suffer -10% movement and swim speed for each threshold exceeded: more than 12 Armor, more than 15 Armor, and more than 8 Armor Toughness.\n- You cannot use shields.\n- Contact with water reduces your damage dealt by 60% and applies §c§l[Silenced]§r for 3 seconds. Each additional second in water adds 3 seconds to the duration, up to 3 minutes.",
+  "description": "\u00a7e\u00a7lStats:\u00a7r\n+20% Size\n-2 Max HP\n \n\u00a7e\u00a7lFeatures:\u00a7r\n- Sunlight grants +25% movement speed.\n- Moonlight grants +20% damage dealt.\n- Your body is naturally 60% opaque. Toggleable.\n- You suffer -10% movement and swim speed for each threshold exceeded: more than 12 Armor, more than 15 Armor, and more than 8 Armor Toughness.\n- You cannot use shields.\n- While \u00a7c\u00a7l[Wet]\u00a7r, physically in water, or exposed to rain, your damage dealt is reduced by 60% and you are \u00a7c\u00a7l[Silenced]\u00a7r for 3 seconds. Each additional second of wet exposure adds 3 seconds to the duration, up to 1.5 minutes.",
   "size": {
     "type": "origins:attribute",
     "modifier": {

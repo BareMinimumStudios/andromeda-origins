@@ -40,9 +40,19 @@
             "power": "*:fenrkin/helper/stalkdog"
           },
           {
-            "type": "origins:origin",
-            "origin": "andromeda_origins:fenrkin",
-            "layer": "origins:origin"
+            "type": "origins:or",
+            "conditions": [
+              {
+                "type": "origins:origin",
+                "origin": "andromeda_origins:fenrkin",
+                "layer": "origins:origin"
+              },
+              {
+                "type": "origins:origin",
+                "origin": "andromeda_origins:champion_fenrkin",
+                "layer": "origins:origin"
+              }
+            ]
           }
         ]
       }
@@ -55,9 +65,19 @@
     "blue": 0.3,
     "green": 0.3,
     "entity_condition": {
-      "type": "origins:origin",
-      "origin": "andromeda_origins:fenrkin",
-      "layer": "origins:origin"
+      "type": "origins:or",
+      "conditions": [
+        {
+          "type": "origins:origin",
+          "origin": "andromeda_origins:fenrkin",
+          "layer": "origins:origin"
+        },
+        {
+          "type": "origins:origin",
+          "origin": "andromeda_origins:champion_fenrkin",
+          "layer": "origins:origin"
+        }
+      ]
     },
     "condition": {
       "type": "origins:power",

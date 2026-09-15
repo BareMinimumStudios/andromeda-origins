@@ -14,6 +14,10 @@
           "command": "stopsound @a[distance=..64] player andromeda_origins:ability.nereid.convalescing_aura"
         },
         {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx nereid.aura_end"
+        },
+        {
           "type": "origins:grant_power",
           "power": "*:nereid/helper/finishcasting",
           "source": "minecraft:state"

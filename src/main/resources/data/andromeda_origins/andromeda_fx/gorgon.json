@@ -1,0 +1,193 @@
+{
+  "gorgon.gaze": {
+    "particles": [
+      {
+        "id": "spell_engine:area_circle_1",
+        "preset": "ground",
+        "count": 1,
+        "scale": 1.7,
+        "color": "#7D7D7D",
+        "opacity": 0.78,
+        "fade_out_hold": 0.22,
+        "glow": true
+      },
+      {
+        "id": "more_rpg_classes:stone_trap",
+        "preset": "placed",
+        "count": 1,
+        "scale": 1.45,
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:stone_explosion",
+        "preset": "placed",
+        "count": 1,
+        "scale": 1.2,
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:stone_particle",
+        "preset": "impact",
+        "count": 30,
+        "speed": 0.14,
+        "scale": 1.0,
+        "motion": "burst",
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "spell_engine:smoke_medium",
+        "preset": "cloud",
+        "count": 16,
+        "speed": 0.04,
+        "scale": 0.9,
+        "motion": "ascend"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "more_rpg_classes:earth_magic_impact1",
+        "volume": 0.48,
+        "pitch": 0.76,
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:arcane_strong_impact",
+        "volume": 0.16,
+        "pitch": 0.7,
+        "requires_mod": "more_rpg_classes"
+      }
+    ]
+  },
+  "gorgon.transference": {
+    "particles": [
+      {
+        "id": "spell_engine:area_swirl",
+        "preset": "ground",
+        "count": 1,
+        "scale": 2.1,
+        "color": "#9267D8",
+        "opacity": 0.88,
+        "fade_out_hold": 0.28,
+        "glow": true
+      },
+      {
+        "id": "spell_engine:magic_arcane",
+        "preset": "casting",
+        "count": 26,
+        "speed": 0.1,
+        "scale": 1.05,
+        "scale_to": 1.25,
+        "color": "#A78BFF",
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "spell_engine:magic_stripe",
+        "preset": "travel",
+        "count": 18,
+        "speed": 0.12,
+        "scale": 0.8,
+        "color": "#EDE0FF",
+        "opacity": 0.8,
+        "glow": true,
+        "motion": "decelerate"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "more_rpg_classes:arcane_strong_impact",
+        "volume": 0.4,
+        "pitch": 0.9,
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "spell_engine:generic_arcane_release",
+        "volume": 0.18,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "gorgon.gaze_extend": {
+    "particles": [
+      {
+        "id": "more_rpg_classes:stone_trap",
+        "preset": "placed",
+        "count": 1,
+        "scale": 1.7,
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:stone_explosion",
+        "preset": "placed",
+        "count": 1,
+        "scale": 1.45,
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "more_rpg_classes:stone_particle",
+        "preset": "shockwave",
+        "count": 36,
+        "speed": 0.16,
+        "pre_travel": 0.08,
+        "scale": 1.08,
+        "motion": "burst",
+        "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "spell_engine:smoke_medium",
+        "preset": "cloud",
+        "count": 18,
+        "speed": 0.04,
+        "scale": 0.92,
+        "motion": "ascend"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "more_rpg_classes:earth_magic_impact1",
+        "volume": 0.38,
+        "pitch": 0.66,
+        "requires_mod": "more_rpg_classes"
+      }
+    ]
+  },
+  "gorgon.transference_target": {
+    "particles": [
+      {
+        "id": "spell_engine:area_circle_1",
+        "preset": "ground",
+        "count": 1,
+        "scale": 1.45,
+        "color": "#8761C6",
+        "opacity": 0.78,
+        "fade_out_hold": 0.2,
+        "glow": true
+      },
+      {
+        "id": "spell_engine:magic_arcane",
+        "preset": "helix",
+        "count": 12,
+        "speed": 0.05,
+        "degrees_per_tick": 20,
+        "offset": 0,
+        "scale": 0.78,
+        "color": "#B79AF4",
+        "opacity": 0.78,
+        "glow": true,
+        "motion": "float"
+      },
+      {
+        "id": "spell_engine:magic_stripe",
+        "preset": "travel",
+        "count": 8,
+        "speed": 0.1,
+        "scale": 0.62,
+        "color": "#EEE3FF",
+        "opacity": 0.66,
+        "glow": true,
+        "motion": "decelerate"
+      }
+    ],
+    "sounds": []
+  }
+}

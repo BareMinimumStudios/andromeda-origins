@@ -2,6 +2,7 @@
   "powers": [
     "andromeda_origins:champion/manticore_passives",
     "andromeda_origins:common/champion",
+    "andromeda_origins:common/champion_cooldowns",
     "andromeda_origins:manticore/primary",
     "andromeda_origins:manticore/secondary",
     "andromeda_origins:manticore/figura",
@@ -14,5 +15,5 @@
   "order": 106,
   "impact": 3,
   "name": "Champion Manticore",
-  "description": "A command-only Champion variant of Manticore. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Cooldowns, charge times and resource costs remain."
+  "description": "A command-only Champion variant of Manticore. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Player-facing ability cooldowns recover twice as fast; charge times and resource costs remain unchanged. Champion Manticore also gains Bloodrift, a Sneak + Secondary reality-tear stealth ability with a fixed 10-second cooldown."
 }

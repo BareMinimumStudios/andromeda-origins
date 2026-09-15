@@ -542,7 +542,7 @@
     }
   ],
   "name": "Passive Features",
-  "description": "§e§lStats:§r\n+20% Size\n+35% Melee Damage\n \n§e§lFeatures:§r\n- You can sense wounded creatures within 16 blocks: orange when more than half their health is missing, and red when more than three-quarters is missing. Undetectable creatures are excluded.\n- You see 75% better in darkness than most creatures.\n- Melee attacks inflict Poison I for 10 seconds.\n- Fire extinguishes after no more than 3 fire-damage ticks.\n- Killing a creature with a melee attack restores 2 Hunger and 2 Saturation.\n- While §c§l[Wet]§r or in cramped spaces, you lose your melee damage bonus and suffer -20% movement speed. Contact with water extends this penalty by 1 second per second, up to 2 minutes.\n- Food is 50% less effective, and you are a Carnivore.",
+  "description": "§e§lStats:§r\n+20% Size\n+35% Melee Damage\n \n§e§lFeatures:§r\n- You can sense wounded creatures within 16 blocks: orange when more than half their health is missing, and red when more than three-quarters is missing. Undetectable creatures are excluded.\n- You see 75% better in darkness than most creatures.\n- Melee attacks while falling inflict Poison I for 10 seconds.\n- Fire extinguishes after no more than 3 fire-damage ticks.\n- Killing a creature with a melee attack restores 2 Hunger and 2 Saturation.\n- While §c§l[Wet]§r or in cramped spaces, you lose your melee damage bonus and suffer -20% movement speed. Contact with water extends this penalty by 1 second per second, up to 2 minutes.\n- Food is 50% less effective, and you are a Carnivore.",
   "size": {
     "type": "origins:attribute",
     "modifier": {

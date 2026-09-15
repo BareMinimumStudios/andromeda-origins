@@ -99,6 +99,12 @@
                       "inverted": true
                     },
                     {
+                      "type": "origins:origin",
+                      "origin": "andromeda_origins:champion_arachne",
+                      "layer": "origins:origin",
+                      "inverted": true
+                    },
+                    {
                       "type": "origins:power",
                       "power": "andromeda_origins:common/unstoppable",
                       "inverted": true

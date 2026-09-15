@@ -570,7 +570,7 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
-      "text": "§e§lDamage Resistances:§r§f Falling (-100%).\n \n§c§lDamage Vulnerabilities:§r§f Iron weapons (+20%).\n \n§e§lEffect Immunities:§r§f Levitation."
+      "text": "§e§lDamage Resistances:§r§f Falling (-100%).\n \n§c§lDamage Vulnerabilities:§r§f Iron weapons (+20%).\n \n§e§lEffect Immunities:§r§f None."
     },
     {
       "type": "origins:tooltip",
@@ -579,7 +579,7 @@
     }
   ],
   "name": "Passive Features",
-  "description": "§e§lStats:§r\n-17% Size\n-20% Max Health\n+33% Ground & Air Speed\n-15% Damage Dealt\n \n§e§lFeatures:§r\n- Hiding in crops, grass, flowers, or leaves makes you §e§lUndetectable§r and grants perfect vision in darkness. While Undetectable, detection and glow abilities cannot reveal you, mobs cannot target you, and held items are hidden.\n- Dealing damage disables this concealment for 10 seconds.\n- Iron weapons deal 20% more damage to you and inflict Wither I. Carrying any iron-tagged item anywhere in your inventory also inflicts Wither I.",
+  "description": "§e§lStats:§r\n-17% Size\n-20% Max Health\n+33% Ground & Air Speed\n-15% Damage Dealt\n \n§e§lFeatures:§r\n- You are immune to fall damage and can jump in mid-air up to 4 times before touching the ground to recharge the jumps. Each mid-air jump clears Levitation and Slow Falling.\n- Hiding in crops, grass, flowers, or leaves makes you §e§lUndetectable§r and grants perfect vision in darkness. While Undetectable, detection and glow abilities cannot reveal you, mobs cannot target you, and held items are hidden.\n- Dealing damage disables this concealment for 10 seconds.\n- Iron weapons deal 20% more damage to you and inflict Wither I. Carrying any iron-tagged item anywhere in your inventory also inflicts Wither I.",
   "size": {
     "type": "origins:attribute",
     "modifier": {

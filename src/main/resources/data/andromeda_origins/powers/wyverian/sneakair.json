@@ -40,6 +40,10 @@
                     "power": "*:*_chargecooldown"
                   },
                   {
+                    "type": "origins:execute_command",
+                    "command": "andromedaorigins internal_fx wyverian.hover"
+                  },
+                  {
                     "type": "origins:play_sound",
                     "sound": "entity.ender_dragon.flap",
                     "volume": 1,

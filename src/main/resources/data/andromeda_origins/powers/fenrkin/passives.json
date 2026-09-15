@@ -11,6 +11,12 @@
         },
         {
           "type": "origins:change_resource",
+          "resource": "andromeda_origins:fenrkin/passives_toggle_state",
+          "change": 1,
+          "operation": "set"
+        },
+        {
+          "type": "origins:change_resource",
           "resource": "andromeda_origins:fenrkin/passives_weaknesstate",
           "change": 0,
           "operation": "set"
@@ -18,7 +24,7 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:fenrkin/passives_undercooldown",
-          "change": 3600,
+          "change": 7200,
           "operation": "set"
         },
         {
@@ -361,8 +367,42 @@
       "amount": -0.25
     }
   },
-  "toggle": {
-    "type": "origins:toggle",
+  "toggle_state": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 1,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "toggle_action": {
+    "type": "origins:active_self",
+    "cooldown": 1,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:if_else",
+      "condition": {
+        "type": "origins:resource",
+        "resource": "*:*_toggle_state",
+        "comparison": "==",
+        "compare_to": 0
+      },
+      "if_action": {
+        "type": "origins:change_resource",
+        "resource": "*:*_toggle_state",
+        "change": 1,
+        "operation": "set"
+      },
+      "else_action": {
+        "type": "origins:change_resource",
+        "resource": "*:*_toggle_state",
+        "change": 0,
+        "operation": "set"
+      }
+    },
     "key": {
       "key": "key.andromeda_origins.toggle",
       "continuous": false
@@ -372,8 +412,10 @@
     "type": "origins:night_vision",
     "strength": 0.75,
     "condition": {
-      "type": "origins:power_active",
-      "power": "*:*_toggle"
+      "type": "origins:resource",
+      "resource": "*:*_toggle_state",
+      "comparison": "==",
+      "compare_to": 1
     }
   },
   "speedup": {
@@ -453,7 +495,7 @@
   },
   "undercooldown": {
     "type": "origins:cooldown",
-    "cooldown": 3600,
+    "cooldown": 7200,
     "hud_render": {
       "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
       "bar_index": 13
@@ -471,6 +513,10 @@
           "pitch": 0.7
         },
         {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx fenrkin.adrenaline"
+        },
+        {
           "type": "origins:extinguish"
         },
         {
@@ -478,15 +524,11 @@
           "power": "*:*_undercooldown"
         },
         {
-          "type": "origins:heal",
-          "amount": 5
-        },
-        {
-          "type": "origins:apply_effect",
-          "effect": {
-            "id": "minecraft:instant_health",
-            "duration": 1,
-            "amplifier": 1
+          "type": "origins:delay",
+          "ticks": 1,
+          "action": {
+            "type": "origins:execute_command",
+            "command": "andromedaorigins internal_set_health_8"
           }
         },
         {
@@ -527,11 +569,11 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
-      "text": "§e§lDamage Resistances:§r§f All sources (-25%).\n \n§c§lDamage Vulnerabilities:§r§f None.\n \n§e§lEffect Immunities:§r§f None."
+      "text": "\u00a7e\u00a7lDamage Resistances:\u00a7r\u00a7f All sources (-25%).\n \n\u00a7c\u00a7lDamage Vulnerabilities:\u00a7r\u00a7f None.\n \n\u00a7e\u00a7lEffect Immunities:\u00a7r\u00a7f None."
     }
   ],
   "name": "Passive Features",
-  "description": "§e§lStats:§r\n+20% Size\n+20% Melee Damage\n \n§e§lFeatures:§r\n- You can sense wounded creatures within 16 blocks: orange when more than half their health is missing, and red when more than three-quarters is missing. Undetectable creatures are excluded.\n- You see 75% better in darkness than most creatures.\n- Melee attacks inflict Poison I for 10 seconds.\n- Fire extinguishes after no more than 3 fire-damage ticks.\n- Killing a creature with a melee attack restores 2 Hunger and 2 Saturation.\n- While §c§l[Wet]§r or in cramped spaces, you lose your melee damage bonus and suffer -20% movement speed. Each second spent Wet adds 1 second to the lingering penalty, up to 2 minutes; the timer counts back down once you are dry. Cramped-space weakness ends when you have room again.\n- Food is 50% less effective, and you are a Carnivore.\n \n§e§lAdrenaline:§r Once every 3 minutes, lethal damage is prevented and you gain an additional 20% damage resistance for 35 seconds.",
+  "description": "\u00a7e\u00a7lStats:\u00a7r\n+20% Size\n+20% Movement Speed while not weakened\n-25% Damage Taken from all sources\n \n\u00a7e\u00a7lFeatures:\u00a7r\n- You see 75% better in darkness than most creatures. Toggleable.\n- While \u00a7c\u00a7l[Wet]\u00a7r or in cramped spaces, your +20% movement-speed bonus is suppressed and your damage dealt is reduced by 20%. Each second spent Wet adds 1 second to the lingering Wet penalty, up to 2 minutes; cramped-space weakness ends once you have room again.\n- Wearing at least 15 Armor points applies Wither I.\n- You are a Carnivore.\n \n\u00a7e\u00a7lAdrenaline:\u00a7r Once every 6 minutes, lethal damage is prevented, you are restored to 8 health, Crowd Control is broken, you briefly become Unstoppable, and you gain an additional 20% damage resistance for 35 seconds.",
   "size": {
     "type": "origins:attribute",
     "modifier": {
@@ -551,8 +593,10 @@
       "amount": 1.0
     },
     "condition": {
-      "type": "origins:power_active",
-      "power": "*:*_toggle"
+      "type": "origins:resource",
+      "resource": "*:*_toggle_state",
+      "comparison": "==",
+      "compare_to": 1
     }
   },
   "weaknesstate2": {

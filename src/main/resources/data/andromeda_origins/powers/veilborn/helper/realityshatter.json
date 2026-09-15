@@ -3,12 +3,21 @@
   "callback": {
     "type": "origins:action_on_callback",
     "entity_action_added": {
-      "type": "origins:apply_effect",
-      "effect": {
-        "id": "minecraft:darkness",
-        "amplifier": 0,
-        "duration": 60
-      }
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:apply_effect",
+          "effect": {
+            "id": "minecraft:darkness",
+            "amplifier": 0,
+            "duration": 60
+          }
+        },
+        {
+          "type": "origins:execute_command",
+          "command": "andromedaorigins internal_fx veilborn.reality_shatter"
+        }
+      ]
     }
   },
   "remove": {

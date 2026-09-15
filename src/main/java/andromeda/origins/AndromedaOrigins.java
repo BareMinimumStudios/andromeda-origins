@@ -2,7 +2,10 @@ package andromeda.origins;
 
 import andromeda.origins.command.AndromedaOriginsCommands;
 import andromeda.origins.compat.MortalResolveManager;
+import andromeda.origins.compat.IronWeaknessMigration;
+import andromeda.origins.compat.VersionHandshake;
 import andromeda.origins.compat.FiguraCompatManager;
+import andromeda.origins.compat.EnhancedFxCompat;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.Settings;
@@ -37,8 +40,11 @@ public final class AndromedaOrigins implements ModInitializer {
         registerIcon("wyverian_icon");
 
         AndromedaSounds.register();
+        VersionHandshake.registerServer();
+        EnhancedFxCompat.initialize();
         AndromedaOriginsCommands.register();
         MortalResolveManager.register();
+        IronWeaknessMigration.register();
         FiguraCompatManager.register();
 
     }

@@ -584,7 +584,7 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
-      "text": "§e§lDamage Resistances:§r§f All sources except magic, wither, freezing and void (-20%), Fire (-100%)\n \n§c§lDamage Vulnerabilities:§r§f None.\n \n§e§lEffect Immunities:§r§f None."
+      "text": "§e§lDamage Resistances:§r§f Most sources (-20%); magic, wither, freezing, void, suffocation, drowning, and dry-out damage are excluded. Fire (-100%).\n \n§c§lDamage Vulnerabilities:§r§f None.\n \n§e§lEffect Immunities:§r§f None."
     },
     {
       "type": "origins:tooltip",
@@ -593,7 +593,7 @@
     }
   ],
   "name": "Passive Features",
-  "description": "§e§lStats:§r\n+20% Size\n+20% Melee Damage\n-10% Movement Speed\n \n§e§lFeatures:§r\n- Your wings allow natural elytra-style flight. Equipping an Elytra bypasses your normal flight restrictions.\n- Hitting a creature while falling or flying ignites it for 10 seconds.\n- You cannot use Firework Rockets or Wind Charges for propulsion.\n- §e§lGusts of Freedom§r cannot be used while §c§l[Wet]§r.\n- While Wet, you lose your melee damage bonus and suffer -20% movement speed. Contact with water extends this penalty by 1 second per second, up to 2 minutes.\n- You are a Carnivore.",
+  "description": "§e§lStats:§r\n+20% Size\n+20% Melee Damage\n-10% Movement Speed\n \n§e§lFeatures:§r\n- Your wings allow natural elytra-style flight. Equipping an Elytra bypasses your normal flight restrictions.\n- Hitting a creature while falling or flying ignites it for 10 seconds.\n- You cannot use Firework Rockets or Wind Charges for propulsion unless an Elytra is equipped.\n- §e§lGusts of Freedom§r cannot be used while §c§l[Wet]§r.\n- While Wet or in cramped spaces, you lose your melee damage bonus and suffer an additional -20% movement speed. Contact with water extends the Wet penalty by 1 second per second, up to 2 minutes; cramped-space weakness ends once you have room again.\n- You are a Carnivore.",
   "size": {
     "type": "origins:attribute",
     "modifier": {

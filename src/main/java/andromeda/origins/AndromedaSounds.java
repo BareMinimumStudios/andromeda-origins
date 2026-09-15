@@ -27,6 +27,7 @@ public final class AndromedaSounds {
         "ability.humanity.mortal_resolve_heartbeat",
         "ability.lichling.final_bell_toll",
         "ability.lichling.chimes_of_necros",
+        "ability.lichling.screech",
         "ability.manticore.ravenous_lunge",
         "ability.manticore.ravenous_lunge_airborne",
         "ability.manticore.beast_of_blood",

@@ -7,7 +7,7 @@
       "actions": [
         {
           "type": "origins:execute_command",
-          "command": "title @s actionbar {\"text\": \"You have been infatuated for 15 seconds!\", \"color\": \"red\"}"
+          "command": "title @s actionbar {\"text\": \"You have been infatuated for 10 seconds!\", \"color\": \"red\"}"
         },
         {
           "type": "origins:grant_power",
@@ -73,8 +73,8 @@
   "remove": {
     "type": "origins:resource",
     "min": 0,
-    "max": 15,
-    "start_value": 15,
+    "max": 10,
+    "start_value": 10,
     "hud_render": {
       "sprite_location": "andromeda_origins:textures/gui/resource_bars_2.png",
       "bar_index": 4

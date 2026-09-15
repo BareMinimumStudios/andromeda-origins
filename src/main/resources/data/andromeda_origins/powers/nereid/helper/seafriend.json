@@ -7,9 +7,19 @@
     "blue": 1,
     "green": 0.6,
     "entity_condition": {
-      "type": "origins:origin",
-      "origin": "andromeda_origins:nereid",
-      "layer": "origins:origin"
+      "type": "origins:or",
+      "conditions": [
+        {
+          "type": "origins:origin",
+          "origin": "andromeda_origins:nereid",
+          "layer": "origins:origin"
+        },
+        {
+          "type": "origins:origin",
+          "origin": "andromeda_origins:champion_nereid",
+          "layer": "origins:origin"
+        }
+      ]
     },
     "condition": {
       "type": "origins:power",
