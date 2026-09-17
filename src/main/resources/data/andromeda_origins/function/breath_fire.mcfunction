@@ -1,3 +1,3 @@
-particle minecraft:flame ^ ^ ^ 0.1 0 0.2 0.005 2 normal
-particle minecraft:smoke ^ ^ ^ 0.5 0.5 0.5 0 1 normal
+particle minecraft:flame ^ ^ ^1.25 0.08 0.05 0.12 0.004 2 normal
+particle minecraft:poof ^ ^ ^1.25 0.16 0.10 0.16 0.002 1 normal
 execute as @e[distance=..2] run damage @s 0.5 minecraft:in_fire

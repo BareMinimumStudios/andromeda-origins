@@ -4,7 +4,7 @@
 
 ## Current release
 
-**v1.4.70** — migration-safe iron weakness. Existing standard Faerie, Gorgon, and Lichling players now receive any missing current children of the iron-weakness multiple power automatically when they join, without reselecting their Origin or resetting existing cooldowns/resources. `/andromedaorigins repair <player>` performs the same narrow reconciliation before its existing Origin-aware attribute repair. The half-heart-per-second iron drain, fast removal, 5-tick inventory sampler, Siren carnivore enforcement, Fenrkin toggle isolation, pre.2 Apoli performance backports, and exact version handshake remain unchanged.
+**v1.4.72** — Wyverian first-person VFX cleanup. Ember Ray and projectile trails now begin farther ahead of the caster instead of spawning across the camera, long-lived campfire smoke was replaced with short-lived smoke/poof particles, and caster-local flame/smoke bursts were lowered away from eye level. Enhanced Pyroclast/Dragon Charge buildup now swirls from the feet rather than through the camera, with Champion Dragon Charge impact smoke shortened as well. Gameplay, damage, ranges, costs, and v1.4.71 fixes are unchanged.
 
 ## Features
 

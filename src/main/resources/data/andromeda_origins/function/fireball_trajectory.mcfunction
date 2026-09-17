@@ -1,2 +1,2 @@
-particle minecraft:flame ^ ^ ^ 0.3 0.2 0.2 0.005 4 normal
-particle minecraft:smoke ^ ^ ^ 0.5 0.5 0.5 0 1 normal
+particle minecraft:flame ^ ^ ^0.75 0.22 0.14 0.16 0.004 3 normal
+particle minecraft:poof ^ ^ ^0.75 0.20 0.16 0.20 0.002 1 normal

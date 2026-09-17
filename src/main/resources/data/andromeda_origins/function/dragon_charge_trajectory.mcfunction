@@ -1,2 +1,2 @@
-particle minecraft:dragon_breath ^ ^ ^ 0.35 0.25 0.35 0.02 6 normal
-particle minecraft:portal ^ ^ ^ 0.45 0.35 0.45 0.03 3 normal
+particle minecraft:dragon_breath ^ ^ ^0.75 0.24 0.18 0.24 0.015 4 normal
+particle minecraft:portal ^ ^ ^0.75 0.28 0.22 0.28 0.018 2 normal

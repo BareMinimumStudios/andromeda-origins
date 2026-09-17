@@ -1,6 +1,6 @@
 # Custom Sound Integration
 
-**Current state: v1.4.70**. The 33 bundled Andromeda SoundEvents remain unchanged. When the optional enhanced-FX layer is active, selected Spell Engine / More RPG Library sounds are mixed underneath the existing Origin audio; they do not replace or re-register Andromeda's custom sounds.
+**Current state: v1.4.72**. The 33 bundled Andromeda SoundEvents remain unchanged. When the optional enhanced-FX layer is active, selected Spell Engine / More RPG Library sounds are mixed underneath the existing Origin audio; they do not replace or re-register Andromeda's custom sounds.
 
 Andromeda Origins registers **33 custom SoundEvents**. Bundled ability audio is stored under `assets/andromeda_origins/sounds/abilities/` and registered in `assets/andromeda_origins/sounds.json`.
 

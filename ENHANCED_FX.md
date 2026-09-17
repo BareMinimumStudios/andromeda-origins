@@ -1,6 +1,14 @@
 # Optional Enhanced Origin FX
 
-**Current state: v1.4.70.** This layer lets Andromeda Origins use Spell Engine and More RPG Library particles/sounds when those mods are installed, while keeping the base mod fully functional without them.
+**Current state: v1.4.72.** This layer lets Andromeda Origins use Spell Engine and More RPG Library particles/sounds when those mods are installed, while keeping the base mod fully functional without them.
+
+## v1.4.72 Wyverian camera-clear pass
+
+- Standard Pyroclast and Champion Dragon Charge buildup no longer use center-aligned helix batches on the caster; their enhanced charge particles now use the feet-level casting layout so first-person aim is not covered.
+- Champion Dragon Breath's enhanced caster burst was likewise moved from a forward center cone to feet-level casting particles.
+- Champion Dragon Charge impact smoke now uses a smaller batch with a fast fade and faster playback so the smoke cloud does not hang in the scene.
+- Vanilla Ember/Dragon ray and projectile trail cosmetics are offset forward independently of their gameplay raycasts, so damage/hit detection is unchanged.
+
 
 ## Dependency model
 

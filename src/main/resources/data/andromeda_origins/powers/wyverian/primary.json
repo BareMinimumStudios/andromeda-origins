@@ -41,7 +41,7 @@
             "y": 0,
             "z": 0
           },
-          "offset_y": 1
+          "offset_y": 0.35
         },
         {
           "type": "origins:spawn_particles",
@@ -53,10 +53,10 @@
           "force": true,
           "spread": {
             "x": 0.35,
-            "y": 0.5,
+            "y": 0.25,
             "z": 0.35
           },
-          "offset_y": 1
+          "offset_y": 0.35
         },
         {
           "type": "origins:spawn_particles",
@@ -71,7 +71,7 @@
             "y": 0.35,
             "z": 0.25
           },
-          "offset_y": 1
+          "offset_y": 0.35
         },
         {
           "type": "origins:change_resource",
@@ -353,15 +353,15 @@
                         {
                           "type": "origins:spawn_particles",
                           "particle": {
-                            "type": "minecraft:campfire_cosy_smoke"
+                            "type": "minecraft:smoke"
                           },
                           "count": 1,
                           "speed": 0.0,
                           "force": true,
-                          "offset_y": 0,
+                          "offset_y": 0.25,
                           "spread": {
                             "x": 0.2,
-                            "y": 0,
+                            "y": 0.0,
                             "z": 0.2
                           }
                         },
@@ -378,7 +378,7 @@
                             "y": 0.3,
                             "z": 0.2
                           },
-                          "offset_y": 1
+                          "offset_y": 0.35
                         }
                       ]
                     }
@@ -417,7 +417,7 @@
                   "y": 0.25,
                   "z": 0.2
                 },
-                "offset_y": 1
+                "offset_y": 0.35
               }
             ]
           }
@@ -435,17 +435,17 @@
               {
                 "type": "origins:spawn_particles",
                 "particle": {
-                  "type": "minecraft:campfire_signal_smoke"
+                  "type": "minecraft:smoke"
                 },
                 "count": 1,
                 "speed": 0.0,
                 "force": true,
                 "spread": {
                   "x": 0.15,
-                  "y": 0.2,
+                  "y": 0.1,
                   "z": 0.15
                 },
-                "offset_y": 1
+                "offset_y": 0.25
               },
               {
                 "type": "origins:spawn_particles",
@@ -457,7 +457,7 @@
                 "force": true,
                 "spread": {
                   "x": 0.25,
-                  "y": 0.5,
+                  "y": 0.25,
                   "z": 0.25
                 }
               },
@@ -548,7 +548,7 @@
                   "y": 0.25,
                   "z": 0.2
                 },
-                "offset_y": 1
+                "offset_y": 0.35
               }
             ]
           }
@@ -625,5 +625,5 @@
     }
   ],
   "name": "Ember Flames",
-  "description": "Ember Flames consumes \u00a7e\u00a7lEmber\u00a7r, which regenerates while not in use. Ember Flames cannot be used underwater. Completely emptying Ember locks the ability until the resource fully regenerates. Creatures killed by Ember Flames drop no experience, and the flames may destroy dropped items.\n \n\u00a7e\u00a7lEmber Ray:\u00a7r\nHold Primary Ability to project a 32-block ray of flame. Creatures near the ray take 0.5 fire damage, creatures within 3 blocks of the impact point take 1.5 fire damage, and direct hits ignite targets for 10 seconds. Consumes 1 Ember every 0.6 seconds.\n \n\u00a7e\u00a7lEmber Pyroclast:\u00a7r\nHold Primary Ability for 2 seconds without taking damage to charge a projectile that explodes on impact in a 4-block radius. It dissipates harmlessly after traveling more than 64 blocks. Creatures caught in the explosion take 10 explosion damage. Consumes 10 Ember."
+  "description": "Ember Flames consumes §e§lEmber§r, which regenerates while not in use. Ember Flames cannot be used underwater. Completely emptying Ember locks the ability until the resource fully regenerates. Creatures killed by Ember Flames drop no experience, and the flames may destroy dropped items.\n \n§e§lEmber Ray:§r\nHold Primary Ability to project a 32-block ray of flame. Creatures near the ray take 0.5 fire damage, creatures within 3 blocks of the impact point take 1.5 fire damage, and direct hits ignite targets for 10 seconds. Consumes 1 Ember every 0.6 seconds.\n \n§e§lEmber Pyroclast:§r\nHold Primary Ability for 2 seconds without taking damage to charge a projectile that explodes on impact in a 4-block radius. It dissipates harmlessly after traveling more than 64 blocks. Creatures caught in the explosion take 10 explosion damage. Consumes 10 Ember."
 }

@@ -41,7 +41,7 @@
             "y": 0,
             "z": 0
           },
-          "offset_y": 1
+          "offset_y": 0.35
         },
         {
           "type": "origins:spawn_particles",
@@ -53,10 +53,10 @@
           "force": true,
           "spread": {
             "x": 0.4,
-            "y": 0.55,
+            "y": 0.25,
             "z": 0.4
           },
-          "offset_y": 1
+          "offset_y": 0.35
         },
         {
           "type": "origins:spawn_particles",
@@ -68,10 +68,10 @@
           "force": true,
           "spread": {
             "x": 0.35,
-            "y": 0.45,
+            "y": 0.25,
             "z": 0.35
           },
-          "offset_y": 1
+          "offset_y": 0.35
         },
         {
           "type": "origins:change_resource",
@@ -366,7 +366,7 @@
                           "count": 3,
                           "speed": 0.035,
                           "force": true,
-                          "offset_y": 1,
+                          "offset_y": 0.35,
                           "spread": {
                             "x": 0.18,
                             "y": 0.18,
@@ -386,7 +386,7 @@
                             "y": 0.3,
                             "z": 0.22
                           },
-                          "offset_y": 1
+                          "offset_y": 0.35
                         }
                       ]
                     }
@@ -434,7 +434,7 @@
                   "y": 0.25,
                   "z": 0.2
                 },
-                "offset_y": 1
+                "offset_y": 0.35
               }
             ]
           }
@@ -462,7 +462,7 @@
                   "y": 0.28,
                   "z": 0.18
                 },
-                "offset_y": 1
+                "offset_y": 0.35
               },
               {
                 "type": "origins:spawn_particles",
@@ -474,7 +474,7 @@
                 "force": true,
                 "spread": {
                   "x": 0.25,
-                  "y": 0.5,
+                  "y": 0.25,
                   "z": 0.25
                 }
               },
@@ -565,7 +565,7 @@
                   "y": 0.25,
                   "z": 0.2
                 },
-                "offset_y": 1
+                "offset_y": 0.35
               }
             ]
           }

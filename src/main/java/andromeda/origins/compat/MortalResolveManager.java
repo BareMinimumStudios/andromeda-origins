@@ -98,7 +98,9 @@ public final class MortalResolveManager {
                     iterator.remove();
                     FINAL_DEATH_PENDING.add(player.getUuid());
                     player.addCommandTag(FINAL_DEATH_PENDING_TAG);
-                    player.removeCommandTag(ACTIVE_TAG);
+                    // Keep ACTIVE_TAG present until the death attempt has been evaluated.
+                    // Indomitable and other standard-Human finality guards key off this tag;
+                    // removing it before player.kill() reopened prevent-death for one call.
                     IncapacitatedCompat.forceMortalResolveDeath(player);
                 } else {
                     entry.setValue(remaining - 1);

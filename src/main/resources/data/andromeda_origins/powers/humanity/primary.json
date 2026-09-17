@@ -114,9 +114,19 @@
       ]
     },
     "condition": {
-      "type": "origins:power",
-      "power": "*:common/silenced",
-      "inverted": true
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "*:common/silenced",
+          "inverted": true
+        },
+        {
+          "type": "origins:has_command_tag",
+          "command_tag": "andromeda_mortal_resolve",
+          "inverted": true
+        }
+      ]
     },
     "key": {
       "key": "key.origins.primary_active",

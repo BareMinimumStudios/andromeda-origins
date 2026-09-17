@@ -1,6 +1,13 @@
 # Andromeda Origins — Compatibility & State Safety
 
-This document describes the compatibility and state-safety behavior in **v1.4.70**. Optional Spell Engine / More RPG Library audiovisual compatibility remains additive; Figura, Armor Model API, Incapacitated, and gameplay-state compatibility remain unchanged.
+This document describes the compatibility and state-safety behavior in **v1.4.72**. Optional Spell Engine / More RPG Library audiovisual compatibility remains additive. v1.4.72 only adjusts Wyverian particle placement/lifetime; the v1.4.70 iron migration and v1.4.71 Arachne/Humanity guards remain intact.
+
+
+### v1.4.71 Arachne collision / Humanity finality guards
+
+- Arachne no longer uses `origins:phasing` to implement cobweb slowdown immunity. A player-only movement hook skips `slowMovement` only for players tagged `arachne` and only for blocks in `origins:cobwebs`, preserving web mobility without exposing Apoli phasing collision hooks to the climbing power. Standard and Champion Arachne share this behavior.
+- Standard Humanity's Indomitable `prevent_death` child is inactive while the `andromeda_mortal_resolve` tag is present, and the Primary activation itself is blocked for that same standard final-stand state. Champion Mortal Resolve uses a different tag and remains intentionally non-lethal.
+- Mortal Resolve expiry keeps its active tag through `player.kill()` and clears it only after a successful death, closing the previous one-call gap where Indomitable could become eligible again.
 
 ### v1.4.70 legacy iron-power migration
 Existing standard Faerie, Gorgon, and Lichling players are checked once when they join. If their already-selected Origin is missing any current child of `andromeda_origins:common/witheringironweakness`, Andromeda grants only the missing child powers under the existing Origin source and syncs Apoli once. It does not re-select the Origin, reset cooldowns/resources, or run a recurring tick scan. The same narrow reconciliation is also performed by `/andromedaorigins repair <player>` before the existing attribute repair.

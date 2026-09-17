@@ -1,3 +1,31 @@
+# v1.4.72
+
+## Wyverian first-person VFX cleanup
+- Moved standard Ember Ray and Champion Dragon Breath trail particles forward from the ray sample point so the first visible particles no longer spawn across the caster's camera/crosshair. Gameplay ray origins, damage checks, hit detection, range, and ignition/magic effects are unchanged.
+- Replaced the standard Wyverian's long-lived `campfire_cosy_smoke` / `campfire_signal_smoke` self-effects with ordinary short-lived smoke, and replaced ray/projectile trail smoke with brief `poof` particles.
+- Lowered remaining caster-local Wyverian flame/smoke/dragon-breath bursts away from eye height and reduced overly tall vertical spread where applicable.
+- Moved enhanced Pyroclast and Champion Dragon Charge charge-up helixes to Spell Engine's feet-level `casting` layout; Champion Dragon Breath's enhanced cone was moved to the same camera-safe layout.
+- Shortened Champion Dragon Charge impact smoke with a smaller batch, lower opacity, rapid fade, and faster playback.
+
+## Regression scope
+- No Wyverian gameplay values changed: Ember/charge resources, charge time, damage, ray/projectile range, cooldowns, flight, and Figura hooks are unchanged.
+- v1.4.70 migration-safe iron repair and v1.4.71 Arachne/Humanity fixes remain unchanged.
+
+# v1.4.71
+
+## Arachne climbing / collision
+- Replaced Arachne's `origins:phasing`-based cobweb slowdown immunity with a narrow player movement hook. Standard and Champion Arachne still ignore slowdown from blocks in `origins:cobwebs`, but they no longer own a phasing power that can interact with climbing/collision push-out behavior.
+- Kept the existing `no_slowdown` child IDs as harmless simple powers so legacy saved Apoli membership cannot leave an old phasing implementation active after the update.
+
+## Humanity Mortal Resolve / Indomitable
+- Fixed Indomitable being able to defeat standard Mortal Resolve's final death. The Indomitable `prevent_death` child is now inactive while `andromeda_mortal_resolve` is active, and Primary cannot newly activate Indomitable during that standard final stand.
+- Fixed the expiry ordering bug that removed Mortal Resolve's active tag immediately before `player.kill()`. The tag now remains present through the death evaluation and is cleared after a successful kill, so the finality guard cannot reopen for the forced-death call.
+- Champion Humanity is unchanged: Champion Mortal Resolve uses its separate champion tag and remains a non-lethal one-minute effort.
+
+## Regression scope
+- v1.4.70 migration-safe iron weakness, Origin-aware repair behavior, the 5-tick iron sampler, pre.2 Origins/Apoli pin, and Apoli performance backports are unchanged.
+- JSON resources were revalidated after the changes.
+
 # v1.4.70
 
 ## Migration-safe iron weakness

@@ -305,6 +305,14 @@ public final class IncapacitatedCompat {
         MortalResolveEffects.playExpiry(player);
         prepareMortalResolveDeath(player);
         player.kill();
+
+        // The active tag must survive through the actual death check so Humanity's own
+        // prevent-death mechanics cannot become eligible again at expiry. Once the kill
+        // has succeeded, clear the runtime/tag state immediately rather than waiting for
+        // the next server tick or respawn callback.
+        if (!player.isAlive()) {
+            MortalResolveManager.stop(player);
+        }
     }
 
     /**

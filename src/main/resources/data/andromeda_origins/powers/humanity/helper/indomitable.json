@@ -50,6 +50,11 @@
           "change": -60
         }
       ]
+    },
+    "condition": {
+      "type": "origins:has_command_tag",
+      "command_tag": "andromeda_mortal_resolve",
+      "inverted": true
     }
   },
   "hittake": {

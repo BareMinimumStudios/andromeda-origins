@@ -106,11 +106,9 @@
       },
       {
         "id": "spell_engine:flame_medium_a",
-        "preset": "helix",
+        "preset": "casting",
         "count": 6,
         "speed": 0.041,
-        "degrees_per_tick": 18,
-        "offset": 0,
         "scale": 0.71,
         "glow": true,
         "motion": "float"
@@ -137,11 +135,9 @@
       },
       {
         "id": "spell_engine:flame_medium_a",
-        "preset": "helix",
+        "preset": "casting",
         "count": 8,
         "speed": 0.047,
-        "degrees_per_tick": 22,
-        "offset": 0,
         "scale": 0.8,
         "glow": true,
         "motion": "float"
@@ -168,11 +164,9 @@
       },
       {
         "id": "spell_engine:flame_medium_a",
-        "preset": "helix",
+        "preset": "casting",
         "count": 10,
         "speed": 0.053000000000000005,
-        "degrees_per_tick": 26,
-        "offset": 0,
         "scale": 0.89,
         "glow": true,
         "motion": "float"
@@ -205,11 +199,9 @@
       },
       {
         "id": "spell_engine:flame_medium_a",
-        "preset": "helix",
+        "preset": "casting",
         "count": 12,
         "speed": 0.059000000000000004,
-        "degrees_per_tick": 30,
-        "offset": 0,
         "scale": 0.98,
         "glow": true,
         "motion": "float"
@@ -222,11 +214,9 @@
       },
       {
         "id": "spell_engine:magic_stripe",
-        "preset": "helix",
+        "preset": "casting",
         "count": 12,
         "speed": 0.06,
-        "degrees_per_tick": 34,
-        "offset": 0,
         "scale": 0.86,
         "color": "#FFD9A3",
         "opacity": 0.82,
@@ -348,10 +338,9 @@
       },
       {
         "id": "spell_engine:magic_arcane",
-        "preset": "cone",
+        "preset": "casting",
         "count": 18,
         "speed": 0.14,
-        "angle": 28,
         "scale": 0.88,
         "color": "#C58CFF",
         "opacity": 0.86,
@@ -360,10 +349,9 @@
       },
       {
         "id": "spell_engine:magic_stripe",
-        "preset": "cone",
+        "preset": "casting",
         "count": 12,
         "speed": 0.16,
-        "angle": 24,
         "scale": 0.72,
         "color": "#F0D5FF",
         "opacity": 0.8,
@@ -396,11 +384,9 @@
     "particles": [
       {
         "id": "spell_engine:magic_arcane",
-        "preset": "helix",
+        "preset": "casting",
         "count": 12,
         "speed": 0.055,
-        "degrees_per_tick": 20,
-        "offset": 0,
         "scale": 0.76,
         "color": "#B16EFF",
         "opacity": 0.82,
@@ -409,11 +395,9 @@
       },
       {
         "id": "spell_engine:magic_stripe",
-        "preset": "helix",
+        "preset": "casting",
         "count": 6,
         "speed": 0.0495,
-        "degrees_per_tick": -21,
-        "offset": 180,
         "scale": 0.6232,
         "color": "#F0D8FF",
         "opacity": 0.76,
@@ -433,11 +417,9 @@
     "particles": [
       {
         "id": "spell_engine:magic_arcane",
-        "preset": "helix",
+        "preset": "casting",
         "count": 18,
         "speed": 0.065,
-        "degrees_per_tick": 24,
-        "offset": 0,
         "scale": 0.88,
         "color": "#B16EFF",
         "opacity": 0.82,
@@ -446,11 +428,9 @@
       },
       {
         "id": "spell_engine:magic_stripe",
-        "preset": "helix",
+        "preset": "casting",
         "count": 9,
         "speed": 0.0585,
-        "degrees_per_tick": -24,
-        "offset": 180,
         "scale": 0.7215999999999999,
         "color": "#F0D8FF",
         "opacity": 0.76,
@@ -470,11 +450,9 @@
     "particles": [
       {
         "id": "spell_engine:magic_arcane",
-        "preset": "helix",
+        "preset": "casting",
         "count": 24,
         "speed": 0.075,
-        "degrees_per_tick": 28,
-        "offset": 0,
         "scale": 1.0,
         "color": "#B16EFF",
         "opacity": 0.82,
@@ -483,11 +461,9 @@
       },
       {
         "id": "spell_engine:magic_stripe",
-        "preset": "helix",
+        "preset": "casting",
         "count": 12,
         "speed": 0.0675,
-        "degrees_per_tick": -27,
-        "offset": 180,
         "scale": 0.82,
         "color": "#F0D8FF",
         "opacity": 0.76,
@@ -517,11 +493,9 @@
     "particles": [
       {
         "id": "spell_engine:magic_arcane",
-        "preset": "helix",
+        "preset": "casting",
         "count": 32,
         "speed": 0.09,
-        "degrees_per_tick": 32,
-        "offset": 0,
         "scale": 1.14,
         "color": "#B16EFF",
         "opacity": 0.82,
@@ -530,11 +504,9 @@
       },
       {
         "id": "spell_engine:magic_stripe",
-        "preset": "helix",
+        "preset": "casting",
         "count": 16,
         "speed": 0.081,
-        "degrees_per_tick": -30,
-        "offset": 180,
         "scale": 0.9347999999999999,
         "color": "#F0D8FF",
         "opacity": 0.76,
@@ -605,12 +577,15 @@
       {
         "id": "spell_engine:smoke_medium",
         "preset": "impact",
-        "count": 18,
+        "count": 10,
         "speed": 0.08,
         "scale": 0.95,
         "color": "#5A2B75",
-        "opacity": 0.72,
-        "motion": "decelerate"
+        "opacity": 0.55,
+        "motion": "decelerate",
+        "fade_out_hold": 0.04,
+        "playback_speed": 1.8,
+        "lifetime_variance": 0.1
       }
     ],
     "sounds": [
