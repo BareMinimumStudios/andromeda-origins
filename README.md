@@ -4,7 +4,7 @@
 
 ## Current release
 
-**v1.4.74** — Nereid gill-state safety plus support/repair hardening. Standard Nereid land suffocation now uses a dedicated gill source and self-repairs on join; Nereid kelp ally marks now expire after 15 seconds, and Convalescing Aura/Submersion hydrate only currently marked Selkies/Nereids. Submersion now uses real water physics: aquatic targets still sink but are immune to forced drowning, while unmarked non-aquatic targets are sunk, heavily movement-limited, rapidly lose air, and drown once it is exhausted. Long channel sounds were remixed for voice-chat clarity, Arachne cobweb shift-click crafting is guarded against the Apoli pre.2 duplication path, and `/andromedaorigins repair` now cleans stale legacy Origin sources/modifiers such as Medieval Origins Pixie health/size/diet residue before rebuilding the current Andromeda attributes.
+**v1.4.75** — aquatic/state-integrity hardening. Standard Nereid gills are directly Origin-owned, reconnects cannot preserve stale Nereid Wet, and natural water/rain now rebuilds the 90-second Nereid stored hydration reserve. Selkie wetness refills at 2 seconds per second while wet, with its existing full-dry recovery preserved. Nereid/Selkie/Siren have Origin-owned aquatic fallbacks, Submersion has explicit aquatic fail-safes, and a post-sync/respawn integrity pass repairs missing current powers/MultiplePower children and stale shared-status counters without adding a recurring world scan.
 
 ## Features
 
@@ -14,7 +14,7 @@
 - Native Minecraft scale and step-height attributes; **Pehkui is not required**.
 - Custom 64×64 registered Origin icon items.
 - Two custom 256×256 HUD resource-bar sheets with 31 catalogued styles.
-- 33 registered custom ability sounds plus layered vanilla audio.
+- 34 registered custom ability sounds plus layered vanilla audio.
 - Optional Spell Engine / More RPG Library enhanced audiovisual layer with data-driven Origin FX definitions, impact-position support, extra flashy event hooks, and no hard runtime dependency.
 - Optional Incapacitated integration for downed/revival mechanics.
 - Mortal Resolve restores Incapacitated counters after its final-death handoff and repairs legacy stale unlimited-down counters on join.

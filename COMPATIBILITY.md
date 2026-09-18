@@ -1,16 +1,34 @@
 # Andromeda Origins — Compatibility & State Safety
 
-This document describes the compatibility and state-safety behavior in **v1.4.74**. Optional Spell Engine / More RPG Library audiovisual compatibility remains additive. v1.4.74 isolates standard Nereid gills from temporary `minecraft:state` power lifecycles and automatically repairs missing gills on join; the v1.4.70 iron migration, v1.4.71 Arachne/Humanity guards, and v1.4.72 Wyverian VFX cleanup remain intact.
+This document describes the compatibility and state-safety behavior in **v1.4.75**. Optional Spell Engine / More RPG Library audiovisual compatibility remains additive. v1.4.75 consolidates direct Nereid gills, reconnect-safe/refillable Nereid hydration, hardened Selkie/Nereid/Siren aquatic traits, Submersion aquatic immunity, and a general post-Origin-sync/respawn integrity pass for Andromeda power membership, MultiplePower children, shared status counters, and Origin compatibility tags. The v1.4.70 iron migration, v1.4.71 Arachne/Humanity guards, v1.4.72 Wyverian VFX cleanup, and v1.4.74 crafting crash fix remain intact.
+
+### v1.4.75 general state-integrity safety
+
+- After Origins finishes synchronizing Origin layers, Andromeda compares each selected Andromeda Origin against its current complete power closure and restores missing roots/MultiplePower children without re-granting powers that are already valid. Obsolete powers owned specifically by the selected Origin source are removed when they are no longer part of the current definition.
+- Every currently owned Andromeda MultiplePower is checked for missing current children, including temporary helper powers. This prevents a persisted parent from surviving without the timer/resource/cleanup child that makes the effect expire.
+- Shared `Wet`, `Petrified`, `Restrained`, `Silenced`, `Pacified`, and `Unstoppable` state is re-derived from the helper powers that actually provide it. Stale shared counters/source ownership can therefore no longer preserve those statuses after the real provider is gone. `Undetectable` is similarly re-derived from live Faerie/Manticore/Veilborn state.
+- The same integrity verification runs once after respawn and through `/andromedaorigins repair`; it is not a recurring tick/world scan. An unresolved/empty Origin selection is fail-closed and is never used for destructive reconciliation.
+- The 13 legacy Origin command tags used by Figura/compatibility hooks are reasserted from the selected Andromeda Origin after sync, closing the callback gap where a datapack reload could remove a tag without rerunning `entity_action_chosen`.
+- Nereid, Selkie, and Siren (standard + Champion variants) now carry hidden Origin-owned aquatic marker/fallback traits. Existing helper-granted Origins aquatic powers remain supported, but losing their temporary ownership no longer removes the underlying core aquatic behavior.
+- Nereid Submersion now recognizes the direct Andromeda aquatic marker before applying its hostile Wet/drowning branch. Its server drowning hook also independently rejects targets with the Andromeda aquatic marker or any Origins `WaterBreathingPowerType`, so a stale/misclassified marker cannot force-drown an aquatic Origin.
 
 
+### v1.4.75 Nereid reconnect hydration safety
 
-### v1.4.74 state / concurrent-cast safety
+- `nereid/helper/nereidwet` is now treated as a session-scoped support/combat hydration buff. On a real player join, persisted Nereid Wet ownership from the previous connection is removed before normal Nereid breathing reconciliation.
+- Shared `common/wet` ownership is removed at join only when a persisted Nereid Wet owner was actually found, so Selkie Wet is not touched by the Nereid migration.
+- The join-only cleanup runs before Origin selection is trusted, while gill removal remains fail-closed until a non-empty post-Origin-sync selection exists.
+- Datapack reloads and `/andromedaorigins repair` use the non-join reconciliation path and therefore do not erase legitimate hydration from an online Nereid.
+- Water/rain now creates or refills the Nereid stored Wet reservoir at 1 second per second up to 90 seconds; dry time drains it at 1 second per second.
+- Selkie native stored wetness refills at 2 seconds per second in water/rain and drains at 1 second per second while dry; the 30-second full-dry recovery gate remains unchanged.
+
+### v1.4.75 state / concurrent-cast safety
 
 - Veil Transposition no longer creates globally tagged `origin` / `destination` marker entities. The successful 32-block raycast now performs an atomic actor/target position exchange, preventing simultaneous Veilborn casts from selecting or deleting each other's temporary markers. Existing warp helpers are retained only for cosmetic teleport feedback.
 - The old `common/debug` Origin-loss callback no longer calls broad `revoke_all_powers` operations on generic Apoli sources. It invokes an Andromeda namespace-scoped transient cleanup instead, avoiding collateral state removal from other Origins addons.
 - Selkie retaliation now uses the same `minecraft:debuff` source for grant and expiry. A one-shot player migration plus a helper-side legacy cleanup removes old stuck `minecraft:state` ownership.
 
-### v1.4.74 legacy Origin repair hardening
+### v1.4.75 legacy Origin repair hardening
 
 - `/andromedaorigins repair <player>` removes power ownership from registered Origin sources the player no longer has selected and explicitly recognizes `medievalorigins:*` sources even if Medieval Origins is no longer registered.
 - Loaded `medievalorigins:*` helper powers and Medieval-owned `origins:carnivore` / `origins:vegetarian` sources are removed when stale, while ownership from a currently selected Origin is preserved.

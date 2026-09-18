@@ -36,6 +36,10 @@ public abstract class NereidSubmersionDrowningMixin {
         Identifier.of("andromeda_origins", "nereid/helper/whirlpooldebuff");
 
     @Unique
+    private static final Identifier ANDROMEDA$AQUATIC_ORIGIN =
+        Identifier.of("andromeda_origins", "common/aquatic_origin");
+
+    @Unique
     private static volatile boolean andromeda$reflectionUnavailable;
 
     @Unique
@@ -46,6 +50,12 @@ public abstract class NereidSubmersionDrowningMixin {
 
     @Unique
     private static Method andromeda$hasPower;
+
+    @Unique
+    private static Method andromeda$getPowerTypes;
+
+    @Unique
+    private static Class<?> andromeda$waterBreathingPowerType;
 
     @Unique
     private int andromeda$submersionAirAtTickStart;
@@ -66,7 +76,7 @@ public abstract class NereidSubmersionDrowningMixin {
             return;
         }
 
-        if (!andromeda$hasSubmersionDebuff(player)) {
+        if (!andromeda$hasSubmersionDebuff(player) || andromeda$isAquatic(player)) {
             player.removeCommandTag(ANDROMEDA$SUBMERSION_DROWN_TAG);
             andromeda$submersionDrowningAtTickStart = false;
             andromeda$submersionDamageTicks = 0;
@@ -84,9 +94,11 @@ public abstract class NereidSubmersionDrowningMixin {
         }
 
         ServerPlayerEntity player = (ServerPlayerEntity) (Object) this;
-        if (!player.isAlive()
-            || !player.getCommandTags().contains(ANDROMEDA$SUBMERSION_DROWN_TAG)
-            || !andromeda$hasSubmersionDebuff(player)) {
+        // HEAD already performed the authoritative Apoli/debuff/aquatic validation for this tick.
+        // Avoid repeating two reflective component scans at TAIL; only cheap state that can change
+        // during the tick is checked here. At worst, a power removed mid-tick can drain one final
+        // five-air step, while the next HEAD immediately clears the tag/state.
+        if (!player.isAlive() || !player.getCommandTags().contains(ANDROMEDA$SUBMERSION_DROWN_TAG)) {
             player.removeCommandTag(ANDROMEDA$SUBMERSION_DROWN_TAG);
             andromeda$submersionDamageTicks = 0;
             return;
@@ -107,6 +119,36 @@ public abstract class NereidSubmersionDrowningMixin {
         if (andromeda$submersionDamageTicks >= 20) {
             andromeda$submersionDamageTicks = 0;
             player.damage(player.getDamageSources().drown(), 2.0F);
+        }
+    }
+
+    @Unique
+    private static boolean andromeda$isAquatic(ServerPlayerEntity player) {
+        if (andromeda$reflectionUnavailable) {
+            return false;
+        }
+
+        try {
+            andromeda$resolveReflection();
+            Object component = andromeda$getComponent.invoke(null, (Entity) player);
+            if (component == null) {
+                return false;
+            }
+
+            // All Andromeda aquatic Origins own this direct marker, including Siren and
+            // Champion Nereid whose breathing is not represented by origins:water_breathing.
+            Object marker = andromeda$getPower.invoke(null, ANDROMEDA$AQUATIC_ORIGIN);
+            if (marker != null && Boolean.TRUE.equals(andromeda$hasPower.invoke(component, marker))) {
+                return true;
+            }
+
+            // External aquatic Origins commonly expose a WaterBreathingPowerType under their own
+            // power ID. Check the actual type rather than relying on the literal Origins power ID.
+            Object value = andromeda$getPowerTypes.invoke(component, andromeda$waterBreathingPowerType);
+            return value instanceof java.util.Collection<?> collection && !collection.isEmpty();
+        } catch (ReflectiveOperationException | RuntimeException exception) {
+            andromeda$reflectionUnavailable = true;
+            return false;
         }
     }
 
@@ -139,9 +181,12 @@ public abstract class NereidSubmersionDrowningMixin {
         Class<?> componentClass = Class.forName("io.github.apace100.apoli.component.PowerHolderComponent");
         Class<?> powerClass = Class.forName("io.github.apace100.apoli.power.Power");
         Class<?> powerManagerClass = Class.forName("io.github.apace100.apoli.power.PowerManager");
+        andromeda$waterBreathingPowerType =
+            Class.forName("io.github.apace100.origins.power.type.WaterBreathingPowerType");
 
         andromeda$getComponent = componentClass.getMethod("getNullable", Entity.class);
         andromeda$getPower = powerManagerClass.getMethod("getNullable", Identifier.class);
         andromeda$hasPower = componentClass.getMethod("hasPower", powerClass);
+        andromeda$getPowerTypes = componentClass.getMethod("getPowerTypes", Class.class);
     }
 }

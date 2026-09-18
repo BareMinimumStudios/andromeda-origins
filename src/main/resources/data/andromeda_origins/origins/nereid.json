@@ -1,6 +1,9 @@
 {
   "powers": [
     "andromeda_origins:nereid/passives",
+    "andromeda_origins:common/aquatic_origin",
+    "andromeda_origins:nereid/aquatic_traits",
+    "andromeda_origins:nereid/gills",
     "andromeda_origins:nereid/primary",
     "andromeda_origins:nereid/secondary",
     "andromeda_origins:nereid/figura",

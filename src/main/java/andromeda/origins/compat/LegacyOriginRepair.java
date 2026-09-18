@@ -57,6 +57,12 @@ public final class LegacyOriginRepair {
     public static Result repair(ServerPlayerEntity player) {
         try {
             Set<Identifier> selectedOrigins = getSelectedOrigins(player);
+            if (selectedOrigins.isEmpty()) {
+                LOGGER.warn("Refusing legacy Origin cleanup for {} because the current Origin selection could not be resolved safely.",
+                    player.getGameProfile().getName());
+                return new Result(0, 0, 0, false, false);
+            }
+
             ReflectionBridge bridge = ReflectionBridge.create(player);
             if (bridge == null) {
                 LOGGER.warn("Could not access Apoli power data for {}; legacy Origin cleanup was skipped.",

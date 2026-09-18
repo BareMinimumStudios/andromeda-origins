@@ -1,6 +1,8 @@
 {
   "powers": [
     "andromeda_origins:champion/siren_passives",
+    "andromeda_origins:common/aquatic_origin",
+    "andromeda_origins:siren/aquatic_traits",
     "andromeda_origins:common/champion",
     "andromeda_origins:common/champion_cooldowns",
     "andromeda_origins:siren/primary",

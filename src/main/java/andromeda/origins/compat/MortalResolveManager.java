@@ -34,18 +34,8 @@ public final class MortalResolveManager {
 
     public static void register() {
         ServerTickEvents.END_SERVER_TICK.register(server -> {
-            // If the server was restarted during a final stand, the vanilla command tag survives.
-            // Re-arm the timer for online tagged players rather than silently dropping the state.
-            for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
-                if (player.getCommandTags().contains(ACTIVE_TAG) && !ACTIVE.containsKey(player.getUuid())) {
-                    ACTIVE.put(player.getUuid(), DURATION_TICKS);
-                }
-                if (player.getCommandTags().contains(CHAMPION_ACTIVE_TAG)
-                    && !CHAMPION_ACTIVE.containsKey(player.getUuid())) {
-                    CHAMPION_ACTIVE.put(player.getUuid(), DURATION_TICKS);
-                }
-            }
-
+            // Only active final-stand entries are visited here. Restart recovery is handled by the
+            // player-join event below, avoiding an all-online-player scan every server tick.
             Iterator<Map.Entry<UUID, Integer>> iterator = ACTIVE.entrySet().iterator();
             while (iterator.hasNext()) {
                 Map.Entry<UUID, Integer> entry = iterator.next();
@@ -190,7 +180,20 @@ public final class MortalResolveManager {
                 player.removeCommandTag(FINAL_DEATH_PENDING_TAG);
                 stop(player);
                 IncapacitatedCompat.restorePostMortalResolveState(player);
-            } else if (!isActive(player)) {
+                return;
+            }
+
+            // Command tags survive a normal server restart while the in-memory timer maps do not.
+            // Re-arm only this joining player instead of scanning every online player every tick.
+            if (player.getCommandTags().contains(ACTIVE_TAG) && !ACTIVE.containsKey(player.getUuid())) {
+                ACTIVE.put(player.getUuid(), DURATION_TICKS);
+            }
+            if (player.getCommandTags().contains(CHAMPION_ACTIVE_TAG)
+                && !CHAMPION_ACTIVE.containsKey(player.getUuid())) {
+                CHAMPION_ACTIVE.put(player.getUuid(), DURATION_TICKS);
+            }
+
+            if (!isActive(player)) {
                 IncapacitatedCompat.repairUnlimitedDownCounter(player);
             }
         });

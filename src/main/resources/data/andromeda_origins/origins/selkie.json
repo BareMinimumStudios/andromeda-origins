@@ -1,6 +1,8 @@
 {
   "powers": [
     "andromeda_origins:selkie/passives",
+    "andromeda_origins:common/aquatic_origin",
+    "andromeda_origins:selkie/aquatic_traits",
     "andromeda_origins:selkie/primary",
     "andromeda_origins:selkie/secondary",
     "andromeda_origins:common/diet_pescatarian",

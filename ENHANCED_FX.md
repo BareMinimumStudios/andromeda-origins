@@ -1,6 +1,6 @@
 # Optional Enhanced Origin FX
 
-**Current state: v1.4.74.** This layer lets Andromeda Origins use Spell Engine and More RPG Library particles/sounds when those mods are installed, while keeping the base mod fully functional without them.
+**Current state: v1.4.75.** This layer lets Andromeda Origins use Spell Engine and More RPG Library particles/sounds when those mods are installed, while keeping the base mod fully functional without them.
 
 ## v1.4.72 Wyverian camera-clear pass
 

@@ -2,6 +2,7 @@ package andromeda.origins;
 
 import andromeda.origins.command.AndromedaOriginsCommands;
 import andromeda.origins.compat.MortalResolveManager;
+import andromeda.origins.compat.AndromedaPowerIntegrity;
 import andromeda.origins.compat.IronWeaknessMigration;
 import andromeda.origins.compat.NereidGillsMigration;
 import andromeda.origins.compat.NereidMarkMigration;
@@ -49,6 +50,7 @@ public final class AndromedaOrigins implements ModInitializer {
         MortalResolveManager.register();
         IronWeaknessMigration.register();
         NereidGillsMigration.register();
+        AndromedaPowerIntegrity.register();
         NereidMarkMigration.register();
         SelkieRetaliationMigration.register();
         FiguraCompatManager.register();

@@ -1,3 +1,30 @@
+# v1.4.75
+
+## Aquatic hydration / breathing reliability
+- Standard Nereid gills are now the hidden direct power `andromeda_origins:nereid/gills`, owned by the selected Nereid Origin rather than temporary `merlingplus` / `merlingminus` ownership. Datapack reloads, callback ordering, or generic state cleanup can no longer permanently remove the racial land-suffocation mechanic.
+- Nereid breathing reconciliation runs after Origins finishes synchronizing Origin layers and fails closed when selection data is unresolved. Existing Nereids missing gills or current passive children are repaired automatically without requiring an Origin reselect.
+- Nereid stored Wet hydration is session-scoped: logout/reconnect clears the previous session's stored Nereid Wet before normal breathing reconciliation, while `/reload` and `/andromedaorigins repair` do not erase legitimate live hydration.
+- Natural water and rain now **rebuild the Nereid stored Wet bar**. If the bar has fully expired, entering water/rain recreates it; while hydrated it refills by **1 second per second** up to the existing 90-second cap, and while dry it drains by 1 second per second.
+- `waterstrong` no longer owns air restoration. Standard Nereid air is restored only from live water, rain, or valid Wet hydration, preventing stale resistance state from creating infinite land oxygen.
+- Selkie stored wetness now refills by **2 seconds per second** in water/rain instead of 1, while still draining by 1 second per second while dry. Fully dried Selkies still use the existing 30-second deep-water/submerged recovery path; the faster refill does not bypass that weakness.
+- Added hidden Origin-owned aquatic fallback traits and an explicit `andromeda_origins:common/aquatic_origin` marker for standard/Champion Nereid, Selkie, and Siren. Core aquatic behavior now survives loss of the old one-shot helper-granted Origins powers.
+- Hardened Nereid Submersion aquatic immunity. The JSON branch recognizes the direct aquatic marker, and the server drowning hook independently rejects Andromeda aquatic Origins or any target with an Origins `WaterBreathingPowerType`.
+
+## General state-integrity hardening
+- Added a one-shot post-Origin-sync integrity pass for all Andromeda Origins. Missing current root powers and `multiple` children are restored without resetting already-valid resources; obsolete members owned specifically by the selected Origin source are removed.
+- The same integrity verification runs after respawn and through `/andromedaorigins repair`. Unresolved Origin selections fail closed and are never used for destructive cleanup.
+- Shared `Wet`, `Petrified`, `Restrained`, `Silenced`, `Pacified`, `Unstoppable`, and `Undetectable` state is re-derived from the helpers/resources that actually provide it instead of trusting stale source counters.
+- When a shared status has no real providers, its source counter is now explicitly normalized back to **0** as well as removing the shared power, preventing an old positive counter from contaminating the next application.
+- Andromeda Origin compatibility/Figura command tags are reasserted from the selected Origin after sync so datapack reloads cannot leave them missing.
+
+## Optimization / safety
+- No recurring world/entity integrity scan was added. Reconciliation runs only on Origin datapack sync/join, respawn, and manual repair.
+- Aquatic fallback attribute polling was reduced from 4×/second to **1×/second**; it only needs to notice fallback/enchantment changes.
+- Hostile Submersion now performs its reflective Apoli/debuff/aquatic validation once at tick start instead of repeating the same component scans again at tick end.
+- Mortal Resolve restart recovery now re-arms only the joining tagged player; the server no longer scans the entire online player list every tick just to detect restart-persisted final-stand tags.
+- Static lifecycle auditing confirms player-facing temporary Andromeda helper grants retain a matching revoke/expiry path; helper-entity-only projectile/web powers remain intentionally entity-scoped.
+- Client/server exact-version safety requires **v1.4.75** on both sides.
+
 # v1.4.74
 
 - Fixed a client crash introduced by the v1.4.73 Arachne cobweb shift-click duplication guard.

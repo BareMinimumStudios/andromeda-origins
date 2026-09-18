@@ -5,6 +5,7 @@ import andromeda.origins.compat.EnhancedFxConfig;
 import andromeda.origins.compat.IncapacitatedCompat;
 import andromeda.origins.compat.MortalResolveManager;
 import andromeda.origins.compat.OriginAttributeRepair;
+import andromeda.origins.compat.AndromedaPowerIntegrity;
 import andromeda.origins.compat.IronWeaknessMigration;
 import andromeda.origins.compat.LegacyOriginRepair;
 import andromeda.origins.compat.NereidGillsMigration;
@@ -196,6 +197,9 @@ public final class AndromedaOriginsCommands {
                             NereidMarkMigration.Result markResult = NereidMarkMigration.migratePlayer(player);
                             SelkieRetaliationMigration.Result retaliationResult = SelkieRetaliationMigration.migratePlayer(player);
                             TransientPowerCleanup.Result transientResult = TransientPowerCleanup.cleanup(player);
+                            // Reconcile after transient cleanup so any shared counters/status parents that were
+                            // intentionally cleared by repair are normalized against the providers that remain.
+                            AndromedaPowerIntegrity.Result integrityResult = AndromedaPowerIntegrity.reconcile(player);
                             OriginAttributeRepair.Result attributeResult = OriginAttributeRepair.repairAttributes(player);
                             IncapacitatedCompat.repairPlayer(player);
                             // Clear stale transient markers if interrupted power lifecycles left them behind.
@@ -212,7 +216,8 @@ public final class AndromedaOriginsCommands {
                             }
 
                             if (!legacyResult.successful() || !migrationResult.successful() || !gillsResult.successful()
-                                || !markResult.successful() || !retaliationResult.successful() || !transientResult.successful()) {
+                                || !integrityResult.successful() || !markResult.successful()
+                                || !retaliationResult.successful() || !transientResult.successful()) {
                                 context.getSource().sendError(Text.literal(
                                     "Andromeda Origins: rebuilt attributes/temporary state for " + player.getName().getString()
                                         + ", but one or more legacy/power migrations could not be completed safely. Check the server log."
@@ -228,8 +233,11 @@ public final class AndromedaOriginsCommands {
                                         + legacyResult.orphanedModifiersRemoved() + " orphaned legacy modifiers cleared, "
                                         + (legacyResult.pehkuiEyeHeightReset() ? "Pixie eye-height reset, " : "")
                                         + migrationResult.powersAdded() + " missing iron-weakness powers restored, "
-                                        + gillsResult.powersAdded() + " Nereid gills restored, "
-                                        + gillsResult.powersRemoved() + " stale Nereid gills cleared, "
+                                        + gillsResult.powersAdded() + " Nereid breathing-state pieces restored, "
+                                        + gillsResult.powersRemoved() + " stale Nereid breathing-state pieces cleared, "
+                                        + integrityResult.powersAdded() + " missing Andromeda power pieces restored, "
+                                        + integrityResult.powersRemoved() + " obsolete/stale Andromeda power pieces cleared, "
+                                        + integrityResult.resourcesCorrected() + " shared state counters corrected, "
                                         + markResult.legacyMarksRemoved() + " indefinite legacy Nereid marks cleared, "
                                         + retaliationResult.legacyPowersRemoved() + " stuck Selkie retaliation states cleared, "
                                         + transientResult.powersRemoved() + " Andromeda transient powers cleared, "
