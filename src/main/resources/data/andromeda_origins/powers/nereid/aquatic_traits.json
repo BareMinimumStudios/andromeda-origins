@@ -1,0 +1,91 @@
+{
+  "type": "origins:multiple",
+  "hidden": true,
+  "aqua_underwater": {
+    "type": "origins:conditioned_attribute",
+    "modifier": {
+      "id": "andromeda_origins:aquatic_fallback_submerged_mining",
+      "attribute": "minecraft:player.submerged_mining_speed",
+      "operation": "add_multiplied_total",
+      "amount": 4.0
+    },
+    "tick_rate": 20,
+    "condition": {
+      "type": "origins:all_of",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "origins:aqua_affinity",
+          "inverted": true
+        },
+        {
+          "type": "origins:enchantment",
+          "enchantment": "minecraft:aqua_affinity",
+          "comparison": "==",
+          "compare_to": 0
+        }
+      ]
+    }
+  },
+  "aqua_ungrounded": {
+    "type": "origins:modify_break_speed",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": 4
+    },
+    "condition": {
+      "type": "origins:all_of",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "origins:aqua_affinity",
+          "inverted": true
+        },
+        {
+          "type": "origins:fluid_height",
+          "fluid": "minecraft:water",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        {
+          "type": "origins:on_block",
+          "inverted": true
+        }
+      ]
+    }
+  },
+  "like_water": {
+    "type": "origins:like_water",
+    "condition": {
+      "type": "origins:power",
+      "power": "origins:like_water",
+      "inverted": true
+    }
+  },
+  "conduit": {
+    "type": "origins:conduit_power_on_land",
+    "condition": {
+      "type": "origins:power",
+      "power": "origins:conduit_power_on_land",
+      "inverted": true
+    }
+  },
+  "air_from_potions": {
+    "type": "origins:action_on_item_use",
+    "condition": {
+      "type": "origins:power",
+      "power": "origins:air_from_potions",
+      "inverted": true
+    },
+    "item_condition": {
+      "type": "origins:ingredient",
+      "ingredient": {
+        "item": "minecraft:potion"
+      }
+    },
+    "entity_action": {
+      "type": "origins:gain_air",
+      "value": 60
+    }
+  }
+}
