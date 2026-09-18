@@ -65,7 +65,7 @@
         {
           "type": "origins:grant_power",
           "power": "*:nereid/helper/whirlpoolstate",
-          "source": "minecraft:state"
+          "source": "andromeda_origins:nereid_submersion_cast"
         }
       ]
     },
@@ -93,9 +93,9 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "§c§lWet:§r§f Counts as being in water."
+      "text": "\u00a7c\u00a7lWet:\u00a7r\u00a7f Counts as being in water."
     }
   ],
   "name": "Submersion",
-  "description": "Press your Secondary Ability key to empower your attacks for 10 seconds. Hits cause creatures to suffocate, become §c§l[Wet]§r, and lose the ability to swim for 5 seconds. Repeated hits extend the effect by 5 seconds, up to 1 minute.\n \nAquatic creatures and players with Water Breathing are immune."
+  "description": "Press your Secondary Ability key to empower your attacks for 10 seconds. Hits apply Submersion for 5 seconds, forcing the target downward and heavily suppressing underwater movement; repeated hits extend the effect by 5 seconds, up to 1 minute.\n \nUnmarked non-aquatic targets also have their air rapidly drained and begin drowning once it is exhausted, whether they are underwater or on land. Aquatic Origins are immune to the air-drain/drowning portion but are still pulled downward. Kelp-marked Selkies and Nereids are also hydrated by each hit through their own native hydration systems. Marked non-aquatic allies remain protected from the hostile effect."
 }

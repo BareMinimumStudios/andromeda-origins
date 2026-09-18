@@ -1,8 +1,8 @@
 # Custom Sound Integration
 
-**Current state: v1.4.72**. The 33 bundled Andromeda SoundEvents remain unchanged. When the optional enhanced-FX layer is active, selected Spell Engine / More RPG Library sounds are mixed underneath the existing Origin audio; they do not replace or re-register Andromeda's custom sounds.
+**Current state: v1.4.73**. The 34 bundled Andromeda SoundEvents remain unchanged. When the optional enhanced-FX layer is active, selected Spell Engine / More RPG Library sounds are mixed underneath the existing Origin audio; they do not replace or re-register Andromeda's custom sounds.
 
-Andromeda Origins registers **33 custom SoundEvents**. Bundled ability audio is stored under `assets/andromeda_origins/sounds/abilities/` and registered in `assets/andromeda_origins/sounds.json`.
+Andromeda Origins registers **34 custom SoundEvents**. Bundled ability audio is stored under `assets/andromeda_origins/sounds/abilities/` and registered in `assets/andromeda_origins/sounds.json`.
 
 ## Optional external sound layers
 
@@ -16,17 +16,17 @@ Examples in v1.4.60 include soul casting/release under Lichling, water release/b
 - Long channel/ambience recordings are marked streamed where appropriate.
 - Important moving/long sounds use guaranteed local playback plus positional copies when needed.
 - Long channel sounds have explicit stop cleanup so movement/release does not leave stale audio behind.
-- Vanilla Minecraft accent layers are not counted among the 33 custom SoundEvents.
+- Vanilla Minecraft accent layers are not counted among the 34 custom SoundEvents.
 
 ## Current behavior notes
 
 - **Faerie:** Allay/Vex accents are vanilla Minecraft sounds layered after the custom fae chime.
-- **Fenrkin:** successful Mark of Fenrir gives the marker and target their own audible marked cue.
+- **Fenrkin:** successful Mark of Fenrir gives the marker and target their own audible marked cue. Stamina Surge's repeated pant layer is intentionally quiet and rate-limited to once per second so a held movement ability does not dominate voice chat.
 - **Humanity:** Mortal Resolve heartbeat is a short positional pulse replayed from the Human’s current position rather than one static minute-long bed.
-- **Lichling:** Chimes of Necros plays while channeling and is explicitly stopped when the channel ends; the Final Bell Toll now plays at the **end of the ability**, not on initial Doom application.
+- **Lichling:** Chimes of Necros plays while channeling and is explicitly stopped when the channel ends; the Final Bell Toll now plays at the **end of the ability**, not on initial Doom application. The long screech/channel/final-bell layers use a reduced v1.4.73 mix for voice-chat clarity.
 - **Manticore:** Ravenous Lunge uses one activation roar and one end-of-lunge roar; there is no repeating airborne roar loop. Collision impacts have their own cue. Champion Bloodrift reuses the Manticore roar immediately after reappearance.
-- **Nereid:** Convalescing Aura has local/positional playback and end-of-channel stop cleanup.
-- **Siren:** Infatuation long audio begins only on successful targeting; the target whisper stops if Infatuation ends early. Shrieking Wail victim impact is intentionally mixed louder than earlier builds.
+- **Nereid:** Convalescing Aura has local/positional playback and end-of-channel stop cleanup. Its 15.7-second bed is deliberately mixed below short impact cues in v1.4.73.
+- **Siren:** Infatuation long audio begins only on successful targeting; the target whisper stops if Infatuation ends early. The 15-second charm/whisper beds are reduced in v1.4.73, while the short Shrieking Wail victim impact remains intentionally punchy.
 - **Satyr:** ordinary foot contact uses vanilla horse-step/clop audio; the custom landing sound is reserved for Satyr’s Landing.
 
 ## Registered custom sounds

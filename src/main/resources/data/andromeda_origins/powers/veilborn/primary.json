@@ -280,26 +280,13 @@
                   }
                 },
                 {
+                  "type": "origins:execute_command",
+                  "command": "andromedaorigins internal_veil_transposition"
+                },
+                {
                   "type": "origins:grant_power",
                   "power": "*:veilborn/helper/warp2",
                   "source": "minecraft:state"
-                },
-                {
-                  "type": "origins:delay",
-                  "ticks": 2,
-                  "action": {
-                    "type": "origins:and",
-                    "actions": [
-                      {
-                        "type": "origins:execute_command",
-                        "command": "kill @e[tag=origin]"
-                      },
-                      {
-                        "type": "origins:execute_command",
-                        "command": "kill @e[tag=destination]"
-                      }
-                    ]
-                  }
                 },
                 {
                   "type": "origins:spawn_particles",

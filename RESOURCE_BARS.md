@@ -1,6 +1,6 @@
 # Custom Resource Bars
 
-**Current release: v1.4.72.** The authoritative HUD mapping remains **25 styles on sheet 1 + 6 styles on sheet 2**. Champion Veilborn reuses the existing Auroral Mirage cooldown bar for its 5-second cooldown; sprite indices are unchanged.
+**Current release: v1.4.73.** The authoritative HUD mapping remains **25 styles on sheet 1 + 6 styles on sheet 2**. Champion Veilborn reuses the existing Auroral Mirage cooldown bar for its 5-second cooldown; sprite indices are unchanged.
 
 Andromeda Origins uses two 256×256 Origins HUD sprite sheets and a global **01–31** art catalog. The global style number is for documentation; Origins itself uses zero-based `bar_index` values within each individual sheet.
 

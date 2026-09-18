@@ -212,6 +212,10 @@
                     },
                     "comparison": ">",
                     "compare_to": 0
+                  },
+                  {
+                    "type": "origins:riding",
+                    "inverted": true
                   }
                 ]
               },
@@ -261,6 +265,9 @@
                         },
                         "comparison": "==",
                         "compare_to": 0
+                      },
+                      {
+                        "type": "origins:riding"
                       }
                     ]
                   }

@@ -1,6 +1,6 @@
 # Champion Origins
 
-**Current release: v1.4.72.** Champion variants retain the normal Origin abilities and strengths while removing racial weaknesses/self-debuffs. Player-facing ability cooldowns recover at twice the standard rate while charge times, resource costs, and internal mechanical cadence remain unchanged. Champion Veilborn Auroral Mirage is a deliberate exception with a fixed 5-second cooldown.
+**Current release: v1.4.73.** Champion variants retain the normal Origin abilities and strengths while removing racial weaknesses/self-debuffs. Player-facing ability cooldowns recover at twice the standard rate while charge times, resource costs, and internal mechanical cadence remain unchanged. Champion Veilborn Auroral Mirage is a deliberate exception with a fixed 5-second cooldown.
 
 Champion Origins are administrative variants of all 13 standard Andromeda Origins. They keep the Origin's identity-defining strengths and active abilities while removing racial weaknesses and clear self-debuffs.
 

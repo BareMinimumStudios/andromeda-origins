@@ -1,3 +1,61 @@
+# v1.4.73
+- Fixed Faerie passive concealment activating or remaining active while riding boats/vehicles; riding now immediately disqualifies environmental stealth.
+
+## Full cleanup / regression audit
+- Fixed Nereid Convalescing Aura's charge-3 release heal being unreachable because the charge table accidentally contained two charge-2 branches. Release healing now progresses cleanly from 1 through 10.
+- Fixed Selkie retaliation being granted under `minecraft:state` while its expiry attempted to revoke `minecraft:debuff`, which could leave the victim with a permanent -20% damage / -15% swim-speed debuff. New retaliation uses the correct debuff source, old player residue is cleared on join/repair, and old state-owned instances on other living entities self-clean.
+- Replaced the legacy `common/debug` Origin-loss reset that revoked **all** powers from generic Apoli sources with an Andromeda-only transient cleanup. Changing away from an Andromeda Origin can no longer erase unrelated temporary powers owned by other Origins/addons that happen to use `minecraft:state`, `minecraft:buff`, `minecraft:debuff`, or `minecraft:ccontrol`.
+- Reworked Veil Transposition to swap positions atomically through Andromeda code instead of shared `origin` / `destination` marker entities and global `kill @e[...]` cleanup. Concurrent Veilborn casts can no longer delete or steal each other's markers; the old warp helpers remain cosmetic-only for their teleport sounds/particles.
+- Removed three empty Exposure-family iron compatibility tag files and their aggregate references after those items were intentionally removed from iron weakness.
+- Corrected the root resource-pack description left over from the old Cogwork project.
+- Removed an obsolete Siren Shrieking Wail cleanup command that searched for and killed `shriek`-tagged armor stands even though the current ability no longer creates those entities; this removes dead logic and avoids touching similarly tagged entities from other content.
+- Full static reachability audit found all 189 power JSON files in use, no orphan Java classes, no unused custom sound assets, no broken internal item-tag references, no duplicate `if_else` branches, and no remaining self-revoke/source mismatches. `andromeda_origins:food/placeable` is currently unused internally but is retained as a compatibility/public datapack tag rather than removed blindly.
+
+## Nereid ally mark duration
+- Nereid's kelp ally mark now lasts **15 seconds** instead of persisting indefinitely. Hitting an already marked target with kelp refreshes the timer back to 15 seconds.
+- Timed marks now use the dedicated `andromeda_origins:nereid_mark` source rather than generic `minecraft:state`, preventing unrelated temporary-state cleanup from owning/revoking the mark.
+- Players carrying the old indefinite `minecraft:state` mark are cleaned once on join; `/andromedaorigins repair <player>` performs the same legacy-mark cleanup for an already-online player. Aura healing/hydration and Submersion ally handling continue to respect the mark only while it is active.
+
+## Iron weakness tag cleanup
+- Removed 26 non-iron/poor-fit compatibility items from the shared `andromeda_origins:iron/alliron` classification. This applies consistently to every standard Origin that uses Andromeda's common iron weakness.
+- Removed the requested **diamond** Magistu Armory / Simply More / Simply Swords equipment from iron weakness; their iron/steel counterparts remain classified normally.
+- Removed Exposure, Exposure Expanded, and Exposure Space camera/film/analyzer utility items from iron weakness so leisure/photography equipment no longer triggers the racial penalty.
+
+## Nereid land-suffocation reliability
+- Fixed standard Nereid players occasionally becoming able to breathe normally on land because their intrinsic `origins:water_breathing` gill power had been removed or failed to persist. Origins uses that power to drain a Merling-style air bar on land; if the power is missing, land suffocation cannot run at all.
+- Standard Nereid gills are now granted from the dedicated `andromeda_origins:nereid_gills` source instead of the generic `minecraft:state` source. Origin removal still cleans both the new source and the legacy source so old saves cannot leave gills behind after changing Origin.
+- Existing standard Nereids are reconciled once on join. If the dedicated gill source is missing, it is restored and Apoli is synced only when a change was necessary. Non-Nereids/Champion Nereids have any stale Andromeda gill source removed.
+- `/andromedaorigins repair <player>` now runs the same Nereid gill reconciliation before the existing attribute/temporary-state repair, allowing already-online affected players to be fixed without reselecting their Origin.
+- Updated the Nereid passive description to explicitly state that dry land consumes air and will eventually cause suffocation unless water, rain, or stored Wet hydration restores the air supply.
+
+## Nereid ally hydration / Submersion
+- Convalescing Aura now applies hydration only to kelp-marked allies, matching the same mark requirement used for ally healing. Unmarked bystanders no longer receive Wet from the support aura.
+- Marked standard Selkies receive Aura hydration through their native stored-wetness / dry-recovery resources instead of a duplicate Nereid Wet timer.
+- Reworked Submersion so the sink effect no longer uses Apoli `ignore_water`. Targets remain in real water physics, are pulled downward every tick, have swim speed reduced by 95%, underwater movement speed reduced by 85%, and cannot jump/swim back up normally. This prevents affected players from simply running around on the ocean floor.
+- Unmarked non-aquatic targets now receive real forced air loss while Submersion is active. Their air is drained rapidly and, once exhausted, they take normal drowning damage once per second whether physically underwater or on land. The hostile air-drain path no longer depends on the target's Wet state or on temporarily granting Origins gills, removing the self-cancelling Wet/gill interaction.
+- Aquatic/Water-Breathing Origins are immune to the forced air-drain/drowning portion but are still affected by the downward sink and movement suppression.
+- Kelp-marked Selkies and Nereids are still sunk like other aquatic targets, but also receive 5 seconds of their own native hydration per hit; marked non-aquatic allies remain protected from the hostile effect.
+- Corrected the first Submersion application to the advertised 5 seconds. Repeated hits extend it by another 5 seconds, up to the existing 60-second cap.
+
+## Audio mix / voice-chat clarity
+- Reduced long-duration/channel audio so it does not dominate voice chat: Nereid Convalescing Aura, Lichling Chimes/Screech/Final Bell, and Siren Infatuation charm/whisper now play substantially quieter. Short impact/roar cues such as Manticore's momentary roars remain intentionally punchy.
+- Fenrkin Stamina Surge panting now plays once per second instead of twice per second and at much lower volume while the ability is held.
+
+## Arachne crafting safety
+- Added a server-authoritative shift-click guard for Arachne's 2-string -> 1-cobweb power recipe in both the 2x2 player crafting grid and 3x3 crafting table. Normal crafting remains available, but shift-clicking the power recipe is blocked to prevent the Apoli pre.2 quick-move duplication exploit.
+
+## Repair / legacy Origin cleanup
+- `/andromedaorigins repair <player>` now removes stale power sources belonging to previously selected Origins that are no longer selected, including Medieval Origins (`medievalorigins:*`) sources. Because Origins uses the Origin ID as the grant source, this also removes vanilla powers such as `origins:carnivore` / `origins:vegetarian` when they were left behind by an old Medieval Origin.
+- Repair also clears orphaned `medievalorigins:*` attribute modifiers across the player's custom attribute instances, covering old Pixie/Fae size, max-health, movement, hitbox, block-speed and similar attribute residue even when the old power is no longer present.
+- If Pehkui is installed, repair resets Medieval Pixie's known `pehkui:eye_height` command scale only when Pixie residue is positively detected from a stale Pixie source/power/modifier; unrelated Pehkui scales are left alone. The stale `siren_seduce` command tag from Medieval Origins is also cleared.
+- The legacy cleanup skips a player who is currently selected into a Medieval Origin, preventing the repair command from deleting a legitimately active legacy Origin.
+
+## Regression scope
+- Fixed Selkie `merlingplus` / `merlingminus` cleanup callbacks that incorrectly referenced Nereid helper IDs; the callbacks now revoke their own Selkie helper powers.
+- Audited explicit Andromeda power/resource references after the change; all resolvable references point to existing power files/subpowers.
+- Nereid dry penalties, Champion Nereid weakness exemptions, and all v1.4.70-v1.4.72 fixes are otherwise unchanged.
+- The new gill migration is a one-shot join/repair check; it adds no recurring tick scan.
+
 # v1.4.72
 
 ## Wyverian first-person VFX cleanup
@@ -50,8 +108,9 @@
 # v1.4.68
 
 ## Siren carnivore enforcement
-- Standard **Siren** now uses a dedicated strict carnivore rule instead of the shared diet-exemption set. Non-meat foods such as golden apples and golden carrots are no longer valid Siren food.
-- Actual beverages and potion-style consumables remain usable through a Siren-specific drink exemption tag, so the diet change does not block normal drinks.
+- Standard **Siren** keeps its dedicated carnivore rule, but now correctly respects the shared `origins:ignore_diet` / `origins:exclude_diet` exemption path in addition to `andromeda_origins:siren_diet_drinks`. Items deliberately marked diet-exempt are usable even when they are not meat or present in the Siren drink list.
+- Actual beverages and potion-style consumables remain usable through the Siren-specific drink exemption tag.
+- Standard Siren's global damage-taken vulnerability was reduced from **+20% to +10%**. Iron-weapon vulnerability remains an additional +20%.
 - Champion Siren remains unchanged and retains the established Champion exemption from racial diet restrictions.
 
 ## Fenrkin Origin Toggle isolation

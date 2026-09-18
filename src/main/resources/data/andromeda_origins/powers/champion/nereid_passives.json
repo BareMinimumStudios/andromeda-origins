@@ -102,14 +102,30 @@
         "power": "*:nereid/helper/seafriend"
       },
       "if_action": {
-        "type": "origins:revoke_power",
-        "power": "*:nereid/helper/seafriend",
-        "source": "minecraft:state"
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:grant_power",
+            "power": "*:nereid/helper/seafriend",
+            "source": "andromeda_origins:nereid_mark"
+          },
+          {
+            "type": "origins:revoke_power",
+            "power": "*:nereid/helper/seafriend",
+            "source": "minecraft:state"
+          },
+          {
+            "type": "origins:change_resource",
+            "resource": "*:nereid/helper/seafriend_remove",
+            "change": 15,
+            "operation": "set"
+          }
+        ]
       },
       "else_action": {
         "type": "origins:grant_power",
         "power": "*:nereid/helper/seafriend",
-        "source": "minecraft:state"
+        "source": "andromeda_origins:nereid_mark"
       }
     },
     "condition": {

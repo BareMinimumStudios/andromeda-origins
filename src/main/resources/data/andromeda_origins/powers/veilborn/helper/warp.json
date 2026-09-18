@@ -6,14 +6,6 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "summon minecraft:marker ~ ~ ~ {Tags:[destination]}"
-        },
-        {
-          "type": "origins:execute_command",
-          "command": "tp @s @e[tag=origin,sort=nearest,limit=1]"
-        },
-        {
           "type": "origins:play_sound",
           "sound": "minecraft:entity.enderman.teleport",
           "volume": 1,

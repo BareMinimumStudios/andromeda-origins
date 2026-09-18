@@ -25,7 +25,7 @@
       },
       {
         "type": "origins:revoke_power",
-        "power": "*:nereid/helper/merlingplus",
+        "power": "*:selkie/helper/merlingplus",
         "source": "minecraft:state"
       }
     ]

@@ -6,6 +6,11 @@
       {
         "type": "origins:revoke_power",
         "power": "origins:water_breathing",
+        "source": "andromeda_origins:nereid_gills"
+      },
+      {
+        "type": "origins:revoke_power",
+        "power": "origins:water_breathing",
         "source": "minecraft:state"
       },
       {

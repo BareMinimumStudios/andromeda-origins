@@ -78,7 +78,7 @@
             "actions": [
               {
                 "type": "origins:execute_command",
-                "command": "playsound andromeda_origins:ability.siren.infatuation_charm master @s ~ ~ ~ 1.20 1.0 1.0"
+                "command": "playsound andromeda_origins:ability.siren.infatuation_charm master @s ~ ~ ~ 0.60 1.0 1.0"
               },
               {
                 "type": "origins:execute_command",
@@ -86,7 +86,7 @@
               },
               {
                 "type": "origins:execute_command",
-                "command": "playsound andromeda_origins:ability.siren.infatuation_charm player @a[distance=0.1..36] ~ ~ ~ 0.95 1.0 0"
+                "command": "playsound andromeda_origins:ability.siren.infatuation_charm player @a[distance=0.1..36] ~ ~ ~ 0.40 1.0 0"
               },
               {
                 "type": "origins:spawn_particles",
@@ -242,11 +242,11 @@
                 },
                 {
                   "type": "origins:execute_command",
-                  "command": "playsound andromeda_origins:ability.siren.infatuation_whisper master @s ~ ~ ~ 1.20 1.0 1.0"
+                  "command": "playsound andromeda_origins:ability.siren.infatuation_whisper master @s ~ ~ ~ 0.60 1.0 1.0"
                 },
                 {
                   "type": "origins:execute_command",
-                  "command": "playsound andromeda_origins:ability.siren.infatuation_whisper player @a[distance=0.1..32] ~ ~ ~ 0.95 1.0 0"
+                  "command": "playsound andromeda_origins:ability.siren.infatuation_whisper player @a[distance=0.1..32] ~ ~ ~ 0.40 1.0 0"
                 },
                 {
                   "type": "origins:spawn_particles",

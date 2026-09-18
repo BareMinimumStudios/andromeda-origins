@@ -107,7 +107,7 @@
     "type": "origins:modify_damage_taken",
     "modifier": {
       "operation": "multiply_total_multiplicative",
-      "amount": 0.2
+      "amount": 0.1
     }
   },
   "toggle": {
@@ -152,11 +152,11 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
-      "text": "§e§lDamage Resistances:§r§f None.\n \n§c§lDamage Vulnerabilities:§r§f All damage (+20%); iron weapons deal an additional +20%.\n \n§e§lEffect Immunities:§r§f None."
+      "text": "§e§lDamage Resistances:§r§f None.\n \n§c§lDamage Vulnerabilities:§r§f All damage (+10%); iron weapons deal an additional +20%.\n \n§e§lEffect Immunities:§r§f None."
     }
   ],
   "name": "Passive Features",
-  "description": "§e§lStats:§r\n+25% Swim Speed\n-10% Damage Dealt\n+20% Damage Taken\n \n§e§lFeatures:§r\n- Your creature type is Aquatic.\n- You can breathe both air and water and can act in water as though you were on land.\n- You see 75% better in darkness and have perfect underwater vision. Toggleable.\n- You are permanently affected by Haste I.\n- Fire does not extinguish on its own.\n- Iron weapons deal an additional 20% damage to you and inflict Wither I.\n- You are a Carnivore.",
+  "description": "§e§lStats:§r\n+25% Swim Speed\n-10% Damage Dealt\n+10% Damage Taken\n \n§e§lFeatures:§r\n- Your creature type is Aquatic.\n- You can breathe both air and water and can act in water as though you were on land.\n- You see 75% better in darkness and have perfect underwater vision. Toggleable.\n- You are permanently affected by Haste I.\n- Fire does not extinguish on its own.\n- Iron weapons deal an additional 20% damage to you and inflict Wither I.\n- You are a Carnivore.",
   "infatuation_guard": {
     "type": "origins:invulnerability",
     "damage_condition": {

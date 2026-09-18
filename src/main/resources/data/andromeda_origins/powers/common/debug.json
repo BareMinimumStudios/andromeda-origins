@@ -4,19 +4,12 @@
     "type": "origins:and",
     "actions": [
       {
-        "type": "origins:revoke_all_powers",
-        "source": "minecraft:buff"
+        "type": "origins:execute_command",
+        "command": "andromedaorigins internal_clear_transient_powers"
       },
       {
-        "type": "origins:revoke_all_powers",
-        "source": "minecraft:debuff"
-      },
-      {
-        "type": "origins:revoke_all_powers",
-        "source": "minecraft:ccontrol"
-      },
-      {
-        "type": "origins:revoke_all_powers",
+        "type": "origins:revoke_power",
+        "power": "*:*",
         "source": "minecraft:state"
       }
     ]

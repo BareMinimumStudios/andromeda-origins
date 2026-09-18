@@ -10,9 +10,19 @@
       "bar_index": 21
     },
     "min_action": {
-      "type": "origins:revoke_power",
-      "power": "*:*",
-      "source": "minecraft:debuff"
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:revoke_power",
+          "power": "*:*",
+          "source": "minecraft:debuff"
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:*",
+          "source": "minecraft:state"
+        }
+      ]
     }
   },
   "timer": {
@@ -38,6 +48,15 @@
       "id": "*:*",
       "operation": "add_multiplied_total",
       "amount": -0.15
+    }
+  },
+  "legacy_source_cleanup": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "minecraft:state"
     }
   }
 }

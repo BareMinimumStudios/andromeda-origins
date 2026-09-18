@@ -2,38 +2,6 @@
   "replace": false,
   "values": [
     {
-      "id": "simplymore:diamond_backhand_blade",
-      "required": false
-    },
-    {
-      "id": "simplymore:diamond_dagger",
-      "required": false
-    },
-    {
-      "id": "simplymore:diamond_deer_horns",
-      "required": false
-    },
-    {
-      "id": "simplymore:diamond_grantsword",
-      "required": false
-    },
-    {
-      "id": "simplymore:diamond_great_katana",
-      "required": false
-    },
-    {
-      "id": "simplymore:diamond_khopesh",
-      "required": false
-    },
-    {
-      "id": "simplymore:diamond_lance",
-      "required": false
-    },
-    {
-      "id": "simplymore:diamond_pernach",
-      "required": false
-    },
-    {
       "id": "simplymore:gold_backhand_blade",
       "required": false
     },

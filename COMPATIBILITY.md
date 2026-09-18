@@ -1,7 +1,22 @@
 # Andromeda Origins — Compatibility & State Safety
 
-This document describes the compatibility and state-safety behavior in **v1.4.72**. Optional Spell Engine / More RPG Library audiovisual compatibility remains additive. v1.4.72 only adjusts Wyverian particle placement/lifetime; the v1.4.70 iron migration and v1.4.71 Arachne/Humanity guards remain intact.
+This document describes the compatibility and state-safety behavior in **v1.4.73**. Optional Spell Engine / More RPG Library audiovisual compatibility remains additive. v1.4.73 isolates standard Nereid gills from temporary `minecraft:state` power lifecycles and automatically repairs missing gills on join; the v1.4.70 iron migration, v1.4.71 Arachne/Humanity guards, and v1.4.72 Wyverian VFX cleanup remain intact.
 
+
+
+### v1.4.73 state / concurrent-cast safety
+
+- Veil Transposition no longer creates globally tagged `origin` / `destination` marker entities. The successful 32-block raycast now performs an atomic actor/target position exchange, preventing simultaneous Veilborn casts from selecting or deleting each other's temporary markers. Existing warp helpers are retained only for cosmetic teleport feedback.
+- The old `common/debug` Origin-loss callback no longer calls broad `revoke_all_powers` operations on generic Apoli sources. It invokes an Andromeda namespace-scoped transient cleanup instead, avoiding collateral state removal from other Origins addons.
+- Selkie retaliation now uses the same `minecraft:debuff` source for grant and expiry. A one-shot player migration plus a helper-side legacy cleanup removes old stuck `minecraft:state` ownership.
+
+### v1.4.73 legacy Origin repair hardening
+
+- `/andromedaorigins repair <player>` removes power ownership from registered Origin sources the player no longer has selected and explicitly recognizes `medievalorigins:*` sources even if Medieval Origins is no longer registered.
+- Loaded `medievalorigins:*` helper powers and Medieval-owned `origins:carnivore` / `origins:vegetarian` sources are removed when stale, while ownership from a currently selected Origin is preserved.
+- Orphaned `medievalorigins:*` attribute modifiers are removed across every instantiated player attribute before Andromeda rebuilds the current Origin's attributes. This covers Medieval size/health/movement/hitbox modifiers instead of resetting unrelated modded attributes wholesale.
+- Pehkui `eye_height` is reset only when Medieval Pixie residue is positively detected and Pehkui is present. Legacy cleanup is manual through `/repair`; it does not run as a recurring join/tick scan.
+- Nereid ally marks are now timed for 15 seconds and use the dedicated `andromeda_origins:nereid_mark` source; old indefinite player marks from `minecraft:state` are removed on join/repair. Nereid Aura/Submersion hydration is kelp-mark-gated and restricted to standard Selkie/Nereid hydration systems. Marked non-aquatic allies are protected from hostile Submersion; aquatic targets remain immune to forced drowning but are still subject to Submersion's sink/movement suppression. No fake hydration state is applied to Sirens or other aquatic Origins.
 
 ### v1.4.71 Arachne collision / Humanity finality guards
 
@@ -181,7 +196,11 @@ Andromeda Origins uses Fabric's login-query networking stage to require an exact
 
 The command is intended for interrupted/broken current-state recovery. Before the existing state cleanup, it rebuilds the raw player attributes Andromeda currently manages (`max_health`, `movement_speed`, `scale`, `step_height`, `armor`, `armor_toughness`, `knockback_resistance`, and `attack_speed`) from Minecraft's clean player defaults, removes/re-applies the currently granted Apoli `AttributeModifying` powers, and then heals to the newly reconstructed maximum health. The effective result is the clean player base plus the currently selected Origin/Champion modifiers, not a vanilla-player final stat line. It does **not** re-run `/origin set`, so selection callbacks, cooldowns, resources, and active timers are preserved.
 
-The full repair then clears known temporary Andromeda control states/source counters, removes a stale `andromeda_undetectable` marker if present, invokes Incapacitated repair behavior when available, repairs a stale negative unlimited-down counter, and resets Incapacitated transient damage tracking. A legitimately active Undetectable power reasserts its marker on the next one-second sync.
+Before rebuilding Andromeda attributes, the full repair now also reconciles stale **Origin-owned Apoli sources**. Any registered Origin source that is no longer selected is removed, and the retired `medievalorigins:` namespace is recognized even when Medieval Origins is no longer installed. Because Origins uses the Origin ID as the power source, this also cleans vanilla powers such as `origins:carnivore` or `origins:vegetarian` when an old Medieval Origin originally granted them.
+
+For Medieval Origins specifically, repair also removes orphaned `medievalorigins:` attribute modifiers across the player's custom attribute instances, clears its transient `siren_seduce` command tag, and—when Pehkui is installed—resets the `pehkui:eye_height` scale type that Medieval Pixie's mount power could leave altered. Andromeda's normal scale remains native Minecraft scaling; no other Pehkui scale types are reset. This legacy cleanup is **manual-only** through `/andromedaorigins repair` rather than an automatic join migration.
+
+The full repair then clears known temporary Andromeda control states/source counters, removes Andromeda-owned transient powers from the historical generic `minecraft:state` / `buff` / `debuff` / `ccontrol` sources, removes a stale `andromeda_undetectable` marker if present, invokes Incapacitated repair behavior when available, repairs a stale negative unlimited-down counter, and resets Incapacitated transient damage tracking. The transient cleanup is namespace-scoped and no longer revokes unrelated addon powers merely because they share one of those generic source IDs. A legitimately active Undetectable power reasserts its marker on the next one-second sync.
 
 Attribute-only recovery is also available with:
 
@@ -197,7 +216,7 @@ All current Origins, powers, resources, functions, tags, registered icon items, 
 andromeda_origins:
 ```
 
-The project does not ship a migration layer for unsupported prototype namespaces or arbitrary old player NBT.
+Automatic join migrations remain narrowly scoped to known Andromeda state (iron weakness, Nereid gills, legacy indefinite Nereid marks, and the pre-fix Selkie retaliation source). The manual repair command additionally understands stale registered Origin sources plus the retired `medievalorigins:` namespace; it does not attempt to guess arbitrary unrelated player NBT.
 
 ## Incapacitated hard-death notes (v1.4.47)
 

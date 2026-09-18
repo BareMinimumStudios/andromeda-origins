@@ -6,7 +6,13 @@ import andromeda.origins.compat.IncapacitatedCompat;
 import andromeda.origins.compat.MortalResolveManager;
 import andromeda.origins.compat.OriginAttributeRepair;
 import andromeda.origins.compat.IronWeaknessMigration;
+import andromeda.origins.compat.LegacyOriginRepair;
+import andromeda.origins.compat.NereidGillsMigration;
+import andromeda.origins.compat.NereidMarkMigration;
 import andromeda.origins.compat.StatusEffectCompat;
+import andromeda.origins.compat.VeilbornTransposition;
+import andromeda.origins.compat.TransientPowerCleanup;
+import andromeda.origins.compat.SelkieRetaliationMigration;
 import andromeda.origins.compat.UndetectableCompat;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import com.mojang.brigadier.arguments.BoolArgumentType;
@@ -137,6 +143,23 @@ public final class AndromedaOriginsCommands {
                                     () -> Text.literal("Andromeda Origins enhanced sounds=" + value), true);
                                 return 1;
                             }))))
+                .then(literal("internal_clear_transient_powers")
+                    .requires(source -> source.hasPermissionLevel(2))
+                    .executes(context -> {
+                        if (!(context.getSource().getEntity() instanceof ServerPlayerEntity player)) {
+                            return 0;
+                        }
+                        TransientPowerCleanup.Result result = TransientPowerCleanup.cleanup(player);
+                        return result.successful() ? 1 : 0;
+                    }))
+                .then(literal("internal_veil_transposition")
+                    .requires(source -> source.hasPermissionLevel(2))
+                    .executes(context -> {
+                        if (!(context.getSource().getEntity() instanceof ServerPlayerEntity player)) {
+                            return 0;
+                        }
+                        return VeilbornTransposition.transpose(player) ? 1 : 0;
+                    }))
                 .then(literal("internal_mortal_resolve")
                     .requires(source -> source.hasPermissionLevel(2))
                     .executes(context -> {
@@ -167,12 +190,18 @@ public final class AndromedaOriginsCommands {
                     .then(argument("player", EntityArgumentType.player())
                         .executes(context -> {
                             ServerPlayerEntity player = EntityArgumentType.getPlayer(context, "player");
+                            LegacyOriginRepair.Result legacyResult = LegacyOriginRepair.repair(player);
                             IronWeaknessMigration.Result migrationResult = IronWeaknessMigration.migratePlayer(player);
+                            NereidGillsMigration.Result gillsResult = NereidGillsMigration.migratePlayer(player);
+                            NereidMarkMigration.Result markResult = NereidMarkMigration.migratePlayer(player);
+                            SelkieRetaliationMigration.Result retaliationResult = SelkieRetaliationMigration.migratePlayer(player);
+                            TransientPowerCleanup.Result transientResult = TransientPowerCleanup.cleanup(player);
                             OriginAttributeRepair.Result attributeResult = OriginAttributeRepair.repairAttributes(player);
                             IncapacitatedCompat.repairPlayer(player);
-                            // Clear a stale stealth marker if an interrupted power lifecycle left one behind.
-                            // A legitimately active Undetectable power reasserts it on its next one-second sync.
+                            // Clear stale transient markers if interrupted power lifecycles left them behind.
+                            // Legitimately active Undetectable reasserts itself on its next one-second sync.
                             player.removeCommandTag(UndetectableCompat.COMMAND_TAG);
+                            player.removeCommandTag("andromeda_nereid_submersion_drown");
 
                             if (!attributeResult.apoliRebuilt()) {
                                 context.getSource().sendError(Text.literal(
@@ -182,10 +211,11 @@ public final class AndromedaOriginsCommands {
                                 return 0;
                             }
 
-                            if (!migrationResult.successful()) {
+                            if (!legacyResult.successful() || !migrationResult.successful() || !gillsResult.successful()
+                                || !markResult.successful() || !retaliationResult.successful() || !transientResult.successful()) {
                                 context.getSource().sendError(Text.literal(
                                     "Andromeda Origins: rebuilt attributes/temporary state for " + player.getName().getString()
-                                        + ", but the legacy iron-weakness power migration could not be completed safely. Check the server log."
+                                        + ", but one or more legacy/power migrations could not be completed safely. Check the server log."
                                 ));
                                 return 0;
                             }
@@ -193,7 +223,16 @@ public final class AndromedaOriginsCommands {
                             context.getSource().sendFeedback(
                                 () -> Text.literal(
                                     "Andromeda Origins: repaired " + player.getName().getString()
-                                        + " (" + migrationResult.powersAdded() + " missing iron-weakness powers restored, "
+                                        + " (" + legacyResult.staleSourcesRemoved() + " stale Origin sources cleared / "
+                                        + legacyResult.powersRemoved() + " legacy powers removed, "
+                                        + legacyResult.orphanedModifiersRemoved() + " orphaned legacy modifiers cleared, "
+                                        + (legacyResult.pehkuiEyeHeightReset() ? "Pixie eye-height reset, " : "")
+                                        + migrationResult.powersAdded() + " missing iron-weakness powers restored, "
+                                        + gillsResult.powersAdded() + " Nereid gills restored, "
+                                        + gillsResult.powersRemoved() + " stale Nereid gills cleared, "
+                                        + markResult.legacyMarksRemoved() + " indefinite legacy Nereid marks cleared, "
+                                        + retaliationResult.legacyPowersRemoved() + " stuck Selkie retaliation states cleared, "
+                                        + transientResult.powersRemoved() + " Andromeda transient powers cleared, "
                                         + attributeResult.baseAttributesReset() + " bases reset, "
                                         + attributeResult.staleAndromedaModifiersRemoved() + " stale Andromeda modifiers cleared, "
                                         + attributeResult.attributePowersReapplied() + " active attribute powers rebuilt)."

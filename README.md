@@ -4,7 +4,7 @@
 
 ## Current release
 
-**v1.4.72** — Wyverian first-person VFX cleanup. Ember Ray and projectile trails now begin farther ahead of the caster instead of spawning across the camera, long-lived campfire smoke was replaced with short-lived smoke/poof particles, and caster-local flame/smoke bursts were lowered away from eye level. Enhanced Pyroclast/Dragon Charge buildup now swirls from the feet rather than through the camera, with Champion Dragon Charge impact smoke shortened as well. Gameplay, damage, ranges, costs, and v1.4.71 fixes are unchanged.
+**v1.4.73** — Nereid gill-state safety plus support/repair hardening. Standard Nereid land suffocation now uses a dedicated gill source and self-repairs on join; Nereid kelp ally marks now expire after 15 seconds, and Convalescing Aura/Submersion hydrate only currently marked Selkies/Nereids. Submersion now uses real water physics: aquatic targets still sink but are immune to forced drowning, while unmarked non-aquatic targets are sunk, heavily movement-limited, rapidly lose air, and drown once it is exhausted. Long channel sounds were remixed for voice-chat clarity, Arachne cobweb shift-click crafting is guarded against the Apoli pre.2 duplication path, and `/andromedaorigins repair` now cleans stale legacy Origin sources/modifiers such as Medieval Origins Pixie health/size/diet residue before rebuilding the current Andromeda attributes.
 
 ## Features
 
@@ -39,7 +39,7 @@
 | Humanity | Indomitable | Mortal Resolve | Fragile mortal baseline with powerful last-stand tools |
 | Lichling | Death's Defiance | Chimes of Necros | Undead sustain, revival, Doom/Wither channeling |
 | Manticore | Ravenous Lunge | Beast of Blood | Heavy predator melee, pounce, Unstoppable state |
-| Nereid | Convalescing Aura | Submersion | Aquatic support, healing, Wet application |
+| Nereid | Convalescing Aura | Submersion | Aquatic support, marked-ally hydration, sinking and drowning control |
 | Satyr | Rush / Swift Leap / Satyr's Landing | Vigil Perception | Momentum-driven mobility and wind/gust movement |
 | Selkie | Coastal Phalanx / Surging Tides | Sealskin Bastion | Aquatic mobility, wetness management, defensive support |
 | Siren | Infatuation Tempo | Shrieking Wail | Pacification/Silence and sonic crowd control |
@@ -141,7 +141,7 @@ See [RESOURCE_BARS.md](RESOURCE_BARS.md) for the full 31-style assignment table 
 
 ## Custom ability audio
 
-Andromeda Origins currently registers **33 custom SoundEvents** under:
+Andromeda Origins currently registers **34 custom SoundEvents** under:
 
 ```text
 andromeda_origins:ability.*
@@ -204,7 +204,7 @@ See [COMPATIBILITY.md](COMPATIBILITY.md) for the implementation notes.
 /andromedaorigins repair_attributes <player>
 ```
 
-`repair` is the full recovery command. It now rebuilds the player's Andromeda-managed raw attributes and re-applies the currently granted Apoli/Origin attribute powers before performing the existing crowd-control/Incapacitated cleanup. This means an Arachne, Lichling, Champion variant, etc. is repaired back to that Origin's effective stats rather than being left at vanilla-player values. `repair_attributes` runs only the attribute rebuild. Neither command re-selects the Origin, so ability cooldowns/resources are not reset.
+`repair` is the full recovery command. It cleans stale legacy Origin ownership/modifiers, clears stuck Andromeda transient helper powers, runs the iron/Nereid/Selkie compatibility migrations, rebuilds the player's Andromeda-managed raw attributes, and re-applies the currently granted Apoli/Origin attribute powers before performing the crowd-control/Incapacitated cleanup. This means an Arachne, Lichling, Champion variant, etc. is repaired back to that Origin's effective stats rather than being left at vanilla-player values. `repair_attributes` runs only the attribute rebuild. Neither command re-selects the Origin, so ability cooldowns/resources are not reset.
 
 ## Exact client/server version sync
 

@@ -6,34 +6,6 @@
       "required": false
     },
     {
-      "id": "simplyswords:diamond_chakram",
-      "required": false
-    },
-    {
-      "id": "simplyswords:diamond_claymore",
-      "required": false
-    },
-    {
-      "id": "simplyswords:diamond_cutlass",
-      "required": false
-    },
-    {
-      "id": "simplyswords:diamond_greataxe",
-      "required": false
-    },
-    {
-      "id": "simplyswords:diamond_greathammer",
-      "required": false
-    },
-    {
-      "id": "simplyswords:diamond_halberd",
-      "required": false
-    },
-    {
-      "id": "simplyswords:diamond_warglaive",
-      "required": false
-    },
-    {
       "id": "simplyswords:gold_chakram",
       "required": false
     },

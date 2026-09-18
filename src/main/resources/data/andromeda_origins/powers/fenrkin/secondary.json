@@ -40,7 +40,7 @@
   },
   "soundcooldown": {
     "type": "origins:cooldown",
-    "cooldown": 10,
+    "cooldown": 20,
     "hud_render": {
       "should_render": false
     }
@@ -120,7 +120,7 @@
                   {
                     "type": "origins:play_sound",
                     "sound": "minecraft:entity.wolf.pant",
-                    "volume": 0.5,
+                    "volume": 0.22,
                     "pitch": 0.7
                   },
                   {

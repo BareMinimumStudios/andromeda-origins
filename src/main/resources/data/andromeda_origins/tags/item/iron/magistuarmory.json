@@ -30,14 +30,6 @@
       "required": false
     },
     {
-      "id": "magistuarmory:diamond_buckler",
-      "required": false
-    },
-    {
-      "id": "magistuarmory:diamond_target",
-      "required": false
-    },
-    {
       "id": "magistuarmory:ecranche_decoration",
       "required": false
     },

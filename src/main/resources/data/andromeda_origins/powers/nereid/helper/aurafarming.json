@@ -164,7 +164,7 @@
                 "type": "origins:resource",
                 "comparison": "==",
                 "resource": "*:*_remove2",
-                "compare_to": 2
+                "compare_to": 3
               },
               "action": {
                 "type": "origins:and",

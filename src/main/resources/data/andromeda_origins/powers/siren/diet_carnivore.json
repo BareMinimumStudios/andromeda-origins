@@ -13,6 +13,13 @@
       {
         "type": "origins:ingredient",
         "ingredient": {
+          "tag": "origins:ignore_diet"
+        },
+        "inverted": true
+      },
+      {
+        "type": "origins:ingredient",
+        "ingredient": {
           "tag": "origins:meat"
         },
         "inverted": true
@@ -23,5 +30,5 @@
     ]
   },
   "name": "Carnivorous Diet",
-  "description": "You can only consume foods classified as meat. Drinks and potions are unaffected."
+  "description": "You can only consume foods classified as meat. Siren drinks and diet-exempt items are unaffected."
 }

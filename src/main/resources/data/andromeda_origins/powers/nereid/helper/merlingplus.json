@@ -6,7 +6,7 @@
       {
         "type": "origins:grant_power",
         "power": "origins:water_breathing",
-        "source": "minecraft:state"
+        "source": "andromeda_origins:nereid_gills"
       },
       {
         "type": "origins:grant_power",

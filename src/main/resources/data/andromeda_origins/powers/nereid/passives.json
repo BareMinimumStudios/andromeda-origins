@@ -230,14 +230,30 @@
         "power": "*:nereid/helper/seafriend"
       },
       "if_action": {
-        "type": "origins:revoke_power",
-        "power": "*:nereid/helper/seafriend",
-        "source": "minecraft:state"
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:grant_power",
+            "power": "*:nereid/helper/seafriend",
+            "source": "andromeda_origins:nereid_mark"
+          },
+          {
+            "type": "origins:revoke_power",
+            "power": "*:nereid/helper/seafriend",
+            "source": "minecraft:state"
+          },
+          {
+            "type": "origins:change_resource",
+            "resource": "*:nereid/helper/seafriend_remove",
+            "change": 15,
+            "operation": "set"
+          }
+        ]
       },
       "else_action": {
         "type": "origins:grant_power",
         "power": "*:nereid/helper/seafriend",
-        "source": "minecraft:state"
+        "source": "andromeda_origins:nereid_mark"
       }
     },
     "condition": {
@@ -297,5 +313,5 @@
     }
   ],
   "name": "Passive Features",
-  "description": "§e§lStats:§r\n+35% Swim Speed\n \n§e§lFeatures:§r\n- Your creature type is Aquatic.\n- While hydrated by water, rain, or §c§l[Wet]§r, you take 25% less damage and can move and act as though you were on land.\n- You have perfect underwater vision. Toggleable.\n \n§e§lNereid's Mark:§r\nHit a creature with kelp to mark or unmark it as an ally. Marked creatures are visible through walls to all Nereids and can be healed by Convalescing Aura. Undetectable creatures cannot be revealed by the mark.\n \n- While dry/on land, you suffer -10% movement speed, -10% damage dealt, and +40% damage taken.\n- You follow a Pescatarian diet."
+  "description": "§e§lStats:§r\n+35% Swim Speed\n \n§e§lFeatures:§r\n- Your creature type is Aquatic.\n- While hydrated by water, rain, or §c§l[Wet]§r, you take 25% less damage and can move and act as though you were on land.\n- You have perfect underwater vision. Toggleable.\n \n§e§lNereid's Mark:§r\nHit a creature with kelp to mark it as an ally for 15 seconds; hit it again while marked to refresh the mark back to 15 seconds. Marked creatures are visible through walls to all Nereids and can be healed by Convalescing Aura. Undetectable creatures cannot be revealed by the mark.\n \n- While dry/on land, you suffer -10% movement speed, -10% damage dealt, and +40% damage taken. Your gills also consume your air on land; without water, rain, or stored §c§l[Wet]§r hydration restoring it, you will eventually suffocate.\n- You follow a Pescatarian diet."
 }

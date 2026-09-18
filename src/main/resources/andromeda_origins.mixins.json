@@ -15,6 +15,10 @@
     "UndetectableMobTargetMixin",
     "ApoliPowerHolderCacheMixin",
     "ApoliEntitySetUnloadMixin",
-    "ArachneCobwebMovementMixin"
+    "ArachneCobwebMovementMixin",
+    "AttributeContainerAccessor",
+    "ArachneCraftingTableQuickMoveMixin",
+    "ArachnePlayerCraftingQuickMoveMixin",
+    "NereidSubmersionDrowningMixin"
   ]
 }

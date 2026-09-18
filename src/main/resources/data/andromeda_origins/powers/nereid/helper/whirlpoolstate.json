@@ -22,6 +22,11 @@
         {
           "type": "origins:revoke_power",
           "power": "*:*",
+          "source": "andromeda_origins:nereid_submersion_cast"
+        },
+        {
+          "type": "origins:revoke_power",
+          "power": "*:*",
           "source": "minecraft:state"
         }
       ]
@@ -51,45 +56,313 @@
           "command": "andromedaorigins internal_fx nereid.submersion_hit"
         },
         {
-          "type": "origins:grant_power",
-          "power": "*:nereid/helper/whirlpooldebuff",
-          "source": "minecraft:debuff"
-        },
-        {
-          "type": "origins:change_resource",
-          "resource": "*:nereid/helper/whirlpooldebuff_remove",
-          "change": 20
-        },
-        {
-          "type": "origins:grant_power",
-          "power": "*:nereid/helper/nereidwet",
-          "source": "minecraft:debuff"
-        },
-        {
-          "type": "origins:change_resource",
-          "resource": "*:nereid/helper/nereidwet_remove",
-          "change": 5
-        },
-        {
-          "type": "origins:add_velocity",
-          "y": -2,
-          "space": "local_horizontal",
-          "set": true
+          "type": "origins:if_else_list",
+          "actions": [
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:power",
+                    "power": "*:nereid/helper/seafriend"
+                  },
+                  {
+                    "type": "origins:power",
+                    "power": "*:selkie/passives"
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:if_else",
+                    "condition": {
+                      "type": "origins:power",
+                      "power": "*:nereid/helper/whirlpooldebuff"
+                    },
+                    "if_action": {
+                      "type": "origins:change_resource",
+                      "resource": "*:nereid/helper/whirlpooldebuff_remove",
+                      "change": 20,
+                      "operation": "add"
+                    },
+                    "else_action": {
+                      "type": "origins:grant_power",
+                      "power": "*:nereid/helper/whirlpooldebuff",
+                      "source": "andromeda_origins:nereid_submersion"
+                    }
+                  },
+                  {
+                    "type": "origins:if_else_list",
+                    "actions": [
+                      {
+                        "condition": {
+                          "type": "origins:power",
+                          "power": "*:selkie/helper/selkiewet"
+                        },
+                        "action": {
+                          "type": "origins:change_resource",
+                          "resource": "*:selkie/helper/selkiewet_remove",
+                          "change": 5,
+                          "operation": "add"
+                        }
+                      },
+                      {
+                        "condition": {
+                          "type": "origins:power",
+                          "power": "*:selkie/helper/groundweak"
+                        },
+                        "action": {
+                          "type": "origins:change_resource",
+                          "resource": "*:selkie/passives_recharge_shawl",
+                          "change": 5,
+                          "operation": "add"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:power",
+                    "power": "*:nereid/helper/seafriend"
+                  },
+                  {
+                    "type": "origins:power",
+                    "power": "*:nereid/passives"
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:if_else",
+                    "condition": {
+                      "type": "origins:power",
+                      "power": "*:nereid/helper/whirlpooldebuff"
+                    },
+                    "if_action": {
+                      "type": "origins:change_resource",
+                      "resource": "*:nereid/helper/whirlpooldebuff_remove",
+                      "change": 20,
+                      "operation": "add"
+                    },
+                    "else_action": {
+                      "type": "origins:grant_power",
+                      "power": "*:nereid/helper/whirlpooldebuff",
+                      "source": "andromeda_origins:nereid_submersion"
+                    }
+                  },
+                  {
+                    "type": "origins:if_else",
+                    "condition": {
+                      "type": "origins:power",
+                      "power": "*:nereid/helper/nereidwet"
+                    },
+                    "if_action": {
+                      "type": "origins:change_resource",
+                      "resource": "*:nereid/helper/nereidwet_remove",
+                      "change": 5,
+                      "operation": "add"
+                    },
+                    "else_action": {
+                      "type": "origins:and",
+                      "actions": [
+                        {
+                          "type": "origins:grant_power",
+                          "power": "*:nereid/helper/nereidwet",
+                          "source": "minecraft:debuff"
+                        },
+                        {
+                          "type": "origins:change_resource",
+                          "resource": "*:nereid/helper/nereidwet_remove",
+                          "change": 5,
+                          "operation": "set"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:or",
+                "conditions": [
+                  {
+                    "type": "origins:power",
+                    "power": "origins:water_breathing"
+                  },
+                  {
+                    "type": "origins:in_tag",
+                    "tag": "minecraft:aquatic"
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:if_else",
+                "condition": {
+                  "type": "origins:power",
+                  "power": "*:nereid/helper/whirlpooldebuff"
+                },
+                "if_action": {
+                  "type": "origins:change_resource",
+                  "resource": "*:nereid/helper/whirlpooldebuff_remove",
+                  "change": 20,
+                  "operation": "add"
+                },
+                "else_action": {
+                  "type": "origins:grant_power",
+                  "power": "*:nereid/helper/whirlpooldebuff",
+                  "source": "andromeda_origins:nereid_submersion"
+                }
+              }
+            },
+            {
+              "condition": {
+                "type": "origins:and",
+                "conditions": [
+                  {
+                    "type": "origins:power",
+                    "power": "*:nereid/helper/seafriend",
+                    "inverted": true
+                  },
+                  {
+                    "type": "origins:power",
+                    "power": "origins:water_breathing",
+                    "inverted": true
+                  },
+                  {
+                    "type": "origins:in_tag",
+                    "tag": "minecraft:aquatic",
+                    "inverted": true
+                  }
+                ]
+              },
+              "action": {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:if_else",
+                    "condition": {
+                      "type": "origins:power",
+                      "power": "*:nereid/helper/whirlpooldebuff"
+                    },
+                    "if_action": {
+                      "type": "origins:change_resource",
+                      "resource": "*:nereid/helper/whirlpooldebuff_remove",
+                      "change": 20,
+                      "operation": "add"
+                    },
+                    "else_action": {
+                      "type": "origins:grant_power",
+                      "power": "*:nereid/helper/whirlpooldebuff",
+                      "source": "andromeda_origins:nereid_submersion"
+                    }
+                  },
+                  {
+                    "type": "origins:if_else",
+                    "condition": {
+                      "type": "origins:power",
+                      "power": "*:nereid/helper/nereidwet"
+                    },
+                    "if_action": {
+                      "type": "origins:change_resource",
+                      "resource": "*:nereid/helper/nereidwet_remove",
+                      "change": 5,
+                      "operation": "add"
+                    },
+                    "else_action": {
+                      "type": "origins:and",
+                      "actions": [
+                        {
+                          "type": "origins:grant_power",
+                          "power": "*:nereid/helper/nereidwet",
+                          "source": "minecraft:debuff"
+                        },
+                        {
+                          "type": "origins:change_resource",
+                          "resource": "*:nereid/helper/nereidwet_remove",
+                          "change": 5,
+                          "operation": "set"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "origins:execute_command",
+                    "command": "tag @s add andromeda_nereid_submersion_drown"
+                  }
+                ]
+              }
+            }
+          ]
         }
       ]
     },
     "target_condition": {
-      "type": "origins:and",
+      "type": "origins:or",
       "conditions": [
         {
+          "type": "origins:and",
+          "conditions": [
+            {
+              "type": "origins:power",
+              "power": "*:nereid/helper/seafriend"
+            },
+            {
+              "type": "origins:power",
+              "power": "*:selkie/passives"
+            }
+          ]
+        },
+        {
+          "type": "origins:and",
+          "conditions": [
+            {
+              "type": "origins:power",
+              "power": "*:nereid/helper/seafriend"
+            },
+            {
+              "type": "origins:power",
+              "power": "*:nereid/passives"
+            }
+          ]
+        },
+        {
           "type": "origins:power",
-          "power": "origins:water_breathing",
-          "inverted": true
+          "power": "origins:water_breathing"
         },
         {
           "type": "origins:in_tag",
-          "tag": "minecraft:aquatic",
-          "inverted": true
+          "tag": "minecraft:aquatic"
+        },
+        {
+          "type": "origins:and",
+          "conditions": [
+            {
+              "type": "origins:power",
+              "power": "*:nereid/helper/seafriend",
+              "inverted": true
+            },
+            {
+              "type": "origins:power",
+              "power": "origins:water_breathing",
+              "inverted": true
+            },
+            {
+              "type": "origins:in_tag",
+              "tag": "minecraft:aquatic",
+              "inverted": true
+            }
+          ]
         }
       ]
     }

@@ -117,7 +117,7 @@
       "action": {
         "type": "origins:grant_power",
         "power": "*:selkie/helper/retaliated",
-        "source": "minecraft:state"
+        "source": "minecraft:debuff"
       }
     }
   },
@@ -130,5 +130,5 @@
     }
   },
   "name": "Champion Passive Features",
-  "description": "§e§lChampion Features:§r\n+45% Swim Speed\n \n- Retains aquatic movement, retaliation, underwater vision and land breathing.\n- No dry-out, Silenced, land-speed, damage or dietary penalties.\n- Player-facing ability cooldowns recover at 2× rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
+  "description": "\u00a7e\u00a7lChampion Features:\u00a7r\n+45% Swim Speed\n \n- Retains aquatic movement, retaliation, underwater vision and land breathing.\n- No dry-out, Silenced, land-speed, damage or dietary penalties.\n- Player-facing ability cooldowns recover at 2\u00d7 rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
 }

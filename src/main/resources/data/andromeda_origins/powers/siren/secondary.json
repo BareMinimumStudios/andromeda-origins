@@ -106,10 +106,6 @@
           "source": "minecraft:state"
         },
         {
-          "type": "origins:execute_command",
-          "command": "kill @e[type=minecraft:armor_stand,tag=shriek,distance=..64]"
-        },
-        {
           "type": "origins:raycast",
           "distance": 11,
           "block": true,

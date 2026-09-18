@@ -78,15 +78,15 @@
               },
               {
                 "type": "origins:execute_command",
-                "command": "playsound andromeda_origins:ability.lichling.screech master @s ~ ~ ~ 1.45 1.0 1.0"
+                "command": "playsound andromeda_origins:ability.lichling.screech master @s ~ ~ ~ 0.90 1.0 1.0"
               },
               {
                 "type": "origins:execute_command",
-                "command": "playsound andromeda_origins:ability.lichling.screech player @a[distance=0.1..48] ~ ~ ~ 1.2 1.0 0"
+                "command": "playsound andromeda_origins:ability.lichling.screech player @a[distance=0.1..48] ~ ~ ~ 0.65 1.0 0"
               },
               {
                 "type": "origins:execute_command",
-                "command": "playsound andromeda_origins:ability.lichling.chimes_of_necros master @s ~ ~ ~ 1.15 1.0 1.0"
+                "command": "playsound andromeda_origins:ability.lichling.chimes_of_necros master @s ~ ~ ~ 0.55 1.0 1.0"
               },
               {
                 "type": "origins:execute_command",
@@ -94,7 +94,7 @@
               },
               {
                 "type": "origins:execute_command",
-                "command": "playsound andromeda_origins:ability.lichling.chimes_of_necros player @a[distance=0.1..48] ~ ~ ~ 1.15 1.0 0"
+                "command": "playsound andromeda_origins:ability.lichling.chimes_of_necros player @a[distance=0.1..48] ~ ~ ~ 0.35 1.0 0"
               }
             ]
           }
@@ -1074,9 +1074,9 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "\u00a7c\u00a7lDoom:\u00a7r\u00a7f A creature can have up to 10 stacks, which decay over time. When a creature gains the 10th Doom stack, it takes 20 magical damage, gains Wither II for 5 seconds and loses its Doom stacks."
+      "text": "§c§lDoom:§r§f A creature can have up to 10 stacks, which decay over time. When a creature gains the 10th Doom stack, it takes 20 magical damage, gains Wither II for 5 seconds and loses its Doom stacks."
     }
   ],
   "name": "Chimes of Necros",
-  "description": "Energy regenerates while this ability is not in use. Hold your Secondary Ability key to afflict every visible non-Undead creature within 15 blocks with Wither I for 2 seconds and 1 stack of \u00a7c\u00a7l[Doom]\u00a7r. The Wither duration increases by 1 second for each Energy consumed during the channel, up to 10 seconds.\n \nYou move 20% slower while channeling Chimes of Necros. Undead creatures are immune. On the 10th Doom stack, the target takes 20 magic damage, gains Wither II for 5 seconds, and all Doom stacks are cleared."
+  "description": "Energy regenerates while this ability is not in use. Hold your Secondary Ability key to afflict every visible non-Undead creature within 15 blocks with Wither I for 2 seconds and 1 stack of §c§l[Doom]§r. The Wither duration increases by 1 second for each Energy consumed during the channel, up to 10 seconds.\n \nYou move 20% slower while channeling Chimes of Necros. Undead creatures are immune. On the 10th Doom stack, the target takes 20 magic damage, gains Wither II for 5 seconds, and all Doom stacks are cleared."
 }
