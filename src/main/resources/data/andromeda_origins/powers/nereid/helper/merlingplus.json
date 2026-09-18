@@ -5,11 +5,6 @@
     "actions": [
       {
         "type": "origins:grant_power",
-        "power": "origins:water_breathing",
-        "source": "andromeda_origins:nereid_gills"
-      },
-      {
-        "type": "origins:grant_power",
         "power": "origins:aqua_affinity",
         "source": "minecraft:state"
       },

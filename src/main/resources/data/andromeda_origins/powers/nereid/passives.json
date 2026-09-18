@@ -129,6 +129,38 @@
       "type": "origins:and",
       "actions": [
         {
+          "type": "origins:if_else",
+          "condition": {
+            "type": "origins:and",
+            "conditions": [
+              {
+                "type": "origins:power",
+                "power": "*:nereid/helper/nereidwet",
+                "inverted": true
+              },
+              {
+                "type": "origins:or",
+                "conditions": [
+                  {
+                    "type": "origins:fluid_height",
+                    "fluid": "minecraft:water",
+                    "comparison": ">",
+                    "compare_to": 0
+                  },
+                  {
+                    "type": "origins:in_rain"
+                  }
+                ]
+              }
+            ]
+          },
+          "if_action": {
+            "type": "origins:grant_power",
+            "power": "*:nereid/helper/nereidwet",
+            "source": "minecraft:debuff"
+          }
+        },
+        {
           "type": "origins:if_else_list",
           "actions": [
             {
@@ -201,6 +233,31 @@
               }
             }
           ]
+        },
+        {
+          "type": "origins:if_else",
+          "condition": {
+            "type": "origins:or",
+            "conditions": [
+              {
+                "type": "origins:power",
+                "power": "andromeda_origins:common/wet"
+              },
+              {
+                "type": "origins:fluid_height",
+                "fluid": "minecraft:water",
+                "comparison": ">",
+                "compare_to": 0
+              },
+              {
+                "type": "origins:in_rain"
+              }
+            ]
+          },
+          "if_action": {
+            "type": "origins:gain_air",
+            "value": 200
+          }
         }
       ]
     }
@@ -313,5 +370,5 @@
     }
   ],
   "name": "Passive Features",
-  "description": "§e§lStats:§r\n+35% Swim Speed\n \n§e§lFeatures:§r\n- Your creature type is Aquatic.\n- While hydrated by water, rain, or §c§l[Wet]§r, you take 25% less damage and can move and act as though you were on land.\n- You have perfect underwater vision. Toggleable.\n \n§e§lNereid's Mark:§r\nHit a creature with kelp to mark it as an ally for 15 seconds; hit it again while marked to refresh the mark back to 15 seconds. Marked creatures are visible through walls to all Nereids and can be healed by Convalescing Aura. Undetectable creatures cannot be revealed by the mark.\n \n- While dry/on land, you suffer -10% movement speed, -10% damage dealt, and +40% damage taken. Your gills also consume your air on land; without water, rain, or stored §c§l[Wet]§r hydration restoring it, you will eventually suffocate.\n- You follow a Pescatarian diet."
+  "description": "§e§lStats:§r\n+35% Swim Speed\n \n§e§lFeatures:§r\n- Your creature type is Aquatic.\n- While hydrated by water, rain, or §c§l[Wet]§r, you take 25% less damage and can move and act as though you were on land.\n- You have perfect underwater vision. Toggleable.\n \n§e§lNereid's Mark:§r\nHit a creature with kelp to mark it as an ally for 15 seconds; hit it again while marked to refresh the mark back to 15 seconds. Marked creatures are visible through walls to all Nereids and can be healed by Convalescing Aura. Undetectable creatures cannot be revealed by the mark.\n \n- Water or rain rebuilds your stored §c§l[Wet]§r hydration reserve up to 90 seconds; while dry, that reserve drains by 1 second per second.\n- While dry/on land, you suffer -10% movement speed, -10% damage dealt, and +40% damage taken. Your gills also consume your air on land; without water, rain, or stored §c§l[Wet]§r hydration restoring it, you will eventually suffocate.\n- You follow a Pescatarian diet."
 }

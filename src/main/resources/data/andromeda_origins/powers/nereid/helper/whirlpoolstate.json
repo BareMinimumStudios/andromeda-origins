@@ -198,6 +198,10 @@
                 "conditions": [
                   {
                     "type": "origins:power",
+                    "power": "andromeda_origins:common/aquatic_origin"
+                  },
+                  {
+                    "type": "origins:power",
                     "power": "origins:water_breathing"
                   },
                   {
@@ -232,6 +236,11 @@
                   {
                     "type": "origins:power",
                     "power": "*:nereid/helper/seafriend",
+                    "inverted": true
+                  },
+                  {
+                    "type": "origins:power",
+                    "power": "andromeda_origins:common/aquatic_origin",
                     "inverted": true
                   },
                   {
@@ -338,6 +347,10 @@
         },
         {
           "type": "origins:power",
+          "power": "andromeda_origins:common/aquatic_origin"
+        },
+        {
+          "type": "origins:power",
           "power": "origins:water_breathing"
         },
         {
@@ -350,6 +363,11 @@
             {
               "type": "origins:power",
               "power": "*:nereid/helper/seafriend",
+              "inverted": true
+            },
+            {
+              "type": "origins:power",
+              "power": "andromeda_origins:common/aquatic_origin",
               "inverted": true
             },
             {

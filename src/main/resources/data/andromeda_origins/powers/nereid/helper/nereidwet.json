@@ -16,6 +16,11 @@
           "change": 1
         }
       ]
+    },
+    "entity_action_lost": {
+      "type": "origins:change_resource",
+      "resource": "*:common/wet_sources",
+      "change": -1
     }
   },
   "remove": {
@@ -33,42 +38,76 @@
       }
     },
     "min_action": {
-      "type": "origins:and",
-      "actions": [
-        {
-          "type": "origins:change_resource",
-          "resource": "*:common/wet_sources",
-          "change": -1
-        },
-        {
-          "type": "origins:revoke_power",
-          "power": "*:*",
-          "source": "minecraft:debuff"
-        }
-      ]
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "minecraft:debuff"
     }
   },
   "timer": {
     "type": "origins:action_over_time",
     "interval": 20,
     "entity_action": {
-      "type": "origins:change_resource",
-      "resource": "*:*_remove",
-      "change": -1,
-      "operation": "add"
-    },
-    "condition": {
-      "type": "origins:and",
-      "conditions": [
+      "type": "origins:if_else_list",
+      "actions": [
         {
-          "type": "origins:fluid_height",
-          "fluid": "minecraft:water",
-          "comparison": "==",
-          "compare_to": 0
+          "condition": {
+            "type": "origins:and",
+            "conditions": [
+              {
+                "type": "origins:resource",
+                "resource": "*:*_remove",
+                "comparison": "<",
+                "compare_to": 90
+              },
+              {
+                "type": "origins:or",
+                "conditions": [
+                  {
+                    "type": "origins:fluid_height",
+                    "fluid": "minecraft:water",
+                    "comparison": ">",
+                    "compare_to": 0
+                  },
+                  {
+                    "type": "origins:in_rain"
+                  }
+                ]
+              }
+            ]
+          },
+          "action": {
+            "type": "origins:change_resource",
+            "resource": "*:*_remove",
+            "change": 1
+          }
         },
         {
-          "type": "origins:in_rain",
-          "inverted": true
+          "condition": {
+            "type": "origins:and",
+            "conditions": [
+              {
+                "type": "origins:resource",
+                "resource": "*:*_remove",
+                "comparison": ">",
+                "compare_to": 0
+              },
+              {
+                "type": "origins:fluid_height",
+                "fluid": "minecraft:water",
+                "comparison": "==",
+                "compare_to": 0
+              },
+              {
+                "type": "origins:in_rain",
+                "inverted": true
+              }
+            ]
+          },
+          "action": {
+            "type": "origins:change_resource",
+            "resource": "*:*_remove",
+            "change": -1
+          }
         }
       ]
     }

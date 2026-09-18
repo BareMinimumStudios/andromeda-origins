@@ -275,19 +275,19 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
-      "text": "\u00a7e\u00a7lDamage Resistances:\u00a7r\u00a7f None.\n \n\u00a7c\u00a7lDamage Vulnerabilities:\u00a7r\u00a7f None.\n \n\u00a7e\u00a7lEffect Immunities:\u00a7r\u00a7f None."
+      "text": "§e§lDamage Resistances:§r§f None.\n \n§c§lDamage Vulnerabilities:§r§f None.\n \n§e§lEffect Immunities:§r§f None."
     },
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "\u00a7c\u00a7lWet:\u00a7r\u00a7f Counts as being in water."
+      "text": "§c§lWet:§r§f Counts as being in water."
     },
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "\u00a7c\u00a7lSilenced:\u00a7r\u00a7f Unable to use active abilities."
+      "text": "§c§lSilenced:§r§f Unable to use active abilities."
     }
   ],
   "name": "Passive Features",
-  "description": "\u00a7e\u00a7lStats:\u00a7r\n+45% Swim Speed\n \n\u00a7e\u00a7lFeatures:\u00a7r\n- Your creature type is Aquatic, and you can act in water as though you were on land.\n- Creatures that strike you deal 20% less attack damage and move 15% slower for 5 seconds.\n- Underwater, you have perfect vision and see 75% better in darkness. Toggleable.\n- While not Silenced by your negative passives, you can breathe on land.\n- You suffer -10% movement speed while out of water.\n- Your stored wetness rises while submerged or in rain and falls while dry. After 3 minutes fully dry, you become \u00a7c\u00a7l[Silenced]\u00a7r. Recover by remaining in deep water or fully submerged/swimming for 30 seconds; leaving qualifying water causes the recovery timer to count back down.\n- Being struck by a player while downed can also Silence you. That player is highlighted to affected Selkies, and striking a player who Silenced a downed Selkie can remove the condition.\n- You follow a Pescatarian diet."
+  "description": "§e§lStats:§r\n+45% Swim Speed\n \n§e§lFeatures:§r\n- Your creature type is Aquatic, and you can act in water as though you were on land.\n- Creatures that strike you deal 20% less attack damage and move 15% slower for 5 seconds.\n- Underwater, you have perfect vision and see 75% better in darkness. Toggleable.\n- While not Silenced by your negative passives, you can breathe on land.\n- You suffer -10% movement speed while out of water.\n- Your stored wetness refills by 2 seconds per second while submerged or in rain and falls by 1 second per second while dry. After 3 minutes fully dry, you become §c§l[Silenced]§r. Recover by remaining in deep water or fully submerged/swimming for 30 seconds; leaving qualifying water causes the recovery timer to count back down.\n- Being struck by a player while downed can also Silence you. That player is highlighted to affected Selkies, and striking a player who Silenced a downed Selkie can remove the condition.\n- You follow a Pescatarian diet."
 }

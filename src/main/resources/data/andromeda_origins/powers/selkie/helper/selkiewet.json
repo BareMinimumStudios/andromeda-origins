@@ -96,7 +96,7 @@
               "action": {
                 "type": "origins:change_resource",
                 "resource": "*:*_remove",
-                "change": 1
+                "change": 2
               }
             },
             {

@@ -13,13 +13,5 @@
       "operation": "multiply_total_multiplicative",
       "amount": -0.25
     }
-  },
-  "breathrestore": {
-    "type": "origins:action_over_time",
-    "interval": 20,
-    "entity_action": {
-      "type": "origins:gain_air",
-      "value": 200
-    }
   }
 }
