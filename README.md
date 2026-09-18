@@ -4,7 +4,7 @@
 
 ## Current release
 
-**v1.4.73** — Nereid gill-state safety plus support/repair hardening. Standard Nereid land suffocation now uses a dedicated gill source and self-repairs on join; Nereid kelp ally marks now expire after 15 seconds, and Convalescing Aura/Submersion hydrate only currently marked Selkies/Nereids. Submersion now uses real water physics: aquatic targets still sink but are immune to forced drowning, while unmarked non-aquatic targets are sunk, heavily movement-limited, rapidly lose air, and drown once it is exhausted. Long channel sounds were remixed for voice-chat clarity, Arachne cobweb shift-click crafting is guarded against the Apoli pre.2 duplication path, and `/andromedaorigins repair` now cleans stale legacy Origin sources/modifiers such as Medieval Origins Pixie health/size/diet residue before rebuilding the current Andromeda attributes.
+**v1.4.74** — Nereid gill-state safety plus support/repair hardening. Standard Nereid land suffocation now uses a dedicated gill source and self-repairs on join; Nereid kelp ally marks now expire after 15 seconds, and Convalescing Aura/Submersion hydrate only currently marked Selkies/Nereids. Submersion now uses real water physics: aquatic targets still sink but are immune to forced drowning, while unmarked non-aquatic targets are sunk, heavily movement-limited, rapidly lose air, and drown once it is exhausted. Long channel sounds were remixed for voice-chat clarity, Arachne cobweb shift-click crafting is guarded against the Apoli pre.2 duplication path, and `/andromedaorigins repair` now cleans stale legacy Origin sources/modifiers such as Medieval Origins Pixie health/size/diet residue before rebuilding the current Andromeda attributes.
 
 ## Features
 

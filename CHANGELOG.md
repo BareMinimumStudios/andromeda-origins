@@ -1,4 +1,12 @@
+# v1.4.74
+
+- Fixed a client crash introduced by the v1.4.73 Arachne cobweb shift-click duplication guard.
+- Moved `ArachneCraftingSafety` out of the reserved Mixin package so inventory/crafting-table QUICK_MOVE hooks can safely load it at runtime.
+- Arachne cobweb anti-duplication behavior is otherwise unchanged.
+- Client/server exact-version safety now requires v1.4.74 on both sides.
+
 # v1.4.73
+- Fixed a client/server quick-move crash introduced by the Arachne cobweb anti-duplication guard. `ArachneCraftingSafety` was an ordinary runtime helper placed inside the reserved Mixin package, causing Sponge Mixin to reject it when inventory shift-click first resolved the helper. The helper now lives in `andromeda.origins.util`, while both crafting mixins keep the same server-authoritative anti-duplication behavior.
 - Fixed Faerie passive concealment activating or remaining active while riding boats/vehicles; riding now immediately disqualifies environmental stealth.
 
 ## Full cleanup / regression audit

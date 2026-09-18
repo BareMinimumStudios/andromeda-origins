@@ -1,5 +1,7 @@
 package andromeda.origins.mixin;
 
+import andromeda.origins.util.ArachneCraftingSafety;
+
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.CraftingResultInventory;
 import net.minecraft.inventory.RecipeInputInventory;

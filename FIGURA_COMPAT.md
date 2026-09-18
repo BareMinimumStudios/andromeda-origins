@@ -1,6 +1,6 @@
 # Figura Compatibility
 
-**Current release: v1.4.73.** Figura hook IDs and the existing model contract are unchanged; Champion Veilborn's 5-second Auroral Mirage cooldown does not add or renumber Figura hooks.
+**Current release: v1.4.74.** Figura hook IDs and the existing model contract are unchanged; Champion Veilborn's 5-second Auroral Mirage cooldown does not add or renumber Figura hooks.
 
 Andromeda Origins does **not** require Figura. Figura is an optional integration and the server-side mod does not import Figura classes. The bundled helper is authored for the project’s Minecraft 1.21.1 / Figura 0.1.6-era setup.
 

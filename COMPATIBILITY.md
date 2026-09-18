@@ -1,16 +1,16 @@
 # Andromeda Origins — Compatibility & State Safety
 
-This document describes the compatibility and state-safety behavior in **v1.4.73**. Optional Spell Engine / More RPG Library audiovisual compatibility remains additive. v1.4.73 isolates standard Nereid gills from temporary `minecraft:state` power lifecycles and automatically repairs missing gills on join; the v1.4.70 iron migration, v1.4.71 Arachne/Humanity guards, and v1.4.72 Wyverian VFX cleanup remain intact.
+This document describes the compatibility and state-safety behavior in **v1.4.74**. Optional Spell Engine / More RPG Library audiovisual compatibility remains additive. v1.4.74 isolates standard Nereid gills from temporary `minecraft:state` power lifecycles and automatically repairs missing gills on join; the v1.4.70 iron migration, v1.4.71 Arachne/Humanity guards, and v1.4.72 Wyverian VFX cleanup remain intact.
 
 
 
-### v1.4.73 state / concurrent-cast safety
+### v1.4.74 state / concurrent-cast safety
 
 - Veil Transposition no longer creates globally tagged `origin` / `destination` marker entities. The successful 32-block raycast now performs an atomic actor/target position exchange, preventing simultaneous Veilborn casts from selecting or deleting each other's temporary markers. Existing warp helpers are retained only for cosmetic teleport feedback.
 - The old `common/debug` Origin-loss callback no longer calls broad `revoke_all_powers` operations on generic Apoli sources. It invokes an Andromeda namespace-scoped transient cleanup instead, avoiding collateral state removal from other Origins addons.
 - Selkie retaliation now uses the same `minecraft:debuff` source for grant and expiry. A one-shot player migration plus a helper-side legacy cleanup removes old stuck `minecraft:state` ownership.
 
-### v1.4.73 legacy Origin repair hardening
+### v1.4.74 legacy Origin repair hardening
 
 - `/andromedaorigins repair <player>` removes power ownership from registered Origin sources the player no longer has selected and explicitly recognizes `medievalorigins:*` sources even if Medieval Origins is no longer registered.
 - Loaded `medievalorigins:*` helper powers and Medieval-owned `origins:carnivore` / `origins:vegetarian` sources are removed when stale, while ownership from a currently selected Origin is preserved.
