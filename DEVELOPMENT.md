@@ -22,6 +22,8 @@ The pinned MC Publish workflow builds once and stages one verified jar per loade
 
 Set `MODRINTH_TOKEN` as an Actions secret. The Modrinth project ID is `8rLKf3xm`. No CurseForge token or project ID is needed for the current workflow.
 
+Modrinth version numbers and display titles use `<mod_version>+<minecraft_version>-<loader>`, for example `1.4.76+1.21.1-fabric`. The workflow validates Modrinth's 32-character limit before building.
+
 Tag releases as `v<mod_version>+1.21.1` after adding a dated version section to `CHANGELOG.md`. Manual publication supports the same destination choices as the other studio mods. No token is stored in the repository.
 
 The root README is the GitHub description. Store descriptions live in `docs/MODRINTH.md` and `docs/CURSEFORGE.md`. Their banner uses the public GitHub URL: push the matching branch and image before copying either description to a store.

@@ -68,6 +68,16 @@ jobs:
 
           release_version="${version}+${MINECRAFT_VERSION}"
 
+          # Modrinth version_number is limited to 32 characters.
+          # Include the mod version, Minecraft version, and loader in each upload.
+          for loader in fabric neoforge; do
+            modrinth_version="${release_version}-${loader}"
+            if (( ${#modrinth_version} > 32 )); then
+              echo "Modrinth version '$modrinth_version' exceeds 32 characters." >&2
+              exit 1
+            fi
+          done
+
           if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
             tag_version="${GITHUB_REF_NAME#v}"
             if [[ "$tag_version" != "$release_version" ]]; then

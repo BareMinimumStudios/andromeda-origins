@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.4.76] - 2026-10-11
+
+- Use `1.4.76+1.21.1-fabric` and `1.4.76+1.21.1-neoforge` for release uploads; validate Modrinth version-number length before building.
+- Publish to Modrinth and GitHub only while the Minecraft 1.21.1 CurseForge listing is unavailable.
+- Refresh the README banner, simplify installation links, and show each Origin's in-game icon beside its name.
+
 ## [1.4.75-overgrown.37] - 2026-10-10
 
 - Imported the complete .36 source and preserved its native badge, Arachne cobweb, Origin selection, configuration, and compatibility fixes.
