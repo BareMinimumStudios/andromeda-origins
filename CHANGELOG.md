@@ -1,3 +1,360 @@
+# Changelog
+
+## [1.4.75-overgrown.37] - 2026-10-10
+
+- Imported the complete .36 source and preserved its native badge, Arachne cobweb, Origin selection, configuration, and compatibility fixes.
+- Converted mod sources and build scripts to Kotlin; shared gameplay and resources now build for Fabric and NeoForge 1.21.1 with Cloche. Added MixinMCP dependency inspection tooling.
+- Updated to Overgrown Origins 1.47.7, Opoli 1.115.0, NeoForge 21.1.248, and bundled Additional Entity Attributes 2.0.2+1.21.1. Replaced the retired food-tooltip adapter with upstream insertion support.
+- Replace copied fallback badge artwork with an original Andromeda glyph; native icons remain supplied by Origins.
+- Render crafting recipe badge previews with vanilla item icons and texture-independent slots. Reset tooltip shader state and keep hover regions inside the reader viewport.
+- Bind Manticore drag victims to the actual caster. Preserve Mortal Resolve world-time deadlines across reconnects and restarts, and clear final-stand state on death.
+- Replace repeated sphere particle commands with cached native actions and summon/tag/search helpers with direct entity creation at the original hit position.
+- Fix current Opoli feed fields and the missing Manticore invulnerability damage condition discovered during dedicated-server resource loading.
+- Require operator access for the config command; cache configuration catalog and reflection lookups; alias duplicated dietary classifications; merge the typo builder namespace; remove retired code and functions.
+- Add matching Andromeda artwork, separate GitHub/Modrinth/CurseForge descriptions, pinned MC Publish workflows, and current validation tools. Retain the Bare Minimum License.
+- Preserve existing Selkie powers and Origin definitions without the proposed sealskin rework.
+
+# 1.4.75-overgrown.36 — Badge rendering / Arachne cobweb hotfix
+
+- Hardened native Origins badge rendering in Andromeda's selector and O-key rich reader: matching released badge sprites are mirrored under the Andromeda namespace and used as a fallback when a synced `origins:` badge texture cannot be resolved client-side.
+- Badge rendering now restores vanilla-white shader color/blending before each sprite blit, matching Overgrown's stock renderer behavior.
+- Replaced Arachne's obsolete `origins:cobwebs` tag checks with direct `minecraft:cobweb` block conditions.
+- Replaced the retired `origins:temporary_cobweb` placement with Opoli's native temporary `ghost_block` cobweb action.
+- Replaced the custom Java cobweb-slowdown bypass with native `modify_block_stuck_speed`, restoring full cobweb movement immunity for Standard and Champion Arachne while allowing Fzzy suppression to remain data-driven.
+- Removed the now-unnecessary `ArachneCobwebMovementMixin`.
+
+---
+
+# 1.4.75-overgrown.35 — Origin UI compatibility / native tags
+
+- Kept Andromeda's server-authoritative Fzzy Config as the supported in-game configuration layer; Overgrown's per-world `origins/config.json` remains an advanced registry-level filter.
+- Custom Choose Origin grid now preserves Overgrown Random selection on independent addon layers while keeping Random disabled on Andromeda's primary `origins:origin` layer.
+- Rebuilt chooser and O-key viewer controls structurally instead of discovering stock buttons by translated text, one-letter labels, or dimensions.
+- Added native Origins badge rendering and badge tooltips to Andromeda's rich Origin reader for better third-party Origin compatibility.
+- Added per-species Origin tags to Standard/Champion variants and a shared `andromeda_origins:hydration` tag for Nereid/Selkie interoperability.
+- Removed the retired `common/aquatic_origin` marker power; aquatic checks now use `origins:origin_tag`.
+- Internal Champion gameplay checks now use the native `andromeda_origins:champion` tag. The hidden `common/champion` marker remains granted only for backward-compatible Figura `isChampion()` support.
+- Nereid Aura hydration targeting now uses the explicit hydration interoperability tag instead of hard-coding Selkie/Nereid passives.
+- Overgrown world-config conflict warnings now rerun after successful datapack reloads.
+
+---
+
+# 1.4.75-overgrown.34 — Released upstream integration / cleanup
+
+- Updated to the exact released **Overgrown Origins 1.46.14 + Opoli 1.108.0** pair and pinned their immutable Modrinth version IDs (`I1SjdiXV` / `6NS1kRVH`).
+- Added **Slimekin** (`origins:slimekin`) to the stock-Origin catalog, Fzzy section, language entries, and validation guardrails so it follows the same default-OFF policy as the other built-in Origins.
+- Kept `DietTooltipCompat` because released Opoli 1.108.0 still exposes the original tooltip API; the upstream tooltip ownership fix belongs to 1.109.0 and is not part of this release.
+- Replaced the giant Champion cooldown polling list with one native `apoli:modify_resource_change` power that doubles cooldown drain only.
+- Added native Origin tags to all 26 Standard/Champion definitions (`aquatic`, `seaside`, `fae`, `beast`, `mystic`, `undead`, `draconic`, `living`, plus `champion`).
+- Added a server-start warning when Overgrown's per-world `origins/config.json` disables Andromeda Origins/powers/layer entries, since those registry-level filters cannot be undone by Fzzy Config.
+- Removed the unused `legacy/` archive, dormant `common/debug` compatibility ID, and rollback-only Curtain Step pearl entity/renderer.
+- Kept current Veil Step presentation from `.33`; the experimental Opoli custom-particle replacement is not included.
+- Kept existing cooldown refresh writes (including Lichling Doom retention) and threshold polling where `trigger_cooldown` / resource `on_change` would change semantics.
+- Kept vanilla `minecraft:generic.scale`, AEA water-speed modifiers, Fzzy non-destructive suppression, the flat Origin UI, Mortal Resolve, Figura/Incapacitated bridges, custom sounds, and optional Enhanced FX unchanged.
+
+# 1.4.75-overgrown.33 — Typed config validator hotfix
+
+- Updated `verifyAndromedaResources` to validate the `.30+` typed `OriginConfigCatalog` per-Origin power model instead of the removed legacy `CONFIGURABLE_BY_ORIGIN` map.
+- Updated the Champion-infrastructure guardrail to read `NON_CONFIGURABLE_INFRASTRUCTURE` from the catalog, where that ownership now lives.
+- No gameplay, balance, Origin data, Fzzy field paths, or config semantics changed.
+
+# 1.4.75-overgrown.32 — Build validator hotfix
+
+- Fixed `verifyAndromedaResources` falsely rejecting the `.30+` shared rich-reader UI architecture.
+- The Gradle guardrail now checks `OriginRichReaderRenderer`, the chooser/O-screen wiring, and the translated reader/title keys instead of requiring old hard-coded `OVERVIEW`, `POWERS & TRAITS`, and `This Is Your Origin` literals inside individual Mixins.
+- No gameplay, balance, Veil Step, Origin data, config behavior, or UI appearance changes from `.31`.
+
+# 1.4.75-overgrown.31 — Veil Step visible Veil-echo presentation
+
+- Veil Step no longer grants the shared `common/undetectable` power: the Veilborn remains visibly present to other players while traversing the Veil.
+- The Veil Step marker now owns traversal-only anti-interruption behavior: no entity collision/body-blocking, full knockback resistance, and Slowness immunity. Existing server-side damage immunity and Reality Shatter crossing behavior remain.
+- Moving Veilborn broadcast a lightweight smoke/reverse-portal shadow-cloud trail to nearby clients.
+- While the local player is inside Veil Step, living entity models are hidden only on that client and represented by sparse shadow-cloud particle echoes instead. Other players' renderers are untouched.
+- Veil echo particles are client-local, distance-scaled, emitted every other tick, and capped to the 64 nearest living entities within 48 blocks to avoid pathological particle floods in mob-dense areas.
+- Updated Veil Step descriptions to match the visible/invulnerable traversal behavior. Auroral Mirage remains the true Undetectable/invisibility ability.
+
+# 1.4.75-overgrown.30 — architecture / UI cleanup
+
+- **Shared rich reader:** the Origin chooser and O-key self viewer now use one `OriginRichReaderRenderer` instead of maintaining duplicate Overview / Powers & Traits / scrollbar implementations.
+- **Localized reader UI:** reader headings, self-view title, and impact label now use translation keys rather than hard-coded English strings.
+- **Typed config catalog:** added `OriginConfigCatalog` as the authoritative mapping for the 26 Andromeda Origins, 11 audited stock Overgrown Origins, and 105 per-Origin power controls. Existing Fzzy field names and TOML paths are unchanged.
+- **Simpler config state generation:** `AndromedaGameplayConfig.toState()` now walks the typed catalog instead of duplicating the entire Origin/power map; `AndromedaConfigPolicy` consumes the same catalog.
+- **Roster reuse:** standard Origin icon registration and scoped transient cleanup derive from the same catalog, reducing roster drift.
+- **Enhanced FX diagnostics:** malformed optional FX definitions, missing optional particle/sound IDs, and Spell Engine reflection/API mismatches now log useful warnings while remaining fail-soft.
+- **No gameplay rebalance:** all `data/andromeda_origins` gameplay resources remain unchanged from `.29`; only UI language metadata and Java architecture changed.
+
+# Changelog
+
+# 1.4.75-overgrown.29 — full safety / redundancy audit
+
+- Hardened Veil Step crash/restart recovery by persisting a minimal pre-Veil flight snapshot and restoring it on the next join if the server stops while a player is inside the Veil.
+- Added a conservative fallback for stale pre-.29 Veil markers so Survival players cannot retain temporary Veil flight after an unclean restart.
+- Fixed Standard/Champion Wyverian Elytra rendering to use the valid vanilla Elytra texture instead of a missing Andromeda texture path.
+- Converted the obsolete `common/debug` self-revoking helper into a hidden no-op compatibility ID; older stored references remain resolvable without running its obsolete callback behavior.
+- Split optional Armor Model API integration into its own non-required mixin config while making core Andromeda mixins required, so critical Origin/config/gameplay hooks can no longer silently fail.
+- Removed a stale Mortal Resolve comment referring to the retired `MortalResolveDeathMixin`; final-death handling remains in `MortalResolveManager`.
+- Added validation guardrails for the core/optional mixin split, dormant debug compatibility ID, valid Wyverian Elytra texture, and Veil Step crash-recovery snapshot.
+- No balance changes or intended player-facing gameplay changes.
+
+# 1.4.75-overgrown.28 — centered flat Origin UI
+
+- Reworked the Choose Origin screen into one centered flat charcoal panel instead of separate grid/reader surfaces.
+- Origin selection tiles now use the same dark-gray flat button language as Select/navigation controls, including neutral hover and selected states.
+- Removed colored selection borders/impact corner markers from the grid; impact remains visible in the detail header.
+- Centered the 4-column-first responsive grid inside a dedicated sidebar with consistent padding and spacing.
+- Updated the O-key self-Origin screen to use the same flat panel and button treatment.
+- Kept Overgrown's selection packets, layer flow, swap behavior, Origin availability, and other screen logic unchanged.
+- No gameplay/resource balance changes from `.27`.
+
+# 1.4.75-overgrown.27 — targeted Origin balance pass
+
+- **Fenrkin:** permanent damage resistance reduced from 25% to **10%** for Standard/Champion. On the Hunt bonuses reduced from 25% to **20%**. Standard Wet/physical-water/rain/cramped weaknesses now enforce both loss of the +20% movement bonus and -20% melee/projectile damage immediately, while preserving the existing lingering Wet timer.
+- **Manticore:** Standard/Champion melee bonus reduced from +35% to **+25%** and qualifying physical resistance from 20% to **15%**.
+- **Wyverian:** Standard/Champion scale resistance reduced from 20% to **10%**; +20% melee remains unchanged.
+- **Satyr:** each Momentum stack now grants **+13% movement speed**, capping 5 stacks at **+65%** for Standard/Champion.
+- **Gorgon:** Standard/Champion general resistance reduced to **10%** and secondary scales resistance to **15%**. Removed wall climbing and step assistance from both variants; toggleable perfect darkvision remains.
+- **Selkie:** stored Wetness increased from **3 minutes to 5 minutes**. Refill/drain rates and the 30-second recovery cycle are otherwise unchanged.
+- **Faerie:** Standard/Champion environmental concealment is now capped at **5 continuous minutes**. The Visionary HUD style now displays the active concealment countdown; reaching the cap ends concealment and triggers its existing cooldown.
+- **Siren:** Standard outgoing damage penalty reduced from -10% to **-5%**. Champion Siren remains exempt from racial damage penalties.
+- **Nereid:** fully-dry damage vulnerability reduced from +40% to **+25%**; dry movement, damage-dealt, gill, hydration, and suffocation behavior is otherwise unchanged.
+- **Veilborn and Humanity:** intentionally unchanged.
+- Added Gradle/static validation guardrails for the new balance values and retained the `.26` selection/personal Origin reader behavior.
+
+# 1.4.75-overgrown.26 — unified personal Origin reader
+
+- Replaced the stock compact `O`-key **View Origin** window with the same neutral wide, scrollable rich-text reader used by the Andromeda Choose Origin screen.
+- Centered the personal reader and added the explicit **“This Is Your Origin”** heading, with the current Origin layer shown beneath it.
+- Suppressed Overgrown's old 176px Origin window and stock scrollbar on `ViewOriginScreen`, preventing legacy UI elements from rendering through the custom reader.
+- Preserved Overgrown's existing Close button, layer cycling, swappable-Origin button, empty-layer Choose flow, current-Origin state, and client synchronization; those controls are only repositioned around the new panel.
+- No Origin powers, stats, configuration behavior, or gameplay values changed.
+
+# 1.4.75-overgrown.25
+
+### Origin description audit
+- Corrected Eightfold Swiftness to state that its shared movement penalty reduces **projectile damage dealt by 50%**, rather than incorrectly claiming Arachne takes less projectile damage.
+- Corrected Selkie retaliation text to describe its implemented **-15% swim-speed** penalty and surfaced Selkie's unconditional **-15% damage dealt** stat.
+- Surfaced Gorgon, Manticore, and Wyverian damage-resistance values in their main descriptions so the standalone rich reader no longer depends on legacy nested tooltip badges for important stats.
+- Clarified Nereid land penalties only begin once stored hydration is exhausted and clarified Satyr's Landing requires Swift Leap to have been consumed.
+- Removed duplicated diet wording from Passive Features where the rich reader already shows a dedicated Diet power; special food-efficiency modifiers remain documented.
+- No gameplay values or mechanics changed in this release.
+
+# 1.4.75-overgrown.24 — standalone neutral Origin reader
+
+- Removed the stock Overgrown Origin detail window from the Andromeda Choose Origin screen instead of rendering the custom reader over it. This eliminates the old background, border, header, impact dots, text, and scrollbar bleeding through the new UI.
+- Kept Overgrown's underlying Origin selection state, availability checks, Select button/network packet flow, Orb flow, and server validation unchanged. Only the stock visual Origin window is suppressed for `ChooseOriginScreen`.
+- Changed the wide reader from purple/Veilborn-themed accents to a **neutral charcoal/gray palette** with white headings and neutral scrollbar/borders. Semantic impact colors on the Origin grid remain unchanged.
+- The `.23` wide scrollable reader, responsive icon grid, Random removal, and all Veilborn gameplay values remain otherwise unchanged.
+
+# 1.4.75-overgrown.23 — Veilborn weakness tuning / rich Origin reader
+
+- Reduced each Standard Veilborn armor-weight threshold penalty from **-10% to -5% movement and swim speed**. The three thresholds remain 13+ Armor, 16+ Armor, and 9+ Armor Toughness, for a new **-15% maximum** combined penalty.
+- Reworked Veilborn's water weakness so Wet/water/rain **no longer applies Silenced and no longer disables active abilities**. While the lingering Wet penalty is active, outgoing melee/projectile damage is reduced by **50%** and movement/swim speed by **40%**. Existing 3-second linger growth (up to 1.5 minutes with continued exposure) is preserved.
+- Removed **Random Origin** from the Andromeda primary layer and from the Andromeda/Overgrown choose-Origin grid. Selection is now always an explicit concrete Origin choice.
+- Replaced the cramped stock detail reader with a responsive **wide, scrollable rich-text Origin reader** while retaining Overgrown's Origin objects, availability checks, Select button, selection packet, Orb flow, and server-side validation. The reader uses a large header, Overview section, Powers & Traits section, preserved formatted descriptions, mouse-wheel scrolling, and a visual scrollbar; no Markdown parser/dependency was added.
+- The icon grid remains paged and responsive down to a single column on narrow GUI scales, and the Select button is repositioned beneath the wider details panel.
+
+# 1.4.75-overgrown.22 — Veil Step tuning / documentation cleanup
+
+- Reduced Veil Step maximum duration from 8 seconds to **5 seconds / 100 ticks**.
+- Reduced Veil Step target free-flight speed from approximately 20 blocks/sec to **15 blocks/sec**. There is still no travel-distance cap, and solid-block collision remains enabled.
+- Preserved the purple vignette-only Veil indicator, entity-crossing Reality Shatter, 8-second base cooldown, Shimmer, and the 5-second post-exit Reality Shatter for Standard Veilborn.
+- Hardened flight restoration: the client no longer blindly forces `flying=false` on exit; the server now re-sends the exact pre-Veil ability state during the restore window, preserving legitimate Creative/modded flight while still closing the stale double-tap-Space case.
+- Invalid-state cleanup (death, Origin removal, or power suppression mid-Veil) now exits cleanly without applying the normal post-use cooldown or self-Reality-Shatter.
+- Audited project Markdown for stale current-version labels and redundant Veilborn release notes; current-reference docs now point to `.22` while historical changelog entries remain intact.
+
+# 1.4.75-overgrown.21 — Veil Step flight cleanup / Mirage duration correction
+
+- Veil Step maximum duration reduced from 10 seconds to **8 seconds / 160 ticks** while retaining approximately **20 blocks/sec** free 3D flight and no travel-distance cap.
+- Hardened Veil Step flight teardown: the server briefly reasserts the exact pre-Veil flight state after emergence, preventing double-tap Space from leaving survival players flying. Client flight and residual traversal velocity are also stopped immediately on exit.
+- Residual 20 b/s movement is cleared on emergence so high-speed collision/velocity damage cannot carry out of Veil Step.
+- Replaced the Veil Step text/frame HUD with a **purple vignette only**.
+- Corrected Auroral Mirage: maximum active duration is now **5 minutes / 6000 ticks**, shown with the Blue Cooldown HUD style; its normal cooldown is restored to **2 minutes / 2400 ticks** after Mirage ends. Champion Veilborn retains the fixed 5-second Mirage cooldown.
+- Added an automatic Mirage timeout that performs the same clean exit/cooldown path as manual dismissal or a successful hit.
+- Added Overgrown 1.41.0's **Buzzborne** (`origins:buzzborne`) to the audited stock-Origin policy and Fzzy Config section. Because stock Overgrown Origins default OFF, Buzzborne is no longer selectable unless the stock roster is explicitly enabled.
+
+# 1.4.75-overgrown.20 — Veil Step flight feel / 10-second Veil
+
+## Veil Step
+- Reworked Veil Step movement after live testing. Removed `.19`'s server teleport corrections and cumulative 20-block travel cap, which caused rubber-banding/choppy movement.
+- Veil Step now uses smooth vanilla free-flight controls on both client and server at approximately **20 blocks/second**, while retaining normal solid-block collision and entity phasing.
+- Maximum Veil duration is now **10 seconds / 200 ticks** with **no travel-distance cap**. Press Primary again to emerge early.
+- Added a short 4-tick entry debounce so the same activation edge cannot immediately toggle Veil Step back off.
+- Added a local Veil HUD treatment: a subtle violet screen veil, edge treatment, and **IN THE VEIL** indicator while the synced Veil Step marker is active.
+- Client tick handling now immediately keeps flight enabled, applies the Veil flight speed, suppresses sprint multiplication, and resets fall distance for smooth spectator-style steering.
+- Preserved `.19` behavior for entity crossing/Reality Shatter, tears, sounds, invisibility/Undetectable state, 8-second post-exit cooldown, 5-second self Reality Shatter, and Champion exceptions.
+
+# 1.4.75-overgrown.19 — Veilborn Veil Step / Shimmer / Mirage concealment
+
+## Veil Step
+- Replaced Standard/Champion Veilborn's old **Curtain Step** pearl teleport with **Veil Step**. Press Primary to enter a short Veil traversal state; press Primary again to emerge early. Veil Transposition remains on Sneak + Primary.
+- Veil Step uses free three-dimensional flight-style steering while keeping solid-block collision. It never enables spectator/no-physics block phasing.
+- Movement is server-authoritatively capped at **13 blocks/second** (`0.65` blocks/tick) with a flat **20-block cumulative path limit** and a **31-tick** maximum traversal window.
+- While Veil Stepping, the player is Undetectable, can pass through living entities, cannot deal or receive ordinary combat damage, and leaves no normal fire/footstep/sprint/status-effect particle traces.
+- Crossing a living entity uses a swept-path test so high-speed movement cannot skip targets. Each entity can be crossed once per activation; crossing applies **Reality Shatter for 5 seconds** and creates a short reality-tear FX/sound at the intersection.
+- Entry and exit create matching Veil tear FX using the existing Veilborn sound/Enhanced FX palette. Standard Veilborn receive **5 seconds of Reality Shatter on exit**; Champion Veilborn retain their established no-self-debuff exception.
+- Veil Step has an **8-second base cooldown**. Champion cooldown acceleration continues to recover applicable cooldowns at 2× speed, giving Champion Veil Step an effective 4-second recovery.
+- Water/Silence and Veilborn armor-weight penalties do **not** block, shorten, or slow Veil Step.
+- Archived the exact `.18` Curtain Step primary and its old Unstable helper under `legacy/veilborn/` and kept the pearl entity/renderer code registered so the old behavior can be restored without reconstructing it.
+
+## Reality Shatter
+- Removed Reality Shatter's **-40% damage dealt** penalty. Reality Shatter is now a spatial disorientation state: Darkness plus **-30% movement speed** and **-30% swim speed**.
+
+## Shimmer
+- Added **Shimmer** to Standard and Champion Veilborn: a **10%** chance to evade entity-caused attacks completely. Environmental damage is unaffected.
+- Successful Shimmer evasion produces a brief Veil shimmer using repurposed Veilborn FX/audio. Because the hit never lands, Shimmer does not break Auroral Mirage.
+- Shimmer is a separate top-level power/config control so Standard and Champion variants can be configured independently.
+
+## Auroral Mirage
+- Increased Standard Auroral Mirage's cooldown to **5 minutes / 6000 ticks** and retained its dedicated HUD cooldown bar at index 20. Champion Veilborn preserve the existing fixed **5-second** Mirage cooldown through their explicit override.
+- A successful incoming hit now immediately breaks Auroral Mirage and starts the cooldown. Dealing damage still breaks it as before.
+- While Mirage is active, vanilla fire rendering, footsteps, sprint/step particles, and status-effect swirl particles are suppressed so ordinary player traces do not reveal the hidden Veilborn. Active effects themselves continue to function.
+- Mirage state checks now use its dedicated `veilpower` marker instead of the shared Undetectable helper, preventing Veil Step from accidentally activating Mirage's +damage/+speed behavior.
+
+## Config / validation
+- Added per-Origin Fzzy Config controls for Shimmer. The audited config model is now **26 Origins / 105 per-Origin controls / 67 unique configurable power IDs**.
+- Power JSON inventory is now **195**; runtime `grant_power` actions are **192** after removing the old Curtain Step grant-based projectile/Unstable flow.
+- Added `.19` guardrails for Veil Step speed/distance, Mirage cooldown/bar, Shimmer config exposure, Reality Shatter's no-damage-penalty rule, and Veilborn trace-suppression mixins.
+
+# 1.4.75-overgrown.18 — Fzzy Config / per-Origin organization
+
+- Replaced `.17`'s custom JSON persistence, custom config screen, custom config synchronization payloads, and custom Mod Menu integration with **Fzzy Config 0.7.7+1.21**.
+- Added a required Fzzy Config dependency from its official Maven. Fzzy Config is not jar-in-jar bundled; its own mod/license remains separate.
+- Gameplay config now lives at `config/andromeda_origins/gameplay.toml`. The old `.17` `config/andromeda_origins.json` is no longer read.
+- Registered the gameplay config as a versioned Fzzy `@RootConfig` with `RegisterType.BOTH`, permission level 2, and `SaveType.SEPARATE`, giving automatic validation, search, nested sections, server/client synchronization, and Mod Menu integration.
+- Reorganized the in-game config into **Standard Origins**, **Champion Origins**, and **Overgrown Defaults**, with a dedicated nested section for each of the 26 Andromeda Origins. Each Origin contains its own availability switch and audited gameplay power/weakness switches.
+- Changed power configuration from `.17`'s global-by-power model to **per-Origin power controls**. Shared power IDs such as diets and Iron Weakness can now be disabled for one Origin without affecting another Origin that grants the same ID.
+- Kept linked Iron Weakness implementation pieces under one visible switch while continuing to hide Figura bookkeeping, Champion cooldown acceleration, shared aquatic markers, and nested implementation helpers.
+- Preserved the `.17` runtime behavior model: stock Overgrown Origins default disabled, the merged primary layer is filtered after datapack composition, direct crafted selection packets are rejected server-side, and invalid currently-held Origins are returned to selection.
+- Preserved non-destructive Opoli suppression. Disabling a power keeps its ownership and stored resource/cooldown state; re-enabling it does not recreate/reset the power.
+- Added an Origin-choice suppression refresh so switching between Origins that share a power ID immediately applies the newly selected Origin's independent setting.
+- `/andromedaorigins config` remains as a small convenience opener for the Fzzy Config screen; Fzzy owns all actual gameplay-config persistence, permissions, validation, and synchronization.
+- Simplified the exact-version login handshake back to version/protocol checking only (protocol 3); gameplay-config synchronization is no longer duplicated in Andromeda's handshake.
+- No Andromeda power JSON, Origin JSON, balance value, cooldown, hydration, movement, Satyr sequencing, or Veil Transposition behavior was intentionally changed.
+
+# 1.4.75-overgrown.17 — server-authoritative Origin / power configuration
+
+- Replaced `.16`'s datapack-priority-dependent `replace: true` stock-roster suppression with runtime filtering on the primary `origins:origin` layer. Andromeda now merges normally, then filters after Overgrown finishes composing the layer, so later resource packs cannot silently re-add stock species to the selectable list.
+- Stock Overgrown 1.41.0 Origins are disabled by default. Added in-game toggles for Standard Andromeda Origins, Champion Origins, the stock Overgrown roster, and audited top-level Andromeda gameplay powers/weaknesses.
+- Added a server-authoritative config at `config/andromeda_origins.json`, operator-only editing through `/andromedaorigins config`, manual reload through `/andromedaorigins config reload`, and an optional Mod Menu Config button. Non-operators receive the synced state read-only.
+- Config state is included in the exact-version login handshake so the client has the authoritative roster before Overgrown opens Origin selection. Live config changes are also synchronized to every online client.
+- Disabling a currently selected Origin clears that layer and returns the affected player to Origin selection. Random-origin candidates and ordinary GUI candidates use the filtered layer; a server-side availability backstop rejects a disabled Origin even if a client crafts a direct selection packet.
+- Power switches use Opoli suppression rather than revocation. This preserves ownership and existing resource/cooldown data while disabling behavior, then restores it cleanly when re-enabled. Newly granted powers immediately inherit the current suppression state.
+- Restricted the power UI/config to an explicit allowlist of powers directly granted by the 26 Andromeda Origin definitions. Figura state, Champion marker/cooldown machinery, aquatic markers, and nested implementation helpers are not exposed. Iron Weakness controls its linked Wither behavior as one setting.
+- Normal Save & Apply changes take effect immediately and do not require a restart. The UI advises reopening Origin selection after roster edits and using `/reload` only when datapacks also modify Origin data.
+- Preserved `.16`'s Overgrown-native paged Origin grid and all `.15` gameplay/cleanup behavior. No Andromeda power/origin JSON balance values were changed for this config pass.
+
+# 1.4.75-overgrown.16 — Andromeda-only roster / Overgrown-native Origin grid
+
+- Andromeda now replaces the primary `origins:origin` layer (`replace: true`) instead of merging into Overgrown's bundled roster. Normal Origin selection therefore contains Andromeda's roster rather than stock Overgrown Human/Merling/Arachnid/etc.
+- The layer still lists all 13 Standard + 13 Champion IDs so operator assignment remains valid; Champion definitions remain unchoosable and stay hidden from ordinary selection.
+- Added an Overgrown-native paged icon selection grid inspired by Alternate Origin GUI. Clicking an icon updates Overgrown's existing detail panel immediately; the normal Select button, random-origin behavior, Orb flow, power badges, seasonal styling, and client/server selection packet remain owned by Overgrown.
+- The integration uses Overgrown's `dev.overgrown.origins.*` screen/API directly and contains no Apace/Yarn Origin-screen references.
+- Known public Alternate Origin GUI builds through 1.1.5 are marked incompatible because they target the older `io.github.apace100.origins.*` screen classes and can otherwise pass the shared `origins` mod-id dependency check before failing at mixin application.
+- Extended Gradle/source validation to enforce the replacement-only 26-ID roster, reject stock `origins:*` entries, require the grid mixins, and lock the incompatible AltOriginGui guard.
+- No Origin powers, balance values, cooldowns, resources, hydration, movement, or `.15` Satyr/helper-cleanup behavior are intentionally changed.
+
+# 1.4.75-overgrown.15 — Satyr sequencing / transient-state cleanup
+
+## Satyr movement sequence
+- Fixed **Satyr's Landing** being usable after an ordinary jump. Standard and Champion Satyr now require the shared Swift Leap charge resource to be consumed (`jumps == 0`) before Sneak can begin Landing.
+- Swift Leap still requires maximum Momentum, consumes the one airborne leap, resets on touching the ground, and can be restored by the existing successful Landing-bounce mechanic. No damage, cooldown, Momentum, or bounce-count values changed.
+
+## Origin-loss helper cleanup
+- Removed all **26** runtime grants of the legacy `common/debug` helper from Standard/Champion Origin-loss callbacks. That helper broadly revoked every power owned by `minecraft:state`, including powers outside Andromeda's namespace.
+- Origin loss now relies entirely on the typed `cleanup_origin_state` path. The cleanup remains namespace/source scoped and now explicitly includes the shared `common/dash_projectile_penalty`, the one non-Origin-path Andromeda `minecraft:state` helper that the old broad callback materially cleaned.
+- The `common/debug` data ID is retained but dormant for compatibility; no live Andromeda power references it.
+- Runtime `grant_power` actions fall from **220 to 194**.
+
+## Temporary helper disposal
+- Replaced the Arachne Web Nest, Wyverian fireball, and Champion Wyverian dragon-charge helper bats' `/kill @s` + `/tp @s ~ ~-300 ~` disposal with one typed `andromeda_origins:discard` action.
+- This removes the helper immediately instead of leaving a dying entity and avoids six command-backed actions. Retained command actions fall from **41 to 35**.
+- Remaining commands are intentionally limited to 22 layered `playsound`, 10 `stopsound`, 2 authored particle-sphere functions, and 1 Manticore nearest-tagged-player teleport.
+
+## Deduplication groundwork / validation
+- Added a Standard/Champion structural audit without renaming or merging any persisted power/resource IDs. Satyr, Faerie, and Gorgon are the strongest future shared-implementation candidates.
+- Extended Gradle/static verification to guard Satyr's Landing sequence, the removal of broad `common/debug` grants, the shared dash-penalty cleanup, typed helper disposal, exact retained-command distribution, and all previous migration/parity invariants.
+- `.15` deliberately leaves the 102 working `action_over_time` definitions unchanged; the supplied Spark profile did not identify periodic Opoli power processing as a meaningful hotspot.
+
+# 1.4.75-overgrown.14 — Veil Transposition atomic swap correction
+
+## Veil Transposition
+- Removed the redundant second Java raycast from Veil Transposition. Opoli's successful 32-block raycast now passes its exact actor/target pair directly into a typed Andromeda bi-entity action.
+- The exchange now moves the caster first and the target second in the same server invocation, avoiding the visible target-to-caster intermediate step caused by the previous target-first implementation.
+- Passenger actors/targets are explicitly dismounted before the exchange. This fixes mounted players snapping back to their vehicle and causing Transposition to behave like a one-way teleport.
+- Targeted vehicles themselves are not forcibly emptied; if the targeted creature is the vehicle, its passengers move with it normally.
+- Added rollback handling for the rare case where one side of the same-level teleport fails.
+- Range, line-of-sight, living-target restriction, cooldown, FX, Figura hook, warp cosmetics, and target Reality Shatter behavior are unchanged.
+
+## Validation
+- Added Gradle/static guards requiring exactly one direct `andromeda_origins:veil_transposition` bi-entity action and rejecting the old actor-only/re-raycast path.
+- Retained the `.13` command-count, vignette-centering, movement, aquatic, lifecycle, diet, Figura, scaling, and Origin-state regression checks.
+
+# 1.4.75-overgrown.13 — profiling-guided cleanup / overlay correction
+
+- Cleanup-focused successor to `.12`; no intentional balance, damage, cooldown, hydration, movement, or Champion changes.
+- Fixed Auroral Mirage, Manticore Beast of Blood/Rage, and the other Andromeda nausea-style screen overlays being visually offset under Opoli 1.90. All six overlays now use `anchor: center`, matching the scaled vignette renderer.
+- Removed the duplicate `andromeda_undetectable` entity-tag mirror and its once-per-second sync loop. Undetectable AI/render compatibility now queries Opoli's indexed `PowerContainer` directly and respects power suppression.
+- Converted Arachne Webspinner's `give @s minecraft:cobweb 5` command to native `apoli:give`, and replaced seven Fenrkin stalking `/attribute ... modifier remove` calls with a direct typed attribute action. Retained command-backed power actions fall from **49 to 41**.
+- Removed Selkie retaliation's redundant once-per-second legacy ownership cleanup; normal expiry already clears both the current `minecraft:debuff` and old `minecraft:state` source. Together with Undetectable, recurring `action_over_time` definitions fall from 104 to **102**.
+- Fixed the Gradle 9.5.1 `Task.project` deprecation in `processResources` by capturing the expanded mod version during configuration; this removes the warning that would become an error under Gradle 10.
+- Extended Gradle verification to enforce all six centered nausea overlays in addition to existing JSON/count/movement/keybind/command guardrails.
+- Singleplayer Spark profile review (`.12`, ~295 s sample) shows Andromeda at roughly **0.02%** and Opoli at roughly **0.54%** of sampled active server-tick work. `ActionOverTimePower` itself accounted for only about **8 ms self-time** in the sampled tick tree, so `.13` deliberately avoids risky timer rewrites with little measured upside.
+- Static/regression validation: **149 PASS / 0 FAIL** before packaging; normalized `.12 -> .13` Andromeda JSON comparison reports **0 unexpected semantic differences**.
+
+# 1.4.75-overgrown.12 — typed-action / cleanup foundation
+
+- Cleanup-only release: no intentional balance, cooldown, damage, movement, hydration, HUD, or Champion gameplay changes from `.11`.
+- Replaced **299 JSON command callbacks plus the remaining Arachne function callback** with typed Andromeda/Opoli actions. The old `andromedaorigins internal_*` Brigadier API is no longer used by powers/functions.
+- Added typed Andromeda actions for Enhanced FX (entity/local/raycast-hit), Origin-loss cleanup, tags, actionbar text, safe revive, Mortal Resolve, Champion Mortal Resolve, exact-health restore, cosmetic lightning, harmful-effect cleanup, and Veil Transposition.
+- Reduced command-backed power actions from **348 to 49**. The remaining commands are deliberately limited to behavior-sensitive targeted sound control, exact attribute cleanup, projectile/helper teleport/kill paths, functions, and one give action for a later pass.
+- Figura hook/resource resets now call Opoli `PowerResources` directly instead of executing `/resource set` through Brigadier.
+- Migrated the rebindable **Origin Toggle** control to Opoli's data-driven keybind loader while preserving `key.andromeda_origins.toggle`, default **C**, and saved rebind behavior.
+- Replaced deprecated `ServerPlayerEvents.ALLOW_DEATH` usage with `ServerLivingEntityEvents.ALLOW_DEATH` plus a player guard; respawn behavior remains on `ServerPlayerEvents.AFTER_RESPAWN`.
+- Mortal Resolve now applies Resistance IV + Strength IV through Minecraft's direct status-effect API instead of four `/effect give` command dispatches.
+- Added `-Xlint:deprecation` to Java compilation so future deprecated API use is visible immediately.
+- Added Gradle-native `verifyAndromedaResources`; `check`/`build` now validate JSON parsing, 194 power/26 Origin counts, the retained-command budget, the data-driven toggle keybind, and key movement-migration guardrails.
+- Static/regression validation: **132 PASS / 0 FAIL**. A normalized semantic comparison against exact `.11` reports **0 unexpected Andromeda JSON/function behavior changes** after accounting for the intentional command→typed-action substitutions.
+- Full Gradle compilation is still unavailable in this sandbox because `services.gradle.org` cannot resolve; local `gradlew clean build` is authoritative.
+
+# 1.4.75-overgrown.11 — movement / swim semantic parity pass
+
+- Replaced `.10`'s vanilla `minecraft:generic.water_movement_efficiency` workaround with the same dedicated water-speed system used by stable Apoli 2.12.0-pre.2: **Additional Entity Attributes 1.8.0+1.21** (`additionalentityattributes:generic.water_speed`). The exact AEA version is bundled with Andromeda.
+- Restored Siren/Nereid/Selkie and Champion swim bonuses to their original multiplicative semantics: **+25% / +35% / +45%**.
+- Migrated all remaining intended Andromeda swim modifiers to the same AEA attribute, including Satyr -50%, Submersion -95%, Selkie defensive/retaliation slows, Fenrkin rush, Veilborn armor penalties, and Reality Shatter. No Andromeda power now uses Opoli 1.90's drag-based `modify_swim_speed` implementation.
+- Fixed Veilborn's unintended water-speed gain: Daylight and Auroral Mirage retain their **+25% movement-speed** bonus but no longer add a separate +25% swim-speed bonus.
+- Restored stable dynamic movement -> air-speed transfer behavior for Arachne, Champion Arachne, Faerie, Champion Faerie, and Gorgon's temporary speed-up state. The compatibility mixin copies the currently active movement-speed attribute modifiers using the same grouped operation semantics as Apoli 2.12.0-pre.2, so potion/mod movement modifiers propagate to air movement again.
+- Retained all `.10` fixes for Nereid/Selkie hydration and oxygen ownership, Nereid Aura startup/hydration/FX, Lichling Doom retention/detonation, scoped Origin-loss cleanup, diet tooltips, cooldown semantics, Figura hooks, native scaling, and step height.
+- Static validation: **114 PASS / 0 FAIL**. Semantic comparison against the exact `.10` source reports **0 unexpected power changes** and **0 unexpected non-power changes**.
+- Full dependency-aware Gradle compilation is still blocked in this environment because `services.gradle.org` cannot resolve; run `gradlew clean build` locally before deployment.
+
+# 1.4.75-overgrown.10 — aquatic / lifecycle parity pass
+
+- Fixed Nereid and Selkie hydration/oxygen flicker by removing periodic `gain_air` loops that were competing with Opoli 1.90's native water-breathing air handling.
+- Standard Nereid now uses native underwater breathing plus a separate dry-land gill condition; stored Wet, water, or rain suppresses the land-suffocation state.
+- Selkie now uses native underwater breathing with its land-suffocation state only while fully dry (`groundweak`). Champion Selkie remains free of the dry-land penalty.
+- Fixed Nereid Convalescing Aura failing to start under Opoli's missing-resource semantics. The channel can begin before `aurafarming` exists, then uses its charge resource once the helper is active. Self/ally hydration and Aura particles/FX remain intact.
+- Replaced the three aquatic Origins' positive `modify_swim_speed` bonuses with vanilla 1.21.1 `minecraft:generic.water_movement_efficiency`: Siren 0.25, Nereid 0.35, Selkie 0.45 (same values for Champions). Opoli's current positive swim-speed path modifies water drag and caps at 0.96, which collapsed the old +25/+35/+45 values into nearly identical movement.
+- Fixed Lichling Chimes of Necros Doom stacks decaying between pulses. Each of the ten applications now directly refreshes Doom's 21-tick retention resource instead of calling `trigger_cooldown`, which Opoli refuses to retrigger while already active. Ten hits again reach the 11-value detonation threshold and preserve the 20 magic damage + Wither II finale.
+- Added scoped Origin-loss transient cleanup for all 13 standard + 13 Champion Origins. Only helper powers under the lost Origin's own Andromeda prefix and known transient sources are removed; shared `common/*` state and unrelated addon/Origin debuffs are not blanket-cleared. This removes stale helper HUD bars/cooldowns after Origin switches without restoring the old polling/migration lifecycle manager.
+- Restored blocked-food item tooltips by wiring Fabric's client tooltip callback into Opoli's own `TooltipPower`. All five diet restriction conditions remain byte-for-structure equivalent to stable v1.4.75.
+- No Apace/CCA player-data migration or automatic old-player repair system was reintroduced. Existing incompatible player data should still be reset/reselected when necessary.
+
+# 1.4.75-overgrown.9 — Mojmap compile corrections
+
+- Fixed Mojang-mapped 1.21.1 compile errors in the Veilborn pearl entity and Fabric resource reload listener.
+- `Entity#hasVehicle()` Yarn usage was replaced with Mojmap `Entity#isPassenger()`.
+- Enhanced FX reload listener now implements `ResourceManagerReloadListener#onResourceManagerReload`.
+- No gameplay migration/legacy player-data compatibility was reintroduced.
+
+# 1.4.75-overgrown.8 — clean Mojang-mapped Overgrown source
+
+- Switched the standalone project to `loom.officialMojangMappings()` and converted the Java source to Mojang names.
+- Removed `LegacyPowerCompat` and the custom legacy `attribute_modify_transfer`, `like_water`, and `conduit_power_on_land` compatibility mixins.
+- Removed automatic old-player Origin/Apoli migration, integrity reconciliation, and general repair commands. Existing incompatible player data is intentionally handled by reset/reselection when needed.
+- Uses current Overgrown/Opoli powers for air speed and aquatic behavior instead of recreating removed Apace power types.
+- Keeps Andromeda-owned gameplay systems that are still required, including Curtain Step's projectile, Mortal Resolve/Incapacitated handling, Figura hooks, Arachne crafting safety, custom FX/audio, and exact-version handshake.
+- Targets Overgrown Origins 1.41.0 and Opoli 1.90.0 on Fabric 1.21.1 / Java 21.
+
 # v1.4.75
 
 ## Aquatic hydration / breathing reliability

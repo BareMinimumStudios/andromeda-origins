@@ -57,8 +57,8 @@
                 "pitch": 0.2
               },
               {
-                "type": "origins:execute_command",
-                "command": "andromedaorigins internal_fx arachne.eightfold_dash"
+                "type": "andromeda_origins:enhanced_fx",
+                "event": "arachne.eightfold_dash"
               },
               {
                 "type": "origins:grant_power",
@@ -133,8 +133,8 @@
                   "pitch": 0.7
                 },
                 {
-                  "type": "origins:execute_command",
-                  "command": "andromedaorigins internal_fx arachne.eightfold_grapple"
+                  "type": "andromeda_origins:enhanced_fx",
+                  "event": "arachne.eightfold_grapple"
                 },
                 {
                   "type": "origins:spawn_particles",
@@ -179,8 +179,11 @@
               "type": "origins:and",
               "actions": [
                 {
-                  "type": "origins:execute_command",
-                  "command": "title @s actionbar {\"text\": \"You must target an entity or a block!\", \"color\": \"red\"}"
+                  "type": "andromeda_origins:actionbar",
+                  "text": {
+                    "text": "You must target an entity or a block!",
+                    "color": "red"
+                  }
                 },
                 {
                   "type": "origins:delay",
@@ -188,7 +191,7 @@
                   "action": {
                     "type": "origins:change_resource",
                     "resource": "*:arachne/primary_primary",
-                    "change": 180,
+                    "change": 20,
                     "operation": "set"
                   }
                 }
@@ -246,5 +249,5 @@
     }
   ],
   "name": "Eightfold Swiftness",
-  "description": "Press your Primary Ability key on the ground to burst forward for 0.5 seconds without forcing you downward; the dash retains Arachne step assistance. Use it while airborne to fire a strand of silk toward a block or creature within 16 blocks and pull yourself in that direction.\n \nWhile using this movement and for 3 seconds afterward, you take 50% less projectile damage. §e§lMovement Ability§r."
+  "description": "Press your Primary Ability key on the ground to burst forward for 0.5 seconds without forcing you downward; the dash retains Arachne step assistance. Use it while airborne to fire a strand of silk toward a block or creature within 16 blocks and pull yourself in that direction.\n \nWhile using this movement and for 3 seconds afterward, your projectile damage dealt is reduced by 50%. §e§lMovement Ability§r."
 }

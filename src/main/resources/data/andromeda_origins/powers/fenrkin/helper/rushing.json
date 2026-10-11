@@ -40,16 +40,17 @@
     "modifier": {
       "id": "andromeda_origins:fenrkin_helper_rushing_speed",
       "attribute": "minecraft:generic.movement_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": 1
     }
   },
   "waterspeed": {
-    "type": "origins:modify_swim_speed",
+    "type": "origins:attribute",
     "modifier": {
       "id": "andromeda_origins:fenrkin_helper_rushing_waterspeed",
-      "operation": "add_multiplied_total",
-      "amount": 0.5
+      "operation": "multiply_total_multiplicative",
+      "amount": 0.5,
+      "attribute": "additionalentityattributes:generic.water_speed"
     }
   }
 }

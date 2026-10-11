@@ -30,12 +30,18 @@
       "should_render": false
     },
     "max_action": {
-      "type": "origins:execute_command",
-      "command": "title @s actionbar {\"text\": \"You are out of breath!\", \"color\": \"red\"}"
+      "type": "andromeda_origins:actionbar",
+      "text": {
+        "text": "You are out of breath!",
+        "color": "red"
+      }
     },
     "min_action": {
-      "type": "origins:execute_command",
-      "command": "title @s actionbar {\"text\": \"You can use Stamina Surge again!\", \"color\": \"green\"}"
+      "type": "andromeda_origins:actionbar",
+      "text": {
+        "text": "You can use Stamina Surge again!",
+        "color": "green"
+      }
     }
   },
   "soundcooldown": {
@@ -66,8 +72,11 @@
         "pitch": 0.7
       },
       "else_action": {
-        "type": "origins:execute_command",
-        "command": "title @s actionbar {\"text\": \"You are out of breath, let your Stamina fully regenerate!\", \"color\": \"red\"}"
+        "type": "andromeda_origins:actionbar",
+        "text": {
+          "text": "You are out of breath, let your Stamina fully regenerate!",
+          "color": "red"
+        }
       }
     },
     "key": {
@@ -566,5 +575,5 @@
     }
   ],
   "name": "Stamina Surge",
-  "description": "Stamina regenerates while this ability is not in use. Hold your Secondary Ability key to double your movement speed at the cost of 1 Stamina per second. While holding Stamina Surge on land, press Jump to perform a powerful leap. A leap normally costs 50% of your maximum Stamina; after a near-full first leap, a brief follow-up window lets a second leap spend the remaining Stamina even if sprinting drained a small amount between jumps.\n \nYour projectile damage is reduced by 50% while using Stamina Surge and for 3 seconds afterward. §e§lMovement Ability§r."
+  "description": "Stamina regenerates while this ability is not in use. Hold your Secondary Ability key to double your movement speed at the cost of 1 Stamina per second. While holding Stamina Surge on land, press Jump to perform a powerful leap. A leap normally costs 50% of your maximum Stamina; after a near-full first leap, a brief follow-up window lets a second leap spend the remaining Stamina even if sprinting drained a small amount between jumps.\n \nYour projectile damage is reduced by 50% while using Stamina Surge and for 3 seconds afterward. \u00a7e\u00a7lMovement Ability\u00a7r."
 }

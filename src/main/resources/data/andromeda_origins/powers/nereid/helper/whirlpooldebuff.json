@@ -3,8 +3,9 @@
   "callback": {
     "type": "origins:action_on_callback",
     "entity_action_removed": {
-      "type": "origins:execute_command",
-      "command": "tag @s remove andromeda_nereid_submersion_drown"
+      "type": "andromeda_origins:tag",
+      "tag": "andromeda_nereid_submersion_drown",
+      "operation": "remove"
     }
   },
   "remove": {
@@ -21,8 +22,9 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove andromeda_nereid_submersion_drown"
+          "type": "andromeda_origins:tag",
+          "tag": "andromeda_nereid_submersion_drown",
+          "operation": "remove"
         },
         {
           "type": "origins:revoke_power",
@@ -62,11 +64,13 @@
     }
   },
   "swim_lock": {
-    "type": "origins:modify_swim_speed",
+    "type": "origins:conditioned_attribute",
+    "tick_rate": 10,
     "modifier": {
       "id": "andromeda_origins:nereid_submersion_swim_lock",
-      "operation": "add_multiplied_total",
-      "amount": -0.95
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.95,
+      "attribute": "additionalentityattributes:generic.water_speed"
     },
     "condition": {
       "type": "origins:submerged_in",
@@ -78,7 +82,7 @@
     "modifier": {
       "id": "andromeda_origins:nereid_submersion_bottom_drag",
       "attribute": "minecraft:generic.movement_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": -0.85
     },
     "condition": {

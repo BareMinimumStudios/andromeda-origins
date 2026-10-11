@@ -14,8 +14,8 @@
           "command": "stopsound @a[distance=..64] player andromeda_origins:ability.nereid.convalescing_aura"
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx nereid.aura_end"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "nereid.aura_end"
         },
         {
           "type": "origins:grant_power",
@@ -685,7 +685,7 @@
     "modifier": {
       "id": "*:*",
       "attribute": "minecraft:generic.movement_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": -0.2
     }
   },

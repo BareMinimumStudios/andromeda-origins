@@ -38,7 +38,7 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:lichling/primary_primary",
-          "change": 7200,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -56,18 +56,19 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:lichling/secondary_soundcooldown",
-          "change": 20,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:lichling/secondary_active",
-          "change": 2,
+          "change": 0,
           "operation": "set"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s add lichling"
+          "type": "andromeda_origins:tag",
+          "tag": "lichling",
+          "operation": "add"
         }
       ]
     },
@@ -80,13 +81,13 @@
           "source": "minecraft:state"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove lichling"
+          "type": "andromeda_origins:tag",
+          "tag": "lichling",
+          "operation": "remove"
         },
         {
-          "type": "origins:grant_power",
-          "power": "*:common/debug",
-          "source": "minecraft:state"
+          "type": "andromeda_origins:cleanup_origin_state",
+          "origin": "lichling"
         }
       ]
     },
@@ -237,7 +238,7 @@
     "modifier": {
       "id": "*:*",
       "attribute": "minecraft:generic.max_health",
-      "operation": "add_value",
+      "operation": "add_base_early",
       "amount": 8
     }
   },
@@ -331,8 +332,8 @@
     },
     "entity_action": {
       "type": "origins:feed",
-      "nutrition": 2,
-      "saturation": 1
+      "saturation": 1,
+      "food": 2
     }
   },
   "good_digestion": {
@@ -354,5 +355,5 @@
     }
   ],
   "name": "Passive Features",
-  "description": "§e§lStats:§r\n+8 Max HP\n-35% Hunger Drain\n \n§e§lFeatures:§r\n- Your creature type is Undead. Instant Damage heals you and Instant Healing harms you.\n- You are immune to Poison, Regeneration, Slowness, Weakness, Mining Fatigue, Nausea, Darkness, and Blindness through your Undead type and explicit effect protections.\n- Hitting a creature while falling reduces its damage dealt by 20% for 10 seconds.\n- Killing a creature restores 2 Hunger and 4 Saturation.\n- When you strike a creature, nearby unoccupied Undead within 16 blocks are compelled to attack it. Toggleable.\n- Carrying or wearing any iron-tagged item anywhere in your inventory applies Wither I. Iron weapons also deal 20% more damage to you and apply Wither I on hit.\n- Sunlight reduces your movement speed and damage dealt by 35%.\n- Fire does not extinguish on its own.\n- You can only eat raw foods; valid foods are four times as effective."
+  "description": "§e§lStats:§r\n+8 Max HP\n-35% Hunger Drain\n \n§e§lFeatures:§r\n- Your creature type is Undead. Instant Damage heals you and Instant Healing harms you.\n- You are immune to Poison, Regeneration, Slowness, Weakness, Mining Fatigue, Nausea, Darkness, and Blindness through your Undead type and explicit effect protections.\n- Hitting a creature while falling reduces its damage dealt by 20% for 10 seconds.\n- Killing a creature restores 2 Hunger and 4 Saturation.\n- When you strike a creature, nearby unoccupied Undead within 16 blocks are compelled to attack it. Toggleable.\n- Carrying or wearing any iron-tagged item anywhere in your inventory applies Wither I. Iron weapons also deal 20% more damage to you and apply Wither I on hit.\n- Sunlight reduces your movement speed and damage dealt by 35%.\n- Fire does not extinguish on its own.\n- Valid raw foods are four times as effective."
 }

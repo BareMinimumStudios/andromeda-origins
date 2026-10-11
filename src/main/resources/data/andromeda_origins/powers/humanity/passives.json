@@ -8,12 +8,13 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:humanity/primary_active",
-          "change": 18000,
+          "change": 0,
           "operation": "set"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s add human"
+          "type": "andromeda_origins:tag",
+          "tag": "human",
+          "operation": "add"
         }
       ]
     },
@@ -21,13 +22,13 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove human"
+          "type": "andromeda_origins:tag",
+          "tag": "human",
+          "operation": "remove"
         },
         {
-          "type": "origins:grant_power",
-          "power": "*:common/debug",
-          "source": "minecraft:state"
+          "type": "andromeda_origins:cleanup_origin_state",
+          "origin": "humanity"
         }
       ]
     },
@@ -38,7 +39,7 @@
     "modifier": {
       "id": "*:*",
       "attribute": "minecraft:generic.max_health",
-      "operation": "add_value",
+      "operation": "add_base_early",
       "amount": -2
     }
   },

@@ -43,20 +43,12 @@
     }
   },
   "waterspeed": {
-    "type": "origins:modify_swim_speed",
+    "type": "origins:attribute",
     "modifier": {
       "id": "*:*",
-      "operation": "add_multiplied_total",
-      "amount": -0.15
-    }
-  },
-  "legacy_source_cleanup": {
-    "type": "origins:action_over_time",
-    "interval": 20,
-    "entity_action": {
-      "type": "origins:revoke_power",
-      "power": "*:*",
-      "source": "minecraft:state"
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.15,
+      "attribute": "additionalentityattributes:generic.water_speed"
     }
   }
 }

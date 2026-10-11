@@ -100,8 +100,8 @@
                     }
                   },
                   {
-                    "type": "origins:execute_command",
-                    "command": "andromedaorigins internal_fx selkie.phalanx_pulse"
+                    "type": "andromeda_origins:enhanced_fx",
+                    "event": "selkie.phalanx_pulse"
                   }
                 ]
               }
@@ -116,7 +116,7 @@
     "modifier": {
       "id": "*:*",
       "attribute": "minecraft:generic.movement_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": -0.1
     }
   }

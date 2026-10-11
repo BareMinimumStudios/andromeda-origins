@@ -8,7 +8,7 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:champion/arachne_passives_webbing",
-          "change": 200,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -20,19 +20,19 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:arachne/primary_primary",
-          "change": 200,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:arachne/secondary_raycast",
-          "change": 600,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:arachne/secondary_weave",
-          "change": 20,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -42,8 +42,9 @@
           "operation": "set"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s add arachne"
+          "type": "andromeda_origins:tag",
+          "tag": "arachne",
+          "operation": "add"
         }
       ]
     },
@@ -51,13 +52,13 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove arachne"
+          "type": "andromeda_origins:tag",
+          "tag": "arachne",
+          "operation": "remove"
         },
         {
-          "type": "origins:grant_power",
-          "power": "*:common/debug",
-          "source": "minecraft:state"
+          "type": "andromeda_origins:cleanup_origin_state",
+          "origin": "arachne"
         }
       ]
     },
@@ -72,15 +73,9 @@
     "modifier": {
       "id": "andromeda_origins:champion_arachne_passives_speed",
       "attribute": "minecraft:generic.movement_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": 0.2
     }
-  },
-  "airspeed": {
-    "type": "origins:attribute_modify_transfer",
-    "class": "modify_air_speed",
-    "attribute": "minecraft:generic.movement_speed",
-    "multiplier": 1
   },
   "effect_immunities": {
     "type": "origins:effect_immunity",
@@ -114,8 +109,8 @@
             {
               "type": "origins:in_block_anywhere",
               "block_condition": {
-                "type": "origins:in_tag",
-                "tag": "origins:cobwebs"
+                "type": "origins:block",
+                "block": "minecraft:cobweb"
               }
             },
             {
@@ -151,8 +146,8 @@
             {
               "type": "origins:in_block_anywhere",
               "block_condition": {
-                "type": "origins:in_tag",
-                "tag": "origins:cobwebs"
+                "type": "origins:block",
+                "block": "minecraft:cobweb"
               }
             },
             {
@@ -183,8 +178,9 @@
           "type": "origins:replaceable"
         },
         "if_action": {
-          "type": "origins:set_block",
-          "block": "origins:temporary_cobweb"
+          "type": "origins:ghost_block",
+          "block": "minecraft:cobweb",
+          "duration": 60
         }
       }
     },
@@ -194,7 +190,12 @@
     }
   },
   "no_slowdown": {
-    "type": "origins:simple"
+    "type": "origins:modify_block_stuck_speed",
+    "block_condition": {
+      "type": "origins:block",
+      "block": "minecraft:cobweb"
+    },
+    "multiplier": 1.0
   },
   "toggle": {
     "type": "origins:toggle",
@@ -226,8 +227,8 @@
             {
               "type": "origins:in_block_anywhere",
               "block_condition": {
-                "type": "origins:in_tag",
-                "tag": "origins:cobwebs"
+                "type": "origins:block",
+                "block": "minecraft:cobweb"
               }
             },
             {
@@ -277,8 +278,8 @@
   "punch_through": {
     "type": "origins:prevent_block_selection",
     "block_condition": {
-      "type": "origins:in_tag",
-      "tag": "origins:cobwebs"
+      "type": "origins:block",
+      "block": "minecraft:cobweb"
     },
     "condition": {
       "type": "origins:sneaking",
@@ -303,8 +304,8 @@
                 {
                   "type": "origins:in_block_anywhere",
                   "block_condition": {
-                    "type": "origins:in_tag",
-                    "tag": "origins:cobwebs"
+                    "type": "origins:block",
+                    "block": "minecraft:cobweb"
                   }
                 },
                 {
@@ -327,7 +328,7 @@
   "web_crafting": {
     "type": "origins:recipe",
     "recipe": {
-      "id": "origins:master_of_webs/web_crafting",
+      "id": "andromeda_origins:champion/arachne_web_crafting",
       "type": "minecraft:crafting_shapeless",
       "ingredients": [
         {
@@ -363,7 +364,7 @@
     "modifier": {
       "id": "andromeda_origins:champion_arachne_passives_size",
       "attribute": "minecraft:generic.scale",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": -0.2
     }
   },
@@ -373,7 +374,7 @@
     "modifier": {
       "id": "andromeda_origins:champion_arachne_passives_step_assist",
       "attribute": "minecraft:generic.step_height",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": 1.0
     },
     "condition": {

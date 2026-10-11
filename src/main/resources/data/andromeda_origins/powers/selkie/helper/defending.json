@@ -33,8 +33,8 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx selkie.bastion_pulse"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "selkie.bastion_pulse"
         },
         {
           "type": "origins:change_resource",
@@ -50,26 +50,28 @@
     "modifier": {
       "id": "*:*",
       "attribute": "minecraft:generic.movement_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": -0.5
     },
     "condition": {
-      "type": "origins:power",
-      "power": "andromeda_origins:common/champion",
+      "type": "origins:origin_tag",
+      "tag": "andromeda_origins:champion",
       "inverted": true
     },
     "tick_rate": 1
   },
   "waterspeed": {
-    "type": "origins:modify_swim_speed",
+    "type": "origins:conditioned_attribute",
+    "tick_rate": 10,
     "modifier": {
       "id": "*:*",
-      "operation": "add_multiplied_total",
-      "amount": -0.5
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.5,
+      "attribute": "additionalentityattributes:generic.water_speed"
     },
     "condition": {
-      "type": "origins:power",
-      "power": "andromeda_origins:common/champion",
+      "type": "origins:origin_tag",
+      "tag": "andromeda_origins:champion",
       "inverted": true
     }
   },

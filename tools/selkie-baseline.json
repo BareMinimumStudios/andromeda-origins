@@ -1,0 +1,23 @@
+{
+  "src/main/resources/data/andromeda_origins/origins/selkie.json": "34c20bccbe042bc8eed78a3224b7b81300fd848d650c9716d9a909b98adcfffc",
+  "src/main/resources/data/andromeda_origins/origins/champion_selkie.json": "409ffed86d2b99e0df26d644a747d33fd38f499bcf087d0aa8af279e3b1f7067",
+  "src/main/resources/data/andromeda_origins/powers/champion/selkie_passives.json": "dfb1fa5bdc5a5ee0f110eddee146f93f019888963eccea06c8b8f09269976404",
+  "src/main/resources/data/andromeda_origins/powers/selkie/figura.json": "cda96ed928f509be5bca6b092d752937ab127763e00d90ce4cebb29ed1889d68",
+  "src/main/resources/data/andromeda_origins/powers/selkie/primary.json": "f7b0788a1b0d8f6c9ba94d7225a5f1b022b9dcfd2a320bea3ec93833eeebcfd4",
+  "src/main/resources/data/andromeda_origins/powers/selkie/aquatic_traits.json": "4970565ef396d4b3ca12be6359b520213ffa3df2a7f369733acd83aa52d11241",
+  "src/main/resources/data/andromeda_origins/powers/selkie/helper/retaliated.json": "ce219a33faedbfd2e9f9dd686d1c5b6edd63e883e43f9021ea5ffaa83193df48",
+  "src/main/resources/data/andromeda_origins/powers/selkie/helper/merlingplus.json": "2d97e3a3fe27bdd9bca14d2823d70a5640f52623dc458506f2e86a8b1069beae",
+  "src/main/resources/data/andromeda_origins/powers/selkie/helper/selkiewet.json": "b76c1db00eac3bb078a14e2c3b27c48ebc26e2c7d17d691e4e761144d1d1d585",
+  "src/main/resources/data/andromeda_origins/powers/selkie/helper/finishcasting.json": "cfe6f3b2b647d7a153b3b9c10d8b84d5e3ce9cecc4ad6f3f7f9da5b1009c7e24",
+  "src/main/resources/data/andromeda_origins/powers/selkie/helper/lifetide.json": "7d332a29901810d61babd07804525feb9fb87d42ccac94aba50166712a148263",
+  "src/main/resources/data/andromeda_origins/powers/selkie/helper/groundweak.json": "fc1fae378281008f9389001cf46f1dbf5e744a627bf1faa0969fcf13e94fe88d",
+  "src/main/resources/data/andromeda_origins/powers/selkie/helper/staring.json": "4b5967359f230db466a07867a3672efd8106c34cf12106db0f11f6f33e5d8907",
+  "src/main/resources/data/andromeda_origins/powers/selkie/helper/defending.json": "833ed3d2d5fd731bc3d5ceb6ba05ffdea443debe06ac43229de6b21844661f44",
+  "src/main/resources/data/andromeda_origins/powers/selkie/helper/merlingminus.json": "46dfbdc237a4c610fde45686a70f276bfae0b000e5adee0c9ce75772dd7ffcf0",
+  "src/main/resources/data/andromeda_origins/powers/selkie/passives.json": "73760b31eb2a87aa68e2dc1f51f3b57840a6c6dd29c011a8c6db9ebbb123f356",
+  "src/main/resources/data/andromeda_origins/powers/selkie/secondary.json": "d4e775e7cc3a17cc08fdf288bc0e5cc9996e8013f81595383eadd5b05c6273d5",
+  "src/main/resources/data/andromeda_origins/andromeda_fx/selkie.json": "749429c9b4fa5752ce6e41c295d63ebcecba7677813b10b55abcd5d303ad55ef",
+  "src/main/resources/assets/andromeda_origins/models/item/selkie_icon.json": "985907fda4a8af682506faa63a4728f64ea833ba85a2dba491d7ee93f32125cf",
+  "src/main/resources/assets/andromeda_origins/textures/item/origin_icon/selkie.png": "a7a2ea0472705daa50bfaab64daff229dfb21bd6f6272332e75d3fe5451f3147",
+  "src/main/resources/assets/andromeda_origins/sounds/abilities/selkie/surging_tides.ogg": "7415422c6aec7508af2ed24d3b30a75d19684c771f45096e474fea0e7d4d0858"
+}

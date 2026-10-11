@@ -5,16 +5,17 @@
     "modifier": {
       "id": "*:*",
       "attribute": "minecraft:generic.movement_speed",
-      "operation": "add_multiplied_base",
-      "amount": -0.1
+      "operation": "multiply_base_additive",
+      "amount": -0.05
     }
   },
   "waterspeed": {
-    "type": "origins:modify_swim_speed",
+    "type": "origins:attribute",
     "modifier": {
       "id": "*:*",
-      "operation": "add_multiplied_base",
-      "amount": -0.1
+      "operation": "multiply_base_additive",
+      "amount": -0.05,
+      "attribute": "additionalentityattributes:generic.water_speed"
     }
   }
 }

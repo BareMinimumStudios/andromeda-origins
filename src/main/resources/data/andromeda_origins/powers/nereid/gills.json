@@ -1,4 +1,25 @@
 {
-  "type": "origins:water_breathing",
-  "hidden": true
+  "type": "apoli:water_breathing",
+  "hidden": true,
+  "suffocate_outside_water": true,
+  "condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:power",
+        "power": "andromeda_origins:common/wet",
+        "inverted": true
+      },
+      {
+        "type": "origins:fluid_height",
+        "fluid": "minecraft:water",
+        "comparison": "==",
+        "compare_to": 0
+      },
+      {
+        "type": "origins:in_rain",
+        "inverted": true
+      }
+    ]
+  }
 }

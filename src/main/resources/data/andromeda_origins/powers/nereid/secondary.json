@@ -17,8 +17,8 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx nereid.submersion"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "nereid.submersion"
         },
         {
           "type": "origins:play_sound",

@@ -16,5 +16,9 @@
   "order": 1,
   "impact": 3,
   "name": "Gorgon",
-  "description": "Gorgons descend from ancient serpentine beings whose gaze could bring living creatures to a halt. Their venom grows more dangerous with repeated strikes, while their esoteric power lets them suppress and siphon the strength of their enemies. Facing a Gorgon directly is often the first mistake a foe makes."
+  "description": "Gorgons descend from ancient serpentine beings whose gaze could bring living creatures to a halt. Their venom grows more dangerous with repeated strikes, while their esoteric power lets them suppress and siphon the strength of their enemies. Facing a Gorgon directly is often the first mistake a foe makes.",
+  "tags": [
+    "andromeda_origins:mystic",
+    "andromeda_origins:gorgon"
+  ]
 }

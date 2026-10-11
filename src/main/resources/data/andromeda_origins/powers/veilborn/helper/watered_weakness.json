@@ -1,0 +1,76 @@
+{
+  "type": "origins:multiple",
+  "callback": {
+    "type": "origins:action_on_callback",
+    "entity_action_added": {
+      "type": "andromeda_origins:actionbar",
+      "text": {
+        "text": "The water anchors you to reality!",
+        "color": "dark_purple"
+      }
+    }
+  },
+  "remove": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 90,
+    "start_value": 0,
+    "hud_render": {
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 2
+    },
+    "min_action": {
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "minecraft:state"
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_remove",
+      "change": -1,
+      "operation": "add"
+    },
+    "condition": {
+      "type": "origins:resource",
+      "resource": "*:veilborn/passives_weaknesstate",
+      "comparison": "==",
+      "compare_to": 0
+    }
+  },
+  "damagedown": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.5
+    }
+  },
+  "damagedownprojectile": {
+    "type": "origins:modify_projectile_damage",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.5
+    }
+  },
+  "speed": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "andromeda_origins:veilborn_watered_speed",
+      "attribute": "minecraft:generic.movement_speed",
+      "operation": "multiply_base_additive",
+      "amount": -0.4
+    }
+  },
+  "waterspeed": {
+    "type": "origins:attribute",
+    "modifier": {
+      "id": "andromeda_origins:veilborn_watered_water_speed",
+      "attribute": "additionalentityattributes:generic.water_speed",
+      "operation": "multiply_base_additive",
+      "amount": -0.4
+    }
+  }
+}

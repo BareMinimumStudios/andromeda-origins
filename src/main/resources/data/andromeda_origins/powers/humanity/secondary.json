@@ -7,8 +7,7 @@
       "should_render": false
     },
     "entity_action": {
-      "type": "origins:execute_command",
-      "command": "andromedaorigins internal_mortal_resolve"
+      "type": "andromeda_origins:mortal_resolve"
     },
     "key": {
       "key": "key.origins.secondary_active",
@@ -29,5 +28,5 @@
     }
   ],
   "name": "Mortal Resolve",
-  "description": "While Incapacitated, press your Secondary Ability key to rise for one final stand. §oTrust in yourself right now. Let your heart burn it up. You can change the world.§r\n \nYou revive and gain Resistance IV and Strength IV for 1 minute. When that minute ends, you die outright. While Mortal Resolve is active, death is final and cannot Incapacitate you again."
+  "description": "While Incapacitated, press your Secondary Ability key to rise for one final stand. \u00a7oTrust in yourself right now. Let your heart burn it up. You can change the world.\u00a7r\n \nYou revive and gain Resistance IV and Strength IV for 1 minute. When that minute ends, you die outright. While Mortal Resolve is active, death is final and cannot Incapacitate you again."
 }

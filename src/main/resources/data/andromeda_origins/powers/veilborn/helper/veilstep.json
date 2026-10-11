@@ -1,0 +1,23 @@
+{
+  "type": "origins:multiple",
+  "unpushable": {
+    "type": "origins:prevent_entity_collision"
+  },
+  "knockback": {
+    "type": "origins:modify_attribute",
+    "attribute": "minecraft:generic.knockback_resistance",
+    "modifier": {
+      "operation": "set_total",
+      "amount": 1
+    }
+  },
+  "slow_immunity": {
+    "type": "origins:effect_immunity",
+    "effects": [
+      "minecraft:slowness"
+    ]
+  },
+  "hidden": true,
+  "name": "Veil Step State",
+  "description": "Internal synced marker while a Veilborn is traversing the Veil. Keeps traversal unpushable without hiding the Veilborn from other players."
+}

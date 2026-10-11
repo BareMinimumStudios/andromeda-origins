@@ -8,7 +8,7 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:champion/manticore_passives_flammablent",
-          "change": 9,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -32,7 +32,7 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:manticore/primary_primary",
-          "change": 200,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -44,7 +44,7 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:manticore/secondary_unstoppable",
-          "change": 1800,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -54,8 +54,9 @@
           "operation": "set"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s add manticore"
+          "type": "andromeda_origins:tag",
+          "tag": "manticore",
+          "operation": "add"
         }
       ]
     },
@@ -63,13 +64,13 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove manticore"
+          "type": "andromeda_origins:tag",
+          "tag": "manticore",
+          "operation": "remove"
         },
         {
-          "type": "origins:grant_power",
-          "power": "*:common/debug",
-          "source": "minecraft:state"
+          "type": "andromeda_origins:cleanup_origin_state",
+          "origin": "manticore"
         }
       ]
     },
@@ -79,7 +80,7 @@
     "type": "origins:modify_damage_taken",
     "modifier": {
       "operation": "multiply_total_multiplicative",
-      "amount": -0.2
+      "amount": -0.15
     },
     "damage_condition": {
       "type": "origins:and",
@@ -100,7 +101,7 @@
     "type": "origins:modify_damage_dealt",
     "modifier": {
       "operation": "multiply_total_multiplicative",
-      "amount": 0.35
+      "amount": 0.25
     }
   },
   "toggle": {
@@ -249,8 +250,8 @@
     },
     "entity_action": {
       "type": "origins:feed",
-      "nutrition": 2,
-      "saturation": 2
+      "saturation": 2,
+      "food": 2
     },
     "damage_condition": {
       "type": "origins:projectile",
@@ -262,12 +263,12 @@
     "modifier": {
       "id": "andromeda_origins:champion_manticore_passives_size",
       "attribute": "minecraft:generic.scale",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": 0.2
     }
   },
   "name": "Champion Passive Features",
-  "description": "\u00a7e\u00a7lChampion Features:\u00a7r\n+20% Size\n+35% Melee Damage\n \n- Retains predatory senses, venom, devouring and physical resistance.\n- No Wet, cramped-space, food-efficiency or dietary penalties.\n- Beast of Blood still grants 30 seconds of Unstoppable, but does not inflict Famished afterward.\n- Sneak + Secondary activates \u00a7c\u00a7lBloodrift\u00a7r: lightning strikes as the Champion tears into reality, becomes [Undetectable], and erupts back out with another lightning strike, a roar, and a nearby 3-second Darkness burst. Attacking or taking damage also forces Bloodrift to end. Bloodrift has a 10-second cooldown.\n- Player-facing ability cooldowns recover at 2\u00d7 rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged.",
+  "description": "§e§lChampion Features:§r\n+20% Size\n+25% Melee Damage\n-15% Damage Taken from non-projectile, non-fall sources\n \n- Retains predatory senses, venom, devouring and physical resistance.\n- No Wet, cramped-space, food-efficiency or dietary penalties.\n- Beast of Blood still grants 30 seconds of Unstoppable, but does not inflict Famished afterward.\n- Sneak + Secondary activates §c§lBloodrift§r: lightning strikes as the Champion tears into reality, becomes [Undetectable], and erupts back out with another lightning strike, a roar, and a nearby 3-second Darkness burst. Attacking or taking damage also forces Bloodrift to end. Bloodrift has a 10-second cooldown.\n- Player-facing ability cooldowns recover at 2× rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged.",
   "bloodriftcooldown": {
     "type": "origins:cooldown",
     "cooldown": 200,
@@ -320,19 +321,21 @@
             "pitch": 0.85
           },
           {
-            "type": "origins:execute_command",
-            "command": "andromedaorigins internal_cosmetic_lightning"
+            "type": "andromeda_origins:cosmetic_lightning"
           },
           {
-            "type": "origins:execute_command",
-            "command": "andromedaorigins internal_fx manticore.bloodrift_enter"
+            "type": "andromeda_origins:enhanced_fx",
+            "event": "manticore.bloodrift_enter"
           },
           {
             "type": "origins:delay",
             "ticks": 2,
             "action": {
-              "type": "origins:execute_command",
-              "command": "andromedaorigins internal_fx_at manticore.bloodrift_tear ^ ^1.0 ^2.25"
+              "type": "andromeda_origins:enhanced_fx_local",
+              "event": "manticore.bloodrift_tear",
+              "left": 0.0,
+              "up": 1.0,
+              "forwards": 2.25
             }
           },
           {
@@ -357,16 +360,18 @@
             "operation": "set"
           },
           {
-            "type": "origins:execute_command",
-            "command": "andromedaorigins internal_cosmetic_lightning"
+            "type": "andromeda_origins:cosmetic_lightning"
           },
           {
-            "type": "origins:execute_command",
-            "command": "andromedaorigins internal_fx manticore.bloodrift_exit"
+            "type": "andromeda_origins:enhanced_fx",
+            "event": "manticore.bloodrift_exit"
           },
           {
-            "type": "origins:execute_command",
-            "command": "andromedaorigins internal_fx_at manticore.bloodrift_tear ^ ^1.0 ^2.25"
+            "type": "andromeda_origins:enhanced_fx_local",
+            "event": "manticore.bloodrift_tear",
+            "left": 0.0,
+            "up": 1.0,
+            "forwards": 2.25
           },
           {
             "type": "origins:delay",
@@ -382,8 +387,8 @@
             "type": "origins:delay",
             "ticks": 4,
             "action": {
-              "type": "origins:execute_command",
-              "command": "andromedaorigins internal_fx manticore.bloodrift_aftershock"
+              "type": "andromeda_origins:enhanced_fx",
+              "event": "manticore.bloodrift_aftershock"
             }
           },
           {
@@ -472,16 +477,18 @@
           "operation": "set"
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_cosmetic_lightning"
+          "type": "andromeda_origins:cosmetic_lightning"
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx manticore.bloodrift_exit"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "manticore.bloodrift_exit"
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx_at manticore.bloodrift_tear ^ ^1.0 ^2.25"
+          "type": "andromeda_origins:enhanced_fx_local",
+          "event": "manticore.bloodrift_tear",
+          "left": 0.0,
+          "up": 1.0,
+          "forwards": 2.25
         },
         {
           "type": "origins:delay",
@@ -497,8 +504,8 @@
           "type": "origins:delay",
           "ticks": 4,
           "action": {
-            "type": "origins:execute_command",
-            "command": "andromedaorigins internal_fx manticore.bloodrift_aftershock"
+            "type": "andromeda_origins:enhanced_fx",
+            "event": "manticore.bloodrift_aftershock"
           }
         },
         {
@@ -553,16 +560,18 @@
           "operation": "set"
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_cosmetic_lightning"
+          "type": "andromeda_origins:cosmetic_lightning"
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx manticore.bloodrift_exit"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "manticore.bloodrift_exit"
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx_at manticore.bloodrift_tear ^ ^1.0 ^2.25"
+          "type": "andromeda_origins:enhanced_fx_local",
+          "event": "manticore.bloodrift_tear",
+          "left": 0.0,
+          "up": 1.0,
+          "forwards": 2.25
         },
         {
           "type": "origins:delay",
@@ -578,8 +587,8 @@
           "type": "origins:delay",
           "ticks": 4,
           "action": {
-            "type": "origins:execute_command",
-            "command": "andromedaorigins internal_fx manticore.bloodrift_aftershock"
+            "type": "andromeda_origins:enhanced_fx",
+            "event": "manticore.bloodrift_aftershock"
           }
         },
         {

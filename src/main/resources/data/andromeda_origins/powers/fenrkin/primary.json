@@ -22,8 +22,8 @@
           "pitch": 1.0
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx fenrkin.on_the_hunt"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "fenrkin.on_the_hunt"
         },
         {
           "type": "origins:change_resource",
@@ -197,8 +197,11 @@
               "change": 1
             },
             "miss_action": {
-              "type": "origins:execute_command",
-              "command": "title @s actionbar {\"text\": \"You must target an entity!\", \"color\": \"red\"}"
+              "type": "andromeda_origins:actionbar",
+              "text": {
+                "text": "You must target an entity!",
+                "color": "red"
+              }
             },
             "bientity_condition": {
               "type": "origins:and",
@@ -234,16 +237,19 @@
               "type": "origins:and",
               "actions": [
                 {
-                  "type": "origins:execute_command",
-                  "command": "title @s actionbar {\"text\": \"Target marked!\", \"color\": \"green\"}"
+                  "type": "andromeda_origins:actionbar",
+                  "text": {
+                    "text": "Target marked!",
+                    "color": "green"
+                  }
                 },
                 {
                   "type": "origins:execute_command",
                   "command": "playsound andromeda_origins:ability.fenrkin.marked master @s ~ ~ ~ 1.15 1.0 1.0"
                 },
                 {
-                  "type": "origins:execute_command",
-                  "command": "andromedaorigins internal_fx fenrkin.mark"
+                  "type": "andromeda_origins:enhanced_fx",
+                  "event": "fenrkin.mark"
                 },
                 {
                   "type": "origins:grant_power",
@@ -258,8 +264,11 @@
               ]
             },
             "miss_action": {
-              "type": "origins:execute_command",
-              "command": "title @s actionbar {\"text\": \"You must target an entity!\", \"color\": \"red\"}"
+              "type": "andromeda_origins:actionbar",
+              "text": {
+                "text": "You must target an entity!",
+                "color": "red"
+              }
             },
             "bientity_action": {
               "type": "origins:target_action",
@@ -276,8 +285,8 @@
                     "command": "playsound andromeda_origins:ability.fenrkin.marked master @s ~ ~ ~ 1.15 1.0 1.0"
                   },
                   {
-                    "type": "origins:execute_command",
-                    "command": "andromedaorigins internal_fx fenrkin.mark"
+                    "type": "andromeda_origins:enhanced_fx",
+                    "event": "fenrkin.mark"
                   }
                 ]
               }
@@ -346,8 +355,7 @@
       "should_render": false
     },
     "min_action": {
-      "type": "origins:execute_command",
-      "command": "attribute @s minecraft:generic.movement_speed modifier remove andromeda_origins:fenrkin_primary_stalking_slow"
+      "type": "andromeda_origins:clear_fenrkin_stalking_slow"
     }
   },
   "stalking_state_decay": {
@@ -448,7 +456,7 @@
     "modifier": {
       "id": "andromeda_origins:fenrkin_primary_stalking_slow",
       "attribute": "minecraft:generic.movement_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": -0.75
     },
     "tick_rate": 1,
@@ -462,8 +470,8 @@
           "compare_to": 0
         },
         {
-          "type": "origins:power",
-          "power": "andromeda_origins:common/champion",
+          "type": "origins:origin_tag",
+          "tag": "andromeda_origins:champion",
           "inverted": true
         }
       ]
@@ -482,5 +490,5 @@
     }
   ],
   "name": "On the Hunt",
-  "description": "Press your Primary Ability key to enter §e§lOn the Hunt§r for 30 seconds, gaining +25% movement speed, attack speed, mining speed, and melee damage while sensing creatures within 64 blocks. Undetectable creatures cannot be revealed.\n \n§e§lMark of Fenrir:§r\nSneak and hold Primary Ability while focusing on a valid target. You move 75% slower while stalking. After 5 seconds, the target is marked for 30 seconds, revealed to you unless Undetectable, and takes 25% more damage from you."
+  "description": "Press your Primary Ability key to enter §e§lOn the Hunt§r for 30 seconds, gaining +20% movement speed, attack speed, mining speed, and melee damage while sensing creatures within 64 blocks. Undetectable creatures cannot be revealed.\n \n§e§lMark of Fenrir:§r\nSneak and hold Primary Ability while focusing on a valid target. You move 75% slower while stalking. After 5 seconds, the target is marked for 30 seconds, revealed to you unless Undetectable, and takes 25% more damage from you."
 }

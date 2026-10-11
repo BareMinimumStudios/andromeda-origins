@@ -9,12 +9,18 @@
       "should_render": false
     },
     "max_action": {
-      "type": "origins:execute_command",
-      "command": "title @s actionbar {\"text\": \"Fire mode: Fireball\", \"color\": \"green\"}"
+      "type": "andromeda_origins:actionbar",
+      "text": {
+        "text": "Fire mode: Fireball",
+        "color": "green"
+      }
     },
     "min_action": {
-      "type": "origins:execute_command",
-      "command": "title @s actionbar {\"text\": \"Fire mode: Line\", \"color\": \"green\"}"
+      "type": "andromeda_origins:actionbar",
+      "text": {
+        "text": "Fire mode: Line",
+        "color": "green"
+      }
     }
   },
   "fireball": {
@@ -124,7 +130,7 @@
               }
             ]
           },
-          "command_at_hit": "summon bat ~ ~1 ~ {attributes: [{id: \"minecraft:generic.scale\", base: 0.1d}],NoGravity:1b,Silent:1b,Tags:[\"helper\"], cardinal_components: {\"apoli:powers\": {powers: [{data: {}, sources: [\"minecraft:helper\"], id: \"andromeda_origins:wyverian/helper/fireball_granter\", type: \"apoli:action_on_callback\"}]}}}",
+          "command_at_hit": "andromedaorigins internal helper fireball",
           "command_step": 1,
           "command_along_ray": "function andromeda_origins:fireball_trajectory",
           "command_along_ray_only_on_hit": false
@@ -144,8 +150,11 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "title @s actionbar {\"text\": \"Ember Pyroclast interrupted!\", \"color\": \"red\"}"
+          "type": "andromeda_origins:actionbar",
+          "text": {
+            "text": "Ember Pyroclast interrupted!",
+            "color": "red"
+          }
         },
         {
           "type": "origins:change_resource",
@@ -233,12 +242,18 @@
       "should_render": false
     },
     "max_action": {
-      "type": "origins:execute_command",
-      "command": "title @s actionbar {\"text\": \"You are out of breath!\", \"color\": \"red\"}"
+      "type": "andromeda_origins:actionbar",
+      "text": {
+        "text": "You are out of breath!",
+        "color": "red"
+      }
     },
     "min_action": {
-      "type": "origins:execute_command",
-      "command": "title @s actionbar {\"text\": \"You can use your breath again!\", \"color\": \"green\"}"
+      "type": "andromeda_origins:actionbar",
+      "text": {
+        "text": "You can use your breath again!",
+        "color": "green"
+      }
     }
   },
   "breathcooldown": {
@@ -272,14 +287,17 @@
             "pitch": 1.0
           },
           {
-            "type": "origins:execute_command",
-            "command": "andromedaorigins internal_fx wyverian.ember"
+            "type": "andromeda_origins:enhanced_fx",
+            "event": "wyverian.ember"
           }
         ]
       },
       "else_action": {
-        "type": "origins:execute_command",
-        "command": "title @s actionbar {\"text\": \"You are out of breath, let your Ember fully regenerate!\", \"color\": \"red\"}"
+        "type": "andromeda_origins:actionbar",
+        "text": {
+          "text": "You are out of breath, let your Ember fully regenerate!",
+          "color": "red"
+        }
       }
     },
     "key": {
@@ -488,8 +506,8 @@
                       "compare_to": 0
                     },
                     "action": {
-                      "type": "origins:execute_command",
-                      "command": "andromedaorigins internal_fx wyverian.pyroclast_charge_1"
+                      "type": "andromeda_origins:enhanced_fx",
+                      "event": "wyverian.pyroclast_charge_1"
                     }
                   },
                   {
@@ -500,8 +518,8 @@
                       "compare_to": 5
                     },
                     "action": {
-                      "type": "origins:execute_command",
-                      "command": "andromedaorigins internal_fx wyverian.pyroclast_charge_2"
+                      "type": "andromeda_origins:enhanced_fx",
+                      "event": "wyverian.pyroclast_charge_2"
                     }
                   },
                   {
@@ -512,8 +530,8 @@
                       "compare_to": 10
                     },
                     "action": {
-                      "type": "origins:execute_command",
-                      "command": "andromedaorigins internal_fx wyverian.pyroclast_charge_3"
+                      "type": "andromeda_origins:enhanced_fx",
+                      "event": "wyverian.pyroclast_charge_3"
                     }
                   },
                   {
@@ -524,8 +542,8 @@
                       "compare_to": 15
                     },
                     "action": {
-                      "type": "origins:execute_command",
-                      "command": "andromedaorigins internal_fx wyverian.pyroclast_charge_4"
+                      "type": "andromeda_origins:enhanced_fx",
+                      "event": "wyverian.pyroclast_charge_4"
                     }
                   }
                 ]
@@ -572,8 +590,8 @@
               "inverted": true
             },
             {
-              "type": "origins:power",
-              "power": "andromeda_origins:common/champion"
+              "type": "origins:origin_tag",
+              "tag": "andromeda_origins:champion"
             }
           ]
         },

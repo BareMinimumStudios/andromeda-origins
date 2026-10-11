@@ -39,8 +39,7 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "tp @s @p[tag=mantileap,distance=0.1..10]"
+          "type": "andromeda_origins:manticore_drag"
         },
         {
           "type": "origins:change_resource",

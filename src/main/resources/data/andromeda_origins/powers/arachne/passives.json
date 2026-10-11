@@ -8,7 +8,7 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:arachne/passives_webbing",
-          "change": 200,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -26,19 +26,19 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:arachne/primary_primary",
-          "change": 200,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:arachne/secondary_raycast",
-          "change": 600,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:arachne/secondary_weave",
-          "change": 20,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -48,8 +48,9 @@
           "operation": "set"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s add arachne"
+          "type": "andromeda_origins:tag",
+          "tag": "arachne",
+          "operation": "add"
         }
       ]
     },
@@ -57,13 +58,13 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove arachne"
+          "type": "andromeda_origins:tag",
+          "tag": "arachne",
+          "operation": "remove"
         },
         {
-          "type": "origins:grant_power",
-          "power": "*:common/debug",
-          "source": "minecraft:state"
+          "type": "andromeda_origins:cleanup_origin_state",
+          "origin": "arachne"
         }
       ]
     },
@@ -78,7 +79,7 @@
     "modifier": {
       "id": "andromeda_origins:arachne_passives_health",
       "attribute": "minecraft:generic.max_health",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": -0.3
     }
   },
@@ -87,15 +88,9 @@
     "modifier": {
       "id": "andromeda_origins:arachne_passives_speed",
       "attribute": "minecraft:generic.movement_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": 0.2
     }
-  },
-  "airspeed": {
-    "type": "origins:attribute_modify_transfer",
-    "class": "modify_air_speed",
-    "attribute": "minecraft:generic.movement_speed",
-    "multiplier": 1
   },
   "effect_immunities": {
     "type": "origins:effect_immunity",
@@ -136,8 +131,8 @@
             {
               "type": "origins:in_block_anywhere",
               "block_condition": {
-                "type": "origins:in_tag",
-                "tag": "origins:cobwebs"
+                "type": "origins:block",
+                "block": "minecraft:cobweb"
               }
             },
             {
@@ -173,8 +168,8 @@
             {
               "type": "origins:in_block_anywhere",
               "block_condition": {
-                "type": "origins:in_tag",
-                "tag": "origins:cobwebs"
+                "type": "origins:block",
+                "block": "minecraft:cobweb"
               }
             },
             {
@@ -225,8 +220,9 @@
           "type": "origins:replaceable"
         },
         "if_action": {
-          "type": "origins:set_block",
-          "block": "origins:temporary_cobweb"
+          "type": "origins:ghost_block",
+          "block": "minecraft:cobweb",
+          "duration": 60
         }
       }
     },
@@ -236,7 +232,12 @@
     }
   },
   "no_slowdown": {
-    "type": "origins:simple"
+    "type": "origins:modify_block_stuck_speed",
+    "block_condition": {
+      "type": "origins:block",
+      "block": "minecraft:cobweb"
+    },
+    "multiplier": 1.0
   },
   "toggle": {
     "type": "origins:toggle",
@@ -268,8 +269,8 @@
             {
               "type": "origins:in_block_anywhere",
               "block_condition": {
-                "type": "origins:in_tag",
-                "tag": "origins:cobwebs"
+                "type": "origins:block",
+                "block": "minecraft:cobweb"
               }
             },
             {
@@ -319,8 +320,8 @@
   "punch_through": {
     "type": "origins:prevent_block_selection",
     "block_condition": {
-      "type": "origins:in_tag",
-      "tag": "origins:cobwebs"
+      "type": "origins:block",
+      "block": "minecraft:cobweb"
     },
     "condition": {
       "type": "origins:sneaking",
@@ -345,8 +346,8 @@
                 {
                   "type": "origins:in_block_anywhere",
                   "block_condition": {
-                    "type": "origins:in_tag",
-                    "tag": "origins:cobwebs"
+                    "type": "origins:block",
+                    "block": "minecraft:cobweb"
                   }
                 },
                 {
@@ -369,7 +370,7 @@
   "web_crafting": {
     "type": "origins:recipe",
     "recipe": {
-      "id": "origins:master_of_webs/web_crafting",
+      "id": "andromeda_origins:arachne/web_crafting",
       "type": "minecraft:crafting_shapeless",
       "ingredients": [
         {
@@ -434,13 +435,13 @@
     }
   ],
   "name": "Passive Features",
-  "description": "§e§lStats:§r\n-30% Max Health\n+20% Ground & Air Speed\n-20% Size\n+35% Hunger Drain\n+20% Damage Taken\n \n§e§lFeatures:§r\n- You are an Arthropod and can climb vertical surfaces.\n- You are immune to fall damage and Poison.\n- Cobwebs do not slow you. Once every 10 seconds, a non-sneaking melee hit places a temporary cobweb at the target; melee hits also inflict Poison II for 3 seconds.\n- You can sense creatures trapped in cobwebs or affected by §c§l[Webbed]§r. Undetectable creatures are excluded.\n- Outside sunlight, you deal 20% more damage to creatures trapped in cobwebs or affected by §c§l[Webbed]§r. In sunlight, your damage dealt is reduced by 10%.\n- You can craft cobwebs and attack through cobwebs while not sneaking.\n- Fire does not extinguish on its own.\n- You see 75% better in darkness than most creatures. Toggleable.\n- You are a Carnivore.",
+  "description": "§e§lStats:§r\n-30% Max Health\n+20% Ground & Air Speed\n-20% Size\n+35% Hunger Drain\n+20% Damage Taken\n \n§e§lFeatures:§r\n- You are an Arthropod and can climb vertical surfaces.\n- You are immune to fall damage and Poison.\n- Cobwebs do not slow you. Once every 10 seconds, a non-sneaking melee hit places a temporary cobweb at the target; melee hits also inflict Poison II for 3 seconds.\n- You can sense creatures trapped in cobwebs or affected by §c§l[Webbed]§r. Undetectable creatures are excluded.\n- Outside sunlight, you deal 20% more damage to creatures trapped in cobwebs or affected by §c§l[Webbed]§r. In sunlight, your damage dealt is reduced by 10%.\n- You can craft cobwebs and attack through cobwebs while not sneaking.\n- Fire does not extinguish on its own.\n- You see 75% better in darkness than most creatures. Toggleable.",
   "size": {
     "type": "origins:attribute",
     "modifier": {
       "id": "andromeda_origins:arachne_passives_size",
       "attribute": "minecraft:generic.scale",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": -0.2
     }
   },
@@ -450,7 +451,7 @@
     "modifier": {
       "id": "andromeda_origins:arachne_passives_step_assist",
       "attribute": "minecraft:generic.step_height",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": 1.0
     },
     "condition": {

@@ -61,8 +61,8 @@
         {
           "type": "origins:if_else",
           "condition": {
-            "type": "origins:power",
-            "power": "andromeda_origins:common/champion"
+            "type": "origins:origin_tag",
+            "tag": "andromeda_origins:champion"
           },
           "if_action": {
             "type": "origins:trigger_cooldown",
@@ -221,8 +221,8 @@
                   }
                 },
                 {
-                  "type": "origins:execute_command",
-                  "command": "andromedaorigins internal_fx satyr.landing_bounce"
+                  "type": "andromeda_origins:enhanced_fx",
+                  "event": "satyr.landing_bounce"
                 },
                 {
                   "type": "origins:play_sound",
@@ -239,8 +239,8 @@
                 {
                   "type": "origins:if_else",
                   "condition": {
-                    "type": "origins:power",
-                    "power": "andromeda_origins:common/champion"
+                    "type": "origins:origin_tag",
+                    "tag": "andromeda_origins:champion"
                   },
                   "if_action": {
                     "type": "origins:change_resource",
@@ -292,8 +292,8 @@
           "pitch": 1.0
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx satyr.landing"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "satyr.landing"
         },
         {
           "type": "origins:change_resource",

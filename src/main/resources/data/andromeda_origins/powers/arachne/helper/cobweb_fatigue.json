@@ -30,7 +30,7 @@
     "modifier": {
       "id": "andromeda_origins:arachne_helper_cobweb_fatigue_speed",
       "attribute": "minecraft:generic.movement_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": -0.25
     }
   },

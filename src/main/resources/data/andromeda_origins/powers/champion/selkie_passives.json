@@ -8,24 +8,25 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:selkie/primary_active",
-          "change": 3600,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:selkie/primary_active2",
-          "change": 600,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:selkie/secondary_active",
-          "change": 2400,
+          "change": 0,
           "operation": "set"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s add selkie"
+          "type": "andromeda_origins:tag",
+          "tag": "selkie",
+          "operation": "add"
         },
         {
           "type": "origins:grant_power",
@@ -38,8 +39,9 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove selkie"
+          "type": "andromeda_origins:tag",
+          "tag": "selkie",
+          "operation": "remove"
         },
         {
           "type": "origins:revoke_power",
@@ -57,9 +59,8 @@
           "source": "minecraft:state"
         },
         {
-          "type": "origins:grant_power",
-          "power": "*:common/debug",
-          "source": "minecraft:state"
+          "type": "andromeda_origins:cleanup_origin_state",
+          "origin": "selkie"
         }
       ]
     },
@@ -70,10 +71,11 @@
     "tag": "aquatic"
   },
   "waterspeed": {
-    "type": "origins:modify_swim_speed",
+    "type": "origins:attribute",
     "modifier": {
       "id": "andromeda_origins:champion_selkie_passives_waterspeed",
-      "operation": "add_multiplied_total",
+      "attribute": "additionalentityattributes:generic.water_speed",
+      "operation": "multiply_total_multiplicative",
       "amount": 0.45
     }
   },
@@ -121,14 +123,6 @@
       }
     }
   },
-  "land_breathing": {
-    "type": "origins:action_over_time",
-    "interval": 20,
-    "entity_action": {
-      "type": "origins:gain_air",
-      "value": 200
-    }
-  },
   "name": "Champion Passive Features",
-  "description": "\u00a7e\u00a7lChampion Features:\u00a7r\n+45% Swim Speed\n \n- Retains aquatic movement, retaliation, underwater vision and land breathing.\n- No dry-out, Silenced, land-speed, damage or dietary penalties.\n- Player-facing ability cooldowns recover at 2\u00d7 rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
+  "description": "§e§lChampion Features:§r\n+45% Swim Speed\n \n- Retains aquatic movement, retaliation, underwater vision and land breathing.\n- No dry-out, Silenced, land-speed, damage or dietary penalties.\n- Player-facing ability cooldowns recover at 2× rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
 }

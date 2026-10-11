@@ -4,23 +4,18 @@
     "type": "origins:and",
     "actions": [
       {
-        "type": "origins:grant_power",
-        "power": "origins:water_breathing",
+        "type": "origins:revoke_power",
+        "power": "origins:merling/water_breathing",
         "source": "minecraft:state"
       },
       {
         "type": "origins:grant_power",
-        "power": "origins:aqua_affinity",
+        "power": "origins:merling/aqua_affinity",
         "source": "minecraft:state"
       },
       {
         "type": "origins:grant_power",
-        "power": "origins:conduit_power_on_land",
-        "source": "minecraft:state"
-      },
-      {
-        "type": "origins:grant_power",
-        "power": "origins:air_from_potions",
+        "power": "origins:merling/air_from_potions",
         "source": "minecraft:state"
       },
       {

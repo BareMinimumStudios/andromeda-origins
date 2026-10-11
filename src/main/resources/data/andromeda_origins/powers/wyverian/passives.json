@@ -44,7 +44,7 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:wyverian/primary_fireselect",
-          "change": 20,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -62,19 +62,19 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:wyverian/primary_breathcooldown",
-          "change": 6,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:wyverian/primary_rawr",
-          "change": 60,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:wyverian/primary_active",
-          "change": 2,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -86,30 +86,31 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:wyverian/secondary_soundcooldown",
-          "change": 20,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:wyverian/secondary_active",
-          "change": 1,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:wyverian/sneakair_chargecooldown",
-          "change": 40,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:wyverian/sneakair_active",
-          "change": 1,
+          "change": 0,
           "operation": "set"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s add wyverian"
+          "type": "andromeda_origins:tag",
+          "tag": "wyverian",
+          "operation": "add"
         },
         {
           "type": "origins:change_resource",
@@ -122,13 +123,13 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove wyverian"
+          "type": "andromeda_origins:tag",
+          "tag": "wyverian",
+          "operation": "remove"
         },
         {
-          "type": "origins:grant_power",
-          "power": "*:common/debug",
-          "source": "minecraft:state"
+          "type": "andromeda_origins:cleanup_origin_state",
+          "origin": "wyverian"
         }
       ]
     },
@@ -405,7 +406,7 @@
     "type": "origins:modify_damage_taken",
     "modifier": {
       "operation": "multiply_total_multiplicative",
-      "amount": -0.2
+      "amount": -0.1
     },
     "damage_condition": {
       "type": "origins:and",
@@ -459,7 +460,7 @@
     "modifier": {
       "id": "andromeda_origins:wyverian_passives_speed",
       "attribute": "minecraft:generic.movement_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": -0.1
     }
   },
@@ -469,7 +470,7 @@
     "modifier": {
       "id": "andromeda_origins:wyverian_passives_speedown",
       "attribute": "minecraft:generic.movement_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": -0.2
     },
     "condition": {
@@ -547,7 +548,7 @@
   "elytra_flight": {
     "type": "origins:elytra_flight",
     "render_elytra": true,
-    "texture_location": "andromeda_origins:textures/entity/elytra.png"
+    "texture_location": "minecraft:textures/entity/elytra.png"
   },
   "nopropulsion": {
     "type": "origins:prevent_item_use",
@@ -584,7 +585,7 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
-      "text": "§e§lDamage Resistances:§r§f Most sources (-20%); magic, wither, freezing, void, suffocation, drowning, and dry-out damage are excluded. Fire (-100%).\n \n§c§lDamage Vulnerabilities:§r§f None.\n \n§e§lEffect Immunities:§r§f None."
+      "text": "§e§lDamage Resistances:§r§f Most sources (-10%); magic, wither, freezing, void, suffocation, drowning, and dry-out damage are excluded. Fire (-100%).\n \n§c§lDamage Vulnerabilities:§r§f None.\n \n§e§lEffect Immunities:§r§f None."
     },
     {
       "type": "origins:tooltip",
@@ -593,13 +594,13 @@
     }
   ],
   "name": "Passive Features",
-  "description": "§e§lStats:§r\n+20% Size\n+20% Melee Damage\n-10% Movement Speed\n \n§e§lFeatures:§r\n- Your wings allow natural elytra-style flight. Equipping an Elytra bypasses your normal flight restrictions.\n- Hitting a creature while falling or flying ignites it for 10 seconds.\n- You cannot use Firework Rockets or Wind Charges for propulsion unless an Elytra is equipped.\n- §e§lGusts of Freedom§r cannot be used while §c§l[Wet]§r.\n- While Wet or in cramped spaces, you lose your melee damage bonus and suffer an additional -20% movement speed. Contact with water extends the Wet penalty by 1 second per second, up to 2 minutes; cramped-space weakness ends once you have room again.\n- You are a Carnivore.",
+  "description": "§e§lStats:§r\n+20% Size\n+20% Melee Damage\n-10% Movement Speed\n-10% Damage Taken from most sources\n \n§e§lFeatures:§r\n- You are immune to fire damage. The -10% damage resistance does not apply to magic, wither, freezing, suffocation, void, drowning, or dry-out damage.\n- Your wings allow natural elytra-style flight. Equipping an Elytra bypasses your normal flight restrictions.\n- Hitting a creature while falling or flying ignites it for 10 seconds.\n- You cannot use Firework Rockets or Wind Charges for propulsion unless an Elytra is equipped.\n- §e§lGusts of Freedom§r cannot be used while §c§l[Wet]§r.\n- While Wet or in cramped spaces, you lose your melee damage bonus and suffer an additional -20% movement speed. Contact with water extends the Wet penalty by 1 second per second, up to 2 minutes; cramped-space weakness ends once you have room again.",
   "size": {
     "type": "origins:attribute",
     "modifier": {
       "id": "andromeda_origins:wyverian_passives_size",
       "attribute": "minecraft:generic.scale",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": 0.2
     }
   }

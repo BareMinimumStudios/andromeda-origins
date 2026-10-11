@@ -2,11 +2,15 @@
   "type": "origins:multiple",
   "hidden": true,
   "water_breathing": {
-    "type": "origins:water_breathing",
+    "type": "apoli:water_breathing",
+    "suffocate_outside_water": false
+  },
+  "dry_gills": {
+    "type": "apoli:water_breathing",
+    "suffocate_outside_water": true,
     "condition": {
       "type": "origins:power",
-      "power": "origins:water_breathing",
-      "inverted": true
+      "power": "andromeda_origins:selkie/helper/groundweak"
     }
   },
   "aqua_underwater": {
@@ -14,7 +18,7 @@
     "modifier": {
       "id": "andromeda_origins:aquatic_fallback_submerged_mining",
       "attribute": "minecraft:player.submerged_mining_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": 4.0
     },
     "tick_rate": 20,
@@ -23,7 +27,7 @@
       "conditions": [
         {
           "type": "origins:power",
-          "power": "origins:aqua_affinity",
+          "power": "origins:merling/aqua_affinity",
           "inverted": true
         },
         {
@@ -46,7 +50,7 @@
       "conditions": [
         {
           "type": "origins:power",
-          "power": "origins:aqua_affinity",
+          "power": "origins:merling/aqua_affinity",
           "inverted": true
         },
         {
@@ -62,19 +66,11 @@
       ]
     }
   },
-  "conduit": {
-    "type": "origins:conduit_power_on_land",
-    "condition": {
-      "type": "origins:power",
-      "power": "origins:conduit_power_on_land",
-      "inverted": true
-    }
-  },
   "air_from_potions": {
     "type": "origins:action_on_item_use",
     "condition": {
       "type": "origins:power",
-      "power": "origins:air_from_potions",
+      "power": "origins:merling/air_from_potions",
       "inverted": true
     },
     "item_condition": {

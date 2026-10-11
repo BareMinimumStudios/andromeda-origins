@@ -1,7 +1,6 @@
 {
   "powers": [
     "andromeda_origins:champion/siren_passives",
-    "andromeda_origins:common/aquatic_origin",
     "andromeda_origins:siren/aquatic_traits",
     "andromeda_origins:common/champion",
     "andromeda_origins:common/champion_cooldowns",
@@ -17,5 +16,11 @@
   "order": 110,
   "impact": 3,
   "name": "Champion Siren",
-  "description": "A command-only Champion variant of Siren. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Player-facing ability cooldowns recover twice as fast; charge times and resource costs remain unchanged."
+  "description": "A command-only Champion variant of Siren. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Player-facing ability cooldowns recover twice as fast; charge times and resource costs remain unchanged.",
+  "tags": [
+    "andromeda_origins:aquatic",
+    "andromeda_origins:seaside",
+    "andromeda_origins:champion",
+    "andromeda_origins:siren"
+  ]
 }

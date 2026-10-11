@@ -1,6 +1,6 @@
 # Custom Resource Bars
 
-**Current release: v1.4.75.** The authoritative HUD mapping remains **25 styles on sheet 1 + 6 styles on sheet 2**. Champion Veilborn reuses the existing Auroral Mirage cooldown bar for its 5-second cooldown; sprite indices are unchanged.
+**Current source: `1.4.75-overgrown.31`.** The authoritative HUD mapping remains **25 styles on sheet 1 + 6 styles on sheet 2**. Auroral Mirage uses the Veil Curtain bar for its cooldown and the Blue Cooldown bar for its 5-minute active timer; Champion Veilborn retains its fixed 5-second cooldown.
 
 Andromeda Origins uses two 256×256 Origins HUD sprite sheets and a global **01–31** art catalog. The global style number is for documentation; Origins itself uses zero-based `bar_index` values within each individual sheet.
 
@@ -23,10 +23,10 @@ Global style 25 is the final style on sheet 1 (`bar_index: 24`). Global style 26
 | 06 | `resource_bars_1.png` | 5 | Flutter Bar | Faerie air-jump charges |
 | 07 | `resource_bars_1.png` | 6 | Trickster Bar | Faerie Fae Illusions cooldown |
 | 08 | `resource_bars_1.png` | 7 | Dust Bar | Faerie Dust / Flutter resource |
-| 09 | `resource_bars_1.png` | 8 | Visionary Bar | Faerie Undetectable state; Satyr Vigil Perception state |
+| 09 | `resource_bars_1.png` | 8 | Visionary Bar | Faerie Undetectable 5-minute active-duration timer; Satyr Vigil Perception state |
 | 10 | `resource_bars_1.png` | 9 | Hunting Bar | Fenrkin On the Hunt active duration |
 | 11 | `resource_bars_1.png` | 10 | Wolf Bar | Fenrkin Mark of Fenrir progress; Fenrkin marked-target duration |
-| 12 | `resource_bars_1.png` | 11 | Blue Cooldown Bar | Faerie Concealment cooldown; Fenrkin Mark of Fenrir cooldown; Selkie Sealskin Bastion cooldown |
+| 12 | `resource_bars_1.png` | 11 | Blue Cooldown Bar | Faerie Concealment cooldown; Fenrkin Mark of Fenrir cooldown; Selkie Sealskin Bastion cooldown; Veilborn Auroral Mirage active-duration timer |
 | 13 | `resource_bars_1.png` | 12 | Shield Bar | Fenrkin Adrenaline active duration |
 | 14 | `resource_bars_1.png` | 13 | Resurrection Bar | Fenrkin Adrenaline cooldown; Lichling Death's Defiance cooldown |
 | 15 | `resource_bars_1.png` | 14 | Eye Bar | Gorgon Ophidian Gaze charges; recharge; Petrified duration |

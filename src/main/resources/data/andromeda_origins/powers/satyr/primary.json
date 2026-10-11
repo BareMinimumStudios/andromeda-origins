@@ -47,23 +47,23 @@
           "pitch": 1.0
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx satyr.rush"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "satyr.rush"
         },
         {
           "type": "origins:delay",
           "ticks": 2,
           "action": {
-            "type": "origins:execute_command",
-            "command": "andromedaorigins internal_fx satyr.rush_trail"
+            "type": "andromeda_origins:enhanced_fx",
+            "event": "satyr.rush_trail"
           }
         },
         {
           "type": "origins:delay",
           "ticks": 4,
           "action": {
-            "type": "origins:execute_command",
-            "command": "andromedaorigins internal_fx satyr.rush_trail"
+            "type": "andromeda_origins:enhanced_fx",
+            "event": "satyr.rush_trail"
           }
         },
         {
@@ -132,8 +132,8 @@
         {
           "type": "origins:if_else",
           "condition": {
-            "type": "origins:power",
-            "power": "andromeda_origins:common/champion"
+            "type": "origins:origin_tag",
+            "tag": "andromeda_origins:champion"
           },
           "if_action": {
             "type": "origins:change_resource",
@@ -221,5 +221,5 @@
     }
   ],
   "name": "Rush, Swift Leap & Satyr's Landing",
-  "description": "\u00a7e\u00a7lRush:\u00a7r\nPress your Primary Ability key to dash in the direction you are looking.\n \n\u00a7e\u00a7lSwift Leap:\u00a7r\nAt maximum Momentum, press Jump while airborne to launch yourself upward once. Swift Leap resets when you touch the ground.\n \n\u00a7e\u00a7lSatyr's Landing:\u00a7r\nPress Sneak while airborne to dive toward the ground. Landing deals 7 cramming damage in a 3-block radius. Hitting a creature instead resets Swift Leap and bounces you upward, up to 2 times.\n \nYou deal 50% less projectile damage for 3 seconds after Rush. \u00a7e\u00a7lMovement Ability\u00a7r."
+  "description": "§e§lRush:§r\nPress your Primary Ability key to dash in the direction you are looking.\n \n§e§lSwift Leap:§r\nAt maximum Momentum, press Jump while airborne to launch yourself upward once. Swift Leap resets when you touch the ground.\n \n§e§lSatyr's Landing:§r\nAfter Swift Leap has been consumed, press Sneak while airborne to dive toward the ground. Landing deals 7 cramming damage in a 3-block radius. Hitting a creature instead resets Swift Leap and bounces you upward, up to 2 times.\n \nYou deal 50% less projectile damage for 3 seconds after Rush. §e§lMovement Ability§r."
 }

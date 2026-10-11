@@ -44,8 +44,8 @@
         {
           "type": "origins:if_else",
           "condition": {
-            "type": "origins:power",
-            "power": "andromeda_origins:common/champion",
+            "type": "origins:origin_tag",
+            "tag": "andromeda_origins:champion",
             "inverted": true
           },
           "if_action": {
@@ -69,8 +69,8 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx manticore.beast_pulse"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "manticore.beast_pulse"
         },
         {
           "type": "origins:spawn_particles",
@@ -143,7 +143,6 @@
   "overlay": {
     "type": "origins:overlay",
     "hidden": true,
-    "sprite": "origins:phantomize_overlay",
     "red": 0.7,
     "green": 0.5,
     "blue": 0.2,
@@ -151,7 +150,9 @@
     "draw_mode": "nausea",
     "draw_phase": "above_hud",
     "visible_in_third_person": true,
-    "hide_with_hud": true
+    "hide_with_hud": true,
+    "texture": "minecraft:textures/misc/nausea.png",
+    "anchor": "center"
   },
   "glow": {
     "type": "origins:self_glow",

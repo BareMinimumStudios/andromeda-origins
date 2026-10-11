@@ -105,7 +105,6 @@
   "overlay": {
     "type": "origins:overlay",
     "hidden": true,
-    "sprite": "*:*",
     "red": 0.1,
     "green": 0.1,
     "blue": 0.1,
@@ -119,7 +118,7 @@
       "conditions": [
         {
           "type": "apoli:power_active",
-          "power": "origins:phantomize"
+          "power": "origins:phantom/phantomize"
         },
         {
           "type": "apoli:food_level",
@@ -127,6 +126,8 @@
           "compare_to": 8
         }
       ]
-    }
+    },
+    "texture": "minecraft:textures/misc/nausea.png",
+    "anchor": "center"
   }
 }

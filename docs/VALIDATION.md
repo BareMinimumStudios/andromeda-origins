@@ -1,0 +1,54 @@
+# .37 validation — 2026-10-10
+
+The complete `.36` source was imported into the `overgrown-1.21.1` branch, preserving Git history. The original checkout and downloaded source archive were retained as recovery copies. Synced ChatGPT project references were not modified.
+
+## Verified
+
+| Check | Result |
+| --- | --- |
+| Clean Cloche build, Java 21 / Kotlin 2.2.21 | Fabric and NeoForge artifacts pass |
+| JSON and resource checks | 318 JSON files, 194 root powers, 26 Origins, 34 registered sound files |
+| Kotlin conversion | No Java sources remain; loader-specific event/networking bridges compile |
+| Static Mixin bytecode | Nine compiled classes across common/Fabric/NeoForge contain static callbacks without singleton fields or initializers |
+| Selkie preservation | SHA-256 checks match all 21 original Selkie resource files |
+| Fabric dedicated server | Startup, command dispatch, resource reload, and graceful shutdown pass |
+| NeoForge dedicated server | Startup, command dispatch, resource reload, and graceful shutdown pass |
+| Native helper creation | Web nest, fireball, and dragon charge return success on both servers |
+| Fabric version negotiation | Missing and mismatched clients rejected; matching version passes login negotiation |
+| Configuration persistence | Both test servers generate the categorized gameplay TOML configuration |
+| Publishing configuration | Both workflow YAML files parse; release staging validates loader metadata, version, and dated changelog |
+| MixinMCP | Build plugin installed, project sync succeeds, updated dependency APIs and Origin screen injection targets inspected |
+
+The dedicated servers used isolated child folders under the supplied Fabric Server directory. Their disposable worlds and loopback ports were separate from the supplied server's world and production configuration. Tests used Origins 1.47.7 and Opoli 1.115.0 on both loaders, Fzzy Config 0.7.7, bundled Additional Entity Attributes 2.0.2+1.21.1, and NeoForge 21.1.248. NeoForge uses the complete Kotlin for Forge 5.11.0 distribution.
+
+The final servers load 1,131 powers including upstream and generated subpowers, 39 registered Origins including upstream entries, 47 inline badges, three power-gated recipes, and 112 Enhanced FX definitions. No Andromeda power parsing failures or obsolete-field warnings remain in the final server logs.
+
+## Findings fixed during verification
+
+- NeoForge items and sounds now register during its registry events instead of in the mod constructor.
+- New helper entities explicitly initialize their Opoli power attachment before receiving powers.
+- Seven current-schema corrections across six power files replace obsolete feed fields and provide Manticore's required damage condition.
+- Modified resources use UTF-8, preserving Minecraft formatting characters.
+- Optional reflection handles missing methods safely and selects the compatible Figura entity overload.
+- Mortal Resolve stores its deadline in Origin storage and clears expired/dead state. Manticore victims retain the actual caster's identity.
+
+Fabric logs three upstream messages about missing data fixers for Opoli's custom projectile, minion, and clone entities. An isolated control server without Andromeda reproduces them. The provided Fabric server libraries also log OSHI/JNA hardware-probe warnings during startup; these do not prevent startup. An empty flat-world preset produces a one-time vanilla `No key layers in MapLike[{}]` message on fresh test worlds. These are recorded separately from Andromeda failures.
+
+## Remaining validation limits
+
+Missing badge sprites use an independently drawn Andromeda glyph; copied upstream fallback textures have been removed. Native badges still use the artwork supplied by Origins.
+
+The tooltip fix replaces the recipe preview's background texture with flat slots and vanilla item rendering, and resets rendering state before badge tooltips. Compilation and dependency inspection pass. No game window was opened, so the final in-game appearance still needs visual confirmation.
+
+Dedicated-server startup cannot prove every ability interaction. Matching-client tests for Origin selection, Fzzy synchronization, two-caster Manticore lunges, Mortal Resolve death/reconnect/restart, and optional Figura/Incapacitated integrations remain manual release checks. NeoForge's required versioned payload negotiation compiles and the server starts; a full matching-client configuration handshake was not exercised.
+
+MC Publish is configured, but no release has been published. Set the Actions tokens and `CURSEFORGE_PROJECT_ID` repository variable before publishing to both stores. The required Origins/Opoli downloads are linked from the store descriptions; unverified CurseForge aliases are explicitly ignored.
+
+## Reproduce
+
+```sh
+python tools/validate_resources.py
+./gradlew clean build
+```
+
+Use a disposable dedicated server with the listed dependencies for runtime checks. `DEVELOPMENT.md` lists the remaining matching-client scenarios. The build's verification tasks check packaged resources and static Mixin bytecode automatically; CI also runs the independent JSON/schema/Selkie regression validator.

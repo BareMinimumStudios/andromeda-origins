@@ -8,36 +8,37 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:nereid/primary_soundcooldown",
-          "change": 20,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:nereid/primary_actualcooldown",
-          "change": 1800,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:nereid/primary_grrr",
-          "change": 60,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:nereid/primary_active",
-          "change": 2,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:nereid/secondary_active",
-          "change": 1800,
+          "change": 0,
           "operation": "set"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s add nereid"
+          "type": "andromeda_origins:tag",
+          "tag": "nereid",
+          "operation": "add"
         },
         {
           "type": "origins:grant_power",
@@ -50,8 +51,9 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove nereid"
+          "type": "andromeda_origins:tag",
+          "tag": "nereid",
+          "operation": "remove"
         },
         {
           "type": "origins:revoke_power",
@@ -69,9 +71,8 @@
           "source": "minecraft:state"
         },
         {
-          "type": "origins:grant_power",
-          "power": "*:common/debug",
-          "source": "minecraft:state"
+          "type": "andromeda_origins:cleanup_origin_state",
+          "origin": "nereid"
         }
       ]
     },
@@ -82,10 +83,11 @@
     "tag": "aquatic"
   },
   "waterspeed": {
-    "type": "origins:modify_swim_speed",
+    "type": "origins:attribute",
     "modifier": {
       "id": "andromeda_origins:champion_nereid_passives_waterspeed",
-      "operation": "add_multiplied_total",
+      "attribute": "additionalentityattributes:generic.water_speed",
+      "operation": "multiply_total_multiplicative",
       "amount": 0.35
     }
   },
@@ -195,14 +197,6 @@
           "type": "origins:in_rain"
         }
       ]
-    }
-  },
-  "breathing": {
-    "type": "origins:action_over_time",
-    "interval": 20,
-    "entity_action": {
-      "type": "origins:gain_air",
-      "value": 200
     }
   },
   "name": "Champion Passive Features",

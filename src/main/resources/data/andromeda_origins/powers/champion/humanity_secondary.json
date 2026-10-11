@@ -7,8 +7,7 @@
       "should_render": false
     },
     "entity_action": {
-      "type": "origins:execute_command",
-      "command": "andromedaorigins internal_champion_mortal_resolve"
+      "type": "andromeda_origins:champion_mortal_resolve"
     },
     "key": {
       "key": "key.origins.secondary_active",

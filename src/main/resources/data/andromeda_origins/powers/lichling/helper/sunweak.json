@@ -5,7 +5,7 @@
     "modifier": {
       "id": "andromeda_origins:lichling_helper_sunweak_speed",
       "attribute": "minecraft:generic.movement_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": -0.35
     }
   },

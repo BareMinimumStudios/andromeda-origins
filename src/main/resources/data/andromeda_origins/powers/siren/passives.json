@@ -14,18 +14,19 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:siren/primary_active",
-          "change": 2400,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:siren/secondary_active",
-          "change": 400,
+          "change": 0,
           "operation": "set"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s add siren"
+          "type": "andromeda_origins:tag",
+          "tag": "siren",
+          "operation": "add"
         },
         {
           "type": "origins:grant_power",
@@ -38,8 +39,9 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove siren"
+          "type": "andromeda_origins:tag",
+          "tag": "siren",
+          "operation": "remove"
         },
         {
           "type": "origins:grant_power",
@@ -47,9 +49,8 @@
           "source": "minecraft:state"
         },
         {
-          "type": "origins:grant_power",
-          "power": "*:common/debug",
-          "source": "minecraft:state"
+          "type": "andromeda_origins:cleanup_origin_state",
+          "origin": "siren"
         }
       ]
     },
@@ -89,10 +90,11 @@
     "tag": "aquatic"
   },
   "waterspeed": {
-    "type": "origins:modify_swim_speed",
+    "type": "origins:attribute",
     "modifier": {
       "id": "andromeda_origins:siren_passives_waterspeed",
-      "operation": "add_multiplied_total",
+      "attribute": "additionalentityattributes:generic.water_speed",
+      "operation": "multiply_total_multiplicative",
       "amount": 0.25
     }
   },
@@ -100,7 +102,7 @@
     "type": "origins:modify_damage_dealt",
     "modifier": {
       "operation": "multiply_total_multiplicative",
-      "amount": -0.1
+      "amount": -0.05
     }
   },
   "vulnerability": {
@@ -156,7 +158,7 @@
     }
   ],
   "name": "Passive Features",
-  "description": "§e§lStats:§r\n+25% Swim Speed\n-10% Damage Dealt\n+10% Damage Taken\n \n§e§lFeatures:§r\n- Your creature type is Aquatic.\n- You can breathe both air and water and can act in water as though you were on land.\n- You see 75% better in darkness and have perfect underwater vision. Toggleable.\n- You are permanently affected by Haste I.\n- Fire does not extinguish on its own.\n- Iron weapons deal an additional 20% damage to you and inflict Wither I.\n- You are a Carnivore.",
+  "description": "§e§lStats:§r\n+25% Swim Speed\n-5% Damage Dealt\n+10% Damage Taken\n \n§e§lFeatures:§r\n- Your creature type is Aquatic.\n- You can breathe both air and water and can act in water as though you were on land.\n- You see 75% better in darkness and have perfect underwater vision. Toggleable.\n- You are permanently affected by Haste I.\n- Fire does not extinguish on its own.\n- Iron weapons deal an additional 20% damage to you and inflict Wither I.",
   "infatuation_guard": {
     "type": "origins:invulnerability",
     "damage_condition": {

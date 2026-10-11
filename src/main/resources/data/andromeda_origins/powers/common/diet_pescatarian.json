@@ -1,26 +1,58 @@
 {
-  "type": "origins:prevent_item_use",
-  "item_condition": {
-    "type": "origins:all_of",
-    "conditions": [
-      {
-        "type": "origins:ingredient",
-        "ingredient": {
-          "tag": "origins:ignore_diet"
+  "type": "origins:multiple",
+  "restriction": {
+    "type": "origins:prevent_item_use",
+    "item_condition": {
+      "type": "origins:all_of",
+      "conditions": [
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "origins:ignore_diet"
+          },
+          "inverted": true
         },
-        "inverted": true
-      },
-      {
-        "type": "origins:ingredient",
-        "ingredient": {
-          "tag": "origins:pescatarian"
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "origins:pescatarian"
+          },
+          "inverted": true
         },
-        "inverted": true
-      },
-      {
-        "type": "origins:food"
-      }
-    ]
+        {
+          "type": "origins:food"
+        }
+      ]
+    }
+  },
+  "tooltip": {
+    "type": "origins:tooltip",
+    "item_condition": {
+      "type": "origins:all_of",
+      "conditions": [
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "origins:ignore_diet"
+          },
+          "inverted": true
+        },
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "origins:pescatarian"
+          },
+          "inverted": true
+        },
+        {
+          "type": "origins:food"
+        }
+      ]
+    },
+    "text": {
+      "text": "Pescatarian Diet: you cannot eat this item.",
+      "color": "red"
+    }
   },
   "name": "Pescatarian Diet",
   "description": "You can only consume foods classified as pescatarian. Diet-exempt foods and drinks are unaffected."

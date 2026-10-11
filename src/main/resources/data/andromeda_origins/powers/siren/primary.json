@@ -81,8 +81,8 @@
                 "command": "playsound andromeda_origins:ability.siren.infatuation_charm master @s ~ ~ ~ 0.60 1.0 1.0"
               },
               {
-                "type": "origins:execute_command",
-                "command": "andromedaorigins internal_fx siren.infatuation"
+                "type": "andromeda_origins:enhanced_fx",
+                "event": "siren.infatuation"
               },
               {
                 "type": "origins:execute_command",
@@ -173,8 +173,11 @@
         "type": "origins:and",
         "actions": [
           {
-            "type": "origins:execute_command",
-            "command": "title @s actionbar {\"text\": \"You must target an entity!\", \"color\": \"red\"}"
+            "type": "andromeda_origins:actionbar",
+            "text": {
+              "text": "You must target an entity!",
+              "color": "red"
+            }
           },
           {
             "type": "origins:delay",
@@ -182,7 +185,7 @@
             "action": {
               "type": "origins:change_resource",
               "resource": "*:*_active",
-              "change": 2399,
+              "change": 1,
               "operation": "set"
             }
           }
@@ -194,8 +197,8 @@
           "type": "origins:and",
           "actions": [
             {
-              "type": "origins:execute_command",
-              "command": "andromedaorigins internal_fx siren.infatuation_target"
+              "type": "andromeda_origins:enhanced_fx",
+              "event": "siren.infatuation_target"
             },
             {
               "type": "origins:delay",
@@ -330,14 +333,14 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "§c§lPacified:§r§f Unable to deal damage."
+      "text": "\u00a7c\u00a7lPacified:\u00a7r\u00a7f Unable to deal damage."
     },
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "§c§lSilenced:§r§f Unable to use active abilities."
+      "text": "\u00a7c\u00a7lSilenced:\u00a7r\u00a7f Unable to use active abilities."
     }
   ],
   "name": "Infatuation Tempo",
-  "description": "Press your Primary Ability key while looking at a creature within 30 blocks to Infatuate it for 10 seconds, applying §c§l[Pacified]§r and §c§l[Silenced]§r. While a creature is Infatuated, its attacks and origin-ability damage cannot harm Sirens.\n \nInfatuation lasts the full 10 seconds and cannot be broken early by movement or by taking damage."
+  "description": "Press your Primary Ability key while looking at a creature within 30 blocks to Infatuate it for 10 seconds, applying \u00a7c\u00a7l[Pacified]\u00a7r and \u00a7c\u00a7l[Silenced]\u00a7r. While a creature is Infatuated, its attacks and origin-ability damage cannot harm Sirens.\n \nInfatuation lasts the full 10 seconds and cannot be broken early by movement or by taking damage."
 }

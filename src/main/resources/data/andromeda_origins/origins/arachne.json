@@ -14,5 +14,10 @@
   "order": 1,
   "impact": 3,
   "name": "Arachne",
-  "description": "Arachne are swift, silk-bound hunters shaped by patience and precision. They control the battlefield through webs, poison, and sudden bursts of movement, turning trapped prey into easy targets. In darkness and confined spaces, few creatures are better suited to dictate the flow of a fight."
+  "description": "Arachne are swift, silk-bound hunters shaped by patience and precision. They control the battlefield through webs, poison, and sudden bursts of movement, turning trapped prey into easy targets. In darkness and confined spaces, few creatures are better suited to dictate the flow of a fight.",
+  "tags": [
+    "andromeda_origins:beast",
+    "andromeda_origins:arachnid",
+    "andromeda_origins:arachne"
+  ]
 }

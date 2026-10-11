@@ -1,6 +1,6 @@
 # Optional Enhanced Origin FX
 
-**Current state: v1.4.75.** This layer lets Andromeda Origins use Spell Engine and More RPG Library particles/sounds when those mods are installed, while keeping the base mod fully functional without them.
+**Current source: `1.4.75-overgrown.31`.** This layer lets Andromeda Origins use Spell Engine and More RPG Library particles/sounds when those mods are installed, while keeping the base mod fully functional without them. Optional bridge failures remain non-fatal, but `.30` now logs malformed definitions and upstream particle/sound API mismatches once so compatibility regressions are diagnosable.
 
 ## v1.4.72 Wyverian camera-clear pass
 
@@ -111,7 +111,7 @@ This makes A/B testing simple. Setting `enabled` to `false` immediately returns 
 
 ## Implementation boundary
 
-- Apoli powers fire the internal cosmetic event with `andromedaorigins internal_fx <event>` at existing cast/impact points.
+- Apoli powers fire typed `andromeda_origins:enhanced_fx` actions at existing cast/impact points. Local-space and raycast-hit variants preserve the old positioned FX behavior without routing through Brigadier.
 - `EnhancedFxDefinitions` reloads the JSON definitions from server data.
 - `EnhancedFxCompat` checks optional mods and registered sounds/particles.
 - The private particle bridge calls Spell Engine's `ParticleGroupBuilder`, batch presets, and `ParticleHelper.sendBatches(...)` reflectively.

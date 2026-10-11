@@ -20,25 +20,25 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:champion/satyr_passives_bigjump",
-          "change": 5,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:champion/satyr_passives_stompcd",
-          "change": 60,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:champion/satyr_passives_stomp",
-          "change": 10,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:satyr/primary_active",
-          "change": 200,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -50,12 +50,13 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:satyr/secondary_active",
-          "change": 10,
+          "change": 0,
           "operation": "set"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s add satyr"
+          "type": "andromeda_origins:tag",
+          "tag": "satyr",
+          "operation": "add"
         }
       ]
     },
@@ -63,13 +64,13 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove satyr"
+          "type": "andromeda_origins:tag",
+          "tag": "satyr",
+          "operation": "remove"
         },
         {
-          "type": "origins:grant_power",
-          "power": "*:common/debug",
-          "source": "minecraft:state"
+          "type": "andromeda_origins:cleanup_origin_state",
+          "origin": "satyr"
         }
       ]
     },
@@ -412,8 +413,8 @@
           "pitch": 1.0
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx satyr.swift_leap"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "satyr.swift_leap"
         },
         {
           "type": "origins:change_resource",
@@ -576,6 +577,12 @@
           "resource": "*:*_stompcd",
           "comparison": "==",
           "compare_to": 0
+        },
+        {
+          "type": "origins:resource",
+          "resource": "*:*_jumps",
+          "comparison": "==",
+          "compare_to": 0
         }
       ]
     },
@@ -626,7 +633,7 @@
     "modifier": {
       "id": "andromeda_origins:champion_satyr_passives_size",
       "attribute": "minecraft:generic.scale",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": -0.17
     }
   },
@@ -636,7 +643,7 @@
     "modifier": {
       "id": "andromeda_origins:champion_satyr_passives_step_assist",
       "attribute": "minecraft:generic.step_height",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": 1.0
     },
     "condition": {
@@ -645,5 +652,5 @@
     }
   },
   "name": "Champion Passive Features",
-  "description": "\u00a7e\u00a7lChampion Features:\u00a7r\n-17% Size\n \n- Retains Momentum, fall immunity, movement abilities and Vigil Perception.\n- No health, swimming, boot, hunger-at-maximum-Momentum or dietary penalties.\n- Reaching maximum Momentum does not increase Hunger drain.\n- Player-facing ability cooldowns recover at 2\u00d7 rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
+  "description": "§e§lChampion Features:§r\n-17% Size\n \n- Retains Momentum (up to +65% movement speed), fall immunity, movement abilities and Vigil Perception.\n- No health, swimming, boot, hunger-at-maximum-Momentum or dietary penalties.\n- Reaching maximum Momentum does not increase Hunger drain.\n- Player-facing ability cooldowns recover at 2× rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
 }

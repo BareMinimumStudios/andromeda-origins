@@ -8,7 +8,25 @@
     "hud_render": {
       "should_render": false,
       "bar_index": 1
-    }
+    },
+    "on_change": [
+      {
+        "value": 1,
+        "entity_action": {
+          "type": "andromeda_origins:tag",
+          "tag": "andromeda_figura_1",
+          "operation": "add"
+        }
+      },
+      {
+        "value": 0,
+        "entity_action": {
+          "type": "andromeda_origins:tag",
+          "tag": "andromeda_figura_1",
+          "operation": "remove"
+        }
+      }
+    ]
   },
   "2": {
     "type": "origins:resource",
@@ -18,7 +36,25 @@
     "hud_render": {
       "should_render": false,
       "bar_index": 2
-    }
+    },
+    "on_change": [
+      {
+        "value": 1,
+        "entity_action": {
+          "type": "andromeda_origins:tag",
+          "tag": "andromeda_figura_2",
+          "operation": "add"
+        }
+      },
+      {
+        "value": 0,
+        "entity_action": {
+          "type": "andromeda_origins:tag",
+          "tag": "andromeda_figura_2",
+          "operation": "remove"
+        }
+      }
+    ]
   },
   "3": {
     "type": "origins:resource",
@@ -28,7 +64,25 @@
     "hud_render": {
       "should_render": false,
       "bar_index": 3
-    }
+    },
+    "on_change": [
+      {
+        "value": 1,
+        "entity_action": {
+          "type": "andromeda_origins:tag",
+          "tag": "andromeda_figura_3",
+          "operation": "add"
+        }
+      },
+      {
+        "value": 0,
+        "entity_action": {
+          "type": "andromeda_origins:tag",
+          "tag": "andromeda_figura_3",
+          "operation": "remove"
+        }
+      }
+    ]
   },
   "4": {
     "type": "origins:resource",
@@ -38,7 +92,25 @@
     "hud_render": {
       "should_render": false,
       "bar_index": 4
-    }
+    },
+    "on_change": [
+      {
+        "value": 1,
+        "entity_action": {
+          "type": "andromeda_origins:tag",
+          "tag": "andromeda_figura_4",
+          "operation": "add"
+        }
+      },
+      {
+        "value": 0,
+        "entity_action": {
+          "type": "andromeda_origins:tag",
+          "tag": "andromeda_figura_4",
+          "operation": "remove"
+        }
+      }
+    ]
   },
   "5": {
     "type": "origins:resource",
@@ -48,10 +120,28 @@
     "hud_render": {
       "should_render": false,
       "bar_index": 5
-    }
+    },
+    "on_change": [
+      {
+        "value": 1,
+        "entity_action": {
+          "type": "andromeda_origins:tag",
+          "tag": "andromeda_figura_5",
+          "operation": "add"
+        }
+      },
+      {
+        "value": 0,
+        "entity_action": {
+          "type": "andromeda_origins:tag",
+          "tag": "andromeda_figura_5",
+          "operation": "remove"
+        }
+      }
+    ]
   },
   "name": "Figura Compatibility",
-  "description": "Legacy numbered Figura hooks remain supported for existing avatars. New avatars should use the semantic state names and Lua helper documented in FIGURA_COMPAT.md.",
+  "description": "Numbered Figura hooks remain supported for existing avatars. New avatars should use the semantic state names and Lua helper documented in FIGURA_COMPAT.md.",
   "hidden": true,
   "reset": {
     "type": "origins:action_on_callback",
@@ -125,6 +215,36 @@
         }
       ]
     },
-    "execute_chosen_when_orb": true
+    "execute_chosen_when_orb": true,
+    "entity_action_removed": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "andromeda_origins:tag",
+          "tag": "andromeda_figura_1",
+          "operation": "remove"
+        },
+        {
+          "type": "andromeda_origins:tag",
+          "tag": "andromeda_figura_2",
+          "operation": "remove"
+        },
+        {
+          "type": "andromeda_origins:tag",
+          "tag": "andromeda_figura_3",
+          "operation": "remove"
+        },
+        {
+          "type": "andromeda_origins:tag",
+          "tag": "andromeda_figura_4",
+          "operation": "remove"
+        },
+        {
+          "type": "andromeda_origins:tag",
+          "tag": "andromeda_figura_5",
+          "operation": "remove"
+        }
+      ]
+    }
   }
 }

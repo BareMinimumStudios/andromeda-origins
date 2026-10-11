@@ -1,7 +1,6 @@
 {
   "powers": [
     "andromeda_origins:champion/nereid_passives",
-    "andromeda_origins:common/aquatic_origin",
     "andromeda_origins:nereid/aquatic_traits",
     "andromeda_origins:common/champion",
     "andromeda_origins:common/champion_cooldowns",
@@ -17,5 +16,12 @@
   "order": 107,
   "impact": 3,
   "name": "Champion Nereid",
-  "description": "A command-only Champion variant of Nereid. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Player-facing ability cooldowns recover twice as fast; charge times and resource costs remain unchanged."
+  "description": "A command-only Champion variant of Nereid. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Player-facing ability cooldowns recover twice as fast; charge times and resource costs remain unchanged.",
+  "tags": [
+    "andromeda_origins:aquatic",
+    "andromeda_origins:seaside",
+    "andromeda_origins:champion",
+    "andromeda_origins:nereid",
+    "andromeda_origins:hydration"
+  ]
 }

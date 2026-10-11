@@ -1,0 +1,11 @@
+{
+  "required": false,
+  "package": "andromeda.origins.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "compat.ArmorModelApiRenderMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

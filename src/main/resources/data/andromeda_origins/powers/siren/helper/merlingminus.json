@@ -5,12 +5,7 @@
     "actions": [
       {
         "type": "origins:revoke_power",
-        "power": "origins:aqua_affinity",
-        "source": "minecraft:state"
-      },
-      {
-        "type": "origins:revoke_power",
-        "power": "origins:conduit_power_on_land",
+        "power": "origins:merling/aqua_affinity",
         "source": "minecraft:state"
       },
       {

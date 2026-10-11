@@ -14,5 +14,9 @@
   "order": 1,
   "impact": 3,
   "name": "Fenrkin",
-  "description": "Descendants of the legendary Dire Wolves, Fenrkin are relentless hunters gifted with keen senses and overwhelming physical strength. Once they catch the trail of their prey, few creatures can escape them. Fiercely loyal and remarkably resilient, a Fenrkin is at its most dangerous when the hunt begins."
+  "description": "Descendants of the legendary Dire Wolves, Fenrkin are relentless hunters gifted with keen senses and overwhelming physical strength. Once they catch the trail of their prey, few creatures can escape them. Fiercely loyal and remarkably resilient, a Fenrkin is at its most dangerous when the hunt begins.",
+  "tags": [
+    "andromeda_origins:beast",
+    "andromeda_origins:fenrkin"
+  ]
 }

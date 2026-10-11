@@ -8,7 +8,7 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:gorgon/passives_flammablent",
-          "change": 9,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -20,13 +20,13 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:gorgon/passives_stonevenom",
-          "change": 20,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:gorgon/primary_active",
-          "change": 20,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -38,13 +38,13 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:gorgon/primary_petrifycooldown",
-          "change": 2400,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:gorgon/secondary_active",
-          "change": 20,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -56,12 +56,13 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:gorgon/secondary_intimidatecooldown",
-          "change": 800,
+          "change": 0,
           "operation": "set"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s add gorgon"
+          "type": "andromeda_origins:tag",
+          "tag": "gorgon",
+          "operation": "add"
         }
       ]
     },
@@ -69,13 +70,13 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove gorgon"
+          "type": "andromeda_origins:tag",
+          "tag": "gorgon",
+          "operation": "remove"
         },
         {
-          "type": "origins:grant_power",
-          "power": "*:common/debug",
-          "source": "minecraft:state"
+          "type": "andromeda_origins:cleanup_origin_state",
+          "origin": "gorgon"
         }
       ]
     },
@@ -85,7 +86,7 @@
     "type": "origins:modify_damage_taken",
     "modifier": {
       "operation": "multiply_total_multiplicative",
-      "amount": -0.15
+      "amount": -0.1
     }
   },
   "toggle": {
@@ -108,7 +109,7 @@
     "modifier": {
       "id": "andromeda_origins:gorgon_passives_speed",
       "attribute": "minecraft:generic.movement_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": 0.15
     }
   },
@@ -116,7 +117,7 @@
     "type": "origins:modify_damage_taken",
     "modifier": {
       "operation": "multiply_total_multiplicative",
-      "amount": -0.2
+      "amount": -0.15
     },
     "damage_condition": {
       "type": "origins:and",
@@ -199,62 +200,6 @@
           "type": "origins:extinguish"
         }
       ]
-    }
-  },
-  "climbing": {
-    "type": "origins:climbing",
-    "condition": {
-      "type": "origins:all_of",
-      "conditions": [
-        {
-          "type": "origins:power_active",
-          "power": "*:*_toggle"
-        },
-        {
-          "type": "origins:any_of",
-          "conditions": [
-            {
-              "type": "origins:all_of",
-              "conditions": [
-                {
-                  "type": "origins:sneaking",
-                  "inverted": true
-                },
-                {
-                  "type": "origins:collided_horizontally"
-                }
-              ]
-            },
-            {
-              "type": "origins:all_of",
-              "conditions": [
-                {
-                  "type": "origins:sneaking"
-                },
-                {
-                  "type": "origins:any_of",
-                  "conditions": [
-                    {
-                      "type": "origins:block_collision",
-                      "offset_x": 0.01,
-                      "offset_z": 0.01
-                    },
-                    {
-                      "type": "origins:block_collision",
-                      "offset_x": -0.01,
-                      "offset_z": -0.01
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    "hold_condition": {
-      "type": "origins:sneaking",
-      "inverted": true
     }
   },
   "stonevenom": {
@@ -452,7 +397,7 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
-      "text": "§e§lDamage Resistances:§r§f All damage (-15%). Most sources receive an additional -20%, excluding fire, freezing, magic, void, wither, suffocation, drowning, and dry-out damage.\n \n§c§lDamage Vulnerabilities:§r§f Iron weapons (+20%).\n \n§e§lEffect Immunities:§r§f None."
+      "text": "§e§lDamage Resistances:§r§f All damage (-10%). Most sources receive an additional -15%, excluding fire, freezing, magic, void, wither, suffocation, drowning, and dry-out damage.\n \n§c§lDamage Vulnerabilities:§r§f Iron weapons (+20%).\n \n§e§lEffect Immunities:§r§f None."
     },
     {
       "type": "origins:tooltip",
@@ -461,19 +406,5 @@
     }
   ],
   "name": "Passive Features",
-  "description": "§e§lStats:§r\n+15% Movement Speed\n \n§e§lFeatures:§r\n- Melee hits inflict Poison I and Slowness I for 2 seconds. Hitting a Slowed target refreshes the duration and increases Slowness by one level. Striking a target at Slowness V applies §c§lStone Venom§r for 5 seconds.\n- You see perfectly in darkness and can climb vertical surfaces.\n- Fire extinguishes after no more than 3 fire-damage ticks.\n- Carrying or wearing any iron-tagged item anywhere in your inventory applies Wither I. Iron weapons also deal 20% more damage to you and apply Wither I on hit.\n- You can only eat raw foods; valid foods are four times as effective.\n- Falling more than 6 blocks reduces your movement speed by 30% for 10 seconds.\n- Creatures wearing pumpkins are immune to Ophidian Gaze and Transference.",
-  "step_assist": {
-    "type": "origins:conditioned_attribute",
-    "tick_rate": 1,
-    "modifier": {
-      "id": "andromeda_origins:gorgon_passives_step_assist",
-      "attribute": "minecraft:generic.step_height",
-      "operation": "add_multiplied_total",
-      "amount": 1.0
-    },
-    "condition": {
-      "type": "origins:power_active",
-      "power": "*:*_toggle"
-    }
-  }
+  "description": "§e§lStats:§r\n+15% Movement Speed\n-10% Damage Taken from all sources\n \n§e§lFeatures:§r\n- Melee hits inflict Poison I and Slowness I for 2 seconds. Hitting a Slowed target refreshes the duration and increases Slowness by one level. Striking a target at Slowness V applies §c§lStone Venom§r for 5 seconds.\n- You take an additional 15% less damage from most ordinary sources; fire, freezing, magic, suffocation, void, wither, drowning, and dry-out damage are excluded from this second reduction.\n- You can toggle perfect vision in darkness.\n- Fire extinguishes after no more than 3 fire-damage ticks.\n- Carrying or wearing any iron-tagged item anywhere in your inventory applies Wither I. Iron weapons also deal 20% more damage to you and apply Wither I on hit.\n- Valid raw foods are four times as effective.\n- Falling more than 6 blocks reduces your movement speed by 30% for 10 seconds.\n- Creatures wearing pumpkins are immune to Ophidian Gaze and Transference."
 }

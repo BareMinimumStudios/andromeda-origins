@@ -59,7 +59,12 @@ function M.snapshot() return player:getNbt() end
 function M.hasTag(tag,nbt) nbt=nbt or M.snapshot(); return tagsFrom(nbt)[tag]==true end
 function M.hasPower(id,nbt) nbt=nbt or M.snapshot(); local _,found=findPower(nbt,id); return found end
 function M.resource(id,nbt) nbt=nbt or M.snapshot(); local n,found=findPower(nbt,id); if not found then return nil end; return n==nil and 1 or n end
-function M.hook(index,nbt) local value=M.resource("andromeda_origins:common/figura_"..tostring(index),nbt); return value~=nil and value>0 end
+function M.hook(index,nbt)
+   nbt=nbt or M.snapshot()
+   if M.hasTag("andromeda_figura_"..tostring(index),nbt) then return true end
+   local value=M.resource("andromeda_origins:common/figura_"..tostring(index),nbt)
+   return value~=nil and value>0
+end
 function M.getOrigin(nbt)
    nbt=nbt or M.snapshot(); local tags=tagsFrom(nbt)
    for tag,origin in pairs(ORIGIN_TAGS) do if tags[tag] then return origin end end

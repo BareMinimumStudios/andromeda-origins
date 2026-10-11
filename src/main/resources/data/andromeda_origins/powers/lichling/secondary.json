@@ -34,12 +34,18 @@
       "should_render": false
     },
     "max_action": {
-      "type": "origins:execute_command",
-      "command": "title @s actionbar {\"text\": \"Your energy has been depleted!\", \"color\": \"red\"}"
+      "type": "andromeda_origins:actionbar",
+      "text": {
+        "text": "Your energy has been depleted!",
+        "color": "red"
+      }
     },
     "min_action": {
-      "type": "origins:execute_command",
-      "command": "title @s actionbar {\"text\": \"Your energy has fully recovered!\", \"color\": \"green\"}"
+      "type": "andromeda_origins:actionbar",
+      "text": {
+        "text": "Your energy has fully recovered!",
+        "color": "green"
+      }
     }
   },
   "soundcooldown": {
@@ -89,8 +95,8 @@
                 "command": "playsound andromeda_origins:ability.lichling.chimes_of_necros master @s ~ ~ ~ 0.55 1.0 1.0"
               },
               {
-                "type": "origins:execute_command",
-                "command": "andromedaorigins internal_fx lichling.chimes_start"
+                "type": "andromeda_origins:enhanced_fx",
+                "event": "lichling.chimes_start"
               },
               {
                 "type": "origins:execute_command",
@@ -113,8 +119,8 @@
                 "type": "origins:and",
                 "actions": [
                   {
-                    "type": "origins:execute_command",
-                    "command": "function andromeda_origins:big_sphere"
+                    "type": "andromeda_origins:particle_sphere",
+                    "preset": "soul"
                   },
                   {
                     "type": "origins:trigger_cooldown",
@@ -131,8 +137,8 @@
                           "compare_to": 10
                         },
                         "action": {
-                          "type": "origins:execute_command",
-                          "command": "andromedaorigins internal_fx lichling.chimes_pulse_1"
+                          "type": "andromeda_origins:enhanced_fx",
+                          "event": "lichling.chimes_pulse_1"
                         }
                       },
                       {
@@ -143,8 +149,8 @@
                           "compare_to": 9
                         },
                         "action": {
-                          "type": "origins:execute_command",
-                          "command": "andromedaorigins internal_fx lichling.chimes_pulse_2"
+                          "type": "andromeda_origins:enhanced_fx",
+                          "event": "lichling.chimes_pulse_2"
                         }
                       },
                       {
@@ -155,8 +161,8 @@
                           "compare_to": 8
                         },
                         "action": {
-                          "type": "origins:execute_command",
-                          "command": "andromedaorigins internal_fx lichling.chimes_pulse_3"
+                          "type": "andromeda_origins:enhanced_fx",
+                          "event": "lichling.chimes_pulse_3"
                         }
                       },
                       {
@@ -167,8 +173,8 @@
                           "compare_to": 7
                         },
                         "action": {
-                          "type": "origins:execute_command",
-                          "command": "andromedaorigins internal_fx lichling.chimes_pulse_4"
+                          "type": "andromeda_origins:enhanced_fx",
+                          "event": "lichling.chimes_pulse_4"
                         }
                       },
                       {
@@ -179,8 +185,8 @@
                           "compare_to": 6
                         },
                         "action": {
-                          "type": "origins:execute_command",
-                          "command": "andromedaorigins internal_fx lichling.chimes_pulse_5"
+                          "type": "andromeda_origins:enhanced_fx",
+                          "event": "lichling.chimes_pulse_5"
                         }
                       },
                       {
@@ -191,8 +197,8 @@
                           "compare_to": 5
                         },
                         "action": {
-                          "type": "origins:execute_command",
-                          "command": "andromedaorigins internal_fx lichling.chimes_pulse_6"
+                          "type": "andromeda_origins:enhanced_fx",
+                          "event": "lichling.chimes_pulse_6"
                         }
                       },
                       {
@@ -203,8 +209,8 @@
                           "compare_to": 4
                         },
                         "action": {
-                          "type": "origins:execute_command",
-                          "command": "andromedaorigins internal_fx lichling.chimes_pulse_7"
+                          "type": "andromeda_origins:enhanced_fx",
+                          "event": "lichling.chimes_pulse_7"
                         }
                       },
                       {
@@ -215,8 +221,8 @@
                           "compare_to": 3
                         },
                         "action": {
-                          "type": "origins:execute_command",
-                          "command": "andromedaorigins internal_fx lichling.chimes_pulse_8"
+                          "type": "andromeda_origins:enhanced_fx",
+                          "event": "lichling.chimes_pulse_8"
                         }
                       },
                       {
@@ -227,8 +233,8 @@
                           "compare_to": 2
                         },
                         "action": {
-                          "type": "origins:execute_command",
-                          "command": "andromedaorigins internal_fx lichling.chimes_pulse_9"
+                          "type": "andromeda_origins:enhanced_fx",
+                          "event": "lichling.chimes_pulse_9"
                         }
                       },
                       {
@@ -239,8 +245,8 @@
                           "compare_to": 1
                         },
                         "action": {
-                          "type": "origins:execute_command",
-                          "command": "andromedaorigins internal_fx lichling.chimes_pulse_10"
+                          "type": "andromeda_origins:enhanced_fx",
+                          "event": "lichling.chimes_pulse_10"
                         }
                       }
                     ]
@@ -283,12 +289,14 @@
                                   "change": 1
                                 },
                                 {
-                                  "type": "origins:trigger_cooldown",
-                                  "power": "*:lichling/helper/doom_unremove"
+                                  "type": "origins:change_resource",
+                                  "resource": "*:lichling/helper/doom_unremove",
+                                  "change": 21,
+                                  "operation": "set"
                                 },
                                 {
-                                  "type": "origins:execute_command",
-                                  "command": "andromedaorigins internal_fx lichling.doom_mark"
+                                  "type": "andromeda_origins:enhanced_fx",
+                                  "event": "lichling.doom_mark"
                                 }
                               ]
                             }
@@ -354,12 +362,14 @@
                                   "change": 1
                                 },
                                 {
-                                  "type": "origins:trigger_cooldown",
-                                  "power": "*:lichling/helper/doom_unremove"
+                                  "type": "origins:change_resource",
+                                  "resource": "*:lichling/helper/doom_unremove",
+                                  "change": 21,
+                                  "operation": "set"
                                 },
                                 {
-                                  "type": "origins:execute_command",
-                                  "command": "andromedaorigins internal_fx lichling.doom_mark"
+                                  "type": "andromeda_origins:enhanced_fx",
+                                  "event": "lichling.doom_mark"
                                 }
                               ]
                             }
@@ -425,12 +435,14 @@
                                   "change": 1
                                 },
                                 {
-                                  "type": "origins:trigger_cooldown",
-                                  "power": "*:lichling/helper/doom_unremove"
+                                  "type": "origins:change_resource",
+                                  "resource": "*:lichling/helper/doom_unremove",
+                                  "change": 21,
+                                  "operation": "set"
                                 },
                                 {
-                                  "type": "origins:execute_command",
-                                  "command": "andromedaorigins internal_fx lichling.doom_mark"
+                                  "type": "andromeda_origins:enhanced_fx",
+                                  "event": "lichling.doom_mark"
                                 }
                               ]
                             }
@@ -496,12 +508,14 @@
                                   "change": 1
                                 },
                                 {
-                                  "type": "origins:trigger_cooldown",
-                                  "power": "*:lichling/helper/doom_unremove"
+                                  "type": "origins:change_resource",
+                                  "resource": "*:lichling/helper/doom_unremove",
+                                  "change": 21,
+                                  "operation": "set"
                                 },
                                 {
-                                  "type": "origins:execute_command",
-                                  "command": "andromedaorigins internal_fx lichling.doom_mark"
+                                  "type": "andromeda_origins:enhanced_fx",
+                                  "event": "lichling.doom_mark"
                                 }
                               ]
                             }
@@ -567,12 +581,14 @@
                                   "change": 1
                                 },
                                 {
-                                  "type": "origins:trigger_cooldown",
-                                  "power": "*:lichling/helper/doom_unremove"
+                                  "type": "origins:change_resource",
+                                  "resource": "*:lichling/helper/doom_unremove",
+                                  "change": 21,
+                                  "operation": "set"
                                 },
                                 {
-                                  "type": "origins:execute_command",
-                                  "command": "andromedaorigins internal_fx lichling.doom_mark"
+                                  "type": "andromeda_origins:enhanced_fx",
+                                  "event": "lichling.doom_mark"
                                 }
                               ]
                             }
@@ -638,12 +654,14 @@
                                   "change": 1
                                 },
                                 {
-                                  "type": "origins:trigger_cooldown",
-                                  "power": "*:lichling/helper/doom_unremove"
+                                  "type": "origins:change_resource",
+                                  "resource": "*:lichling/helper/doom_unremove",
+                                  "change": 21,
+                                  "operation": "set"
                                 },
                                 {
-                                  "type": "origins:execute_command",
-                                  "command": "andromedaorigins internal_fx lichling.doom_mark"
+                                  "type": "andromeda_origins:enhanced_fx",
+                                  "event": "lichling.doom_mark"
                                 }
                               ]
                             }
@@ -709,12 +727,14 @@
                                   "change": 1
                                 },
                                 {
-                                  "type": "origins:trigger_cooldown",
-                                  "power": "*:lichling/helper/doom_unremove"
+                                  "type": "origins:change_resource",
+                                  "resource": "*:lichling/helper/doom_unremove",
+                                  "change": 21,
+                                  "operation": "set"
                                 },
                                 {
-                                  "type": "origins:execute_command",
-                                  "command": "andromedaorigins internal_fx lichling.doom_mark"
+                                  "type": "andromeda_origins:enhanced_fx",
+                                  "event": "lichling.doom_mark"
                                 }
                               ]
                             }
@@ -780,12 +800,14 @@
                                   "change": 1
                                 },
                                 {
-                                  "type": "origins:trigger_cooldown",
-                                  "power": "*:lichling/helper/doom_unremove"
+                                  "type": "origins:change_resource",
+                                  "resource": "*:lichling/helper/doom_unremove",
+                                  "change": 21,
+                                  "operation": "set"
                                 },
                                 {
-                                  "type": "origins:execute_command",
-                                  "command": "andromedaorigins internal_fx lichling.doom_mark"
+                                  "type": "andromeda_origins:enhanced_fx",
+                                  "event": "lichling.doom_mark"
                                 }
                               ]
                             }
@@ -851,12 +873,14 @@
                                   "change": 1
                                 },
                                 {
-                                  "type": "origins:trigger_cooldown",
-                                  "power": "*:lichling/helper/doom_unremove"
+                                  "type": "origins:change_resource",
+                                  "resource": "*:lichling/helper/doom_unremove",
+                                  "change": 21,
+                                  "operation": "set"
                                 },
                                 {
-                                  "type": "origins:execute_command",
-                                  "command": "andromedaorigins internal_fx lichling.doom_mark"
+                                  "type": "andromeda_origins:enhanced_fx",
+                                  "event": "lichling.doom_mark"
                                 }
                               ]
                             }
@@ -922,12 +946,14 @@
                                   "change": 1
                                 },
                                 {
-                                  "type": "origins:trigger_cooldown",
-                                  "power": "*:lichling/helper/doom_unremove"
+                                  "type": "origins:change_resource",
+                                  "resource": "*:lichling/helper/doom_unremove",
+                                  "change": 21,
+                                  "operation": "set"
                                 },
                                 {
-                                  "type": "origins:execute_command",
-                                  "command": "andromedaorigins internal_fx lichling.doom_mark"
+                                  "type": "andromeda_origins:enhanced_fx",
+                                  "event": "lichling.doom_mark"
                                 }
                               ]
                             }

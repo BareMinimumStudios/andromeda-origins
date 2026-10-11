@@ -6,8 +6,9 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove andromeda_dragon_caster"
+          "type": "andromeda_origins:tag",
+          "tag": "andromeda_dragon_caster",
+          "operation": "remove"
         },
         {
           "type": "origins:change_resource",
@@ -36,7 +37,7 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:champion/wyverian_primary_fireselect",
-          "change": 20,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -54,19 +55,19 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:champion/wyverian_primary_breathcooldown",
-          "change": 6,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:champion/wyverian_primary_rawr",
-          "change": 60,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:champion/wyverian_primary_active",
-          "change": 2,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -78,30 +79,31 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:wyverian/secondary_soundcooldown",
-          "change": 20,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:wyverian/secondary_active",
-          "change": 1,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:wyverian/sneakair_chargecooldown",
-          "change": 40,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:wyverian/sneakair_active",
-          "change": 1,
+          "change": 0,
           "operation": "set"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s add wyverian"
+          "type": "andromeda_origins:tag",
+          "tag": "wyverian",
+          "operation": "add"
         }
       ]
     },
@@ -109,17 +111,18 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove andromeda_dragon_caster"
+          "type": "andromeda_origins:tag",
+          "tag": "andromeda_dragon_caster",
+          "operation": "remove"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove wyverian"
+          "type": "andromeda_origins:tag",
+          "tag": "wyverian",
+          "operation": "remove"
         },
         {
-          "type": "origins:grant_power",
-          "power": "*:common/debug",
-          "source": "minecraft:state"
+          "type": "andromeda_origins:cleanup_origin_state",
+          "origin": "wyverian"
         }
       ]
     },
@@ -199,7 +202,7 @@
     "type": "origins:modify_damage_taken",
     "modifier": {
       "operation": "multiply_total_multiplicative",
-      "amount": -0.2
+      "amount": -0.1
     },
     "damage_condition": {
       "type": "origins:and",
@@ -282,17 +285,17 @@
   "elytra_flight": {
     "type": "origins:elytra_flight",
     "render_elytra": true,
-    "texture_location": "andromeda_origins:textures/entity/elytra.png"
+    "texture_location": "minecraft:textures/entity/elytra.png"
   },
   "size": {
     "type": "origins:attribute",
     "modifier": {
       "id": "andromeda_origins:champion_wyverian_passives_size",
       "attribute": "minecraft:generic.scale",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": 0.2
     }
   },
   "name": "Champion Passive Features",
-  "description": "§e§lChampion Features:§r\n+20% Size\n+20% Melee Damage\n \n- Retains scales, fire immunity, flight and draconic breath powers.\n- Ember Flames are replaced by §d§lDragon's Breath§r and §d§lDragon Charge§r, which deal magic damage and use dragon-breath effects instead of flame/ignition.\n- No movement, Wet, cramped-space, propulsion or dietary penalties.\n- Wet and cramped-space checks do not suppress your movement bonus, melee bonus, or Gusts of Freedom.\n- Player-facing ability cooldowns recover at 2× rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
+  "description": "§e§lChampion Features:§r\n+20% Size\n+20% Melee Damage\n-10% Damage Taken from most sources\n \n- Retains scales, fire immunity, flight and draconic breath powers.\n- Ember Flames are replaced by §d§lDragon's Breath§r and §d§lDragon Charge§r, which deal magic damage and use dragon-breath effects instead of flame/ignition.\n- No movement, Wet, cramped-space, propulsion or dietary penalties.\n- Wet and cramped-space checks do not suppress your movement bonus, melee bonus, or Gusts of Freedom.\n- Player-facing ability cooldowns recover at 2× rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
 }

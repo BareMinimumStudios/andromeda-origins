@@ -1,47 +1,4 @@
 {
-  "veilborn.curtain_step": {
-    "particles": [
-      {
-        "id": "spell_engine:area_swirl",
-        "preset": "ground",
-        "count": 1,
-        "scale": 1.45,
-        "color": "#9A4DFF",
-        "opacity": 0.85,
-        "fade_out_hold": 0.25,
-        "glow": true
-      },
-      {
-        "id": "spell_engine:magic_arcane",
-        "preset": "impact",
-        "count": 18,
-        "speed": 0.1,
-        "scale": 1.0,
-        "color": "#C36CFF",
-        "glow": true,
-        "motion": "burst"
-      },
-      {
-        "id": "spell_engine:magic_spell",
-        "preset": "impact",
-        "count": 10,
-        "speed": 0.09,
-        "scale": 0.9,
-        "color": "#FF66FF",
-        "opacity": 0.82,
-        "glow": true,
-        "motion": "burst"
-      }
-    ],
-    "sounds": [
-      {
-        "id": "more_rpg_classes:stealth_vanish",
-        "volume": 0.36,
-        "pitch": 0.92,
-        "requires_mod": "more_rpg_classes"
-      }
-    ]
-  },
   "veilborn.transposition": {
     "particles": [
       {
@@ -410,5 +367,162 @@
         "requires_mod": "more_rpg_classes"
       }
     ]
+  },
+  "veilborn.veil_step_enter": {
+    "particles": [
+      {
+        "id": "spell_engine:area_swirl",
+        "preset": "ground",
+        "count": 1,
+        "scale": 1.45,
+        "color": "#9A4DFF",
+        "opacity": 0.85,
+        "fade_out_hold": 0.25,
+        "glow": true
+      },
+      {
+        "id": "spell_engine:magic_arcane",
+        "preset": "impact",
+        "count": 18,
+        "speed": 0.1,
+        "scale": 1.0,
+        "color": "#C36CFF",
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "spell_engine:magic_spell",
+        "preset": "impact",
+        "count": 10,
+        "speed": 0.09,
+        "scale": 0.9,
+        "color": "#FF66FF",
+        "opacity": 0.82,
+        "glow": true,
+        "motion": "burst"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "more_rpg_classes:stealth_vanish",
+        "volume": 0.36,
+        "pitch": 0.92,
+        "requires_mod": "more_rpg_classes"
+      }
+    ]
+  },
+  "veilborn.veil_step_exit": {
+    "particles": [
+      {
+        "id": "spell_engine:area_circle_1",
+        "preset": "ground",
+        "count": 1,
+        "scale": 1.9,
+        "scale_to": 1.35,
+        "color": "#9A4DFF",
+        "opacity": 0.88,
+        "fade_out_hold": 0.2,
+        "glow": true
+      },
+      {
+        "id": "spell_engine:magic_arcane",
+        "preset": "impact",
+        "count": 22,
+        "speed": 0.12,
+        "scale": 1.05,
+        "color": "#FF66FF",
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "spell_engine:smoke_medium",
+        "preset": "impact",
+        "count": 12,
+        "speed": 0.08,
+        "scale": 0.9,
+        "motion": "decelerate"
+      },
+      {
+        "id": "spell_engine:magic_spell",
+        "preset": "impact",
+        "count": 14,
+        "speed": 0.09,
+        "scale": 0.9,
+        "color": "#FF66FF",
+        "opacity": 0.82,
+        "glow": true,
+        "motion": "burst"
+      }
+    ],
+    "sounds": []
+  },
+  "veilborn.veil_tear": {
+    "particles": [
+      {
+        "id": "spell_engine:area_swirl",
+        "preset": "ground",
+        "count": 1,
+        "scale": 2.15,
+        "scale_to": 1.2,
+        "color": "#6E20B8",
+        "opacity": 0.9,
+        "fade_out_hold": 0.18,
+        "glow": true
+      },
+      {
+        "id": "spell_engine:magic_arcane",
+        "preset": "impact",
+        "count": 30,
+        "speed": 0.14,
+        "scale": 1.1,
+        "color": "#B13CFF",
+        "color_variance": 0.12,
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "spell_engine:magic_stripe",
+        "preset": "helix",
+        "count": 12,
+        "speed": 0.065,
+        "degrees_per_tick": 28,
+        "offset": 0,
+        "scale": 0.82,
+        "color": "#F06CFF",
+        "opacity": 0.86,
+        "glow": true,
+        "motion": "decelerate"
+      }
+    ],
+    "sounds": []
+  },
+  "veilborn.shimmer": {
+    "particles": [
+      {
+        "id": "spell_engine:magic_arcane",
+        "preset": "impact",
+        "count": 10,
+        "speed": 0.06,
+        "scale": 0.78,
+        "color": "#DCA8FF",
+        "opacity": 0.68,
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "spell_engine:magic_stripe",
+        "preset": "helix",
+        "count": 6,
+        "speed": 0.04,
+        "degrees_per_tick": 20,
+        "offset": 0,
+        "scale": 0.62,
+        "color": "#8A2BE2",
+        "opacity": 0.58,
+        "glow": true,
+        "motion": "float"
+      }
+    ],
+    "sounds": []
   }
 }

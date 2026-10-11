@@ -12,8 +12,8 @@
           "pitch": 1.0
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx siren.wail_impact"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "siren.wail_impact"
         },
         {
           "type": "origins:spawn_particles",

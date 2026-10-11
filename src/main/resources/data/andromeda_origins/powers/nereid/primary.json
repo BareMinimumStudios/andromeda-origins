@@ -34,8 +34,8 @@
           "command": "playsound andromeda_origins:ability.nereid.convalescing_aura master @s ~ ~ ~ 0.55 1.0 1.0"
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx nereid.aura_start"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "nereid.aura_start"
         },
         {
           "type": "origins:execute_command",
@@ -136,8 +136,8 @@
                     "power": "*:*_soundcooldown"
                   },
                   {
-                    "type": "origins:execute_command",
-                    "command": "andromedaorigins internal_fx nereid.aura_tick"
+                    "type": "andromeda_origins:enhanced_fx",
+                    "event": "nereid.aura_tick"
                   },
                   {
                     "type": "origins:change_resource",
@@ -163,8 +163,8 @@
                     "amount": 1
                   },
                   {
-                    "type": "origins:execute_command",
-                    "command": "andromedaorigins internal_fx nereid.aura_heal"
+                    "type": "andromeda_origins:enhanced_fx",
+                    "event": "nereid.aura_heal"
                   },
                   {
                     "type": "origins:grant_power",
@@ -190,8 +190,8 @@
                       "type": "origins:and",
                       "actions": [
                         {
-                          "type": "origins:execute_command",
-                          "command": "function andromeda_origins:big_sphere2"
+                          "type": "andromeda_origins:particle_sphere",
+                          "preset": "water"
                         },
                         {
                           "type": "origins:area_of_effect",
@@ -218,8 +218,8 @@
                                             "amount": 1
                                           },
                                           {
-                                            "type": "origins:execute_command",
-                                            "command": "andromedaorigins internal_fx nereid.aura_heal"
+                                            "type": "andromeda_origins:enhanced_fx",
+                                            "event": "nereid.aura_heal"
                                           }
                                         ]
                                       }
@@ -238,17 +238,8 @@
                                             "power": "*:nereid/helper/seafriend"
                                           },
                                           {
-                                            "type": "origins:or",
-                                            "conditions": [
-                                              {
-                                                "type": "origins:power",
-                                                "power": "*:selkie/passives"
-                                              },
-                                              {
-                                                "type": "origins:power",
-                                                "power": "*:nereid/passives"
-                                              }
-                                            ]
+                                            "type": "origins:origin_tag",
+                                            "tag": "andromeda_origins:hydration"
                                           }
                                         ]
                                       },
@@ -445,10 +436,20 @@
           "compare_to": 0
         },
         {
-          "type": "origins:resource",
-          "comparison": "<",
-          "resource": "*:nereid/helper/aurafarming_remove2",
-          "compare_to": 10
+          "type": "origins:or",
+          "conditions": [
+            {
+              "type": "origins:power",
+              "power": "*:nereid/helper/aurafarming",
+              "inverted": true
+            },
+            {
+              "type": "origins:resource",
+              "comparison": "<",
+              "resource": "*:nereid/helper/aurafarming_remove2",
+              "compare_to": 10
+            }
+          ]
         }
       ]
     },

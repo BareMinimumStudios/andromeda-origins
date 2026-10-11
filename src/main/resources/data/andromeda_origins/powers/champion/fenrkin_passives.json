@@ -6,8 +6,7 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "attribute @s minecraft:generic.movement_speed modifier remove andromeda_origins:fenrkin_primary_stalking_slow"
+          "type": "andromeda_origins:clear_fenrkin_stalking_slow"
         },
         {
           "type": "origins:change_resource",
@@ -18,13 +17,13 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:champion/fenrkin_passives_undercooldown",
-          "change": 7200,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:fenrkin/primary_active",
-          "change": 3600,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -36,13 +35,13 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:fenrkin/primary_cooldown",
-          "change": 3000,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:fenrkin/primary_active2",
-          "change": 20,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -54,7 +53,7 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:fenrkin/primary_stalking_slow_refresh",
-          "change": 1,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -78,13 +77,13 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:fenrkin/secondary_grrr",
-          "change": 60,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:fenrkin/secondary_active",
-          "change": 2,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -94,8 +93,9 @@
           "operation": "set"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s add fenrkin"
+          "type": "andromeda_origins:tag",
+          "tag": "fenrkin",
+          "operation": "add"
         }
       ]
     },
@@ -103,17 +103,16 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "attribute @s minecraft:generic.movement_speed modifier remove andromeda_origins:fenrkin_primary_stalking_slow"
+          "type": "andromeda_origins:clear_fenrkin_stalking_slow"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove fenrkin"
+          "type": "andromeda_origins:tag",
+          "tag": "fenrkin",
+          "operation": "remove"
         },
         {
-          "type": "origins:grant_power",
-          "power": "*:common/debug",
-          "source": "minecraft:state"
+          "type": "andromeda_origins:cleanup_origin_state",
+          "origin": "fenrkin"
         }
       ]
     },
@@ -121,8 +120,7 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "attribute @s minecraft:generic.movement_speed modifier remove andromeda_origins:fenrkin_primary_stalking_slow"
+          "type": "andromeda_origins:clear_fenrkin_stalking_slow"
         }
       ]
     },
@@ -170,7 +168,7 @@
     "type": "origins:modify_damage_taken",
     "modifier": {
       "operation": "multiply_total_multiplicative",
-      "amount": -0.25
+      "amount": -0.1
     }
   },
   "toggle_state": {
@@ -229,7 +227,7 @@
     "modifier": {
       "id": "andromeda_origins:champion_fenrkin_passives_speedup",
       "attribute": "minecraft:generic.movement_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": 0.2
     }
   },
@@ -253,8 +251,8 @@
           "pitch": 0.7
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx fenrkin.adrenaline"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "fenrkin.adrenaline"
         },
         {
           "type": "origins:extinguish"
@@ -267,8 +265,7 @@
           "type": "origins:delay",
           "ticks": 1,
           "action": {
-            "type": "origins:execute_command",
-            "command": "andromedaorigins internal_set_health_8"
+            "type": "andromeda_origins:set_health_8"
           }
         },
         {
@@ -310,7 +307,7 @@
     "modifier": {
       "id": "andromeda_origins:champion_fenrkin_passives_size",
       "attribute": "minecraft:generic.scale",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": 0.2
     }
   },
@@ -320,7 +317,7 @@
     "modifier": {
       "id": "andromeda_origins:champion_fenrkin_passives_step_assist",
       "attribute": "minecraft:generic.step_height",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": 1.0
     },
     "condition": {
@@ -331,5 +328,5 @@
     }
   },
   "name": "Champion Passive Features",
-  "description": "\u00a7e\u00a7lChampion Features:\u00a7r\n+20% Size\n+20% Movement Speed\n-25% Damage Taken from all sources\n \n- Retains darkvision, hunting abilities, Stamina Surge and Adrenaline. Adrenaline restores you to 8 health, breaks Crowd Control, briefly makes you Unstoppable, and grants its 35-second resistance buff. Its base cooldown is 6 minutes (3 minutes effective with Champion cooldown recovery).\n- Mark of Fenrir retains its mark/reveal and +25% damage interaction without the stalking movement penalty.\n- No Wet, cramped-space, armor-Wither or dietary penalties.\n- Player-facing ability cooldowns recover at 2\u00d7 rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
+  "description": "§e§lChampion Features:§r\n+20% Size\n+20% Movement Speed\n-10% Damage Taken from all sources\n \n- Retains darkvision, hunting abilities, Stamina Surge and Adrenaline. Adrenaline restores you to 8 health, breaks Crowd Control, briefly makes you Unstoppable, and grants its 35-second resistance buff. Its base cooldown is 6 minutes (3 minutes effective with Champion cooldown recovery).\n- Mark of Fenrir retains its mark/reveal and +25% damage interaction without the stalking movement penalty.\n- No Wet, cramped-space, armor-Wither or dietary penalties.\n- Player-facing ability cooldowns recover at 2× rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
 }

@@ -30,8 +30,8 @@
           "command": "playsound andromeda_origins:ability.lichling.final_bell_toll master @s ~ ~ ~ 0.90 1.0 1.0"
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx lichling.chimes_end"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "lichling.chimes_end"
         },
         {
           "type": "origins:execute_command",
@@ -60,13 +60,13 @@
     "modifier": {
       "id": "*:*",
       "attribute": "minecraft:generic.movement_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": -0.2
     },
     "tick_rate": 1,
     "condition": {
-      "type": "origins:power",
-      "power": "andromeda_origins:common/champion",
+      "type": "origins:origin_tag",
+      "tag": "andromeda_origins:champion",
       "inverted": true
     }
   }

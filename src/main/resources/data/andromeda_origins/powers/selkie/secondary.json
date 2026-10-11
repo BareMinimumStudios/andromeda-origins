@@ -17,8 +17,8 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx selkie.bastion"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "selkie.bastion"
         },
         {
           "type": "origins:play_sound",
@@ -128,5 +128,5 @@
     }
   ],
   "name": "Sealskin Bastion",
-  "description": "Press your Secondary Ability key to enter §e§lSealskin Bastion§r for 10 seconds, reducing incoming damage by 75%. You also lose 50% movement and swim speed during the stance."
+  "description": "Press your Secondary Ability key to enter \u00a7e\u00a7lSealskin Bastion\u00a7r for 10 seconds, reducing incoming damage by 75%. You also lose 50% movement and swim speed during the stance."
 }

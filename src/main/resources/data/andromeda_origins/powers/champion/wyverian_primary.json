@@ -9,12 +9,18 @@
       "should_render": false
     },
     "max_action": {
-      "type": "origins:execute_command",
-      "command": "title @s actionbar {\"text\": \"Dragon mode: Dragon Charge\", \"color\": \"light_purple\"}"
+      "type": "andromeda_origins:actionbar",
+      "text": {
+        "text": "Dragon mode: Dragon Charge",
+        "color": "light_purple"
+      }
     },
     "min_action": {
-      "type": "origins:execute_command",
-      "command": "title @s actionbar {\"text\": \"Dragon mode: Dragon's Breath\", \"color\": \"light_purple\"}"
+      "type": "andromeda_origins:actionbar",
+      "text": {
+        "text": "Dragon mode: Dragon's Breath",
+        "color": "light_purple"
+      }
     }
   },
   "fireball": {
@@ -91,8 +97,9 @@
           "pitch": 0.9
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s add andromeda_dragon_caster"
+          "type": "andromeda_origins:tag",
+          "tag": "andromeda_dragon_caster",
+          "operation": "add"
         },
         {
           "type": "origins:raycast",
@@ -128,14 +135,15 @@
               }
             ]
           },
-          "command_at_hit": "summon bat ~ ~1 ~ {attributes: [{id: \"minecraft:generic.scale\", base: 0.1d}],NoGravity:1b,Silent:1b,Tags:[\"helper\"], cardinal_components: {\"apoli:powers\": {powers: [{data: {}, sources: [\"minecraft:helper\"], id: \"andromeda_origins:champion/wyverian/dragon_charge_granter\", type: \"apoli:action_on_callback\"}]}}}",
+          "command_at_hit": "andromedaorigins internal helper dragon_charge",
           "command_step": 1,
           "command_along_ray": "function andromeda_origins:dragon_charge_trajectory",
           "command_along_ray_only_on_hit": false
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove andromeda_dragon_caster"
+          "type": "andromeda_origins:tag",
+          "tag": "andromeda_dragon_caster",
+          "operation": "remove"
         },
         {
           "type": "origins:add_velocity",
@@ -152,8 +160,11 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "title @s actionbar {\"text\": \"Dragon Charge interrupted!\", \"color\": \"red\"}"
+          "type": "andromeda_origins:actionbar",
+          "text": {
+            "text": "Dragon Charge interrupted!",
+            "color": "red"
+          }
         },
         {
           "type": "origins:change_resource",
@@ -241,12 +252,18 @@
       "should_render": false
     },
     "max_action": {
-      "type": "origins:execute_command",
-      "command": "title @s actionbar {\"text\": \"You are out of breath!\", \"color\": \"red\"}"
+      "type": "andromeda_origins:actionbar",
+      "text": {
+        "text": "You are out of breath!",
+        "color": "red"
+      }
     },
     "min_action": {
-      "type": "origins:execute_command",
-      "command": "title @s actionbar {\"text\": \"You can use your breath again!\", \"color\": \"green\"}"
+      "type": "andromeda_origins:actionbar",
+      "text": {
+        "text": "You can use your breath again!",
+        "color": "green"
+      }
     }
   },
   "breathcooldown": {
@@ -280,14 +297,17 @@
             "pitch": 1.0
           },
           {
-            "type": "origins:execute_command",
-            "command": "andromedaorigins internal_fx wyverian.dragon_breath"
+            "type": "andromeda_origins:enhanced_fx",
+            "event": "wyverian.dragon_breath"
           }
         ]
       },
       "else_action": {
-        "type": "origins:execute_command",
-        "command": "title @s actionbar {\"text\": \"You are out of breath, let your Draconic Breath fully regenerate!\", \"color\": \"red\"}"
+        "type": "andromeda_origins:actionbar",
+        "text": {
+          "text": "You are out of breath, let your Draconic Breath fully regenerate!",
+          "color": "red"
+        }
       }
     },
     "key": {
@@ -394,8 +414,9 @@
                 ]
               },
               {
-                "type": "origins:execute_command",
-                "command": "tag @s add andromeda_dragon_caster"
+                "type": "andromeda_origins:tag",
+                "tag": "andromeda_dragon_caster",
+                "operation": "add"
               },
               {
                 "type": "origins:raycast",
@@ -418,8 +439,9 @@
                 "command_along_ray_only_on_hit": false
               },
               {
-                "type": "origins:execute_command",
-                "command": "tag @s remove andromeda_dragon_caster"
+                "type": "andromeda_origins:tag",
+                "tag": "andromeda_dragon_caster",
+                "operation": "remove"
               },
               {
                 "type": "origins:spawn_particles",
@@ -505,8 +527,8 @@
                       "compare_to": 0
                     },
                     "action": {
-                      "type": "origins:execute_command",
-                      "command": "andromedaorigins internal_fx wyverian.dragon_charge_1"
+                      "type": "andromeda_origins:enhanced_fx",
+                      "event": "wyverian.dragon_charge_1"
                     }
                   },
                   {
@@ -517,8 +539,8 @@
                       "compare_to": 5
                     },
                     "action": {
-                      "type": "origins:execute_command",
-                      "command": "andromedaorigins internal_fx wyverian.dragon_charge_2"
+                      "type": "andromeda_origins:enhanced_fx",
+                      "event": "wyverian.dragon_charge_2"
                     }
                   },
                   {
@@ -529,8 +551,8 @@
                       "compare_to": 10
                     },
                     "action": {
-                      "type": "origins:execute_command",
-                      "command": "andromedaorigins internal_fx wyverian.dragon_charge_3"
+                      "type": "andromeda_origins:enhanced_fx",
+                      "event": "wyverian.dragon_charge_3"
                     }
                   },
                   {
@@ -541,8 +563,8 @@
                       "compare_to": 15
                     },
                     "action": {
-                      "type": "origins:execute_command",
-                      "command": "andromedaorigins internal_fx wyverian.dragon_charge_4"
+                      "type": "andromeda_origins:enhanced_fx",
+                      "event": "wyverian.dragon_charge_4"
                     }
                   }
                 ]
@@ -589,8 +611,8 @@
               "inverted": true
             },
             {
-              "type": "origins:power",
-              "power": "andromeda_origins:common/champion"
+              "type": "origins:origin_tag",
+              "tag": "andromeda_origins:champion"
             }
           ]
         },

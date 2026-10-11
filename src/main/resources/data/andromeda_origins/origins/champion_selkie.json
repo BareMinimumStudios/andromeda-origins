@@ -1,7 +1,6 @@
 {
   "powers": [
     "andromeda_origins:champion/selkie_passives",
-    "andromeda_origins:common/aquatic_origin",
     "andromeda_origins:selkie/aquatic_traits",
     "andromeda_origins:common/champion",
     "andromeda_origins:common/champion_cooldowns",
@@ -17,5 +16,12 @@
   "order": 109,
   "impact": 3,
   "name": "Champion Selkie",
-  "description": "A command-only Champion variant of Selkie. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Player-facing ability cooldowns recover twice as fast; charge times and resource costs remain unchanged."
+  "description": "A command-only Champion variant of Selkie. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Player-facing ability cooldowns recover twice as fast; charge times and resource costs remain unchanged.",
+  "tags": [
+    "andromeda_origins:aquatic",
+    "andromeda_origins:seaside",
+    "andromeda_origins:champion",
+    "andromeda_origins:selkie",
+    "andromeda_origins:hydration"
+  ]
 }

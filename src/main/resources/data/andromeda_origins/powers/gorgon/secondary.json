@@ -98,8 +98,8 @@
         "type": "origins:and",
         "actions": [
           {
-            "type": "origins:execute_command",
-            "command": "andromedaorigins internal_fx gorgon.transference"
+            "type": "andromeda_origins:enhanced_fx",
+            "event": "gorgon.transference"
           },
           {
             "type": "origins:delay",
@@ -152,8 +152,11 @@
         ]
       },
       "miss_action": {
-        "type": "origins:execute_command",
-        "command": "title @s actionbar {\"text\": \"You must target an entity!\", \"color\": \"red\"}"
+        "type": "andromeda_origins:actionbar",
+        "text": {
+          "text": "You must target an entity!",
+          "color": "red"
+        }
       },
       "bientity_action": {
         "type": "origins:target_action",
@@ -161,8 +164,8 @@
           "type": "origins:and",
           "actions": [
             {
-              "type": "origins:execute_command",
-              "command": "andromedaorigins internal_fx gorgon.transference_target"
+              "type": "andromeda_origins:enhanced_fx",
+              "event": "gorgon.transference_target"
             },
             {
               "type": "origins:delay",

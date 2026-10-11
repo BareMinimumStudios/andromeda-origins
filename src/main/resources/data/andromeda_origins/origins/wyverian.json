@@ -15,5 +15,10 @@
   "order": 1,
   "impact": 3,
   "name": "Wyverian",
-  "description": "Wyverians are draconic beings descended from ancient flame and open skies. Their scaled wings carry them above the battlefield while their ember breath scorches anything beneath them. Brilliant, swift, and destructive, a Wyverian is at its strongest when given room to soar."
+  "description": "Wyverians are draconic beings descended from ancient flame and open skies. Their scaled wings carry them above the battlefield while their ember breath scorches anything beneath them. Brilliant, swift, and destructive, a Wyverian is at its strongest when given room to soar.",
+  "tags": [
+    "andromeda_origins:beast",
+    "andromeda_origins:draconic",
+    "andromeda_origins:wyverian"
+  ]
 }

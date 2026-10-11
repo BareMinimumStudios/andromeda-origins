@@ -30,8 +30,8 @@
             "operation": "set"
           },
           {
-            "type": "origins:execute_command",
-            "command": "andromedaorigins internal_fx selkie.phalanx_cast"
+            "type": "andromeda_origins:enhanced_fx",
+            "event": "selkie.phalanx_cast"
           },
           {
             "type": "origins:play_sound",
@@ -136,8 +136,11 @@
         ]
       },
       "miss_action": {
-        "type": "origins:execute_command",
-        "command": "title @s actionbar {\"text\": \"You must target an entity!\", \"color\": \"red\"}"
+        "type": "andromeda_origins:actionbar",
+        "text": {
+          "text": "You must target an entity!",
+          "color": "red"
+        }
       },
       "bientity_action": {
         "type": "origins:target_action",
@@ -151,8 +154,8 @@
               "pitch": 0.2
             },
             {
-              "type": "origins:execute_command",
-              "command": "andromedaorigins internal_fx selkie.phalanx_target"
+              "type": "andromeda_origins:enhanced_fx",
+              "event": "selkie.phalanx_target"
             },
             {
               "type": "origins:grant_power",
@@ -220,31 +223,31 @@
           "pitch": 1.0
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx selkie.surging_tides"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "selkie.surging_tides"
         },
         {
           "type": "origins:delay",
           "ticks": 2,
           "action": {
-            "type": "origins:execute_command",
-            "command": "andromedaorigins internal_fx selkie.surging_trail"
+            "type": "andromeda_origins:enhanced_fx",
+            "event": "selkie.surging_trail"
           }
         },
         {
           "type": "origins:delay",
           "ticks": 4,
           "action": {
-            "type": "origins:execute_command",
-            "command": "andromedaorigins internal_fx selkie.surging_trail"
+            "type": "andromeda_origins:enhanced_fx",
+            "event": "selkie.surging_trail"
           }
         },
         {
           "type": "origins:delay",
           "ticks": 6,
           "action": {
-            "type": "origins:execute_command",
-            "command": "andromedaorigins internal_fx selkie.surging_trail"
+            "type": "andromeda_origins:enhanced_fx",
+            "event": "selkie.surging_trail"
           }
         },
         {

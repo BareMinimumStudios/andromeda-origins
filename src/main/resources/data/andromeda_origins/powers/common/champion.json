@@ -8,5 +8,5 @@
   },
   "hidden": true,
   "name": "Champion",
-  "description": "Marks this command-only origin as a Champion variant."
+  "description": "Compatibility marker retained for Figura avatars; gameplay uses the native Champion Origin tag."
 }

@@ -14,36 +14,37 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:veilborn/primary_active",
-          "change": 60,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:veilborn/primary_active3",
-          "change": 600,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:veilborn/secondary_unstoppable",
-          "change": 20,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:veilborn/secondary_cooldown",
-          "change": 2400,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:veilborn/secondary_uncloak",
-          "change": 20,
+          "change": 0,
           "operation": "set"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s add veilborn"
+          "type": "andromeda_origins:tag",
+          "tag": "veilborn",
+          "operation": "add"
         }
       ]
     },
@@ -51,13 +52,13 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove veilborn"
+          "type": "andromeda_origins:tag",
+          "tag": "veilborn",
+          "operation": "remove"
         },
         {
-          "type": "origins:grant_power",
-          "power": "*:common/debug",
-          "source": "minecraft:state"
+          "type": "andromeda_origins:cleanup_origin_state",
+          "origin": "veilborn"
         }
       ]
     },
@@ -186,10 +187,10 @@
     "modifier": {
       "id": "andromeda_origins:champion_veilborn_passives_size",
       "attribute": "minecraft:generic.scale",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": 0.2
     }
   },
   "name": "Champion Passive Features",
-  "description": "§e§lChampion Features:§r\n+20% Size\n \n- Retains sunlight speed, moonlight damage, translucency and veil powers.\n- No health, armor-weight, shield, water-damage or water-Silence penalties.\n- Curtain Step does not make you Unstable or self-apply Reality Shatter; Veil Transposition still applies Reality Shatter to its target.\n- Entering or leaving Auroral Mirage releases an 8-block Darkness burst, applying Darkness to nearby entities for 5 seconds.\n- Auroral Mirage has a fixed 5-second cooldown. Other player-facing ability cooldowns recover at 2× rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
+  "description": "§e§lChampion Features:§r\n+20% Size\n \n- Retains sunlight speed, moonlight damage, translucency, Shimmer and veil powers.\n- No health, armor-weight, shield, or water-weakness penalties.\n- Veil Step does not self-apply Reality Shatter after emerging; crossed living entities are still shattered. Veil Transposition still applies Reality Shatter to its target.\n- Entering or leaving Auroral Mirage releases an 8-block Darkness burst, applying Darkness to nearby entities for 5 seconds.\n- Auroral Mirage has a fixed 5-second cooldown. Other player-facing ability cooldowns recover at 2× rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
 }

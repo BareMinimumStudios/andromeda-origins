@@ -8,7 +8,7 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:champion/gorgon_passives_flammablent",
-          "change": 9,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -20,13 +20,13 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:champion/gorgon_passives_stonevenom",
-          "change": 20,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:gorgon/primary_active",
-          "change": 20,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -38,13 +38,13 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:gorgon/primary_petrifycooldown",
-          "change": 2400,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:gorgon/secondary_active",
-          "change": 20,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -56,12 +56,13 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:gorgon/secondary_intimidatecooldown",
-          "change": 800,
+          "change": 0,
           "operation": "set"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s add gorgon"
+          "type": "andromeda_origins:tag",
+          "tag": "gorgon",
+          "operation": "add"
         }
       ]
     },
@@ -69,13 +70,13 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove gorgon"
+          "type": "andromeda_origins:tag",
+          "tag": "gorgon",
+          "operation": "remove"
         },
         {
-          "type": "origins:grant_power",
-          "power": "*:common/debug",
-          "source": "minecraft:state"
+          "type": "andromeda_origins:cleanup_origin_state",
+          "origin": "gorgon"
         }
       ]
     },
@@ -85,7 +86,7 @@
     "type": "origins:modify_damage_taken",
     "modifier": {
       "operation": "multiply_total_multiplicative",
-      "amount": -0.15
+      "amount": -0.1
     }
   },
   "toggle": {
@@ -108,7 +109,7 @@
     "modifier": {
       "id": "andromeda_origins:champion_gorgon_passives_speed",
       "attribute": "minecraft:generic.movement_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": 0.15
     }
   },
@@ -116,7 +117,7 @@
     "type": "origins:modify_damage_taken",
     "modifier": {
       "operation": "multiply_total_multiplicative",
-      "amount": -0.2
+      "amount": -0.15
     },
     "damage_condition": {
       "type": "origins:and",
@@ -199,62 +200,6 @@
           "type": "origins:extinguish"
         }
       ]
-    }
-  },
-  "climbing": {
-    "type": "origins:climbing",
-    "condition": {
-      "type": "origins:all_of",
-      "conditions": [
-        {
-          "type": "origins:power_active",
-          "power": "*:*_toggle"
-        },
-        {
-          "type": "origins:any_of",
-          "conditions": [
-            {
-              "type": "origins:all_of",
-              "conditions": [
-                {
-                  "type": "origins:sneaking",
-                  "inverted": true
-                },
-                {
-                  "type": "origins:collided_horizontally"
-                }
-              ]
-            },
-            {
-              "type": "origins:all_of",
-              "conditions": [
-                {
-                  "type": "origins:sneaking"
-                },
-                {
-                  "type": "origins:any_of",
-                  "conditions": [
-                    {
-                      "type": "origins:block_collision",
-                      "offset_x": 0.01,
-                      "offset_z": 0.01
-                    },
-                    {
-                      "type": "origins:block_collision",
-                      "offset_x": -0.01,
-                      "offset_z": -0.01
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    "hold_condition": {
-      "type": "origins:sneaking",
-      "inverted": true
     }
   },
   "stonevenom": {
@@ -419,20 +364,6 @@
       "amount": 3
     }
   },
-  "step_assist": {
-    "type": "origins:conditioned_attribute",
-    "tick_rate": 1,
-    "modifier": {
-      "id": "andromeda_origins:champion_gorgon_passives_step_assist",
-      "attribute": "minecraft:generic.step_height",
-      "operation": "add_multiplied_total",
-      "amount": 1.0
-    },
-    "condition": {
-      "type": "origins:power_active",
-      "power": "*:*_toggle"
-    }
-  },
   "name": "Champion Passive Features",
-  "description": "§e§lChampion Features:§r\n+15% Movement Speed\n \n- Retains venom, climbing, darkvision, scales and 4× food effectiveness without the raw-only restriction.\n- No iron sensitivity, falling slowdown or dietary restriction.\n- Player-facing ability cooldowns recover at 2× rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
+  "description": "§e§lChampion Features:§r\n+15% Movement Speed\n-10% Damage Taken from all sources\n-15% additional Damage Taken reduction from most ordinary sources\n \n- Retains venom, toggleable perfect darkvision, scales and 4× food effectiveness without the raw-only restriction.\n- No iron sensitivity, falling slowdown or dietary restriction.\n- Player-facing ability cooldowns recover at 2× rate (50% shorter); charge times, resource costs, and internal ability cadence are unchanged."
 }

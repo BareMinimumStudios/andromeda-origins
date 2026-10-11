@@ -3,8 +3,11 @@
   "callback": {
     "type": "origins:action_on_callback",
     "entity_action_added": {
-      "type": "origins:execute_command",
-      "command": "title @s actionbar {\"text\": \"You are being intimidated!\", \"color\": \"red\"}"
+      "type": "andromeda_origins:actionbar",
+      "text": {
+        "text": "You are being intimidated!",
+        "color": "red"
+      }
     }
   },
   "remove": {

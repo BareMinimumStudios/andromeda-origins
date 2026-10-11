@@ -52,8 +52,8 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx nereid.submersion_hit"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "nereid.submersion_hit"
         },
         {
           "type": "origins:if_else_list",
@@ -197,12 +197,12 @@
                 "type": "origins:or",
                 "conditions": [
                   {
-                    "type": "origins:power",
-                    "power": "andromeda_origins:common/aquatic_origin"
+                    "type": "origins:origin_tag",
+                    "tag": "andromeda_origins:aquatic"
                   },
                   {
                     "type": "origins:power",
-                    "power": "origins:water_breathing"
+                    "power": "origins:merling/water_breathing"
                   },
                   {
                     "type": "origins:in_tag",
@@ -239,13 +239,13 @@
                     "inverted": true
                   },
                   {
-                    "type": "origins:power",
-                    "power": "andromeda_origins:common/aquatic_origin",
+                    "type": "origins:origin_tag",
+                    "tag": "andromeda_origins:aquatic",
                     "inverted": true
                   },
                   {
                     "type": "origins:power",
-                    "power": "origins:water_breathing",
+                    "power": "origins:merling/water_breathing",
                     "inverted": true
                   },
                   {
@@ -306,8 +306,9 @@
                     }
                   },
                   {
-                    "type": "origins:execute_command",
-                    "command": "tag @s add andromeda_nereid_submersion_drown"
+                    "type": "andromeda_origins:tag",
+                    "tag": "andromeda_nereid_submersion_drown",
+                    "operation": "add"
                   }
                 ]
               }
@@ -346,12 +347,12 @@
           ]
         },
         {
-          "type": "origins:power",
-          "power": "andromeda_origins:common/aquatic_origin"
+          "type": "origins:origin_tag",
+          "tag": "andromeda_origins:aquatic"
         },
         {
           "type": "origins:power",
-          "power": "origins:water_breathing"
+          "power": "origins:merling/water_breathing"
         },
         {
           "type": "origins:in_tag",
@@ -366,13 +367,13 @@
               "inverted": true
             },
             {
-              "type": "origins:power",
-              "power": "andromeda_origins:common/aquatic_origin",
+              "type": "origins:origin_tag",
+              "tag": "andromeda_origins:aquatic",
               "inverted": true
             },
             {
               "type": "origins:power",
-              "power": "origins:water_breathing",
+              "power": "origins:merling/water_breathing",
               "inverted": true
             },
             {

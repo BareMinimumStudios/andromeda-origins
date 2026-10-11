@@ -92,6 +92,14 @@
     {
       "id": "dawnoftimebuilder:waxed_oak_door",
       "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:waxed_oak_chandelier",
+      "required": false
+    },
+    {
+      "id": "dawnoftimebuilder:wrought_iron_fence",
+      "required": false
     }
   ]
 }

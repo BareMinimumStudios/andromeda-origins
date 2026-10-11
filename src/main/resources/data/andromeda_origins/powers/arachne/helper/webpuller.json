@@ -116,12 +116,7 @@
           }
         },
         {
-          "type": "origins:execute_command",
-          "command": "kill @s"
-        },
-        {
-          "type": "origins:execute_command",
-          "command": "tp @s ~ ~-300 ~"
+          "type": "andromeda_origins:discard"
         }
       ]
     }

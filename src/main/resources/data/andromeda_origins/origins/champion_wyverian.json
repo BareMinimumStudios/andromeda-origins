@@ -16,5 +16,11 @@
   "order": 112,
   "impact": 3,
   "name": "Champion Wyverian",
-  "description": "A command-only Champion variant of Wyverian. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Its Ember Flames are replaced by Dragon's Breath and Dragon Charge, using draconic/magic damage instead of fire. Player-facing ability cooldowns recover twice as fast; charge times and resource costs remain unchanged."
+  "description": "A command-only Champion variant of Wyverian. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Its Ember Flames are replaced by Dragon's Breath and Dragon Charge, using draconic/magic damage instead of fire. Player-facing ability cooldowns recover twice as fast; charge times and resource costs remain unchanged.",
+  "tags": [
+    "andromeda_origins:beast",
+    "andromeda_origins:draconic",
+    "andromeda_origins:champion",
+    "andromeda_origins:wyverian"
+  ]
 }

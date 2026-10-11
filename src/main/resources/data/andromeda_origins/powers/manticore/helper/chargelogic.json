@@ -17,6 +17,9 @@
               "amount": 2.5
             },
             {
+              "type": "andromeda_origins:manticore_bind"
+            },
+            {
               "type": "origins:target_action",
               "action": {
                 "type": "origins:grant_power",
@@ -36,8 +39,8 @@
                     "pitch": 1.0
                   },
                   {
-                    "type": "origins:execute_command",
-                    "command": "andromedaorigins internal_fx manticore.lunge_impact"
+                    "type": "andromeda_origins:enhanced_fx",
+                    "event": "manticore.lunge_impact"
                   }
                 ]
               }

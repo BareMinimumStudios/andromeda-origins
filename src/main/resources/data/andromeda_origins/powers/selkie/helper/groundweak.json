@@ -16,8 +16,11 @@
           "change": 1
         },
         {
-          "type": "origins:execute_command",
-          "command": "title @s actionbar {\"text\": \"Your skin feels dry!\", \"color\": \"red\"}"
+          "type": "andromeda_origins:actionbar",
+          "text": {
+            "text": "Your skin feels dry!",
+            "color": "red"
+          }
         }
       ]
     },
@@ -32,7 +35,7 @@
     "modifier": {
       "id": "*:*",
       "attribute": "minecraft:generic.movement_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": -0.1
     }
   }

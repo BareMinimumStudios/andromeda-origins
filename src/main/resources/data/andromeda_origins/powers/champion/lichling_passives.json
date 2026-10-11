@@ -26,7 +26,7 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:lichling/primary_primary",
-          "change": 7200,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -44,18 +44,19 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:lichling/secondary_soundcooldown",
-          "change": 20,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:lichling/secondary_active",
-          "change": 2,
+          "change": 0,
           "operation": "set"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s add lichling"
+          "type": "andromeda_origins:tag",
+          "tag": "lichling",
+          "operation": "add"
         }
       ]
     },
@@ -68,13 +69,13 @@
           "source": "minecraft:state"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove lichling"
+          "type": "andromeda_origins:tag",
+          "tag": "lichling",
+          "operation": "remove"
         },
         {
-          "type": "origins:grant_power",
-          "power": "*:common/debug",
-          "source": "minecraft:state"
+          "type": "andromeda_origins:cleanup_origin_state",
+          "origin": "lichling"
         }
       ]
     },
@@ -149,7 +150,7 @@
     "modifier": {
       "id": "*:*",
       "attribute": "minecraft:generic.max_health",
-      "operation": "add_value",
+      "operation": "add_base_early",
       "amount": 8
     }
   },
@@ -229,8 +230,8 @@
     },
     "entity_action": {
       "type": "origins:feed",
-      "nutrition": 2,
-      "saturation": 1
+      "saturation": 1,
+      "food": 2
     }
   },
   "good_digestion": {

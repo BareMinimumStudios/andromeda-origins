@@ -8,18 +8,19 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:siren/primary_active",
-          "change": 2400,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:siren/secondary_active",
-          "change": 400,
+          "change": 0,
           "operation": "set"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s add siren"
+          "type": "andromeda_origins:tag",
+          "tag": "siren",
+          "operation": "add"
         },
         {
           "type": "origins:grant_power",
@@ -32,8 +33,9 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove siren"
+          "type": "andromeda_origins:tag",
+          "tag": "siren",
+          "operation": "remove"
         },
         {
           "type": "origins:grant_power",
@@ -41,9 +43,8 @@
           "source": "minecraft:state"
         },
         {
-          "type": "origins:grant_power",
-          "power": "*:common/debug",
-          "source": "minecraft:state"
+          "type": "andromeda_origins:cleanup_origin_state",
+          "origin": "siren"
         }
       ]
     },
@@ -83,10 +84,11 @@
     "tag": "aquatic"
   },
   "waterspeed": {
-    "type": "origins:modify_swim_speed",
+    "type": "origins:attribute",
     "modifier": {
       "id": "andromeda_origins:champion_siren_passives_waterspeed",
-      "operation": "add_multiplied_total",
+      "attribute": "additionalentityattributes:generic.water_speed",
+      "operation": "multiply_total_multiplicative",
       "amount": 0.25
     }
   },

@@ -1,8 +1,6 @@
 # Champion Origins
 
-**Current release: v1.4.75.** Champion variants retain the normal Origin abilities and strengths while removing racial weaknesses/self-debuffs. Player-facing ability cooldowns recover at twice the standard rate while charge times, resource costs, and internal mechanical cadence remain unchanged. Champion Veilborn Auroral Mirage is a deliberate exception with a fixed 5-second cooldown.
-
-Champion Origins are administrative variants of all 13 standard Andromeda Origins. They keep the Origin's identity-defining strengths and active abilities while removing racial weaknesses and clear self-debuffs.
+**Current source: `1.4.75-overgrown.31`.** Champion variants are administrative versions of all 13 standard Andromeda Origins. They retain identity-defining strengths and active abilities while removing racial weaknesses/self-debuffs. Player-facing ability cooldowns recover at twice the standard rate while charge times, resource costs, and internal mechanical cadence remain unchanged. Champion Veilborn Auroral Mirage is a deliberate exception with a fixed 5-second cooldown.
 
 ## Selection behavior
 
@@ -59,12 +57,12 @@ Champions generally remove:
 | Champion Satyr | `andromeda_origins:champion_satyr` | No health/swim, boot, max-Momentum hunger, or diet penalties. Rush retains the normal projectile-damage reduction. |
 | Champion Selkie | `andromeda_origins:champion_selkie` | No dry-out/Silenced cycle, land-speed, damage, diet, or Sealskin Bastion slowdown penalties. Surging Tides retains the normal projectile-damage reduction. |
 | Champion Siren | `andromeda_origins:champion_siren` | No damage, prolonged-fire, iron, or diet penalties. |
-| Champion Veilborn | `andromeda_origins:champion_veilborn` | No health, armor-weight, shield, water damage/Silence, or Curtain Step self-Reality-Shatter penalties. Entering/leaving Auroral Mirage applies a 5-second Darkness burst to nearby entities within 8 blocks; Auroral Mirage itself has a fixed 5-second cooldown. |
+| Champion Veilborn | `andromeda_origins:champion_veilborn` | No health, armor-weight, shield, water-weakness, or Veil Step self-Reality-Shatter penalties. Entering/leaving Auroral Mirage applies a 5-second Darkness burst to nearby entities within 8 blocks; Auroral Mirage itself has a fixed 5-second cooldown. |
 | Champion Wyverian | `andromeda_origins:champion_wyverian` | No movement, Wet/cramped, propulsion, diet, or underwater breath lockout penalties. Gusts of Freedom retains the normal projectile-damage reduction. Champion-only exception: Ember Ray / Ember Pyroclast are replaced by **Dragon's Breath / Dragon Charge**, using draconic presentation and magic damage while retaining the same core range, charge, resource, and impact structure. |
 
 ## v1.4.45 Veilborn note
 
-The standard Veilborn rebalance does not reduce Champion Veilborn. Champion Veilborn already removes the standard health penalty, armor-weight slowdown, water damage/Silence penalty, shield restriction, and Curtain Step self-Reality-Shatter. Shared Undetectable improvements still apply to Auroral Mirage: mob AI cannot target the Champion while Undetectable and normal held-item rendering is hidden.
+The standard Veilborn rebalance does not reduce Champion Veilborn. Champion Veilborn already removes the standard health penalty, armor-weight slowdown, water weakness, shield restriction, and Veil Step self-Reality-Shatter. Shared Undetectable improvements still apply to Auroral Mirage: mob AI cannot target the Champion while Undetectable, normal held-item rendering is hidden, and vanilla fire/status-effect/step traces are suppressed. Champion Veilborn use the same Veil Step traversal and Shimmer evasion as Standard Veilborn, but retain the Champion rule that Veil Step does not self-apply Reality Shatter on exit.
 
 ## AoE self-hit protection
 

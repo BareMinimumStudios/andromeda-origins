@@ -72,8 +72,8 @@
           "pitch": 1.05
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx faerie.fae_illusions"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "faerie.fae_illusions"
         },
         {
           "type": "origins:delay",
@@ -130,8 +130,11 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "title @s actionbar {\"text\": \"You must target an entity!\", \"color\": \"red\"}"
+          "type": "andromeda_origins:actionbar",
+          "text": {
+            "text": "You must target an entity!",
+            "color": "red"
+          }
         },
         {
           "type": "origins:change_resource",
@@ -150,7 +153,7 @@
           "action": {
             "type": "origins:change_resource",
             "resource": "*:*",
-            "change": 3580,
+            "change": 20,
             "operation": "set"
           }
         }
@@ -229,5 +232,5 @@
     }
   ],
   "name": "Fae Illusions",
-  "description": "Press your Secondary Ability key while looking at a creature within 64 blocks to afflict it with §e§lFae Illusions§r for 30 seconds. Faeries can see the affected target through walls, the target cannot perceive entities normally, and it becomes vulnerable to additional effects from §e§lTrickster§r."
+  "description": "Press your Secondary Ability key while looking at a creature within 64 blocks to afflict it with \u00a7e\u00a7lFae Illusions\u00a7r for 30 seconds. Faeries can see the affected target through walls, the target cannot perceive entities normally, and it becomes vulnerable to additional effects from \u00a7e\u00a7lTrickster\u00a7r."
 }

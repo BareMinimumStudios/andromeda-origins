@@ -20,7 +20,7 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:manticore/passives_flammablent",
-          "change": 9,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -44,7 +44,7 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:manticore/primary_primary",
-          "change": 200,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -56,12 +56,13 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:manticore/secondary_unstoppable",
-          "change": 1800,
+          "change": 0,
           "operation": "set"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s add manticore"
+          "type": "andromeda_origins:tag",
+          "tag": "manticore",
+          "operation": "add"
         },
         {
           "type": "origins:change_resource",
@@ -74,13 +75,13 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove manticore"
+          "type": "andromeda_origins:tag",
+          "tag": "manticore",
+          "operation": "remove"
         },
         {
-          "type": "origins:grant_power",
-          "power": "*:common/debug",
-          "source": "minecraft:state"
+          "type": "andromeda_origins:cleanup_origin_state",
+          "origin": "manticore"
         }
       ]
     },
@@ -296,7 +297,7 @@
     "type": "origins:modify_damage_taken",
     "modifier": {
       "operation": "multiply_total_multiplicative",
-      "amount": -0.2
+      "amount": -0.15
     },
     "damage_condition": {
       "type": "origins:and",
@@ -317,7 +318,7 @@
     "type": "origins:modify_damage_dealt",
     "modifier": {
       "operation": "multiply_total_multiplicative",
-      "amount": 0.35
+      "amount": 0.25
     },
     "condition": {
       "type": "origins:and",
@@ -368,7 +369,7 @@
     "modifier": {
       "id": "andromeda_origins:manticore_passives_speedown",
       "attribute": "minecraft:generic.movement_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": -0.2
     },
     "tick_rate": 20,
@@ -521,8 +522,8 @@
     },
     "entity_action": {
       "type": "origins:feed",
-      "nutrition": 2,
-      "saturation": 2
+      "saturation": 2,
+      "food": 2
     },
     "damage_condition": {
       "type": "origins:projectile",
@@ -533,7 +534,7 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
-      "text": "§e§lDamage Resistances:§r§f All sources except falling & projectiles (-20%).\n \n§c§lDamage Vulnerabilities:§r§f None.\n \n§e§lEffect Immunities:§r§f None."
+      "text": "§e§lDamage Resistances:§r§f All sources except falling & projectiles (-15%).\n \n§c§lDamage Vulnerabilities:§r§f None.\n \n§e§lEffect Immunities:§r§f None."
     },
     {
       "type": "origins:tooltip",
@@ -542,13 +543,13 @@
     }
   ],
   "name": "Passive Features",
-  "description": "§e§lStats:§r\n+20% Size\n+35% Melee Damage\n \n§e§lFeatures:§r\n- You can sense wounded creatures within 16 blocks: orange when more than half their health is missing, and red when more than three-quarters is missing. Undetectable creatures are excluded.\n- You see 75% better in darkness than most creatures.\n- Melee attacks while falling inflict Poison I for 10 seconds.\n- Fire extinguishes after no more than 3 fire-damage ticks.\n- Killing a creature with a melee attack restores 2 Hunger and 2 Saturation.\n- While §c§l[Wet]§r or in cramped spaces, you lose your melee damage bonus and suffer -20% movement speed. Contact with water extends this penalty by 1 second per second, up to 2 minutes.\n- Food is 50% less effective, and you are a Carnivore.",
+  "description": "§e§lStats:§r\n+20% Size\n+25% Melee Damage\n-15% Damage Taken from non-projectile, non-fall sources\n \n§e§lFeatures:§r\n- You can sense wounded creatures within 16 blocks: orange when more than half their health is missing, and red when more than three-quarters is missing. Undetectable creatures are excluded.\n- You see 75% better in darkness than most creatures.\n- Melee attacks while falling inflict Poison I for 10 seconds.\n- Fire extinguishes after no more than 3 fire-damage ticks.\n- Killing a creature with a melee attack restores 2 Hunger and 2 Saturation.\n- While §c§l[Wet]§r or in cramped spaces, you lose your melee damage bonus and suffer -20% movement speed. Contact with water extends this penalty by 1 second per second, up to 2 minutes.\n- Food is 50% less effective.",
   "size": {
     "type": "origins:attribute",
     "modifier": {
       "id": "andromeda_origins:manticore_passives_size",
       "attribute": "minecraft:generic.scale",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": 0.2
     }
   }

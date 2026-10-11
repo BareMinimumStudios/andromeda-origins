@@ -92,7 +92,7 @@
     "modifier": {
       "id": "*:*",
       "attribute": "minecraft:generic.attack_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": -1
     }
   },
@@ -119,7 +119,6 @@
   "overlay": {
     "type": "origins:overlay",
     "hidden": true,
-    "sprite": "origins:phantomize_overlay",
     "red": 0.3,
     "green": 0.3,
     "blue": 0.3,
@@ -127,6 +126,8 @@
     "draw_mode": "nausea",
     "draw_phase": "above_hud",
     "visible_in_third_person": true,
-    "hide_with_hud": true
+    "hide_with_hud": true,
+    "texture": "minecraft:textures/misc/nausea.png",
+    "anchor": "center"
   }
 }

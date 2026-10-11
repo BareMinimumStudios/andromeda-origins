@@ -14,36 +14,37 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:nereid/primary_soundcooldown",
-          "change": 20,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:nereid/primary_actualcooldown",
-          "change": 1800,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:nereid/primary_grrr",
-          "change": 60,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:nereid/primary_active",
-          "change": 2,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:nereid/secondary_active",
-          "change": 1800,
+          "change": 0,
           "operation": "set"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s add nereid"
+          "type": "andromeda_origins:tag",
+          "tag": "nereid",
+          "operation": "add"
         },
         {
           "type": "origins:grant_power",
@@ -56,8 +57,9 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove nereid"
+          "type": "andromeda_origins:tag",
+          "tag": "nereid",
+          "operation": "remove"
         },
         {
           "type": "origins:revoke_power",
@@ -75,9 +77,8 @@
           "source": "minecraft:state"
         },
         {
-          "type": "origins:grant_power",
-          "power": "*:common/debug",
-          "source": "minecraft:state"
+          "type": "andromeda_origins:cleanup_origin_state",
+          "origin": "nereid"
         }
       ]
     },
@@ -233,31 +234,6 @@
               }
             }
           ]
-        },
-        {
-          "type": "origins:if_else",
-          "condition": {
-            "type": "origins:or",
-            "conditions": [
-              {
-                "type": "origins:power",
-                "power": "andromeda_origins:common/wet"
-              },
-              {
-                "type": "origins:fluid_height",
-                "fluid": "minecraft:water",
-                "comparison": ">",
-                "compare_to": 0
-              },
-              {
-                "type": "origins:in_rain"
-              }
-            ]
-          },
-          "if_action": {
-            "type": "origins:gain_air",
-            "value": 200
-          }
         }
       ]
     }
@@ -267,10 +243,11 @@
     "tag": "aquatic"
   },
   "waterspeed": {
-    "type": "origins:modify_swim_speed",
+    "type": "origins:attribute",
     "modifier": {
       "id": "andromeda_origins:nereid_passives_waterspeed",
-      "operation": "add_multiplied_total",
+      "attribute": "additionalentityattributes:generic.water_speed",
+      "operation": "multiply_total_multiplicative",
       "amount": 0.35
     }
   },
@@ -361,7 +338,7 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
-      "text": "§e§lDamage Resistances:§r§f While hydrated by water, rain, or Wet (-25%).\n \n§c§lDamage Vulnerabilities:§r§f While dry/on land (+40%).\n \n§e§lEffect Immunities:§r§f None."
+      "text": "§e§lDamage Resistances:§r§f While hydrated by water, rain, or Wet (-25%).\n \n§c§lDamage Vulnerabilities:§r§f While fully dry/on land (+25%).\n \n§e§lEffect Immunities:§r§f None."
     },
     {
       "type": "origins:tooltip",
@@ -370,5 +347,5 @@
     }
   ],
   "name": "Passive Features",
-  "description": "§e§lStats:§r\n+35% Swim Speed\n \n§e§lFeatures:§r\n- Your creature type is Aquatic.\n- While hydrated by water, rain, or §c§l[Wet]§r, you take 25% less damage and can move and act as though you were on land.\n- You have perfect underwater vision. Toggleable.\n \n§e§lNereid's Mark:§r\nHit a creature with kelp to mark it as an ally for 15 seconds; hit it again while marked to refresh the mark back to 15 seconds. Marked creatures are visible through walls to all Nereids and can be healed by Convalescing Aura. Undetectable creatures cannot be revealed by the mark.\n \n- Water or rain rebuilds your stored §c§l[Wet]§r hydration reserve up to 90 seconds; while dry, that reserve drains by 1 second per second.\n- While dry/on land, you suffer -10% movement speed, -10% damage dealt, and +40% damage taken. Your gills also consume your air on land; without water, rain, or stored §c§l[Wet]§r hydration restoring it, you will eventually suffocate.\n- You follow a Pescatarian diet."
+  "description": "§e§lStats:§r\n+35% Swim Speed\n \n§e§lFeatures:§r\n- Your creature type is Aquatic.\n- While hydrated by water, rain, or §c§l[Wet]§r, you take 25% less damage and can move and act as though you were on land.\n- You have perfect underwater vision. Toggleable.\n \n§e§lNereid's Mark:§r\nHit a creature with kelp to mark it as an ally for 15 seconds; hit it again while marked to refresh the mark back to 15 seconds. Marked creatures are visible through walls to all Nereids and can be healed by Convalescing Aura. Undetectable creatures cannot be revealed by the mark.\n \n- Water or rain rebuilds your stored §c§l[Wet]§r hydration reserve up to 90 seconds; while dry, that reserve drains by 1 second per second.\n- Once your stored hydration is exhausted on land, you suffer -10% movement speed, -10% damage dealt, and +25% damage taken. Your gills also consume your air on land; without water, rain, or stored §c§l[Wet]§r hydration restoring it, you will eventually suffocate."
 }

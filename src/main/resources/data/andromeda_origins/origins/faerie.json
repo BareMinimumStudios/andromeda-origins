@@ -16,5 +16,9 @@
   "order": 1,
   "impact": 3,
   "name": "Faerie",
-  "description": "Faeries are tiny, luminous beings carried by wind, mischief, and curiosity. Their small frames make them fragile, but their speed, concealment, and fae illusions allow them to slip through danger before their enemies can react. A clever Faerie survives by remaining difficult to find and even harder to predict."
+  "description": "Faeries are tiny, luminous beings carried by wind, mischief, and curiosity. Their small frames make them fragile, but their speed, concealment, and fae illusions allow them to slip through danger before their enemies can react. A clever Faerie survives by remaining difficult to find and even harder to predict.",
+  "tags": [
+    "andromeda_origins:fae",
+    "andromeda_origins:faerie"
+  ]
 }

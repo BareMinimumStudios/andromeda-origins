@@ -6,8 +6,7 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "attribute @s minecraft:generic.movement_speed modifier remove andromeda_origins:fenrkin_primary_stalking_slow"
+          "type": "andromeda_origins:clear_fenrkin_stalking_slow"
         },
         {
           "type": "origins:change_resource",
@@ -24,7 +23,7 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:fenrkin/passives_undercooldown",
-          "change": 7200,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -36,7 +35,7 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:fenrkin/primary_active",
-          "change": 3600,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -48,13 +47,13 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:fenrkin/primary_cooldown",
-          "change": 3000,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:fenrkin/primary_active2",
-          "change": 20,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -66,7 +65,7 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:fenrkin/primary_stalking_slow_refresh",
-          "change": 1,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -90,13 +89,13 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:fenrkin/secondary_grrr",
-          "change": 60,
+          "change": 0,
           "operation": "set"
         },
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:fenrkin/secondary_active",
-          "change": 2,
+          "change": 0,
           "operation": "set"
         },
         {
@@ -106,8 +105,9 @@
           "operation": "set"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s add fenrkin"
+          "type": "andromeda_origins:tag",
+          "tag": "fenrkin",
+          "operation": "add"
         },
         {
           "type": "origins:change_resource",
@@ -127,17 +127,16 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "attribute @s minecraft:generic.movement_speed modifier remove andromeda_origins:fenrkin_primary_stalking_slow"
+          "type": "andromeda_origins:clear_fenrkin_stalking_slow"
         },
         {
-          "type": "origins:execute_command",
-          "command": "tag @s remove fenrkin"
+          "type": "andromeda_origins:tag",
+          "tag": "fenrkin",
+          "operation": "remove"
         },
         {
-          "type": "origins:grant_power",
-          "power": "*:common/debug",
-          "source": "minecraft:state"
+          "type": "andromeda_origins:cleanup_origin_state",
+          "origin": "fenrkin"
         }
       ]
     },
@@ -145,8 +144,7 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "attribute @s minecraft:generic.movement_speed modifier remove andromeda_origins:fenrkin_primary_stalking_slow"
+          "type": "andromeda_origins:clear_fenrkin_stalking_slow"
         },
         {
           "type": "origins:change_resource",
@@ -364,7 +362,7 @@
     "type": "origins:modify_damage_taken",
     "modifier": {
       "operation": "multiply_total_multiplicative",
-      "amount": -0.25
+      "amount": -0.1
     }
   },
   "toggle_state": {
@@ -424,7 +422,7 @@
     "modifier": {
       "id": "andromeda_origins:fenrkin_passives_speedup",
       "attribute": "minecraft:generic.movement_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": 0.2
     },
     "condition": {
@@ -441,6 +439,28 @@
           "resource": "*:*_weaknesstate2",
           "comparison": "==",
           "compare_to": 0
+        },
+        {
+          "type": "origins:power",
+          "power": "andromeda_origins:common/wet",
+          "inverted": true
+        },
+        {
+          "type": "origins:fluid_height",
+          "fluid": "minecraft:water",
+          "comparison": "==",
+          "compare_to": 0
+        },
+        {
+          "type": "origins:in_rain",
+          "inverted": true
+        },
+        {
+          "type": "origins:block_collision",
+          "offset_x": 0,
+          "offset_y": 1,
+          "offset_z": 0,
+          "inverted": true
         }
       ]
     }
@@ -465,6 +485,25 @@
           "resource": "*:*_weaknesstate2",
           "comparison": ">",
           "compare_to": 0
+        },
+        {
+          "type": "origins:power",
+          "power": "andromeda_origins:common/wet"
+        },
+        {
+          "type": "origins:fluid_height",
+          "fluid": "minecraft:water",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        {
+          "type": "origins:in_rain"
+        },
+        {
+          "type": "origins:block_collision",
+          "offset_x": 0,
+          "offset_y": 1,
+          "offset_z": 0
         }
       ]
     }
@@ -489,6 +528,25 @@
           "resource": "*:*_weaknesstate2",
           "comparison": ">",
           "compare_to": 0
+        },
+        {
+          "type": "origins:power",
+          "power": "andromeda_origins:common/wet"
+        },
+        {
+          "type": "origins:fluid_height",
+          "fluid": "minecraft:water",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        {
+          "type": "origins:in_rain"
+        },
+        {
+          "type": "origins:block_collision",
+          "offset_x": 0,
+          "offset_y": 1,
+          "offset_z": 0
         }
       ]
     }
@@ -513,8 +571,8 @@
           "pitch": 0.7
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx fenrkin.adrenaline"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "fenrkin.adrenaline"
         },
         {
           "type": "origins:extinguish"
@@ -527,8 +585,7 @@
           "type": "origins:delay",
           "ticks": 1,
           "action": {
-            "type": "origins:execute_command",
-            "command": "andromedaorigins internal_set_health_8"
+            "type": "andromeda_origins:set_health_8"
           }
         },
         {
@@ -569,17 +626,17 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
-      "text": "\u00a7e\u00a7lDamage Resistances:\u00a7r\u00a7f All sources (-25%).\n \n\u00a7c\u00a7lDamage Vulnerabilities:\u00a7r\u00a7f None.\n \n\u00a7e\u00a7lEffect Immunities:\u00a7r\u00a7f None."
+      "text": "§e§lDamage Resistances:§r§f All sources (-10%).\n \n§c§lDamage Vulnerabilities:§r§f None.\n \n§e§lEffect Immunities:§r§f None."
     }
   ],
   "name": "Passive Features",
-  "description": "\u00a7e\u00a7lStats:\u00a7r\n+20% Size\n+20% Movement Speed while not weakened\n-25% Damage Taken from all sources\n \n\u00a7e\u00a7lFeatures:\u00a7r\n- You see 75% better in darkness than most creatures. Toggleable.\n- While \u00a7c\u00a7l[Wet]\u00a7r or in cramped spaces, your +20% movement-speed bonus is suppressed and your damage dealt is reduced by 20%. Each second spent Wet adds 1 second to the lingering Wet penalty, up to 2 minutes; cramped-space weakness ends once you have room again.\n- Wearing at least 15 Armor points applies Wither I.\n- You are a Carnivore.\n \n\u00a7e\u00a7lAdrenaline:\u00a7r Once every 6 minutes, lethal damage is prevented, you are restored to 8 health, Crowd Control is broken, you briefly become Unstoppable, and you gain an additional 20% damage resistance for 35 seconds.",
+  "description": "§e§lStats:§r\n+20% Size\n+20% Movement Speed while not weakened\n-10% Damage Taken from all sources\n \n§e§lFeatures:§r\n- You see 75% better in darkness than most creatures. Toggleable.\n- While §c§l[Wet]§r, physically in water/rain, or in cramped spaces, your +20% movement-speed bonus is suppressed and your melee/projectile damage dealt is reduced by 20%. Water/Wet exposure is enforced immediately and lingers; each second exposed adds 1 second to the lingering Wet penalty, up to 2 minutes. Cramped-space weakness ends once you have room again.\n- Wearing at least 15 Armor points applies Wither I.\n \n§e§lAdrenaline:§r Once every 6 minutes, lethal damage is prevented, you are restored to 8 health, Crowd Control is broken, you briefly become Unstoppable, and you gain an additional 20% damage resistance for 35 seconds.",
   "size": {
     "type": "origins:attribute",
     "modifier": {
       "id": "andromeda_origins:fenrkin_passives_size",
       "attribute": "minecraft:generic.scale",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": 0.2
     }
   },
@@ -589,7 +646,7 @@
     "modifier": {
       "id": "andromeda_origins:fenrkin_passives_step_assist",
       "attribute": "minecraft:generic.step_height",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": 1.0
     },
     "condition": {

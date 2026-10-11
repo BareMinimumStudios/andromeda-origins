@@ -1,33 +1,72 @@
 {
-  "type": "origins:prevent_item_use",
-  "item_condition": {
-    "type": "origins:all_of",
-    "conditions": [
-      {
-        "type": "origins:ingredient",
-        "ingredient": {
-          "tag": "andromeda_origins:siren_diet_drinks"
+  "type": "origins:multiple",
+  "restriction": {
+    "type": "origins:prevent_item_use",
+    "item_condition": {
+      "type": "origins:all_of",
+      "conditions": [
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "andromeda_origins:siren_diet_drinks"
+          },
+          "inverted": true
         },
-        "inverted": true
-      },
-      {
-        "type": "origins:ingredient",
-        "ingredient": {
-          "tag": "origins:ignore_diet"
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "origins:ignore_diet"
+          },
+          "inverted": true
         },
-        "inverted": true
-      },
-      {
-        "type": "origins:ingredient",
-        "ingredient": {
-          "tag": "origins:meat"
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "origins:meat"
+          },
+          "inverted": true
         },
-        "inverted": true
-      },
-      {
-        "type": "origins:food"
-      }
-    ]
+        {
+          "type": "origins:food"
+        }
+      ]
+    }
+  },
+  "tooltip": {
+    "type": "origins:tooltip",
+    "item_condition": {
+      "type": "origins:all_of",
+      "conditions": [
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "andromeda_origins:siren_diet_drinks"
+          },
+          "inverted": true
+        },
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "origins:ignore_diet"
+          },
+          "inverted": true
+        },
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "origins:meat"
+          },
+          "inverted": true
+        },
+        {
+          "type": "origins:food"
+        }
+      ]
+    },
+    "text": {
+      "text": "Carnivorous Diet: you cannot eat this item.",
+      "color": "red"
+    }
   },
   "name": "Carnivorous Diet",
   "description": "You can only consume foods classified as meat. Siren drinks and diet-exempt items are unaffected."

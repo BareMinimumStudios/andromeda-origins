@@ -1,5 +1,7 @@
 {
   "replace": false,
+  "order": 0,
+  "enabled": true,
   "origins": [
     "andromeda_origins:arachne",
     "andromeda_origins:faerie",
@@ -27,5 +29,9 @@
     "andromeda_origins:champion_siren",
     "andromeda_origins:champion_veilborn",
     "andromeda_origins:champion_wyverian"
-  ]
+  ],
+  "allow_random": false,
+  "exclude_random": [],
+  "allow_random_unchoosable": false,
+  "hidden": false
 }

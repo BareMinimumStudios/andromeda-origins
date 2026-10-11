@@ -33,8 +33,11 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:execute_command",
-          "command": "title @s actionbar {\"text\": \"You have run out of dust!\", \"color\": \"red\"}"
+          "type": "andromeda_origins:actionbar",
+          "text": {
+            "text": "You have run out of dust!",
+            "color": "red"
+          }
         },
         {
           "type": "origins:play_sound",
@@ -45,8 +48,11 @@
       ]
     },
     "min_action": {
-      "type": "origins:execute_command",
-      "command": "title @s actionbar {\"text\": \"You can use Flutter again!\", \"color\": \"green\"}"
+      "type": "andromeda_origins:actionbar",
+      "text": {
+        "text": "You can use Flutter again!",
+        "color": "green"
+      }
     }
   },
   "soundcooldown": {
@@ -116,8 +122,11 @@
         ]
       },
       "else_action": {
-        "type": "origins:execute_command",
-        "command": "title @s actionbar {\"text\": \"Your wings are out of dust, let it fully regenerate!\", \"color\": \"red\"}"
+        "type": "andromeda_origins:actionbar",
+        "text": {
+          "text": "Your wings are out of dust, let it fully regenerate!",
+          "color": "red"
+        }
       }
     },
     "key": {
@@ -169,8 +178,8 @@
                     "pitch": 1.6
                   },
                   {
-                    "type": "origins:execute_command",
-                    "command": "andromedaorigins internal_fx faerie.flutter"
+                    "type": "andromeda_origins:enhanced_fx",
+                    "event": "faerie.flutter"
                   },
                   {
                     "type": "origins:spawn_particles",

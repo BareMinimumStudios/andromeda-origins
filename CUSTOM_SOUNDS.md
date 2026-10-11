@@ -1,6 +1,6 @@
 # Custom Sound Integration
 
-**Current state: v1.4.75**. The 34 bundled Andromeda SoundEvents remain unchanged. When the optional enhanced-FX layer is active, selected Spell Engine / More RPG Library sounds are mixed underneath the existing Origin audio; they do not replace or re-register Andromeda's custom sounds.
+**Current source: `1.4.75-overgrown.31`.** The 34 bundled Andromeda SoundEvents remain unchanged. When the optional enhanced-FX layer is active, selected Spell Engine / More RPG Library sounds are mixed underneath the existing Origin audio; they do not replace or re-register Andromeda's custom sounds.
 
 Andromeda Origins registers **34 custom SoundEvents**. Bundled ability audio is stored under `assets/andromeda_origins/sounds/abilities/` and registered in `assets/andromeda_origins/sounds.json`.
 
@@ -55,8 +55,8 @@ Examples in v1.4.60 include soul casting/release under Lichling, water release/b
 | `andromeda_origins:ability.siren.infatuation_whisper` | `abilities/siren/infatuation_whisper.ogg` | 15.00s | streamed | Infatuated target-local whisper; stopped if Infatuation ends early |
 | `andromeda_origins:ability.siren.shrieking_wail` | `abilities/siren/shrieking_wail.ogg` | 4.00s | one-shot | Shrieking Wail activation |
 | `andromeda_origins:ability.siren.wail_impact` | `abilities/siren/wail_impact.ogg` | 2.50s | one-shot | Shrieking Wail victim impact; current impact mix is intentionally louder |
-| `andromeda_origins:ability.veilborn.veil_open` | `abilities/veilborn/veil_open.ogg` | 2.10s | one-shot | Curtain Step veil opening |
-| `andromeda_origins:ability.veilborn.veil_close` | `abilities/veilborn/veil_close.ogg` | 2.10s | one-shot | Auroral Mirage manual dismissal/veil close |
+| `andromeda_origins:ability.veilborn.veil_open` | `abilities/veilborn/veil_open.ogg` | 2.10s | one-shot | Veil Step entry / Shimmer veil flicker |
+| `andromeda_origins:ability.veilborn.veil_close` | `abilities/veilborn/veil_close.ogg` | 2.10s | one-shot | Veil Step exit / Auroral Mirage manual dismissal |
 | `andromeda_origins:ability.veilborn.transposition` | `abilities/veilborn/transposition.ogg` | 3.00s | one-shot | Veil Transposition successful swap |
 | `andromeda_origins:ability.veilborn.auroral_mirage_activate` | `abilities/veilborn/auroral_mirage_activate.ogg` | 2.50s | one-shot | Auroral Mirage activation |
 | `andromeda_origins:ability.veilborn.reality_fracture` | `abilities/veilborn/reality_fracture.ogg` | 2.60s | one-shot | Reality Shatter application cue |

@@ -6,7 +6,7 @@
     "modifier": {
       "id": "andromeda_origins:aquatic_fallback_submerged_mining",
       "attribute": "minecraft:player.submerged_mining_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": 4.0
     },
     "tick_rate": 20,
@@ -15,7 +15,7 @@
       "conditions": [
         {
           "type": "origins:power",
-          "power": "origins:aqua_affinity",
+          "power": "origins:merling/aqua_affinity",
           "inverted": true
         },
         {
@@ -38,7 +38,7 @@
       "conditions": [
         {
           "type": "origins:power",
-          "power": "origins:aqua_affinity",
+          "power": "origins:merling/aqua_affinity",
           "inverted": true
         },
         {
@@ -52,14 +52,6 @@
           "inverted": true
         }
       ]
-    }
-  },
-  "conduit": {
-    "type": "origins:conduit_power_on_land",
-    "condition": {
-      "type": "origins:power",
-      "power": "origins:conduit_power_on_land",
-      "inverted": true
     }
   }
 }

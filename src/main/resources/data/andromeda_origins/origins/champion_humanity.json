@@ -16,5 +16,10 @@
   "order": 104,
   "impact": 3,
   "name": "Champion Human",
-  "description": "A command-only Champion variant of The Human. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Player-facing ability cooldowns recover twice as fast; charge times and resource costs remain unchanged."
+  "description": "A command-only Champion variant of The Human. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Player-facing ability cooldowns recover twice as fast; charge times and resource costs remain unchanged.",
+  "tags": [
+    "andromeda_origins:living",
+    "andromeda_origins:champion",
+    "andromeda_origins:humanity"
+  ]
 }

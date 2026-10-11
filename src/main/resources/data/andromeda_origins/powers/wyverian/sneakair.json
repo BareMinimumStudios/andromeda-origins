@@ -40,8 +40,8 @@
                     "power": "*:*_chargecooldown"
                   },
                   {
-                    "type": "origins:execute_command",
-                    "command": "andromedaorigins internal_fx wyverian.hover"
+                    "type": "andromeda_origins:enhanced_fx",
+                    "event": "wyverian.hover"
                   },
                   {
                     "type": "origins:play_sound",
@@ -108,8 +108,8 @@
               "inverted": true
             },
             {
-              "type": "origins:power",
-              "power": "andromeda_origins:common/champion"
+              "type": "origins:origin_tag",
+              "tag": "andromeda_origins:champion"
             }
           ]
         },

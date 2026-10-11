@@ -1,12 +1,16 @@
 {
   "type": "origins:multiple",
   "hidden": true,
+  "water_breathing": {
+    "type": "apoli:water_breathing",
+    "suffocate_outside_water": false
+  },
   "aqua_underwater": {
     "type": "origins:conditioned_attribute",
     "modifier": {
       "id": "andromeda_origins:aquatic_fallback_submerged_mining",
       "attribute": "minecraft:player.submerged_mining_speed",
-      "operation": "add_multiplied_total",
+      "operation": "multiply_total_multiplicative",
       "amount": 4.0
     },
     "tick_rate": 20,
@@ -15,7 +19,7 @@
       "conditions": [
         {
           "type": "origins:power",
-          "power": "origins:aqua_affinity",
+          "power": "origins:merling/aqua_affinity",
           "inverted": true
         },
         {
@@ -38,7 +42,7 @@
       "conditions": [
         {
           "type": "origins:power",
-          "power": "origins:aqua_affinity",
+          "power": "origins:merling/aqua_affinity",
           "inverted": true
         },
         {
@@ -55,26 +59,35 @@
     }
   },
   "like_water": {
-    "type": "origins:like_water",
+    "type": "apoli:modify_falling",
+    "velocity": 0.0,
+    "take_fall_damage": false,
     "condition": {
-      "type": "origins:power",
-      "power": "origins:like_water",
-      "inverted": true
-    }
-  },
-  "conduit": {
-    "type": "origins:conduit_power_on_land",
-    "condition": {
-      "type": "origins:power",
-      "power": "origins:conduit_power_on_land",
-      "inverted": true
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:fluid_height",
+          "fluid": "minecraft:water",
+          "comparison": "!=",
+          "compare_to": 0
+        },
+        {
+          "type": "apoli:sneaking",
+          "inverted": true
+        },
+        {
+          "type": "apoli:power",
+          "power": "origins:merling/like_water",
+          "inverted": true
+        }
+      ]
     }
   },
   "air_from_potions": {
     "type": "origins:action_on_item_use",
     "condition": {
       "type": "origins:power",
-      "power": "origins:air_from_potions",
+      "power": "origins:merling/air_from_potions",
       "inverted": true
     },
     "item_condition": {

@@ -1180,8 +1180,8 @@
           "type": "origins:extinguish"
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx faerie.trickster_waterswap"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "faerie.trickster_waterswap"
         }
       ]
     }
@@ -1223,8 +1223,8 @@
           }
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx faerie.trickster_warden"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "faerie.trickster_warden"
         }
       ]
     }
@@ -1258,8 +1258,8 @@
           "duration": 2
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx faerie.trickster_blaze"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "faerie.trickster_blaze"
         }
       ]
     }
@@ -1289,8 +1289,8 @@
           "damage_type": "minecraft:magic"
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx faerie.trickster_phantom"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "faerie.trickster_phantom"
         }
       ]
     }
@@ -1318,8 +1318,8 @@
           "type": "origins:clear_effect"
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx faerie.trickster_cow"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "faerie.trickster_cow"
         }
       ]
     }
@@ -1353,8 +1353,8 @@
           "damage_type": "minecraft:magic"
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx faerie.trickster_skeleton"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "faerie.trickster_skeleton"
         }
       ]
     }
@@ -1383,8 +1383,8 @@
           }
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx faerie.trickster_wskeleton"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "faerie.trickster_wskeleton"
         }
       ]
     }
@@ -1419,8 +1419,8 @@
           }
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx faerie.trickster_enderman"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "faerie.trickster_enderman"
         }
       ]
     }
@@ -1454,8 +1454,8 @@
           }
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx faerie.trickster_spider"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "faerie.trickster_spider"
         }
       ]
     }
@@ -1481,8 +1481,8 @@
           "damage_type": "minecraft:magic"
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx faerie.trickster_zombie"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "faerie.trickster_zombie"
         }
       ]
     }
@@ -1562,8 +1562,8 @@
           ]
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx faerie.trickster_creeper"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "faerie.trickster_creeper"
         }
       ]
     }
@@ -1605,8 +1605,8 @@
           }
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx faerie.trickster_stray"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "faerie.trickster_stray"
         }
       ]
     }
@@ -1640,8 +1640,8 @@
           "damage_type": "minecraft:magic"
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx faerie.trickster_drowned"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "faerie.trickster_drowned"
         }
       ]
     }
@@ -1664,8 +1664,8 @@
           "pitch": 1
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx faerie.trickster_strider"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "faerie.trickster_strider"
         }
       ]
     }
@@ -1711,8 +1711,8 @@
           }
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx faerie.trickster_pufferfish"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "faerie.trickster_pufferfish"
         }
       ]
     }
@@ -1787,8 +1787,8 @@
           ]
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx faerie.trickster_breeze"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "faerie.trickster_breeze"
         }
       ]
     }
@@ -1826,8 +1826,8 @@
           }
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx faerie.trickster_shulker"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "faerie.trickster_shulker"
         }
       ]
     }
@@ -1860,8 +1860,8 @@
           }
         },
         {
-          "type": "origins:execute_command",
-          "command": "andromedaorigins internal_fx faerie.trickster_axolotl"
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "faerie.trickster_axolotl"
         }
       ]
     }

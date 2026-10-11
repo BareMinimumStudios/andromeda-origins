@@ -136,8 +136,11 @@
         ]
       },
       "miss_action": {
-        "type": "origins:execute_command",
-        "command": "title @s actionbar {\"text\": \"You must target an entity!\", \"color\": \"red\"}"
+        "type": "andromeda_origins:actionbar",
+        "text": {
+          "text": "You must target an entity!",
+          "color": "red"
+        }
       },
       "bientity_action": {
         "type": "origins:target_action",
@@ -151,8 +154,8 @@
               "pitch": 1.0
             },
             {
-              "type": "origins:execute_command",
-              "command": "andromedaorigins internal_fx gorgon.gaze"
+              "type": "andromeda_origins:enhanced_fx",
+              "event": "gorgon.gaze"
             },
             {
               "type": "origins:delay",
@@ -174,8 +177,8 @@
                 "type": "origins:and",
                 "actions": [
                   {
-                    "type": "origins:execute_command",
-                    "command": "andromedaorigins internal_fx gorgon.gaze_extend"
+                    "type": "andromeda_origins:enhanced_fx",
+                    "event": "gorgon.gaze_extend"
                   },
                   {
                     "type": "origins:change_resource",

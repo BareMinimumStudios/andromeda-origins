@@ -15,5 +15,10 @@
   "order": 103,
   "impact": 3,
   "name": "Champion Gorgon",
-  "description": "A command-only Champion variant of Gorgon. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Player-facing ability cooldowns recover twice as fast; charge times and resource costs remain unchanged."
+  "description": "A command-only Champion variant of Gorgon. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Player-facing ability cooldowns recover twice as fast; charge times and resource costs remain unchanged.",
+  "tags": [
+    "andromeda_origins:mystic",
+    "andromeda_origins:champion",
+    "andromeda_origins:gorgon"
+  ]
 }

@@ -3,6 +3,7 @@
     "andromeda_origins:champion/veilborn_passives",
     "andromeda_origins:common/champion",
     "andromeda_origins:common/champion_cooldowns",
+    "andromeda_origins:veilborn/shimmer",
     "andromeda_origins:veilborn/primary",
     "andromeda_origins:veilborn/secondary",
     "andromeda_origins:veilborn/figura",
@@ -15,5 +16,10 @@
   "order": 111,
   "impact": 3,
   "name": "Champion Veilborn",
-  "description": "A command-only Champion variant of Veilborn. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Auroral Mirage has a 5-second cooldown; other player-facing ability cooldowns recover twice as fast. Charge times and resource costs remain unchanged."
+  "description": "A command-only Champion variant of Veilborn. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Auroral Mirage has a fixed 5-second cooldown; other player-facing ability cooldowns recover twice as fast. Charge times and resource costs remain unchanged.",
+  "tags": [
+    "andromeda_origins:mystic",
+    "andromeda_origins:champion",
+    "andromeda_origins:veilborn"
+  ]
 }

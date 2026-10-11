@@ -1,0 +1,5 @@
+{
+  "type": "origins:simple",
+  "name": "Shimmer",
+  "description": "Attacks from other entities have a 10% chance to miss as your body briefly shimmers between reality and the Veil. A successful Shimmer fully avoids the hit and does not break Auroral Mirage."
+}
