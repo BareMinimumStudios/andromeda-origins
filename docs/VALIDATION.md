@@ -92,3 +92,10 @@ These checks simulate server players and stale data. They do not test a real ret
 ## Veil Step cloud presentation (1.4.78)
 
 Both dedicated-server backends passed standard and Champion Veilborn checks for observer/viewer rendering policy, suppression, stationary lifetime, and model restoration after timeout. Startup, helper commands, reload, and shutdown also passed. Client dispatcher rendering is cancelled for marked casters, with an optional Armor Model API guard; the server emits the existing cloud every other tick while stationary or moving. Temporary diagnostics are excluded from release jars. A matching two-client visual check remains necessary to verify the final appearance, including custom avatar/rendering mods.
+
+
+## Night vision and aquatic reports (1.4.79)
+
+The installed Iris 1.8.14 beta uses CommonUniforms.getNightVision() for its shader uniform; the optional client-only bridge merges the active Opoli strength without status effects. Fabric and NeoForge native backend checks verified Gorgon 1.0 and Arachne 0.75 strengths, toggles and suppression, with no Night Vision potion. Shader appearance has not been visually tested.
+
+Native activation verified Selkie dash cooldowns of 600 ticks on dry land and 100 ticks while physically in water on both loaders. Nereid hydration grant/expiry removed Wet, activated gills, drained real air and inflicted drowning damage through the player tick path on both loaders. The reported live-server Nereid failure has not been reproduced; no speculative breathing balance change was made. Use `/andromedaorigins diagnose_aquatic <player>` after hydration expires to inspect the affected server player; `/andromedaorigins repair <player>` already restores missing selected-origin powers and marks the container dirty for sync.

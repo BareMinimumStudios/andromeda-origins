@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.79] - 2026-10-12
+
+- Fix Selkie Surging Tides using a 30-second cooldown underwater: select 5 seconds in water/rain and 30 seconds on land before Opoli starts the cooldown.
+- Add OP-only `/andromedaorigins diagnose_aquatic <player>` to report server-side Nereid gills, suppression, hydration sources, reserve, and air when investigating breathing/sync reports.
+
+- Bridge custom Opoli night-vision powers into Iris shader brightness, preserving strengths, conditions, toggles, suppression, and vanilla potion brightness without applying status effects.
+
 ## [1.4.78] - 2026-10-12
 
 - Show standard and Champion Veilborn as particle clouds to other players during Veil Step. Hide their model and equipment and maintain the cloud while stationary; restore normal rendering on emergence.

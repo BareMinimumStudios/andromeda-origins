@@ -41,6 +41,23 @@ object PlayerOriginRepair {
             }
         }
         Platform.commands { dispatcher, _, _ ->
+            dispatcher.register(Commands.literal("andromedaorigins").then(
+                Commands.literal("diagnose_aquatic").requires { it.hasPermission(2) }
+                    .then(Commands.argument("player", EntityArgument.player()).executes { context ->
+                        val player = EntityArgument.getPlayer(context, "player")
+                        val container = PowerContainerAttachment.get(player)
+                        val gills = ResourceLocation.parse("andromeda_origins:nereid/gills")
+                        val wet = ResourceLocation.parse("andromeda_origins:common/wet")
+                        val selection = PlayerOriginsAttachment.get(player)?.snapshot()
+                        val report = "${player.gameProfile.name}: origins=$selection; " +
+                            "gills loaded=${ApoliPowers.get(gills) != null}, granted=${container?.hasPower(gills)}, suppressed=${container?.isSuppressed(gills)}; " +
+                            "wet=${container?.hasPower(wet)}, wet sources=${container?.sourcesOf(wet)}, " +
+                            "reserve=${container?.let { dev.overgrown.apoli.power.PowerResources.read(it, ResourceLocation.parse("andromeda_origins:nereid/helper/nereidwet_remove")) }}; " +
+                            "air=${player.airSupply}/${player.maxAirSupply}, " +
+                            "land suffocation=${dev.overgrown.apoli.power.builtin.WaterBreathingPower.suffocatesOutsideWater(player)}"
+                        context.source.sendSuccess({ Component.literal(report) }, false)
+                        1
+                    })))
             for (name in listOf("repair", "repair_attributes")) {
                 dispatcher.register(Commands.literal("andromedaorigins").then(
                     Commands.literal(name).requires { it.hasPermission(2) }
