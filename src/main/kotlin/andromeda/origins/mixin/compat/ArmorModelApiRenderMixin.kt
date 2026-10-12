@@ -28,7 +28,8 @@ object ArmorModelApiRenderMixin {
     contextModel: net.minecraft.client.model.HumanoidModel<net.minecraft.world.entity.LivingEntity>,
     cir: org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable<kotlin.Boolean>
     ) {
-        if (UndetectableCompat.isUndetectable(entity)
+        if (andromeda.origins.compat.VeilbornStealthCompat.isVeilStep(entity)
+        || UndetectableCompat.isUndetectable(entity)
         || FiguraArmorVisibilityCompat.shouldHideArmor(entity, slot)) {
             cir.setReturnValue(true)
         }

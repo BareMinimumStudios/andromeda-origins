@@ -3,7 +3,7 @@ package andromeda.origins.mixin
 import andromeda.origins.client.VeilStepVisuals
 
 
- /** Replaces living entity models with local particle echoes while the viewer is inside Veil Step.  */
+ /** Hides Veil Step casters for all viewers and replaces living models for viewers inside the Veil. */
 @org.spongepowered.asm.mixin.Mixin(net.minecraft.client.renderer.entity.EntityRenderDispatcher::class)
 abstract class VeilStepEntityRenderMixin {
     @org.spongepowered.asm.mixin.injection.Inject(method = ["render"], at = [org.spongepowered.asm.mixin.injection.At("HEAD")], cancellable = true) private fun <E : net.minecraft.world.entity.Entity>`andromeda$renderLivingAsVeilEcho`(

@@ -33,7 +33,7 @@ object VeilStepVisuals {
 
     fun replaceLivingRender(entity: net.minecraft.world.entity.LivingEntity?): kotlin.Boolean {
         val client: net.minecraft.client.Minecraft = net.minecraft.client.Minecraft.getInstance()
-        return entity != null && client.player != null && VeilbornStealthCompat.isVeilStep(client.player)
+        return VeilbornStealthCompat.renderAsVeilCloud(entity, client.player)
     }
 
     private fun emitLivingEchoes(client: net.minecraft.client.Minecraft) {

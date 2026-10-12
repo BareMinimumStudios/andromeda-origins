@@ -16,7 +16,7 @@ import andromeda.origins.compat.AndromedaOriginTags
  * corrections. This keeps steering smooth and immediate while preserving ordinary solid-block
  * collision. The server owns the 5-second lifetime, combat/stealth state, entity-crossing tears,
  * cooldown, visible shadow-cloud presentation, and cleanup. Veil Step does not use the shared
- * Undetectable power: other players can still see the Veilborn while traversal remains invulnerable
+ * Undetectable power: other players see a particle cloud while traversal remains invulnerable
  * and unpushable. No cumulative travel-distance limit is applied.
  */
 object VeilStepManager {
@@ -170,10 +170,11 @@ object VeilStepManager {
         val current: net.minecraft.world.phys.Vec3 = player.position()
         if (current.distanceToSqr(state.lastPosition) > 1.0E-8) {
             VeilStepManager.shatterCrossedEntities(player, state, state.lastPosition, current)
-            if ((state.ticks and 1) == 0) VeilStepManager.emitVisibleVeilTrail(player)
             state.lastPosition = current
         }
 
+        // Maintain the cloud while hovering as well as while moving.
+        if ((state.ticks and 1) == 0) VeilStepManager.emitVisibleVeilTrail(player)
         state.ticks++
         player.resetFallDistance()
 
@@ -194,9 +195,8 @@ object VeilStepManager {
 
 
      /**
- * Broadcasts the Veilborn's moving shadow-cloud form to nearby clients. The player remains a
- * normal visible entity; these particles are presentation only and therefore do not reveal any
- * hidden model state or alter collision.
+ * Broadcasts the Veilborn's shadow-cloud form to nearby clients, including while stationary.
+ * Clients suppress the caster's model using the synced Veil Step marker; collision is unchanged.
  */
     private fun emitVisibleVeilTrail(player: net.minecraft.server.level.ServerPlayer) {
         val level: net.minecraft.server.level.ServerLevel = player.serverLevel()

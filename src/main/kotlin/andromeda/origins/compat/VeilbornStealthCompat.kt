@@ -16,6 +16,11 @@ object VeilbornStealthCompat {
         return VeilbornStealthCompat.hasActiveMarker(entity, VeilbornStealthCompat.VEIL_STEP_MARKER)
     }
 
+    /** A Veil Step caster is a cloud to everyone; a caster also perceives living targets as clouds. */
+    fun renderAsVeilCloud(entity: net.minecraft.world.entity.LivingEntity?, viewer: net.minecraft.world.entity.Entity?): Boolean {
+        return entity != null && (isVeilStep(entity) || isVeilStep(viewer))
+    }
+
     fun suppressTraces(entity: net.minecraft.world.entity.Entity?): kotlin.Boolean {
         return VeilbornStealthCompat.isAuroralMirage(entity) || VeilbornStealthCompat.isVeilStep(entity)
     }

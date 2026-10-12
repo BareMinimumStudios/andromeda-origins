@@ -87,3 +87,8 @@ Both requested values were already present in the current source. The independen
 Fabric and NeoForge dedicated-server backend checks passed Humanity's 18 HP value, missing grant restoration, no healing, old Andromeda health modifiers, Medieval height/diet/tag cleanup, foreign modifier preservation, active Medieval selection preservation, repeated repair stability, fail-closed missing selection handling, manual base restoration, operator permissions, and suppressed attribute preservation. All 26 Origins produced stable attribute values across repeated rebuilds; standard Arachne scale was 0.8 and Faerie scale was 0.83, matching current data. Startup, native helper commands, reload, and normal shutdown passed on both loaders. Temporary diagnostic code is excluded from production jars.
 
 These checks simulate server players and stale data. They do not test a real returning player's old Cardinal Components save or a matching client's visual height. The optional Pehkui eye-height command path was not exercised because Pehkui is absent from the test servers.
+
+
+## Veil Step cloud presentation (1.4.78)
+
+Both dedicated-server backends passed standard and Champion Veilborn checks for observer/viewer rendering policy, suppression, stationary lifetime, and model restoration after timeout. Startup, helper commands, reload, and shutdown also passed. Client dispatcher rendering is cancelled for marked casters, with an optional Armor Model API guard; the server emits the existing cloud every other tick while stationary or moving. Temporary diagnostics are excluded from release jars. A matching two-client visual check remains necessary to verify the final appearance, including custom avatar/rendering mods.
