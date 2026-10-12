@@ -59,8 +59,10 @@
       "set": false
     },
     "condition": {
-      "type": "origins:submerged_in",
-      "fluid": "minecraft:water"
+      "type": "origins:fluid_height",
+      "fluid": "minecraft:water",
+      "comparison": ">",
+      "compare_to": 0
     }
   },
   "swim_lock": {
@@ -73,8 +75,10 @@
       "attribute": "additionalentityattributes:generic.water_speed"
     },
     "condition": {
-      "type": "origins:submerged_in",
-      "fluid": "minecraft:water"
+      "type": "origins:fluid_height",
+      "fluid": "minecraft:water",
+      "comparison": ">",
+      "compare_to": 0
     }
   },
   "bottom_drag": {
@@ -86,8 +90,10 @@
       "amount": -0.85
     },
     "condition": {
-      "type": "origins:submerged_in",
-      "fluid": "minecraft:water"
+      "type": "origins:fluid_height",
+      "fluid": "minecraft:water",
+      "comparison": ">",
+      "compare_to": 0
     },
     "tick_rate": 1
   },
@@ -98,8 +104,10 @@
       "amount": -1
     },
     "condition": {
-      "type": "origins:submerged_in",
-      "fluid": "minecraft:water"
+      "type": "origins:fluid_height",
+      "fluid": "minecraft:water",
+      "comparison": ">",
+      "compare_to": 0
     }
   },
   "visual": {

@@ -54,7 +54,7 @@ object PlayerOriginRepair {
                             "wet=${container?.hasPower(wet)}, wet sources=${container?.sourcesOf(wet)}, " +
                             "reserve=${container?.let { dev.overgrown.apoli.power.PowerResources.read(it, ResourceLocation.parse("andromeda_origins:nereid/helper/nereidwet_remove")) }}; " +
                             "air=${player.airSupply}/${player.maxAirSupply}, " +
-                            "land suffocation=${dev.overgrown.apoli.power.builtin.WaterBreathingPower.suffocatesOutsideWater(player)}"
+                            "land suffocation=${NereidGills.isDry(player)}"
                         context.source.sendSuccess({ Component.literal(report) }, false)
                         1
                     })))

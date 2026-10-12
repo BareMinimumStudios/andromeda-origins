@@ -2,6 +2,9 @@
 
 ## [1.4.79] - 2026-10-12
 
+- Enforce expired Nereid hydration air drain after server player updates, preventing later air recovery from undoing land suffocation. Preserve native client prediction, Respiration, suppression, water/rain, Water Breathing (including diving helmets), and Conduit Power; resume draining when protection ends.
+- Fix Nereid Submersion pulling only fully submerged targets, its drowning drain being overwritten by player updates, and its hydration HUD appearing on non-Nereid victims.
+
 - Fix Selkie Surging Tides using a 30-second cooldown underwater: select 5 seconds in water/rain and 30 seconds on land before Opoli starts the cooldown.
 - Add OP-only `/andromedaorigins diagnose_aquatic <player>` to report server-side Nereid gills, suppression, hydration sources, reserve, and air when investigating breathing/sync reports.
 

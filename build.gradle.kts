@@ -169,6 +169,7 @@ tasks.check { dependsOn(verifyAndromedaResources) }
 // Keep their authored static methods and annotations; remove unused object scaffolding so
 // Mixin never copies an initializer that attempts to instantiate a target class.
 val staticMixinObjects = setOf(
+    "andromeda/origins/mixin/NereidGillsPowerMixin.class",
     "andromeda/origins/mixin/compat/IrisNightVisionMixin.class",
     "andromeda/origins/mixin/UndetectableSensorMixin.class",
     "andromeda/origins/mixin/OriginManagerConfigMixin.class",

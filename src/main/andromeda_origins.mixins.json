@@ -32,6 +32,7 @@
     "VeilbornFootstepMixin",
     "FoodBalanceItemStackMixin",
     "FoodBalanceEffectMixin",
-    "FoodBalanceFoodDataMixin"
+    "FoodBalanceFoodDataMixin",
+    "NereidGillsPowerMixin"
   ]
 }

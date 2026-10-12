@@ -32,9 +32,17 @@
       "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
       "bar_index": 1,
       "condition": {
-        "type": "origins:power",
-        "power": "*:selkie/passives",
-        "inverted": true
+        "type": "origins:or",
+        "conditions": [
+          {
+            "type": "origins:power",
+            "power": "andromeda_origins:nereid/passives"
+          },
+          {
+            "type": "origins:power",
+            "power": "andromeda_origins:champion/nereid_passives"
+          }
+        ]
       }
     },
     "min_action": {
