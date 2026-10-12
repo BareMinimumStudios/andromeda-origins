@@ -76,3 +76,7 @@ Dedicated Fabric and NeoForge servers used Farm & Charm 1.1.27, Brewery 2.1.12, 
 Settings are server-authoritative and sync through the existing Fzzy lifecycle. Existing per-stack custom components are preserved. The item food overlay is cached and refreshed after policy or base-food changes; it does not mutate item defaults or saved stacks. Stack-size overrides and drink/wine changes are outside this port.
 
 Production builds also passed startup, helper commands, reload, and normal shutdown on both loaders with Farm & Charm, Brewery, Candlelight, Foundation, and Incapacitated absent. Expected optional Mixin target warnings were recorded. A Fabric control server without Andromeda reproduced the eight Let's Do/Foundation missing-data-fixer messages, confirming they originate upstream.
+
+## Gorgon climbing and Selkie hydration (1.4.77)
+
+Both requested values were already present in the current source. The independent resource validator now traverses standard and Champion Gorgon power dependencies and rejects climbing powers. It also checks the native Selkie wetness reserve starts and caps at 300 seconds, updates every 20 ticks, and drains by one only outside water and rain. The existing 21-file Selkie baseline remains unchanged. Champion Selkie retains its existing immunity to dry-out penalties. No wider Selkie rework or Nereid hydration change was made.

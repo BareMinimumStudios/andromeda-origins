@@ -54,6 +54,45 @@ for path,definition in data.items():
             check('tp @s @p[tag=mantileap' not in command,f'{path.name}: unsafe caster selection')
             for name in re.findall(r'\bfunction\s+andromeda_origins:([\w/.-]+)',command):
                 check((RES/f'data/andromeda_origins/function/{name}.mcfunction').exists(), f'{path.name}: missing function {name}')
+# Follow the Gorgon power graph, including granted powers and multiple-power children.
+# Both variants must remain free of wall climbing.
+def root_power(identifier):
+    if identifier.startswith('*:'):
+        identifier = 'andromeda_origins:' + identifier[2:]
+    if identifier in powers: return identifier
+    return next((root for root in sorted(powers, key=len, reverse=True)
+                 if identifier.startswith(root + '_')), None)
+
+for path,origin in origins:
+    if path.stem not in ('gorgon', 'champion_gorgon'): continue
+    pending = list(origin.get('powers', []))
+    visited = set()
+    while pending:
+        identifier = pending.pop()
+        check('climb' not in identifier.lower(), f'{path.stem}: climbing power reference {identifier}')
+        root = root_power(identifier)
+        if root is None or root in visited: continue
+        visited.add(root)
+        for node in walk(powers[root]):
+            check(node.get('type') not in ('origins:climbing', 'apoli:climbing'),
+                  f'{path.stem}: wall climbing found in {root}')
+            if isinstance(node.get('power'), str): pending.append(node['power'])
+
+# The native Selkie reserve is measured in seconds, not ticks: 300 units,
+# losing one unit every 20 ticks while outside water and rain.
+wet = powers['andromeda_origins:selkie/helper/selkiewet']
+check(wet['remove']['max'] == 300 and wet['remove']['start_value'] == 300,
+      'Selkie hydration must start full and cap at five minutes')
+check(wet['timer']['interval'] == 20, 'Selkie hydration must update once per second')
+dry = wet['timer']['entity_action']['actions'][0]['actions'][1]
+check(dry['action']['change'] == -1 and dry['action']['resource'] == '*:*_remove',
+      'Selkie dry-land hydration must drain one second per second')
+conditions = dry['condition']['conditions']
+check(any(c.get('type') == 'origins:fluid_height' and c.get('compare_to') == 0
+          and c.get('comparison') == '==' for c in conditions)
+      and any(c.get('type') == 'origins:in_rain' and c.get('inverted') for c in conditions),
+      'Selkie hydration must drain only outside water and rain')
+
 # Lichling shares the same primary across standard and Champion Origins. Downed state
 # must win over sneak targeting, or the cooldown can be consumed without self-revival.
 lichling=powers['andromeda_origins:lichling/primary']

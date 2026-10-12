@@ -2,6 +2,8 @@
 
 ## [1.4.77] - 2026-10-11
 
+- Confirm standard and Champion Gorgons have no wall climbing and standard Selkie hydration lasts five minutes on dry land; add regression checks to preserve both behaviors.
+
 - Add synchronized Fzzy Food Balance settings for Farmer's Blessing, Grandma's Blessing, and Stoutheart; disable them by default and clear active player effects.
 - Port the Beef Wellington nerf at 6 nutrition / 0.5 saturation modifier, including placed Foundation dishes. Configure or disable it live through Fzzy Config while preserving effects, containers, and eating properties.
 
