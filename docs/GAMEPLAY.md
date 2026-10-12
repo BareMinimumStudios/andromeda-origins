@@ -223,3 +223,11 @@ A normal reconnect does not intentionally refresh active ability cooldowns.
 ## More information
 
 See the [README](../README.md) for installation, [development guide](../DEVELOPMENT.md) for building and publishing, and [release history](../CHANGELOG.md) for changes.
+
+## Food balance
+
+In Fzzy Config's gameplay screen, **Food Balance** offers separate switches for Farmer's Blessing, Grandma's Blessing, and Stoutheart. All three are disabled by default. Disabled effects are blocked when applied and removed from players within one second, including effects saved before joining. These switches disable the effects from every source; other effects keep their normal behavior.
+
+Beef Wellington defaults to **6 nutrition** and **0.5 saturation modifier**, restoring 6 hunger points (three hunger icons) and 6 saturation per serving. Set nutrition from 0–20 and the modifier from 0–2, or switch **Balance Beef Wellington** off to use Candlelight's values. Both held portions and dishes placed through Foundation are covered. Effects, eating time, and containers are preserved. Changes apply live on the server and synced clients.
+
+**Block Golden Food Incapacitated Bypass** prevents only golden apples, enchanted golden apples, and golden carrots from resetting down counters/timers, providing adrenaline recovery, or reviving players. Their normal food effects remain. Origin revival abilities keep working. No stack sizes are changed. Farm & Charm, Brewery, Candlelight, Foundation, and Incapacitated remain optional dependencies.

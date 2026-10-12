@@ -354,5 +354,19 @@
   "andromeda_origins.screen.reader.powers_traits": "Powers & Traits",
   "andromeda_origins.screen.reader.impact": "Impact: %s",
   "andromeda_origins.gameplay.blockIncapacitatedFoodBypass": "Block Golden Food Incapacitated Bypass",
-  "andromeda_origins.gameplay.blockIncapacitatedFoodBypass.desc": "Prevent golden apples, enchanted golden apples, and golden carrots from resetting Incapacitated down counters or reviving players. Normal food effects, modded foods, and Origin revival abilities still work. Server setting; applies immediately."
+  "andromeda_origins.gameplay.blockIncapacitatedFoodBypass.desc": "Prevent golden apples, enchanted golden apples, and golden carrots from resetting Incapacitated down counters or reviving players. Normal food effects, modded foods, and Origin revival abilities still work. Server setting; applies immediately.",
+  "andromeda_origins.gameplay.foodBalance": "Food Balance",
+  "andromeda_origins.gameplay.foodBalance.desc": "Server-wide food balance. Settings apply immediately. Let's Do mods remain optional.",
+  "andromeda_origins.gameplay.foodBalance.disableFarmersBlessing": "Disable Farmer's Blessing",
+  "andromeda_origins.gameplay.foodBalance.disableFarmersBlessing.desc": "Block Farmer's Blessing and clear it from players within one second.",
+  "andromeda_origins.gameplay.foodBalance.disableGrandmasBlessing": "Disable Grandma's Blessing",
+  "andromeda_origins.gameplay.foodBalance.disableGrandmasBlessing.desc": "Block Grandma's Blessing and clear it from players within one second.",
+  "andromeda_origins.gameplay.foodBalance.disableStoutheart": "Disable Stoutheart",
+  "andromeda_origins.gameplay.foodBalance.disableStoutheart.desc": "Block Stoutheart and clear it from players within one second.",
+  "andromeda_origins.gameplay.foodBalance.balanceBeefWellington": "Balance Beef Wellington",
+  "andromeda_origins.gameplay.foodBalance.balanceBeefWellington.desc": "Override Beef Wellington nutrition and saturation for held food and placed dishes. Turn off to restore upstream values.",
+  "andromeda_origins.gameplay.foodBalance.beefWellingtonNutrition": "Beef Wellington Nutrition",
+  "andromeda_origins.gameplay.foodBalance.beefWellingtonNutrition.desc": "Hunger points per serving, 0–20. Two points equal one hunger icon. Default: 6.",
+  "andromeda_origins.gameplay.foodBalance.beefWellingtonSaturationModifier": "Beef Wellington Saturation Modifier",
+  "andromeda_origins.gameplay.foodBalance.beefWellingtonSaturationModifier.desc": "Restored saturation equals nutrition × modifier × 2. Default: 0.5, restoring 6 saturation at 6 nutrition."
 }

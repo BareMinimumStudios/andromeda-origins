@@ -29,6 +29,9 @@
     "OriginManagerConfigMixin",
     "VeilbornTraceMixin",
     "VeilbornEffectParticleMixin",
-    "VeilbornFootstepMixin"
+    "VeilbornFootstepMixin",
+    "FoodBalanceItemStackMixin",
+    "FoodBalanceEffectMixin",
+    "FoodBalanceFoodDataMixin"
   ]
 }

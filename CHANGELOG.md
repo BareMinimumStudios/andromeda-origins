@@ -2,6 +2,9 @@
 
 ## [1.4.77] - 2026-10-11
 
+- Add synchronized Fzzy Food Balance settings for Farmer's Blessing, Grandma's Blessing, and Stoutheart; disable them by default and clear active player effects.
+- Port the Beef Wellington nerf at 6 nutrition / 0.5 saturation modifier, including placed Foundation dishes. Configure or disable it live through Fzzy Config while preserving effects, containers, and eating properties.
+
 - Fix standard and Champion Lichling self-revival while sneaking: incapacitated casters always revive themselves before considering target revival.
 - Invoke Incapacitated revival synchronously and verify its state before granting Humanity's final-stand effects; preserve the no-op for healthy players.
 - Add validation for Lichling revival priority and namespaced wildcard power references.

@@ -46,6 +46,7 @@ object AndromedaOrigins {
 
                 // Clean Overgrown runtime: no automatic legacy-player migration or repair layer.
         FiguraCompatManager.register()
+        andromeda.origins.compat.FoodBalanceCompat.register()
 
     }
 }

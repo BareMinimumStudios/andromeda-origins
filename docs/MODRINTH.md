@@ -48,6 +48,8 @@ Use the **Overgrown fork** of Origins and Opoli. Apace's original Origins/Apoli 
 
 Open the gameplay screen through Mod Menu when available, or use `/andromedaorigins config` with operator permission level 2. Settings are stored in `config/andromeda_origins/gameplay.toml` and apply live. Power switches preserve their stored cooldown and resource state.
 
+The **Food Balance** section controls Farmer's Blessing, Grandma's Blessing, and Stoutheart, plus Beef Wellington nutrition and saturation. The default Wellington serving restores 6 hunger points and 6 saturation, whether eaten from an item or a placed dish. A separate switch blocks golden apples, enchanted golden apples, and golden carrots from bypassing Incapacitated. These settings apply live; the integrations are optional.
+
 Champion variants are hidden from normal selection. Operators can assign one with:
 
 ```mcfunction

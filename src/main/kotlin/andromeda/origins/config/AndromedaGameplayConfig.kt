@@ -31,6 +31,9 @@ class AndromedaGameplayConfig : me.fzzyhmstrs.fzzy_config.config.Config(net.mine
     @me.fzzyhmstrs.fzzy_config.annotations.Comment("Prevent golden apples, enchanted golden apples, and golden carrots from resetting Incapacitated down counters or reviving players. Normal food effects, modded foods, and Origin revival abilities remain available.")
     var blockIncapacitatedFoodBypass = me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean(true)
 
+    @me.fzzyhmstrs.fzzy_config.annotations.Comment("Food balance and optional Let's Do compatibility. Settings apply immediately and are synchronized to clients.")
+    var foodBalance = FoodBalanceSection()
+
     override fun defaultPermLevel(): kotlin.Int {
         return 2
     }
@@ -78,7 +81,8 @@ class AndromedaGameplayConfig : me.fzzyhmstrs.fzzy_config.config.Config(net.mine
         java.util.Set.copyOf<net.minecraft.resources.ResourceLocation>(disabledStock),
         java.util.Set.copyOf<net.minecraft.resources.ResourceLocation>(disabledOrigins),
         AndromedaGameplayConfig.Companion.immutablePowerMap(disabledByOrigin),
-        blockIncapacitatedFoodBypass.get()
+        blockIncapacitatedFoodBypass.get(),
+        foodBalance.toState()
         )
     }
 
