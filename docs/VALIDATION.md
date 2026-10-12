@@ -1,5 +1,13 @@
 # .37 validation — 2026-10-10
 
+## 1.4.77 ability audit — 2026-10-11
+
+Reproduced a downed Champion Lichling failing to self-revive when sneaking: the primary took its target-revival branch. With incapacitated state taking priority, both standard and Champion Lichling revive to full health in either sneak state.
+
+Incapacitated 2.0.1 was tested on Fabric and NeoForge in disposable dedicated-server worlds. Tests used simulated server players, with outgoing packets suppressed for the NeoForge diagnostic; they do not validate client packet handling or visuals. Checks covered healthy-player no-op behavior, synchronous revival inside a nested command, Champion Humanity recovery, 178 activation cases per loader across all 26 Origins, and 120 manual passive ticks per Origin. These are execution smoke checks, not assertions of every ability's gameplay outcome, target selection, or multiplayer balance.
+
+Resource validation checks all 194 root powers, 26 Origin definitions, sound files, and namespaced wildcard power references. The Lichling revival branch has a regression check. Diagnostic classes are excluded from production source and release jars. Both production jars passed dedicated-server startup and reload checks; Fabric was also checked with Incapacitated absent.
+
 The complete `.36` source was imported into the `overgrown-1.21.1` branch, preserving Git history. The original checkout and downloaded source archive were retained as recovery copies. Synced ChatGPT project references were not modified.
 
 ## Verified

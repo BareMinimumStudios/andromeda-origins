@@ -45,6 +45,8 @@ for path,definition in data.items():
             check('damage_condition' in node,f'{path.name}: missing invulnerability condition')
         for key in ('resource','power'):
             identifier=node.get(key)
+            if isinstance(identifier,str) and identifier.startswith('*:') and '*' not in identifier[2:]:
+                identifier='andromeda_origins:'+identifier[2:]
             if isinstance(identifier,str) and identifier.startswith('andromeda_origins:'):
                 check(identifier in known,f'{path.relative_to(RES)}: missing {key} {identifier}')
         command=node.get('command','')
@@ -52,6 +54,17 @@ for path,definition in data.items():
             check('tp @s @p[tag=mantileap' not in command,f'{path.name}: unsafe caster selection')
             for name in re.findall(r'\bfunction\s+andromeda_origins:([\w/.-]+)',command):
                 check((RES/f'data/andromeda_origins/function/{name}.mcfunction').exists(), f'{path.name}: missing function {name}')
+# Lichling shares the same primary across standard and Champion Origins. Downed state
+# must win over sneak targeting, or the cooldown can be consumed without self-revival.
+lichling=powers['andromeda_origins:lichling/primary']
+first=lichling['primary']['entity_action']['actions'][0]['condition']
+check(first.get('type')=='origins:or' and
+      first.get('conditions',[{}])[0].get('type')=='andromeda_origins:incapacitated',
+      'Lichling self-revival must take priority while incapacitated')
+for path,origin in origins:
+    if path.stem in ('lichling','champion_lichling'):
+        check('andromeda_origins:lichling/primary' in origin['powers'],
+              f'{path.name}: shared self-revival power is missing')
 sounds=data.get(RES/'assets/andromeda_origins/sounds.json',{})
 referenced=set()
 for definition in sounds.values():

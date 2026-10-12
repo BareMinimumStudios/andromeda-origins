@@ -6,7 +6,7 @@ package andromeda.origins.compat
  /**
  * Small status-effect helpers used by Origin abilities.
  *
- * Keeping this in Java lets us classify vanilla and modded effects by Minecraft's actual
+ * Using the native effect category lets us classify vanilla and modded effects by Minecraft's actual
  * HARMFUL category instead of maintaining a fragile hard-coded list of effect IDs.
  */
 object StatusEffectCompat {

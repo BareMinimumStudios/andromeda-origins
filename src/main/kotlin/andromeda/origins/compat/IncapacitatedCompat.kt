@@ -10,7 +10,7 @@ import andromeda.origins.compat.MortalResolveEffects
  *
  * This module intentionally uses reflection instead of a hard compile/runtime dependency. That
  * keeps Andromeda Origins usable without Incapacitated while still allowing us to ask the mod's
- * own player-data object whether the player is actually downed before running its revive command.
+ * own player-data object whether the player is actually downed before calling its revival API.
  */
 object IncapacitatedCompat {
     val LOGGER: org.slf4j.Logger = org.slf4j.LoggerFactory.getLogger("Andromeda Origins/Incapacitated Compat")
@@ -234,15 +234,22 @@ object IncapacitatedCompat {
             return false
         }
 
-        val silentSource: net.minecraft.commands.CommandSourceStack = player.createCommandSourceStack()
-        .withPermission(4)
-        .withSource(net.minecraft.commands.CommandSource.NULL)
-
-        player.serverLevel().getServer().getCommands()
-        .performPrefixedCommand(silentSource, "incapacitated setDowned false")
-
-        IncapacitatedCompat.resetDamageTracking(player)
-        return true
+        try {
+            // Brigadier can defer nested commands until the current command finishes. Calling
+            // the upstream API synchronously keeps subsequent heals/counter writes in order.
+            val owner = Class.forName("com.cartoonishvillain.incapacitated.events.AbstractedIncapacitation")
+            method(owner, "revive", net.minecraft.world.entity.player.Player::class.java,
+                net.minecraft.world.entity.player.Player::class.java).invoke(null, player, null)
+            if (isDowned(player)) return false
+            resetDamageTracking(player)
+            return true
+        } catch (exception: ReflectiveOperationException) {
+            LOGGER.warn("Could not revive {} through Incapacitated's API.", player.gameProfile.name, exception)
+            return false
+        } catch (exception: RuntimeException) {
+            LOGGER.warn("Could not revive {} through Incapacitated's API.", player.gameProfile.name, exception)
+            return false
+        }
     }
 
      /**

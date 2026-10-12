@@ -36,6 +36,7 @@ object AndromedaOrigins {
         AndromedaSounds.register()
         VersionHandshake.registerServer()
         EnhancedFxCompat.initialize()
+        andromeda.origins.action.AndromedaConditions.register()
         AndromedaActions.register()
         AndromedaOriginsCommands.register()
         MortalResolveManager.register()

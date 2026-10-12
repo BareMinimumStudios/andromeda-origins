@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.4.77] - 2026-10-11
+
+- Fix standard and Champion Lichling self-revival while sneaking: incapacitated casters always revive themselves before considering target revival.
+- Invoke Incapacitated revival synchronously and verify its state before granting Humanity's final-stand effects; preserve the no-op for healthy players.
+- Add validation for Lichling revival priority and namespaced wildcard power references.
+
 ## [1.4.76] - 2026-10-11
 
 - Use `1.4.76+1.21.1-fabric` and `1.4.76+1.21.1-neoforge` for release uploads; validate Modrinth version-number length before building.
