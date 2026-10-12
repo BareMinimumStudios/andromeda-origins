@@ -7,6 +7,9 @@
       "attribute": "minecraft:generic.movement_speed",
       "operation": "multiply_total_multiplicative",
       "amount": -0.35
+    },
+    "condition": {
+      "type": "origins:exposed_to_sun"
     }
   },
   "damage": {

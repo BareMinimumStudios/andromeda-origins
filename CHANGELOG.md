@@ -2,6 +2,8 @@
 
 ## [1.4.79] - 2026-10-12
 
+- Fix Lichling sunlight slowness persisting at night or under shelter after its helper power is revoked. Automatically clear stuck sunlight speed modifiers while preserving the 35% sunlight penalty and other mods' attributes.
+
 - Enforce expired Nereid hydration air drain after server player updates, preventing later air recovery from undoing land suffocation. Preserve native client prediction, Respiration, suppression, water/rain, Water Breathing (including diving helmets), and Conduit Power; resume draining when protection ends.
 - Fix Nereid Submersion pulling only fully submerged targets, its drowning drain being overwritten by player updates, and its hydration HUD appearing on non-Nereid victims.
 

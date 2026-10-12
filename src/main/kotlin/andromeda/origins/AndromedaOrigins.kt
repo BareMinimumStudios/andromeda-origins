@@ -46,6 +46,7 @@ object AndromedaOrigins {
 
         andromeda.origins.compat.PlayerOriginRepair.register()
         FiguraCompatManager.register()
+        andromeda.origins.compat.LichlingSunlight.register()
         andromeda.origins.compat.FoodBalanceCompat.register()
 
     }
