@@ -39,3 +39,10 @@ Static-only Kotlin Mixin objects are stripped of singleton scaffolding after com
 Overgrown Origins and Opoli are installed from Modrinth on both loaders. The CurseForge description is retained as a draft for a future listing. Install Kotlin for Forge using its complete `-all.jar` distribution, not the small Maven aggregate jar.
 
 Run `python tools/validate_resources.py` for duplicate JSON keys, schema regressions, native Mixin source coverage, retained Selkie data, and retired-helper checks. CI runs this validation before building.
+
+
+## Returning-player repair
+
+`/andromedaorigins repair <player>` (alias `repair_attributes`) requires operator level 2. It removes stale Andromeda modifiers, rebuilds currently granted attributes, restores missing selected Andromeda powers, and resets the eight vanilla attribute bases managed by the legacy repair: health, speed, scale, step height, armor, toughness, knockback resistance, and attack speed. Foreign modifier IDs remain intact. Because other mods may intentionally change these base values, use the manual command only for players who need a reset.
+
+Login/respawn cleanup runs after one second and does not reset base values. Medieval sources, helper powers, modifiers, and `siren_seduce` are cleaned only when the player has a resolved selection and no active Medieval Origin on any layer. A Pehkui eye-height reset requires evidence of old Medieval Pixie state and an installed Pehkui command. This does not convert old Cardinal Components selections into Overgrown selections; unavailable selections skip cleanup safely. Rebuilds preserve current HP, existing resources/cooldowns, and suppressed powers.

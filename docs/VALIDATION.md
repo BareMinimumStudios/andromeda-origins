@@ -80,3 +80,10 @@ Production builds also passed startup, helper commands, reload, and normal shutd
 ## Gorgon climbing and Selkie hydration (1.4.77)
 
 Both requested values were already present in the current source. The independent resource validator now traverses standard and Champion Gorgon power dependencies and rejects climbing powers. It also checks the native Selkie wetness reserve starts and caps at 300 seconds, updates every 20 ticks, and drains by one only outside water and rain. The existing 21-file Selkie baseline remains unchanged. Champion Selkie retains its existing immunity to dry-out penalties. No wider Selkie rework or Nereid hydration change was made.
+
+
+## Legacy player repair (1.4.77)
+
+Fabric and NeoForge dedicated-server backend checks passed Humanity's 18 HP value, missing grant restoration, no healing, old Andromeda health modifiers, Medieval height/diet/tag cleanup, foreign modifier preservation, active Medieval selection preservation, repeated repair stability, fail-closed missing selection handling, manual base restoration, operator permissions, and suppressed attribute preservation. All 26 Origins produced stable attribute values across repeated rebuilds; standard Arachne scale was 0.8 and Faerie scale was 0.83, matching current data. Startup, native helper commands, reload, and normal shutdown passed on both loaders. Temporary diagnostic code is excluded from production jars.
+
+These checks simulate server players and stale data. They do not test a real returning player's old Cardinal Components save or a matching client's visual height. The optional Pehkui eye-height command path was not exercised because Pehkui is absent from the test servers.

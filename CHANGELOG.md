@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.4.78] - 2026-10-12
+
+- Restore operator player repair commands and targeted login/respawn cleanup for stale Andromeda and Medieval Origins attributes. Preserve other mods, active Medieval selections, cooldowns, configuration suppression, and current health. Humanity remains nine hearts (18 HP).
+
 ## [1.4.77] - 2026-10-11
 
 - Confirm standard and Champion Gorgons have no wall climbing and standard Selkie hydration lasts five minutes on dry land; add regression checks to preserve both behaviors.

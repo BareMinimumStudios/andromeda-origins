@@ -28,6 +28,10 @@ powers = {f'andromeda_origins:{p.relative_to(powers_dir).as_posix()[:-5]}':v for
 origins = [(p,v) for p,v in data.items() if p.is_relative_to(RES/'data/andromeda_origins/origins')]
 check(len(powers)==194, f'Expected 194 active root powers, found {len(powers)}')
 check(len(origins)==26, f'Expected 26 Origins, found {len(origins)}')
+human_hp = powers.get('andromeda_origins:humanity/passives', {}).get('hp', {}).get('modifier', {})
+check(human_hp.get('attribute') == 'minecraft:generic.max_health' and
+      human_hp.get('operation') == 'add_base_early' and human_hp.get('amount') == -2,
+      'Humanity must have nine hearts (18 HP) before other mod/equipment modifiers')
 known = set(powers)
 for identifier, definition in powers.items():
     if definition.get('type') in ('origins:multiple','apoli:multiple'):

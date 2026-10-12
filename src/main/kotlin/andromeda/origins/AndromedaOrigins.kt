@@ -44,7 +44,7 @@ object AndromedaOrigins {
         VeilStepManager.register()
         VeilbornShimmer.register()
 
-                // Clean Overgrown runtime: no automatic legacy-player migration or repair layer.
+        andromeda.origins.compat.PlayerOriginRepair.register()
         FiguraCompatManager.register()
         andromeda.origins.compat.FoodBalanceCompat.register()
 
