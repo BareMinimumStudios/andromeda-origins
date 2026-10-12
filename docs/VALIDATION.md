@@ -60,3 +60,11 @@ python tools/validate_resources.py
 ```
 
 Use a disposable dedicated server with the listed dependencies for runtime checks. `DEVELOPMENT.md` lists the remaining matching-client scenarios. The build's verification tasks check packaged resources and static Mixin bytecode automatically; CI also runs the independent JSON/schema/Selkie regression validator.
+
+## Golden food compatibility (1.4.77)
+
+The server-authoritative Fzzy setting `blockIncapacitatedFoodBypass` defaults to true and applies immediately. It blocks only golden apples, enchanted golden apples, and golden carrots inside Incapacitated's food hook. It prevents food-based revival, adrenaline recovery, and down-counter/timer resets without cancelling vanilla consumption or food effects. Other foods and Origin revival abilities keep their existing behavior. Incapacitated remains optional.
+
+Dedicated Fabric and NeoForge tests against Incapacitated 2.0.1 invoked its real food hook with simulated players. All three foods preserved the downed state, counter, and timer with blocking enabled; disabling the setting restored upstream behavior. A non-golden food temporarily added to the upstream revival tag still revived successfully with blocking enabled. Standard and Champion Lichling self-revival passed while standing and sneaking, and Champion Humanity revival passed. Temporary diagnostic code is excluded from release builds. These server tests do not replace matching-client gameplay testing.
+
+Both production builds also reached server-ready, passed helper/reload checks, and shut down normally without Incapacitated installed. Mixin logs an expected missing optional target warning in that case; the generic smoke-log scanner reports it as an exception string even though startup succeeds.

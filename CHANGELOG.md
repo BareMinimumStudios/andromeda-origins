@@ -5,6 +5,7 @@
 - Fix standard and Champion Lichling self-revival while sneaking: incapacitated casters always revive themselves before considering target revival.
 - Invoke Incapacitated revival synchronously and verify its state before granting Humanity's final-stand effects; preserve the no-op for healthy players.
 - Add validation for Lichling revival priority and namespaced wildcard power references.
+- Add an enabled-by-default server setting to block Incapacitated food revival, adrenaline recovery, and down-counter resets from golden apples, enchanted golden apples, and golden carrots. Preserve normal food effects and Origin revival abilities.
 
 ## [1.4.76] - 2026-10-11
 

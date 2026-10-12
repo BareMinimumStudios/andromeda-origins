@@ -171,7 +171,8 @@ tasks.check { dependsOn(verifyAndromedaResources) }
 val staticMixinObjects = setOf(
     "andromeda/origins/mixin/UndetectableSensorMixin.class",
     "andromeda/origins/mixin/OriginManagerConfigMixin.class",
-    "andromeda/origins/mixin/compat/ArmorModelApiRenderMixin.class"
+    "andromeda/origins/mixin/compat/ArmorModelApiRenderMixin.class",
+    "andromeda/origins/mixin/compat/IncapacitatedFoodMixin.class"
 )
 tasks.withType<KotlinCompile>().configureEach {
     doLast {

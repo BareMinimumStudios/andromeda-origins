@@ -352,5 +352,7 @@
   "andromeda_origins.screen.view_origin.title": "This Is Your Origin",
   "andromeda_origins.screen.reader.overview": "Overview",
   "andromeda_origins.screen.reader.powers_traits": "Powers & Traits",
-  "andromeda_origins.screen.reader.impact": "Impact: %s"
+  "andromeda_origins.screen.reader.impact": "Impact: %s",
+  "andromeda_origins.gameplay.blockIncapacitatedFoodBypass": "Block Golden Food Incapacitated Bypass",
+  "andromeda_origins.gameplay.blockIncapacitatedFoodBypass.desc": "Prevent golden apples, enchanted golden apples, and golden carrots from resetting Incapacitated down counters or reviving players. Normal food effects, modded foods, and Origin revival abilities still work. Server setting; applies immediately."
 }

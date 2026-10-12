@@ -7,7 +7,8 @@ class AndromedaConfigState(
     val enableStockOvergrownOrigins: Boolean,
     disabledStockOrigins: Set<ResourceLocation>,
     disabledAndromedaOrigins: Set<ResourceLocation>,
-    disabledPowersByOrigin: Map<ResourceLocation, Set<ResourceLocation>>
+    disabledPowersByOrigin: Map<ResourceLocation, Set<ResourceLocation>>,
+    val blockIncapacitatedFoodBypass: Boolean = true
 ) {
     val disabledStockOrigins: Set<ResourceLocation> = java.util.Set.copyOf(disabledStockOrigins)
     val disabledAndromedaOrigins: Set<ResourceLocation> = java.util.Set.copyOf(disabledAndromedaOrigins)
