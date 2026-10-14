@@ -11,7 +11,9 @@
     "ViewOriginScreenRichReaderMixin",
     "VeilbornFireRenderMixin",
     "VeilStepHudMixin",
-    "VeilStepEntityRenderMixin"
+    "VeilStepEntityRenderMixin",
+    "FaerieJumpInputMixin",
+    "FaerieJumpPacketMixin"
   ],
   "injectors": {
     "defaultRequire": 1

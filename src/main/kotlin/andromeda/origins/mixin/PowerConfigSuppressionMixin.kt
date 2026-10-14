@@ -20,4 +20,11 @@ abstract class PowerConfigSuppressionMixin {
         if (!AndromedaConfigRuntime.shouldSuppressPower(owner, power)) return
         container.suppressPower(power, AndromedaConfigPolicy.CONFIG_SUPPRESSION_SOURCE)
     }
+    @org.spongepowered.asm.mixin.injection.Inject(method = ["removePower"], at = [org.spongepowered.asm.mixin.injection.At("RETURN")])
+    private fun `andromeda$cleanRemovedAttribute`(power: net.minecraft.resources.ResourceLocation, source: net.minecraft.resources.ResourceLocation,
+        cir: org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable<kotlin.Boolean>) {
+        if (cir.returnValue) andromeda.origins.compat.AndromedaAttributeCleanup.afterRemoval(
+            this as kotlin.Any as dev.overgrown.apoli.power.PowerContainer, power)
+    }
+
 }

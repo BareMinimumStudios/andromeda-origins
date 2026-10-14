@@ -139,6 +139,13 @@ for name,digest in manifest.items():
     check(path.exists() and hashlib.sha256(path.read_bytes()).hexdigest()==digest,f'Selkie data changed: {name}')
 for name in ('big_sphere','big_sphere2','web_nest','fireball','dragon_charge'):
     check(not list((RES/'data/andromeda_origins/function').rglob(name+'.mcfunction')),f'Retired helper remains: {name}')
+# Direct overlay textures must resolve to packaged files, not shorthand sprite IDs.
+for path, definition in data.items():
+    for node in walk(definition):
+        if isinstance(node, dict) and node.get('type') in ('origins:overlay', 'apoli:overlay'):
+            texture = node.get('texture', '')
+            if texture.startswith('andromeda_origins:'):
+                check((RES/'assets/andromeda_origins'/texture.split(':',1)[1]).is_file(), f'Missing overlay texture {texture} in {path}')
 if errors:
     print('\n'.join(errors),file=sys.stderr)
     sys.exit(1)

@@ -21,13 +21,14 @@
       "attribute": "minecraft:generic.movement_speed",
       "operation": "multiply_total_multiplicative",
       "amount": -1
-    }
+    },
+    "update_health": false
   },
   "jump": {
     "type": "origins:modify_jump",
     "modifier": {
       "operation": "max_total",
-      "amount": -1
+      "amount": 0
     }
   },
   "elytra_disable": {

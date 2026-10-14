@@ -271,9 +271,9 @@
       ]
     },
     "hold_condition": {
-      "type": "origins:sneaking",
-      "inverted": true
-    }
+      "type": "origins:sneaking"
+    },
+    "allow_holding": true
   },
   "punch_through": {
     "type": "origins:prevent_block_selection",

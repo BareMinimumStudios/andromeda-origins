@@ -1,11 +1,25 @@
 # Changelog
 
-## [1.4.79] - 2026-10-12
+## [1.4.80] - 2026-10-13
+
+- Clear temporary Arachne Webbed state on login, death and respawn, and remove orphaned restraint grants. Expired or missing Webbed timers cannot leave the player permanently immobilized. Manual `/andromedaorigins repair <player>` also releases stuck Webbed state without healing or deleting player data.
+
+- Clean Andromeda attribute modifiers after the final power grant is removed, preventing temporary speed boosts, slowdowns and petrification attack-speed locks from persisting. Preserve remaining grants and avoid healing on removal.
+
+- Harden Webbed/restraint: cap jumping at zero instead of a negative value, disable unnecessary health updates for its movement-speed modifier, and clear revoked restraint speed modifiers after expiry. Add OP-only `/andromedaorigins diagnose_web <player>` for server health, movement and restraint state when investigating NaN reports.
+
+- Fix standard and Champion Arachne wall-climbing hold being enabled while standing instead of crouching.
+- Restore Webbed's two screen-overlay textures with a soft white vignette, a transparent center, and correct packaged paths, fixing the full-screen missing-texture effect on victims. Validate local overlay references during resource checks.
+- Prevent a normal ground-jump press from also spending a standard or Champion Faerie air-jump charge after takeoff. A separate airborne press still activates the existing air jump.
+
+- Clear orphaned Nereid Wet grants after hydration helpers disappear or expire, fixing infinite land breathing with an empty hydration reserve. Preserve valid hydration, breathing effects, and unrelated Wet sources.
 
 - Fix Lichling sunlight slowness persisting at night or under shelter after its helper power is revoked. Automatically clear stuck sunlight speed modifiers while preserving the 35% sunlight penalty and other mods' attributes.
 
 - Enforce expired Nereid hydration air drain after server player updates, preventing later air recovery from undoing land suffocation. Preserve native client prediction, Respiration, suppression, water/rain, Water Breathing (including diving helmets), and Conduit Power; resume draining when protection ends.
 - Fix Nereid Submersion pulling only fully submerged targets, its drowning drain being overwritten by player updates, and its hydration HUD appearing on non-Nereid victims.
+
+## [1.4.79] - 2026-10-12
 
 - Fix Selkie Surging Tides using a 30-second cooldown underwater: select 5 seconds in water/rain and 30 seconds on land before Opoli starts the cooldown.
 - Add OP-only `/andromedaorigins diagnose_aquatic <player>` to report server-side Nereid gills, suppression, hydration sources, reserve, and air when investigating breathing/sync reports.

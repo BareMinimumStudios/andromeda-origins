@@ -49,12 +49,30 @@ object PlayerOriginRepair {
                         val gills = ResourceLocation.parse("andromeda_origins:nereid/gills")
                         val wet = ResourceLocation.parse("andromeda_origins:common/wet")
                         val selection = PlayerOriginsAttachment.get(player)?.snapshot()
+                        val dry = NereidGills.isDry(player)
                         val report = "${player.gameProfile.name}: origins=$selection; " +
                             "gills loaded=${ApoliPowers.get(gills) != null}, granted=${container?.hasPower(gills)}, suppressed=${container?.isSuppressed(gills)}; " +
                             "wet=${container?.hasPower(wet)}, wet sources=${container?.sourcesOf(wet)}, " +
                             "reserve=${container?.let { dev.overgrown.apoli.power.PowerResources.read(it, ResourceLocation.parse("andromeda_origins:nereid/helper/nereidwet_remove")) }}; " +
                             "air=${player.airSupply}/${player.maxAirSupply}, " +
-                            "land suffocation=${NereidGills.isDry(player)}"
+                            "land suffocation=$dry"
+                        context.source.sendSuccess({ Component.literal(report) }, false)
+                        1
+                    })))
+            dispatcher.register(Commands.literal("andromedaorigins").then(
+                Commands.literal("diagnose_web").requires { it.hasPermission(2) }
+                    .then(Commands.argument("player", EntityArgument.player()).executes { context ->
+                        val player = EntityArgument.getPlayer(context, "player")
+                        val container = PowerContainerAttachment.get(player)
+                        val webbed = ResourceLocation.parse("andromeda_origins:arachne/helper/webbed")
+                        val restrained = ResourceLocation.parse("andromeda_origins:common/restrained")
+                        val reserve = ResourceLocation.parse("andromeda_origins:arachne/helper/webbed_remove")
+                        val report = "${player.gameProfile.name}: health=${player.health}/${player.maxHealth}, " +
+                            "absorption=${player.absorptionAmount}; speed=${player.getAttributeValue(Attributes.MOVEMENT_SPEED)}; " +
+                            "position=${player.position()}, velocity=${player.deltaMovement}; " +
+                            "webbed=${container?.hasPower(webbed)}, sources=${container?.sourcesOf(webbed)}, " +
+                            "remaining=${container?.let { dev.overgrown.apoli.power.PowerResources.read(it, reserve) }}; " +
+                            "restrained=${container?.hasPower(restrained)}, sources=${container?.sourcesOf(restrained)}"
                         context.source.sendSuccess({ Component.literal(report) }, false)
                         1
                     })))
@@ -82,6 +100,7 @@ object PlayerOriginRepair {
         val selected = (state.snapshot().values + state.swapSnapshot().values).toSet()
         if (selected.isEmpty()) return null
         val container = PowerContainerAttachment.get(player) ?: return null
+        if (resetBases) WebbedLifecycle.clear(player)
         val medievalActive = selected.any { it.namespace == "medievalorigins" }
         var pixie = container.allSources().any { it.toString() == "medievalorigins:pixie" } ||
             container.allPowers().any { it.namespace == "medievalorigins" && it.path.startsWith("pixie/") }

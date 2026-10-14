@@ -68,7 +68,7 @@
   },
   "frame1": {
     "type": "origins:overlay",
-    "texture": "andromeda_origins:webbed1",
+    "texture": "andromeda_origins:textures/overlay/webbed1.png",
     "strength": 1.0,
     "red": 1.0,
     "green": 1.0,
@@ -109,7 +109,7 @@
   },
   "frame2": {
     "type": "origins:overlay",
-    "texture": "andromeda_origins:webbed2",
+    "texture": "andromeda_origins:textures/overlay/webbed2.png",
     "strength": 1.0,
     "red": 1.0,
     "green": 1.0,
