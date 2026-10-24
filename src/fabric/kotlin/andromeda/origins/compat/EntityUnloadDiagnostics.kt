@@ -9,10 +9,22 @@ object EntityUnloadDiagnostics {
     val enabled: Boolean = java.lang.Boolean.getBoolean("andromeda.entityUnloadDiagnostics")
     private val logger = LoggerFactory.getLogger("Andromeda Origins/Entity Unload Trace")
     private val reports = AtomicInteger()
+    private val entries = AtomicInteger()
     private const val LIMIT = 32
 
     init {
-        if (enabled) logger.info("ENTITY_UNLOAD_TRACE enabled: observing actual off-thread/reentrant queue mutations; maximum {} mutation reports; no unloading repair", LIMIT)
+        if (enabled) logger.info("ENTITY_UNLOAD_TRACE enabled: observing queue mutations and nested/off-thread unload entry; maximum {} reports per trace kind; no unloading repair", LIMIT)
+    }
+
+    fun entry(manager: Any, owner: Thread?, depth: Int, size: Int, outerChunk: Long?, outerEntity: String?) {
+        val current = Thread.currentThread()
+        if (owner == null || (current === owner && depth == 0)) return
+        val number = entries.incrementAndGet()
+        if (number > LIMIT) return
+        logger.warn("ENTITY_UNLOAD_ENTRY #{} manager={} callerThread={} expectedThread={} outerDepth={} queueSize={} outerChunk={} outerEntity={}; iterator removal can mutate the queue without a status update",
+            number, System.identityHashCode(manager), current.name, owner.name, depth, size,
+            outerChunk?.let(::ChunkPos), outerEntity, Throwable("Nested/off-thread entity unload caller"))
+        if (number == LIMIT) logger.warn("Entity unload entry trace reached its {}-report limit for this JVM", LIMIT)
     }
 
     fun mutation(manager: Any, owner: Thread?, depth: Int, chunk: Long, operation: String, changed: Boolean, size: Int) {

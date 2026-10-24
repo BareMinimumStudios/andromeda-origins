@@ -1,60 +1,55 @@
 package andromeda.origins.mixin
 
 import andromeda.origins.compat.AndromedaAirSpeedTransferMixinState
+import dev.overgrown.apoli.access.ModifierSummaryHolder
+import dev.overgrown.apoli.data.ModifierSummary
+import dev.overgrown.apoli.power.PowerContainer
+import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.ai.attributes.AttributeModifier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import org.spongepowered.asm.mixin.Mixin
+import org.spongepowered.asm.mixin.Unique
+import org.spongepowered.asm.mixin.injection.At
+import org.spongepowered.asm.mixin.injection.Inject
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable
 
-
-
-
- /**
- * Restores stable Apoli 2.12.0-pre.2 attribute_modify_transfer behavior for Andromeda's
- * five movement -> air-speed transfer sites.
- *
- * Stable copied the currently-active MOVEMENT_SPEED attribute modifiers onto the air-speed
- * calculation, so potion/mod/origin speed modifiers propagated dynamically. Opoli 1.90 no
- * longer provides attribute_modify_transfer; fixed modify_air_speed replacements are not
- * behaviorally equivalent.
- */
-@org.spongepowered.asm.mixin.Mixin(value = [net.minecraft.world.entity.LivingEntity::class], priority = 900)
+/** Preserve legacy bucket-summed transfer; native total multipliers instead multiply individually. */
+@Mixin(value = [LivingEntity::class], priority = 900)
 abstract class AndromedaAirSpeedTransferMixin {
-    @org.spongepowered.asm.mixin.injection.Inject(method = ["getFlyingSpeed"], at = [org.spongepowered.asm.mixin.injection.At("RETURN")], cancellable = true) fun `andromeda$transferMovementModifiers`(cir: org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable<kotlin.Float>) {
-        val entity: net.minecraft.world.entity.LivingEntity = this as kotlin.Any as net.minecraft.world.entity.LivingEntity
-        val container: dev.overgrown.apoli.power.PowerContainer? = dev.overgrown.apoli.power.PowerContainer.of(entity)
-        if (container == null || container.isEmpty()) return
+    @Unique private var `andromeda$movementSummary`: ModifierSummary? = null
+    @Unique private var `andromeda$added`: Double = 0.0
+    @Unique private var `andromeda$baseMultiplier`: Double = 0.0
+    @Unique private var `andromeda$totalMultiplier`: Double = 0.0
 
-        var applies: kotlin.Boolean = false
-        for (power in AndromedaAirSpeedTransferMixinState.`ANDROMEDA$TRANSFER_OWNERS`) {
-            if (container.hasPower(power) && !container.isSuppressed(power)) {
-                applies = true
-                break
+    @Inject(method = ["getFlyingSpeed"], at = [At("RETURN")], cancellable = true)
+    fun `andromeda$transferMovementModifiers`(cir: CallbackInfoReturnable<Float>) {
+        val entity = this as Any as LivingEntity
+        val container = PowerContainer.of(entity) ?: return
+        if (container.isEmpty()) return
+        if (AndromedaAirSpeedTransferMixinState.`ANDROMEDA$TRANSFER_OWNERS`.none {
+                container.hasPower(it) && !container.isSuppressed(it)
+            }) return
+        val movement = entity.getAttribute(Attributes.MOVEMENT_SPEED) ?: return
+        // Opoli invalidates this immutable summary whenever AttributeInstance becomes dirty.
+        // Keep entity-local sums rather than introducing shared client/server cache maps.
+        val summary = (movement as? ModifierSummaryHolder)?.`apoli$modifierSummary`()
+        if (summary == null || summary !== `andromeda$movementSummary`) {
+            var added = 0.0
+            var base = 0.0
+            var total = 0.0
+            for (modifier in movement.modifiers) {
+                when (modifier.operation()) {
+                    AttributeModifier.Operation.ADD_VALUE -> added += modifier.amount()
+                    AttributeModifier.Operation.ADD_MULTIPLIED_BASE -> base += modifier.amount()
+                    AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL -> total += modifier.amount()
+                }
             }
+            `andromeda$added` = added
+            `andromeda$baseMultiplier` = base
+            `andromeda$totalMultiplier` = total
+            `andromeda$movementSummary` = summary
         }
-        if (!applies) return
-
-        val movement: net.minecraft.world.entity.ai.attributes.AttributeInstance? = entity.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED)
-        if (movement == null) return
-
-        val original: kotlin.Float = cir.getReturnValue()
-
-                // Exact Apoli 2.12.0-pre.2 AttributeModifyTransfer semantics:
-        // vanilla ADD_VALUE -> ADD_BASE_EARLY,
-        // ADD_MULTIPLIED_BASE -> MULTIPLY_BASE_MULTIPLICATIVE,
-        // ADD_MULTIPLIED_TOTAL -> MULTIPLY_TOTAL_MULTIPLICATIVE.
-        // Each operation bucket is summed before it is applied.
-        var addBase: kotlin.Double = 0.0
-        var multiplyBase: kotlin.Double = 0.0
-        var multiplyTotal: kotlin.Double = 0.0
-        for (modifier in movement.getModifiers()) {
-            when (modifier.operation()){net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_VALUE -> addBase += modifier.amount()
-                net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE -> multiplyBase += modifier.amount()
-                net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL -> multiplyTotal += modifier.amount()}
-        }
-
-        var total: kotlin.Double = original + addBase
-        total *= 1.0 + multiplyBase
-        total *= 1.0 + multiplyTotal
-
-        cir.setReturnValue(total.toFloat())
+        cir.returnValue = ((cir.returnValueF + `andromeda$added`) *
+            (1.0 + `andromeda$baseMultiplier`) * (1.0 + `andromeda$totalMultiplier`)).toFloat()
     }
-
-    }
-
+}

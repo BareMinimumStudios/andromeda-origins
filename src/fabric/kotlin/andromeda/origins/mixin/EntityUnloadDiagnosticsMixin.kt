@@ -29,6 +29,8 @@ abstract class EntityUnloadDiagnosticsMixin {
     private fun `andromeda$observeUnloading`(queue: LongSet, predicate: LongPredicate): Boolean {
         if (!EntityUnloadDiagnostics.enabled) return queue.removeIf(predicate)
         val before = queue.size
+        EntityUnloadDiagnostics.entry(this, `andromeda$ownerThread`, `andromeda$unloadDepth`,
+            before, `andromeda$lastChunk`, `andromeda$lastEntity`)
         val previousChunk = `andromeda$lastChunk`
         val previousEntity = `andromeda$lastEntity`
         `andromeda$lastChunk` = null
