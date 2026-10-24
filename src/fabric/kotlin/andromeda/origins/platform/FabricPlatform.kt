@@ -27,6 +27,7 @@ class FabricEntrypoint : ModInitializer {
     override fun onInitialize() {
         Platform.install(FabricPlatform())
         AndromedaOrigins.initialize()
+        andromeda.origins.compat.EntityUnloadDiagnostics.register()
     }
 }
 

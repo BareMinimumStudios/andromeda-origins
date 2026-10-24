@@ -2,6 +2,8 @@
 
 ## [1.4.81] - 2026-10-24
 
+- Expose Logout Diagnostics (Fabric Server) in the existing OP-controlled Fzzy Config screen. The setting defaults off, persists with server config, and applies to existing worlds immediately. Startup JVM flags are no longer used; enabling/disabling is logged.
+
 - Update Overgrown Origins to 1.47.12 and Opoli to 1.119.0 on both loaders. Update client and server dependencies together.
 - Cache airborne movement-modifier sums using Opoli's new dirty-invalidated attribute summaries. Preserve legacy stacking, suppression and all five transfer owners.
 - Extend opt-in Fabric unload diagnostics to trace nested/off-thread unload entry, including iterator mutations which bypass status-update hooks. Keep the native queue/algorithm and rethrow original failures; the live crash cause remains unconfirmed.
@@ -151,13 +153,6 @@
 - **Enhanced FX diagnostics:** malformed optional FX definitions, missing optional particle/sound IDs, and Spell Engine reflection/API mismatches now log useful warnings while remaining fail-soft.
 - **No gameplay rebalance:** all `data/andromeda_origins` gameplay resources remain unchanged from `.29`; only UI language metadata and Java architecture changed.
 
-# Changelog
-
-## [1.4.81] - 2026-10-24
-
-- Update Overgrown Origins to 1.47.12 and Opoli to 1.119.0 on both loaders. Update client and server dependencies together.
-- Cache airborne movement-modifier sums using Opoli's new dirty-invalidated attribute summaries. Preserve legacy stacking, suppression and all five transfer owners.
-- Extend opt-in Fabric unload diagnostics to trace nested/off-thread unload entry, including iterator mutations which bypass status-update hooks. Keep the native queue/algorithm and rethrow original failures; the live crash cause remains unconfirmed.
 
 # 1.4.75-overgrown.29 — full safety / redundancy audit
 
@@ -1522,42 +1517,3 @@
 - Siren Sonar Shriek now reaches about 10 blocks and deals 6 sonic damage.
 - Siren Infatuation now lasts a fixed 15 seconds and cannot be broken by self-damage or movement.
 - Carrying iron-tagged items anywhere in the inventory now triggers the persistent withering iron weakness for Gorgon, Faerie, and Lichling.
-
-# Changelog
-
-## [1.4.81] - 2026-10-24
-
-- Update Overgrown Origins to 1.47.12 and Opoli to 1.119.0 on both loaders. Update client and server dependencies together.
-- Cache airborne movement-modifier sums using Opoli's new dirty-invalidated attribute summaries. Preserve legacy stacking, suppression and all five transfer owners.
-- Extend opt-in Fabric unload diagnostics to trace nested/off-thread unload entry, including iterator mutations which bypass status-update hooks. Keep the native queue/algorithm and rethrow original failures; the live crash cause remains unconfirmed.
-
-## 1.2.2
-
-### Undetectable / detection compatibility
-- Fixed Fenrkin **On the Hunt** revealing targets that currently have `andromeda_origins:common/undetectable`.
-- Fenrkin target-marking raycasts now reject Undetectable targets.
-- Existing Fenrkin stalk marks no longer render an outline while the target is Undetectable.
-- All Andromeda Origins `origins:entity_glow` and `origins:self_glow` renderers now respect the target holder's Undetectable state, covering Arachne sense, Manticore health auras, Nereid friend outlines, and similar custom outlines.
-- Vanilla `minecraft:glowing` immunity remains in `common/undetectable`.
-
-## 1.2.0
-
-### Incapacitated compatibility
-- Lichling self/target revive no longer blindly calls `incapacitated setDowned false`.
-- Added an optional reflection bridge that checks Incapacitated's own player state before reviving.
-- Reset Incapacitated's transient last-damage/pre-hit-health tracking after Andromeda-triggered revives.
-- Replaced Lichling's undead Instant Damage healing trick with `origins:heal`.
-
-### Player-data / attribute safety
-- Replaced 31 explicitly named attribute/modifier IDs with unique `andromeda_origins:*` IDs.
-- Added `/andromedaorigins repair <player>` for emergency health/downed/control-state recovery.
-
-### Crowd-control state fixes
-- Fixed Arachne Webbed decrementing the shared restraint source counter twice on normal expiry.
-- Fixed Gorgon Constricted doing the same.
-- Repair command clears stale ccontrol powers and resets shared control resource counters.
-
-### Existing content retained
-- 64x64 origin selection icons remain included.
-- Andromeda Origins branding and mod icon remain included.
-- Existing `andromeda_origins:` content namespace remains intact for save/Figura compatibility.

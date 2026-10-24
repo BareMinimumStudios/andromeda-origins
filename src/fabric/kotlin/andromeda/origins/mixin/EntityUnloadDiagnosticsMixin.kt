@@ -21,7 +21,8 @@ abstract class EntityUnloadDiagnosticsMixin {
 
     @Inject(method = ["<init>"], at = [At("RETURN")])
     private fun `andromeda$rememberOwner`(ci: CallbackInfo) {
-        if (EntityUnloadDiagnostics.enabled) `andromeda$ownerThread` = Thread.currentThread()
+        // Capture even while disabled so enabling the live config covers existing worlds.
+        `andromeda$ownerThread` = Thread.currentThread()
     }
 
     @Redirect(method = ["processUnloads"], at = At(value = "INVOKE",

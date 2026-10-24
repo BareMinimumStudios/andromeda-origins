@@ -9,7 +9,8 @@ class AndromedaConfigState(
     disabledAndromedaOrigins: Set<ResourceLocation>,
     disabledPowersByOrigin: Map<ResourceLocation, Set<ResourceLocation>>,
     val blockIncapacitatedFoodBypass: Boolean = true,
-    val foodBalance: FoodBalanceState = FoodBalanceState()
+    val foodBalance: FoodBalanceState = FoodBalanceState(),
+    val logoutDiagnostics: Boolean = false
 ) {
     val disabledStockOrigins: Set<ResourceLocation> = java.util.Set.copyOf(disabledStockOrigins)
     val disabledAndromedaOrigins: Set<ResourceLocation> = java.util.Set.copyOf(disabledAndromedaOrigins)

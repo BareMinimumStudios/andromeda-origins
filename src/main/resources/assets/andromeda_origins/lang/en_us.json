@@ -368,5 +368,7 @@
   "andromeda_origins.gameplay.foodBalance.beefWellingtonNutrition": "Beef Wellington Nutrition",
   "andromeda_origins.gameplay.foodBalance.beefWellingtonNutrition.desc": "Hunger points per serving, 0–20. Two points equal one hunger icon. Default: 6.",
   "andromeda_origins.gameplay.foodBalance.beefWellingtonSaturationModifier": "Beef Wellington Saturation Modifier",
-  "andromeda_origins.gameplay.foodBalance.beefWellingtonSaturationModifier.desc": "Restored saturation equals nutrition × modifier × 2. Default: 0.5, restoring 6 saturation at 6 nutrition."
+  "andromeda_origins.gameplay.foodBalance.beefWellingtonSaturationModifier.desc": "Restored saturation equals nutrition × modifier × 2. Default: 0.5, restoring 6 saturation at 6 nutrition.",
+  "andromeda_origins.gameplay.logoutDiagnostics": "Logout Diagnostics (Fabric Server)",
+  "andromeda_origins.gameplay.logoutDiagnostics.desc": "Log bounded entity-unload caller stacks to investigate logout crashes. Server option; OP level 2. Applies immediately without restart or JVM arguments. Fabric only. Collects evidence; does not prevent crashes."
 }

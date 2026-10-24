@@ -6,14 +6,26 @@ import java.util.concurrent.atomic.AtomicInteger
 
 /** Diagnostic only: retain Minecraft's original queue and propagate its failures. */
 object EntityUnloadDiagnostics {
-    val enabled: Boolean = java.lang.Boolean.getBoolean("andromeda.entityUnloadDiagnostics")
+    val enabled: Boolean get() = andromeda.origins.config.AndromedaConfigRuntime.get().logoutDiagnostics
     private val logger = LoggerFactory.getLogger("Andromeda Origins/Entity Unload Trace")
     private val reports = AtomicInteger()
     private val entries = AtomicInteger()
     private const val LIMIT = 32
 
-    init {
-        if (enabled) logger.info("ENTITY_UNLOAD_TRACE enabled: observing queue mutations and nested/off-thread unload entry; maximum {} reports per trace kind; no unloading repair", LIMIT)
+    private var announced = false
+
+    fun register() {
+        andromeda.origins.platform.Platform.serverStarted { announce() }
+        andromeda.origins.platform.Platform.serverTick { announce() }
+        andromeda.origins.platform.Platform.serverStopped { announced = false }
+    }
+
+    private fun announce() {
+        val active = enabled
+        if (active == announced) return
+        announced = active
+        if (active) logger.info("ENTITY_UNLOAD_TRACE enabled via Fzzy Config: observing queue mutations and nested/off-thread unload entry; maximum {} reports per trace kind; no unloading repair", LIMIT)
+        else logger.info("ENTITY_UNLOAD_TRACE disabled via Fzzy Config")
     }
 
     fun entry(manager: Any, owner: Thread?, depth: Int, size: Int, outerChunk: Long?, outerEntity: String?) {

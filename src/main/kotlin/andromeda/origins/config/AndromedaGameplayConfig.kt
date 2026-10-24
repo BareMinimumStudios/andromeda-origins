@@ -34,6 +34,9 @@ class AndromedaGameplayConfig : me.fzzyhmstrs.fzzy_config.config.Config(net.mine
     @me.fzzyhmstrs.fzzy_config.annotations.Comment("Food balance and optional Let's Do compatibility. Settings apply immediately and are synchronized to clients.")
     var foodBalance = FoodBalanceSection()
 
+    @me.fzzyhmstrs.fzzy_config.annotations.Comment("Fabric server only: log bounded entity-unload mutation and nested-caller stacks for logout-crash investigation. Applies immediately; no startup argument or restart required. Diagnostic only, not a crash fix.")
+    var logoutDiagnostics = me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean(false)
+
     override fun defaultPermLevel(): kotlin.Int {
         return 2
     }
@@ -82,7 +85,8 @@ class AndromedaGameplayConfig : me.fzzyhmstrs.fzzy_config.config.Config(net.mine
         java.util.Set.copyOf<net.minecraft.resources.ResourceLocation>(disabledOrigins),
         AndromedaGameplayConfig.Companion.immutablePowerMap(disabledByOrigin),
         blockIncapacitatedFoodBypass.get(),
-        foodBalance.toState()
+        foodBalance.toState(),
+        logoutDiagnostics.get()
         )
     }
 
