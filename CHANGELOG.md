@@ -2,6 +2,18 @@
 
 ## [1.4.80] - 2026-10-13
 
+- Extend shared effect recovery to orphaned petrification, restraint and pacification, rebuilding counters from active helpers and expiring missing/finished crowd-control timers. Preserve overlapping legitimate effects, other grant sources, and current health. This protects all Origins from leftover ability, attack and movement restrictions.
+- Extend orphaned hydration-Wet cleanup to all Origins, preserving valid Nereid/Selkie hydration helpers and unrelated Wet sources so expired borrowed hydration cannot leave water weaknesses stuck.
+
+- Fix Selkie primary/secondary abilities remaining blocked after rehydration when a stale shared Silenced counter survives its dehydration helper. Reconcile silence from active dehydration, petrification and Siren infatuation on join and during server ticks, preserving other grant sources. Manual Origin repair also reconciles silence.
+- Integrate Veil Step with optional PlayerAbilityLib flight sources instead of writing tracked flight flags directly. Release only Veil Step's source on exit, death, suppression and stale-state recovery, preserving Creative and other mods' current flight grants. Retain the existing fallback when PAL is absent.
+
+- Update Overgrown Origins to 1.47.10 and Opoli to 1.117.0 on Fabric and NeoForge. Update client and server dependencies together: the upstream network protocol has changed. Existing gameplay and balance are retained.
+- Fix recursive Veilborn active-state checks when called through a general living-entity reference.
+
+- Dispatch Fabric disconnect cleanup onto the server thread, preserving synchronous cleanup when already on that thread and ignoring delayed callbacks for a replaced player connection. This corrects Andromeda state-map threading; it is not a confirmed fix for the entity-unloading crash.
+- Add disabled-by-default Fabric entity-unloading caller diagnostics (`-Dandromeda.entityUnloadDiagnostics=true`). Capture bounded off-thread/reentrant queue-mutation stacks and failure context (last chunk/entity and queue sizes), filtering status updates that leave membership unchanged. Retain the native unloading queue and removal algorithm, and rethrow failures unchanged.
+
 - Clear temporary Arachne Webbed state on login, death and respawn, and remove orphaned restraint grants. Expired or missing Webbed timers cannot leave the player permanently immobilized. Manual `/andromedaorigins repair <player>` also releases stuck Webbed state without healing or deleting player data.
 
 - Clean Andromeda attribute modifiers after the final power grant is removed, preventing temporary speed boosts, slowdowns and petrification attack-speed locks from persisting. Preserve remaining grants and avoid healing on removal.

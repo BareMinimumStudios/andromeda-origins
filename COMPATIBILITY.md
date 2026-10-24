@@ -6,8 +6,8 @@ This document describes **`1.4.75-overgrown.37`** for Minecraft 1.21.1.
 The Andromeda Origin chooser and O-key self-view use a centered flat neutral UI while retaining Overgrown's underlying selection, layer, swap, and networking behavior.
 ## Runtime
 
-- Overgrown Origins **1.47.7**
-- Opoli **1.115.0**
+- Overgrown Origins **1.47.10**
+- Opoli **1.117.0**
 - Fabric Loader **0.19.3+** or NeoForge **21.1.248+**
 - Fabric: Fabric API **0.116.15+1.21.1** and Fabric Language Kotlin **1.13.7+kotlin.2.2.21**
 - NeoForge: complete Kotlin for Forge **5.11.0** distribution
@@ -19,7 +19,7 @@ The Andromeda Origin chooser and O-key self-view use a centered flat neutral UI 
 
 ## Current upstream integration notes
 
-- The exact released Opoli 1.115.0 / Origins 1.47.7 Modrinth artifacts are pinned by immutable version ID; no bundled upstream source projects are required.
+- The exact released Opoli 1.117.0 / Origins 1.47.10 Modrinth artifacts are pinned by immutable version ID; no bundled upstream source projects are required.
 - `origins:slimekin` is included in Andromeda's stock-Origin policy and remains disabled by default with the rest of the stock roster.
 - Diet tooltip rendering uses Opoli’s native food-tooltip insertion API; the retired custom adapter has been removed.
 - Champion cooldown recovery uses `apoli:modify_resource_change` with 2x cooldown drain instead of a hard-coded polling list.

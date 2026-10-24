@@ -105,7 +105,7 @@ object VeilStepManager {
 
     fun isActive(entity: net.minecraft.world.entity.LivingEntity?): kotlin.Boolean {
         val player = entity as? net.minecraft.server.level.ServerPlayer
-        return player != null && VeilStepManager.isActive(entity)
+        return player != null && VeilStepManager.isActive(player)
     }
 
     fun toggle(player: net.minecraft.server.level.ServerPlayer?) {
@@ -186,8 +186,10 @@ object VeilStepManager {
     private fun forceFlight(player: net.minecraft.server.level.ServerPlayer) {
         val abilities: net.minecraft.world.entity.player.Abilities = player.getAbilities()
         val changed: kotlin.Boolean = !abilities.mayfly || !abilities.flying || kotlin.math.abs(abilities.getFlyingSpeed() - VeilStepManager.VEIL_FLY_SPEED) > 1.0E-5f
-        abilities.mayfly = true
-        abilities.flying = true
+        if (!VeilFlightCompat.grant(player)) {
+            abilities.mayfly = true
+            abilities.flying = true
+        }
         abilities.setFlyingSpeed(VeilStepManager.VEIL_FLY_SPEED)
         player.setSprinting(false)
         if (changed) player.onUpdateAbilities()
@@ -271,16 +273,20 @@ object VeilStepManager {
 
     private fun restoreAbilities(player: net.minecraft.server.level.ServerPlayer, state: VeilStepManager.State, sync: kotlin.Boolean) {
         val abilities: net.minecraft.world.entity.player.Abilities = player.getAbilities()
-        abilities.mayfly = state.previousMayfly
-        abilities.flying = state.previousFlying
+        if (!VeilFlightCompat.release(player)) {
+            abilities.mayfly = state.previousMayfly
+            abilities.flying = state.previousFlying
+        }
         abilities.setFlyingSpeed(state.previousFlyingSpeed)
         if (sync) player.onUpdateAbilities()
     }
 
     private fun enforceRestoredAbilities(player: net.minecraft.server.level.ServerPlayer, state: RestoreState) {
         val abilities: net.minecraft.world.entity.player.Abilities = player.getAbilities()
-        abilities.mayfly = state.mayfly
-        abilities.flying = state.flying
+        if (!VeilFlightCompat.release(player)) {
+            abilities.mayfly = state.mayfly
+            abilities.flying = state.flying
+        }
         abilities.setFlyingSpeed(state.flyingSpeed)
                 // Re-send the authoritative pre-Veil state during the short restore window. This prevents
         // stale client double-tap flight without incorrectly forcing legitimate Creative/modded
@@ -301,12 +307,13 @@ object VeilStepManager {
 
         val container: dev.overgrown.apoli.power.PowerContainer? = dev.overgrown.apoli.power.PowerContainer.of(player)
         val staleVeilMarker: kotlin.Boolean = container != null && container.hasPower(VeilStepManager.VEIL_STEP_MARKER)
+        val managedFlight = VeilFlightCompat.release(player)
         val restoredSnapshot: kotlin.Boolean = VeilStepManager.restorePersistentFlightSnapshot(player)
 
                 // Upgrade/recovery fallback for a player saved inside Veil Step by an older build that did
         // not yet persist a pre-Veil snapshot. Only touch non-Creative/non-Spectator flight and only
         // when Andromeda's own stale Veil marker proves the temporary flight state was active.
-        if (staleVeilMarker && !restoredSnapshot && !player.isCreative() && !player.isSpectator()) {
+        if (staleVeilMarker && !restoredSnapshot && !managedFlight && !player.isCreative() && !player.isSpectator()) {
             val abilities: net.minecraft.world.entity.player.Abilities = player.getAbilities()
             abilities.mayfly = false
             abilities.flying = false
@@ -354,8 +361,10 @@ object VeilStepManager {
         }
 
         val abilities: net.minecraft.world.entity.player.Abilities = player.getAbilities()
-        abilities.mayfly = player.getTags().contains(VeilStepManager.FLIGHT_SNAPSHOT_MAYFLY)
-        abilities.flying = abilities.mayfly && player.getTags().contains(VeilStepManager.FLIGHT_SNAPSHOT_FLYING)
+        if (!VeilFlightCompat.release(player)) {
+            abilities.mayfly = player.getTags().contains(VeilStepManager.FLIGHT_SNAPSHOT_MAYFLY)
+            abilities.flying = abilities.mayfly && player.getTags().contains(VeilStepManager.FLIGHT_SNAPSHOT_FLYING)
+        }
         abilities.setFlyingSpeed(flyingSpeed)
         player.setDeltaMovement(net.minecraft.world.phys.Vec3.ZERO)
         player.resetFallDistance()

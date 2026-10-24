@@ -188,6 +188,7 @@ object PlayerOriginRepair {
                     commands.performPrefixedCommand(source, "scale reset pehkui:eye_height @s")
                 }
             }
+            CrowdControlLifecycle.reconcile(player)
             container.markDirty()
             return removed
         } finally {

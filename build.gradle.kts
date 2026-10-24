@@ -61,6 +61,7 @@ cloche {
         mixins.from("src/main/andromeda_origins.mixins.json", "src/main/andromeda_origins.compat.mixins.json")
     }
     fabric {
+        mixins.from("src/fabric/andromeda_origins.fabric-diagnostics.mixins.json")
         loaderVersion = fabricLoader
         includedClient()
         runs { server(); client() }

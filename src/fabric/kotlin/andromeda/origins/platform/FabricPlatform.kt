@@ -45,7 +45,15 @@ class FabricPlatform : PlatformBackend {
     override fun serverStarted(callback: Consumer<MinecraftServer>) = ServerLifecycleEvents.SERVER_STARTED.register { callback.accept(it) }
     override fun reload(callback: ReloadCallback) = ServerLifecycleEvents.END_DATA_PACK_RELOAD.register { server, manager, success -> callback.run(server, manager, success) }
     override fun join(callback: JoinCallback) = ServerPlayConnectionEvents.JOIN.register { handler, sender, server -> callback.run(handler, sender, server) }
-    override fun disconnect(callback: BiConsumer<ServerGamePacketListenerImpl, MinecraftServer>) = ServerPlayConnectionEvents.DISCONNECT.register { handler, server -> callback.accept(handler, server) }
+    override fun disconnect(callback: BiConsumer<ServerGamePacketListenerImpl, MinecraftServer>) =
+        ServerPlayConnectionEvents.DISCONNECT.register { handler, server ->
+            // Network disconnect callbacks can arrive on Netty; gameplay maps/world state belong to the server.
+            val cleanup = Runnable {
+                val current = server.playerList.getPlayer(handler.player.uuid)
+                if (current == null || current === handler.player) callback.accept(handler, server)
+            }
+            if (server.isSameThread) cleanup.run() else server.execute(cleanup)
+        }
     override fun respawn(callback: RespawnCallback) = ServerPlayerEvents.AFTER_RESPAWN.register { old, new, alive -> callback.run(old, new, alive) }
     override fun damage(callback: DamageCallback) = ServerLivingEntityEvents.ALLOW_DAMAGE.register { entity, source, amount -> callback.allow(entity, source, amount) }
     override fun death(callback: DamageCallback) = ServerLivingEntityEvents.ALLOW_DEATH.register { entity, source, amount -> callback.allow(entity, source, amount) }

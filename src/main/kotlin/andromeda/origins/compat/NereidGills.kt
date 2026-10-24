@@ -21,7 +21,7 @@ object NereidGills {
     /** A leftover shared Wet grant must not outlive the actual hydration helpers. */
     fun clearOrphanWet(player: ServerPlayer) {
         val container = PowerContainer.of(player) ?: return
-        if (!container.hasPower(power) || !container.sourcesOf(wet).contains(debuff)) return
+        if (!container.sourcesOf(wet).contains(debuff)) return
         if (hydration.any { helper ->
             container.hasPower(helper) && !container.isSuppressed(helper) &&
                 ResourcePower.readValue(container, ResourceLocation.fromNamespaceAndPath(
