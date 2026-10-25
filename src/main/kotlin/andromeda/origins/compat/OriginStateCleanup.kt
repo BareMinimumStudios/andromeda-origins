@@ -2,65 +2,47 @@ package andromeda.origins.compat
 
 import andromeda.origins.AndromedaOrigins
 import andromeda.origins.config.OriginConfigCatalog
-import andromeda.origins.config.OriginConfigCatalog.OriginEntry
+import dev.overgrown.apoli.power.PowerContainer
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.server.level.ServerPlayer
 
-
- /**
- * Clears temporary helper state owned by an Andromeda Origin when that Origin is lost.
- *
- *
- * This is deliberately not a legacy-player migration layer. Overgrown owns the selected
- * Origin and its layer-sourced powers; this only removes short-lived Andromeda helper powers
- * that stable v1.4.75 granted from generic transient sources such as minecraft:state/buff/debuff.
- */
+/** Remove only an outgoing Origin's temporary grants, preserving other sources. */
 object OriginStateCleanup {
-    val ORIGIN_PREFIXES: kotlin.collections.MutableSet<kotlin.String> = OriginConfigCatalog.STANDARD.stream()
-    .map<kotlin.String> { entry: OriginEntry<*> -> entry.id.getPath()}
-    .collect(java.util.stream.Collectors.toUnmodifiableSet())
-
-    val TRANSIENT_SOURCES: kotlin.collections.MutableSet<net.minecraft.resources.ResourceLocation> = java.util.Set.of<net.minecraft.resources.ResourceLocation>(
-    OriginStateCleanup.id("minecraft", "state"),
-    OriginStateCleanup.id("minecraft", "debuff"),
-    OriginStateCleanup.id("minecraft", "buff"),
-    OriginStateCleanup.id("minecraft", "ccontrol"),
-    OriginStateCleanup.id("minecraft", "helper"),
-    OriginStateCleanup.id(AndromedaOrigins.MOD_ID, "nereid_mark"),
-    OriginStateCleanup.id(AndromedaOrigins.MOD_ID, "nereid_submersion"),
-    OriginStateCleanup.id(AndromedaOrigins.MOD_ID, "nereid_submersion_cast"),
-    OriginStateCleanup.id(AndromedaOrigins.MOD_ID, "veil_step")
+    val ORIGIN_PREFIXES: Set<String> = OriginConfigCatalog.STANDARD.map { it.id.path }.toSet()
+    val TRANSIENT_SOURCES: Set<ResourceLocation> = setOf(
+        id("minecraft", "state"), id("minecraft", "debuff"), id("minecraft", "buff"),
+        id("minecraft", "ccontrol"), id("minecraft", "helper"),
+        id(AndromedaOrigins.MOD_ID, "nereid_mark"),
+        id(AndromedaOrigins.MOD_ID, "nereid_submersion"),
+        id(AndromedaOrigins.MOD_ID, "nereid_submersion_cast"),
+        id(AndromedaOrigins.MOD_ID, "veil_step")
+    )
+    val SHARED_TRANSIENT_POWERS: Set<ResourceLocation> = setOf(
+        id(AndromedaOrigins.CONTENT_NAMESPACE, "common/dash_projectile_penalty"),
+        id(AndromedaOrigins.CONTENT_NAMESPACE, "common/undetectable")
     )
 
-     /**
- * Shared Andromeda helpers that are not stored under an Origin-specific path but still need
- * to be cleared when the owning Origin is removed. Keeping this allow-list explicit avoids
- * the old common/debug behavior, which revoked every minecraft:state power from every mod.
- */
-    val SHARED_TRANSIENT_POWERS: kotlin.collections.MutableSet<net.minecraft.resources.ResourceLocation> = java.util.Set.of<net.minecraft.resources.ResourceLocation>(
-    OriginStateCleanup.id(AndromedaOrigins.CONTENT_NAMESPACE, "common/dash_projectile_penalty"),
-    OriginStateCleanup.id(AndromedaOrigins.CONTENT_NAMESPACE, "common/undetectable")
-    )
-
-    fun cleanup(player: net.minecraft.server.level.ServerPlayer?, originPrefix: kotlin.String?): kotlin.Int {
-        if (player == null || !OriginStateCleanup.ORIGIN_PREFIXES.contains(originPrefix)) return 0
-        val container: dev.overgrown.apoli.power.PowerContainer? = dev.overgrown.apoli.power.PowerContainer.of(player)
-        if (container == null || container.isEmpty()) return 0
-
-        val pathPrefix: kotlin.String = originPrefix + "/"
-        var removed: kotlin.Int = 0
-        for (powerId in java.util.List.copyOf<net.minecraft.resources.ResourceLocation>(container.allPowers())) {
-            if (AndromedaOrigins.CONTENT_NAMESPACE != powerId.getNamespace()) continue
-            val ownedByOrigin: kotlin.Boolean = powerId.getPath().startsWith(pathPrefix)
-            val sharedTransient: kotlin.Boolean = OriginStateCleanup.SHARED_TRANSIENT_POWERS.contains(powerId)
-            if (!ownedByOrigin && !sharedTransient) continue
-            for (source in java.util.List.copyOf<net.minecraft.resources.ResourceLocation>(container.sourcesOf(powerId))) {
-                if (!OriginStateCleanup.TRANSIENT_SOURCES.contains(source)) continue
-                if (container.removePower(powerId, source)) removed++
+    fun cleanup(player: ServerPlayer?, originPrefix: String?): Int {
+        if (player == null || originPrefix !in ORIGIN_PREFIXES) return 0
+        if (originPrefix == "humanity") {
+            if (MortalResolveManager.isActive(player)) MortalResolveManager.stop(player)
+            if (MortalResolveManager.isChampionActive(player)) MortalResolveManager.stopChampion(player)
+        }
+        val container = PowerContainer.of(player) ?: return 0
+        val standard = "$originPrefix/"
+        val championNested = "champion/$originPrefix/"
+        val championFlat = "champion/${originPrefix}_"
+        var removed = 0
+        for (power in container.allPowers().toList()) {
+            if (power.namespace != AndromedaOrigins.CONTENT_NAMESPACE) continue
+            if (!power.path.startsWith(standard) && !power.path.startsWith(championNested) &&
+                !power.path.startsWith(championFlat) && power !in SHARED_TRANSIENT_POWERS) continue
+            for (source in container.sourcesOf(power).toList()) {
+                if (source in TRANSIENT_SOURCES && container.removePower(power, source)) removed++
             }
         }
         return removed
     }
 
-    private fun id(namespace: kotlin.String, path: kotlin.String): net.minecraft.resources.ResourceLocation {
-        return net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(namespace, path)
-    }
+    private fun id(namespace: String, path: String) = ResourceLocation.fromNamespaceAndPath(namespace, path)
 }

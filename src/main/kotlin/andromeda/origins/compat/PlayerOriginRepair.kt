@@ -141,15 +141,16 @@ object PlayerOriginRepair {
                 if (originId.namespace != "andromeda_origins" || OriginsWorldConfig.blocks(layer, originId)) continue
                 val origin = OriginRegistry.get(originId) ?: continue
                 val source = ResourceLocation.fromNamespaceAndPath(layer.namespace, "layer/${layer.path}")
-                fun grant(id: ResourceLocation, visited: MutableSet<ResourceLocation>) {
+                fun grant(id: ResourceLocation, owner: ResourceLocation, visited: MutableSet<ResourceLocation>) {
                     if (!visited.add(id)) return
                     val power = ApoliPowers.get(id) ?: return
-                    if (!container.hasPower(id)) container.addPower(id, source)
+                    if (owner !in container.sourcesOf(id)) container.addPower(id, owner)
                     if (power.type() is MultiplePower) {
-                        for (child in (power.config() as MultiplePower.Cfg).subPowerIds()) grant(child, visited)
+                        // MultiplePower owns children under the parent ID, not the Origin layer.
+                        for (child in (power.config() as MultiplePower.Cfg).subPowerIds()) grant(child, id, visited)
                     }
                 }
-                for (id in origin.powersFor(player)) grant(id, mutableSetOf())
+                for (id in origin.powersFor(player)) grant(id, source, mutableSetOf())
             }
             val attributes = container.allPowers().mapNotNull { id ->
                 val power = ApoliPowers.get(id) ?: return@mapNotNull null

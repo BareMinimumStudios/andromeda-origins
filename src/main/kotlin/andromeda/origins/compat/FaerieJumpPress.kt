@@ -14,5 +14,5 @@ class FaerieJumpPress {
     }
 
     fun blocks(power: ResourceLocation): Boolean = groundPress && power.namespace == "andromeda_origins" &&
-        power.path in setOf("faerie/passives_airjump", "champion/faerie_passives_airjump")
+        (power.path == "faerie/passives_airjump" || power.path == "champion/faerie_passives_airjump")
 }

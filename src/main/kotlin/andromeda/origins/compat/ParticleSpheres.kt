@@ -6,7 +6,9 @@ import com.mojang.serialization.MapCodec
 import dev.overgrown.apoli.action.ActionType
 import dev.overgrown.apoli.action.ActionTypes
 import dev.overgrown.apoli.condition.context.EntityCtx
+import net.minecraft.commands.CommandSourceStack
 import net.minecraft.commands.arguments.coordinates.LocalCoordinates
+import net.minecraft.world.phys.Vec3
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.level.ServerLevel
@@ -23,6 +25,19 @@ object ParticleSpheres {
         }
     }
 
+    /** Compute the local-coordinate basis once per cast instead of once per particle. */
+    internal fun positions(preset: String, source: CommandSourceStack): List<Vec3> {
+        val origin = LocalCoordinates(0.0, 0.0, 0.0).getPosition(source)
+        val left = LocalCoordinates(1.0, 0.0, 0.0).getPosition(source).subtract(origin)
+        val up = LocalCoordinates(0.0, 1.0, 0.0).getPosition(source).subtract(origin)
+        val forward = LocalCoordinates(0.0, 0.0, 1.0).getPosition(source).subtract(origin)
+        return points.getValue(preset).map { point ->
+            Vec3(origin.x + left.x * point[0] + up.x * point[1] + forward.x * point[2],
+                origin.y + left.y * point[0] + up.y * point[1] + forward.y * point[2],
+                origin.z + left.z * point[0] + up.z * point[1] + forward.z * point[2])
+        }
+    }
+
     fun register() {
         ActionTypes.ENTITY.register(ResourceLocation.fromNamespaceAndPath("andromeda_origins", "particle_sphere"),
             object : ActionType<EntityCtx, Config> {
@@ -36,8 +51,7 @@ object ParticleSpheres {
                         else -> return
                     }
                     val source = entity.createCommandSourceStack()
-                    for (point in points.getValue(cfg.preset)) {
-                        val position = LocalCoordinates(point[0], point[1], point[2]).getPosition(source)
+                    for (position in positions(cfg.preset, source)) {
                         for (viewer in level.server.playerList.players) {
                             level.sendParticles(viewer, particle, true, position.x, position.y, position.z, 1, 0.0, 0.0, 0.0, 0.0)
                         }

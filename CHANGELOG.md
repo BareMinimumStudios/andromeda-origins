@@ -2,6 +2,12 @@
 
 ## [1.4.81] - 2026-10-24
 
+- Fix Origin repair skipping a missing layer grant when the power is still held from another source. Restore multiple-power children under their native parent source; preserve existing resources, cooldowns, unrelated grants and current health.
+- Include Champion power paths in outgoing-Origin transient cleanup, including Champion Wyverian's breath helpers. Clear Humanity's final-stand timer when Humanity is removed.
+- Release offline Humanity/Champion Humanity runtime timer entries while preserving persisted deadlines and finality across reconnects.
+- Reduce repeated Webbed orphan-power scans to once per second; normal expiry, death, join and manual repair still clear immediately.
+- Reuse the particle-sphere coordinate basis per cast and remove temporary set allocation from Faerie jump checks; preserve existing visuals and jump behavior.
+
 - Expose Logout Diagnostics (Fabric Server) in the existing OP-controlled Fzzy Config screen. The setting defaults off, persists with server config, and applies to existing worlds immediately. Startup JVM flags are no longer used; enabling/disabling is logged.
 
 - Update Overgrown Origins to 1.47.12 and Opoli to 1.119.0 on both loaders. Update client and server dependencies together.

@@ -47,6 +47,12 @@ object MortalResolveManager {
         MortalResolveManager.FINAL_DEATH_PENDING.clear()
 
         })
+        andromeda.origins.platform.Platform.disconnect { handler, _ ->
+            // Tags and stored deadlines retain offline finality; runtime effects need no offline entry.
+            ACTIVE.remove(handler.player.uuid)
+            CHAMPION_ACTIVE.remove(handler.player.uuid)
+            FINAL_DEATH_PENDING.remove(handler.player.uuid)
+        }
         andromeda.origins.platform.Platform.serverTick(java.util.function.Consumer callback@ { server: net.minecraft.server.MinecraftServer ->
             // Only active final-stand entries are visited here. Restart recovery is handled by the
             // player-join event below, avoiding an all-online-player scan every server tick.
@@ -59,7 +65,7 @@ object MortalResolveManager {
                             // Time continues to pass while disconnected. Once the player returns, an expired
                 // final stand resolves immediately instead of allowing logout to avoid the death.
             if (player == null) {
-                entry.setValue(kotlin.math.max(0, remaining - 1))
+                iterator.remove()
                 continue
             }
 
@@ -121,7 +127,7 @@ object MortalResolveManager {
             val remaining: kotlin.Int = entry.value
 
             if (player == null) {
-                entry.setValue(kotlin.math.max(0, remaining - 1))
+                championIterator.remove()
                 continue
             }
 

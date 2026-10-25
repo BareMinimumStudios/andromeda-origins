@@ -28,7 +28,11 @@ object WebbedLifecycle {
         val container = PowerContainer.of(player) ?: return
         if (container.hasPower(webbed) && ResourcePower.readValue(container, remaining).orElse(0) <= 0) {
             clear(player)
-        } else reconcile(player, container)
+        } else if (player.tickCount % 20 == 0) {
+            // Expiry above remains immediate. Re-scan legacy orphan grants once per second,
+            // rather than copying every player's whole power set on every normal tick.
+            reconcile(player, container)
+        }
     }
 
     fun clear(player: ServerPlayer) {
