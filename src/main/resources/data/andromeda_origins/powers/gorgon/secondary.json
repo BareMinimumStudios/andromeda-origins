@@ -334,5 +334,5 @@
     }
   ],
   "name": "Transference",
-  "description": "Transference has 2 charges. Press your Secondary Ability key while looking at a creature within 32 blocks to reduce its damage dealt by 30% for 15 seconds and double your own movement speed for 15 seconds. Repeated applications can extend the target's damage reduction up to 1 minute."
+  "description": "Transference has 2 charges. Press your Secondary Ability key while looking at a creature within 32 blocks to reduce its damage dealt by 30% for 15 seconds and double your own movement speed for 15 seconds. Repeated applications can extend the target's damage reduction up to 1 minute.\n \n§e§lBase Cooldown:§r 40 seconds after both charges are spent."
 }

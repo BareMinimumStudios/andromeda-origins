@@ -280,5 +280,5 @@
     }
   ],
   "name": "Weaver's Nest",
-  "description": "Press your Secondary Ability key to create a sphere of webs around a targeted point or creature. Nearby entities are pulled toward the center and become §c§l[Restrained]§r and §c§l[Webbed]§r for 7 seconds. Webbed players may struggle to break free.\n \n§e§lWebspinner:§r\nSneak and hold Secondary Ability to weave 5 cobwebs instead. Completing the weave applies §c§l[Cobweb Fatigue]§r for 30 seconds."
+  "description": "Press your Secondary Ability key to create a sphere of webs around a targeted point or creature. Nearby entities are pulled toward the center and become §c§l[Restrained]§r and §c§l[Webbed]§r for 7 seconds. Webbed players may struggle to break free.\n \n§e§lWebspinner:§r\nSneak and hold Secondary Ability to weave 5 cobwebs instead. Completing the weave applies §c§l[Cobweb Fatigue]§r for 30 seconds.\n \n§e§lBase Cooldown:§r 30 seconds (Weaver's Nest). Cobweb Fatigue lasts 30 seconds."
 }

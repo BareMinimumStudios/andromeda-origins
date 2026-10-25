@@ -437,5 +437,5 @@
     }
   ],
   "name": "Death's Defiance",
-  "description": "Press your Primary Ability key to fully restore your Health and Hunger, gain Resistance II for 1 minute 30 seconds, and revive yourself if you are Incapacitated.\n \nWhen you are not Incapacitated, sneak to target a creature within 5 blocks instead. Self-revival always takes priority while you are Incapacitated. The target receives the defensive/revival effect without the full heal."
+  "description": "Press your Primary Ability key to fully restore your Health and Hunger, gain Resistance II for 1 minute 30 seconds, and revive yourself if you are Incapacitated.\n \nWhen you are not Incapacitated, sneak to target a creature within 5 blocks instead. Self-revival always takes priority while you are Incapacitated. The target receives the defensive/revival effect without the full heal.\n \n§e§lBase Cooldown:§r 6 minutes."
 }

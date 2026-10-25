@@ -1,4 +1,4 @@
-# Upstream dependencies for 1.4.81
+# Upstream dependencies for 1.4.82
 
 The build pins immutable Modrinth files for Minecraft 1.21.1 so a release cannot silently resolve a different dependency.
 

@@ -355,5 +355,9 @@
     }
   ],
   "name": "Passive Features",
-  "description": "§e§lStats:§r\n+8 Max HP\n-35% Hunger Drain\n \n§e§lFeatures:§r\n- Your creature type is Undead. Instant Damage heals you and Instant Healing harms you.\n- You are immune to Poison, Regeneration, Slowness, Weakness, Mining Fatigue, Nausea, Darkness, and Blindness through your Undead type and explicit effect protections.\n- Hitting a creature while falling reduces its damage dealt by 20% for 10 seconds.\n- Killing a creature restores 2 Hunger and 4 Saturation.\n- When you strike a creature, nearby unoccupied Undead within 16 blocks are compelled to attack it. Toggleable.\n- Carrying or wearing any iron-tagged item anywhere in your inventory applies Wither I. Iron weapons also deal 20% more damage to you and apply Wither I on hit.\n- Sunlight reduces your movement speed and damage dealt by 35%.\n- Fire does not extinguish on its own.\n- Valid raw foods are four times as effective."
+  "description": "§e§lStats:§r\n+8 Max HP\n-35% Hunger Drain\n \n§e§lFeatures:§r\n- Your creature type is Undead. Instant Damage heals you and Instant Healing harms you.\n- You are immune to Poison, Regeneration, Slowness, Weakness, Mining Fatigue, Nausea, Darkness, and Blindness through your Undead type and explicit effect protections.\n- Hitting a creature while falling reduces its damage dealt by 20% for 10 seconds.\n- Killing a creature restores 2 Hunger and 4 Saturation.\n- When you strike a creature, nearby unoccupied Undead within 16 blocks are compelled to attack it. Toggleable.\n- Carrying or wearing any iron-tagged item anywhere in your inventory applies Wither I. Iron weapons also deal 20% more damage to you and apply Wither I on hit.\n- Sunlight reduces your movement speed and damage dealt by 35%.\n- Fire does not extinguish on its own.\n- Valid raw foods are four times as effective.\n- You do not need to breathe underwater.",
+  "water_breathing": {
+    "type": "apoli:water_breathing",
+    "suffocate_outside_water": false
+  }
 }

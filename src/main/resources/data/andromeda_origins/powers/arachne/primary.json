@@ -249,5 +249,5 @@
     }
   ],
   "name": "Eightfold Swiftness",
-  "description": "Press your Primary Ability key on the ground to burst forward for 0.5 seconds without forcing you downward; the dash retains Arachne step assistance. Use it while airborne to fire a strand of silk toward a block or creature within 16 blocks and pull yourself in that direction.\n \nWhile using this movement and for 3 seconds afterward, your projectile damage dealt is reduced by 50%. §e§lMovement Ability§r."
+  "description": "Press your Primary Ability key on the ground to burst forward for 0.5 seconds without forcing you downward; the dash retains Arachne step assistance. Use it while airborne to fire a strand of silk toward a block or creature within 16 blocks and pull yourself in that direction.\n \nWhile using this movement and for 3 seconds afterward, your projectile damage dealt is reduced by 50%. §e§lMovement Ability§r.\n \n§e§lBase Cooldown:§r 10 seconds."
 }

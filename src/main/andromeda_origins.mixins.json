@@ -13,7 +13,8 @@
     "VeilStepHudMixin",
     "VeilStepEntityRenderMixin",
     "FaerieJumpInputMixin",
-    "FaerieJumpPacketMixin"
+    "FaerieJumpPacketMixin",
+    "PetrificationRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

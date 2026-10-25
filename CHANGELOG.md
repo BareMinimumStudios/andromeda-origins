@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.4.82] - 2026-10-25
+
+- Show Fenrkin's lingering Wet weakness on the HUD and bind its Wet/cramped counters to explicit power IDs. Verify the native 20% damage penalty, loss of the speed bonus, recovery and Champion exemption on both loaders.
+- Add Siren water-hover behavior with sneaking descent, matching Nereid. Restore underwater breathing for standard and Champion Lichlings without a potion effect.
+- Restore carved-pumpkin and jack-o'-lantern Gorgon protection through the shared equipment tag. Clear temporary Gorgon petrification on login, death and respawn; manual repair now clears active temporary crowd control while preserving unrelated grants and current health.
+- Render petrification desaturation in a dedicated world-only pass, separate from menu rendering and the shared shader-power slot.
+- Exempt Convenient Decor umbrellas from iron weakness while retaining iron tools, weather vanes and umbrella stands.
+- Add separate base-cooldown lines to ability descriptions using current power values; retain Ravenous Lunge's existing 10-second cooldown.
+
 ## [1.4.81] - 2026-10-24
 
 - Fix Origin repair skipping a missing layer grant when the power is still held from another source. Restore multiple-power children under their native parent source; preserve existing resources, cooldowns, unrelated grants and current health.

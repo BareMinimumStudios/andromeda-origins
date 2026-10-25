@@ -302,3 +302,15 @@ These are focused lifecycle/geometry checks with simulated players and suppresse
 
 
 The final clean production build passes the resource/static-Mixin checks on both loaders. Both probe-free release JARs pass dedicated startup, all three helper creation commands, datapack reload and orderly shutdown. The Fabric fixture retains pre-existing Opoli and external Brewery/Farm & Charm/Foundation data-fixer messages also present in older-stack logs, plus the existing Windows OSHI/JNA hardware-probe warnings; these are recorded separately from new Andromeda failures. Release packaging produces both loader JARs, checksums and a flat source ZIP. No version bump, live-server access, or gameplay balance changes were made.
+
+## 1.4.82 issue regression pass — 2026-10-25
+
+Native gameplay/visual fixtures ran before the requested metadata bump, using 1.4.81; the final release is 1.4.82. Local isolated Fabric and NeoForge servers used Origins 1.47.12 and Opoli 1.119.0. Native power ticks and damage preview verified Fenrkin's 20% outgoing damage reduction, removal of its 20% speed bonus, accumulation/drain of lingering Wet, physical water, externally applied Wet, rainfall, the 120-second cap and full recovery. Champion Fenrkin remains exempt. The previously reported absence of the gameplay penalty was not reproduced with the current code; its HUD was disabled and is now enabled, and counter references are explicit.
+
+Both loaders passed Siren/Champion Siren hover and sneaking descent, unchanged Nereid hover, Lichling/Champion Lichling native underwater breathing, pumpkin equipment tag membership, active-petrification manual repair without healing, and preservation of a foreign-source silence grant. Optional Convenient Decor umbrella entries were removed from iron classification; umbrella stands and iron tools remain.
+
+A hidden Fabric Minecraft client with FancyMenu 3.9.14 connected to a disposable local server. Native framebuffer captures covered normal color, petrification, six Escape-menu frames, resumed gameplay and reconnect. World-region color variation remained consistently reduced across all six menu captures, and normal color returned on reconnect. This validates the dedicated world-only desaturation pass in that setup; it does not establish the original renderer conflict or exhaust every shader pack. NeoForge client visuals were compiled but not exercised in a real NeoForge client.
+
+Temporary test powers, simulated-player probes, test launchers and captures are outside production sources/artifacts. No live-server access occurred. The logout-crash investigation remains paused, and the unfinished dismount guard remains excluded.
+
+Final clean 1.4.82 production jars passed dedicated-server startup, native helper creation, reload and graceful shutdown on Fabric and NeoForge. Artifact/source inspection confirmed no temporary probes or unfinished dismount guard; source packaging remains flat.

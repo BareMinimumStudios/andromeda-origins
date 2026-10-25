@@ -17,7 +17,7 @@ Global style 25 is the final style on sheet 1 (`bar_index: 24`). Global style 26
 |---:|---|---:|---|---|
 | 01 | `resource_bars_1.png` | 0 | Stamina Bar | Arachne Eightfold Swiftness; Fenrkin Stamina Surge; Gorgon Transference speed-buff duration; Humanity Indomitable active duration; Manticore Ravenous Lunge; Satyr Momentum; Selkie Surging Tides |
 | 02 | `resource_bars_1.png` | 1 | Wetness Bar | Nereid Wet duration; Selkie Wetness / land-weakness recovery |
-| 03 | `resource_bars_1.png` | 2 | Wet Status Bar | Manticore Wet / Cramped weakness duration; Nereid Convalescing Wet effect (catalog intent; see shared-resource note below); Veilborn Wet / Unstable duration; Wyverian weakness-state duration |
+| 03 | `resource_bars_1.png` | 2 | Wet Status Bar | Fenrkin lingering Wet weakness; Manticore Wet / Cramped weakness duration; Nereid Convalescing Wet effect (catalog intent; see shared-resource note below); Veilborn Wet / Unstable duration; Wyverian weakness-state duration |
 | 04 | `resource_bars_1.png` | 3 | Cobweb Bar | Arachne Weaver's Nest |
 | 05 | `resource_bars_1.png` | 4 | Cooldown 1 Bar | Arachne Cobweb Fatigue; Fenrkin On the Hunt cooldown; Humanity Indomitable cooldown; Manticore Beast of Blood cooldown; Nereid Submersion cooldown; Selkie Coastal Phalanx cooldown |
 | 06 | `resource_bars_1.png` | 5 | Flutter Bar | Faerie air-jump charges |

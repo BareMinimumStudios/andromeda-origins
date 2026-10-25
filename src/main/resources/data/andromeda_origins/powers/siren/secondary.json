@@ -805,5 +805,5 @@
     }
   ],
   "name": "Shrieking Wail",
-  "description": "Press your Secondary Ability key to unleash a sonic wail in a raycast fan reaching roughly 10 blocks in front of you. Creatures caught in the cone take 6 sonic damage and gain Darkness and Glowing for 5 seconds. The wail no longer spawns helper entities."
+  "description": "Press your Secondary Ability key to unleash a sonic wail in a raycast fan reaching roughly 10 blocks in front of you. Creatures caught in the cone take 6 sonic damage and gain Darkness and Glowing for 5 seconds. The wail no longer spawns helper entities.\n \n§e§lBase Cooldown:§r 20 seconds."
 }

@@ -442,7 +442,7 @@
     }
   ],
   "name": "Coastal Phalanx & Surging Tides",
-  "description": "§e§lCoastal Phalanx:§r\nSneak and press your Primary Ability key while looking at a creature within 30 blocks to grant both of you Absorption II for 1 minute. The Absorption effect refreshes every 10 seconds.\n \n§e§lSurging Tides:§r\nPress your Primary Ability key while not sneaking to dash in the direction you are looking. Base cooldown: 5 seconds while physically in water or exposed to rain, 30 seconds otherwise on land.\n \nYour projectile damage is reduced by 50% during Surging Tides and for 3 seconds afterward. §e§lMovement Ability§r.",
+  "description": "§e§lCoastal Phalanx:§r\nSneak and press your Primary Ability key while looking at a creature within 30 blocks to grant both of you Absorption II for 1 minute. The Absorption effect refreshes every 10 seconds.\n \n§e§lSurging Tides:§r\nPress your Primary Ability key while not sneaking to dash in the direction you are looking. Base cooldown: 5 seconds while physically in water or exposed to rain, 30 seconds otherwise on land.\n \nYour projectile damage is reduced by 50% during Surging Tides and for 3 seconds afterward. §e§lMovement Ability§r.\n \n§e§lBase Cooldown:§r 3 minutes (Coastal Phalanx); 5 seconds in water/rain or 30 seconds on land (Surging Tides).",
   "dash_cooldown": {
     "type": "origins:resource",
     "min": 100,

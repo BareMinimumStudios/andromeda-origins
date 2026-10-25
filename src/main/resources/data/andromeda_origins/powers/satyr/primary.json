@@ -221,5 +221,5 @@
     }
   ],
   "name": "Rush, Swift Leap & Satyr's Landing",
-  "description": "§e§lRush:§r\nPress your Primary Ability key to dash in the direction you are looking.\n \n§e§lSwift Leap:§r\nAt maximum Momentum, press Jump while airborne to launch yourself upward once. Swift Leap resets when you touch the ground.\n \n§e§lSatyr's Landing:§r\nAfter Swift Leap has been consumed, press Sneak while airborne to dive toward the ground. Landing deals 7 cramming damage in a 3-block radius. Hitting a creature instead resets Swift Leap and bounces you upward, up to 2 times.\n \nYou deal 50% less projectile damage for 3 seconds after Rush. §e§lMovement Ability§r."
+  "description": "§e§lRush:§r\nPress your Primary Ability key to dash in the direction you are looking.\n \n§e§lSwift Leap:§r\nAt maximum Momentum, press Jump while airborne to launch yourself upward once. Swift Leap resets when you touch the ground.\n \n§e§lSatyr's Landing:§r\nAfter Swift Leap has been consumed, press Sneak while airborne to dive toward the ground. Landing deals 7 cramming damage in a 3-block radius. Hitting a creature instead resets Swift Leap and bounces you upward, up to 2 times.\n \nYou deal 50% less projectile damage for 3 seconds after Rush. §e§lMovement Ability§r.\n \n§e§lBase Cooldown:§r 10 seconds (Rush)."
 }

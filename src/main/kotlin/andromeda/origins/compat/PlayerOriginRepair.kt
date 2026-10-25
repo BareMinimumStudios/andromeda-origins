@@ -100,7 +100,7 @@ object PlayerOriginRepair {
         val selected = (state.snapshot().values + state.swapSnapshot().values).toSet()
         if (selected.isEmpty()) return null
         val container = PowerContainerAttachment.get(player) ?: return null
-        if (resetBases) WebbedLifecycle.clear(player)
+        if (resetBases) CrowdControlLifecycle.clearTemporary(player)
         val medievalActive = selected.any { it.namespace == "medievalorigins" }
         var pixie = container.allSources().any { it.toString() == "medievalorigins:pixie" } ||
             container.allPowers().any { it.namespace == "medievalorigins" && it.path.startsWith("pixie/") }

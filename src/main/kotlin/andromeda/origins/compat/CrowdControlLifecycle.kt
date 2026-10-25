@@ -31,7 +31,37 @@ object CrowdControlLifecycle {
         Platform.serverTick { server ->
             if (server.tickCount % 20 == 0) server.playerList.players.forEach(::reconcile)
         }
-        Platform.join { handler, _, _ -> reconcile(handler.player) }
+        Platform.join { handler, _, _ -> clearGorgon(handler.player) }
+        Platform.respawn { old, player, _ -> clearGorgon(old); clearGorgon(player) }
+        Platform.death { entity, _, _ ->
+            if (entity is ServerPlayer) clearGorgon(entity)
+            true
+        }
+    }
+
+    /** Combat petrification must not survive login or respawn. Keep unrelated grants. */
+    private fun clearGorgon(player: ServerPlayer) {
+        val container = PowerContainer.of(player) ?: return
+        for (root in listOf(ophidianed, constricted, petrified)) removeControlTree(container, root)
+        reconcile(player)
+        container.markDirty()
+    }
+
+    /** Explicit operator repair clears temporary crowd control without healing or changing Origins. */
+    fun clearTemporary(player: ServerPlayer) {
+        val container = PowerContainer.of(player) ?: return
+        for (root in timed + shared.map { it.power }) removeControlTree(container, root)
+        reconcile(player)
+        container.markDirty()
+    }
+
+    private fun removeControlTree(container: PowerContainer, root: ResourceLocation) {
+        // Remove the normal root first so MultiplePower releases its native child ownership.
+        container.removePower(root, source)
+        for (power in container.allPowers().toList()) {
+            if (power.namespace == root.namespace && power.path.startsWith(root.path + "_"))
+                container.removePower(power, source)
+        }
     }
 
     fun reconcile(player: ServerPlayer) {

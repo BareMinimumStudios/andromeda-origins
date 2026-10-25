@@ -107,8 +107,7 @@
     "type": "origins:disable_regen"
   },
   "desaturated_vision": {
-    "type": "origins:shader",
-    "shader": "minecraft:shaders/post/desaturate.json"
+    "type": "origins:simple"
   },
   "prevent_item_use": {
     "type": "origins:prevent_item_use"

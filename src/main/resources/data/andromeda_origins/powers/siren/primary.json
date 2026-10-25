@@ -333,14 +333,14 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "\u00a7c\u00a7lPacified:\u00a7r\u00a7f Unable to deal damage."
+      "text": "§c§lPacified:§r§f Unable to deal damage."
     },
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "\u00a7c\u00a7lSilenced:\u00a7r\u00a7f Unable to use active abilities."
+      "text": "§c§lSilenced:§r§f Unable to use active abilities."
     }
   ],
   "name": "Infatuation Tempo",
-  "description": "Press your Primary Ability key while looking at a creature within 30 blocks to Infatuate it for 10 seconds, applying \u00a7c\u00a7l[Pacified]\u00a7r and \u00a7c\u00a7l[Silenced]\u00a7r. While a creature is Infatuated, its attacks and origin-ability damage cannot harm Sirens.\n \nInfatuation lasts the full 10 seconds and cannot be broken early by movement or by taking damage."
+  "description": "Press your Primary Ability key while looking at a creature within 30 blocks to Infatuate it for 10 seconds, applying §c§l[Pacified]§r and §c§l[Silenced]§r. While a creature is Infatuated, its attacks and origin-ability damage cannot harm Sirens.\n \nInfatuation lasts the full 10 seconds and cannot be broken early by movement or by taking damage.\n \n§e§lBase Cooldown:§r 2 minutes."
 }

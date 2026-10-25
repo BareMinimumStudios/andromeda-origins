@@ -490,5 +490,5 @@
     }
   ],
   "name": "On the Hunt",
-  "description": "Press your Primary Ability key to enter §e§lOn the Hunt§r for 30 seconds, gaining +20% movement speed, attack speed, mining speed, and melee damage while sensing creatures within 64 blocks. Undetectable creatures cannot be revealed.\n \n§e§lMark of Fenrir:§r\nSneak and hold Primary Ability while focusing on a valid target. You move 75% slower while stalking. After 5 seconds, the target is marked for 30 seconds, revealed to you unless Undetectable, and takes 25% more damage from you."
+  "description": "Press your Primary Ability key to enter §e§lOn the Hunt§r for 30 seconds, gaining +20% movement speed, attack speed, mining speed, and melee damage while sensing creatures within 64 blocks. Undetectable creatures cannot be revealed.\n \n§e§lMark of Fenrir:§r\nSneak and hold Primary Ability while focusing on a valid target. You move 75% slower while stalking. After 5 seconds, the target is marked for 30 seconds, revealed to you unless Undetectable, and takes 25% more damage from you.\n \n§e§lBase Cooldown:§r 3 minutes (On the Hunt); 2 minutes 30 seconds (Mark of Fenrir)."
 }

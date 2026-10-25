@@ -232,5 +232,5 @@
     }
   ],
   "name": "Fae Illusions",
-  "description": "Press your Secondary Ability key while looking at a creature within 64 blocks to afflict it with \u00a7e\u00a7lFae Illusions\u00a7r for 30 seconds. Faeries can see the affected target through walls, the target cannot perceive entities normally, and it becomes vulnerable to additional effects from \u00a7e\u00a7lTrickster\u00a7r."
+  "description": "Press your Secondary Ability key while looking at a creature within 64 blocks to afflict it with §e§lFae Illusions§r for 30 seconds. Faeries can see the affected target through walls, the target cannot perceive entities normally, and it becomes vulnerable to additional effects from §e§lTrickster§r.\n \n§e§lBase Cooldown:§r 3 minutes."
 }

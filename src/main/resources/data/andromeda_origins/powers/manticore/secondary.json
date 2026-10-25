@@ -103,9 +103,9 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "\u00a7e\u00a7lUnstoppable:\u00a7r\u00a7f Immune to crowd control effects, slowness and knockback.\n \n\u00a7c\u00a7lFamished:\u00a7r\u00a7f 75% hunger penalty for 1 minute afterward."
+      "text": "§e§lUnstoppable:§r§f Immune to crowd control effects, slowness and knockback.\n \n§c§lFamished:§r§f 75% hunger penalty for 1 minute afterward."
     }
   ],
   "name": "Beast of Blood",
-  "description": "Press your Secondary Ability key to purge harmful potion and Crowd Control effects from yourself and become Unstoppable for 30 seconds. You become \u00a7c\u00a7l[Famished]\u00a7r for 1 minute afterward."
+  "description": "Press your Secondary Ability key to purge harmful potion and Crowd Control effects from yourself and become Unstoppable for 30 seconds. You become §c§l[Famished]§r for 1 minute afterward.\n \n§e§lBase Cooldown:§r 1 minute 30 seconds."
 }
