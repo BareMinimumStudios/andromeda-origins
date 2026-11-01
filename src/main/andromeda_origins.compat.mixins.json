@@ -11,6 +11,8 @@
   },
   "mixins": [
     "compat.IncapacitatedFoodMixin",
-    "compat.FoodBalancePlacedDishMixin"
+    "compat.FoodBalancePlacedDishMixin",
+    "compat.SimplySwordsImplicitMixin",
+    "compat.SimplyMoreImplicitMixin"
   ]
 }

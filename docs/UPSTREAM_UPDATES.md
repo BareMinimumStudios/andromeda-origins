@@ -1,4 +1,4 @@
-# Upstream dependencies for 1.4.82
+# Upstream dependencies for 1.4.83
 
 The build pins immutable Modrinth files for Minecraft 1.21.1 so a release cannot silently resolve a different dependency.
 
@@ -21,3 +21,13 @@ The October 24 pair adds built-in Enderian pearl and Avian airborne-speed fixes.
 ### Airborne transfer in 1.4.81
 
 Opoli's native `attribute_modify_transfer` is not a drop-in replacement for the legacy bridge: two total modifiers +20%/+30% produce 1.56x natively versus the retained 1.50x bucket-summed multiplier. The five existing transfer owners keep their semantics. The bridge now uses the identity of Opoli's dirty-invalidated `ModifierSummary` to cache its own legacy sums per entity. Unchanged attributes avoid repeated modifier scans; missing summary support falls back to recomputation. No shared mutable cache is introduced. Native transfer migration would be a separate movement-balance decision. Connected-block harvesting, breeding/taming, extra trades and HUD redesigns remain deferred.
+
+## November 1 upstream review (upgrade not applied)
+
+The current official Minecraft 1.21.1 releases are [Opoli 1.124.0](https://modrinth.com/mod/opoli/version/6rLBJtq0) (Fabric `6rLBJtq0`, NeoForge `oHslKfYl`) and [Origins 1.49.0](https://modrinth.com/mod/overgrowns-origins/version/6thhlmG1) (Fabric `6thhlmG1`, NeoForge `FQEvanTQ`). Their released jar metadata requires Fabric Loader 0.20.1+ or NeoForge 21.1.265+. This patch retains the existing tested 1.119.0 / 1.47.12 dependency pair; a pack-wide loader/dependency upgrade is a separate step.
+
+The strongest benefits are lower allocation/CPU costs for native attribute powers and faster power/layer/badge reloads. HUD bars and badge icons gain fallback textures; data may use JSONC/JSON5. Keep this repository's strict JSON and validation rather than converting files just to use the new syntax.
+
+Before upgrading, audit pack overrides for the now-effective loading_priority behavior on Origins/global power sets. Apoli removes sneaky/share_effects and moves voice/speech types to Birdsong. None of Andromeda's own power definitions use those removed/moved types, so Birdsong is not required for its existing abilities. Ordinary voice-chat use is independent of Apoli's speech powers.
+
+Retain the airborne transfer bridge: native and legacy total-modifier stacking differ, as documented above. New spawn offsets alone do not establish a replacement for exact raycast hit-position commands. Avoid deleting these bridges or helper logic without matching movement/impact tests.

@@ -130,6 +130,9 @@ if (badge_dir/'fallback.png').exists():
     check(struct.unpack('>II',(badge_dir/'fallback.png').read_bytes()[16:24])==(9,9),'Incorrect fallback badge dimensions')
 for path in (ROOT/'src/main/kotlin/andromeda/origins/mixin').rglob('*.kt'):
     check('companion object' not in path.read_text(),f'Unsafe singleton scaffold in {path.name}')
+    if '@JvmStatic' in path.read_text() and re.search(r'\bobject\s+\w+', path.read_text()):
+        compiled = path.relative_to(ROOT/'src/main/kotlin').with_suffix('.class').as_posix()
+        check('"'+compiled+'"' in (ROOT/'build.gradle.kts').read_text(), f'Static Mixin missing bytecode sanitation: {path.name}')
 spheres=data.get(RES/'assets/andromeda_origins/particle_spheres.json',{})
 check(set(spheres)=={'soul','water'},'Particle sphere presets missing')
 for name,points in spheres.items():check(len(points)==200 and all(len(p)==3 for p in points),f'{name}: incorrect sphere geometry')
@@ -139,6 +142,17 @@ for name,digest in manifest.items():
     check(path.exists() and hashlib.sha256(path.read_bytes()).hexdigest()==digest,f'Selkie data changed: {name}')
 for name in ('big_sphere','big_sphere2','web_nest','fireball','dragon_charge'):
     check(not list((RES/'data/andromeda_origins/function').rglob(name+'.mcfunction')),f'Retired helper remains: {name}')
+# Explicit custom HUD textures must be bundled; upstream community artwork is not a stable dependency.
+for path, definition in data.items():
+    if not path.is_relative_to(powers_dir): continue
+    for node in walk(definition):
+        hud = node.get('hud_render') if isinstance(node, dict) else None
+        if not isinstance(hud, dict) or 'sprite_location' not in hud: continue
+        texture = hud['sprite_location']
+        namespace, texture_path = texture.split(':', 1) if ':' in texture else ('minecraft', texture)
+        check(namespace == 'andromeda_origins', f'{path.relative_to(RES)}: HUD texture must be bundled: {texture}')
+        check((RES/'assets'/namespace/texture_path).is_file(), f'{path.relative_to(RES)}: missing HUD texture {texture}')
+
 # Direct overlay textures must resolve to packaged files, not shorthand sprite IDs.
 for path, definition in data.items():
     for node in walk(definition):

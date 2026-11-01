@@ -27,12 +27,12 @@ Global style 25 is the final style on sheet 1 (`bar_index: 24`). Global style 26
 | 10 | `resource_bars_1.png` | 9 | Hunting Bar | Fenrkin On the Hunt active duration |
 | 11 | `resource_bars_1.png` | 10 | Wolf Bar | Fenrkin Mark of Fenrir progress; Fenrkin marked-target duration |
 | 12 | `resource_bars_1.png` | 11 | Blue Cooldown Bar | Faerie Concealment cooldown; Fenrkin Mark of Fenrir cooldown; Selkie Sealskin Bastion cooldown; Veilborn Auroral Mirage active-duration timer |
-| 13 | `resource_bars_1.png` | 12 | Shield Bar | Fenrkin Adrenaline active duration |
+| 13 | `resource_bars_1.png` | 12 | Shield Bar | Fenrkin Adrenaline active duration / brief activation helper |
 | 14 | `resource_bars_1.png` | 13 | Resurrection Bar | Fenrkin Adrenaline cooldown; Lichling Death's Defiance cooldown |
 | 15 | `resource_bars_1.png` | 14 | Eye Bar | Gorgon Ophidian Gaze charges; recharge; Petrified duration |
 | 16 | `resource_bars_1.png` | 15 | Transference Bar | Gorgon Transference charges; recharge; target debuff duration |
 | 17 | `resource_bars_1.png` | 16 | Skull Bar | Lichling Energy / Chimes of Necros; Doom duration |
-| 18 | `resource_bars_1.png` | 17 | Weakness Bar | Lichling weakness-state duration |
+| 18 | `resource_bars_1.png` | 17 | Weakness Bar | Lichling weakness-state duration; Selkie retaliation on attackers |
 | 19 | `resource_bars_1.png` | 18 | Blood Moon Bar | Manticore Beast of Blood active duration |
 | 20 | `resource_bars_1.png` | 19 | Veil Swap Bar | Veilborn Veil Transposition cooldown |
 | 21 | `resource_bars_1.png` | 20 | Veil Curtain Bar | Veilborn Auroral Mirage cooldown |

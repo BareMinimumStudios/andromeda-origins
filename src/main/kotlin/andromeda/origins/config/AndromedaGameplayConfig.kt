@@ -37,6 +37,9 @@ class AndromedaGameplayConfig : me.fzzyhmstrs.fzzy_config.config.Config(net.mine
     @me.fzzyhmstrs.fzzy_config.annotations.Comment("Fabric server only: log bounded entity-unload mutation and nested-caller stacks for logout-crash investigation. Applies immediately; no startup argument or restart required. Diagnostic only, not a crash fix.")
     var logoutDiagnostics = me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean(false)
 
+    @me.fzzyhmstrs.fzzy_config.annotations.Comment("Optional Simply Swords and Simply More weapon implicit balance. Server-authoritative; changes apply to new hits immediately.")
+    var weaponBalance = WeaponBalanceSection()
+
     override fun defaultPermLevel(): kotlin.Int {
         return 2
     }
@@ -86,7 +89,8 @@ class AndromedaGameplayConfig : me.fzzyhmstrs.fzzy_config.config.Config(net.mine
         AndromedaGameplayConfig.Companion.immutablePowerMap(disabledByOrigin),
         blockIncapacitatedFoodBypass.get(),
         foodBalance.toState(),
-        logoutDiagnostics.get()
+        logoutDiagnostics.get(),
+        weaponBalance.toState()
         )
     }
 

@@ -370,5 +370,16 @@
   "andromeda_origins.gameplay.foodBalance.beefWellingtonSaturationModifier": "Beef Wellington Saturation Modifier",
   "andromeda_origins.gameplay.foodBalance.beefWellingtonSaturationModifier.desc": "Restored saturation equals nutrition × modifier × 2. Default: 0.5, restoring 6 saturation at 6 nutrition.",
   "andromeda_origins.gameplay.logoutDiagnostics": "Logout Diagnostics (Fabric Server)",
-  "andromeda_origins.gameplay.logoutDiagnostics.desc": "Log bounded entity-unload caller stacks to investigate logout crashes. Server option; OP level 2. Applies immediately without restart or JVM arguments. Fabric only. Collects evidence; does not prevent crashes."
+  "andromeda_origins.gameplay.logoutDiagnostics.desc": "Log bounded entity-unload caller stacks to investigate logout crashes. Server option; OP level 2. Applies immediately without restart or JVM arguments. Fabric only. Collects evidence; does not prevent crashes.",
+  "andromeda_origins.weapon_implicit.disabled": "Implicit disabled by server",
+  "andromeda_origins.gameplay.weaponBalance": "Weapon Implicit Balance",
+  "andromeda_origins.gameplay.weaponBalance.desc": "Optional Simply Swords / Simply More compatibility. Existing effects expire normally.",
+  "andromeda_origins.gameplay.weaponBalance.enabled": "Enable Weapon Implicit Compatibility",
+  "andromeda_origins.gameplay.weaponBalance.enabled.desc": "Turn off to restore upstream implicit behavior. Does not rewrite weapons or their rolled values.",
+  "andromeda_origins.gameplay.weaponBalance.disableBleedImplicits": "Disable Bleed Implicits",
+  "andromeda_origins.gameplay.weaponBalance.disableBleedImplicits.desc": "Disable glaive, greataxe and halberd implicit Bleed, including addon weapons mapped to them. Unique ability Bleed remains available.",
+  "andromeda_origins.gameplay.weaponBalance.disableAttackSpeedImplicits": "Disable Disarm / Implicit Fatigue",
+  "andromeda_origins.gameplay.weaponBalance.disableAttackSpeedImplicits.desc": "Disable Simply More khopesh/deer-horn implicit attack-speed fatigue. Vanilla Slowness and Mining Fatigue remain available.",
+  "andromeda_origins.gameplay.weaponBalance.disableStunImplicits": "Disable Pernach Stun Implicit",
+  "andromeda_origins.gameplay.weaponBalance.disableStunImplicits.desc": "Optional: disable the Pernach implicit stun. Unique stun abilities remain available. Default off."
 }

@@ -231,3 +231,11 @@ In Fzzy Config's gameplay screen, **Food Balance** offers separate switches for 
 Beef Wellington defaults to **6 nutrition** and **0.5 saturation modifier**, restoring 6 hunger points (three hunger icons) and 6 saturation per serving. Set nutrition from 0–20 and the modifier from 0–2, or switch **Balance Beef Wellington** off to use Candlelight's values. Both held portions and dishes placed through Foundation are covered. Effects, eating time, and containers are preserved. Changes apply live on the server and synced clients.
 
 **Block Golden Food Incapacitated Bypass** prevents only golden apples, enchanted golden apples, and golden carrots from resetting down counters/timers, providing adrenaline recovery, or reviving players. Their normal food effects remain. Origin revival abilities keep working. No stack sizes are changed. Farm & Charm, Brewery, Candlelight, Foundation, and Incapacitated remain optional dependencies.
+
+## Optional weapon implicit balance
+
+Fzzy Config → Weapon Implicit Balance is server-controlled (OP level 2), synchronized to clients, and applies to new hits without a restart. `enabled=false` restores upstream behavior. `disableBleedImplicits=true` blocks the Simply Swords Bleed handler used by glaives, greataxes, halberds and addon weapons mapped to them. `disableAttackSpeedImplicits=true` blocks Simply More's Disarm implicit on khopeshes/deer horns. Its `implicit_mining_fatigue` reduces attack speed; it is distinct from vanilla Mining Fatigue. `disableStunImplicits=false` preserves Pernach Stun by default; administrators can enable its restriction separately.
+
+Existing effects expire normally. Unique-ability Bleed/stuns and vanilla Slowness/Mining Fatigue are preserved. Disabled implicit tooltips say so; item components and rolled values are not rewritten. No replacement bonus is implemented in this patch.
+
+Suggested replacements for a later balance decision: replace implicit Bleed with Opening Strike (+10% damage against targets above 75% health on fully charged attacks); replace Disarm with a small positional damage bonus (+10% from behind on fully charged attacks). Implement either through the normal damage pipeline, with no extra damage events, stacking debuffs, item cooldown lockouts or rerolled weapon components. These are proposals, not active gameplay.

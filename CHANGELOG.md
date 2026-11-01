@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.4.83] - 2026-11-01
+
+- Add optional Simply Swords / Simply More weapon-implicit balance in the existing OP-controlled, server-synchronized Fzzy Config. The master switch restores upstream behavior; separate switches disable implicit Bleed and Disarm/attack-speed fatigue by default, with Pernach implicit Stun available as an additional opt-in restriction.
+- Update weapon implicit tooltips to reflect disabled server policy. Preserve existing weapon components and rolled values, unique-ability effects, vanilla Slowness/Mining Fatigue and normal expiry of already-applied effects.
+- Fix Selkie's five-second retaliation HUD, shown to an attacker after hitting a Selkie, referencing a missing upstream community texture. Use the bundled Weakness bar without changing the debuff.
+- Replace the same obsolete upstream texture reference in Fenrkin's brief Adrenaline helper with the bundled Shield bar.
+- Validate explicit HUD textures during standalone CI checks and require static-only Kotlin Mixins to be covered by bytecode sanitation.
+
+
 ## [1.4.82] - 2026-10-25
 
 - Show Fenrkin's lingering Wet weakness on the HUD and bind its Wet/cramped counters to explicit power IDs. Verify the native 20% damage penalty, loss of the speed bonus, recovery and Champion exemption on both loaders.
