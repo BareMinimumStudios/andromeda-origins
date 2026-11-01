@@ -78,7 +78,8 @@ cloche {
             entrypoint("main") { value = "andromeda.origins.platform.FabricEntrypoint" }
             entrypoint("client") { value = "andromeda.origins.platform.FabricClientEntrypoint" }
             dependencies {
-                dependency { modId = "fabric-api" }
+                dependency { modId = "fabricloader"; version(fabricLoader) }
+                dependency { modId = "fabric-api"; version(fabricApiVersion) }
                 dependency { modId = "fabric-language-kotlin"; version(fabricKotlinVersion) }
                 dependency { modId = "origins"; version(originsVersion) }
                 dependency { modId = "apoli"; version(opoliVersion) }
@@ -103,6 +104,7 @@ cloche {
             loaderVersion { start = kotlinForForgeVersion }
             blurLogo = false
             dependencies {
+                dependency { modId = "neoforge"; version(neoForgeLoader) }
                 dependency { modId = "kotlinforforge"; version(kotlinForForgeVersion) }
                 dependency { modId = "origins"; version(originsVersion) }
                 dependency { modId = "apoli"; version(opoliVersion) }

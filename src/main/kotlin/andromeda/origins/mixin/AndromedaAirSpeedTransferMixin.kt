@@ -5,6 +5,7 @@ import dev.overgrown.apoli.access.ModifierSummaryHolder
 import dev.overgrown.apoli.data.ModifierSummary
 import dev.overgrown.apoli.power.PowerContainer
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.entity.ai.attributes.AttributeModifier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import org.spongepowered.asm.mixin.Mixin
@@ -14,7 +15,8 @@ import org.spongepowered.asm.mixin.injection.Inject
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable
 
 /** Preserve legacy bucket-summed transfer; native total multipliers instead multiply individually. */
-@Mixin(value = [LivingEntity::class], priority = 900)
+// Player overrides this method without calling LivingEntity; both declared methods need the bridge.
+@Mixin(value = [LivingEntity::class, Player::class], priority = 900)
 abstract class AndromedaAirSpeedTransferMixin {
     @Unique private var `andromeda$movementSummary`: ModifierSummary? = null
     @Unique private var `andromeda$added`: Double = 0.0
@@ -22,7 +24,7 @@ abstract class AndromedaAirSpeedTransferMixin {
     @Unique private var `andromeda$totalMultiplier`: Double = 0.0
 
     @Inject(method = ["getFlyingSpeed"], at = [At("RETURN")], cancellable = true)
-    fun `andromeda$transferMovementModifiers`(cir: CallbackInfoReturnable<Float>) {
+    private fun `andromeda$transferMovementModifiers`(cir: CallbackInfoReturnable<Float>) {
         val entity = this as Any as LivingEntity
         val container = PowerContainer.of(entity) ?: return
         if (container.isEmpty()) return

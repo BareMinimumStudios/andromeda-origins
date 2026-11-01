@@ -25,8 +25,8 @@ abstract class EntityUnloadDiagnosticsMixin {
         `andromeda$ownerThread` = Thread.currentThread()
     }
 
-    @Redirect(method = ["processUnloads"], at = At(value = "INVOKE",
-        target = "Lit/unimi/dsi/fastutil/longs/LongSet;removeIf(Ljava/util/function/LongPredicate;)Z"))
+    @Redirect(method = ["processUnloads"], at = [At(value = "INVOKE",
+        target = "Lit/unimi/dsi/fastutil/longs/LongSet;removeIf(Ljava/util/function/LongPredicate;)Z")])
     private fun `andromeda$observeUnloading`(queue: LongSet, predicate: LongPredicate): Boolean {
         if (!EntityUnloadDiagnostics.enabled) return queue.removeIf(predicate)
         val before = queue.size
@@ -61,7 +61,7 @@ abstract class EntityUnloadDiagnosticsMixin {
     }
 
     @Redirect(method = ["updateChunkStatus(Lnet/minecraft/world/level/ChunkPos;Lnet/minecraft/world/level/entity/Visibility;)V"],
-        at = At(value = "INVOKE", target = "Lit/unimi/dsi/fastutil/longs/LongSet;add(J)Z"))
+        at = [At(value = "INVOKE", target = "Lit/unimi/dsi/fastutil/longs/LongSet;add(J)Z")])
     private fun `andromeda$traceAdd`(queue: LongSet, chunk: Long): Boolean {
         val changed = queue.add(chunk)
         if (EntityUnloadDiagnostics.enabled) EntityUnloadDiagnostics.mutation(this, `andromeda$ownerThread`,
@@ -70,7 +70,7 @@ abstract class EntityUnloadDiagnosticsMixin {
     }
 
     @Redirect(method = ["updateChunkStatus(Lnet/minecraft/world/level/ChunkPos;Lnet/minecraft/world/level/entity/Visibility;)V"],
-        at = At(value = "INVOKE", target = "Lit/unimi/dsi/fastutil/longs/LongSet;remove(J)Z"))
+        at = [At(value = "INVOKE", target = "Lit/unimi/dsi/fastutil/longs/LongSet;remove(J)Z")])
     private fun `andromeda$traceRemove`(queue: LongSet, chunk: Long): Boolean {
         val changed = queue.remove(chunk)
         if (EntityUnloadDiagnostics.enabled) EntityUnloadDiagnostics.mutation(this, `andromeda$ownerThread`,

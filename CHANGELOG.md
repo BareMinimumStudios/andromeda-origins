@@ -2,6 +2,10 @@
 
 ## [1.4.83] - 2026-11-01
 
+- Update Overgrown Origins to 1.49.0 and Opoli to 1.124.0 on both loaders. Require Fabric Loader 0.20.1+ or NeoForge 21.1.265+ and update Fabric API to 0.116.17+1.21.1. Update client and server together.
+- Adapt food, targeting, particle and diagnostic hooks to the current loader/Mixin APIs.
+- Fix player airborne movement bypassing the legacy speed-transfer bridge. Preserve the five owners, suppression, cached sums and additive stacking (+20% and +30% remain 1.50x).
+
 - Add optional Simply Swords / Simply More weapon-implicit balance in the existing OP-controlled, server-synchronized Fzzy Config. The master switch restores upstream behavior; separate switches disable implicit Bleed and Disarm/attack-speed fatigue by default, with Pernach implicit Stun available as an additional opt-in restriction.
 - Update weapon implicit tooltips to reflect disabled server policy. Preserve existing weapon components and rolled values, unique-ability effects, vanilla Slowness/Mining Fatigue and normal expiry of already-applied effects.
 - Fix Selkie's five-second retaliation HUD, shown to an attacker after hitting a Selkie, referencing a missing upstream community texture. Use the bundled Weakness bar without changing the debuff.
