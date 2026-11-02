@@ -1,0 +1,385 @@
+{
+  "type": "origins:multiple",
+  "active": {
+    "type": "origins:active_self",
+    "cooldown": 2400,
+    "hud_render": {
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 4,
+      "condition": {
+        "type": "origins:power",
+        "power": "*:champion/fenrkin/onhunt",
+        "inverted": true
+      }
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "andromeda_origins:ability.fenrkin.on_the_hunt_howl",
+          "volume": 1.0,
+          "pitch": 1.0
+        },
+        {
+          "type": "andromeda_origins:enhanced_fx",
+          "event": "fenrkin.on_the_hunt"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "andromeda_origins:common/figura_1",
+          "change": 1,
+          "operation": "set"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:fenrkin/helper/howl",
+          "source": "minecraft:state"
+        },
+        {
+          "type": "origins:grant_power",
+          "power": "*:champion/fenrkin/onhunt",
+          "source": "minecraft:buff"
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:cloud"
+          },
+          "count": 8,
+          "speed": 0.05,
+          "force": true,
+          "spread": {
+            "x": 0.35,
+            "y": 0.2,
+            "z": 0.35
+          },
+          "offset_y": 0.2
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:crit"
+          },
+          "count": 6,
+          "speed": 0.1,
+          "force": true,
+          "spread": {
+            "x": 0.3,
+            "y": 0.6,
+            "z": 0.3
+          },
+          "offset_y": 1
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:sweep_attack"
+          },
+          "count": 2,
+          "speed": 0.0,
+          "force": true,
+          "spread": {
+            "x": 0.15,
+            "y": 0.15,
+            "z": 0.15
+          },
+          "offset_y": 0.9
+        },
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:smoke"
+          },
+          "count": 5,
+          "speed": 0.02,
+          "force": true,
+          "spread": {
+            "x": 0.3,
+            "y": 0.2,
+            "z": 0.3
+          },
+          "offset_y": 0.5
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "*:common/silenced",
+          "inverted": true
+        },
+        {
+          "type": "origins:sneaking",
+          "inverted": true
+        }
+      ]
+    },
+    "key": {
+      "key": "key.origins.primary_active",
+      "continuous": false
+    }
+  },
+  "cooldown": {
+    "type": "origins:cooldown",
+    "cooldown": 1200,
+    "hud_render": {
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 11
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Trigger with ",
+        {
+          "keybind": "key.origins.primary_active"
+        }
+      ]
+    }
+  ],
+  "name": "On the Hunt",
+  "description": "On the Hunt lasts 30 seconds: +20% movement speed, attack speed, mining speed and melee damage, with orange creature outlines within 64 blocks. Undetectable creatures stay hidden. Effective Champion cooldown: 60 seconds (120-second base).\n\nSneak and hold Primary for 5 seconds to mark a visible creature within 64 blocks. Up to 3 targets can be marked for 90 seconds each, with orange outlines and +25% damage from you. Marks belong to their caster. Effective mark cooldown: 30 seconds (60-second base). Marking does not slow you.",
+  "marks": {
+    "type": "origins:entity_set",
+    "persistent": false
+  },
+  "active2": {
+    "type": "origins:active_self",
+    "cooldown": 20,
+    "hud_render": {
+      "should_render": false
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:spawn_particles",
+          "particle": {
+            "type": "minecraft:cloud"
+          },
+          "count": 2,
+          "speed": 0.01,
+          "force": true,
+          "spread": {
+            "x": 0.15,
+            "y": 0.1,
+            "z": 0.15
+          },
+          "offset_y": 0.8
+        },
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.sniffer.scenting",
+          "volume": 1,
+          "pitch": 1.3
+        },
+        {
+          "type": "origins:if_else",
+          "condition": {
+            "type": "origins:resource",
+            "resource": "*:*_mark",
+            "comparison": "<",
+            "compare_to": 5
+          },
+          "if_action": {
+            "type": "origins:raycast",
+            "distance": 64,
+            "block": false,
+            "entity": true,
+            "shape_type": "collider",
+            "fluid_handling": "none",
+            "hit_action": {
+              "type": "origins:change_resource",
+              "resource": "*:*_mark",
+              "change": 1
+            },
+            "miss_action": {
+              "type": "andromeda_origins:actionbar",
+              "text": {
+                "text": "You must target an entity!",
+                "color": "red"
+              }
+            },
+            "bientity_condition": {
+              "type": "origins:and",
+              "conditions": [
+                {
+                  "type": "origins:can_see"
+                },
+                {
+                  "type": "origins:target_condition",
+                  "condition": {
+                    "type": "origins:living"
+                  }
+                },
+                {
+                  "type": "origins:target_condition",
+                  "condition": {
+                    "type": "origins:power",
+                    "power": "*:common/undetectable",
+                    "inverted": true
+                  }
+                }
+              ]
+            }
+          },
+          "else_action": {
+            "type": "origins:raycast",
+            "distance": 64,
+            "block": false,
+            "entity": true,
+            "shape_type": "collider",
+            "fluid_handling": "none",
+            "hit_action": {
+              "type": "origins:and",
+              "actions": [
+                {
+                  "type": "origins:trigger_cooldown",
+                  "power": "*:*_cooldown"
+                },
+                {
+                  "type": "andromeda_origins:actionbar",
+                  "text": {
+                    "text": "Target marked for 90 seconds!",
+                    "color": "gold"
+                  }
+                },
+                {
+                  "type": "origins:play_sound",
+                  "sound": "andromeda_origins:ability.fenrkin.marked",
+                  "volume": 1.15,
+                  "pitch": 1
+                },
+                {
+                  "type": "origins:change_resource",
+                  "resource": "*:*_mark",
+                  "change": 0,
+                  "operation": "set"
+                }
+              ]
+            },
+            "miss_action": {
+              "type": "andromeda_origins:actionbar",
+              "text": {
+                "text": "You must target an entity!",
+                "color": "red"
+              }
+            },
+            "bientity_action": {
+              "type": "origins:add_to_entity_set",
+              "set": "andromeda_origins:champion/fenrkin_primary_marks",
+              "time_limit": 1800
+            },
+            "bientity_condition": {
+              "type": "origins:and",
+              "conditions": [
+                {
+                  "type": "origins:can_see"
+                },
+                {
+                  "type": "origins:target_condition",
+                  "condition": {
+                    "type": "origins:living"
+                  }
+                },
+                {
+                  "type": "origins:target_condition",
+                  "condition": {
+                    "type": "origins:power",
+                    "power": "*:common/undetectable",
+                    "inverted": true
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "*:common/silenced",
+          "inverted": true
+        },
+        {
+          "type": "origins:sneaking"
+        },
+        {
+          "type": "origins:resource",
+          "resource": "*:*_cooldown",
+          "comparison": "==",
+          "compare_to": 0
+        },
+        {
+          "type": "origins:entity_set_size",
+          "set": "andromeda_origins:champion/fenrkin_primary_marks",
+          "comparison": "<",
+          "compare_to": 3
+        }
+      ]
+    },
+    "key": {
+      "key": "key.origins.primary_active",
+      "continuous": true
+    }
+  },
+  "marked_damage": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": 0.25
+    },
+    "bientity_condition": {
+      "type": "origins:in_entity_set",
+      "set": "andromeda_origins:champion/fenrkin_primary_marks"
+    }
+  },
+  "marked_glow": {
+    "type": "origins:entity_glow",
+    "red": 1,
+    "green": 0.5,
+    "blue": 0.05,
+    "use_teams": false,
+    "bientity_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:in_entity_set",
+          "set": "andromeda_origins:champion/fenrkin_primary_marks"
+        },
+        {
+          "type": "origins:target_condition",
+          "condition": {
+            "type": "origins:power",
+            "power": "*:common/undetectable",
+            "inverted": true
+          }
+        }
+      ]
+    }
+  },
+  "mark": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 5,
+    "start_value": 0,
+    "hud_render": {
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 10,
+      "condition": {
+        "type": "origins:resource",
+        "resource": "*:*_cooldown",
+        "comparison": "==",
+        "compare_to": 0
+      }
+    }
+  }
+}

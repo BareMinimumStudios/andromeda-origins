@@ -3,8 +3,8 @@
     "andromeda_origins:champion/fenrkin_passives",
     "andromeda_origins:common/champion",
     "andromeda_origins:common/champion_cooldowns",
-    "andromeda_origins:fenrkin/primary",
-    "andromeda_origins:fenrkin/secondary",
+    "andromeda_origins:champion/fenrkin_primary",
+    "andromeda_origins:champion/fenrkin_secondary",
     "andromeda_origins:fenrkin/figura",
     "andromeda_origins:common/figura"
   ],
@@ -15,7 +15,7 @@
   "order": 102,
   "impact": 3,
   "name": "Champion Fenrkin",
-  "description": "A command-only Champion variant of Fenrkin. It retains the origin's identity and abilities while removing racial weaknesses and self-debuffs. Player-facing ability cooldowns recover twice as fast; charge times and resource costs remain unchanged.",
+  "description": "Champion Fenrkin retains hunting, darkvision and Adrenaline without racial weaknesses. Stamina Surge has 40 stamina, 5-stamina directional leaps and no full-refill lock. Mark up to 3 targets; Mark and Hunt have effective 30/60-second cooldowns.",
   "tags": [
     "andromeda_origins:beast",
     "andromeda_origins:champion",

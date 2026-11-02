@@ -2,6 +2,10 @@
 
 ## [1.4.83] - 2026-11-01
 
+- Improve Champion Fenrkin only: 40 stamina, 5-stamina leaps and reuse after partial recovery instead of waiting for a full refill. Hold Surge and use movement keys with Jump for forward, backward, sideways or diagonal leaps; Jump without movement keys leaps vertically. Preserve discrete jump presses, crowd-control restrictions and the projectile-damage penalty.
+- Give Champion Fenrkin up to three caster-owned marks, using Opoli's native synced entity sets. Marks last 90 seconds so three can overlap with the 30-second effective cooldown; retain the five-second marking channel and +25% damage from the marking Champion. Hunt has a 60-second effective cooldown and orange outlines. Standard Fenrkin retains its existing data and balance.
+- Migrate existing Champion Fenrkin ability grants during login/manual repair, preserving proportional stamina/cooldowns, unrelated power sources and current health. Retain existing Fzzy ability controls for the new Champion definitions.
+
 - Update Overgrown Origins to 1.49.0 and Opoli to 1.124.0 on both loaders. Require Fabric Loader 0.20.1+ or NeoForge 21.1.265+ and update Fabric API to 0.116.17+1.21.1. Update client and server together.
 - Adapt food, targeting, particle and diagnostic hooks to the current loader/Mixin APIs.
 - Fix player airborne movement bypassing the legacy speed-transfer bridge. Preserve the five owners, suppression, cached sums and additive stacking (+20% and +30% remain 1.50x).

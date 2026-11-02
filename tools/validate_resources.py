@@ -26,7 +26,7 @@ for path in RES.rglob('*.json'):
 powers_dir = RES / 'data/andromeda_origins/powers'
 powers = {f'andromeda_origins:{p.relative_to(powers_dir).as_posix()[:-5]}':v for p,v in data.items() if p.is_relative_to(powers_dir)}
 origins = [(p,v) for p,v in data.items() if p.is_relative_to(RES/'data/andromeda_origins/origins')]
-check(len(powers)==194, f'Expected 194 active root powers, found {len(powers)}')
+check(len(powers)==197, f'Expected 197 active root powers, found {len(powers)}')
 check(len(origins)==26, f'Expected 26 Origins, found {len(origins)}')
 human_hp = powers.get('andromeda_origins:humanity/passives', {}).get('hp', {}).get('modifier', {})
 check(human_hp.get('attribute') == 'minecraft:generic.max_health' and
@@ -47,7 +47,7 @@ for path,definition in data.items():
             check('food' in node and 'nutrition' not in node,f'{path.name}: obsolete feed schema')
         if kind in ('origins:invulnerability','apoli:invulnerability'):
             check('damage_condition' in node,f'{path.name}: missing invulnerability condition')
-        for key in ('resource','power'):
+        for key in ('resource','power','set'):
             identifier=node.get(key)
             if isinstance(identifier,str) and identifier.startswith('*:') and '*' not in identifier[2:]:
                 identifier='andromeda_origins:'+identifier[2:]

@@ -152,6 +152,7 @@ object PlayerOriginRepair {
                 }
                 for (id in origin.powersFor(player)) grant(id, source, mutableSetOf())
             }
+            ChampionFenrkinMigration.reconcile(player)
             val attributes = container.allPowers().mapNotNull { id ->
                 val power = ApoliPowers.get(id) ?: return@mapNotNull null
                 if (id.namespace != "andromeda_origins" || power.type() !is AttributePower) null
