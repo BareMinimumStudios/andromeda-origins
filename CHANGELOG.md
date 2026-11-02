@@ -2,6 +2,9 @@
 
 ## [1.4.83] - 2026-11-01
 
+- Clear the Mortal Resolve Figura active flag when the tracked state ends, including Champion Mortal Triumph expiry. Repair stale inactive flags on login while preserving valid active/reconnecting states.
+- Verify standard-Origin cooldown rates, resource costs and temporary-effect recovery with real clients on Fabric and NeoForge.
+
 - Verify all other Champion selections with real Fabric and NeoForge clients, including cooldown recovery, sustained resource costs, exhaustion recovery, Arachne weaving and Gorgon charges. Keep existing standard-Origin balance unchanged.
 
 - Restrict Champion cooldown recovery to 26 explicitly listed ability cooldowns. Internal input, charge, sound, consumption, passive-proc and crowd-control/effect timers retain their normal cadence, and unrelated mods' cooldowns are no longer accelerated.

@@ -74,12 +74,15 @@ object MortalResolveManager {
             if (!player.isAlive()) {
                 dev.overgrown.origins.storage.OriginStorage.clear(player, DEADLINE_KEY)
                 player.removeTag(MortalResolveManager.ACTIVE_TAG)
+                FiguraCompatManager.setResource(player, FiguraCompatManager.MORTAL_RESOLVE_RESOURCE, 0)
                 iterator.remove()
                 continue
             }
 
             if (!player.getTags().contains(MortalResolveManager.ACTIVE_TAG)) {
                 dev.overgrown.origins.storage.OriginStorage.clear(player, DEADLINE_KEY)
+                MortalResolveEffects.stopHeartbeat(player)
+                FiguraCompatManager.setResource(player, FiguraCompatManager.MORTAL_RESOLVE_RESOURCE, 0)
                 iterator.remove()
                 continue
             }
@@ -135,6 +138,7 @@ object MortalResolveManager {
                 dev.overgrown.origins.storage.OriginStorage.clear(player, CHAMPION_DEADLINE_KEY)
                 player.removeTag(MortalResolveManager.CHAMPION_ACTIVE_TAG)
                 MortalResolveEffects.stopHeartbeat(player)
+                FiguraCompatManager.setResource(player, FiguraCompatManager.MORTAL_RESOLVE_RESOURCE, 0)
                 championIterator.remove()
                 continue
             }
@@ -159,6 +163,7 @@ object MortalResolveManager {
                 dev.overgrown.origins.storage.OriginStorage.clear(player, CHAMPION_DEADLINE_KEY)
                 player.removeTag(MortalResolveManager.CHAMPION_ACTIVE_TAG)
                 MortalResolveEffects.stopHeartbeat(player)
+                FiguraCompatManager.setResource(player, FiguraCompatManager.MORTAL_RESOLVE_RESOURCE, 0)
             } else {
                 entry.setValue(remaining - 1)
             }
@@ -224,6 +229,9 @@ object MortalResolveManager {
 
         if (!MortalResolveManager.isActive(player)) {
             IncapacitatedCompat.repairUnlimitedDownCounter(player)
+            if (!MortalResolveManager.isChampionActive(player)) {
+                FiguraCompatManager.setResource(player, FiguraCompatManager.MORTAL_RESOLVE_RESOURCE, 0)
+            }
         }
 
         })
