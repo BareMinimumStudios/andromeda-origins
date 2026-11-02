@@ -1,13 +1,318 @@
 {
-  "type": "apoli:modify_resource_change",
-  "modifier": {
-    "value": 1,
-    "operation": "multiply_total"
-  },
-  "modify": "drain",
-  "resources": false,
-  "cooldowns": true,
+  "type": "origins:multiple",
   "hidden": true,
   "name": "Champion Cooldown Recovery",
-  "description": "Champion player-facing ability cooldowns recover at twice the normal rate. Charge times, resource costs, and internal ability cadence are unchanged."
+  "description": "Only the listed player-facing ability cooldowns recover twice as fast. Internal input, charge, consumption, sound and effect timers, plain resources, and unrelated mods retain their normal cadence.",
+  "ability_0": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:arachne/primary_primary",
+    "hidden": true
+  },
+  "ability_1": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:arachne/secondary_raycast",
+    "hidden": true
+  },
+  "ability_2": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:champion/faerie_passives_stealthcooldown",
+    "hidden": true
+  },
+  "ability_3": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:faerie/secondary",
+    "hidden": true
+  },
+  "ability_4": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:champion/fenrkin_passives_undercooldown",
+    "hidden": true
+  },
+  "ability_5": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:champion/fenrkin_primary_active",
+    "hidden": true
+  },
+  "ability_6": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:champion/fenrkin_primary_cooldown",
+    "hidden": true
+  },
+  "ability_7": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:gorgon/primary_petrifycooldown",
+    "hidden": true
+  },
+  "ability_8": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:gorgon/secondary_intimidatecooldown",
+    "hidden": true
+  },
+  "ability_9": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:humanity/primary_active",
+    "hidden": true
+  },
+  "ability_10": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:lichling/primary_primary",
+    "hidden": true
+  },
+  "ability_11": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:champion/manticore_passives_bloodriftcooldown",
+    "hidden": true
+  },
+  "ability_12": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:manticore/primary_primary",
+    "hidden": true
+  },
+  "ability_13": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:manticore/secondary_unstoppable",
+    "hidden": true
+  },
+  "ability_14": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:nereid/primary_actualcooldown",
+    "hidden": true
+  },
+  "ability_15": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:nereid/secondary_active",
+    "hidden": true
+  },
+  "ability_16": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:champion/satyr_passives_stompcd",
+    "hidden": true
+  },
+  "ability_17": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:satyr/primary_active",
+    "hidden": true
+  },
+  "ability_18": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:selkie/primary_active",
+    "hidden": true
+  },
+  "ability_19": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:selkie/primary_active2",
+    "hidden": true
+  },
+  "ability_20": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:selkie/secondary_active",
+    "hidden": true
+  },
+  "ability_21": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:siren/primary_active",
+    "hidden": true
+  },
+  "ability_22": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:siren/secondary_active",
+    "hidden": true
+  },
+  "ability_23": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:veilborn/primary_active3",
+    "hidden": true
+  },
+  "ability_24": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:veilborn/primary_veil_step_cooldown",
+    "hidden": true
+  },
+  "ability_25": {
+    "type": "apoli:modify_resource_change",
+    "modifier": {
+      "value": 1,
+      "operation": "multiply_total"
+    },
+    "modify": "drain",
+    "resources": false,
+    "cooldowns": true,
+    "resource": "andromeda_origins:veilborn/secondary_cooldown",
+    "hidden": true
+  }
 }

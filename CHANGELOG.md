@@ -2,7 +2,10 @@
 
 ## [1.4.83] - 2026-11-01
 
-- Retain Champion Fenrkin's five-second marking channel under accelerated cooldown recovery by using a 40-tick base channel cadence.
+- Restrict Champion cooldown recovery to 26 explicitly listed ability cooldowns. Internal input, charge, sound, consumption, passive-proc and crowd-control/effect timers retain their normal cadence, and unrelated mods' cooldowns are no longer accelerated.
+- Fix doubled dust/channel/wing-charge consumption for Champion Faerie, Lichling and Wyverian; restore Wyverian's normal hover-charge interval. Keep ordinary resource amounts/regeneration and intended ability cooldown reductions unchanged.
+- Keep Champion Fenrkin's five-second mark channel with its normal 20-tick channel cadence, since internal timers are now excluded from accelerated recovery. Preserve its 40 stamina, 5-cost directional leaps and 30/60-second effective Mark/Hunt cooldowns.
+
 - Keep Champion Fenrkin's stamina-drain clock separate from accelerated ability cooldowns, fixing Surge consuming stamina about twice as fast as its stated one unit per second.
 - Read Champion Fenrkin leap direction two server ticks after activation so simultaneous direction/Jump inputs use the updated held-key state. Recheck the ability and crowd-control state before applying the impulse.
 - Improve Champion Fenrkin only: 40 stamina, 5-stamina leaps and reuse after partial recovery instead of waiting for a full refill. Hold Surge and use movement keys with Jump for forward, backward, sideways or diagonal leaps; Jump without movement keys leaps vertically. Preserve discrete jump presses, crowd-control restrictions and the projectile-damage penalty.

@@ -31,3 +31,8 @@ The strongest benefits are lower allocation/CPU costs for native attribute power
 Before upgrading, audit pack overrides for the now-effective loading_priority behavior on Origins/global power sets. Apoli removes sneaky/share_effects and moves voice/speech types to Birdsong. None of Andromeda's own power definitions use those removed/moved types, so Birdsong is not required for its existing abilities. Ordinary voice-chat use is independent of Apoli's speech powers.
 
 Retain the airborne transfer bridge: native and legacy total-modifier stacking differ, as documented above. New spawn offsets alone do not establish a replacement for exact raycast hit-position commands. Avoid deleting these bridges or helper logic without matching movement/impact tests.
+
+
+## Champion recovery targeting in 1.4.83
+
+The shared recovery root now contains explicit native `modify_resource_change` filters for player-facing ability cooldown IDs. New ability cooldowns must be deliberately added to `powers/common/champion_cooldowns.json`; internal cadence/resource-consumption timers should remain excluded. Do not restore an unfiltered modifier: it accelerates charged channels, pulse costs and timers granted by other mods or incoming effects. Plain resources and Java world-time deadlines are separate from cooldown recovery.
