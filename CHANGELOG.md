@@ -2,6 +2,9 @@
 
 ## [1.4.83] - 2026-11-01
 
+- Declare supported integrations as optional in loader and publishing metadata, and document their visual, sound, avatar, shader and gameplay hooks on each mod-page description.
+- Recognize current More RPG Library (`mrpg_lib`) and resolve legacy enhanced-FX resource IDs to its current namespace, while retaining older-library support and bundled fallbacks.
+
 - Clear the Mortal Resolve Figura active flag when the tracked state ends, including Champion Mortal Triumph expiry. Repair stale inactive flags on login while preserving valid active/reconnecting states.
 - Verify standard-Origin cooldown rates, resource costs and temporary-effect recovery with real clients on Fabric and NeoForge.
 

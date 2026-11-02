@@ -85,6 +85,19 @@ cloche {
                 dependency { modId = "apoli"; version(opoliVersion) }
                 dependency { modId = "fzzy_config"; version(fzzyVersion) }
                 dependency { modId = "additionalentityattributes"; version(aeaVersion) }
+                // Informational optional integrations; never installed or required by the build.
+                dependency { modId = "spell_engine"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Extra ability particles and audiovisual layers") }
+                dependency { modId = "mrpg_lib"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Additional ability particle and sound assets") }
+                dependency { modId = "incapacitated"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Downed-player revival and golden-food policy") }
+                dependency { modId = "figura"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Avatar state hooks and armor visibility"); environment.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Environment.Client) }
+                dependency { modId = "iris"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Shader-compatible custom night vision"); environment.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Environment.Client) }
+                dependency { modId = "simplyswords"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Configurable weapon implicit balance") }
+                dependency { modId = "simplymore"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Configurable weapon implicit balance") }
+                dependency { modId = "farm_and_charm"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Optional food and blessing balance") }
+                dependency { modId = "candlelight"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Optional food and blessing balance") }
+                dependency { modId = "brewery"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Optional food and blessing balance") }
+                dependency { modId = "modmenu"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Configuration screen entry point"); environment.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Environment.Client) }
+                dependency { modId = "playerabilitylib"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Coordinates Veil Step with other flight grants") }
             }
         }
     }
@@ -110,6 +123,17 @@ cloche {
                 dependency { modId = "apoli"; version(opoliVersion) }
                 dependency { modId = "fzzy_config"; version("$fzzyVersion+neoforge") }
                 dependency { modId = "additionalentityattributes"; version(aeaVersion) }
+                // Informational optional integrations; never installed or required by the build.
+                dependency { modId = "spell_engine"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Extra ability particles and audiovisual layers") }
+                dependency { modId = "mrpg_lib"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Additional ability particle and sound assets") }
+                dependency { modId = "incapacitated"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Downed-player revival and golden-food policy") }
+                dependency { modId = "figura"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Avatar state hooks and armor visibility"); environment.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Environment.Client) }
+                dependency { modId = "iris"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Shader-compatible custom night vision"); environment.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Environment.Client) }
+                dependency { modId = "simplyswords"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Configurable weapon implicit balance") }
+                dependency { modId = "simplymore"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Configurable weapon implicit balance") }
+                dependency { modId = "farm_and_charm"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Optional food and blessing balance") }
+                dependency { modId = "candlelight"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Optional food and blessing balance") }
+                dependency { modId = "brewery"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Optional food and blessing balance") }
             }
         }
     }

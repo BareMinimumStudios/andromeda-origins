@@ -188,6 +188,18 @@ jobs:
             additionalentityattributes(embedded){modrinth:additionalentityattributes}
             fabric-api(required){modrinth:fabric-api}
             fabric-language-kotlin(required){modrinth:fabric-language-kotlin}
+            spell_engine(optional){modrinth:XvoWJaA2}
+            mrpg_lib(optional){modrinth:Wkc3lwHo}
+            incapacitated(optional){modrinth:CmDgNtOI}
+            figura(optional){modrinth:s9gIPDom}
+            iris(optional){modrinth:YL57xq9U}
+            simplyswords(optional){modrinth:bK3Ubu9p}
+            simplymore(optional){modrinth:zhpyD8Y0}
+            farm_and_charm(optional){modrinth:HJetCzWo}
+            candlelight(optional){modrinth:qwbArkQk}
+            brewery(optional){modrinth:b7NV2plI}
+            modmenu(optional){modrinth:mOgUt4GM}
+            playerabilitylib(optional){modrinth:DHQA06r4}
           java: ${{ env.JAVA_VERSION }}
           retry-attempts: 3
           fail-mode: fail
@@ -233,6 +245,16 @@ jobs:
             fzzy-config(required){modrinth:fzzy-config}
             additionalentityattributes(embedded){modrinth:additionalentityattributes}
             kotlinforforge(required){modrinth:kotlin-for-forge}
+            spell_engine(optional){modrinth:XvoWJaA2}
+            mrpg_lib(optional){modrinth:Wkc3lwHo}
+            incapacitated(optional){modrinth:CmDgNtOI}
+            figura(optional){modrinth:s9gIPDom}
+            iris(optional){modrinth:YL57xq9U}
+            simplyswords(optional){modrinth:bK3Ubu9p}
+            simplymore(optional){modrinth:zhpyD8Y0}
+            farm_and_charm(optional){modrinth:HJetCzWo}
+            candlelight(optional){modrinth:qwbArkQk}
+            brewery(optional){modrinth:b7NV2plI}
           java: ${{ env.JAVA_VERSION }}
           retry-attempts: 3
           fail-mode: fail

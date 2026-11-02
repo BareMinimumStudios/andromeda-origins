@@ -58,6 +58,21 @@ Champion variants are hidden from normal selection. Operators can assign one wit
 
 ## Optional integrations
 
-Figura hooks support custom avatars; Incapacitated connects downed and revival mechanics. Spell Engine and More RPG Library provide additional ability effects. Dietary and iron tags cover compatible modded foods and equipment. Availability depends on your loader and the installed mods.
+**Your installed mods can change how abilities look and sound.** Andromeda includes its own sounds and base particle effects. [Spell Engine](https://modrinth.com/mod/spell-engine) adds enhanced particle layers, and [More RPG Library](https://modrinth.com/mod/more-rpg-library) supplies additional particle and sound assets. Install both libraries for the full enhanced layer. These are optional enhancements: missing or unsupported assets are skipped while the bundled effects continue. Cosmetic layers do not change ability damage, cooldowns or resource costs.
+
+| Optional mod | What it adds or connects |
+| --- | --- |
+| [Spell Engine](https://modrinth.com/mod/spell-engine) + [More RPG Library](https://modrinth.com/mod/more-rpg-library) | Additional ability particles and sound layers. |
+| [Incapacitated](https://modrinth.com/mod/incapacitated) | Downed-player revival abilities and the configurable golden-food bypass restriction. |
+| [Figura](https://modrinth.com/mod/figura) | Avatar ability-state hooks and armor visibility support; an avatar must use these hooks to show custom animations. |
+| [Iris Shaders](https://modrinth.com/mod/iris) | Connects the custom night-vision powers to shader brightness. Appearance still depends on the shader pack. |
+| [Simply Swords](https://modrinth.com/mod/simply-swords) / [Simply More](https://modrinth.com/mod/simplymore) | Server-configurable weapon implicit balance and matching tooltip changes. |
+| [Farm & Charm](https://modrinth.com/mod/lets-do-farm-charm), [Candlelight](https://modrinth.com/mod/lets-do-candlelight-farmcharm-compat), [Brewery](https://modrinth.com/mod/lets-do-brewery-farmcharm-compat) | Optional food nutrition and blessing-effect balance. |
+| [Mod Menu](https://modrinth.com/mod/modmenu) (Fabric) | An entry point to the configuration screen. |
+| [PlayerAbilityLib](https://modrinth.com/mod/pal) (Fabric) | Coordinates Veil Step with other mods’ flight grants when present. |
+
+Choose compatible Minecraft/loader releases and install each optional mod's own dependencies. Gameplay/effect libraries belong on both client and server; Figura, Iris and Mod Menu are client integrations. Dietary and iron tags also recognize compatible modded foods and equipment.
+
+Operators can control the cosmetic layers with `/andromedaorigins enhanced_fx enabled false`, `particles false` or `sounds false` (use `true` to re-enable). Settings are saved in `config/andromeda_origins_fx.json`. Bundled effects remain available when these extra layers are disabled.
 
 Andromeda's code and artwork use The Bare Minimum License v1.0. Bundled third-party components retain their own licenses.

@@ -28,7 +28,7 @@ object EnhancedFxCompat {
         EnhancedFxConfig.load()
         EnhancedFxDefinitions.register()
         EnhancedFxCompat.spellEngineLoaded = andromeda.origins.platform.Platform.isModLoaded(EnhancedFxCompat.SPELL_ENGINE_ID)
-        EnhancedFxCompat.moreRpgLoaded = andromeda.origins.platform.Platform.isModLoaded(EnhancedFxCompat.MORE_RPG_ID)
+        EnhancedFxCompat.moreRpgLoaded = (andromeda.origins.platform.Platform.isModLoaded("mrpg_lib") || andromeda.origins.platform.Platform.isModLoaded(EnhancedFxCompat.MORE_RPG_ID))
     }
 
     fun active(): kotlin.Boolean {
@@ -93,7 +93,7 @@ object EnhancedFxCompat {
         if (modId == null || modId.isBlank()) {
             return true
         }
-        if (MORE_RPG_ID == modId) {
+        if (MORE_RPG_ID == modId || "mrpg_lib" == modId) {
             return EnhancedFxCompat.moreRpgLoaded
         }
         if (SPELL_ENGINE_ID == modId) {
@@ -102,8 +102,16 @@ object EnhancedFxCompat {
         return andromeda.origins.platform.Platform.isModLoaded(modId)
     }
 
+    /** Keep legacy FX definitions usable with the current More RPG Library namespace. */
+    private fun effectId(value: String): net.minecraft.resources.ResourceLocation? {
+        val id = net.minecraft.resources.ResourceLocation.tryParse(value) ?: return null
+        return if (id.namespace == MORE_RPG_ID && andromeda.origins.platform.Platform.isModLoaded("mrpg_lib")) {
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("mrpg_lib", id.path)
+        } else id
+    }
+
     private fun playSound(entity: net.minecraft.world.entity.Entity, x: kotlin.Double, y: kotlin.Double, z: kotlin.Double, definition: EnhancedFxDefinitions.SoundDefinition) {
-        val id: net.minecraft.resources.ResourceLocation? = net.minecraft.resources.ResourceLocation.tryParse(definition.id)
+        val id: net.minecraft.resources.ResourceLocation? = effectId(definition.id)
         if (id == null || !net.minecraft.core.registries.BuiltInRegistries.SOUND_EVENT.containsKey(id)) {
             EnhancedFxCompat.warnOnce("sound:" + definition.id, "Enhanced FX sound '{}' is not registered; skipping optional sound layer.", definition.id)
             return
@@ -225,7 +233,7 @@ object EnhancedFxCompat {
             try {
                 val effects: kotlin.collections.MutableList<kotlin.Any> = java.util.ArrayList<kotlin.Any>(specs.size)
                 for (spec in specs) {
-                    val id: net.minecraft.resources.ResourceLocation? = net.minecraft.resources.ResourceLocation.tryParse(spec.id)
+                    val id: net.minecraft.resources.ResourceLocation? = effectId(spec.id)
                     if (id == null || !net.minecraft.core.registries.BuiltInRegistries.PARTICLE_TYPE.containsKey(id)) {
                         EnhancedFxCompat.warnOnce("particle:" + spec.id,
                         "Enhanced FX particle '{}' is not registered; skipping optional particle layer.", spec.id)
