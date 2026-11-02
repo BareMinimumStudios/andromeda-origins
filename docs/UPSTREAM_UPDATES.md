@@ -36,3 +36,10 @@ Retain the airborne transfer bridge: native and legacy total-modifier stacking d
 ## Champion recovery targeting in 1.4.83
 
 The shared recovery root now contains explicit native `modify_resource_change` filters for player-facing ability cooldown IDs. New ability cooldowns must be deliberately added to `powers/common/champion_cooldowns.json`; internal cadence/resource-consumption timers should remain excluded. Do not restore an unfiltered modifier: it accelerates charged channels, pulse costs and timers granted by other mods or incoming effects. Plain resources and Java world-time deadlines are separate from cooldown recovery.
+
+
+## November 2 recheck for 1.4.83
+
+The official Modrinth API still lists Opoli 1.124.0 and Origins 1.49.0 as the newest Minecraft 1.21.1 Fabric and NeoForge releases. No further dependency bump is needed. Their attribute-allocation and reload improvements benefit existing definitions automatically. Targeted Champion recovery uses native resource-ID filters; Champion Fenrkin already uses native synced entity sets.
+
+The data audit found no removed sneaky/share_effects types, moved speech powers, stacking_status_effect definitions or explicit loading_priority overrides in Andromeda's own data. Keep strict JSON validation. Optional HUD fallbacks can help external resource packs, but shipped HUD references already validate. Native airborne-transfer stacking still differs from preserved legacy behavior, and spawn offsets alone do not replace exact raycast impact placement. Those remain future migrations requiring behavior-matching tests.

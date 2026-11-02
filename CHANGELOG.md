@@ -2,6 +2,8 @@
 
 ## [1.4.83] - 2026-11-01
 
+- Verify all other Champion selections with real Fabric and NeoForge clients, including cooldown recovery, sustained resource costs, exhaustion recovery, Arachne weaving and Gorgon charges. Keep existing standard-Origin balance unchanged.
+
 - Restrict Champion cooldown recovery to 26 explicitly listed ability cooldowns. Internal input, charge, sound, consumption, passive-proc and crowd-control/effect timers retain their normal cadence, and unrelated mods' cooldowns are no longer accelerated.
 - Fix doubled dust/channel/wing-charge consumption for Champion Faerie, Lichling and Wyverian; restore Wyverian's normal hover-charge interval. Keep ordinary resource amounts/regeneration and intended ability cooldown reductions unchanged.
 - Keep Champion Fenrkin's five-second mark channel with its normal 20-tick channel cadence, since internal timers are now excluded from accelerated recovery. Preserve its 40 stamina, 5-cost directional leaps and 30/60-second effective Mark/Hunt cooldowns.
