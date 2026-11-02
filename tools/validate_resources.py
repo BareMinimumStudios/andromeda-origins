@@ -32,6 +32,17 @@ human_hp = powers.get('andromeda_origins:humanity/passives', {}).get('hp', {}).g
 check(human_hp.get('attribute') == 'minecraft:generic.max_health' and
       human_hp.get('operation') == 'add_base_early' and human_hp.get('amount') == -2,
       'Humanity must have nine hearts (18 HP) before other mod/equipment modifiers')
+# Champion timing must account for the global cooldown-recovery multiplier.
+champion_rate = 1 + powers['andromeda_origins:common/champion_cooldowns']['modifier']['value']
+champ_primary = powers['andromeda_origins:champion/fenrkin_primary']
+champ_secondary = powers['andromeda_origins:champion/fenrkin_secondary']
+check(abs(champ_primary['active2']['cooldown'] / champion_rate * champ_primary['mark']['max'] / 20 - 5) < 0.001,
+      'Champion Fenrkin marking must retain its five-second effective channel')
+clock = champ_secondary['soundcooldown']
+clock_tick = champ_secondary['soundcooldown_tick']
+check(clock['type'] in ('origins:resource', 'apoli:resource') and
+      abs(clock['max'] * clock_tick['interval'] / abs(clock_tick['entity_action']['change']) / 20 - 1) < 0.001,
+      'Champion Fenrkin stamina drain must use an independent one-second clock, not accelerated cooldowns')
 known = set(powers)
 for identifier, definition in powers.items():
     if definition.get('type') in ('origins:multiple','apoli:multiple'):

@@ -2,6 +2,9 @@
 
 ## [1.4.83] - 2026-11-01
 
+- Retain Champion Fenrkin's five-second marking channel under accelerated cooldown recovery by using a 40-tick base channel cadence.
+- Keep Champion Fenrkin's stamina-drain clock separate from accelerated ability cooldowns, fixing Surge consuming stamina about twice as fast as its stated one unit per second.
+- Read Champion Fenrkin leap direction two server ticks after activation so simultaneous direction/Jump inputs use the updated held-key state. Recheck the ability and crowd-control state before applying the impulse.
 - Improve Champion Fenrkin only: 40 stamina, 5-stamina leaps and reuse after partial recovery instead of waiting for a full refill. Hold Surge and use movement keys with Jump for forward, backward, sideways or diagonal leaps; Jump without movement keys leaps vertically. Preserve discrete jump presses, crowd-control restrictions and the projectile-damage penalty.
 - Give Champion Fenrkin up to three caster-owned marks, using Opoli's native synced entity sets. Marks last 90 seconds so three can overlap with the 30-second effective cooldown; retain the five-second marking channel and +25% damage from the marking Champion. Hunt has a 60-second effective cooldown and orange outlines. Standard Fenrkin retains its existing data and balance.
 - Migrate existing Champion Fenrkin ability grants during login/manual repair, preserving proportional stamina/cooldowns, unrelated power sources and current health. Retain existing Fzzy ability controls for the new Champion definitions.

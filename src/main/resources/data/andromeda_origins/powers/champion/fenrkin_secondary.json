@@ -12,8 +12,10 @@
     }
   },
   "soundcooldown": {
-    "type": "origins:cooldown",
-    "cooldown": 20,
+    "type": "origins:resource",
+    "min": 0,
+    "max": 20,
+    "start_value": 0,
     "hud_render": {
       "should_render": false
     }
@@ -85,8 +87,10 @@
                 "type": "origins:and",
                 "actions": [
                   {
-                    "type": "origins:trigger_cooldown",
-                    "power": "*:*_soundcooldown"
+                    "type": "origins:change_resource",
+                    "resource": "*:*_soundcooldown",
+                    "change": 20,
+                    "operation": "set"
                   },
                   {
                     "type": "origins:change_resource",
@@ -366,181 +370,207 @@
           }
         },
         {
-          "type": "origins:if_else_list",
-          "actions": [
-            {
-              "condition": {
-                "type": "origins:and",
-                "conditions": [
-                  {
+          "type": "origins:delay",
+          "ticks": 2,
+          "action": {
+            "type": "origins:if_else",
+            "condition": {
+              "type": "origins:and",
+              "conditions": [
+                {
+                  "type": "origins:power",
+                  "power": "andromeda_origins:champion/fenrkin_secondary"
+                },
+                {
+                  "type": "origins:power",
+                  "power": "andromeda_origins:common/silenced",
+                  "inverted": true
+                },
+                {
+                  "type": "origins:power",
+                  "power": "andromeda_origins:common/restrained",
+                  "inverted": true
+                }
+              ]
+            },
+            "if_action": {
+              "type": "origins:if_else_list",
+              "actions": [
+                {
+                  "condition": {
+                    "type": "origins:and",
+                    "conditions": [
+                      {
+                        "type": "origins:key_pressed",
+                        "key": "key.left",
+                        "grace": 0
+                      },
+                      {
+                        "type": "origins:key_pressed",
+                        "key": "key.forward",
+                        "grace": 0
+                      }
+                    ]
+                  },
+                  "action": {
+                    "type": "origins:add_velocity",
+                    "x": 1.060660172,
+                    "z": 1.060660172,
+                    "space": "local_horizontal_normalized",
+                    "set": true,
+                    "y": 0.65
+                  }
+                },
+                {
+                  "condition": {
+                    "type": "origins:and",
+                    "conditions": [
+                      {
+                        "type": "origins:key_pressed",
+                        "key": "key.left",
+                        "grace": 0
+                      },
+                      {
+                        "type": "origins:key_pressed",
+                        "key": "key.back",
+                        "grace": 0
+                      }
+                    ]
+                  },
+                  "action": {
+                    "type": "origins:add_velocity",
+                    "x": 1.060660172,
+                    "z": -1.060660172,
+                    "space": "local_horizontal_normalized",
+                    "set": true,
+                    "y": 0.65
+                  }
+                },
+                {
+                  "condition": {
+                    "type": "origins:and",
+                    "conditions": [
+                      {
+                        "type": "origins:key_pressed",
+                        "key": "key.right",
+                        "grace": 0
+                      },
+                      {
+                        "type": "origins:key_pressed",
+                        "key": "key.forward",
+                        "grace": 0
+                      }
+                    ]
+                  },
+                  "action": {
+                    "type": "origins:add_velocity",
+                    "x": -1.060660172,
+                    "z": 1.060660172,
+                    "space": "local_horizontal_normalized",
+                    "set": true,
+                    "y": 0.65
+                  }
+                },
+                {
+                  "condition": {
+                    "type": "origins:and",
+                    "conditions": [
+                      {
+                        "type": "origins:key_pressed",
+                        "key": "key.right",
+                        "grace": 0
+                      },
+                      {
+                        "type": "origins:key_pressed",
+                        "key": "key.back",
+                        "grace": 0
+                      }
+                    ]
+                  },
+                  "action": {
+                    "type": "origins:add_velocity",
+                    "x": -1.060660172,
+                    "z": -1.060660172,
+                    "space": "local_horizontal_normalized",
+                    "set": true,
+                    "y": 0.65
+                  }
+                },
+                {
+                  "condition": {
                     "type": "origins:key_pressed",
                     "key": "key.left",
                     "grace": 0
                   },
-                  {
-                    "type": "origins:key_pressed",
-                    "key": "key.forward",
-                    "grace": 0
+                  "action": {
+                    "type": "origins:add_velocity",
+                    "x": 1.5,
+                    "z": 0,
+                    "space": "local_horizontal_normalized",
+                    "set": true,
+                    "y": 0.65
                   }
-                ]
-              },
-              "action": {
-                "type": "origins:add_velocity",
-                "x": 1.060660172,
-                "z": 1.060660172,
-                "space": "local_horizontal_normalized",
-                "set": true,
-                "y": 0.65
-              }
-            },
-            {
-              "condition": {
-                "type": "origins:and",
-                "conditions": [
-                  {
-                    "type": "origins:key_pressed",
-                    "key": "key.left",
-                    "grace": 0
-                  },
-                  {
-                    "type": "origins:key_pressed",
-                    "key": "key.back",
-                    "grace": 0
-                  }
-                ]
-              },
-              "action": {
-                "type": "origins:add_velocity",
-                "x": 1.060660172,
-                "z": -1.060660172,
-                "space": "local_horizontal_normalized",
-                "set": true,
-                "y": 0.65
-              }
-            },
-            {
-              "condition": {
-                "type": "origins:and",
-                "conditions": [
-                  {
+                },
+                {
+                  "condition": {
                     "type": "origins:key_pressed",
                     "key": "key.right",
                     "grace": 0
                   },
-                  {
+                  "action": {
+                    "type": "origins:add_velocity",
+                    "x": -1.5,
+                    "z": 0,
+                    "space": "local_horizontal_normalized",
+                    "set": true,
+                    "y": 0.65
+                  }
+                },
+                {
+                  "condition": {
                     "type": "origins:key_pressed",
                     "key": "key.forward",
                     "grace": 0
-                  }
-                ]
-              },
-              "action": {
-                "type": "origins:add_velocity",
-                "x": -1.060660172,
-                "z": 1.060660172,
-                "space": "local_horizontal_normalized",
-                "set": true,
-                "y": 0.65
-              }
-            },
-            {
-              "condition": {
-                "type": "origins:and",
-                "conditions": [
-                  {
-                    "type": "origins:key_pressed",
-                    "key": "key.right",
-                    "grace": 0
                   },
-                  {
+                  "action": {
+                    "type": "origins:add_velocity",
+                    "x": 0,
+                    "z": 1.5,
+                    "space": "local_horizontal_normalized",
+                    "set": true,
+                    "y": 0.65
+                  }
+                },
+                {
+                  "condition": {
                     "type": "origins:key_pressed",
                     "key": "key.back",
                     "grace": 0
+                  },
+                  "action": {
+                    "type": "origins:add_velocity",
+                    "x": 0,
+                    "z": -1.5,
+                    "space": "local_horizontal_normalized",
+                    "set": true,
+                    "y": 0.65
                   }
-                ]
-              },
-              "action": {
-                "type": "origins:add_velocity",
-                "x": -1.060660172,
-                "z": -1.060660172,
-                "space": "local_horizontal_normalized",
-                "set": true,
-                "y": 0.65
-              }
-            },
-            {
-              "condition": {
-                "type": "origins:key_pressed",
-                "key": "key.left",
-                "grace": 0
-              },
-              "action": {
-                "type": "origins:add_velocity",
-                "x": 1.5,
-                "z": 0,
-                "space": "local_horizontal_normalized",
-                "set": true,
-                "y": 0.65
-              }
-            },
-            {
-              "condition": {
-                "type": "origins:key_pressed",
-                "key": "key.right",
-                "grace": 0
-              },
-              "action": {
-                "type": "origins:add_velocity",
-                "x": -1.5,
-                "z": 0,
-                "space": "local_horizontal_normalized",
-                "set": true,
-                "y": 0.65
-              }
-            },
-            {
-              "condition": {
-                "type": "origins:key_pressed",
-                "key": "key.forward",
-                "grace": 0
-              },
-              "action": {
-                "type": "origins:add_velocity",
-                "x": 0,
-                "z": 1.5,
-                "space": "local_horizontal_normalized",
-                "set": true,
-                "y": 0.65
-              }
-            },
-            {
-              "condition": {
-                "type": "origins:key_pressed",
-                "key": "key.back",
-                "grace": 0
-              },
-              "action": {
-                "type": "origins:add_velocity",
-                "x": 0,
-                "z": -1.5,
-                "space": "local_horizontal_normalized",
-                "set": true,
-                "y": 0.65
-              }
-            },
-            {
-              "condition": {
-                "type": "origins:constant",
-                "value": true
-              },
-              "action": {
-                "type": "origins:add_velocity",
-                "y": 0.9,
-                "space": "world",
-                "set": true
-              }
+                },
+                {
+                  "condition": {
+                    "type": "origins:constant",
+                    "value": true
+                  },
+                  "action": {
+                    "type": "origins:add_velocity",
+                    "y": 0.9,
+                    "space": "world",
+                    "set": true
+                  }
+                }
+              ]
             }
-          ]
+          }
         },
         {
           "type": "origins:set_fall_distance",
@@ -616,5 +646,20 @@
     }
   ],
   "name": "Stamina Surge",
-  "description": "Champion Stamina Surge holds 40 stamina. Hold Secondary to double movement speed, spending 1 stamina per second. While holding Secondary on land, press Jump to leap for 5 stamina. Movement keys select forward, backward, sideways or diagonal leaps; no movement key produces a vertical leap. Release and press Jump for each leap. Reuse requires only enough stamina, not a full refill. Stamina regenerates by 1 per second while not rushing.\n\nProjectile damage remains reduced by 50% during Surge and for 3 seconds afterward."
+  "description": "Champion Stamina Surge holds 40 stamina. Hold Secondary to double movement speed, spending 1 stamina per second. While holding Secondary on land, press Jump to leap for 5 stamina. Movement keys select forward, backward, sideways or diagonal leaps; no movement key produces a vertical leap. Release and press Jump for each leap. Reuse requires only enough stamina, not a full refill. Stamina regenerates by 1 per second while not rushing.\n\nProjectile damage remains reduced by 50% during Surge and for 3 seconds afterward.",
+  "soundcooldown_tick": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_soundcooldown",
+      "change": -1
+    },
+    "condition": {
+      "type": "origins:resource",
+      "resource": "*:*_soundcooldown",
+      "comparison": ">",
+      "compare_to": 0
+    }
+  }
 }
