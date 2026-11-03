@@ -53,6 +53,7 @@ cloche {
         author { name = "jaselumena" }
         author { name = "pokesmells" }
         author { name = "aulatris" }
+        url = "https://www.curseforge.com/minecraft/mc-mods/andromeda-origins"
         sources = "https://github.com/BareMinimumStudios/andromeda-origins"
         issues = "https://github.com/BareMinimumStudios/andromeda-origins/issues"
     }

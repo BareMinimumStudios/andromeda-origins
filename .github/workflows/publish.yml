@@ -15,6 +15,8 @@ on:
           - all
           - fabric-modrinth
           - neoforge-modrinth
+          - fabric-curseforge
+          - neoforge-curseforge
           - github
 
 permissions:
@@ -28,6 +30,7 @@ env:
   JAVA_VERSION: "21"
   MINECRAFT_VERSION: "1.21.1"
   MODRINTH_PROJECT_ID: "8rLKf3xm"
+  CURSEFORGE_PROJECT_ID: "1778081"
   RELEASE_ARTIFACT: "andromeda-origins-release-jars"
 
 jobs:
@@ -147,7 +150,7 @@ jobs:
           retention-days: 14
 
   fabric-modrinth:
-    name: Fabric → Modrinth
+    name: Fabric â†’ Modrinth
     needs: build
     if: github.event_name != 'workflow_dispatch' || inputs.target == 'all' || inputs.target == 'fabric-modrinth'
     runs-on: ubuntu-latest
@@ -205,7 +208,7 @@ jobs:
           fail-mode: fail
 
   neoforge-modrinth:
-    name: NeoForge → Modrinth
+    name: NeoForge â†’ Modrinth
     needs: build
     if: github.event_name != 'workflow_dispatch' || inputs.target == 'all' || inputs.target == 'neoforge-modrinth'
     runs-on: ubuntu-latest
@@ -255,6 +258,117 @@ jobs:
             farm_and_charm(optional){modrinth:HJetCzWo}
             candlelight(optional){modrinth:qwbArkQk}
             brewery(optional){modrinth:b7NV2plI}
+          java: ${{ env.JAVA_VERSION }}
+          retry-attempts: 3
+          fail-mode: fail
+
+  fabric-curseforge:
+    name: Fabric â†’ CurseForge
+    needs: build
+    if: github.event_name != 'workflow_dispatch' || inputs.target == 'all' || inputs.target == 'fabric-curseforge'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Download release jars
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: ${{ env.RELEASE_ARTIFACT }}
+          path: build/release
+
+      - name: Validate CurseForge token
+        shell: bash
+        env:
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+        run: '[[ -n "$CURSEFORGE_TOKEN" ]] || { echo "Missing CURSEFORGE_TOKEN Actions secret (repository or organization)." >&2; exit 1; }'
+
+      - name: Publish Fabric to CurseForge
+        uses: Kira-NT/mc-publish@52307b03863581dec6b652b83e597aec02ebb075 # v3.3.1
+        with:
+          curseforge-id: ${{ env.CURSEFORGE_PROJECT_ID }}
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          files: build/release/*-fabric.jar
+          name: ${{ needs.build.outputs.release_version }}-fabric
+          version: ${{ needs.build.outputs.release_version }}-fabric
+          version-type: release
+          changelog-file: build/release/RELEASE-NOTES.md
+          loaders: fabric
+          environment: client | server
+          game-versions: ${{ env.MINECRAFT_VERSION }}
+          dependencies: |
+            overgrowns-origins(required){curseforge:1636345}
+            opoli(required){curseforge:1631826}
+            fzzy-config(required){curseforge:1005914}
+            fabric-api(required){curseforge:306612}
+            fabric-language-kotlin(required){curseforge:308769}
+            spell_engine(optional){curseforge:807653}
+            mrpg_lib(optional){curseforge:923030}
+            incapacitated(optional){curseforge:528135}
+            figura(optional){curseforge:901503}
+            iris(optional){curseforge:455508}
+            simplyswords(optional){curseforge:659887}
+            simplymore(optional){curseforge:1095252}
+            farm_and_charm(optional){curseforge:1038103}
+            candlelight(optional){curseforge:846962}
+            brewery(optional){curseforge:971636}
+            modmenu(optional){curseforge:308702}
+            playerabilitylib(optional){curseforge:359522}
+          java: ${{ env.JAVA_VERSION }}
+          retry-attempts: 3
+          fail-mode: fail
+
+  neoforge-curseforge:
+    name: NeoForge â†’ CurseForge
+    needs: build
+    if: github.event_name != 'workflow_dispatch' || inputs.target == 'all' || inputs.target == 'neoforge-curseforge'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Download release jars
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: ${{ env.RELEASE_ARTIFACT }}
+          path: build/release
+
+      - name: Validate CurseForge token
+        shell: bash
+        env:
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+        run: '[[ -n "$CURSEFORGE_TOKEN" ]] || { echo "Missing CURSEFORGE_TOKEN Actions secret (repository or organization)." >&2; exit 1; }'
+
+      - name: Publish NeoForge to CurseForge
+        uses: Kira-NT/mc-publish@52307b03863581dec6b652b83e597aec02ebb075 # v3.3.1
+        with:
+          curseforge-id: ${{ env.CURSEFORGE_PROJECT_ID }}
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          files: build/release/*-neoforge.jar
+          name: ${{ needs.build.outputs.release_version }}-neoforge
+          version: ${{ needs.build.outputs.release_version }}-neoforge
+          version-type: release
+          changelog-file: build/release/RELEASE-NOTES.md
+          loaders: neoforge
+          environment: client | server
+          game-versions: ${{ env.MINECRAFT_VERSION }}
+          dependencies: |
+            overgrowns-origins(required){curseforge:1636345}
+            opoli(required){curseforge:1631826}
+            fzzy-config(required){curseforge:1005914}
+            kotlinforforge(required){curseforge:351264}
+            spell_engine(optional){curseforge:807653}
+            mrpg_lib(optional){curseforge:923030}
+            incapacitated(optional){curseforge:528135}
+            figura(optional){curseforge:901503}
+            iris(optional){curseforge:455508}
+            simplyswords(optional){curseforge:659887}
+            simplymore(optional){curseforge:1095252}
+            farm_and_charm(optional){curseforge:1038103}
+            candlelight(optional){curseforge:846962}
+            brewery(optional){curseforge:971636}
           java: ${{ env.JAVA_VERSION }}
           retry-attempts: 3
           fail-mode: fail

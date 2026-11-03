@@ -18,11 +18,11 @@ Use a separate disposable world and the correct dependency set for each loader. 
 
 ## Publish
 
-The pinned MC Publish workflow builds once and stages one verified jar per loader. It supports separate Fabric/NeoForge Modrinth and GitHub destinations for retrying a partial release. CurseForge publishing is currently disabled because there is no Minecraft 1.21.1 listing.
+The pinned MC Publish workflow builds once and stages one verified jar per loader. It supports separate Fabric/NeoForge destinations on Modrinth and CurseForge, plus GitHub, for retrying a partial release. Select only the failed destination when recovering a partial upload.
 
-Set `MODRINTH_TOKEN` as an Actions secret. The Modrinth project ID is `8rLKf3xm`. No CurseForge token or project ID is needed for the current workflow.
+Set `MODRINTH_TOKEN` and `CURSEFORGE_TOKEN` as repository or organization Actions secrets. The project IDs are Modrinth `8rLKf3xm` and CurseForge `1778081`. Each upload job validates its own secret without printing it.
 
-Modrinth version numbers and display titles use `<mod_version>+<minecraft_version>-<loader>`, for example `1.4.76+1.21.1-fabric`. The workflow validates Modrinth's 32-character limit before building.
+Modrinth and CurseForge version numbers and display titles use `<mod_version>+<minecraft_version>-<loader>`, for example `1.4.76+1.21.1-fabric`. The workflow validates Modrinth's 32-character limit before building.
 
 Tag releases as `v<mod_version>+1.21.1` after adding a dated version section to `CHANGELOG.md`. Manual publication supports the same destination choices as the other studio mods. No token is stored in the repository.
 
@@ -36,7 +36,7 @@ Distribute source ZIPs with the project files directly at the ZIP root. Exclude 
 
 Static-only Kotlin Mixin objects are stripped of singleton scaffolding after compilation. The verification task checks the compiled callback bytecode to prevent target constructors from receiving Kotlin singleton initialization. Helpers live outside the reserved Mixin package.
 
-Overgrown Origins and Opoli are installed from Modrinth on both loaders. The CurseForge description is retained as a draft for a future listing. Install Kotlin for Forge using its complete `-all.jar` distribution, not the small Maven aggregate jar.
+Overgrown Origins and Opoli are installed from Modrinth on both loaders. The CurseForge listing is [Andromeda Origins](https://www.curseforge.com/minecraft/mc-mods/andromeda-origins). Publishing declares the correct Overgrown projects and optional integration relationships; Additional Entity Attributes remains embedded. If a store has not mirrored the required Origins/Opoli versions yet, install the versions required by the loader metadata from Modrinth. Install Kotlin for Forge using its complete `-all.jar` distribution, not the small Maven aggregate jar.
 
 Run `python tools/validate_resources.py` for duplicate JSON keys, schema regressions, native Mixin source coverage, retained Selkie data, and retired-helper checks. CI runs this validation before building.
 

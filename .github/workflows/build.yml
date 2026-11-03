@@ -36,7 +36,7 @@ jobs:
       - name: Make Gradle wrapper executable
         run: chmod +x ./gradlew
 
-      - name: Build
+      - name: Build and validate Fabric and NeoForge jars
         run: |
           python3 tools/validate_resources.py
           ./gradlew clean build --stacktrace
@@ -48,5 +48,5 @@ jobs:
           path: |
             build/libs/**/*.jar
             !build/libs/**/*-dev.jar
-          if-no-files-found: warn
+          if-no-files-found: error
           retention-days: 14

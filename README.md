@@ -8,7 +8,7 @@ Climb walls as an Arachne, stalk prey as a Fenrkin, or slip through the Veil. Bu
 
 Read your abilities in the in-game Origin reader, track cooldowns and resources on custom HUD bars, and tune individual powers through server-controlled settings. **13 Champion variants** give operators an additional set of hidden Origins to assign.
 
-[Download on Modrinth](https://modrinth.com/mod/andromeda-origins) · [Community](https://discord.gg/pcRw79hwey)
+[Download on Modrinth](https://modrinth.com/mod/andromeda-origins) · [Download on CurseForge](https://www.curseforge.com/minecraft/mc-mods/andromeda-origins) · [Community](https://discord.gg/pcRw79hwey)
 
 ## Origin roster
 
