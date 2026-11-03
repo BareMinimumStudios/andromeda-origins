@@ -115,7 +115,8 @@ object EnhancedFxDefinitions {
             id,
             EnhancedFxDefinitions.number(s, "volume", 0.35f),
             EnhancedFxDefinitions.number(s, "pitch", 1f),
-            EnhancedFxDefinitions.string(s, "requires_mod", "")
+            EnhancedFxDefinitions.string(s, "requires_mod", ""),
+            EnhancedFxDefinitions.bool(s, "resource_pack", false)
             ))
         }
 
@@ -189,6 +190,6 @@ object EnhancedFxDefinitions {
     }
 
 
-    data class SoundDefinition (val id: kotlin.String, val volume: kotlin.Float, val pitch: kotlin.Float, val requiresMod: kotlin.String) {
+    data class SoundDefinition (val id: kotlin.String, val volume: kotlin.Float, val pitch: kotlin.Float, val requiresMod: kotlin.String, val resourcePack: kotlin.Boolean = false) {
     }
 }

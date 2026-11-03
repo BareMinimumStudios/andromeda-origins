@@ -173,6 +173,20 @@ for path, definition in data.items():
         check(namespace == 'andromeda_origins', f'{path.relative_to(RES)}: HUD texture must be bundled: {texture}')
         check((RES/'assets'/namespace/texture_path).is_file(), f'{path.relative_to(RES)}: missing HUD texture {texture}')
 
+# Every visible custom HUD and explicit tooltip badge has a resolvable fallback.
+for path, definition in data.items():
+    for node in walk(definition):
+        if not isinstance(node, dict): continue
+        hud = node.get('hud_render')
+        if isinstance(hud, dict) and hud.get('should_render', True) and 'sprite_location' in hud:
+            fallback = hud.get('fallback')
+            check(isinstance(fallback, dict) and fallback.get('sprite_location') == 'apoli:textures/gui/resource_bar.png'
+                  and fallback.get('bar_index') == 0 and fallback.get('icon_index') == 0,
+                  f'{path.relative_to(RES)}: missing safe native HUD fallback')
+        if node.get('type') in ('origins:tooltip', 'apoli:tooltip') and 'sprite' in node:
+            check(node.get('fallback') == 'andromeda_origins:textures/gui/badge/fallback.png',
+                  f'{path.relative_to(RES)}: missing bundled badge fallback')
+
 # Direct overlay textures must resolve to packaged files, not shorthand sprite IDs.
 for path, definition in data.items():
     for node in walk(definition):
@@ -183,4 +197,4 @@ for path, definition in data.items():
 if errors:
     print('\n'.join(errors),file=sys.stderr)
     sys.exit(1)
-print(f'Validated {len(data)} JSON files, {len(powers)} powers, {len(origins)} Origins, {len(actual)} sounds, and {len(manifest)} unchanged Selkie files.')
+print(f'Validated {len(data)} JSON files, {len(powers)} powers, {len(origins)} Origins, {len(actual)} sounds, and {len(manifest)} preserved Selkie baselines.')

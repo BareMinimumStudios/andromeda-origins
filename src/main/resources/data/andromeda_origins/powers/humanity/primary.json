@@ -6,7 +6,12 @@
     "hud_render": {
       "should_render": true,
       "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
-      "bar_index": 4
+      "bar_index": 4,
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
+      }
     },
     "entity_action": {
       "type": "origins:and",
@@ -142,9 +147,10 @@
         {
           "keybind": "key.origins.primary_active"
         }
-      ]
+      ],
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     }
   ],
   "name": "Indomitable",
-  "description": "Press your Primary Ability key to gain Absorption II for 1 minute and survive the next otherwise-fatal hit.\n \n\u00a7e\u00a7lBase Cooldown:\u00a7r 15 minutes."
+  "description": "Press your Primary Ability key to gain Absorption II for 1 minute and survive the next otherwise-fatal hit.\n \n§e§lBase Cooldown:§r 15 minutes."
 }

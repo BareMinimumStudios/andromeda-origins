@@ -4,12 +4,14 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/green.png",
-      "text": "\u00a7c\u00a7lfigura_1:\u00a7r\u00a7f Ophidian Gaze cast. Plays briefly when the gaze is used."
+      "text": "§c§lfigura_1:§r§f Ophidian Gaze cast. Plays briefly when the gaze is used.",
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     },
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/yellow.png",
-      "text": "\u00a7c\u00a7lfigura_2:\u00a7r\u00a7f Transference cast. Plays briefly when Transference is used."
+      "text": "§c§lfigura_2:§r§f Transference cast. Plays briefly when Transference is used.",
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     }
   ],
   "name": "Figura Compatibility",

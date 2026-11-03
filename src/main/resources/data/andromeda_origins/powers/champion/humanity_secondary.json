@@ -24,7 +24,8 @@
           "keybind": "key.origins.secondary_active"
         },
         " while Incapacitated"
-      ]
+      ],
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     }
   ],
   "name": "Mortal Triumph",

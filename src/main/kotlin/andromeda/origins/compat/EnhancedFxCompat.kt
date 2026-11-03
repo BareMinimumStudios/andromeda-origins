@@ -33,7 +33,7 @@ object EnhancedFxCompat {
 
     fun active(): kotlin.Boolean {
         EnhancedFxCompat.initialize()
-        return EnhancedFxConfig.enabled() && EnhancedFxCompat.spellEngineLoaded
+        return EnhancedFxConfig.enabled()
     }
 
     fun statusLine(): kotlin.String {
@@ -57,7 +57,7 @@ object EnhancedFxCompat {
 
     private fun playInternal(entity: net.minecraft.world.entity.Entity, event: kotlin.String, position: net.minecraft.world.phys.Vec3?): kotlin.Boolean {
         EnhancedFxCompat.initialize()
-        if ((entity.level() !is net.minecraft.server.level.ServerLevel) || !EnhancedFxConfig.enabled() || !EnhancedFxCompat.spellEngineLoaded) {
+        if ((entity.level() !is net.minecraft.server.level.ServerLevel) || !EnhancedFxConfig.enabled()) {
             return false
         }
 
@@ -67,7 +67,7 @@ object EnhancedFxCompat {
             return false
         }
 
-        if (EnhancedFxConfig.particles()) {
+        if (EnhancedFxConfig.particles() && EnhancedFxCompat.spellEngineLoaded) {
             val particles: kotlin.collections.MutableList<EnhancedFxDefinitions.ParticleDefinition> = definition.particles.stream()
             .filter { p: EnhancedFxDefinitions.ParticleDefinition -> EnhancedFxCompat.requirementPresent(p.requiresMod)}
             .toList()
@@ -112,21 +112,26 @@ object EnhancedFxCompat {
 
     private fun playSound(entity: net.minecraft.world.entity.Entity, x: kotlin.Double, y: kotlin.Double, z: kotlin.Double, definition: EnhancedFxDefinitions.SoundDefinition) {
         val id: net.minecraft.resources.ResourceLocation? = effectId(definition.id)
-        if (id == null || !net.minecraft.core.registries.BuiltInRegistries.SOUND_EVENT.containsKey(id)) {
+        if (id == null || !definition.volume.isFinite() || !definition.pitch.isFinite()) {
+            EnhancedFxCompat.warnOnce("sound:" + definition.id, "Invalid enhanced sound '{}'; skipping optional sound layer.", definition.id)
+            return
+        }
+        val sound = (if (net.minecraft.core.registries.BuiltInRegistries.SOUND_EVENT.containsKey(id)) {
+            net.minecraft.core.registries.BuiltInRegistries.SOUND_EVENT.get(id)
+        } else if (definition.resourcePack) {
+            // Direct sound events let clients provide sounds.json and audio without a Java registry entry.
+            net.minecraft.sounds.SoundEvent.createVariableRangeEvent(id)
+        } else {
             EnhancedFxCompat.warnOnce("sound:" + definition.id, "Enhanced FX sound '{}' is not registered; skipping optional sound layer.", definition.id)
             return
-        }
-        val sound: net.minecraft.sounds.SoundEvent? = net.minecraft.core.registries.BuiltInRegistries.SOUND_EVENT.get(id)
-        if (sound == null) {
-            return
-        }
+        }) ?: return
         entity.level().playSound(
         null,
         x, y, z,
         sound,
         net.minecraft.sounds.SoundSource.PLAYERS,
-        definition.volume,
-        definition.pitch
+        definition.volume.coerceIn(0f, 4f),
+        definition.pitch.coerceIn(0.5f, 2f)
         )
     }
 

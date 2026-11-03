@@ -2,6 +2,10 @@
 
 ## [1.4.83] - 2026-11-01
 
+- Add native texture fallbacks to 76 custom HUDs and 111 tooltip badges. Honor ordered badge fallbacks in the custom Origin menu while keeping hover text and existing artwork.
+- Allow datapack-defined, resource-pack-only enhanced sound layers without Spell Engine. Support custom IDs, volume/pitch and live reload; retain the existing switches, bundled cues and ability costs. Skip invalid sound definitions safely.
+- Audit the copied pack for competing Origin/power definitions and asset overrides; preserve intentional Origin-layer merging and existing pack priority.
+
 - Declare supported integrations as optional in loader and publishing metadata, and document their visual, sound, avatar, shader and gameplay hooks on each mod-page description.
 - Recognize current More RPG Library (`mrpg_lib`) and resolve legacy enhanced-FX resource IDs to its current namespace, while retaining older-library support and bundled fallbacks.
 

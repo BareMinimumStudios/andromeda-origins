@@ -206,7 +206,12 @@
     "cooldown": 7200,
     "hud_render": {
       "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
-      "bar_index": 13
+      "bar_index": 13,
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
+      }
     }
   },
   "underdog": {
@@ -298,5 +303,5 @@
     }
   },
   "name": "Champion Passive Features",
-  "description": "\u00a7e\u00a7lChampion Features:\u00a7r\n+20% Size\n+20% Movement Speed\n-10% Damage Taken from all sources\n \n- Retains darkvision, hunting abilities, Stamina Surge and Adrenaline. Adrenaline restores you to 8 health, breaks Crowd Control, briefly makes you Unstoppable, and grants its 35-second resistance buff. Its base cooldown is 6 minutes (3 minutes effective with Champion cooldown recovery).\n- Mark of Fenrir retains its mark/reveal and +25% damage interaction without the stalking movement penalty.\n- No Wet, cramped-space, armor-Wither or dietary penalties.\n- Player-facing ability cooldowns recover at 2\u00d7 rate (50% shorter); Stamina Surge has 40 stamina and 5-stamina directional leaps. Mark up to 3 targets for 90 seconds; effective Mark/Hunt cooldowns are 30/60 seconds."
+  "description": "§e§lChampion Features:§r\n+20% Size\n+20% Movement Speed\n-10% Damage Taken from all sources\n \n- Retains darkvision, hunting abilities, Stamina Surge and Adrenaline. Adrenaline restores you to 8 health, breaks Crowd Control, briefly makes you Unstoppable, and grants its 35-second resistance buff. Its base cooldown is 6 minutes (3 minutes effective with Champion cooldown recovery).\n- Mark of Fenrir retains its mark/reveal and +25% damage interaction without the stalking movement penalty.\n- No Wet, cramped-space, armor-Wither or dietary penalties.\n- Player-facing ability cooldowns recover at 2× rate (50% shorter); Stamina Surge has 40 stamina and 5-stamina directional leaps. Mark up to 3 targets for 90 seconds; effective Mark/Hunt cooldowns are 30/60 seconds."
 }

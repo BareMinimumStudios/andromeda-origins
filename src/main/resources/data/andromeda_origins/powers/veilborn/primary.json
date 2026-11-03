@@ -34,7 +34,12 @@
     "cooldown": 600,
     "hud_render": {
       "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
-      "bar_index": 19
+      "bar_index": 19,
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
+      }
     },
     "entity_action": {
       "type": "origins:raycast",
@@ -294,12 +299,14 @@
           "keybind": "key.origins.primary_active"
         },
         " to enter or leave the Veil."
-      ]
+      ],
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     },
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/purple.png",
-      "text": "§5§lReality Shatter:§r§f Darkness and −30% movement/swim speed. Veil Step applies it for 5 seconds after a standard Veilborn emerges and for 5 seconds to living entities crossed in the Veil."
+      "text": "§5§lReality Shatter:§r§f Darkness and −30% movement/swim speed. Veil Step applies it for 5 seconds after a standard Veilborn emerges and for 5 seconds to living entities crossed in the Veil.",
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     }
   ],
   "name": "Veil Step & Veil Transposition",

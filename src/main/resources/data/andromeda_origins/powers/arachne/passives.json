@@ -426,12 +426,14 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
-      "text": "§e§lDamage Resistances:§r§f Falling (-100%).\n \n§c§lDamage Vulnerabilities:§r§f All damage (+20%).\n \n§e§lEffect Immunities:§r§f Poison."
+      "text": "§e§lDamage Resistances:§r§f Falling (-100%).\n \n§c§lDamage Vulnerabilities:§r§f All damage (+20%).\n \n§e§lEffect Immunities:§r§f Poison.",
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     },
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "§c§lWebbed:§r§f Obscures vision, counts as being in cobweb."
+      "text": "§c§lWebbed:§r§f Obscures vision, counts as being in cobweb.",
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     }
   ],
   "name": "Passive Features",

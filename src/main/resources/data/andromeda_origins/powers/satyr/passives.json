@@ -84,7 +84,12 @@
     "hud_render": {
       "should_render": true,
       "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
-      "bar_index": 0
+      "bar_index": 0,
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
+      }
     },
     "max_action": {
       "type": "origins:and",
@@ -668,7 +673,8 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
-      "text": "§e§lDamage Resistances:§r§f Falling (-100%).\n \n§c§lDamage Vulnerabilities:§r§f Projectiles (+20%).\n \n§e§lEffect Immunities:§r§f None."
+      "text": "§e§lDamage Resistances:§r§f Falling (-100%).\n \n§c§lDamage Vulnerabilities:§r§f Projectiles (+20%).\n \n§e§lEffect Immunities:§r§f None.",
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     }
   ],
   "name": "Passive Features",

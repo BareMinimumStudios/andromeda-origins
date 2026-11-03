@@ -6,7 +6,12 @@
     "hud_render": {
       "should_render": true,
       "sprite_location": "andromeda_origins:textures/gui/resource_bars_2.png",
-      "bar_index": 5
+      "bar_index": 5,
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
+      }
     },
     "entity_action": {
       "type": "origins:and",
@@ -801,7 +806,8 @@
         {
           "keybind": "key.origins.secondary_active"
         }
-      ]
+      ],
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     }
   ],
   "name": "Shrieking Wail",

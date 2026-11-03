@@ -397,12 +397,14 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
-      "text": "§e§lDamage Resistances:§r§f All damage (-10%). Most sources receive an additional -15%, excluding fire, freezing, magic, void, wither, suffocation, drowning, and dry-out damage.\n \n§c§lDamage Vulnerabilities:§r§f Iron weapons (+20%).\n \n§e§lEffect Immunities:§r§f None."
+      "text": "§e§lDamage Resistances:§r§f All damage (-10%). Most sources receive an additional -15%, excluding fire, freezing, magic, void, wither, suffocation, drowning, and dry-out damage.\n \n§c§lDamage Vulnerabilities:§r§f Iron weapons (+20%).\n \n§e§lEffect Immunities:§r§f None.",
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     },
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "§c§lStone Venom:§r§f For the duration: §c§lRestrained§r§f and §c§lPoison I§r§f. Prevents knockback. Affected creatures can §e§lStruggle§r§f.\n \n§e§lStruggle:§r§f Rapidly pressing direction keys.\n \n§c§lRestrained:§r§f Prevents movement, movement abilities and elytra flight."
+      "text": "§c§lStone Venom:§r§f For the duration: §c§lRestrained§r§f and §c§lPoison I§r§f. Prevents knockback. Affected creatures can §e§lStruggle§r§f.\n \n§e§lStruggle:§r§f Rapidly pressing direction keys.\n \n§c§lRestrained:§r§f Prevents movement, movement abilities and elytra flight.",
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     }
   ],
   "name": "Passive Features",

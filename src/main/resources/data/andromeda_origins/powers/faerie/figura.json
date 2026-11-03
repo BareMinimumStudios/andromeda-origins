@@ -4,17 +4,20 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/green.png",
-      "text": "\u00a7c\u00a7lfigura_1:\u00a7r\u00a7f Primary ability, flutter to maintain your height. Plays for the duration."
+      "text": "§c§lfigura_1:§r§f Primary ability, flutter to maintain your height. Plays for the duration.",
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     },
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/yellow.png",
-      "text": "\u00a7c\u00a7lfigura_2:\u00a7r\u00a7f Secondary ability, attempt to confuse a player. Plays for 1 second."
+      "text": "§c§lfigura_2:§r§f Secondary ability, attempt to confuse a player. Plays for 1 second.",
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     },
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "\u00a7c\u00a7lfigura_3:\u00a7r\u00a7f Spacebar, jumping mid air. Plays for 1 second."
+      "text": "§c§lfigura_3:§r§f Spacebar, jumping mid air. Plays for 1 second.",
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     }
   ],
   "name": "Figura Compatibility",

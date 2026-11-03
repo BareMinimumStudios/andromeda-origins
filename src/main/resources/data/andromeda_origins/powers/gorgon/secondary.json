@@ -290,6 +290,11 @@
         "comparison": "==",
         "resource": "*:*_intimidatecooldown",
         "compare_to": 0
+      },
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
       }
     },
     "min_action": {
@@ -318,6 +323,11 @@
         "comparison": ">",
         "resource": "*:*_intimidatecooldown",
         "compare_to": 0
+      },
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
       }
     }
   },
@@ -330,7 +340,8 @@
         {
           "keybind": "key.origins.secondary_active"
         }
-      ]
+      ],
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     }
   ],
   "name": "Transference",

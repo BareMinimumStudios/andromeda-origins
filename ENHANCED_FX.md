@@ -1,6 +1,6 @@
 # Optional Enhanced Origin FX
 
-**Current source: `1.4.75-overgrown.31`.** This layer lets Andromeda Origins use Spell Engine and More RPG Library particles/sounds when those mods are installed, while keeping the base mod fully functional without them. Optional bridge failures remain non-fatal, but `.30` now logs malformed definitions and upstream particle/sound API mismatches once so compatibility regressions are diagnosable.
+**Current source: `1.4.83`.** Optional particle and sound layers keep bundled Origin effects available when their libraries or assets are absent. Malformed definitions and unsupported optional APIs are logged without blocking abilities.
 
 ## v1.4.72 Wyverian camera-clear pass
 
@@ -13,7 +13,7 @@
 ## Dependency model
 
 - `spell_engine`: optional (`suggests`).
-- `more_rpg_classes`: optional (`suggests`).
+- `mrpg_lib` (current More RPG Library) or legacy `more_rpg_classes`: optional (`suggests`).
 - Andromeda does **not** bundle either project and does not declare either as a runtime dependency.
 - More RPG Library still requires its own dependencies (including Spell Engine and Spell Power) when More RPG itself is installed.
 
@@ -21,7 +21,7 @@ The bridge deliberately uses reflection for Spell Engine's particle API. No Spel
 
 ## Fallback behavior
 
-Every original Andromeda custom sound and vanilla particle remains in the power JSON. Enhanced FX are an additive layer. If the libraries are absent, disabled, missing an asset, or the bridge cannot resolve the external API, the extra layer is skipped and the original presentation still runs.
+Every original Andromeda custom sound and vanilla particle remains in the power JSON. Enhanced FX are an additive layer. Particle layers need Spell Engine; registered or resource-pack-only sound layers can run independently. Missing optional libraries/assets or unsupported particle APIs skip the affected extra layer while original effects still run.
 
 ## Data-driven definitions
 
@@ -58,11 +58,48 @@ There is one JSON file per Origin. Each event may define particle batches and op
 }
 ```
 
-Supported particle presets in v1.4.65 are `impact`, `casting`, `travel`, `cloud`, `shockwave`, `ground`, `placed`, `cone`, `helix`, and `pop_up`. `angle` is used by `cone`; `pre_travel` is used by `shockwave`; `degrees_per_tick` and `offset` are used by `helix`. Definitions may also set color, glow, opacity/fade, scale growth, playback speed, lifetime variance, motion, gravity, drag, collision, and attachment flags.
+Supported particle presets are `impact`, `casting`, `travel`, `cloud`, `shockwave`, `ground`, `placed`, `cone`, `helix`, and `pop_up`. `angle` is used by `cone`; `pre_travel` is used by `shockwave`; `degrees_per_tick` and `offset` are used by `helix`. Definitions may also set color, glow, opacity/fade, scale growth, playback speed, lifetime variance, motion, gravity, drag, collision, and attachment flags.
+
+## Custom resource-pack sounds
+
+Copy the relevant bundled definition, for example `data/andromeda_origins/andromeda_fx/faerie.json`, into the **same path in a server datapack**. Keep the other events/particles and edit the desired event's `sounds` array:
+
+```json
+[
+  {
+    "id": "andromeda_custom:ability.flutter",
+    "resource_pack": true,
+    "volume": 0.35,
+    "pitch": 1.0
+  }
+]
+```
+
+Give clients a resource pack containing `assets/andromeda_custom/sounds/flutter.ogg` and `assets/andromeda_custom/sounds.json`:
+
+```json
+{
+  "ability.flutter": {
+    "sounds": ["andromeda_custom:flutter"]
+  }
+}
+```
+
+Both packs need a normal Minecraft 1.21.1 `pack.mcmeta` (data format 48; resource format 34). Enable the server datapack and client resource pack. Server `/reload` applies definition changes; clients reload resources after changing sound assets. A resource pack alone cannot change server event definitions. The highest-priority pack's file replaces the entire matching definition file, so preserve other entries you want to retain.
+
+`resource_pack: true` permits an unregistered sound ID supplied by clients; it defaults to false. Spell Engine and More RPG Library are unnecessary for this sound-only setup. Registered Minecraft/mod sounds work without that flag. Optional `requires_mod` gates a sound by installed server mod ID. Missing client sounds leave the normal ability and bundled cues working; Minecraft may log an unknown-sound warning.
+
+Sound layers are additive to bundled cues, not replacements for the original power actions. The existing master/sounds switches control these extra layers. Volume is clamped to 0–4 and pitch to 0.5–2. Invalid IDs and non-finite values are skipped with a warning once; missing optional sounds do not stop remaining valid cues or spend additional resources.
+
+## HUD and badge texture fallbacks
+
+Visible custom HUDs use Opoli's built-in resource bar if their primary texture is missing, including safe bar/icon indices. Explicit tooltip badges use Andromeda's bundled informational glyph. The custom Origin menu honors the badge's ordered fallback list before using that glyph; text and hover behavior remain available. Existing artwork keeps priority. These fallbacks cover missing resources, not intentionally transparent or corrupt replacement images.
+
+Pack authors can override these fallback fields using the upstream HUD/badge format. Server datapack changes require `/reload`; client artwork changes require a resource reload. Origin/global-power-set `loading_priority` is now respected by the dependencies across packs; this mod does not raise its priorities to block intentional pack overrides. Origin selection layers retain their existing merge behavior.
 
 ## Current event coverage
 
-The v1.4.65 layer currently defines **109 enhanced FX events** across all 13 Origins. The event set now includes one-shot casts/impacts plus recurring channel/aura pulses, target-side feedback, movement trails, staged charge effects, and state escalations.
+The layer currently defines **112 enhanced FX events** across all 13 Origins. The event set now includes one-shot casts/impacts plus recurring channel/aura pulses, target-side feedback, movement trails, staged charge effects, and state escalations.
 
 | Origin | Enhanced FX events |
 |---|---:|
@@ -77,7 +114,7 @@ The v1.4.65 layer currently defines **109 enhanced FX events** across all 13 Ori
 | Satyr | 5 |
 | Selkie | 7 |
 | Siren | 5 |
-| Veilborn | 8 |
+| Veilborn | 11 |
 | Wyverian | 14 |
 
 ## Testing / reverting without uninstalling anything

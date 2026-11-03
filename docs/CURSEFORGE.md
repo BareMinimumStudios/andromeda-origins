@@ -75,4 +75,6 @@ Choose compatible Minecraft/loader releases and install each optional mod's own 
 
 Operators can control the cosmetic layers with `/andromedaorigins enhanced_fx enabled false`, `particles false` or `sounds false` (use `true` to re-enable). Settings are saved in `config/andromeda_origins_fx.json`. Bundled effects remain available when these extra layers are disabled.
 
+Custom resource-pack sound layers can also run without Spell Engine. Pack authors can set the sound ID, volume and pitch in a server datapack; missing HUD textures and tooltip badge artwork have fallbacks. See [FX customization](https://github.com/BareMinimumStudios/andromeda-origins/blob/overgrown-1.21.1/ENHANCED_FX.md#custom-resource-pack-sounds) for the matching datapack/resource-pack setup.
+
 Andromeda's code and artwork use The Bare Minimum License v1.0. Bundled third-party components retain their own licenses.

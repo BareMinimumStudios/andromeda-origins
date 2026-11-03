@@ -8,7 +8,12 @@
     "hud_render": {
       "should_render": true,
       "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
-      "bar_index": 7
+      "bar_index": 7,
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
+      }
     },
     "min_action": {
       "type": "origins:change_resource",
@@ -290,9 +295,10 @@
         {
           "keybind": "key.origins.primary_active"
         }
-      ]
+      ],
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     }
   ],
   "name": "Flutter",
-  "description": "Faerie Dust regenerates while this ability is not in use. Hold your Primary Ability key to flutter, dramatically slowing your fall while allowing free horizontal movement. Flutter cannot gain altitude. \u00a7e\u00a7lMovement Ability\u00a7r."
+  "description": "Faerie Dust regenerates while this ability is not in use. Hold your Primary Ability key to flutter, dramatically slowing your fall while allowing free horizontal movement. Flutter cannot gain altitude. §e§lMovement Ability§r."
 }

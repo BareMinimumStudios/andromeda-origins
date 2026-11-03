@@ -8,7 +8,12 @@
     "hud_render": {
       "should_render": true,
       "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
-      "bar_index": 0
+      "bar_index": 0,
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
+      }
     },
     "min_action": {
       "type": "origins:change_resource",
@@ -571,9 +576,10 @@
         {
           "keybind": "key.origins.secondary_active"
         }
-      ]
+      ],
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     }
   ],
   "name": "Stamina Surge",
-  "description": "Stamina regenerates while this ability is not in use. Hold your Secondary Ability key to double your movement speed at the cost of 1 Stamina per second. While holding Stamina Surge on land, press Jump to perform a powerful leap. A leap normally costs 50% of your maximum Stamina; after a near-full first leap, a brief follow-up window lets a second leap spend the remaining Stamina even if sprinting drained a small amount between jumps.\n \nYour projectile damage is reduced by 50% while using Stamina Surge and for 3 seconds afterward. \u00a7e\u00a7lMovement Ability\u00a7r."
+  "description": "Stamina regenerates while this ability is not in use. Hold your Secondary Ability key to double your movement speed at the cost of 1 Stamina per second. While holding Stamina Surge on land, press Jump to perform a powerful leap. A leap normally costs 50% of your maximum Stamina; after a near-full first leap, a brief follow-up window lets a second leap spend the remaining Stamina even if sprinting drained a small amount between jumps.\n \nYour projectile damage is reduced by 50% while using Stamina Surge and for 3 seconds afterward. §e§lMovement Ability§r."
 }

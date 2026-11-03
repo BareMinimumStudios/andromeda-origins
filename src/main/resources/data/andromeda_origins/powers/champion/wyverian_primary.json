@@ -230,7 +230,12 @@
     "hud_render": {
       "should_render": true,
       "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
-      "bar_index": 23
+      "bar_index": 23,
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
+      }
     },
     "min_action": {
       "type": "origins:change_resource",
@@ -650,7 +655,8 @@
         {
           "keybind": "key.origins.primary_active"
         }
-      ]
+      ],
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     },
     {
       "type": "origins:tooltip",
@@ -660,7 +666,8 @@
         {
           "keybind": "key.andromeda_origins.toggle"
         }
-      ]
+      ],
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     }
   ],
   "name": "Dragon's Breath",

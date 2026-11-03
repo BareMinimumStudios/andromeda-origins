@@ -8,7 +8,12 @@
     "hud_render": {
       "should_render": true,
       "bar_index": 24,
-      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png"
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
+      }
     },
     "min_action": {
       "type": "andromeda_origins:actionbar",
@@ -226,9 +231,10 @@
         {
           "keybind": "key.origins.secondary_active"
         }
-      ]
+      ],
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     }
   ],
   "name": "Gusts of Freedom",
-  "description": "Hold your Secondary Ability key while flying to surge forward for up to 20 seconds. You recover 1 second of flight time for every second spent on the ground.\n \n\u00a7e\u00a7lHover:\u00a7r\nHold Sneak while flying to stop your forward movement and hover in place, consuming flight time at half the normal rate.\n \nYou deal 50% less projectile damage while using Gusts of Freedom and for 3 seconds afterward. \u00a7e\u00a7lMovement Ability\u00a7r."
+  "description": "Hold your Secondary Ability key while flying to surge forward for up to 20 seconds. You recover 1 second of flight time for every second spent on the ground.\n \n§e§lHover:§r\nHold Sneak while flying to stop your forward movement and hover in place, consuming flight time at half the normal rate.\n \nYou deal 50% less projectile damage while using Gusts of Freedom and for 3 seconds afterward. §e§lMovement Ability§r."
 }

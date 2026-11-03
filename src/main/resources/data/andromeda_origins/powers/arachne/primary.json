@@ -6,7 +6,12 @@
     "hud_render": {
       "should_render": true,
       "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
-      "bar_index": 0
+      "bar_index": 0,
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
+      }
     },
     "entity_action": {
       "type": "origins:if_else_list",
@@ -245,7 +250,8 @@
         {
           "keybind": "key.origins.primary_active"
         }
-      ]
+      ],
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     }
   ],
   "name": "Eightfold Swiftness",

@@ -11,6 +11,11 @@
         "comparison": "==",
         "resource": "*:selkie/helper/lifetide_remove",
         "compare_to": 0
+      },
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
       }
     },
     "entity_action": {
@@ -211,7 +216,12 @@
     "cooldown": "andromeda_origins:selkie/primary_dash_cooldown",
     "hud_render": {
       "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
-      "bar_index": 0
+      "bar_index": 0,
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
+      }
     },
     "entity_action": {
       "type": "origins:and",
@@ -438,7 +448,8 @@
         {
           "keybind": "key.origins.primary_active"
         }
-      ]
+      ],
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     }
   ],
   "name": "Coastal Phalanx & Surging Tides",

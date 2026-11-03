@@ -117,7 +117,7 @@ object OriginRichReaderRenderer {
                 rowY += step
             }
             if (rowY >= clipTop - size && rowY <= clipBottom + size) {
-                val sprite: net.minecraft.resources.ResourceLocation = OriginRichReaderRenderer.resolveBadgeSprite(badge.spriteId())
+                val sprite: net.minecraft.resources.ResourceLocation = OriginRichReaderRenderer.resolveBadgeSprite(badge)
                 val spriteSize: kotlin.Int = OriginRichReaderRenderer.badgeSpriteSize(sprite)
                 com.mojang.blaze3d.systems.RenderSystem.enableBlend()
                 com.mojang.blaze3d.systems.RenderSystem.defaultBlendFunc()
@@ -133,9 +133,13 @@ object OriginRichReaderRenderer {
         return BadgeRow(rowY + step + 1, hovered, if (hovered == null) null else powerId)
     }
 
-    private fun resolveBadgeSprite(requested: net.minecraft.resources.ResourceLocation): net.minecraft.resources.ResourceLocation {
+    private fun resolveBadgeSprite(badge: dev.overgrown.origins.badge.Badge): net.minecraft.resources.ResourceLocation {
         val minecraft: net.minecraft.client.Minecraft = net.minecraft.client.Minecraft.getInstance()
+        val requested = badge.spriteId()
         if (minecraft.getResourceManager().getResource(requested).isPresent()) return requested
+        for (fallback in badge.fallback()) {
+            if (minecraft.getResourceManager().getResource(fallback).isPresent()) return fallback
+        }
 
         // Native badge artwork stays in its dependency. Missing resources use our own
         // informational glyph while retaining the badge's full tooltip and behavior.

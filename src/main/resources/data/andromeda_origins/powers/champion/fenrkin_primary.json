@@ -10,6 +10,11 @@
         "type": "origins:power",
         "power": "*:champion/fenrkin/onhunt",
         "inverted": true
+      },
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
       }
     },
     "entity_action": {
@@ -127,7 +132,12 @@
     "cooldown": 1200,
     "hud_render": {
       "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
-      "bar_index": 11
+      "bar_index": 11,
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
+      }
     }
   },
   "badges": [
@@ -139,7 +149,8 @@
         {
           "keybind": "key.origins.primary_active"
         }
-      ]
+      ],
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     }
   ],
   "name": "On the Hunt",
@@ -379,6 +390,11 @@
         "resource": "*:*_cooldown",
         "comparison": "==",
         "compare_to": 0
+      },
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
       }
     }
   }

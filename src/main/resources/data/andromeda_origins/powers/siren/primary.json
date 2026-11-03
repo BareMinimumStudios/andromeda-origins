@@ -5,7 +5,12 @@
     "cooldown": 2400,
     "hud_render": {
       "sprite_location": "andromeda_origins:textures/gui/resource_bars_2.png",
-      "bar_index": 4
+      "bar_index": 4,
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
+      }
     },
     "entity_action": {
       "type": "origins:raycast",
@@ -328,17 +333,20 @@
         {
           "keybind": "key.origins.primary_active"
         }
-      ]
+      ],
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     },
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "§c§lPacified:§r§f Unable to deal damage."
+      "text": "§c§lPacified:§r§f Unable to deal damage.",
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     },
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "§c§lSilenced:§r§f Unable to use active abilities."
+      "text": "§c§lSilenced:§r§f Unable to use active abilities.",
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     }
   ],
   "name": "Infatuation Tempo",

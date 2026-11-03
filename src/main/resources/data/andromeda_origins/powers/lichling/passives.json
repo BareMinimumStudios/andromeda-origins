@@ -108,6 +108,11 @@
         "resource": "*:*_weaknesstate",
         "comparison": ">",
         "compare_to": 0
+      },
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
       }
     },
     "max_action": {
@@ -351,7 +356,8 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/shapes/shape_heart.png",
-      "text": "§e§lDamage Resistances:§r§f None.\n \n§c§lDamage Vulnerabilities:§r§f Iron weapons (+20%).\n \n§e§lEffect Immunities:§r§f Poison, Regeneration, Slowness, Weakness, Mining Fatigue, Nausea, Darkness, and Blindness. Instant Damage and Instant Healing are inverted."
+      "text": "§e§lDamage Resistances:§r§f None.\n \n§c§lDamage Vulnerabilities:§r§f Iron weapons (+20%).\n \n§e§lEffect Immunities:§r§f Poison, Regeneration, Slowness, Weakness, Mining Fatigue, Nausea, Darkness, and Blindness. Instant Damage and Instant Healing are inverted.",
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     }
   ],
   "name": "Passive Features",

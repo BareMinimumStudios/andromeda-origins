@@ -324,6 +324,11 @@
         "comparison": "==",
         "resource": "*:*_petrifycooldown",
         "compare_to": 0
+      },
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
       }
     },
     "min_action": {
@@ -352,6 +357,11 @@
         "comparison": ">",
         "resource": "*:*_petrifycooldown",
         "compare_to": 0
+      },
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
       }
     }
   },
@@ -364,12 +374,14 @@
         {
           "keybind": "key.origins.primary_active"
         }
-      ]
+      ],
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     },
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "§c§lPetrified:§r§f For the duration: §c§lRestrained§r§f, §c§lSilenced§r§f and §c§lPacified§r§f. Prevents interaction with the world and knockback, and reduces damage taken by 75%. Affected creatures can §e§lStruggle§r§f.\n \n§e§lStruggle:§r§f Rapidly pressing direction keys.\n \n§c§lPacified:§r§f Unable to deal damage.\n \n§c§lRestrained:§r§f Prevents movement, movement abilities and elytra flight.\n \n§c§lSilenced:§r§f Inability to use Active Features."
+      "text": "§c§lPetrified:§r§f For the duration: §c§lRestrained§r§f, §c§lSilenced§r§f and §c§lPacified§r§f. Prevents interaction with the world and knockback, and reduces damage taken by 75%. Affected creatures can §e§lStruggle§r§f.\n \n§e§lStruggle:§r§f Rapidly pressing direction keys.\n \n§c§lPacified:§r§f Unable to deal damage.\n \n§c§lRestrained:§r§f Prevents movement, movement abilities and elytra flight.\n \n§c§lSilenced:§r§f Inability to use Active Features.",
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     }
   ],
   "name": "Ophidian Gaze",

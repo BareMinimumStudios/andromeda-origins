@@ -85,7 +85,7 @@ See [CHAMPION_ORIGINS.md](../CHAMPION_ORIGINS.md) for every ID, removed drawback
 
 Spell Engine and More RPG Library are **suggested, not required**. Andromeda checks for them at runtime and loads its particle bridge only when Spell Engine is present. Existing bundled sounds and vanilla particles are never replaced, so removing the libraries or disabling enhanced FX returns the mod to its normal presentation.
 
-Enhanced FX definitions are data-driven under `data/andromeda_origins/andromeda_fx/` and currently cover 109 enhanced events across all 13 Origins. Operators can compare the two presentation modes without restarting:
+Enhanced FX definitions are data-driven under `data/andromeda_origins/andromeda_fx/` and currently cover 112 enhanced events across all 13 Origins. Operators can compare the two presentation modes without restarting:
 
 ```mcfunction
 /andromedaorigins enhanced_fx

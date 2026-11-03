@@ -4,22 +4,26 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/green.png",
-      "text": "\u00a7c\u00a7lfigura_1:\u00a7r\u00a7f Coastal Phalanx cast/targeting animation."
+      "text": "§c§lfigura_1:§r§f Coastal Phalanx cast/targeting animation.",
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     },
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/yellow.png",
-      "text": "\u00a7c\u00a7lfigura_2:\u00a7r\u00a7f Coastal Phalanx successful target animation."
+      "text": "§c§lfigura_2:§r§f Coastal Phalanx successful target animation.",
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     },
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/red.png",
-      "text": "\u00a7c\u00a7lfigura_3:\u00a7r\u00a7f Surging Tides dash animation."
+      "text": "§c§lfigura_3:§r§f Surging Tides dash animation.",
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     },
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/community/silent/badge/colors/magenta.png",
-      "text": "\u00a7c\u00a7lfigura_4:\u00a7r\u00a7f Sealskin Bastion active animation."
+      "text": "§c§lfigura_4:§r§f Sealskin Bastion active animation.",
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     }
   ],
   "name": "Figura Compatibility",

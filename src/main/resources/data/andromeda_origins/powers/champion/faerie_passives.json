@@ -136,7 +136,12 @@
     "hud_render": {
       "should_render": true,
       "bar_index": 11,
-      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png"
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
+      }
     }
   },
   "stealthstate": {
@@ -362,7 +367,12 @@
     "hud_render": {
       "should_render": true,
       "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
-      "bar_index": 5
+      "bar_index": 5,
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
+      }
     }
   },
   "airjump": {
@@ -588,6 +598,11 @@
         "resource": "*:*_stealthstate",
         "comparison": "==",
         "compare_to": 1
+      },
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
       }
     },
     "min_action": {

@@ -4,7 +4,12 @@
   "hud_render": {
     "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
     "bar_index": 6,
-    "order": 6
+    "order": 6,
+    "fallback": {
+      "sprite_location": "apoli:textures/gui/resource_bar.png",
+      "bar_index": 0,
+      "icon_index": 0
+    }
   },
   "entity_action": {
     "type": "origins:raycast",
@@ -228,7 +233,8 @@
         {
           "keybind": "key.origins.secondary_active"
         }
-      ]
+      ],
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
     }
   ],
   "name": "Fae Illusions",
