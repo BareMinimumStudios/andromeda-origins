@@ -2,6 +2,8 @@
 
 ## [1.4.83] - 2026-11-01
 
+- Restore standard Fenrkin shake-off feedback when lingering Wet expires: a brief model shake, water droplets and wolf-shake sound. Add a two-second load-in Wet state when dry while preserving longer saved timers; keep Champion weakness immunity and existing Figura ability flags.
+
 - Enable separate Fabric and NeoForge CurseForge publishing with verified project/dependency IDs, optional integrations and the same loader-specific version names. Link the project from loader metadata.
 
 - Add native texture fallbacks to 76 custom HUDs and 111 tooltip badges. Honor ordered badge fallbacks in the custom Origin menu while keeping hover text and existing artwork.

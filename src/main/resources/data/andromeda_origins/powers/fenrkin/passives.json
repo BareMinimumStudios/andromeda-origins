@@ -17,7 +17,7 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:fenrkin/passives_weaknesstate",
-          "change": 0,
+          "change": 2,
           "operation": "set"
         },
         {
@@ -112,7 +112,7 @@
         {
           "type": "origins:change_resource",
           "resource": "andromeda_origins:fenrkin/passives_weaknesstate",
-          "change": 0,
+          "change": 2,
           "operation": "set"
         },
         {
@@ -147,10 +147,19 @@
           "type": "andromeda_origins:clear_fenrkin_stalking_slow"
         },
         {
-          "type": "origins:change_resource",
-          "resource": "andromeda_origins:fenrkin/passives_weaknesstate",
-          "change": 0,
-          "operation": "set"
+          "type": "origins:if_else",
+          "condition": {
+            "type": "origins:resource",
+            "resource": "andromeda_origins:fenrkin/passives_weaknesstate",
+            "comparison": "==",
+            "compare_to": 0
+          },
+          "if_action": {
+            "type": "origins:change_resource",
+            "resource": "andromeda_origins:fenrkin/passives_weaknesstate",
+            "change": 2,
+            "operation": "set"
+          }
         },
         {
           "type": "origins:change_resource",
@@ -182,6 +191,64 @@
         "sprite_location": "apoli:textures/gui/resource_bar.png",
         "bar_index": 0,
         "icon_index": 0
+      }
+    },
+    "min_action": {
+      "type": "origins:if_else",
+      "condition": {
+        "type": "origins:and",
+        "conditions": [
+          {
+            "type": "origins:power",
+            "power": "andromeda_origins:fenrkin/passives"
+          },
+          {
+            "type": "origins:power",
+            "power": "andromeda_origins:common/wet",
+            "inverted": true
+          },
+          {
+            "type": "origins:fluid_height",
+            "fluid": "minecraft:water",
+            "comparison": "==",
+            "compare_to": 0
+          },
+          {
+            "type": "origins:in_rain",
+            "inverted": true
+          }
+        ]
+      },
+      "if_action": {
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:grant_power",
+            "power": "andromeda_origins:fenrkin/helper/shake",
+            "source": "minecraft:state"
+          },
+          {
+            "type": "origins:play_sound",
+            "sound": "minecraft:entity.wolf.shake",
+            "volume": 0.75,
+            "pitch": 1.0
+          },
+          {
+            "type": "origins:spawn_particles",
+            "particle": {
+              "type": "minecraft:falling_water"
+            },
+            "count": 20,
+            "speed": 0.1,
+            "force": true,
+            "offset_y": 1,
+            "spread": {
+              "x": 0.4,
+              "y": 0.25,
+              "z": 0.4
+            }
+          }
+        ]
       }
     }
   },

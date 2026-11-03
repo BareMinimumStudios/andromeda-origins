@@ -26,7 +26,7 @@ for path in RES.rglob('*.json'):
 powers_dir = RES / 'data/andromeda_origins/powers'
 powers = {f'andromeda_origins:{p.relative_to(powers_dir).as_posix()[:-5]}':v for p,v in data.items() if p.is_relative_to(powers_dir)}
 origins = [(p,v) for p,v in data.items() if p.is_relative_to(RES/'data/andromeda_origins/origins')]
-check(len(powers)==197, f'Expected 197 active root powers, found {len(powers)}')
+check(len(powers)==198, f'Expected 198 active root powers, found {len(powers)}')
 check(len(origins)==26, f'Expected 26 Origins, found {len(origins)}')
 human_hp = powers.get('andromeda_origins:humanity/passives', {}).get('hp', {}).get('modifier', {})
 check(human_hp.get('attribute') == 'minecraft:generic.max_health' and
