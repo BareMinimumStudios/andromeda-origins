@@ -66,6 +66,9 @@ class FabricPlatform : PlatformBackend {
         })
     }
     override fun registerNetworking() { PayloadTypeRegistry.playS2C().register(OpenConfigPayload.TYPE, OpenConfigPayload.CODEC) }
+    override fun canReceiveCosmetic(player: ServerPlayer, channel: ResourceLocation): Boolean = ServerPlayNetworking.canSend(player, channel)
+    override fun sendCosmetic(player: ServerPlayer, payload: net.minecraft.network.protocol.common.custom.CustomPacketPayload) { ServerPlayNetworking.send(player, payload) }
+
     override fun openConfig(player: ServerPlayer) { ServerPlayNetworking.send(player, OpenConfigPayload.INSTANCE) }
     override fun versionHandshake() = FabricVersionHandshake.registerServer()
 }

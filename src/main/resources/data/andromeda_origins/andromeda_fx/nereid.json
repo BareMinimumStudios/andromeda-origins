@@ -45,7 +45,14 @@
         "pitch": 1.04,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/shockwave",
+      "color": "77DDFF",
+      "radius": 2.2,
+      "intensity": 0.5,
+      "duration": 8
+    }
   },
   "nereid.submersion": {
     "particles": [

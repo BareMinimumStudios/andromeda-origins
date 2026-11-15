@@ -53,4 +53,15 @@ Reviewed the new native batched raycast particles. Andromeda currently uses hit-
 
 Boat and minecart handling uses a dedicated passenger predicate because upstream `riding` only recognizes living vehicles. Retain our existing Figura boolean hooks and optional custom-armor visibility integration.
 
-More RPG Library 2.8.2 offers client-built timed FX and presets. A future optional adapter could batch our additional aura/burst layers, but would require integrating its code API and preserving no-library fallbacks; existing JSON FX are not automatically migrated. Decimal stamina, block highlighting, clones, dynamic spell schools and new gameplay are deferred to a separate balance pass.
+More RPG Library 2.8.2 offers client-built timed FX and presets. The follow-up below adds optional native preset playback for two selected events while preserving no-library fallbacks; other existing JSON FX are not automatically migrated. Decimal stamina, block highlighting, clones, dynamic spell schools and new gameplay are deferred to a separate balance pass.
+
+
+## Behavior-preserving follow-up within 1.4.84
+
+The remaining three helper commands now use typed ray-hit actions and Opoli's scoped `hit_x`, `hit_y`, `hit_z` values. Full native traveling projectiles were not substituted: these powers use an invisible, short-lived living helper to apply their established immediate area effects. Native `spawn_entity` also finalizes mob spawns and uses a different position context. Preserving the existing helper creation avoids changing collision, placement, damage attribution, offsets or timing. The legacy OP-only command remains for external datapacks.
+
+Equipment checks already use native `equipped_item` and `inventory` conditions. The shared iron rules intentionally distinguish hands and carried items. No accessory-slot expansion or new Java inventory scanner was introduced, because either would add behavior or maintenance without replacing a custom compatibility path.
+
+Native invisibility's `render_held_items: false` replaces the separate held-item feature child. The model-color alpha guard remains for perfect concealment, including friendly-invisibility viewing; first-person and custom-armor hooks cover separate render paths. Veil Step remains an observable cloud, not shared Undetectable invisibility. The Figura armor visibility bridge remains in place.
+
+Optional MRPG native effect presets are bounded and capability-gated; see ENHANCED_FX.md. No new hard dependency or gameplay feature is introduced, and the version remains 1.4.84. Replace matching client and server jars together, including when replacing an earlier unpublished 1.4.84 build.

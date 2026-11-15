@@ -63,7 +63,14 @@
         "pitch": 0.84,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "color": "A079FF",
+      "radius": 0.8,
+      "intensity": 0.5,
+      "duration": 8
+    }
   },
   "veilborn.mirage_enter": {
     "particles": [

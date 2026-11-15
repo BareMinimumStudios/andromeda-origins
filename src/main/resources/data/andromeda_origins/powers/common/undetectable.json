@@ -30,11 +30,8 @@
   "invisible2": {
     "type": "origins:invisibility",
     "render_armor": false,
-    "render_outline": false
-  },
-  "hide_held_item": {
-    "type": "origins:prevent_feature_render",
-    "feature": "held_item"
+    "render_outline": false,
+    "render_held_items": false
   },
   "unpushable": {
     "type": "origins:prevent_entity_collision"

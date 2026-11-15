@@ -189,3 +189,24 @@ All of these remain additive optional cosmetics. The normal Andromeda sound/part
 
 ## v1.4.63 FX highlights
 - **Champion Wyverian:** added a separate draconic presentation for Dragon's Breath and Dragon Charge. The new Champion-only event family uses purple arcane helixes, dragon-claw accents, staged charging, and a large magic impact instead of the standard flame-based Pyroclast presentation.
+
+
+## Native MRPG presets in 1.4.84
+
+More RPG Library 2.8.2 provides client-built effects. Two bundled events opt in: `nereid.aura_start` uses a blue shockwave and `veilborn.transposition` a violet burst. These replace only the event's optional particle layer when playback is supported. Existing bundled cues, sound layers, power conditions, costs, damage and targeting remain unchanged. Spell Engine is not required for this native path.
+
+An event may add this field alongside its existing `particles` and `sounds`:
+
+```json
+"mrpg": {
+  "preset": "mrpg_lib:preset/shockwave",
+  "radius": 2.2,
+  "intensity": 0.5,
+  "color": "77DDFF",
+  "duration": 8
+}
+```
+
+Use matching compatible MRPG builds on the server and clients. Before sending a native effect, Andromeda checks that every nearby recipient supports `mrpg_lib:fx_play`. Missing libraries, unavailable APIs, unknown effects or unsupported clients use the previous optional-particle path instead. Removing the `mrpg` field also selects that path. Each supported recipient receives one effect payload; the client builds its particles and applies MRPG's own density setting.
+
+The bundled presets are short, finite bursts with no persistent server handles. Radius is bounded to 0.1–8, intensity to 0–2 and duration to 1–20 ticks. The existing enhanced-FX master and particles switches control this path; the sounds switch remains independent. Native support does not turn existing command-along-ray visuals into batched trails automatically.

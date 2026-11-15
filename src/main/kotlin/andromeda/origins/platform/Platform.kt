@@ -38,6 +38,8 @@ interface PlatformBackend {
     fun death(callback: DamageCallback)
     fun commands(callback: CommandCallback)
     fun resourceReload(id: ResourceLocation, callback: Consumer<ResourceManager>)
+    fun canReceiveCosmetic(player: ServerPlayer, channel: ResourceLocation): Boolean
+    fun sendCosmetic(player: ServerPlayer, payload: net.minecraft.network.protocol.common.custom.CustomPacketPayload)
     fun registerNetworking()
     fun openConfig(player: ServerPlayer)
     fun versionHandshake()
@@ -63,6 +65,8 @@ object Platform {
     @JvmStatic fun death(callback: DamageCallback) = backend.death(callback)
     @JvmStatic fun commands(callback: CommandCallback) = backend.commands(callback)
     @JvmStatic fun resourceReload(id: ResourceLocation, callback: Consumer<ResourceManager>) = backend.resourceReload(id, callback)
+    @JvmStatic fun canReceiveCosmetic(player: ServerPlayer, channel: ResourceLocation) = backend.canReceiveCosmetic(player, channel)
+    @JvmStatic fun sendCosmetic(player: ServerPlayer, payload: net.minecraft.network.protocol.common.custom.CustomPacketPayload) = backend.sendCosmetic(player, payload)
     @JvmStatic fun registerNetworking() = backend.registerNetworking()
     @JvmStatic fun openConfig(player: ServerPlayer) = backend.openConfig(player)
     @JvmStatic fun versionHandshake() = backend.versionHandshake()

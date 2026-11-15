@@ -67,7 +67,10 @@ object EnhancedFxCompat {
             return false
         }
 
-        if (EnhancedFxConfig.particles() && EnhancedFxCompat.spellEngineLoaded) {
+        val nativeParticles = EnhancedFxConfig.particles() && definition.mrpg?.let {
+            MrpgFxBridge.play(entity.level() as net.minecraft.server.level.ServerLevel, position ?: entity.position(), it)
+        } == true
+        if (EnhancedFxConfig.particles() && !nativeParticles && EnhancedFxCompat.spellEngineLoaded) {
             val particles: kotlin.collections.MutableList<EnhancedFxDefinitions.ParticleDefinition> = definition.particles.stream()
             .filter { p: EnhancedFxDefinitions.ParticleDefinition -> EnhancedFxCompat.requirementPresent(p.requiresMod)}
             .toList()

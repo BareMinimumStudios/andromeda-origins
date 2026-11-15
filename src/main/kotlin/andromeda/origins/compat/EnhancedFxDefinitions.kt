@@ -120,7 +120,13 @@ object EnhancedFxDefinitions {
             ))
         }
 
-        return EventDefinition(java.util.List.copyOf<EnhancedFxDefinitions.ParticleDefinition>(particles), java.util.List.copyOf<EnhancedFxDefinitions.SoundDefinition>(sounds))
+        val mrpg = if (`object`.has("mrpg") && `object`.get("mrpg").isJsonObject) {
+            val definition = `object`.getAsJsonObject("mrpg")
+            MrpgDefinition(string(definition, "preset", ""), number(definition, "radius", 1f),
+                number(definition, "intensity", 0.5f), string(definition, "color", "FFFFFF").removePrefix("#").toIntOrNull(16) ?: 0xffffff,
+                number(definition, "duration", 8f).toInt())
+        } else null
+        return EventDefinition(java.util.List.copyOf<EnhancedFxDefinitions.ParticleDefinition>(particles), java.util.List.copyOf<EnhancedFxDefinitions.SoundDefinition>(sounds), mrpg)
     }
 
     private fun string(`object`: com.google.gson.JsonObject, key: kotlin.String, fallback: kotlin.String): kotlin.String {
@@ -156,9 +162,11 @@ object EnhancedFxDefinitions {
     }
 
 
-    data class EventDefinition (val particles: kotlin.collections.MutableList<EnhancedFxDefinitions.ParticleDefinition>, val sounds: kotlin.collections.MutableList<EnhancedFxDefinitions.SoundDefinition>) {
+    data class EventDefinition (val particles: kotlin.collections.MutableList<EnhancedFxDefinitions.ParticleDefinition>, val sounds: kotlin.collections.MutableList<EnhancedFxDefinitions.SoundDefinition>, val mrpg: MrpgDefinition? = null) {
     }
 
+
+    data class MrpgDefinition(val preset: String, val radius: Float, val intensity: Float, val color: Int, val duration: Int)
 
     data class ParticleDefinition (val id: kotlin.String,
     val preset: kotlin.String,

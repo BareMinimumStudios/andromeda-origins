@@ -107,30 +107,38 @@
             "type": "origins:and",
             "actions": [
               {
-                "type": "origins:change_resource",
-                "resource": "andromeda_origins:common/figura_2",
-                "change": 0,
-                "operation": "set"
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "andromeda_origins:common/figura_2",
+                    "change": 0,
+                    "operation": "set"
+                  },
+                  {
+                    "type": "origins:revoke_power",
+                    "power": "andromeda_origins:wyverian/helper/breathing2",
+                    "source": "minecraft:state"
+                  },
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "andromeda_origins:common/figura_3",
+                    "change": 1,
+                    "operation": "set"
+                  },
+                  {
+                    "type": "origins:grant_power",
+                    "power": "andromeda_origins:wyverian/helper/spitting",
+                    "source": "minecraft:state"
+                  }
+                ]
               },
               {
-                "type": "origins:revoke_power",
-                "power": "andromeda_origins:wyverian/helper/breathing2",
-                "source": "minecraft:state"
-              },
-              {
-                "type": "origins:change_resource",
-                "resource": "andromeda_origins:common/figura_3",
-                "change": 1,
-                "operation": "set"
-              },
-              {
-                "type": "origins:grant_power",
-                "power": "andromeda_origins:wyverian/helper/spitting",
-                "source": "minecraft:state"
+                "type": "andromeda_origins:spawn_ray_helper",
+                "kind": "fireball"
               }
             ]
           },
-          "command_at_hit": "andromedaorigins internal helper fireball",
           "command_step": 1,
           "command_along_ray": "function andromeda_origins:fireball_trajectory",
           "command_along_ray_only_on_hit": false

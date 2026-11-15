@@ -112,6 +112,9 @@ class NeoForgePlatform(private val modBus: IEventBus) : PlatformBackend {
             }
         })
     }
+    override fun canReceiveCosmetic(player: ServerPlayer, channel: ResourceLocation): Boolean = player.connection.hasChannel(channel)
+    override fun sendCosmetic(player: ServerPlayer, payload: net.minecraft.network.protocol.common.custom.CustomPacketPayload) { PacketDistributor.sendToPlayer(player, payload) }
+
     override fun openConfig(player: ServerPlayer) = PacketDistributor.sendToPlayer(player, OpenConfigPayload.INSTANCE)
     override fun versionHandshake() { /* NeoForge negotiates the required payload version. */ }
 }
