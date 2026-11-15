@@ -11,6 +11,12 @@ import net.minecraft.server.level.ServerPlayer
 /** Optional integrations expose their authoritative state to server-side powers. */
 object AndromedaConditions {
     fun register() {
+        // Native riding only accepts living vehicles; boats and minecarts must count too.
+        ConditionTypes.ENTITY.register(ResourceLocation.parse("andromeda_origins:passenger"),
+            object : ConditionType<EntityCtx, Unit> {
+                override fun codec(): MapCodec<Unit> = MapCodec.unit(Unit)
+                override fun test(cfg: Unit, ctx: EntityCtx): Boolean = ctx.raw().isPassenger
+            })
         ConditionTypes.ENTITY.register(ResourceLocation.parse("andromeda_origins:incapacitated"),
             object : ConditionType<EntityCtx, Unit> {
                 override fun codec(): MapCodec<Unit> = MapCodec.unit(Unit)

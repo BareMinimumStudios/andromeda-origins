@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.4.84] - 2026-11-15
+
+- Update Overgrown Origins to 1.52.0 and Opoli to 1.132.0 on Fabric and NeoForge; update Fabric API to 0.116.18. Matching client/server updates are required.
+- Migrate all custom resource access to Opoli's decimal API, fixing the join crash first reached through the Figura animation hooks. Keep whole-number counters and cooldown behavior unchanged.
+- Prevent standard and Champion Faerie air jumps from spending charges while riding. Detect boats and minecarts as passengers as well as living mounts, and end foliage concealment while mounted.
+- Remove the unintended ladder-speed cap from standard and Champion Arachne's ordinary cobweb movement; retain crouched web holding and wall climbing.
+- Reconcile expired combat restraints on non-player living entities, including horses restored after recall or chunk load. Remove orphaned Andromeda movement restrictions while preserving active effects and foreign attribute modifiers.
+- Benefit from upstream refreshed ghost-block lifetimes and deferred unloaded-chunk restoration; retain existing ability costs and effects. The upstream loader now provides more precise datapack errors for compatibility checks.
+
 ## [1.4.83] - 2026-11-01
 
 - Restore standard Fenrkin shake-off feedback when lingering Wet expires: a brief model shake, water droplets and wolf-shake sound. Add a two-second load-in Wet state when dry while preserving longer saved timers; keep Champion weakness immunity and existing Figura ability flags.

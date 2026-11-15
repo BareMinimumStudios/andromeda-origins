@@ -14,7 +14,7 @@ object FaerieJumpInput {
             state = FaerieJumpPress()
         }
         val current = client.player ?: return
-        state.sample(client.options.keyJump.isDown, current.onGround())
+        state.sample(client.options.keyJump.isDown, current.onGround() || current.isPassenger)
     }
 
     fun blocks(power: ResourceLocation): Boolean = state.blocks(power)

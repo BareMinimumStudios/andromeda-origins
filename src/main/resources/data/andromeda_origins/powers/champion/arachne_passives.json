@@ -225,11 +225,19 @@
           "type": "origins:any_of",
           "conditions": [
             {
-              "type": "origins:in_block_anywhere",
-              "block_condition": {
-                "type": "origins:block",
-                "block": "minecraft:cobweb"
-              }
+              "type": "origins:all_of",
+              "conditions": [
+                {
+                  "type": "origins:in_block_anywhere",
+                  "block_condition": {
+                    "type": "origins:block",
+                    "block": "minecraft:cobweb"
+                  }
+                },
+                {
+                  "type": "origins:sneaking"
+                }
+              ]
             },
             {
               "type": "origins:all_of",

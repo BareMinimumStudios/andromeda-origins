@@ -26,7 +26,7 @@ object WebbedLifecycle {
 
     fun tick(player: ServerPlayer) {
         val container = PowerContainer.of(player) ?: return
-        if (container.hasPower(webbed) && ResourcePower.readValue(container, remaining).orElse(0) <= 0) {
+        if (container.hasPower(webbed) && ResourcePower.readValue(container, remaining).orElse(0.0) <= 0) {
             clear(player)
         } else if (player.tickCount % 20 == 0) {
             // Expiry above remains immediate. Re-scan legacy orphan grants once per second,

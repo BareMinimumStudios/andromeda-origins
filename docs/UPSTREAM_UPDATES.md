@@ -1,11 +1,11 @@
-# Upstream dependencies for 1.4.83
+# Upstream dependencies for 1.4.84
 
 The build pins immutable Modrinth files for Minecraft 1.21.1 so a release cannot silently resolve a different dependency.
 
 | Dependency | Fabric file | NeoForge file |
 | --- | --- | --- |
-| Overgrown Origins 1.49.0 | `6thhlmG1` | `FQEvanTQ` |
-| Opoli 1.124.0 | `6rLBJtq0` | `oHslKfYl` |
+| Overgrown Origins 1.52.0 | `Osv0g1oE` | `dFrPRXFk` |
+| Opoli 1.132.0 | `ffaD8mzX` | `wANUeGzx` |
 | Additional Entity Attributes 2.0.2+1.21.1, bundled | `wdj5W9YU` | `6oJLT6m7` |
 
 Historical 1.4.81 baseline: the [Origins changelog](https://modrinth.com/mod/overgrowns-origins/version/u1Nxa3lt) fixes the built-in Enderian pearl spawn height and Avian airborne walking-speed transfer.
@@ -43,3 +43,14 @@ The shared recovery root now contains explicit native `modify_resource_change` f
 The official Modrinth API still lists Opoli 1.124.0 and Origins 1.49.0 as the newest Minecraft 1.21.1 Fabric and NeoForge releases. No further dependency bump is needed. Their attribute-allocation and reload improvements benefit existing definitions automatically. Targeted Champion recovery uses native resource-ID filters; Champion Fenrkin already uses native synced entity sets.
 
 The data audit found no removed sneaky/share_effects types, moved speech powers, stacking_status_effect definitions or explicit loading_priority overrides in Andromeda's own data. Keep strict JSON validation. Optional HUD fallbacks can help external resource packs, but shipped HUD references already validate. Native airborne-transfer stacking still differs from preserved legacy behavior, and spawn offsets alone do not replace exact raycast impact placement. Those remain future migrations requiring behavior-matching tests.
+
+
+## November 15 upgrade in 1.4.84
+
+Updated to Origins 1.52.0 / Opoli 1.132.0, with Fabric API 0.116.18. Rebuilt all direct resource access against OptionalDouble and double writes. This fixes a binary API failure in the old Figura resource bridge; it is unrelated to the separate avatar/model loader. Integer ability counters and whole-tick cooldowns retain their existing semantics.
+
+Reviewed the new native batched raycast particles. Andromeda currently uses hit-only particle commands or gameplay functions along its rays; the native particle field renders on misses too, so an automatic substitution would change behavior. Defer that conversion until hit-only batching can be preserved. Arachne's native ghost blocks now refresh their lifetime and defer restoration until unloaded chunks reload, avoiding forced chunk loads. These are dependency improvements, not evidence that the historical logout crash is fixed. New error reporting is used to review powers and optional fields during reload.
+
+Boat and minecart handling uses a dedicated passenger predicate because upstream `riding` only recognizes living vehicles. Retain our existing Figura boolean hooks and optional custom-armor visibility integration.
+
+More RPG Library 2.8.2 offers client-built timed FX and presets. A future optional adapter could batch our additional aura/burst layers, but would require integrating its code API and preserving no-library fallbacks; existing JSON FX are not automatically migrated. Decimal stamina, block highlighting, clones, dynamic spell schools and new gameplay are deferred to a separate balance pass.

@@ -25,10 +25,10 @@ object ChampionFenrkinMigration {
             val saved = transfers.mapNotNull { (child, scale) ->
                 val from = id("fenrkin/${ability}_$child")
                 if (!c.hasPower(from)) null else id("champion/fenrkin_${ability}_$child") to
-                    kotlin.math.ceil(PowerResources.read(c, from).asInt * scale).toInt()
+                    kotlin.math.ceil(PowerResources.read(c, from).asDouble * scale).toInt()
             }
             for (owner in obsolete) c.removePower(old, owner)
-            for ((resource, value) in saved) PowerResources.write(c, resource, value)
+            for ((resource, value) in saved) PowerResources.write(c, resource, value.toDouble())
         }
     }
 }

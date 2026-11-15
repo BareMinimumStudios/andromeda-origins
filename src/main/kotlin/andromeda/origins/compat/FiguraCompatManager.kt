@@ -33,6 +33,6 @@ object FiguraCompatManager {
     }
 
     fun setResource(player: net.minecraft.server.level.ServerPlayer, resource: net.minecraft.resources.ResourceLocation, value: kotlin.Int) {
-        dev.overgrown.apoli.power.PowerResources.write(dev.overgrown.apoli.power.PowerContainer.of(player), resource, value)
+        dev.overgrown.apoli.power.PowerResources.write(dev.overgrown.apoli.power.PowerContainer.of(player), resource, value.toDouble())
     }
 }

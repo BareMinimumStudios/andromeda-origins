@@ -5,6 +5,7 @@ import dev.overgrown.apoli.power.PowerContainer
 import dev.overgrown.apoli.power.PowerResources
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.level.ServerPlayer
+import net.minecraft.world.entity.LivingEntity
 
 /** Rebuild shared restrictions from their actual owners, not persisted callback totals. */
 object CrowdControlLifecycle {
@@ -64,26 +65,26 @@ object CrowdControlLifecycle {
         }
     }
 
-    fun reconcile(player: ServerPlayer) {
+    fun reconcile(player: LivingEntity) {
         val container = PowerContainer.of(player) ?: return
         for (helper in timed) {
             val remaining = ResourceLocation.fromNamespaceAndPath(helper.namespace, helper.path + "_remove")
             if (source in container.sourcesOf(helper) &&
-                (!container.hasPower(remaining) || PowerResources.read(container, remaining).asInt <= 0))
+                (!container.hasPower(remaining) || PowerResources.read(container, remaining).asDouble <= 0))
                 container.removePower(helper, source)
         }
         for (effect in shared) {
             val active = effect.owners.count { container.hasPower(it) && !container.isSuppressed(it) }
             if (active > 0) {
                 if (source !in container.sourcesOf(effect.power)) container.addPower(effect.power, source)
-                if (PowerResources.read(container, effect.counter).asInt != active)
-                    PowerResources.write(container, effect.counter, active)
+                if (PowerResources.read(container, effect.counter).asDouble != active.toDouble())
+                    PowerResources.write(container, effect.counter, active.toDouble())
             } else if (source in container.sourcesOf(effect.power)) {
                 // Preserve grants belonging to anyone else, including another mod or command source.
                 container.removePower(effect.power, source)
             }
         }
-        NereidGills.clearOrphanWet(player)
+        if (player is ServerPlayer) NereidGills.clearOrphanWet(player)
         RestraintCleanup.clean(player)
     }
 }

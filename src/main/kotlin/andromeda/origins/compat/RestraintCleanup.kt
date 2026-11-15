@@ -4,7 +4,7 @@ import andromeda.origins.platform.Platform
 import dev.overgrown.apoli.power.PowerContainer
 import dev.overgrown.apoli.power.builtin.AttributePower
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.server.level.ServerPlayer
+import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.ai.attributes.Attributes
 
 /** Clear a revoked restraint's speed modifier without changing health or other modifiers. */
@@ -16,7 +16,7 @@ object RestraintCleanup {
         Platform.serverTick { server -> server.playerList.players.forEach(::clean) }
     }
 
-    fun clean(player: ServerPlayer) {
+    fun clean(player: LivingEntity) {
         val speed = player.getAttribute(Attributes.MOVEMENT_SPEED) ?: return
         if (!speed.hasModifier(modifier)) return
         val container = PowerContainer.of(player)

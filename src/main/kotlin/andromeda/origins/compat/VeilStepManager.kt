@@ -257,7 +257,7 @@ object VeilStepManager {
         val container: dev.overgrown.apoli.power.PowerContainer? = dev.overgrown.apoli.power.PowerContainer.of(player)
         if (reason != ExitReason.INVALID_STATE) {
             if (container != null && container.hasPower(VeilStepManager.COOLDOWN)) {
-                dev.overgrown.apoli.power.PowerResources.write(container, VeilStepManager.COOLDOWN, VeilStepManager.COOLDOWN_TICKS)
+                dev.overgrown.apoli.power.PowerResources.write(container, VeilStepManager.COOLDOWN, VeilStepManager.COOLDOWN_TICKS.toDouble())
             }
 
             val center: net.minecraft.world.phys.Vec3 = player.position().add(0.0, player.getBbHeight() * 0.5, 0.0)
@@ -396,7 +396,7 @@ object VeilStepManager {
         val container: dev.overgrown.apoli.power.PowerContainer? = dev.overgrown.apoli.power.PowerContainer.of(target)
         if (container == null) return
         container.addPower(VeilStepManager.REALITY_SHATTER, VeilStepManager.DEBUFF_SOURCE)
-        dev.overgrown.apoli.power.PowerResources.write(container, VeilStepManager.REALITY_SHATTER_TIMER, seconds)
+        dev.overgrown.apoli.power.PowerResources.write(container, VeilStepManager.REALITY_SHATTER_TIMER, seconds.toDouble())
     }
 
     private fun hasUnsuppressed(container: dev.overgrown.apoli.power.PowerContainer, power: net.minecraft.resources.ResourceLocation?): kotlin.Boolean {

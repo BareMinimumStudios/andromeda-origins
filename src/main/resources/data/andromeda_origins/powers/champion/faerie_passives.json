@@ -226,7 +226,7 @@
                     "compare_to": 0
                   },
                   {
-                    "type": "origins:riding",
+                    "type": "andromeda_origins:passenger",
                     "inverted": true
                   }
                 ]
@@ -290,7 +290,7 @@
                         "compare_to": 0
                       },
                       {
-                        "type": "origins:riding"
+                        "type": "andromeda_origins:passenger"
                       }
                     ]
                   }
@@ -550,6 +550,10 @@
           "fluid": "minecraft:lava",
           "comparison": "==",
           "compare_to": 0
+        },
+        {
+          "type": "andromeda_origins:passenger",
+          "inverted": true
         }
       ]
     },

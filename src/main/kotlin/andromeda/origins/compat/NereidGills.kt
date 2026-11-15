@@ -25,7 +25,7 @@ object NereidGills {
         if (hydration.any { helper ->
             container.hasPower(helper) && !container.isSuppressed(helper) &&
                 ResourcePower.readValue(container, ResourceLocation.fromNamespaceAndPath(
-                    helper.namespace, helper.path + "_remove")).orElse(0) > 0
+                    helper.namespace, helper.path + "_remove")).orElse(0.0) > 0
         }) return
         // Only the source owned by our hydration callbacks; preserve unrelated grants.
         for (id in container.allPowers().toList()) {
