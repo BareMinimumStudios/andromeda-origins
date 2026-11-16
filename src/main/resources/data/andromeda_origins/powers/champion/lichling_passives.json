@@ -130,6 +130,7 @@
   "effect_immunities": {
     "type": "origins:effect_immunity",
     "effects": [
+      "minecraft:poison",
       "minecraft:slowness",
       "minecraft:weakness",
       "minecraft:mining_fatigue",

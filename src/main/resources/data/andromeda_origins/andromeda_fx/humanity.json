@@ -38,7 +38,15 @@
         "pitch": 1.02,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/shockwave",
+      "radius": 2.2,
+      "intensity": 0.5,
+      "color": "FFE599",
+      "duration": 8,
+      "attach": false
+    }
   },
   "humanity.mortal_resolve": {
     "particles": [
@@ -89,7 +97,15 @@
         "volume": 0.44,
         "pitch": 0.82
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/aura",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "FFF4B0",
+      "duration": 8,
+      "attach": true
+    }
   },
   "humanity.indomitable_save": {
     "particles": [
@@ -147,7 +163,15 @@
         "volume": 0.26,
         "pitch": 0.88
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "FFD66B",
+      "duration": 8,
+      "attach": false
+    }
   },
   "humanity.mortal_resolve_stage_1": {
     "particles": [
@@ -172,7 +196,15 @@
         "motion": "float"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/aura",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "FFE8A6",
+      "duration": 8,
+      "attach": true
+    }
   },
   "humanity.mortal_resolve_stage_2": {
     "particles": [
@@ -207,7 +239,15 @@
         "motion": "burst"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/swirl",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "FFE484",
+      "duration": 8,
+      "attach": true
+    }
   },
   "humanity.mortal_resolve_stage_3": {
     "particles": [
@@ -267,7 +307,15 @@
         "volume": 0.18,
         "pitch": 0.72
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/pillar",
+      "radius": 0.8,
+      "intensity": 0.5,
+      "color": "FFD251",
+      "duration": 8,
+      "attach": false
+    }
   },
   "humanity.mortal_resolve_expiry": {
     "particles": [
@@ -293,6 +341,14 @@
         "motion": "ascend"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "6B5A49",
+      "duration": 8,
+      "attach": false
+    }
   }
 }

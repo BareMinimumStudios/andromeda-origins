@@ -73,7 +73,7 @@ Champion variants are hidden from normal selection. Operators can assign one wit
 
 Choose compatible Minecraft/loader releases and install each optional mod's own dependencies. Gameplay/effect libraries belong on both client and server; Figura, Iris and Mod Menu are client integrations. Dietary and iron tags also recognize compatible modded foods and equipment.
 
-Compatible More RPG Library builds also provide client-built water and violet preset bursts for Nereid aura activation and Veilborn transposition, independently of Spell Engine. Unsupported clients retain the previous effects path.
+Compatible More RPG Library builds also provide client-built effects across all 112 existing ability events, with per-event colors and shapes, independently of Spell Engine. Unsupported clients retain the previous effects path.
 
 Operators can control the cosmetic layers with `/andromedaorigins enhanced_fx enabled false`, `particles false` or `sounds false` (use `true` to re-enable). Settings are saved in `config/andromeda_origins_fx.json`. Bundled effects remain available when these extra layers are disabled.
 

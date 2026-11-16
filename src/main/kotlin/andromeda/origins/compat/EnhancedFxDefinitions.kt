@@ -124,7 +124,7 @@ object EnhancedFxDefinitions {
             val definition = `object`.getAsJsonObject("mrpg")
             MrpgDefinition(string(definition, "preset", ""), number(definition, "radius", 1f),
                 number(definition, "intensity", 0.5f), string(definition, "color", "FFFFFF").removePrefix("#").toIntOrNull(16) ?: 0xffffff,
-                number(definition, "duration", 8f).toInt())
+                number(definition, "duration", 8f).toInt(), bool(definition, "attach", false))
         } else null
         return EventDefinition(java.util.List.copyOf<EnhancedFxDefinitions.ParticleDefinition>(particles), java.util.List.copyOf<EnhancedFxDefinitions.SoundDefinition>(sounds), mrpg)
     }
@@ -166,7 +166,7 @@ object EnhancedFxDefinitions {
     }
 
 
-    data class MrpgDefinition(val preset: String, val radius: Float, val intensity: Float, val color: Int, val duration: Int)
+    data class MrpgDefinition(val preset: String, val radius: Float, val intensity: Float, val color: Int, val duration: Int, val attach: Boolean = false)
 
     data class ParticleDefinition (val id: kotlin.String,
     val preset: kotlin.String,

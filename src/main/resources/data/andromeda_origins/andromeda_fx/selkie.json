@@ -34,7 +34,15 @@
         "pitch": 1.0,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/shockwave",
+      "radius": 2.2,
+      "intensity": 0.5,
+      "color": "7CD8E8",
+      "duration": 8,
+      "attach": false
+    }
   },
   "selkie.bastion": {
     "particles": [
@@ -74,7 +82,15 @@
         "pitch": 0.84,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/aura",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "7DDCFF",
+      "duration": 8,
+      "attach": true
+    }
   },
   "selkie.phalanx_cast": {
     "particles": [
@@ -114,7 +130,15 @@
         "pitch": 1.06,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/shockwave",
+      "radius": 2.2,
+      "intensity": 0.5,
+      "color": "8DEAFF",
+      "duration": 8,
+      "attach": false
+    }
   },
   "selkie.phalanx_target": {
     "particles": [
@@ -147,7 +171,15 @@
         "requires_mod": "more_rpg_classes"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/aura",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "B7F4FF",
+      "duration": 8,
+      "attach": false
+    }
   },
   "selkie.phalanx_pulse": {
     "particles": [
@@ -172,7 +204,15 @@
         "motion": "float"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/aura",
+      "radius": 0.65,
+      "intensity": 0.18,
+      "color": "B7F4FF",
+      "duration": 4,
+      "attach": true
+    }
   },
   "selkie.surging_trail": {
     "particles": [
@@ -206,7 +246,15 @@
         "motion": "decelerate"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 0.65,
+      "intensity": 0.18,
+      "color": "B9F6FF",
+      "duration": 4,
+      "attach": false
+    }
   },
   "selkie.bastion_pulse": {
     "particles": [
@@ -242,6 +290,14 @@
         "requires_mod": "more_rpg_classes"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/aura",
+      "radius": 0.65,
+      "intensity": 0.18,
+      "color": "6FDFFF",
+      "duration": 4,
+      "attach": true
+    }
   }
 }

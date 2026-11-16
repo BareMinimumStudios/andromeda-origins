@@ -65,7 +65,15 @@
         "pitch": 1.35,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "FFE7FF",
+      "duration": 8,
+      "attach": false
+    }
   },
   "faerie.fae_illusions": {
     "particles": [
@@ -132,7 +140,15 @@
         "pitch": 1.25,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/swirl",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "F4C2FF",
+      "duration": 8,
+      "attach": true
+    }
   },
   "faerie.trickster_waterswap": {
     "particles": [
@@ -154,7 +170,15 @@
         "requires_mod": "more_rpg_classes"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "F3A8F4",
+      "duration": 8,
+      "attach": false
+    }
   },
   "faerie.trickster_warden": {
     "particles": [
@@ -186,7 +210,15 @@
         "motion": "ascend"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "28445C",
+      "duration": 8,
+      "attach": false
+    }
   },
   "faerie.trickster_blaze": {
     "particles": [
@@ -209,7 +241,15 @@
         "motion": "ascend"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "F3A8F4",
+      "duration": 8,
+      "attach": false
+    }
   },
   "faerie.trickster_phantom": {
     "particles": [
@@ -237,7 +277,15 @@
         "motion": "float"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "8EB5FF",
+      "duration": 8,
+      "attach": false
+    }
   },
   "faerie.trickster_cow": {
     "particles": [
@@ -252,7 +300,15 @@
         "motion": "burst"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "B88A67",
+      "duration": 8,
+      "attach": false
+    }
   },
   "faerie.trickster_skeleton": {
     "particles": [
@@ -267,7 +323,15 @@
         "motion": "burst"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "F1F1E6",
+      "duration": 8,
+      "attach": false
+    }
   },
   "faerie.trickster_wskeleton": {
     "particles": [
@@ -290,7 +354,15 @@
         "motion": "ascend"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "5B5263",
+      "duration": 8,
+      "attach": false
+    }
   },
   "faerie.trickster_enderman": {
     "particles": [
@@ -314,7 +386,15 @@
         "motion": "burst"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "B34DFF",
+      "duration": 8,
+      "attach": false
+    }
   },
   "faerie.trickster_spider": {
     "particles": [
@@ -338,7 +418,15 @@
         "motion": "float"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "71E66C",
+      "duration": 8,
+      "attach": false
+    }
   },
   "faerie.trickster_zombie": {
     "particles": [
@@ -353,7 +441,15 @@
         "motion": "burst"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "71965A",
+      "duration": 8,
+      "attach": false
+    }
   },
   "faerie.trickster_creeper": {
     "particles": [
@@ -369,7 +465,15 @@
         "motion": "burst"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "70E05A",
+      "duration": 8,
+      "attach": false
+    }
   },
   "faerie.trickster_stray": {
     "particles": [
@@ -395,7 +499,15 @@
         "motion": "float"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "B9E9FF",
+      "duration": 8,
+      "attach": false
+    }
   },
   "faerie.trickster_drowned": {
     "particles": [
@@ -418,7 +530,15 @@
         "requires_mod": "more_rpg_classes"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "F3A8F4",
+      "duration": 8,
+      "attach": false
+    }
   },
   "faerie.trickster_strider": {
     "particles": [
@@ -432,7 +552,15 @@
         "motion": "float"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "F3A8F4",
+      "duration": 8,
+      "attach": false
+    }
   },
   "faerie.trickster_pufferfish": {
     "particles": [
@@ -456,7 +584,15 @@
         "motion": "float"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "E7EA67",
+      "duration": 8,
+      "attach": false
+    }
   },
   "faerie.trickster_breeze": {
     "particles": [
@@ -481,7 +617,15 @@
         "motion": "burst"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "E7FBFF",
+      "duration": 8,
+      "attach": false
+    }
   },
   "faerie.trickster_shulker": {
     "particles": [
@@ -498,7 +642,15 @@
         "motion": "ascend"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "E65CFF",
+      "duration": 8,
+      "attach": false
+    }
   },
   "faerie.trickster_axolotl": {
     "particles": [
@@ -522,6 +674,14 @@
         "motion": "float"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "FFBDE8",
+      "duration": 8,
+      "attach": false
+    }
   }
 }

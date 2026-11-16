@@ -52,7 +52,15 @@
         "pitch": 0.72,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/pillar",
+      "radius": 0.8,
+      "intensity": 0.5,
+      "color": "6D44C8",
+      "duration": 8,
+      "attach": false
+    }
   },
   "lichling.chimes_start": {
     "particles": [
@@ -113,7 +121,15 @@
         "volume": 0.34,
         "pitch": 0.78
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/swirl",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "6F4BBE",
+      "duration": 8,
+      "attach": true
+    }
   },
   "lichling.chimes_end": {
     "particles": [
@@ -168,7 +184,15 @@
         "pitch": 0.76,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/shockwave",
+      "radius": 2.2,
+      "intensity": 0.5,
+      "color": "8C67E1",
+      "duration": 8,
+      "attach": false
+    }
   },
   "lichling.chimes_pulse_1": {
     "particles": [
@@ -202,7 +226,15 @@
         "volume": 0.158,
         "pitch": 1.015
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/swirl",
+      "radius": 0.585,
+      "intensity": 0.18,
+      "color": "B18CFF",
+      "duration": 4,
+      "attach": true
+    }
   },
   "lichling.chimes_pulse_2": {
     "particles": [
@@ -236,7 +268,15 @@
         "volume": 0.176,
         "pitch": 0.99
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/swirl",
+      "radius": 0.62,
+      "intensity": 0.18,
+      "color": "B18CFF",
+      "duration": 4,
+      "attach": true
+    }
   },
   "lichling.chimes_pulse_3": {
     "particles": [
@@ -270,7 +310,15 @@
         "volume": 0.194,
         "pitch": 0.965
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/swirl",
+      "radius": 0.655,
+      "intensity": 0.18,
+      "color": "B18CFF",
+      "duration": 4,
+      "attach": true
+    }
   },
   "lichling.chimes_pulse_4": {
     "particles": [
@@ -315,7 +363,15 @@
         "volume": 0.212,
         "pitch": 0.94
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/swirl",
+      "radius": 0.69,
+      "intensity": 0.18,
+      "color": "B18CFF",
+      "duration": 4,
+      "attach": true
+    }
   },
   "lichling.chimes_pulse_5": {
     "particles": [
@@ -360,7 +416,15 @@
         "volume": 0.23,
         "pitch": 0.915
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/swirl",
+      "radius": 0.725,
+      "intensity": 0.18,
+      "color": "B18CFF",
+      "duration": 4,
+      "attach": true
+    }
   },
   "lichling.chimes_pulse_6": {
     "particles": [
@@ -405,7 +469,15 @@
         "volume": 0.248,
         "pitch": 0.89
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/swirl",
+      "radius": 0.76,
+      "intensity": 0.18,
+      "color": "B18CFF",
+      "duration": 4,
+      "attach": true
+    }
   },
   "lichling.chimes_pulse_7": {
     "particles": [
@@ -460,7 +532,15 @@
         "volume": 0.266,
         "pitch": 0.865
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/swirl",
+      "radius": 0.795,
+      "intensity": 0.18,
+      "color": "B18CFF",
+      "duration": 4,
+      "attach": true
+    }
   },
   "lichling.chimes_pulse_8": {
     "particles": [
@@ -515,7 +595,15 @@
         "volume": 0.284,
         "pitch": 0.84
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/swirl",
+      "radius": 0.83,
+      "intensity": 0.18,
+      "color": "B18CFF",
+      "duration": 4,
+      "attach": true
+    }
   },
   "lichling.chimes_pulse_9": {
     "particles": [
@@ -570,7 +658,15 @@
         "volume": 0.302,
         "pitch": 0.815
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/swirl",
+      "radius": 0.865,
+      "intensity": 0.18,
+      "color": "B18CFF",
+      "duration": 4,
+      "attach": true
+    }
   },
   "lichling.chimes_pulse_10": {
     "particles": [
@@ -625,7 +721,15 @@
         "volume": 0.32,
         "pitch": 0.79
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/swirl",
+      "radius": 0.9,
+      "intensity": 0.18,
+      "color": "B18CFF",
+      "duration": 4,
+      "attach": true
+    }
   },
   "lichling.doom_mark": {
     "particles": [
@@ -652,7 +756,15 @@
         "motion": "ascend"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/cast",
+      "radius": 0.65,
+      "intensity": 0.5,
+      "color": "B18CFF",
+      "duration": 8,
+      "attach": false
+    }
   },
   "lichling.doom_detonate": {
     "particles": [
@@ -732,6 +844,14 @@
         "pitch": 0.62,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/shockwave",
+      "radius": 2.2,
+      "intensity": 0.5,
+      "color": "4E1F72",
+      "duration": 8,
+      "attach": false
+    }
   }
 }

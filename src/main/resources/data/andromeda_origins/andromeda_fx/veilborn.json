@@ -66,10 +66,11 @@
     ],
     "mrpg": {
       "preset": "mrpg_lib:preset/burst",
-      "color": "A079FF",
       "radius": 0.8,
       "intensity": 0.5,
-      "duration": 8
+      "color": "9A4DFF",
+      "duration": 8,
+      "attach": false
     }
   },
   "veilborn.mirage_enter": {
@@ -122,7 +123,15 @@
         "pitch": 1.0,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/swirl",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "9A4DFF",
+      "duration": 8,
+      "attach": true
+    }
   },
   "veilborn.mirage_exit": {
     "particles": [
@@ -174,7 +183,15 @@
         "pitch": 0.78,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "9A4DFF",
+      "duration": 8,
+      "attach": false
+    }
   },
   "veilborn.transposition_target": {
     "particles": [
@@ -218,7 +235,15 @@
         "volume": 0.24,
         "pitch": 0.86
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "8A2BE2",
+      "duration": 8,
+      "attach": false
+    }
   },
   "veilborn.reality_shatter": {
     "particles": [
@@ -300,7 +325,15 @@
         "volume": 0.2,
         "pitch": 0.7
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/shockwave",
+      "radius": 2.2,
+      "intensity": 0.5,
+      "color": "6E20B8",
+      "duration": 8,
+      "attach": false
+    }
   },
   "veilborn.unstable": {
     "particles": [
@@ -329,7 +362,15 @@
         "motion": "float"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/swirl",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "A54CFF",
+      "duration": 8,
+      "attach": true
+    }
   },
   "veilborn.mirage_darkness": {
     "particles": [
@@ -373,7 +414,15 @@
         "pitch": 0.7,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/cloud",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "451060",
+      "duration": 8,
+      "attach": false
+    }
   },
   "veilborn.veil_step_enter": {
     "particles": [
@@ -416,7 +465,15 @@
         "pitch": 0.92,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/swirl",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "9A4DFF",
+      "duration": 8,
+      "attach": true
+    }
   },
   "veilborn.veil_step_exit": {
     "particles": [
@@ -461,7 +518,15 @@
         "motion": "burst"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "9A4DFF",
+      "duration": 8,
+      "attach": false
+    }
   },
   "veilborn.veil_tear": {
     "particles": [
@@ -501,7 +566,15 @@
         "motion": "decelerate"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/slash",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "6E20B8",
+      "duration": 8,
+      "attach": false
+    }
   },
   "veilborn.shimmer": {
     "particles": [
@@ -530,6 +603,14 @@
         "motion": "float"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 0.65,
+      "intensity": 0.18,
+      "color": "DCA8FF",
+      "duration": 4,
+      "attach": false
+    }
   }
 }

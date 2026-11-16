@@ -56,7 +56,15 @@
         "pitch": 0.82,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/cloud",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "B7E39A",
+      "duration": 8,
+      "attach": false
+    }
   },
   "arachne.webspinner_tick": {
     "particles": [
@@ -114,7 +122,15 @@
         "pitch": 1.12,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/swirl",
+      "radius": 0.65,
+      "intensity": 0.18,
+      "color": "F1F1F1",
+      "duration": 4,
+      "attach": true
+    }
   },
   "arachne.webspinner_complete": {
     "particles": [
@@ -169,7 +185,15 @@
         "pitch": 1.16,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/shockwave",
+      "radius": 2.2,
+      "intensity": 0.5,
+      "color": "D4F2C8",
+      "duration": 8,
+      "attach": false
+    }
   },
   "arachne.eightfold_dash": {
     "particles": [
@@ -209,7 +233,15 @@
         "pitch": 1.12,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/slash",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "FFFFFF",
+      "duration": 8,
+      "attach": false
+    }
   },
   "arachne.eightfold_grapple": {
     "particles": [
@@ -240,6 +272,14 @@
         "pitch": 0.94,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/cast",
+      "radius": 0.65,
+      "intensity": 0.5,
+      "color": "FFFFFF",
+      "duration": 8,
+      "attach": false
+    }
   }
 }

@@ -34,7 +34,15 @@
         "pitch": 0.78,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/cast",
+      "radius": 0.65,
+      "intensity": 0.5,
+      "color": "B11328",
+      "duration": 8,
+      "attach": false
+    }
   },
   "manticore.lunge_impact": {
     "particles": [
@@ -81,7 +89,15 @@
         "pitch": 0.76,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/impact",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "A90E1F",
+      "duration": 8,
+      "attach": false
+    }
   },
   "manticore.beast_of_blood": {
     "particles": [
@@ -127,7 +143,15 @@
         "pitch": 0.7,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/shockwave",
+      "radius": 2.2,
+      "intensity": 0.5,
+      "color": "8E091B",
+      "duration": 8,
+      "attach": false
+    }
   },
   "manticore.beast_pulse": {
     "particles": [
@@ -163,7 +187,15 @@
         "motion": "float"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/aura",
+      "radius": 0.65,
+      "intensity": 0.18,
+      "color": "7B0D16",
+      "duration": 4,
+      "attach": true
+    }
   },
   "manticore.lunge_trail": {
     "particles": [
@@ -198,7 +230,15 @@
         "motion": "decelerate"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 0.65,
+      "intensity": 0.18,
+      "color": "B21E26",
+      "duration": 4,
+      "attach": false
+    }
   },
   "manticore.bloodrift_enter": {
     "particles": [
@@ -254,7 +294,15 @@
         "pitch": 0.62,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/swirl",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "690611",
+      "duration": 8,
+      "attach": true
+    }
   },
   "manticore.bloodrift_tear": {
     "particles": [
@@ -320,7 +368,15 @@
         "pitch": 0.68,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/slash",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "FFE1E1",
+      "duration": 8,
+      "attach": false
+    }
   },
   "manticore.bloodrift_exit": {
     "particles": [
@@ -376,7 +432,15 @@
         "volume": 0.22,
         "pitch": 0.7
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "A30F21",
+      "duration": 8,
+      "attach": false
+    }
   },
   "manticore.bloodrift_aftershock": {
     "particles": [
@@ -431,6 +495,14 @@
         "pitch": 0.78,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/shockwave",
+      "radius": 2.2,
+      "intensity": 0.5,
+      "color": "C41527",
+      "duration": 8,
+      "attach": false
+    }
   }
 }

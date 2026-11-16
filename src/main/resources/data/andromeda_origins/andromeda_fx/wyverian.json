@@ -45,7 +45,15 @@
         "pitch": 1.1,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "FF8C40",
+      "duration": 8,
+      "attach": false
+    }
   },
   "wyverian.gust": {
     "particles": [
@@ -91,7 +99,15 @@
         "pitch": 1.08,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/shockwave",
+      "radius": 2.2,
+      "intensity": 0.5,
+      "color": "E7F8FF",
+      "duration": 8,
+      "attach": false
+    }
   },
   "wyverian.pyroclast_charge_1": {
     "particles": [
@@ -120,7 +136,15 @@
         "volume": 0.16999999999999998,
         "pitch": 1.1199999999999999
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/cast",
+      "radius": 0.65,
+      "intensity": 0.32,
+      "color": "FF8C40",
+      "duration": 8,
+      "attach": false
+    }
   },
   "wyverian.pyroclast_charge_2": {
     "particles": [
@@ -149,7 +173,15 @@
         "volume": 0.22,
         "pitch": 1.04
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/cast",
+      "radius": 0.65,
+      "intensity": 0.39,
+      "color": "FF8C40",
+      "duration": 8,
+      "attach": false
+    }
   },
   "wyverian.pyroclast_charge_3": {
     "particles": [
@@ -184,7 +216,15 @@
         "volume": 0.27,
         "pitch": 0.96
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/cast",
+      "radius": 0.65,
+      "intensity": 0.46,
+      "color": "FF8C40",
+      "duration": 8,
+      "attach": false
+    }
   },
   "wyverian.pyroclast_charge_4": {
     "particles": [
@@ -230,7 +270,15 @@
         "volume": 0.32,
         "pitch": 0.8799999999999999
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/cast",
+      "radius": 0.65,
+      "intensity": 0.53,
+      "color": "FFD9A3",
+      "duration": 8,
+      "attach": false
+    }
   },
   "wyverian.pyroclast_impact": {
     "particles": [
@@ -291,7 +339,15 @@
         "pitch": 0.8,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/shockwave",
+      "radius": 2.2,
+      "intensity": 0.5,
+      "color": "FFF1D8",
+      "duration": 8,
+      "attach": false
+    }
   },
   "wyverian.hover": {
     "particles": [
@@ -322,7 +378,15 @@
         "motion": "decelerate"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/aura",
+      "radius": 0.65,
+      "intensity": 0.18,
+      "color": "E8FAFF",
+      "duration": 4,
+      "attach": true
+    }
   },
   "wyverian.dragon_breath": {
     "particles": [
@@ -378,7 +442,15 @@
         "volume": 0.22,
         "pitch": 0.82
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 0.65,
+      "intensity": 0.18,
+      "color": "9B5CFF",
+      "duration": 4,
+      "attach": false
+    }
   },
   "wyverian.dragon_charge_1": {
     "particles": [
@@ -411,7 +483,15 @@
         "volume": 0.17500000000000002,
         "pitch": 1.12
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/cast",
+      "radius": 0.65,
+      "intensity": 0.32,
+      "color": "B16EFF",
+      "duration": 8,
+      "attach": false
+    }
   },
   "wyverian.dragon_charge_2": {
     "particles": [
@@ -444,7 +524,15 @@
         "volume": 0.21000000000000002,
         "pitch": 1.02
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/cast",
+      "radius": 0.65,
+      "intensity": 0.39,
+      "color": "B16EFF",
+      "duration": 8,
+      "attach": false
+    }
   },
   "wyverian.dragon_charge_3": {
     "particles": [
@@ -487,7 +575,15 @@
         "volume": 0.24500000000000002,
         "pitch": 0.94
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/cast",
+      "radius": 0.65,
+      "intensity": 0.46,
+      "color": "B16EFF",
+      "duration": 8,
+      "attach": false
+    }
   },
   "wyverian.dragon_charge_4": {
     "particles": [
@@ -530,7 +626,15 @@
         "volume": 0.28,
         "pitch": 0.86
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/cast",
+      "radius": 0.65,
+      "intensity": 0.53,
+      "color": "B16EFF",
+      "duration": 8,
+      "attach": false
+    }
   },
   "wyverian.dragon_charge_impact": {
     "particles": [
@@ -600,6 +704,14 @@
         "volume": 0.24,
         "pitch": 0.72
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/cast",
+      "radius": 0.65,
+      "intensity": 0.5,
+      "color": "7A2FD0",
+      "duration": 8,
+      "attach": false
+    }
   }
 }

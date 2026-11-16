@@ -52,7 +52,15 @@
         "volume": 0.2,
         "pitch": 1.12
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/swirl",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "89D7FF",
+      "duration": 8,
+      "attach": true
+    }
   },
   "siren.wail": {
     "particles": [
@@ -111,7 +119,15 @@
         "volume": 0.18,
         "pitch": 1.2
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/shockwave",
+      "radius": 2.2,
+      "intensity": 0.5,
+      "color": "D8F7FF",
+      "duration": 8,
+      "attach": false
+    }
   },
   "siren.wail_impact": {
     "particles": [
@@ -171,7 +187,15 @@
         "pitch": 0.95,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/impact",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "9FE9FF",
+      "duration": 8,
+      "attach": false
+    }
   },
   "siren.wail_echo": {
     "particles": [
@@ -208,7 +232,15 @@
         "requires_mod": "more_rpg_classes"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/shockwave",
+      "radius": 2.2,
+      "intensity": 0.5,
+      "color": "BCEEFF",
+      "duration": 8,
+      "attach": false
+    }
   },
   "siren.infatuation_target": {
     "particles": [
@@ -246,6 +278,14 @@
         "motion": "float"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/aura",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "B9EEFF",
+      "duration": 8,
+      "attach": false
+    }
   }
 }

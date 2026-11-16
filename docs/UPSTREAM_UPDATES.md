@@ -53,7 +53,7 @@ Reviewed the new native batched raycast particles. Andromeda currently uses hit-
 
 Boat and minecart handling uses a dedicated passenger predicate because upstream `riding` only recognizes living vehicles. Retain our existing Figura boolean hooks and optional custom-armor visibility integration.
 
-More RPG Library 2.8.2 offers client-built timed FX and presets. The follow-up below adds optional native preset playback for two selected events while preserving no-library fallbacks; other existing JSON FX are not automatically migrated. Decimal stamina, block highlighting, clones, dynamic spell schools and new gameplay are deferred to a separate balance pass.
+More RPG Library 2.8.2 offers client-built timed FX and presets. The follow-up below adds optional native preset playback for all 112 existing events while preserving no-library fallbacks. Decimal stamina, block highlighting, clones, dynamic spell schools and new gameplay are deferred to a separate balance pass.
 
 
 ## Behavior-preserving follow-up within 1.4.84

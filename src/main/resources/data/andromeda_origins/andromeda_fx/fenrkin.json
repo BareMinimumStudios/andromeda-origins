@@ -55,7 +55,15 @@
         "pitch": 1.18,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/shockwave",
+      "radius": 2.2,
+      "intensity": 0.5,
+      "color": "9D0C18",
+      "duration": 8,
+      "attach": false
+    }
   },
   "fenrkin.mark": {
     "particles": [
@@ -104,7 +112,15 @@
         "volume": 0.34,
         "pitch": 0.84
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/cast",
+      "radius": 0.65,
+      "intensity": 0.5,
+      "color": "FF3636",
+      "duration": 8,
+      "attach": false
+    }
   },
   "fenrkin.adrenaline": {
     "particles": [
@@ -172,7 +188,15 @@
         "volume": 0.26,
         "pitch": 0.72
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/aura",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "C7262D",
+      "duration": 8,
+      "attach": true
+    }
   },
   "fenrkin.hunt_pulse": {
     "particles": [
@@ -209,6 +233,14 @@
         "motion": "decelerate"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/aura",
+      "radius": 0.65,
+      "intensity": 0.18,
+      "color": "8B151C",
+      "duration": 4,
+      "attach": true
+    }
   }
 }

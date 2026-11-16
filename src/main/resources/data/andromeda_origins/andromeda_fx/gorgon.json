@@ -56,7 +56,15 @@
         "pitch": 0.7,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/cast",
+      "radius": 0.65,
+      "intensity": 0.5,
+      "color": "7D7D7D",
+      "duration": 8,
+      "attach": false
+    }
   },
   "gorgon.transference": {
     "particles": [
@@ -105,7 +113,15 @@
         "volume": 0.18,
         "pitch": 0.8
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/swirl",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "9267D8",
+      "duration": 8,
+      "attach": true
+    }
   },
   "gorgon.gaze_extend": {
     "particles": [
@@ -149,7 +165,15 @@
         "pitch": 0.66,
         "requires_mod": "more_rpg_classes"
       }
-    ]
+    ],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/aura",
+      "radius": 1.2,
+      "intensity": 0.5,
+      "color": "89B879",
+      "duration": 8,
+      "attach": true
+    }
   },
   "gorgon.transference_target": {
     "particles": [
@@ -188,6 +212,14 @@
         "motion": "decelerate"
       }
     ],
-    "sounds": []
+    "sounds": [],
+    "mrpg": {
+      "preset": "mrpg_lib:preset/cast",
+      "radius": 0.65,
+      "intensity": 0.5,
+      "color": "8761C6",
+      "duration": 8,
+      "attach": false
+    }
   }
 }

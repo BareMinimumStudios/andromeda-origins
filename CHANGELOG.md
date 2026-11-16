@@ -2,9 +2,11 @@
 
 ## [1.4.84] - 2026-11-15
 
+- Explicitly protect standard and Champion Lichlings from poison through their existing status-effect immunities.
+
 - Replace the three built-in ray-hit helper commands with typed actions using Opoli's scoped hit coordinates. Preserve the existing helper entities, offsets, impact powers, costs and timing; retain the OP-only command for external datapacks.
 - Use native held-item invisibility instead of the redundant held-item feature power. Retain zero-alpha bodies, first-person hand suppression, Veil clouds and Figura/custom-armor compatibility.
-- Add optional client-built MRPG preset effects for Nereid aura activation and Veilborn transposition. Keep short finite durations, existing particle/sound switches, bundled cues and fallback particles; use the previous path if any nearby client lacks the FX channel.
+- Add optional client-built MRPG preset effects across all 112 existing FX events, using per-event palettes, brief aura/swirl attachment and lighter repeated pulses. Keep short finite durations, existing particle/sound switches, bundled cues and fallback particles; use the previous path if any nearby client lacks the FX channel.
 
 - Update Overgrown Origins to 1.52.0 and Opoli to 1.132.0 on Fabric and NeoForge; update Fabric API to 0.116.18. Matching client/server updates are required.
 - Migrate all custom resource access to Opoli's decimal API, fixing the join crash first reached through the Figura animation hooks. Keep whole-number counters and cooldown behavior unchanged.
