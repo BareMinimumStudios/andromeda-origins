@@ -1,26 +1,14 @@
 {
   "type": "origins:multiple",
   "name": "Begone",
-  "description": "Banish the player or living mob you look at within 32 blocks approximately 500 blocks away from you, relative to their current position. Same dimension only; searches for a safe nearby landing within 8 blocks of the destination. Failure costs no cooldown. 90-second effective cooldown.",
+  "description": "Banish the player or living mob you look at within 32 blocks approximately 500 blocks away from you, relative to their current position. Same dimension only; searches for a safe nearby landing within 8 blocks of the destination. No cooldown.",
   "cooldown": {
     "type": "origins:resource",
     "min": 0,
     "max": 1800,
     "start_value": 0,
     "hud_render": {
-      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
-      "bar_index": 14,
-      "condition": {
-        "type": "origins:resource",
-        "resource": "*:*_cooldown",
-        "comparison": ">",
-        "compare_to": 0
-      },
-      "fallback": {
-        "sprite_location": "apoli:textures/gui/resource_bar.png",
-        "bar_index": 0,
-        "icon_index": 0
-      }
+      "should_render": false
     }
   },
   "cooldown_tick": {

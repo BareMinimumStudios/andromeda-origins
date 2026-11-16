@@ -114,9 +114,8 @@ object Dawnbreaker {
 
     private fun castAura(player: ServerPlayer) {
         if (!usable(player, aura)) return
-        if (resource(player, aura, "cooldown") > 0) { say(player, "Dawnbreaker is recovering."); return }
         set(player, aura, "active", 400.0)
-        set(player, aura, "cooldown", 1200.0)
+        set(player, aura, "cooldown", 0.0)
         ring(player, player.serverLevel(), player.position(), 3.0, 48)
         sound(player.serverLevel(), player.position(), net.minecraft.sounds.SoundEvents.BEACON_ACTIVATE, .65f, 1.3f)
         say(player, "Dawnbreaker’s Presence — 20 seconds")
@@ -213,7 +212,7 @@ object Dawnbreaker {
 
     private fun castBanish(player: ServerPlayer) {
         if (!usable(player, begone) || player.uuid in pending) return
-        if (resource(player, begone, "cooldown") > 0) { say(player, "Begone is recovering."); return }
+        set(player, begone, "cooldown", 0.0)
         val eye = player.eyePosition
         val end = eye.add(player.lookAngle.scale(32.0))
         // Ray-box targeting is narrow and stops at blocks; unrelated bystanders are never substituted.
@@ -244,23 +243,23 @@ object Dawnbreaker {
                 if (pending[player.uuid] !== request) return@execute
                 pending.remove(player.uuid)
                 val victim = level.getEntity(request.target) as? LivingEntity
-                if (error != null || victim == null || !usable(player, begone) || resource(player, begone, "cooldown") > 0 ||
+                if (error != null || victim == null || !usable(player, begone) ||
                     victim.level() !== level || player.serverLevel() !== level || !victim.isAlive || victim.isSpectator ||
                     victim.distanceToSqr(request.from) > 16.0 || player.distanceToSqr(victim) > 36.0 * 36.0 || !player.hasLineOfSight(victim)) {
-                    say(player, "Banishment cancelled; no cooldown spent."); return@execute
+                    say(player, "Banishment cancelled."); return@execute
                 }
                 val landing = columns.firstNotNullOfOrNull { safeLanding(level, victim, it) }
-                if (landing == null) { say(player, "No safe landing found; no cooldown spent."); return@execute }
+                if (landing == null) { say(player, "No safe landing found."); return@execute }
                 val old = victim.position()
                 val vehicle = victim.vehicle
                 victim.stopRiding()
                 if (!victim.teleportTo(level, landing.x, landing.y, landing.z, mutableSetOf<RelativeMovement>(), victim.yRot, victim.xRot)) {
                     if (vehicle != null && !vehicle.isRemoved) victim.startRiding(vehicle, true)
-                    say(player, "Banishment failed; no cooldown spent."); return@execute
+                    say(player, "Banishment failed."); return@execute
                 }
                 victim.deltaMovement = Vec3.ZERO
                 victim.fallDistance = 0f
-                set(player, begone, "cooldown", 1800.0)
+                set(player, begone, "cooldown", 0.0)
                 ring(player, level, old, 1.4, 40); ring(player, level, landing, 1.4, 40)
                 sound(level, old, net.minecraft.sounds.SoundEvents.ENDERMAN_TELEPORT, .7f, 1.4f)
                 sound(level, landing, net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_RESONATE, .6f, 1.2f)
@@ -333,6 +332,8 @@ object Dawnbreaker {
         Platform.serverTick(::tick)
     }
     fun clear(player: ServerPlayer) {
+        set(player, aura, "cooldown", 0.0)
+        set(player, begone, "cooldown", 0.0)
         set(player, aura, "active", 0.0)
         cancelBow(player)
         pending.remove(player.uuid)
@@ -362,7 +363,7 @@ object Dawnbreaker {
     }
     private fun tick(server: MinecraftServer) {
         for ((owner, request) in pending.toMap()) if (server.tickCount >= request.expires) {
-            pending.remove(owner); server.playerList.getPlayer(owner)?.let { say(it, "Landing search expired; no cooldown spent.") }
+            pending.remove(owner); server.playerList.getPlayer(owner)?.let { say(it, "Landing search expired.") }
         }
         for ((target, owners) in statues.toMap()) {
             owners.removeIf { owner -> server.playerList.getPlayer(owner)?.let { owns(it, gaze) && it.level() === target.level() } != true }

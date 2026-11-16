@@ -531,3 +531,8 @@ Begone successfully moved a living pig approximately 500 blocks to a controlled 
 Inspected front/back aura screenshots and golden-arrow flight screenshots on both loaders. Wings are double-sided. Removed repeated cloud shockwaves and reduced dust sizes; sparse MRPG aura motes, golden cast/impact bursts and fine gold trails replace them. The installed Dawnquiver renderer draws flying light-arrow geometry without replacing server damage/collision or adding persistent client-world projectiles. Existing FX visibility switches remain respected. Registered holy release, layered magical flyby and holy impact sound callbacks were received; audio remained muted. Block hits now also trigger impact feedback.
 
 These checks use disposable local worlds/config copies, with shaders disabled. No original profiles or live server were changed; no full NeoForge pack was supplied. Standard and Champion Gorgon and preserved Selkie data remain unchanged.
+
+
+### Dawnbreaker cooldown removal — 1.4.84
+
+Removed Presence and Begone cooldown guards and writes, retained the 20-second aura duration and safe asynchronous mob/player landing search. Legacy resources remain for saved-data compatibility, are hidden and cleared on lifecycle cleanup/activation. Gaze recharge and bow damage are unchanged. Both loader builds and resource validation pass; the immediately preceding real-client runs cover the unchanged targeting, visuals and damage. This small follow-up did not repeat the full-pack client matrix.

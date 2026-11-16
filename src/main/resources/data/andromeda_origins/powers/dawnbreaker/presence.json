@@ -1,26 +1,14 @@
 {
   "type": "origins:multiple",
   "name": "Dawnbreaker’s Presence",
-  "description": "Radiate a golden-jade aura for 20 seconds. Visible enemies within 10 blocks looking toward you move 25% slower. Scoreboard allies and allied tame pets are excluded. 60-second effective cooldown.",
+  "description": "Radiate a golden-jade aura for 20 seconds. Visible enemies within 10 blocks looking toward you move 25% slower. Scoreboard allies and allied tame pets are excluded. No cooldown.",
   "cooldown": {
     "type": "origins:resource",
     "min": 0,
     "max": 1200,
     "start_value": 0,
     "hud_render": {
-      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
-      "bar_index": 14,
-      "condition": {
-        "type": "origins:resource",
-        "resource": "*:*_cooldown",
-        "comparison": ">",
-        "compare_to": 0
-      },
-      "fallback": {
-        "sprite_location": "apoli:textures/gui/resource_bar.png",
-        "bar_index": 0,
-        "icon_index": 0
-      }
+      "should_render": false
     }
   },
   "cooldown_tick": {
