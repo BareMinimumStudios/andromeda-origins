@@ -1,0 +1,43 @@
+{
+  "type": "origins:multiple",
+  "hidden": true,
+  "lease": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 6,
+    "start_value": 6,
+    "hud_render": {
+      "should_render": false
+    },
+    "min_action": {
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "andromeda_origins:dawnbreaker_effect"
+    }
+  },
+  "lease_tick": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "condition": {
+      "type": "origins:resource",
+      "resource": "*:*_lease",
+      "comparison": ">",
+      "compare_to": 0
+    },
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_lease",
+      "change": -1
+    }
+  },
+  "speed": {
+    "type": "origins:attribute",
+    "update_health": false,
+    "modifier": {
+      "id": "andromeda_origins:dawnbreaker_oppression",
+      "attribute": "minecraft:generic.movement_speed",
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.25
+    }
+  }
+}

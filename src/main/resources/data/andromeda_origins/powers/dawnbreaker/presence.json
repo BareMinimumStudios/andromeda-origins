@@ -1,0 +1,102 @@
+{
+  "type": "origins:multiple",
+  "name": "Dawnbreaker’s Presence",
+  "description": "Radiate a golden-jade aura for 20 seconds. Visible enemies within 10 blocks looking toward you move 25% slower. Scoreboard allies and allied tame pets are excluded. 60-second effective cooldown.",
+  "cooldown": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1200,
+    "start_value": 0,
+    "hud_render": {
+      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
+      "bar_index": 14,
+      "condition": {
+        "type": "origins:resource",
+        "resource": "*:*_cooldown",
+        "comparison": ">",
+        "compare_to": 0
+      },
+      "fallback": {
+        "sprite_location": "apoli:textures/gui/resource_bar.png",
+        "bar_index": 0,
+        "icon_index": 0
+      }
+    }
+  },
+  "cooldown_tick": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "condition": {
+      "type": "origins:resource",
+      "resource": "*:*_cooldown",
+      "comparison": ">",
+      "compare_to": 0
+    },
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_cooldown",
+      "change": -1
+    }
+  },
+  "cast": {
+    "type": "origins:active_self",
+    "cooldown": 1,
+    "hud_render": {
+      "should_render": false
+    },
+    "key": {
+      "key": "key.andromeda_origins.dawnbreaker",
+      "continuous": false
+    },
+    "entity_action": {
+      "type": "andromeda_origins:dawnbreaker",
+      "kind": "dawnbreaker"
+    }
+  },
+  "active": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 400,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "active_tick": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "condition": {
+      "type": "origins:resource",
+      "resource": "*:*_active",
+      "comparison": ">",
+      "compare_to": 0
+    },
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_active",
+      "change": -1
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Activate with ",
+        {
+          "keybind": "key.andromeda_origins.dawnbreaker"
+        }
+      ],
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
+    }
+  ],
+  "radiance": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  }
+}

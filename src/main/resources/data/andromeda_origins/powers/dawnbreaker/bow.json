@@ -1,0 +1,118 @@
+{
+  "type": "origins:multiple",
+  "name": "Seraph’s Draw",
+  "description": "Hold the Seraph’s Draw key to conjure a visible bow of golden light. Build one Dawn Chorus per second, up to three. Release to spend Chorus and fire an arrow of light: 6 / 10 / 14 base damage before distance and armor. Releasing before one Chorus cancels freely. Effective cooldown: 10 seconds. No bow item or ammunition required. Requires Simply Swords with Dawnquiver support on the server and client for the original bow, HUD and sound presentation.",
+  "draw": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 60,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "display_draw": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 60,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "chorus": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 3,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "radiance": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "afterglow": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 6,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "afterglow_tick": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "condition": {
+      "type": "origins:resource",
+      "resource": "*:*_afterglow",
+      "comparison": ">",
+      "compare_to": 0
+    },
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_afterglow",
+      "change": -1
+    }
+  },
+  "cooldown": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 200,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "cooldown_tick": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "condition": {
+      "type": "origins:resource",
+      "resource": "*:*_cooldown",
+      "comparison": ">",
+      "compare_to": 0
+    },
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_cooldown",
+      "change": -1
+    }
+  },
+  "cast": {
+    "type": "origins:active_self",
+    "cooldown": 1,
+    "hud_render": {
+      "should_render": false
+    },
+    "key": {
+      "key": "key.andromeda_origins.seraphs_draw",
+      "continuous": true
+    },
+    "entity_action": {
+      "type": "andromeda_origins:dawnbreaker",
+      "kind": "bow"
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": [
+        "Hold ",
+        {
+          "keybind": "key.andromeda_origins.seraphs_draw"
+        },
+        " to draw; release to fire."
+      ],
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
+    }
+  ]
+}

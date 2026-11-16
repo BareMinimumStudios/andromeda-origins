@@ -17,6 +17,7 @@ import java.util.function.BiFunction
  */
 object AndromedaActions {
     fun register() {
+        andromeda.origins.compat.Dawnbreaker.registerActions()
         andromeda.origins.compat.HelperSpawner.registerActions()
         andromeda.origins.compat.ManticoreTether.registerActions()
         andromeda.origins.compat.ParticleSpheres.register()

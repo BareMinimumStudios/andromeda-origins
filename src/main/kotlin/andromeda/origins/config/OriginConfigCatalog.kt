@@ -22,6 +22,7 @@ import andromeda.origins.config.AndromedaGameplayConfig.ChampionArachneSection
 import andromeda.origins.config.AndromedaGameplayConfig.ChampionFaerieSection
 import andromeda.origins.config.AndromedaGameplayConfig.ChampionFenrkinSection
 import andromeda.origins.config.AndromedaGameplayConfig.ChampionGorgonSection
+import andromeda.origins.config.AndromedaGameplayConfig.DawnbreakerSection
 import andromeda.origins.config.AndromedaGameplayConfig.ChampionHumanitySection
 import andromeda.origins.config.AndromedaGameplayConfig.ChampionLichlingSection
 import andromeda.origins.config.AndromedaGameplayConfig.ChampionManticoreSection
@@ -104,6 +105,15 @@ object OriginConfigCatalog {
     OriginConfigCatalog.entry<ChampionGorgonSection>("champion_gorgon", true, java.util.function.Function { c: AndromedaGameplayConfig -> c.championOrigins.champion_gorgon},
     OriginConfigCatalog.toggle<ChampionGorgonSection>("champion/gorgon_passives", java.util.function.Function { s: ChampionGorgonSection -> s.passiveFeatures}), OriginConfigCatalog.toggle<ChampionGorgonSection>("gorgon/primary", java.util.function.Function { s: ChampionGorgonSection -> s.ophidianGaze}),
     OriginConfigCatalog.toggle<ChampionGorgonSection>("gorgon/secondary", java.util.function.Function { s: ChampionGorgonSection -> s.transference})),
+    OriginConfigCatalog.entry<DawnbreakerSection>("dawnbreaker", true, java.util.function.Function { c: AndromedaGameplayConfig -> c.championOrigins.dawnbreaker},
+    OriginConfigCatalog.toggle<DawnbreakerSection>("champion/gorgon_passives", java.util.function.Function { s: DawnbreakerSection -> s.passiveFeatures}),
+    OriginConfigCatalog.toggle<DawnbreakerSection>("dawnbreaker/bow", java.util.function.Function { s: DawnbreakerSection -> s.seraphsDraw}),
+    OriginConfigCatalog.toggle<DawnbreakerSection>("dawnbreaker/primary", java.util.function.Function { s: DawnbreakerSection -> s.sovereignGaze}),
+    OriginConfigCatalog.toggle<DawnbreakerSection>("gorgon/secondary", java.util.function.Function { s: DawnbreakerSection -> s.transference}),
+    OriginConfigCatalog.toggle<DawnbreakerSection>("dawnbreaker/presence", java.util.function.Function { s: DawnbreakerSection -> s.presence}),
+    OriginConfigCatalog.toggle<DawnbreakerSection>("dawnbreaker/begone", java.util.function.Function { s: DawnbreakerSection -> s.begone}),
+    OriginConfigCatalog.toggle<DawnbreakerSection>("dawnbreaker/radiance", java.util.function.Function { s: DawnbreakerSection -> s.radiantEffects}),
+    OriginConfigCatalog.toggle<DawnbreakerSection>("dawnbreaker/stone_appearance", java.util.function.Function { s: DawnbreakerSection -> s.stoneAppearance})),
     OriginConfigCatalog.entry<ChampionHumanitySection>("champion_humanity", true, java.util.function.Function { c: AndromedaGameplayConfig -> c.championOrigins.champion_humanity},
     OriginConfigCatalog.toggle<ChampionHumanitySection>("champion/humanity_passives", java.util.function.Function { s: ChampionHumanitySection -> s.passiveFeatures}), OriginConfigCatalog.toggle<ChampionHumanitySection>("humanity/primary", java.util.function.Function { s: ChampionHumanitySection -> s.indomitable}),
     OriginConfigCatalog.toggle<ChampionHumanitySection>("champion/humanity_secondary", java.util.function.Function { s: ChampionHumanitySection -> s.mortalTriumph})),

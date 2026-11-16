@@ -60,3 +60,8 @@ The Overgrown build does **not** include an automatic importer, join-time Origin
 ## Overgrown-native replacements
 
 The old Apace-only compatibility power registry is not carried forward. The port uses current Opoli/Overgrown APIs and typed actions/resources where possible, while Andromeda still owns mechanics that have no upstream equivalent and are part of the Origin design, including Veil Step, Mortal Resolve integration, Arachne crafting safety, version handshake, custom sounds/FX, targeted gameplay mixins, the Origin-selection grid, and the `.18` Fzzy Config-backed server-authoritative Origin/power configuration layer.
+
+
+### Dawnbreaker and Dawnquiver
+
+Seraph’s Draw requires a Simply Swords build with Dawnquiver support; current integration is tested against 1.70.2 on both loaders. Other Origins and the rest of Dawnbreaker's kit do not require it. Client-only visual entities delegate directly to its registered renderer, using its normal formation/release animation and configurable scale. The Chorus/draw HUD calls its merged HUD helpers, with a scoped item-use-time override during that draw only. No player item-use state, inventory contents, library code, sound files or textures are copied or modified. Remove client-only visuals on release, suppression, disconnect/world change or API failure. Keep both mods installed on client and server for this feature.

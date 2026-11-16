@@ -56,6 +56,8 @@ Champion variants are hidden from normal selection. Operators can assign one wit
 /origin set <player> origins:origin andromeda_origins:champion_fenrkin
 ```
 
+**Dawnbreaker** is a separate command-only Origin; Champion Gorgon keeps its original kit. Dawnbreaker combines a golden-jade aura, group petrification, safe banishment and a conjured light bow with three Dawn Chorus stages. Assign it with `/origin set <player> origins:origin andromeda_origins:dawnbreaker`. Bind its Presence, Begone and held Seraph’s Draw keys in Controls. The bow, Chorus HUD and bow sounds use installed Simply Swords’ Dawnquiver rendering. Abilities and radiant/stone visuals have independent switches under **Champion Origins → Dawnbreaker** in Fzzy Config.
+
 ## Optional integrations
 
 **Your installed mods can change how abilities look and sound.** Andromeda includes its own sounds and base particle effects. [Spell Engine](https://modrinth.com/mod/spell-engine) adds enhanced particle layers, and [More RPG Library](https://modrinth.com/mod/more-rpg-library) supplies additional particle and sound assets. Install both libraries for the full enhanced layer. These are optional enhancements: missing or unsupported assets are skipped while the bundled effects continue. Cosmetic layers do not change ability damage, cooldowns or resource costs.

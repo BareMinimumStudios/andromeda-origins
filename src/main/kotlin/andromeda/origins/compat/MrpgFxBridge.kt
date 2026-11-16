@@ -47,7 +47,7 @@ object MrpgFxBridge {
             val parameters = api.at.invoke(null, position)
             if (definition.attach && atSource) api.attach.invoke(parameters, entity)
             api.direction.invoke(parameters, entity.lookAngle)
-            api.radius.invoke(parameters, definition.radius.coerceIn(0.1f, 8f))
+            api.radius.invoke(parameters, definition.radius.coerceIn(0.1f, 10f))
             api.intensity.invoke(parameters, definition.intensity.coerceIn(0f, 2f))
             api.color.invoke(parameters, definition.color and 0xffffff)
             // Short, finite bursts need no persistent handles and cannot leave a channel effect running.

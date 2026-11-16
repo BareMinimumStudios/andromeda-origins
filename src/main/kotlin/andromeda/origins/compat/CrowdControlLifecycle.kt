@@ -16,13 +16,14 @@ object CrowdControlLifecycle {
     private val webbed = id("arachne/helper/webbed")
     private val constricted = id("gorgon/helper/constricted")
     private val ophidianed = id("gorgon/helper/ophidianed")
-    private val timed = listOf(ophidianed, infatuated, webbed, constricted)
+    private val sovereign = id("dawnbreaker/helper/ophidianed")
+    private val timed = listOf(ophidianed, sovereign, infatuated, webbed, constricted)
     private data class Shared(val power: ResourceLocation, val owners: List<ResourceLocation>) {
         val counter = ResourceLocation.fromNamespaceAndPath(power.namespace, power.path + "_sources")
     }
     // Resolve the parent petrification first; it owns the remaining restrictions.
     private val shared = listOf(
-        Shared(petrified, listOf(ophidianed)),
+        Shared(petrified, listOf(ophidianed, sovereign)),
         Shared(id("common/restrained"), listOf(petrified, webbed, constricted)),
         Shared(id("common/silenced"), listOf(id("selkie/helper/groundweak"), petrified, infatuated)),
         Shared(id("common/pacified"), listOf(petrified, infatuated))
@@ -43,7 +44,8 @@ object CrowdControlLifecycle {
     /** Combat petrification must not survive login or respawn. Keep unrelated grants. */
     private fun clearGorgon(player: ServerPlayer) {
         val container = PowerContainer.of(player) ?: return
-        for (root in listOf(ophidianed, constricted, petrified)) removeControlTree(container, root)
+        Dawnbreaker.clear(player)
+        for (root in listOf(ophidianed, sovereign, constricted, petrified)) removeControlTree(container, root)
         reconcile(player)
         container.markDirty()
     }
@@ -51,6 +53,7 @@ object CrowdControlLifecycle {
     /** Explicit operator repair clears temporary crowd control without healing or changing Origins. */
     fun clearTemporary(player: ServerPlayer) {
         val container = PowerContainer.of(player) ?: return
+        Dawnbreaker.clear(player)
         for (root in timed + shared.map { it.power }) removeControlTree(container, root)
         reconcile(player)
         container.markDirty()

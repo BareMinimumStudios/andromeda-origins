@@ -1,0 +1,25 @@
+{
+  "type": "origins:multiple",
+  "hidden": true,
+  "color": {
+    "type": "origins:model_color",
+    "red": 0.58,
+    "green": 0.61,
+    "blue": 0.55,
+    "alpha": 1
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "condition": {
+      "type": "origins:power",
+      "power": "andromeda_origins:dawnbreaker/helper/ophidianed",
+      "inverted": true
+    },
+    "entity_action": {
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "andromeda_origins:dawnbreaker_effect"
+    }
+  }
+}

@@ -2,6 +2,13 @@
 
 ## [1.4.84] - 2026-11-15
 
+- Add **Dawnbreaker** as a separate, command-only Origin. Keep standard and Champion Gorgon unchanged. Give Dawnbreaker independent Fzzy Config switches for availability, inherited passives, each ability, radiant effects and stone appearance.
+- Dawnbreaker’s Presence radiates a gold-and-jade aura for 20 seconds. Visible enemies within 10 blocks looking toward the caster move 25% slower; scoreboard allies and allied tame pets are excluded. Effective cooldown: 60 seconds. Add layered radiant arcs/halo, native client-built MRPG ground rings and vanilla fallback particles.
+- Sovereign Ophidian Gaze petrifies up to five foes in a 60-degree cone within 24 blocks for 30 seconds, extending repeated applications up to 60 seconds. Preserve walls, pumpkin equipment, Unstoppable and directional-key escape. Two charges recharge in 60 effective seconds after both are spent. Add optional stone tint and fragments; keep its timer separate from ordinary Gorgon petrification.
+- Begone sends the looked-at player within 32 blocks approximately 500 horizontal blocks farther away from the caster. Find solid, collision-free ground in the same dimension, within 8 blocks per axis of the destination and inside the world border; reject fluids, dangerous surfaces and Nether roof landings. Prepare destination chunks asynchronously. Only a successful teleport spends the 90-second effective cooldown.
+- Seraph’s Draw conjures a visible bow of gold-and-white light while its dedicated key is held, in first person and to observers. Build up to three Dawn Chorus charges, one per second; release to spend them on a damaging light arrow. Base damage is 6 / 10 / 14 before travel and armor; effective cooldown is 10 seconds. Short taps cancel freely. No bow item or ammunition is required. Integrate the installed Simply Swords Dawnquiver visual entity, native Chorus/draw HUD and registered bow sounds; bundle no Simply Swords code or assets. Arrows cannot be picked up and expire after 24 ticks.
+- Keep new activation keys separate, rebindable and initially unbound. Clear active aura/bow state and owned petrification on logout, death, repair, suppression or Origin change without healing or removing overlapping ordinary Gorgon petrification. Preserve cooldowns across reconnects.
+
 - Explicitly protect standard and Champion Lichlings from poison through their existing status-effect immunities.
 
 - Replace the three built-in ray-hit helper commands with typed actions using Opoli's scoped hit coordinates. Preserve the existing helper entities, offsets, impact powers, costs and timing; retain the OP-only command for external datapacks.

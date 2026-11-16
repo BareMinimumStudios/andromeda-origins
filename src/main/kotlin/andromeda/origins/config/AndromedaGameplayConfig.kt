@@ -339,6 +339,17 @@ class AndromedaGameplayConfig : me.fzzyhmstrs.fzzy_config.config.Config(net.mine
         var transference: me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean = AndromedaGameplayConfig.Companion.enabled()
     }
 
+    class DawnbreakerSection : OriginToggleSection() {
+        var seraphsDraw: me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean = AndromedaGameplayConfig.Companion.enabled()
+        var passiveFeatures: me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean = AndromedaGameplayConfig.Companion.enabled()
+        var sovereignGaze: me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean = AndromedaGameplayConfig.Companion.enabled()
+        var transference: me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean = AndromedaGameplayConfig.Companion.enabled()
+        var presence: me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean = AndromedaGameplayConfig.Companion.enabled()
+        var begone: me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean = AndromedaGameplayConfig.Companion.enabled()
+        var radiantEffects: me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean = AndromedaGameplayConfig.Companion.enabled()
+        var stoneAppearance: me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean = AndromedaGameplayConfig.Companion.enabled()
+    }
+
     class ChampionHumanitySection : OriginToggleSection() {
         @me.fzzyhmstrs.fzzy_config.annotations.Comment("Enable or disable Champion Passive Features for Champion Human. Applies immediately and preserves live power resource/cooldown state.")
         var passiveFeatures: me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean = AndromedaGameplayConfig.Companion.enabled()
@@ -439,6 +450,7 @@ class AndromedaGameplayConfig : me.fzzyhmstrs.fzzy_config.config.Config(net.mine
         var champion_fenrkin: ChampionFenrkinSection = ChampionFenrkinSection()
         @me.fzzyhmstrs.fzzy_config.annotations.Comment("Champion Gorgon availability and gameplay powers.")
         var champion_gorgon: ChampionGorgonSection = ChampionGorgonSection()
+        var dawnbreaker: DawnbreakerSection = DawnbreakerSection()
         @me.fzzyhmstrs.fzzy_config.annotations.Comment("Champion Human availability and gameplay powers.")
         var champion_humanity: ChampionHumanitySection = ChampionHumanitySection()
         @me.fzzyhmstrs.fzzy_config.annotations.Comment("Champion Lichling availability and gameplay powers.")

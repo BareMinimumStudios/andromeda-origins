@@ -210,7 +210,7 @@ An event may add this field alongside its existing `particles` and `sounds`:
 
 Use matching compatible MRPG builds on the server and clients. Before sending a native effect, Andromeda checks that every nearby recipient supports `mrpg_lib:fx_play`. Missing libraries, unavailable APIs, unknown effects or unsupported clients use the previous optional-particle path instead. Removing the `mrpg` field also selects that path. Each supported recipient receives one effect payload; the client builds its particles and applies MRPG's own density setting.
 
-The bundled presets are short, finite bursts with no persistent server handles. Radius is bounded to 0.1–8, intensity to 0–2 and duration to 1–20 ticks. The existing enhanced-FX master and particles switches control this path; the sounds switch remains independent. Native support does not turn existing command-along-ray visuals into batched trails automatically.
+The bundled presets are short, finite bursts with no persistent server handles. Radius is bounded to 0.1–10, intensity to 0–2 and duration to 1–20 ticks. The existing enhanced-FX master and particles switches control this path; the sounds switch remains independent. Native support does not turn existing command-along-ray visuals into batched trails automatically.
 
 
 Repeated ticks/trails/pulses use four-tick, low-intensity profiles to limit visual clutter. Other bursts last eight ticks. Auras and selected swirls use `attach: true` to follow their source for this brief lifetime; explicit target-position events always remain at their supplied position. Directional shapes use the source's look direction. No persistent channels or gameplay timers are added. Presets with independent explosion/storm audio are intentionally excluded so the sounds switch continues to control the optional audio layer.
@@ -232,3 +232,26 @@ Repeated ticks/trails/pulses use four-tick, low-intensity profiles to limit visu
 | Wyverian | Separate existing flame/draconic palettes, staged casts and impact rings |
 
 This native path replaces the optional event particle layer only. Existing Spell Engine definitions remain as fallback data, sounds remain independently configurable, and bundled base ability particles, ray trajectories and gameplay are unchanged.
+
+
+## Dawnbreaker — separate command-only Origin
+
+Standard and Champion Gorgon retain their existing kits. Operators can assign the new Origin with:
+
+```mcfunction
+origin set <player> origins:origin andromeda_origins:dawnbreaker
+```
+
+Under **Champion Origins → Dawnbreaker**, Fzzy Config exposes availability, inherited passives, Sovereign Gaze, Transference, Presence, Begone, Seraph’s Draw, radiant effects and stone appearance independently. Command-only availability is retained; Dawnbreaker is excluded from normal/random selection.
+
+Bind **Dawnbreaker’s Presence**, **Begone** and **Seraph’s Draw (Hold)** separately in Controls under Andromeda Origins. All three start unbound to avoid pack conflicts. **Primary** activates Sovereign Ophidian Gaze; **Secondary** retains Transference. New descriptions list effective cooldowns; the new native resource timers do not receive shared Champion recovery a second time.
+
+The halo and aura are Andromeda effects. **Seraph’s Draw uses the actual Dawnquiver bow renderer and Chorus/draw HUD from the installed Simply Swords mod**, rather than a replacement bow model. A client-only Dawnquiver visual entity follows the synchronized draw state; it never becomes a server entity or an inventory item. The scoped HUD adapter feeds our draw progress to Simply Swords’ own HUD helpers without changing the player's item-use or inventory state. Charge, release and impact sounds use its registered sound events. Compatible Simply Swords is required on both sides for Seraph’s Draw; all other Dawnbreaker abilities remain available without it.
+
+No Simply Swords implementation or assets are copied into this mod. Its library remains separately installed. The adapter covers the installed 1.70.2 renderer/HUD and handles the released component format; newer capacity components are optional. Rendering helpers are implementation details and can change upstream. The real weapon's own HUD keeps priority if an actual Dawnquiver is equipped.
+
+Ground effects use paired finite ten-tick MRPG rings where supported, with a vanilla gold/jade dust fallback. Existing Enhanced FX particle and sound switches remain effective. The separate radiant-effects switch also hides the custom light geometry while retaining gameplay; the stone-appearance switch controls native stone tint independently of petrification.
+
+Stone tint and mossy-stone fragments preserve existing skins/artwork. Arbitrary Figura scripts/materials may control their own mesh colors; local Figura compatibility tests do not guarantee identical rendering for every third-party avatar. Readable petrification feedback and movement-key escape remain.
+
+Light arrows use normal projectile collisions and armor, respect friendly teams/allied tame pets, cannot be picked up, and have a tagged 24-tick cleanup even after entity reload. No permanent light-bow entity or persistent cosmetic handle is created.

@@ -28,7 +28,8 @@
     "andromeda_origins:champion_selkie",
     "andromeda_origins:champion_siren",
     "andromeda_origins:champion_veilborn",
-    "andromeda_origins:champion_wyverian"
+    "andromeda_origins:champion_wyverian",
+    "andromeda_origins:dawnbreaker"
   ],
   "allow_random": false,
   "exclude_random": [],

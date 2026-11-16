@@ -1,0 +1,29 @@
+{
+  "powers": [
+    "andromeda_origins:champion/gorgon_passives",
+    "andromeda_origins:common/champion",
+    "andromeda_origins:common/champion_cooldowns",
+    "andromeda_origins:dawnbreaker/primary",
+    "andromeda_origins:gorgon/secondary",
+    "andromeda_origins:gorgon/figura",
+    "andromeda_origins:common/figura",
+    "andromeda_origins:dawnbreaker/presence",
+    "andromeda_origins:dawnbreaker/begone",
+    "andromeda_origins:dawnbreaker/radiance",
+    "andromeda_origins:dawnbreaker/stone_appearance",
+    "andromeda_origins:dawnbreaker/bow"
+  ],
+  "icon": {
+    "id": "andromeda_origins:gorgon_icon"
+  },
+  "unchoosable": true,
+  "order": 114,
+  "impact": 3,
+  "name": "Dawnbreaker",
+  "description": "A command-only radiant sovereign descended from the Gorgon. Wields Sovereign Ophidian Gaze, a golden-jade Dawnbreaker aura and safe targeted banishment. Retains Transference and Champion Gorgon passive benefits. New ability descriptions list effective cooldowns.",
+  "tags": [
+    "andromeda_origins:mystic",
+    "andromeda_origins:champion",
+    "andromeda_origins:gorgon"
+  ]
+}

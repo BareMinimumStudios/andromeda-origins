@@ -39,6 +39,7 @@ object AndromedaOrigins {
         andromeda.origins.action.AndromedaConditions.register()
         AndromedaActions.register()
         AndromedaOriginsCommands.register()
+        andromeda.origins.compat.Dawnbreaker.register()
         MortalResolveManager.register()
         OriginsWorldConfigWarning.register()
         VeilStepManager.register()
