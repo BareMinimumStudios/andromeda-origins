@@ -520,3 +520,14 @@ Full copied Fabric pack gameplay checks passed for aura direction/visibility/all
 The final presentation uses installed Simply Swords 1.70.2's actual Dawnquiver visual entity and HUD helpers, with its registered charge/release/impact sounds. Real-client first-person and observer screenshots were inspected on both loaders. The bridge uses client-only visual entities and a scoped HUD timer; no weapon item, third-party implementation or assets are bundled. Simply Swords and its required dependencies were added only to copied NeoForge fixtures.
 
 Limits: Fabric used the copied full pack and client configs; NeoForge used the isolated compatible setup, since no full NeoForge pack was supplied. Local Figura avatars were loaded. Shaders were disabled. Sound-manager callbacks and registered resources were verified while audio was muted, rather than judged by listening. Banishment used controlled landing platforms; this is not an unloaded-world generation stress test. Arbitrary Figura materials can render tint differently. No live server or original profile was changed.
+
+
+### Dawnbreaker presentation corrections and damage — 1.4.84
+
+The final shipping jars passed revised real-client tests with Figura on the full copied Fabric pack and the isolated NeoForge setup. Each Chorus level produced exactly **10 / 20 / 30 base damage** on unarmored targets. Impact normalization preserves these base values despite normal arrow drag; armor and other damage mitigation still apply. Bow cooldown remains zero. Short taps, suppression cancellation, finite arrow cleanup, reconnect state cleanup, reload and repair passed.
+
+Begone successfully moved a living pig approximately 500 blocks to a controlled safe platform on both loaders. Existing safe-landing and player behavior are retained. Private test fixtures reset saved cooldowns before repeat runs and move the observing client out of the projectile path.
+
+Inspected front/back aura screenshots and golden-arrow flight screenshots on both loaders. Wings are double-sided. Removed repeated cloud shockwaves and reduced dust sizes; sparse MRPG aura motes, golden cast/impact bursts and fine gold trails replace them. The installed Dawnquiver renderer draws flying light-arrow geometry without replacing server damage/collision or adding persistent client-world projectiles. Existing FX visibility switches remain respected. Registered holy release, layered magical flyby and holy impact sound callbacks were received; audio remained muted. Block hits now also trigger impact feedback.
+
+These checks use disposable local worlds/config copies, with shaders disabled. No original profiles or live server were changed; no full NeoForge pack was supplied. Standard and Champion Gorgon and preserved Selkie data remain unchanged.

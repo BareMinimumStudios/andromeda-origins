@@ -60,12 +60,22 @@ object DawnbreakerVisuals {
         }
         pose.popPose()
     }
-    private val bowLight = ResourceLocation.parse("andromeda_origins:dawnbreaker/bow_radiance")
+    private val projectileVisuals = java.util.WeakHashMap<net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity>()
     fun renderProjectile(entity: net.minecraft.world.entity.Entity, x: Double, y: Double, z: Double, pose: PoseStack, buffers: MultiBufferSource) {
         if (entity !is net.minecraft.world.entity.projectile.AbstractArrow || entity.customName?.string != "Dawnbreaker Light Arrow") return
         val owner = entity.owner as? LivingEntity ?: return
         val c = PowerContainer.of(owner) ?: return
-        if (PowerResources.read(c, bowLight).orElse(0.0) <= 0) return
+        if (!c.hasPower(feature) || c.isSuppressed(feature) || PowerResources.read(c, ResourceLocation.parse("andromeda_origins:dawnbreaker/bow_radiance")).orElse(0.0) <= 0) return
+        val client = Minecraft.getInstance()
+        val type = net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.parse("simplyswords:dawnquiver_arrow"))
+        val native = projectileVisuals[entity] ?: type?.create(entity.level())?.also { projectileVisuals[entity] = it }
+        if (native != null && native.javaClass.simpleName == "DawnquiverArrowEntity") {
+            native.setPos(entity.x, entity.y, entity.z)
+            native.deltaMovement = entity.deltaMovement
+            native.tickCount = entity.tickCount
+            client.entityRenderDispatcher.render(native, x, y, z, entity.yRot, 0f, pose, buffers, 15728880)
+            return
+        }
         pose.pushPose(); pose.translate(x, y, z); pose.mulPose(Axis.YP.rotationDegrees(180 - entity.yRot)); pose.mulPose(Axis.XP.rotationDegrees(entity.xRot))
         val v = buffers.getBuffer(RenderType.lightning()); val m = pose.last().pose()
         val a = net.minecraft.world.phys.Vec3(0.0, 0.0, .3); val b = net.minecraft.world.phys.Vec3(0.0, 0.0, -.65)
@@ -93,9 +103,8 @@ object DawnbreakerVisuals {
         val dx = -(y2 - y1) / length * width / 2
         val dy = (x2 - x1) / length * width / 2
         val a = (alpha.coerceIn(0f, 1f) * 255).toInt()
-        v.addVertex(m, (x1 + dx).toFloat(), (y1 + dy).toFloat(), 0f).setColor(r, g, b, a)
-        v.addVertex(m, (x2 + dx).toFloat(), (y2 + dy).toFloat(), 0f).setColor(r, g, b, a)
-        v.addVertex(m, (x2 - dx).toFloat(), (y2 - dy).toFloat(), 0f).setColor(r, g, b, a)
-        v.addVertex(m, (x1 - dx).toFloat(), (y1 - dy).toFloat(), 0f).setColor(r, g, b, a)
+        val points = listOf(x1 + dx to y1 + dy, x2 + dx to y2 + dy, x2 - dx to y2 - dy, x1 - dx to y1 - dy)
+        for (face in listOf(points, points.reversed())) for ((x, y) in face)
+            v.addVertex(m, x.toFloat(), y.toFloat(), 0f).setColor(r, g, b, a)
     }
 }

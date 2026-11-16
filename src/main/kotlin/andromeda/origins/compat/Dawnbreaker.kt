@@ -56,8 +56,8 @@ object Dawnbreaker {
     private val petrify = id("dawnbreaker/helper/ophidianed")
     private val oppressed = id("dawnbreaker/helper/oppressed")
     private val pumpkin = TagKey.create(Registries.ITEM, ResourceLocation.parse("origins:pumpkin_like/equipment"))
-    private val gold = DustParticleOptions(Vector3f(1f, .78f, .23f), 1.15f)
-    private val jade = DustParticleOptions(Vector3f(.32f, .81f, .55f), 1f)
+    private val gold = DustParticleOptions(Vector3f(1f, .78f, .23f), .55f)
+    private val jade = DustParticleOptions(Vector3f(.32f, .81f, .55f), .45f)
     private val affected = mutableSetOf<LivingEntity>()
     private val statues = mutableMapOf<LivingEntity, MutableSet<UUID>>()
     private data class Pending(val target: UUID, val level: ServerLevel, val from: Vec3, val expires: Int)
@@ -159,7 +159,8 @@ object Dawnbreaker {
     private fun holdBow(player: ServerPlayer) {
         if (!lightBowAvailable) { say(player, "Seraph’s Draw requires Simply Swords with Dawnquiver support."); return }
 
-        if (!usable(player, bow) || resource(player, bow, "cooldown") > 0) return
+        if (!usable(player, bow)) return
+        set(player, bow, "cooldown", 0.0)
         if (player.uuid !in held) bowSound(player.serverLevel(), player.position(), "magic_bow_charge_long_version", net.minecraft.sounds.SoundEvents.BEACON_POWER_SELECT, .45f, 1f)
         held[player.uuid] = player.server.tickCount
     }
@@ -191,15 +192,21 @@ object Dawnbreaker {
                 net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.ARROW), null)
             arrow.pickup = net.minecraft.world.entity.projectile.AbstractArrow.Pickup.DISALLOWED
             arrow.setNoGravity(true)
-            arrow.setBaseDamage((2.0 + chorus * 4.0) / 3.0)
+            arrow.setBaseDamage(chorus * 10.0 / 3.0)
             arrow.customName = Component.literal("Dawnbreaker Light Arrow")
             arrow.isCustomNameVisible = false
             arrow.addTag("andromeda_dawn_light")
+            arrow.addTag("andromeda_dawn_chorus_$chorus")
             arrow.shootFromRotation(player, player.xRot, player.yRot, 0f, 3f, 0f)
             if (!player.serverLevel().addFreshEntity(arrow)) return
-            set(player, bow, "cooldown", 200.0)
+            set(player, bow, "cooldown", 0.0)
             sound(player.serverLevel(), player.position(), net.minecraft.sounds.SoundEvents.ARROW_SHOOT, .65f, 1.3f)
             bowSound(player.serverLevel(), player.position(), "elemental_bow_holy_shoot_flyby_01", net.minecraft.sounds.SoundEvents.TRIDENT_THROW.value(), .65f, 1f)
+            bowSound(player.serverLevel(), player.position(), "magic_bow_shoot_flyby_02", net.minecraft.sounds.SoundEvents.TRIDENT_THROW.value(), .8f, 1f)
+            if (radiant(player)) {
+                MrpgFxBridge.play(player.serverLevel(), player.eyePosition.add(player.lookAngle), EnhancedFxDefinitions.MrpgDefinition("mrpg_lib:preset/cast", .65f, .45f, 0xffd878, 6), player, false)
+                player.serverLevel().sendParticles(ParticleTypes.FLASH, arrow.x, arrow.y, arrow.z, 1, 0.0, 0.0, 0.0, 0.0)
+            }
             say(player, "Seraph’s Draw — ${chorus} Chorus released")
         }
     }
@@ -212,11 +219,11 @@ object Dawnbreaker {
         // Ray-box targeting is narrow and stops at blocks; unrelated bystanders are never substituted.
         val hitBlock = player.serverLevel().clip(ClipContext(eye, end, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player))
         val limit = eye.distanceToSqr(hitBlock.location)
-        val target = player.serverLevel().players().filter { it !== player && it.isAlive && !it.isSpectator && !it.isVehicle }
+        val target = player.serverLevel().getEntitiesOfClass(LivingEntity::class.java, player.boundingBox.expandTowards(player.lookAngle.scale(32.0)).inflate(1.0)) { it !== player && it.isAlive && !it.isSpectator && !it.isVehicle }
             .mapNotNull { candidate -> candidate.boundingBox.inflate(.15).clip(eye, end).orElse(null)?.let { candidate to it } }
             .filter { eye.distanceToSqr(it.second) < limit && eye.distanceToSqr(it.second) <= 32.0 * 32.0 }
             .minByOrNull { eye.distanceToSqr(it.second) }?.first
-        if (target == null) { say(player, "Look directly at a player within 32 blocks."); return }
+        if (target == null) { say(player, "Look directly at a player or mob within 32 blocks."); return }
         var away = Vec3(target.x - player.x, 0.0, target.z - player.z)
         if (away.lengthSqr() < .0001) away = Vec3(player.lookAngle.x, 0.0, player.lookAngle.z)
         if (away.lengthSqr() < .0001) away = Vec3(0.0, 0.0, 1.0)
@@ -236,9 +243,9 @@ object Dawnbreaker {
             player.server.execute {
                 if (pending[player.uuid] !== request) return@execute
                 pending.remove(player.uuid)
-                val victim = player.server.playerList.getPlayer(request.target)
+                val victim = level.getEntity(request.target) as? LivingEntity
                 if (error != null || victim == null || !usable(player, begone) || resource(player, begone, "cooldown") > 0 ||
-                    victim.serverLevel() !== level || player.serverLevel() !== level || !victim.isAlive || victim.isSpectator ||
+                    victim.level() !== level || player.serverLevel() !== level || !victim.isAlive || victim.isSpectator ||
                     victim.distanceToSqr(request.from) > 16.0 || player.distanceToSqr(victim) > 36.0 * 36.0 || !player.hasLineOfSight(victim)) {
                     say(player, "Banishment cancelled; no cooldown spent."); return@execute
                 }
@@ -257,22 +264,41 @@ object Dawnbreaker {
                 ring(player, level, old, 1.4, 40); ring(player, level, landing, 1.4, 40)
                 sound(level, old, net.minecraft.sounds.SoundEvents.ENDERMAN_TELEPORT, .7f, 1.4f)
                 sound(level, landing, net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_RESONATE, .6f, 1.2f)
-                say(player, "Begone."); say(victim, "The Dawnbreaker has banished you.")
+                say(player, "Begone."); if (victim is ServerPlayer) say(victim, "The Dawnbreaker has banished you.")
             }
+        }
+    }
+    fun prepareLightArrowDamage(arrow: net.minecraft.world.entity.projectile.AbstractArrow) {
+        if (arrow.level().isClientSide || "andromeda_dawn_light" !in arrow.tags) return
+        val chorus = (1..3).firstOrNull { "andromeda_dawn_chorus_$it" in arrow.tags } ?: return
+        val speed = arrow.deltaMovement.length()
+        // Vanilla multiplies base damage by current speed and rounds up. Normalize at impact
+        // so air drag cannot turn the promised 10/20/30 into lower damage at longer ranges.
+        if (speed.isFinite() && speed > .0001) arrow.setBaseDamage((chorus * 10.0 - .00001) / speed)
+    }
+    fun lightArrowTrail(arrow: net.minecraft.world.entity.projectile.AbstractArrow) {
+        if ("andromeda_dawn_light" !in arrow.tags) return
+        val level = arrow.level() as? ServerLevel ?: return
+        val caster = arrow.owner as? ServerPlayer ?: return
+        if (!radiant(caster)) return
+        val step = arrow.deltaMovement.scale(1.0 / 5)
+        for (i in 0..4) {
+            val at = arrow.position().subtract(step.scale(i.toDouble()))
+            level.sendParticles(gold, at.x, at.y, at.z, 1, .015, .015, .015, 0.0)
         }
     }
     fun lightArrowImpact(arrow: net.minecraft.world.entity.projectile.AbstractArrow, at: Vec3) {
         if ("andromeda_dawn_light" !in arrow.tags) return
         val level = arrow.level() as? ServerLevel ?: return
         val caster = arrow.owner as? ServerPlayer ?: return
-        bowSound(level, at, "magic_bow_shoot_impact_02", net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_BREAK, .55f, 1f)
+        bowSound(level, at, "elemental_bow_holy_shoot_impact_01", net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_BREAK, .55f, 1f)
         if (radiant(caster)) {
             level.sendParticles(ParticleTypes.END_ROD, at.x, at.y, at.z, 12, .18, .18, .18, .07)
-            ring(caster, level, at, .8, 18)
+            MrpgFxBridge.play(level, at, EnhancedFxDefinitions.MrpgDefinition("mrpg_lib:preset/impact", .8f, .5f, 0xffd878, 6), caster, false)
         }
     }
 
-    private fun safeLanding(level: ServerLevel, victim: ServerPlayer, column: BlockPos): Vec3? {
+    private fun safeLanding(level: ServerLevel, victim: LivingEntity, column: BlockPos): Vec3? {
         if (!level.hasChunk(column.x shr 4, column.z shr 4)) return null
         val y = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, column.x, column.z)
         if (y <= level.minBuildHeight || y + ceil(victim.bbHeight.toDouble()).toInt() >= level.maxBuildHeight ||
@@ -362,8 +388,8 @@ object Dawnbreaker {
             if (resource(caster, aura, "active") <= 0) continue
             val level = caster.serverLevel()
             if (server.tickCount % 10 == 0 && radiant(caster)) {
-                ring(caster, level, caster.position(), 10.0, 48)
-                for (i in 0..7) {
+                MrpgFxBridge.play(level, caster.position().add(0.0, .15, 0.0), EnhancedFxDefinitions.MrpgDefinition("mrpg_lib:preset/aura", 1.1f, .12f, 0xffd878, 10), caster, false)
+                for (i in 0..3) {
                     val angle = i * Math.PI / 4 + server.tickCount * .035
                     level.sendParticles(ParticleTypes.END_ROD, caster.x + cos(angle) * .8, caster.y + 2.1 + sin(server.tickCount * .07) * .12, caster.z + sin(angle) * .8, 1, 0.0, .025, 0.0, .005)
                 }
@@ -391,11 +417,6 @@ object Dawnbreaker {
     }
     private fun ring(entity: LivingEntity, level: ServerLevel, pos: Vec3, radius: Double, count: Int) {
         if (entity !is ServerPlayer || !radiant(entity)) return
-        // Client-built rings avoid one network particle packet per point when MRPG is available.
-        if (MrpgFxBridge.play(level, pos, EnhancedFxDefinitions.MrpgDefinition("mrpg_lib:preset/shockwave", radius.toFloat(), .35f, 0xffc73b, 10), entity, false)) {
-            MrpgFxBridge.play(level, pos, EnhancedFxDefinitions.MrpgDefinition("mrpg_lib:preset/shockwave", (radius * .9).toFloat(), .25f, 0x52cf8c, 10), entity, false)
-            return
-        }
         for (i in 0 until count) {
             val angle = i * Math.PI * 2 / count
             level.sendParticles(if (i % 2 == 0) gold else jade, pos.x + cos(angle) * radius, pos.y + .12, pos.z + sin(angle) * radius, 1, 0.0, .025, 0.0, 0.0)

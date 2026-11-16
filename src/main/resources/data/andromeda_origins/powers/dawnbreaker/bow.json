@@ -1,7 +1,7 @@
 {
   "type": "origins:multiple",
   "name": "Seraph’s Draw",
-  "description": "Hold the Seraph’s Draw key to conjure a visible bow of golden light. Build one Dawn Chorus per second, up to three. Release to spend Chorus and fire an arrow of light: 6 / 10 / 14 base damage before distance and armor. Releasing before one Chorus cancels freely. Effective cooldown: 10 seconds. No bow item or ammunition required. Requires Simply Swords with Dawnquiver support on the server and client for the original bow, HUD and sound presentation.",
+  "description": "Hold the Seraph’s Draw key to conjure a visible bow of golden light. Build one Dawn Chorus per second, up to three. Release to spend Chorus and fire an arrow of light: 10 / 20 / 30 base damage before armor. Releasing before one Chorus cancels freely. No cooldown between draws. No bow item or ammunition required. Requires Simply Swords with Dawnquiver support on the server and client for the original bow, HUD and sound presentation.",
   "draw": {
     "type": "origins:resource",
     "min": 0,
