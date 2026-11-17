@@ -52,6 +52,16 @@ clock_tick = champ_secondary['soundcooldown_tick']
 check(clock['type'] in ('origins:resource', 'apoli:resource') and
       abs(clock['max'] * clock_tick['interval'] / abs(clock_tick['entity_action']['change']) / 20 - 1) < 0.001,
       'Champion Fenrkin stamina drain must use an independent one-second clock')
+# Diets retain stable power IDs but must never block ordinary food consumption.
+for diet in ('common/diet_carnivore','common/diet_pescatarian','common/diet_vegetarian','common/diet_raw','siren/diet_carnivore'):
+    definition = powers['andromeda_origins:' + diet]
+    check(not any(n.get('type') in ('origins:prevent_item_use','apoli:prevent_item_use') for n in walk(definition)), f'{diet}: hard food restriction remains')
+    penalty = definition['restriction']
+    check(penalty.get('type') == 'origins:modify_food' and all(penalty.get(key, {}).get('amount') == -0.75 for key in ('food_modifier','saturation_modifier')), f'{diet}: incorrect off-diet nourishment')
+    check(penalty['item_condition'] == definition['tooltip']['item_condition'], f'{diet}: tooltip differs from applied diet')
+for raw_origin in ('gorgon','lichling'):
+    check('item_condition' in powers['andromeda_origins:' + raw_origin + '/passives']['good_digestion'], f'{raw_origin}: off-diet foods must not receive 4x digestion')
+
 known = set(powers)
 for identifier, definition in powers.items():
     if definition.get('type') in ('origins:multiple','apoli:multiple'):

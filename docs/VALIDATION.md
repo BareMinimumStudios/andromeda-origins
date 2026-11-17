@@ -536,3 +536,12 @@ These checks use disposable local worlds/config copies, with shaders disabled. N
 ### Dawnbreaker cooldown removal — 1.4.84
 
 Removed Presence and Begone cooldown guards and writes, retained the 20-second aura duration and safe asynchronous mob/player landing search. Legacy resources remain for saved-data compatibility, are hidden and cleared on lifecycle cleanup/activation. Gaze recharge and bow damage are unchanged. Both loader builds and resource validation pass; the immediately preceding real-client runs cover the unchanged targeting, visuals and damage. This small follow-up did not repeat the full-pack client matrix.
+
+
+### Soft dietary preferences — 2026-11-17, 1.4.84
+
+Replaced the five shared/Siren food-use blockers with native item-conditioned Modify Food powers, retaining the existing root/child IDs, classification tags, exemptions and Fzzy suppression switches. Off-diet nutrition and saturation each multiply by 0.25; native whole-point nutrition rounds down. Preferred foods retain their existing modifiers. Standard Gorgon/Lichling digestion now checks raw/exempt tags or a disabled raw diet, preventing its 4x bonus from negating the off-diet penalty. Champion food exemptions and independent Manticore digestion are unchanged.
+
+Both shipping jars passed 48 focused native checks each, on isolated NeoForge and the copied full Fabric server. Unspawned living-entity owners exercised Opoli's actual ModifyFoodHandler with real item tags and standardized 8-nutrition/8-saturation components: preferred/exempt foods returned 8/8, off-diet and custom-component food returned 2/2; suppression, restoration and removal behaved correctly. Gorgon/Lichling raw/exempt foods returned 32/32 while cooked off-diet food returned 2/2, disabling the diet restored unrestricted 32/32, and Champion bonuses remained 32/32. Manticore's own half-efficiency remained, giving 4/4 preferred and 1/1 off-diet. Metadata/container/effect lists were preserved and diet containers had no Prevent Item Use powers. These are native modifier evaluations, not real-client eating/tooltip captures or direct placed-block meal tests.
+
+Both loader builds, native resource loading and orderly shutdown passed. The standalone validator enforces soft diets and matching tooltip predicates; all 21 preserved Selkie baselines still match. Test-only addons are outside production sources/artifacts and were removed from copied fixtures afterward. No live server or original pack profile was touched. The source ZIP remains flat; version remains 1.4.84.

@@ -2,6 +2,8 @@
 
 ## [1.4.84] - 2026-11-15
 
+- Replace hard carnivore, pescatarian, vegetarian and raw-food restrictions with off-diet nourishment penalties. Every Origin can eat any food; off-diet food restores 25% hunger and saturation, with hunger rounded down. Preserve preferred foods, diet exemptions, Siren drinks and existing Fzzy diet switches. Keep standard Gorgon/Lichling 4× digestion on raw/exempt foods so it cannot cancel the off-diet penalty; disabling their diet restores unrestricted digestion. Champion dietary exemptions, independent food-balance rules and golden-food revival protection remain unchanged.
+
 - Remove Dawnbreaker’s Presence and Begone cooldowns. Presence can refresh its 20-second duration immediately; Begone retains safe destination checks and one pending search per caster. Clear legacy cooldown state on login/cleanup and hide obsolete cooldown bars.
 
 - Refine Dawnbreaker aura particles with subtle MRPG light, render radiant wings from both sides, use native Dawnquiver golden projectile rendering with release/impact sounds and gold trails, remove Seraph’s Draw cooldown, and allow safe Begone targeting of living mobs as well as players.

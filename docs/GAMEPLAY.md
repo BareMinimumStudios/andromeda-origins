@@ -32,6 +32,20 @@ Disabled powers are **suppressed through Opoli**, not revoked. Ownership and sto
 
 Ordinary Fzzy Config changes apply live; a full game/server restart is normally unnecessary. `/reload` is only relevant when datapacks themselves are being changed. Fzzy Config's `SaveType.SEPARATE` is used so a remote server's synced gameplay settings do not overwrite the player's local/single-player config file.
 
+## Dietary preferences
+
+Every Andromeda Origin can eat any ordinary food item. Dietary preferences reduce **off-diet hunger and saturation to 25%**, rather than preventing eating. Hunger uses whole points and rounds down, so small off-diet snacks may restore no hunger. Preferred food retains existing Origin benefits and independent food-balance settings.
+
+| Preference | Standard Origins |
+| --- | --- |
+| Meat | Arachne, Fenrkin, Manticore, Siren, Wyverian |
+| Raw foods | Gorgon, Lichling |
+| Pescatarian | Nereid, Selkie |
+| Vegetarian | Satyr |
+| Unrestricted | Faerie, Humanity, Veilborn; Champion variants |
+
+Diet tags still determine which modded foods are preferred. `origins:ignore_diet` items and Siren drink exemptions are unchanged. Gorgon/Lichling raw and exempt foods retain 4× digestion; off-diet foods do not receive that bonus. Manticore's independent food-efficiency penalty still applies. Disabling an Origin's diet in Fzzy Config removes its dietary penalty; disabling raw diets restores unrestricted digestion. Ordinary food effects and containers, golden-food revival protection, and existing food-balance switches are unchanged. These preferences apply to food-item consumption; direct world-block feeding mechanics are owned by their respective mods.
+
 ## Origin roster
 
 | Origin | Primary | Secondary / additional active | Identity |

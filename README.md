@@ -10,6 +10,9 @@ Read your abilities in the in-game Origin reader, track cooldowns and resources 
 
 [Download on Modrinth](https://modrinth.com/mod/andromeda-origins) · [Download on CurseForge](https://www.curseforge.com/minecraft/mc-mods/andromeda-origins) · [Community](https://discord.gg/pcRw79hwey)
 
+
+Dietary Origins can eat any food. Preferred foods retain their normal benefits; off-diet foods restore only **25% hunger and saturation** (hunger rounds down). Diet-exempt items and Siren drinks keep their exemptions. Existing server diet switches control this penalty; Champions retain their dietary exemptions.
+
 ## Origin roster
 
 | Origin | Playstyle |

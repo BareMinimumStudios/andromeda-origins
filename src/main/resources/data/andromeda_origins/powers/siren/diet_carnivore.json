@@ -1,7 +1,7 @@
 {
   "type": "origins:multiple",
   "restriction": {
-    "type": "origins:prevent_item_use",
+    "type": "origins:modify_food",
     "item_condition": {
       "type": "origins:all_of",
       "conditions": [
@@ -30,6 +30,14 @@
           "type": "origins:food"
         }
       ]
+    },
+    "food_modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.75
+    },
+    "saturation_modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.75
     }
   },
   "tooltip": {
@@ -64,10 +72,10 @@
       ]
     },
     "text": {
-      "text": "Carnivorous Diet: you cannot eat this item.",
+      "text": "Carnivorous Diet: off-diet food restores only 25% hunger and saturation.",
       "color": "red"
     }
   },
   "name": "Carnivorous Diet",
-  "description": "You can only consume foods classified as meat. Siren drinks and diet-exempt items are unaffected."
+  "description": "You can eat any food. Foods outside your meat diet restore only 25% hunger and saturation (hunger rounds down). Siren drinks and diet-exempt items are unaffected."
 }

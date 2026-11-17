@@ -1,7 +1,7 @@
 {
   "type": "origins:multiple",
   "restriction": {
-    "type": "origins:prevent_item_use",
+    "type": "origins:modify_food",
     "item_condition": {
       "type": "origins:all_of",
       "conditions": [
@@ -23,6 +23,14 @@
           "type": "origins:food"
         }
       ]
+    },
+    "food_modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.75
+    },
+    "saturation_modifier": {
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.75
     }
   },
   "tooltip": {
@@ -50,10 +58,10 @@
       ]
     },
     "text": {
-      "text": "Pescatarian Diet: you cannot eat this item.",
+      "text": "Pescatarian Diet: off-diet food restores only 25% hunger and saturation.",
       "color": "red"
     }
   },
   "name": "Pescatarian Diet",
-  "description": "You can only consume foods classified as pescatarian. Diet-exempt foods and drinks are unaffected."
+  "description": "You can eat any food. Foods outside your pescatarian diet restore only 25% hunger and saturation (hunger rounds down). Diet-exempt foods and drinks are unaffected."
 }

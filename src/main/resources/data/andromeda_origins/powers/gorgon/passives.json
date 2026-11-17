@@ -391,6 +391,31 @@
     "saturation_modifier": {
       "operation": "multiply_total_multiplicative",
       "amount": 3
+    },
+    "item_condition": {
+      "type": "origins:any_of",
+      "conditions": [
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "andromeda_origins:food/allraw"
+          }
+        },
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "origins:ignore_diet"
+          }
+        },
+        {
+          "type": "origins:holder",
+          "entity_condition": {
+            "type": "origins:power_active",
+            "power": "andromeda_origins:common/diet_raw",
+            "inverted": true
+          }
+        }
+      ]
     }
   },
   "badges": [
