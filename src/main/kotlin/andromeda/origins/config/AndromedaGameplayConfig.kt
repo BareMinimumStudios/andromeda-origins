@@ -340,6 +340,12 @@ class AndromedaGameplayConfig : me.fzzyhmstrs.fzzy_config.config.Config(net.mine
     }
 
     class DawnbreakerSection : OriginToggleSection() {
+        @me.fzzyhmstrs.fzzy_config.annotations.Comment("Enable Kneel: a three-second grounding command within 12 blocks, with no cooldown.")
+        var kneel: me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean = AndromedaGameplayConfig.Companion.enabled()
+        @me.fzzyhmstrs.fzzy_config.annotations.Comment("Enable Stillwater Guard: hold up to eight incoming vanilla arrows, snowballs or eggs for at most eight seconds; release to redirect.")
+        var stillwaterGuard: me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean = AndromedaGameplayConfig.Companion.enabled()
+        @me.fzzyhmstrs.fzzy_config.annotations.Comment("Animate Dawnbreaker stone appearance rising over two seconds. Disabling keeps immediate stone tint; Stone Appearance controls the entire stone visual.")
+        var gradualPetrification: me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean = AndromedaGameplayConfig.Companion.enabled()
         var seraphsDraw: me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean = AndromedaGameplayConfig.Companion.enabled()
         var passiveFeatures: me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean = AndromedaGameplayConfig.Companion.enabled()
         var sovereignGaze: me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean = AndromedaGameplayConfig.Companion.enabled()

@@ -1,0 +1,56 @@
+{
+  "type": "origins:multiple",
+  "hidden": true,
+  "lease": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 60,
+    "start_value": 60,
+    "hud_render": {
+      "should_render": false
+    },
+    "min_action": {
+      "type": "origins:revoke_power",
+      "power": "*:*",
+      "source": "andromeda_origins:dawnbreaker_effect"
+    }
+  },
+  "timer": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_lease",
+      "change": -1
+    }
+  },
+  "jump": {
+    "type": "origins:modify_jump",
+    "modifier": {
+      "operation": "max_total",
+      "amount": 0
+    }
+  },
+  "elytra": {
+    "type": "origins:prevent_elytra_flight"
+  },
+  "speed": {
+    "type": "origins:attribute",
+    "update_health": false,
+    "modifier": {
+      "id": "andromeda_origins:dawn_kneel",
+      "attribute": "minecraft:generic.movement_speed",
+      "operation": "multiply_total_multiplicative",
+      "amount": -0.5
+    }
+  },
+  "radiance": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  }
+}

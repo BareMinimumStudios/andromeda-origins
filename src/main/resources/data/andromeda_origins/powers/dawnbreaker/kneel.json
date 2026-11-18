@@ -1,0 +1,44 @@
+{
+  "type": "origins:multiple",
+  "name": "Kneel",
+  "description": "Command visible enemies within 12 blocks to descend and lose jumping/gliding for 3 seconds. Movement is slowed by 50%; cameras remain free. Respects PvP, protected teams and Unstoppable. Does not pull through blocks or inflict fall damage during grounding. No cooldown.",
+  "cast": {
+    "type": "origins:active_self",
+    "cooldown": 1,
+    "hud_render": {
+      "should_render": false
+    },
+    "key": {
+      "key": "key.andromeda_origins.kneel",
+      "continuous": false
+    },
+    "entity_action": {
+      "type": "andromeda_origins:dawnbreaker",
+      "kind": "kneel"
+    }
+  },
+  "cooldown": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 120,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "tick": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "condition": {
+      "type": "origins:resource",
+      "resource": "*:*_cooldown",
+      "comparison": ">",
+      "compare_to": 0
+    },
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "*:*_cooldown",
+      "change": -1
+    }
+  }
+}

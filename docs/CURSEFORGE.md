@@ -59,7 +59,7 @@ Champion variants are hidden from normal selection. Operators can assign one wit
 /origin set <player> origins:origin andromeda_origins:champion_fenrkin
 ```
 
-**Dawnbreaker** is a separate command-only Origin; Champion Gorgon keeps its original kit. Dawnbreaker combines a golden-jade aura, group petrification, safe banishment and a conjured light bow with three Dawn Chorus stages. Assign it with `/origin set <player> origins:origin andromeda_origins:dawnbreaker`. Bind its Presence, Begone and held Seraph’s Draw keys in Controls. The bow, Chorus HUD and bow sounds use installed Simply Swords’ Dawnquiver rendering. Abilities and radiant/stone visuals have independent switches under **Champion Origins → Dawnbreaker** in Fzzy Config.
+**Dawnbreaker** is a separate command-only Origin; Champion Gorgon keeps its original kit. Dawnbreaker combines a golden-jade aura, group petrification, safe banishment and a conjured light bow with three Dawn Chorus stages. Assign it with `/origin set <player> origins:origin andromeda_origins:dawnbreaker`. Bind Presence, Begone, Kneel, Stillwater Guard (Hold) and Seraph’s Draw (Hold) in Controls. Kneel grounds nearby enemies; Stillwater suspends and redirects incoming arrows, snowballs and eggs. Petrification gains a rising gold-seamed stone transition. These features have individual Fzzy switches. The bow, Chorus HUD and bow sounds use installed Simply Swords’ Dawnquiver rendering. Abilities and radiant/stone visuals have independent switches under **Champion Origins → Dawnbreaker** in Fzzy Config.
 
 ## Optional integrations
 

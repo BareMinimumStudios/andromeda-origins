@@ -23,6 +23,7 @@ object DawnbreakerVisuals {
         val viewer = Minecraft.getInstance().player ?: return
         if (entity.isInvisibleTo(viewer) || viewer.distanceToSqr(entity) > 48.0 * 48.0) return
         val c = PowerContainer.of(entity) ?: return
+        SovereignVisuals.render(entity, x, y, z, delta, pose, buffers)
         if (!c.hasPower(feature) || c.isSuppressed(feature) || PowerResources.read(c, active).orElse(0.0) <= 0 ||
             PowerResources.read(c, visible).orElse(0.0) <= 0) { appearing.remove(entity); return }
         val age = entity.tickCount + delta

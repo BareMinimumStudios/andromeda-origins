@@ -5,6 +5,7 @@ abstract class DawnbreakerArrowMixin {
     @org.spongepowered.asm.mixin.injection.Inject(method = ["tick"], at = [org.spongepowered.asm.mixin.injection.At("HEAD")], cancellable = true)
     private fun expireLightArrow(ci: org.spongepowered.asm.mixin.injection.callback.CallbackInfo) {
         val arrow = this as Any as net.minecraft.world.entity.projectile.AbstractArrow
+        if (andromeda.origins.compat.SovereignArts.isFrozen(arrow)) { ci.cancel(); return }
         andromeda.origins.compat.Dawnbreaker.lightArrowTrail(arrow)
         if (!arrow.level().isClientSide && "andromeda_dawn_light" in arrow.tags && arrow.tickCount >= 24) {
             arrow.discard(); ci.cancel()

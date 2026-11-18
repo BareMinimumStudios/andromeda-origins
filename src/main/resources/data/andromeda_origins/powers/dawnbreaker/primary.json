@@ -1,7 +1,7 @@
 {
   "type": "origins:multiple",
   "name": "Sovereign Ophidian Gaze",
-  "description": "Petrify up to five visible foes in a 60-degree forward cone within 24 blocks for 30 seconds. Repeated casts extend petrification up to 60 seconds. Direction keys break free faster; pumpkin protection and Unstoppable remain effective. Two charges; 60-second effective recharge after both are spent. Player targets respect server PvP and team friendly-fire protections; rank/nameplate team membership alone does not grant immunity.",
+  "description": "Petrify up to five visible foes in a 60-degree forward cone within 24 blocks for 30 seconds. Repeated casts extend petrification up to 60 seconds. Direction keys break free faster; pumpkin protection and Unstoppable remain effective. No cooldown or charge restriction. Player targets respect server PvP and team friendly-fire protections; rank/nameplate team membership alone does not grant immunity.",
   "charges": {
     "type": "origins:resource",
     "min": 0,
@@ -17,19 +17,7 @@
     "max": 1200,
     "start_value": 0,
     "hud_render": {
-      "sprite_location": "andromeda_origins:textures/gui/resource_bars_1.png",
-      "bar_index": 14,
-      "condition": {
-        "type": "origins:resource",
-        "resource": "*:*_recharge",
-        "comparison": ">",
-        "compare_to": 0
-      },
-      "fallback": {
-        "sprite_location": "apoli:textures/gui/resource_bar.png",
-        "bar_index": 0,
-        "icon_index": 0
-      }
+      "should_render": false
     },
     "min_action": {
       "type": "origins:change_resource",

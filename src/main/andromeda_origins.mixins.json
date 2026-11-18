@@ -41,6 +41,7 @@
     "FoodBalanceFoodDataMixin",
     "NereidGillsPowerMixin",
     "NonPlayerRestraintMixin",
-    "DawnbreakerArrowMixin"
+    "DawnbreakerArrowMixin",
+    "StillwaterThrowableMixin"
   ]
 }

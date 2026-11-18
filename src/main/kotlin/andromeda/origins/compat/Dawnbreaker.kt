@@ -73,18 +73,20 @@ object Dawnbreaker {
                     "dawnbreaker" -> castAura(player)
                     "begone" -> castBanish(player)
                     "bow" -> holdBow(player)
+                    "kneel" -> SovereignArts.kneel(player)
+                    "stillwater" -> SovereignArts.hold(player)
                 }
             }
         })
     }
 
-    private fun owns(player: ServerPlayer, power: ResourceLocation): Boolean {
+    internal fun owns(player: ServerPlayer, power: ResourceLocation): Boolean {
         val c = PowerContainer.of(player) ?: return false
         return player.isAlive && !player.isSpectator &&
             PlayerOriginsAttachment.get(player)?.snapshot()?.containsValue(origin) == true &&
             c.hasPower(power) && !c.isSuppressed(power)
     }
-    private fun usable(player: ServerPlayer, power: ResourceLocation): Boolean {
+    internal fun usable(player: ServerPlayer, power: ResourceLocation): Boolean {
         val c = PowerContainer.of(player) ?: return false
         return owns(player, power) && !IncapacitatedCompat.isDowned(player) &&
             !(c.hasPower(id("common/silenced")) && !c.isSuppressed(id("common/silenced"))) &&
@@ -113,7 +115,7 @@ object Dawnbreaker {
         }
         return false
     }
-    private fun validTarget(actor: ServerPlayer, target: LivingEntity): Boolean = target.isAlive &&
+    internal fun validTarget(actor: ServerPlayer, target: LivingEntity): Boolean = target.isAlive &&
         !target.isSpectator && target !== actor && target.level() === actor.level() && !ally(actor, target) &&
         !(target is ServerPlayer && !actor.canHarmPlayer(target)) &&
         !(PowerContainer.of(target)?.let { it.hasPower(id("common/unstoppable")) && !it.isSuppressed(id("common/unstoppable")) } ?: false)
@@ -137,9 +139,8 @@ object Dawnbreaker {
     }
     private fun castGaze(player: ServerPlayer) {
         if (!usable(player, gaze)) return
-        if (resource(player, gaze, "charges") < 1 || resource(player, gaze, "recharge") > 0) {
-            say(player, "Sovereign Gaze is recharging."); return
-        }
+        set(player, gaze, "charges", 2.0)
+        set(player, gaze, "recharge", 0.0)
         val eye = player.eyePosition
         val look = player.lookAngle
         val visibleTargets = player.serverLevel().getEntitiesOfClass(LivingEntity::class.java, player.boundingBox.inflate(24.0)) {
@@ -154,17 +155,19 @@ object Dawnbreaker {
             val old = if (c.hasPower(petrify)) resource(target, petrify, "remove") else 0.0
             c.addPower(petrify, cc)
             set(target, petrify, "remove", (old + 30.0).coerceAtMost(60.0))
-            if (owns(player, stoneAppearance)) c.addPower(stone, source)
+            if (owns(player, stoneAppearance)) {
+                val beginning = source !in c.sourcesOf(stone)
+                c.addPower(stone, source)
+                if (beginning) set(target, stone, "progress", 0.0)
+                set(target, stone, "gradual", if (owns(player, id("dawnbreaker/gradual_petrification"))) 1.0 else 0.0)
+            }
             c.markDirty()
             statues.getOrPut(target) { mutableSetOf() }.add(player.uuid)
             if (radiant(player)) shards(target)
         }
-        val left = resource(player, gaze, "charges") - 1
-        set(player, gaze, "charges", left)
-        if (left <= 0) set(player, gaze, "recharge", 1200.0)
         sound(player.serverLevel(), player.position(), net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_RESONATE, .7f, .6f)
         ring(player, player.serverLevel(), player.position(), 2.0, 40)
-        say(player, "Sovereign Gaze — ${targets.size} petrified; ${left.toInt()} charges")
+        say(player, "Sovereign Gaze — ${targets.size} petrified")
     }
 
     private val lightBowAvailable by lazy {
@@ -338,20 +341,23 @@ object Dawnbreaker {
         Platform.disconnect { handler, _ -> clear(handler.player) }
         Platform.respawn { old, player, _ -> clear(old); clear(player) }
         Platform.death { entity, _, _ -> if (entity is ServerPlayer) clear(entity); true }
-        Platform.serverStopped { affected.clear(); statues.clear(); pending.clear(); held.clear() }
+        Platform.serverStopped { affected.clear(); statues.clear(); pending.clear(); held.clear(); SovereignArts.stop() }
         Platform.damage { entity, damage, _ ->
             val arrow = damage.directEntity
             val caster = damage.entity as? ServerPlayer
-            if (arrow is net.minecraft.world.entity.projectile.AbstractArrow && "andromeda_dawn_light" in arrow.tags &&
+            if (arrow is net.minecraft.world.entity.projectile.Projectile && ("andromeda_dawn_light" in arrow.tags || "andromeda_stillwater_returned" in arrow.tags) &&
                 caster != null && ally(caster, entity)) false else true
         }
         Platform.serverTick(::tick)
     }
     fun clear(player: ServerPlayer) {
+        set(player, gaze, "recharge", 0.0)
+        set(player, gaze, "charges", 2.0)
         set(player, aura, "cooldown", 0.0)
         set(player, begone, "cooldown", 0.0)
         set(player, aura, "active", 0.0)
         cancelBow(player)
+        SovereignArts.clear(player)
         pending.remove(player.uuid)
         remove(player, oppressed, source)
         remove(player, stone, source)
@@ -378,6 +384,7 @@ object Dawnbreaker {
         statues.remove(target)
     }
     private fun tick(server: MinecraftServer) {
+        SovereignArts.tick(server)
         for ((owner, request) in pending.toMap()) if (server.tickCount >= request.expires) {
             pending.remove(owner); server.playerList.getPlayer(owner)?.let { say(it, "Landing search expired.") }
         }
@@ -388,9 +395,11 @@ object Dawnbreaker {
             else {
                 if (owners.any { server.playerList.getPlayer(it)?.let { p -> owns(p, stoneAppearance) } == true }) {
                     val c = PowerContainer.of(target)
-                    if (c != null && source !in c.sourcesOf(stone)) { c.addPower(stone, source); c.markDirty() }
+                    if (c != null) {
+                        if (source !in c.sourcesOf(stone)) { c.addPower(stone, source); c.markDirty() }
+                        set(target, stone, "gradual", if (owners.any { server.playerList.getPlayer(it)?.let { p -> owns(p, id("dawnbreaker/gradual_petrification")) } == true }) 1.0 else 0.0)
+                    }
                 } else remove(target, stone, source)
-                if (server.tickCount % 10 == 0 && owners.any { server.playerList.getPlayer(it)?.let { p -> radiant(p) } == true }) shards(target)
             }
         }
         val desired = mutableSetOf<LivingEntity>()
@@ -420,11 +429,11 @@ object Dawnbreaker {
         for (entity in affected - desired) remove(entity, oppressed, source)
         affected.clear(); affected.addAll(desired)
     }
-    private fun radiant(player: ServerPlayer) = owns(player, radiance) && EnhancedFxConfig.enabled() && EnhancedFxConfig.particles()
+    internal fun radiant(player: ServerPlayer) = owns(player, radiance) && EnhancedFxConfig.enabled() && EnhancedFxConfig.particles()
     private fun shards(entity: LivingEntity) {
         val level = entity.level() as? ServerLevel ?: return
         if (EnhancedFxConfig.enabled() && EnhancedFxConfig.particles()) {
-            level.sendParticles(BlockParticleOption(ParticleTypes.BLOCK, Blocks.MOSSY_STONE_BRICKS.defaultBlockState()), entity.x, entity.y + .5, entity.z, 5, .3, .4, .3, .02)
+            level.sendParticles(BlockParticleOption(ParticleTypes.BLOCK, Blocks.CALCITE.defaultBlockState()), entity.x, entity.y + .35, entity.z, 3, .16, .2, .16, .01)
         }
     }
     private fun ring(entity: LivingEntity, level: ServerLevel, pos: Vec3, radius: Double, count: Int) {

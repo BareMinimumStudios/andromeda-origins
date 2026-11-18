@@ -1,0 +1,47 @@
+{
+  "type": "origins:multiple",
+  "name": "Stillwater Guard",
+  "description": "Hold to suspend up to eight incoming vanilla arrows, spectral arrows, snowballs or eggs in a golden arc. Release to send them toward your aim; protected players and allies are not selected. Eight-second maximum hold, no cooldown. Cancellation restores their original owner and motion. Other projectile types pass normally.",
+  "cast": {
+    "type": "origins:active_self",
+    "cooldown": 1,
+    "hud_render": {
+      "should_render": false
+    },
+    "key": {
+      "key": "key.andromeda_origins.stillwater",
+      "continuous": true
+    },
+    "entity_action": {
+      "type": "andromeda_origins:dawnbreaker",
+      "kind": "stillwater"
+    }
+  },
+  "active": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 160,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "count": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 8,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "radiance": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  }
+}

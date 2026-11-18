@@ -60,18 +60,6 @@
       "operation": "add"
     }
   },
-  "visual": {
-    "type": "origins:particle",
-    "count": 5,
-    "particle": "minecraft:electric_spark",
-    "spread": {
-      "x": 0.25,
-      "y": 0.25,
-      "z": 0.25
-    },
-    "offset_y": 1,
-    "frequency": 10
-  },
   "w_detect": {
     "type": "origins:active_self",
     "cooldown": 40,

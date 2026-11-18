@@ -401,5 +401,11 @@
   "andromeda_origins.gameplay.championOrigins.dawnbreaker.stoneAppearance": "Stone Appearance",
   "andromeda_origins.gameplay.championOrigins.dawnbreaker.stoneAppearance.desc": "Enable or disable Stone Appearance for Dawnbreaker.",
   "andromeda_origins.gameplay.championOrigins.dawnbreaker.seraphsDraw": "Seraph’s Draw",
-  "andromeda_origins.gameplay.championOrigins.dawnbreaker.seraphsDraw.desc": "Enable the conjured light bow and Chorus charge-and-release attack."
+  "andromeda_origins.gameplay.championOrigins.dawnbreaker.seraphsDraw.desc": "Enable the conjured light bow and Chorus charge-and-release attack.",
+  "andromeda_origins.gameplay.championOrigins.dawnbreaker.kneel": "Kneel",
+  "andromeda_origins.gameplay.championOrigins.dawnbreaker.kneel.desc": "Enable the grounding command.",
+  "andromeda_origins.gameplay.championOrigins.dawnbreaker.stillwaterGuard": "Stillwater Guard",
+  "andromeda_origins.gameplay.championOrigins.dawnbreaker.stillwaterGuard.desc": "Enable the held projectile guard.",
+  "andromeda_origins.gameplay.championOrigins.dawnbreaker.gradualPetrification": "Gradual Petrification",
+  "andromeda_origins.gameplay.championOrigins.dawnbreaker.gradualPetrification.desc": "Animate the stone appearance rising from the feet. Disable for immediate tint."
 }

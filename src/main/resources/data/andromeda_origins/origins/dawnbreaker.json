@@ -11,7 +11,10 @@
     "andromeda_origins:dawnbreaker/begone",
     "andromeda_origins:dawnbreaker/radiance",
     "andromeda_origins:dawnbreaker/stone_appearance",
-    "andromeda_origins:dawnbreaker/bow"
+    "andromeda_origins:dawnbreaker/bow",
+    "andromeda_origins:dawnbreaker/kneel",
+    "andromeda_origins:dawnbreaker/stillwater",
+    "andromeda_origins:dawnbreaker/gradual_petrification"
   ],
   "icon": {
     "id": "andromeda_origins:gorgon_icon"
