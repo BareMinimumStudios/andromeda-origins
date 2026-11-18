@@ -2,6 +2,8 @@
 
 ## [1.4.84] - 2026-11-15
 
+- Fix Dawnbreaker treating every scoreboard teammate as protected even when friendly fire is enabled, which could block Gaze, Presence and light-arrow damage on rank/nameplate teams. Honor actual team friendly-fire settings while preserving server PvP, protected allies/pets and immunity rules. Replace Gaze’s vague rejection message with the specific blocking reason. Begone and Transference are unchanged.
+
 - Refine Dawnbreaker’s Presence into separated gold/jade halo bands and swept wings, removing overlapping light strips and crown/target particle clutter. Anchor the halo and shoulder-rooted wings on separate planes behind the upper back. Smooth body rotation, scale with the wearer, and refresh the aura without repeated cast noise. Begone now has no departure/arrival particles or world sounds and no victim warning text; only a successfully banished player hears a low private heartbeat through a dedicated ability sound event, independent of muted vanilla low-health heartbeats. Retain safe mob/player targeting, 500-block distance, no cooldowns and 10/20/30 bow damage.
 
 - Replace hard carnivore, pescatarian, vegetarian and raw-food restrictions with off-diet nourishment penalties. Every Origin can eat any food; off-diet food restores 25% hunger and saturation, with hunger rounded down. Preserve preferred foods, diet exemptions, Siren drinks and existing Fzzy diet switches. Keep standard Gorgon/Lichling 4× digestion on raw/exempt foods so it cannot cancel the off-diet penalty; disabling their diet restores unrestricted digestion. Champion dietary exemptions, independent food-balance rules and golden-food revival protection remain unchanged.

@@ -111,7 +111,7 @@ Changing Origins runs the corresponding selection initialization so owned cooldo
 Dawnbreaker does not replace Champion Gorgon. Assign it with `/origin set <player> origins:origin andromeda_origins:dawnbreaker`. It inherits Champion Gorgon passives and Transference, with independently configurable additional abilities:
 
 - **Primary — Sovereign Ophidian Gaze:** up to five foes in a 60° forward cone within 24 blocks; 30-second petrification, extended up to 60 seconds. Two charges, 60-second effective recharge after both are spent. Walls, pumpkin protection, Unstoppable and direction-key escape remain.
-- **Dawnbreaker’s Presence:** 20-second gold/jade aura, 10-block radius; visible foes looking toward the caster move 25% slower. Scoreboard allies and allied tame pets are excluded. No cooldown.
+- **Dawnbreaker’s Presence:** 20-second gold/jade aura, 10-block radius; visible foes looking toward the caster move 25% slower. Players respect PvP/team friendly-fire protection; allied tame pets are excluded. No cooldown.
 - **Begone:** targeted same-dimension banishment of a player or living mob, approximately 500 horizontal blocks beyond the target away from the caster. Safe solid ground and world-border checks. No departure/arrival particles or broadcast sound; only a banished player hears a private heartbeat. Range: 32 blocks; no cooldown.
 - **Seraph’s Draw (hold):** conjure a visible bow of light without a bow item or ammunition. Gain one Dawn Chorus per second, up to three; release to fire a stronger arrow. Base damage: 10/20/30 before armor; no cooldown between draws. Short taps cancel, the bow fades after release, and tagged arrows expire after 24 ticks.
 

@@ -100,7 +100,13 @@ object Dawnbreaker {
     }
     private fun say(player: ServerPlayer, text: String) = player.displayClientMessage(Component.literal(text), true)
     private fun ally(actor: LivingEntity, target: LivingEntity): Boolean {
-        if (actor === target || actor.isAlliedTo(target) || target.isAlliedTo(actor)) return true
+        if (actor === target) return true
+        // Rank/nameplate teams may intentionally allow PvP; membership alone is not protection.
+        if (actor is net.minecraft.world.entity.player.Player && target is net.minecraft.world.entity.player.Player) {
+            val team = actor.team
+            if (team != null && team.isAlliedTo(target.team)) return !team.isAllowFriendlyFire
+        }
+        if (actor.isAlliedTo(target) || target.isAlliedTo(actor)) return true
         if (target is TamableAnimal) {
             if (target.ownerUUID == actor.uuid) return true
             if (target.owner?.let { actor.isAlliedTo(it) || it.isAlliedTo(actor) } == true) return true
@@ -112,6 +118,15 @@ object Dawnbreaker {
         !(target is ServerPlayer && !actor.canHarmPlayer(target)) &&
         !(PowerContainer.of(target)?.let { it.hasPower(id("common/unstoppable")) && !it.isSuppressed(id("common/unstoppable")) } ?: false)
 
+    private fun gazeBlockReason(actor: ServerPlayer, target: LivingEntity?): String = when {
+        target == null -> "No visible target in your gaze: look within 24 blocks and the forward cone."
+        target.getItemBySlot(EquipmentSlot.HEAD).`is`(pumpkin) -> "Gaze blocked: target has pumpkin protection."
+        target is ServerPlayer && !actor.server.isPvpAllowed -> "Gaze blocked: server PvP is disabled."
+        ally(actor, target) -> "Gaze blocked: target is an ally or protected teammate."
+        target is ServerPlayer && !actor.canHarmPlayer(target) -> "Gaze blocked: player PvP or friendly-fire protection."
+        PowerContainer.of(target)?.let { it.hasPower(id("common/unstoppable")) && !it.isSuppressed(id("common/unstoppable")) } == true -> "Gaze blocked: target has Unstoppable."
+        else -> "Gaze blocked: target is protected."
+    }
     private fun castAura(player: ServerPlayer) {
         if (!usable(player, aura)) return
         val refreshing = resource(player, aura, "active") > 0
@@ -127,12 +142,13 @@ object Dawnbreaker {
         }
         val eye = player.eyePosition
         val look = player.lookAngle
-        val targets = player.serverLevel().getEntitiesOfClass(LivingEntity::class.java, player.boundingBox.inflate(24.0)) {
-            validTarget(player, it) && !it.getItemBySlot(EquipmentSlot.HEAD).`is`(pumpkin) &&
+        val visibleTargets = player.serverLevel().getEntitiesOfClass(LivingEntity::class.java, player.boundingBox.inflate(24.0)) {
+            it !== player && it.isAlive && !it.isSpectator &&
                 it.distanceToSqr(player) <= 24.0 * 24.0 && player.hasLineOfSight(it) &&
                 look.dot(it.eyePosition.subtract(eye).normalize()) >= cos(Math.toRadians(30.0))
-        }.sortedWith(compareByDescending<LivingEntity> { look.dot(it.eyePosition.subtract(eye).normalize()) }.thenBy { it.distanceToSqr(player) }).take(5)
-        if (targets.isEmpty()) { say(player, "No unprotected foes in your gaze."); return }
+        }.sortedWith(compareByDescending<LivingEntity> { look.dot(it.eyePosition.subtract(eye).normalize()) }.thenBy { it.distanceToSqr(player) })
+        val targets = visibleTargets.filter { validTarget(player, it) && !it.getItemBySlot(EquipmentSlot.HEAD).`is`(pumpkin) }.take(5)
+        if (targets.isEmpty()) { say(player, gazeBlockReason(player, visibleTargets.firstOrNull())); return }
         for (target in targets) {
             val c = PowerContainerAttachment.getOrCreate(target) ?: continue
             val old = if (c.hasPower(petrify)) resource(target, petrify, "remove") else 0.0
