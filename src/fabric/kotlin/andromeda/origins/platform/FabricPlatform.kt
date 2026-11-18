@@ -65,7 +65,10 @@ class FabricPlatform : PlatformBackend {
             override fun onResourceManagerReload(manager: ResourceManager) = callback.accept(manager)
         })
     }
-    override fun registerNetworking() { PayloadTypeRegistry.playS2C().register(OpenConfigPayload.TYPE, OpenConfigPayload.CODEC) }
+    override fun registerNetworking() {
+        PayloadTypeRegistry.playS2C().register(OpenConfigPayload.TYPE, OpenConfigPayload.CODEC)
+        PayloadTypeRegistry.playS2C().register(andromeda.origins.network.BanishmentHeartbeatPayload.TYPE, andromeda.origins.network.BanishmentHeartbeatPayload.CODEC)
+    }
     override fun canReceiveCosmetic(player: ServerPlayer, channel: ResourceLocation): Boolean = ServerPlayNetworking.canSend(player, channel)
     override fun sendCosmetic(player: ServerPlayer, payload: net.minecraft.network.protocol.common.custom.CustomPacketPayload) { ServerPlayNetworking.send(player, payload) }
 

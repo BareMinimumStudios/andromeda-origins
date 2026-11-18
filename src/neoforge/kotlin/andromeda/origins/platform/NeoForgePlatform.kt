@@ -110,6 +110,9 @@ class NeoForgePlatform(private val modBus: IEventBus) : PlatformBackend {
             event.registrar(version()).playToClient(OpenConfigPayload.TYPE, OpenConfigPayload.CODEC) { _, context ->
                 context.enqueueWork { NeoForgeClientPlatform.openConfig() }
             }
+            event.registrar(version()).playToClient(andromeda.origins.network.BanishmentHeartbeatPayload.TYPE, andromeda.origins.network.BanishmentHeartbeatPayload.CODEC) { _, context ->
+                context.enqueueWork { andromeda.origins.client.DawnbreakerAudio.playBanishmentHeartbeat() }
+            }
         })
     }
     override fun canReceiveCosmetic(player: ServerPlayer, channel: ResourceLocation): Boolean = player.connection.hasChannel(channel)

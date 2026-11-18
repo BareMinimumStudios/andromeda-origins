@@ -18,47 +18,76 @@ object DawnbreakerVisuals {
     private val active = ResourceLocation.parse("andromeda_origins:dawnbreaker/presence_active")
     private val visible = ResourceLocation.parse("andromeda_origins:dawnbreaker/presence_radiance")
     private val feature = ResourceLocation.parse("andromeda_origins:dawnbreaker/radiance")
+    private val appearing = java.util.WeakHashMap<LivingEntity, Float>()
     fun render(entity: LivingEntity, x: Double, y: Double, z: Double, delta: Float, pose: PoseStack, buffers: MultiBufferSource) {
         val viewer = Minecraft.getInstance().player ?: return
         if (entity.isInvisibleTo(viewer) || viewer.distanceToSqr(entity) > 48.0 * 48.0) return
         val c = PowerContainer.of(entity) ?: return
         if (!c.hasPower(feature) || c.isSuppressed(feature) || PowerResources.read(c, active).orElse(0.0) <= 0 ||
-            PowerResources.read(c, visible).orElse(0.0) <= 0) return
+            PowerResources.read(c, visible).orElse(0.0) <= 0) { appearing.remove(entity); return }
+        val age = entity.tickCount + delta
+        val started = appearing.getOrPut(entity) { age }
         val remaining = PowerResources.read(c, active).orElse(0.0).toFloat()
-        val fade = min(1f, min((400f - remaining + delta) / 8f, remaining / 8f)).coerceIn(0f, 1f)
+        val fade = min(1f, min((age - started) / 10f, remaining / 12f)).coerceIn(0f, 1f)
         if (fade <= 0) return
         pose.pushPose()
-        pose.translate(x, y + 1.35, z)
-        pose.mulPose(Axis.YP.rotationDegrees(-entity.yBodyRot))
-        pose.translate(0.0, 0.0, .36)
+        pose.translate(x, y, z)
+        pose.mulPose(Axis.YP.rotationDegrees(-net.minecraft.util.Mth.rotLerp(delta, entity.yBodyRotO, entity.yBodyRot)))
+        val scale = (entity.bbHeight / 1.8f).coerceIn(.65f, 1.6f)
+        pose.scale(scale, scale, scale)
+        pose.translate(0.0, 0.0, -.70)
         val vertices = buffers.getBuffer(RenderType.lightning())
         val matrix = pose.last().pose()
-        val age = entity.tickCount + delta
-        val pulse = .9f + sin(age * .07f) * .1f
-        // Two broken aureoles with warm bodies and pale inner cores.
+        val breath = .94f + sin(age * .025f) * .06f
+        // Distinct concentric bands, with no core/glow quads occupying the same surface.
+        halo(vertices, matrix, .695, .709, 0.0, Math.PI * 2, 255, 209, 104, fade * .85f * breath)
+        halo(vertices, matrix, .566, .574, 0.0, Math.PI * 2, 255, 244, 202, fade * .65f)
+        val phase = age * .0012
         for (i in 0..2) {
-            val start = age * .003 + i * Math.PI * 2 / 3
-            arc(vertices, matrix, 1.18, start, start + 1.55, .065, 255, 184, 43, fade * .32f * pulse)
-            arc(vertices, matrix, 1.18, start, start + 1.55, .018, 255, 251, 209, fade * .95f)
-            arc(vertices, matrix, 1.34, -start, -start + 1.35, .024, 113, 227, 163, fade * .65f)
+            val start = phase + i * Math.PI * 2 / 3
+            halo(vertices, matrix, .814, .822, start, start + 1.35, 126, 206, 160, fade * .46f)
         }
-        // Swept wing-like light bows, kept behind the wearer rather than over the face.
+        // Both planes are behind the wearer: halo at -.70, wings at -.46.
+        // Separating their depth prevents intersecting projected outlines from z-fighting.
+        pose.pushPose()
+        pose.translate(0.0, 0.0, .24)
+        val wingMatrix = pose.last().pose()
         for (side in listOf(-1.0, 1.0)) for (feather in 0..3) {
-            val px = side * (.42 + feather * .2)
-            val py = -.38 + feather * .18
-            line(vertices, matrix, px, py, side * (1.45 + feather * .1), .15 + feather * .3,
-                .075, 255, 191, 56, fade * .32f)
-            line(vertices, matrix, px, py, side * (1.45 + feather * .1), .15 + feather * .3,
-                .017, 255, 251, 218, fade * .95f)
-        }
-        // Radiant crown/sunburst accents around the outer ring.
-        for (i in 0..11) {
-            val angle = i * Math.PI / 6 + Math.PI / 12
-            val r = 1.43
-            line(vertices, matrix, cos(angle) * r, sin(angle) * r, cos(angle) * 1.61, sin(angle) * 1.61,
-                .025, 255, 222, 133, fade * .8f)
+            stroke(vertices, wingMatrix, side * (.34 + feather * .04), 1.04 + feather * .16,
+                side * (1.84 + feather * .08), 1.18 + feather * .44, .045, .012, fade)
         }
         pose.popPose()
+        for (i in 0..7) {
+            val angle = i * Math.PI / 4 + Math.PI / 8
+            line(vertices, matrix, cos(angle) * .90, 1.55 + sin(angle) * .90,
+                cos(angle) * .99, 1.55 + sin(angle) * .99, .012, 255, 220, 143, fade * .6f)
+        }
+        pose.popPose()
+    }
+    private fun halo(v: VertexConsumer, m: Matrix4f, inner: Double, outer: Double, start: Double, end: Double,
+        r: Int, g: Int, b: Int, alpha: Float) {
+        for (i in 0 until 64) {
+            val a = start + (end - start) * i / 64
+            val bAngle = start + (end - start) * (i + 1) / 64
+            quad(v, m, listOf(cos(a) * inner to 1.55 + sin(a) * inner,
+                cos(bAngle) * inner to 1.55 + sin(bAngle) * inner,
+                cos(bAngle) * outer to 1.55 + sin(bAngle) * outer,
+                cos(a) * outer to 1.55 + sin(a) * outer), r, g, b, alpha)
+        }
+    }
+    private fun stroke(v: VertexConsumer, m: Matrix4f, x1: Double, y1: Double, x2: Double, y2: Double,
+        outer: Double, core: Double, alpha: Float) {
+        val length = hypot(x2 - x1, y2 - y1).coerceAtLeast(.0001)
+        val nx = -(y2 - y1) / length; val ny = (x2 - x1) / length
+        for ((lo, hi) in listOf(-outer / 2 to -core / 2, core / 2 to outer / 2))
+            quad(v, m, listOf(x1 + nx * lo to y1 + ny * lo, x2 + nx * lo to y2 + ny * lo,
+                x2 + nx * hi to y2 + ny * hi, x1 + nx * hi to y1 + ny * hi), 232, 179, 70, alpha * .3f)
+        line(v, m, x1, y1, x2, y2, core, 255, 238, 182, alpha * .88f)
+    }
+    private fun quad(v: VertexConsumer, m: Matrix4f, points: List<Pair<Double, Double>>, r: Int, g: Int, b: Int, alpha: Float) {
+        val a = (alpha.coerceIn(0f, 1f) * 255).toInt()
+        for (face in listOf(points, points.reversed())) for ((x, y) in face)
+            v.addVertex(m, x.toFloat(), y.toFloat(), 0f).setColor(r, g, b, a)
     }
     private val projectileVisuals = java.util.WeakHashMap<net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity>()
     fun renderProjectile(entity: net.minecraft.world.entity.Entity, x: Double, y: Double, z: Double, pose: PoseStack, buffers: MultiBufferSource) {
@@ -90,13 +119,6 @@ object DawnbreakerVisuals {
         val other = direction.cross(side).normalize().scale(width / 2)
         for (offset in listOf(side, other)) for (p in listOf(a.add(offset), b.add(offset), b.subtract(offset), a.subtract(offset)))
             v.addVertex(m, p.x.toFloat(), p.y.toFloat(), p.z.toFloat()).setColor(r, g, blue, (alpha.coerceIn(0f, 1f) * 255).toInt())
-    }
-    private fun arc(v: VertexConsumer, m: Matrix4f, radius: Double, from: Double, to: Double, width: Double, r: Int, g: Int, b: Int, a: Float) {
-        for (i in 0 until 24) {
-            val p = from + (to - from) * i / 24
-            val q = from + (to - from) * (i + 1) / 24
-            line(v, m, cos(p) * radius, sin(p) * radius, cos(q) * radius, sin(q) * radius, width, r, g, b, a)
-        }
     }
     private fun line(v: VertexConsumer, m: Matrix4f, x1: Double, y1: Double, x2: Double, y2: Double, width: Double, r: Int, g: Int, b: Int, alpha: Float) {
         val length = hypot(x2 - x1, y2 - y1).coerceAtLeast(.0001)

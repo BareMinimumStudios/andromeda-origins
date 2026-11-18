@@ -241,5 +241,12 @@
         "stream": true
       }
     ]
+  },
+  "ability.dawnbreaker.banishment_heartbeat": {
+    "sounds": [
+      {
+        "name": "andromeda_origins:abilities/humanity/mortal_resolve_heartbeat"
+      }
+    ]
   }
 }

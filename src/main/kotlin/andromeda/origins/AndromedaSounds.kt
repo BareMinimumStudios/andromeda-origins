@@ -19,6 +19,7 @@ object AndromedaSounds {
     "ability.fenrkin.marked",
     "ability.gorgon.hiss",
     "ability.gorgon.stone_form",
+    "ability.dawnbreaker.banishment_heartbeat",
     "ability.humanity.mortal_resolve_ignite",
     "ability.humanity.mortal_resolve_heartbeat",
     "ability.lichling.final_bell_toll",

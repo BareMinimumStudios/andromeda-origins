@@ -23,6 +23,9 @@ class FabricClientPlatform : ClientPlatformBackend {
         ClientPlayNetworking.registerGlobalReceiver(OpenConfigPayload.TYPE) { _, context ->
             context.client().execute { ConfigApiJava.openScreen(AndromedaGameplayConfig.SCREEN_SCOPE) }
         }
+        ClientPlayNetworking.registerGlobalReceiver(andromeda.origins.network.BanishmentHeartbeatPayload.TYPE) { _, context ->
+            context.client().execute { andromeda.origins.client.DawnbreakerAudio.playBanishmentHeartbeat() }
+        }
     }
     override fun versionHandshake() = FabricVersionHandshakeClient.register()
 }

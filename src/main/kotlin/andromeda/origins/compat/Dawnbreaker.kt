@@ -114,10 +114,10 @@ object Dawnbreaker {
 
     private fun castAura(player: ServerPlayer) {
         if (!usable(player, aura)) return
+        val refreshing = resource(player, aura, "active") > 0
         set(player, aura, "active", 400.0)
         set(player, aura, "cooldown", 0.0)
-        ring(player, player.serverLevel(), player.position(), 3.0, 48)
-        sound(player.serverLevel(), player.position(), net.minecraft.sounds.SoundEvents.BEACON_ACTIVATE, .65f, 1.3f)
+        if (!refreshing) sound(player.serverLevel(), player.position(), net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_RESONATE, .18f, .65f)
         say(player, "Dawnbreaker’s Presence — 20 seconds")
     }
     private fun castGaze(player: ServerPlayer) {
@@ -250,7 +250,6 @@ object Dawnbreaker {
                 }
                 val landing = columns.firstNotNullOfOrNull { safeLanding(level, victim, it) }
                 if (landing == null) { say(player, "No safe landing found."); return@execute }
-                val old = victim.position()
                 val vehicle = victim.vehicle
                 victim.stopRiding()
                 if (!victim.teleportTo(level, landing.x, landing.y, landing.z, mutableSetOf<RelativeMovement>(), victim.yRot, victim.xRot)) {
@@ -260,10 +259,11 @@ object Dawnbreaker {
                 victim.deltaMovement = Vec3.ZERO
                 victim.fallDistance = 0f
                 set(player, begone, "cooldown", 0.0)
-                ring(player, level, old, 1.4, 40); ring(player, level, landing, 1.4, 40)
-                sound(level, old, net.minecraft.sounds.SoundEvents.ENDERMAN_TELEPORT, .7f, 1.4f)
-                sound(level, landing, net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_RESONATE, .6f, 1.2f)
-                say(player, "Begone."); if (victim is ServerPlayer) say(victim, "The Dawnbreaker has banished you.")
+                // Notify only the recipient. No world sound, particle dispatch or victim warning text.
+                if (victim is ServerPlayer && EnhancedFxConfig.enabled() && EnhancedFxConfig.sounds() &&
+                    Platform.canReceiveCosmetic(victim, andromeda.origins.network.BanishmentHeartbeatPayload.TYPE.id()))
+                    Platform.sendCosmetic(victim, andromeda.origins.network.BanishmentHeartbeatPayload.INSTANCE)
+                say(player, "Begone.")
             }
         }
     }
@@ -390,10 +390,6 @@ object Dawnbreaker {
             val level = caster.serverLevel()
             if (server.tickCount % 10 == 0 && radiant(caster)) {
                 MrpgFxBridge.play(level, caster.position().add(0.0, .15, 0.0), EnhancedFxDefinitions.MrpgDefinition("mrpg_lib:preset/aura", 1.1f, .12f, 0xffd878, 10), caster, false)
-                for (i in 0..3) {
-                    val angle = i * Math.PI / 4 + server.tickCount * .035
-                    level.sendParticles(ParticleTypes.END_ROD, caster.x + cos(angle) * .8, caster.y + 2.1 + sin(server.tickCount * .07) * .12, caster.z + sin(angle) * .8, 1, 0.0, .025, 0.0, .005)
-                }
             }
             for (target in level.getEntitiesOfClass(LivingEntity::class.java, caster.boundingBox.inflate(10.0))) {
                 if (!validTarget(caster, target) || target.distanceToSqr(caster) > 100 || !caster.hasLineOfSight(target)) continue
@@ -403,7 +399,6 @@ object Dawnbreaker {
                 val c = PowerContainerAttachment.getOrCreate(target) ?: continue
                 if (source !in c.sourcesOf(oppressed)) { c.addPower(oppressed, source); c.markDirty() }
                 set(target, oppressed, "lease", 6.0)
-                if (server.tickCount % 10 == 0 && radiant(caster)) level.sendParticles(jade, target.x, target.y + 1.0, target.z, 3, .25, .4, .25, 0.0)
             }
         }
         for (entity in affected - desired) remove(entity, oppressed, source)
