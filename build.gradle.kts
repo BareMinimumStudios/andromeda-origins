@@ -147,7 +147,7 @@ tasks.withType<JavaCompile>().configureEach {
 }
 tasks.withType<Jar>().configureEach { duplicatesStrategy = DuplicatesStrategy.EXCLUDE; from("LICENSE") }
 // Version-neutral checks of packaged content, run by every build.
-val verifyAndromedaResources by tasks.registering {
+val verifyAndromedaResources = tasks.register("verifyAndromedaResources") {
     group = "verification"
     description = "Checks JSON, Origin references, sound assets, and transient ownership invariants."
     inputs.dir("src/main/resources")
@@ -225,7 +225,7 @@ tasks.withType<KotlinCompile>().configureEach {
     }
 }
 
-val verifyStaticMixinBytecode by tasks.registering {
+val verifyStaticMixinBytecode = tasks.register("verifyStaticMixinBytecode") {
     group = "verification"
     description = "Rejects Kotlin singleton initialization in static-only Mixin injectors."
     dependsOn(tasks.withType<KotlinCompile>())
