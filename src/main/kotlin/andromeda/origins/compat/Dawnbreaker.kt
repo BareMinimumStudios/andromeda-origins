@@ -160,15 +160,13 @@ object Dawnbreaker {
         set(player, id("dawnbreaker/presentation"), "step_x", from.x)
         set(player, id("dawnbreaker/presentation"), "step_y", from.y)
         set(player, id("dawnbreaker/presentation"), "step_z", from.z)
-        set(player, id("dawnbreaker/presentation"), "step", 10.0)
-        if (radiant(player)) {
-            val samples = DawnbreakerPresentation.particles(12)
-            for (i in 0..samples) {
-                val p = from.lerp(destination, i.toDouble() / samples).add(0.0, 1.0, 0.0)
-                level.sendParticles(gold, p.x, p.y, p.z, 1, .025, .06, .025, 0.0)
-            }
+        set(player, id("dawnbreaker/presentation"), "step", 2.0)
+        // The move itself is a same-tick teleport. Only mark the endpoints, never draw a travel path.
+        if (radiant(player)) for (p in listOf(from, destination)) {
+            level.sendParticles(gold, p.x, p.y + 1.0, p.z, DawnbreakerPresentation.particles(3), .08, .18, .08, 0.0)
         }
     }
+
     private fun castTransference(player: ServerPlayer) {
         if (!usable(player, id("dawnbreaker/secondary"))) return
         val eye = player.eyePosition

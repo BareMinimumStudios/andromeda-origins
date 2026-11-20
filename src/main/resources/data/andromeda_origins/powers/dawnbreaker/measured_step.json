@@ -1,7 +1,7 @@
 {
   "type": "origins:active_self",
   "name": "Measured Step",
-  "description": "Blink up to 16 blocks toward your aim, stopping at walls and finding safe visible solid ground. Cannot be used while riding or carrying passengers. No cooldown.",
+  "description": "Instantly blink up to 16 blocks toward your aim, stopping at walls and finding safe visible solid ground. Cannot be used while riding or carrying passengers. No cooldown.",
   "cooldown": 1,
   "hud_render": {
     "should_render": false

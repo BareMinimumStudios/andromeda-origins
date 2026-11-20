@@ -25,7 +25,7 @@ object DawnbreakerVisuals {
         val c = PowerContainer.of(entity) ?: return
         SovereignVisuals.render(entity, x, y, z, delta, pose, buffers)
         fun resource(path: String) = PowerResources.read(c, ResourceLocation.parse("andromeda_origins:dawnbreaker/" + path)).orElse(0.0)
-        val stepping = resource("presentation_step").toFloat() / 10f
+        val stepping = (resource("presentation_step").toFloat() / 2f).coerceIn(0f, 1f)
         val shot = resource("presentation_shot").toFloat() / 12f
         val drawing = resource("bow_draw").toFloat() / 60f
         val presence = PowerResources.read(c, active).orElse(0.0)

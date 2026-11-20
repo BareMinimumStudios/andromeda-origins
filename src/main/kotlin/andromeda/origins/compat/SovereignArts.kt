@@ -25,7 +25,7 @@ object SovereignArts {
     private val source = ResourceLocation.parse("andromeda_origins:dawnbreaker_effect")
     private data class Grounded(val owners: MutableMap<UUID, Int>)
     private val grounded = mutableMapOf<LivingEntity, Grounded>()
-    private data class Held(val projectile: Projectile, val velocity: Vec3, val owner: Entity?, val captured: Int, val from: Vec3)
+    private data class Held(val projectile: Projectile, val velocity: Vec3, val owner: Entity?, val from: Vec3)
     private data class Guard(val started: Int, var refreshed: Int, val held: MutableList<Held> = mutableListOf())
     private data class Release(val caster: UUID, val held: Held, val level: net.minecraft.server.level.ServerLevel, val at: Int, val aim: Vec3)
     private val releasing = mutableListOf<Release>()
@@ -75,13 +75,6 @@ object SovereignArts {
         val v = p.deltaMovement
         return v.lengthSqr() > .01 && v.dot(actor.eyePosition.subtract(p.position())) > 0
     }
-    private fun slot(player: ServerPlayer, i: Int): Vec3 {
-        val local = DawnbreakerLayout.guardSlot(i)
-        val yaw = Math.toRadians(player.yRot.toDouble())
-        val right = Vec3(cos(yaw), 0.0, sin(yaw))
-        val back = Vec3(sin(yaw), 0.0, -cos(yaw))
-        return player.position().add(right.scale(local.x)).add(back.scale(-local.z)).add(0.0, local.y, 0.0)
-    }
     private fun restore(held: Held) {
         val p = held.projectile
         frozen.remove(p)
@@ -106,7 +99,7 @@ object SovereignArts {
     private fun finish(player: ServerPlayer?, state: Guard, fire: Boolean) {
         if (fire && player != null) {
             val target = if (state.held.isNotEmpty()) aim(player) else player.eyePosition
-            state.held.forEachIndexed { i, held -> releasing.add(Release(player.uuid, held, player.serverLevel(), player.server.tickCount + i, target)) }
+            state.held.forEach { held -> releasing.add(Release(player.uuid, held, player.serverLevel(), player.server.tickCount, target)) }
         } else state.held.forEach(::restore)
         if (player != null) { write(player, "stillwater_active", 0.0); write(player, "stillwater_count", 0.0); write(player, "stillwater_radiance", 0.0) }
     }
@@ -120,11 +113,15 @@ object SovereignArts {
             if (server.tickCount < release.at) continue
             releasing.remove(release); frozen.remove(p)
             if (p.removeTag(RECOVER_GRAVITY)) p.setNoGravity(false)
-            // Launch from its visible slot; use the player's muzzle only if that slot is obstructed.
+            // Fire from the frozen interception point; fall back to the muzzle if a block moved into it.
             if (!release.level.noCollision(p, p.boundingBox)) p.setPos(player.eyePosition.add(player.lookAngle.scale(.9)))
             p.owner = player; p.addTag("andromeda_stillwater_returned")
             val d = release.aim.subtract(p.position())
-            p.shoot(d.x, d.y, d.z, release.held.velocity.length().coerceIn(1.0, 3.0).toFloat(), 0f)
+            val previousSpeed = release.held.velocity.length().coerceIn(1.0, 3.0)
+            val returnSpeed = (previousSpeed * 3.0).coerceIn(6.0, 8.0)
+            // Arrow damage multiplies base damage by speed: acceleration must not silently multiply damage.
+            if (p is net.minecraft.world.entity.projectile.AbstractArrow) p.setBaseDamage(p.baseDamage * previousSpeed / returnSpeed)
+            p.shoot(d.x, d.y, d.z, returnSpeed.toFloat(), 0f)
             p.hurtMarked = true
         }
     }
@@ -165,16 +162,14 @@ object SovereignArts {
             for (p in player.serverLevel().getEntitiesOfClass(Projectile::class.java, player.boundingBox.inflate(6.0)) { eligible(it, player) }.sortedBy { it.distanceToSqr(player) }) {
                 if (state.held.size + releasing.count { it.caster == uuid } >= 8) break
                 if (!player.hasLineOfSight(p)) continue
-                state.held.add(Held(p, p.deltaMovement, p.owner, server.tickCount, p.position())); frozen.add(p)
+                state.held.add(Held(p, p.deltaMovement, p.owner, p.position())); frozen.add(p)
                 if (!p.isNoGravity) { p.addTag(RECOVER_GRAVITY); p.setNoGravity(true) }
             }
-            val target = if (state.held.isNotEmpty()) aim(player) else player.eyePosition
-            state.held.forEachIndexed { i, held ->
-                val t = ((server.tickCount - held.captured) / 5.0).coerceIn(0.0, 1.0)
-                val eased = t * t * (3 - 2 * t)
-                val position = if (t < 1) held.from.lerp(slot(player, i), eased) else held.projectile.position().lerp(slot(player, i), .55)
-                held.projectile.setPos(position); held.projectile.deltaMovement = Vec3.ZERO
-                orient(held.projectile, target)
+            // Force-like stasis: do not reel shots into an orbit or turn them while held.
+            for (held in state.held) {
+                held.projectile.setPos(held.from)
+                held.projectile.deltaMovement = Vec3.ZERO
+                held.projectile.hurtMarked = true
             }
             write(player, "stillwater_active", (160 - (server.tickCount - state.started)).toDouble())
             write(player, "stillwater_count", state.held.size.toDouble())

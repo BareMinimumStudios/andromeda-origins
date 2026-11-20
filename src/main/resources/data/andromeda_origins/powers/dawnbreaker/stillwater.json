@@ -1,7 +1,7 @@
 {
   "type": "origins:multiple",
   "name": "Stillwater Guard",
-  "description": "Hold to suspend up to eight incoming vanilla arrows, spectral arrows, snowballs or eggs in a golden arc. Release to send them toward your aim; protected players and allies are not selected. Eight-second maximum hold, no cooldown. Cancellation restores their original owner and motion. Other projectile types pass normally.",
+  "description": "Hold to suspend up to eight incoming vanilla arrows, spectral arrows, snowballs or eggs at their interception points. Release to fire the entire volley toward your aim at high speed; protected players and allies are not selected. Eight-second maximum hold, no cooldown. Cancellation restores their original owner and motion. Other projectile types pass normally.",
   "cast": {
     "type": "origins:active_self",
     "cooldown": 1,
