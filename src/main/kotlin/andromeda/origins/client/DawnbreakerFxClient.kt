@@ -21,10 +21,16 @@ object DawnbreakerFxClient {
     private var impactKind = 0
     private var impactAt = 0L
     private var nextImpact = 0L
-    fun openConfig() { me.fzzyhmstrs.fzzy_config.api.ConfigApiJava.openScreen("andromeda_origins.dawnbreaker_visuals") }
+    private var openMenuRequested = false
+    fun openConfig() { openMenuRequested = true }
     fun register() {
         config = me.fzzyhmstrs.fzzy_config.api.ConfigApiJava.registerAndLoadConfig(java.util.function.Supplier { DawnbreakerVisualConfig() }, me.fzzyhmstrs.fzzy_config.api.RegisterType.CLIENT)
         ClientPlatform.endTick { c ->
+            // ChatScreen closes itself after executing a command. Open after that close, not inside it.
+            if (openMenuRequested) {
+                openMenuRequested = false
+                me.fzzyhmstrs.fzzy_config.api.ConfigApiJava.openScreen("andromeda_origins.dawnbreaker_visuals")
+            }
             if (world !== c.level || c.player?.isAlive != true) { ghosts.clear(); impactAt = 0; nextImpact = 0; world = c.level }
             ghosts.entries.removeIf { it.key.isRemoved || System.nanoTime() >= it.value.until }
         }

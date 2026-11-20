@@ -68,17 +68,18 @@ object EnhancedFxCompat {
             return false
         }
 
-        val contours = EnhancedFxConfig.particles() && OriginContourBridge.play(entity, event, position, definition)
-        val nativeParticles = contours || (EnhancedFxConfig.particles() && definition.mrpg?.let {
-            MrpgFxBridge.play(entity.level() as net.minecraft.server.level.ServerLevel, position ?: entity.position(), it, entity, position == null)
-        } == true)
-        if (EnhancedFxConfig.particles() && !nativeParticles && EnhancedFxCompat.spellEngineLoaded) {
-            val particles: kotlin.collections.MutableList<EnhancedFxDefinitions.ParticleDefinition> = definition.particles.stream()
-            .filter { p: EnhancedFxDefinitions.ParticleDefinition -> EnhancedFxCompat.requirementPresent(p.requiresMod)}
-            .toList()
-            if (!particles.isEmpty()) {
-                ParticleBridge.spawn(entity, position, particles)
-            }
+        if (EnhancedFxConfig.particles()) {
+            val specs = definition.particles.filter { requirementPresent(it.requiresMod) }.toMutableList()
+            val minimal = OriginFxStyle.quality() == OriginFxStyle.Quality.MINIMAL
+            // Texture-based library effects are the normal presentation, not a suppressed fallback.
+            val textured = !minimal && ((spellEngineLoaded && ParticleBridge.spawn(entity, position, specs)) ||
+                simpleLibraryParticles(entity, position, specs))
+            val preset = !minimal && !textured && definition.mrpg?.let {
+                MrpgFxBridge.play(entity.level() as net.minecraft.server.level.ServerLevel, position ?: entity.position(), it, entity, position == null)
+            } == true
+            // Keep the clean geometry as an occasional accent; sustained library effects stand alone.
+            if ((!textured && !preset) || (!OriginFxStyle.sustained(event) && event !in setOf("fenrkin.on_the_hunt", "fenrkin.mark")))
+                OriginContourBridge.play(entity, event, position, definition)
         }
 
         if (EnhancedFxConfig.sounds()) {
@@ -94,7 +95,7 @@ object EnhancedFxCompat {
             val fallback = when (event.substringBefore('.')) {
                 "arachne" -> "minecraft:block.azalea_leaves.step"
                 "faerie", "gorgon" -> "minecraft:block.amethyst_block.chime"
-                "fenrkin" -> "minecraft:entity.wolf.growl"
+                "fenrkin" -> null
                 "humanity" -> "minecraft:block.beacon.power_select"
                 "lichling" -> "minecraft:block.soul_sand.step"
                 "manticore" -> "minecraft:entity.phantom.flap"
@@ -105,10 +106,30 @@ object EnhancedFxCompat {
                 else -> null
             }
             if (available != null) playSound(entity, x, y, z, available)
-            else if (fallback != null) playSound(entity, x, y, z,
+            else if (fallback != null && definition.sounds.isNotEmpty() && !OriginFxStyle.sustained(event)) playSound(entity, x, y, z,
                 EnhancedFxDefinitions.SoundDefinition(fallback, .45f, 1f, "", false))
         }
         return true
+    }
+
+    private fun simpleLibraryParticles(entity: net.minecraft.world.entity.Entity, position: net.minecraft.world.phys.Vec3?, specs: List<EnhancedFxDefinitions.ParticleDefinition>): Boolean {
+        val level = entity.level() as? net.minecraft.server.level.ServerLevel ?: return false
+        val origin = position ?: entity.position()
+        var sent = false
+        for (spec in specs.take(OriginFxStyle.layers())) {
+            val id = effectId(spec.id) ?: continue
+            val type = net.minecraft.core.registries.BuiltInRegistries.PARTICLE_TYPE.get(id) as? net.minecraft.core.particles.SimpleParticleType ?: continue
+            val viewers = level.players().filter { it.distanceToSqr(origin) <= 32.0 * 32.0 &&
+                (id.namespace == "minecraft" || andromeda.origins.platform.Platform.canReceiveCosmetic(it, net.minecraft.resources.ResourceLocation.parse("mrpg_lib:fx_play"))) }
+            if (viewers.isEmpty()) continue
+            val count = OriginFxStyle.particles(entity, spec.count.toInt()) ?: continue
+            val ground = spec.preset in setOf("ground", "placed")
+            val radius = if (ground) .08 else .22
+            val y = origin.y + if (ground) .08 else entity.bbHeight * .5
+            for (viewer in viewers) level.sendParticles(viewer, type, false, origin.x, y, origin.z, count, radius, if (ground) .01 else .32, radius, spec.speed.toDouble().coerceIn(0.0, .15))
+            sent = true
+        }
+        return sent
     }
 
     private fun requirementPresent(modId: kotlin.String?): kotlin.Boolean {
@@ -254,15 +275,13 @@ object EnhancedFxCompat {
             return ParticleBridge.available
         }
 
-        fun spawn(entity: net.minecraft.world.entity.Entity, position: net.minecraft.world.phys.Vec3?, specs: kotlin.collections.MutableList<EnhancedFxDefinitions.ParticleDefinition>) {
-            if (!ParticleBridge.init()) {
-                return
-            }
+        fun spawn(entity: net.minecraft.world.entity.Entity, position: net.minecraft.world.phys.Vec3?, specs: kotlin.collections.MutableList<EnhancedFxDefinitions.ParticleDefinition>): Boolean {
+            if (!ParticleBridge.init()) return false
             try {
                 val effects: kotlin.collections.MutableList<kotlin.Any> = java.util.ArrayList<kotlin.Any>(specs.size)
-                for (original in specs.take(if (OriginFxStyle.quality() == OriginFxStyle.Quality.MINIMAL) 1 else 2)) {
+                for (original in specs.take(OriginFxStyle.layers())) {
                     val count = OriginFxStyle.particles(entity, original.count.toInt()) ?: continue
-                    val spec = original.copy(count = count.toFloat(), scale = original.scale.coerceIn(.05f,.7f), scaleTo = original.scaleTo.coerceIn(.05f,.75f), scaleVariance = original.scaleVariance.coerceIn(0f,.1f), opacity = original.opacity.coerceIn(0f,.68f))
+                    val spec = original.copy(count = count.toFloat(), scale = original.scale.coerceIn(.05f,OriginFxStyle.particleScaleLimit()), scaleTo = original.scaleTo.coerceIn(.05f,OriginFxStyle.particleScaleLimit()), scaleVariance = original.scaleVariance.coerceIn(0f,.15f), opacity = original.opacity.coerceIn(0f,.85f))
                     val id: net.minecraft.resources.ResourceLocation? = effectId(spec.id)
                     if (id == null || !net.minecraft.core.registries.BuiltInRegistries.PARTICLE_TYPE.containsKey(id)) {
                         EnhancedFxCompat.warnOnce("particle:" + spec.id,
@@ -281,6 +300,7 @@ object EnhancedFxCompat {
                     } else {
                         ParticleBridge.sendBatches.invoke(null, entity, effects)
                     }
+                    return true
                 }
             }catch (exception: java.lang.ReflectiveOperationException) {
                 ParticleBridge.available = false
@@ -288,6 +308,7 @@ object EnhancedFxCompat {
                 "Spell Engine particle invocation failed; enhanced particles are disabled for the rest of this session.",
                 exception)
             }
+            return false
         }
 
         @kotlin.Throws(java.lang.ReflectiveOperationException::class) fun applyAppearance(builder: kotlin.Any, spec: EnhancedFxDefinitions.ParticleDefinition) {

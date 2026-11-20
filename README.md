@@ -63,7 +63,7 @@ Champion variants are hidden from normal selection. Operators can assign one wit
 
 ## Visual presentation
 
-Every standard and Champion Origin shares the **Shared Origin presentation** settings in Fzzy Config. **Minimal** keeps essential motifs, **Standard** adds restrained complementary detail, and **Cinematic** uses smoother finite effects and geometry without raising the Standard burst limits. Finite family-specific ribbon/contour effects replace the default library billboard bursts. They sweep, expand and flow, scale with the caster, and have bounded lifetimes and per-view limits. Per-entity budgets reduce stacked particles and optional sound layers while preserving core ability sounds; optional libraries retain the same family palettes and bundled effects remain available without them. Reduced cosmetic flashes are enabled by default. Gameplay values, targeting and ability timings are unchanged.
+Every standard and Champion Origin shares the **Shared Origin presentation** settings in Fzzy Config. **Minimal** keeps the clean contour motifs; **Standard** restores a balanced blend of textured water, bubbles, mist, sparks and family effects from installed libraries, with restrained contour accents. **Cinematic** allows richer bounded detail. Effects remain finite and per-entity burst budgets apply in every preset. Core ability sounds stay intact; intentionally silent pulses do not acquire generic fallback noises. Reduced cosmetic flashes are enabled by default. Presentation settings do not change ability damage, cooldowns or resource costs.
 
 Use `/andromedaorigins_visuals` for a local contour opt-out and maximum detail preference.
 
@@ -71,7 +71,7 @@ Dawnbreaker's opt-in impact frames use filled gold/black eclipse, pressure and r
 
 ## Optional integrations
 
-**Your installed mods can change how abilities look and sound.** The refined contour compositions, bundled sounds and vanilla-particle cues work without extra effect libraries. [Spell Engine](https://modrinth.com/mod/spell-engine) and [More RPG Library](https://modrinth.com/mod/more-rpg-library) provide optional sound assets and the restrained library-particle fallback, available when refined contours are disabled or unavailable. Resource packs can customize supported sound events and effect palettes. Cosmetic layers do not change ability damage, cooldowns or resource costs.
+**Your installed mods can change how abilities look and sound.** The refined contour compositions, bundled sounds and vanilla-particle cues work without extra effect libraries. [Spell Engine](https://modrinth.com/mod/spell-engine) and [More RPG Library](https://modrinth.com/mod/more-rpg-library) provide the textured visual layers and optional sound assets used by Standard and Cinematic. Clean bundled contours remain available as accents and fallbacks when libraries are absent. Resource packs can customize supported sound events and effect palettes. Cosmetic layers do not change ability damage, cooldowns or resource costs.
 
 | Optional mod | What it adds or connects |
 | --- | --- |

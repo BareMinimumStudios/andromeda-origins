@@ -140,6 +140,4 @@ Server switches under Champion Origins → Dawnbreaker control Afterimages compa
 
 ### Shared presentation — 1.4.85
 
-All 27 Origins are covered by the shared Fzzy presentation policy, including standard and Champion variants. Minimal reduces density; Standard and Cinematic share the same particle burst ceiling. Cinematic increases finite animation smoothness/detail rather than cloud size. Thirteen family palettes cover all 112 enhanced events, with at most two complementary particle layers and one sound layer per event. Bundled native-codec sound and burst actions use per-entity cosmetic budgets, preserving conditions, positioning, directed particles and all gameplay/resource logic. Essential mark, web, petrification and aquatic cues remain.
-
-Dawnbreaker impact frames now use original filled eclipse (Step), opposing pressure crescents (Guard), and a four-lobed rupture (confirmed bow hit). No radial spokes or extra camera effects are used. Screen effects remain opt-in and bounded.
+All 27 Origins share the Fzzy presentation policy. Minimal keeps restrained contours; Standard restores textured library layers with moderated density and contour accents; Cinematic allows richer bounded detail. Every preset has per-entity burst limits. The thirteen original family styles cover all 112 enhanced events, including aquatic bubbles, water splashes and mist. Intentionally silent repeated events stay silent, while activation cues and core sounds remain. Essential mark, web, petrification and aquatic feedback is preserved.

@@ -66,11 +66,11 @@
   },
   "heartbeat": {
     "type": "origins:action_over_time",
-    "interval": 30,
+    "interval": 100,
     "entity_action": {
       "type": "andromeda_origins:refined_sound",
       "sound": "minecraft:entity.sniffer.scenting",
-      "volume": 1,
+      "volume": 0.18,
       "pitch": 1.3
     }
   },

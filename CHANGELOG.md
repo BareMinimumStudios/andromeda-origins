@@ -2,19 +2,14 @@
 
 ## [1.4.85] - 2026-11-19
 
-- Add a tiny caster-only teleport cue on successful Begone, quieter than Measured Step. Preserve silent public endpoints, the recipient heartbeat, instant displacement and sound opt-out.
-
-- Make Dawnbreaker Transference and Sovereign Gaze audio clearer: use distinct cast cues and brief target-position siphon/petrification impacts, so affected players hear successful casts beyond the caster’s sound radius. Retain the sound switch and keep audio independent of particle settings; no repeating loops or gameplay changes.
-
-- Make Begone immediately displace its player or living-mob target exactly 500 horizontal blocks at the same height. Remove the asynchronous safe-landing search, cancellation window and search/status text; keep silent endpoints and the recipient-only heartbeat. Restore the caster’s “Begone.” and the recipient’s post-arrival “You have been banished.” messages independently of optional success chatter. Add restrained Measured Step and Stillwater activation/first-capture/volley sounds, respecting the sound switch without looping wing or Guard audio.
-
-- Restore distinct core ability sounds without the shared optional-layer limiter swallowing them; provide native family sound fallbacks when optional libraries are absent. Render Measured Step departure silhouettes independently of arrival visibility, including first-person casters, with a readable 450 ms fade and a bundled fallback. Make grounded Step follow facing direction across terrain instead of shortening when looking down. Add clear expanding, sweeping and flowing motion to all family contours; animate visible Guard arc gaps, rotating accents and wing breathing without extra particle emitters.
-
-- Add bounded client-rendered silk arcs, currents, soul wisps, ripples and family-specific ribbon compositions as the default enhanced layer, with optional-library fallbacks. Scale and interpolate attached effects with the caster; avoid opaque billboard clouds.
-- Refine the presentation of every standard and Champion Origin plus Dawnbreaker: lean family palettes, fewer complementary layers, small particles and shorter finite effects. Add shared Minimal/Standard/Cinematic quality controls and bounded per-entity cosmetic budgets; Cinematic adds smoother detail without increasing burst limits.
-- Replace line-based Dawnbreaker impact frames with filled gold/black eclipse, pressure and rupture compositions for Step, Guard and confirmed bow hits. Preserve independent server switches and client opt-in, intensity and duration.
-- Route bundled sound and particle actions through native-codec cosmetic wrappers, retaining gameplay actions, resource costs, timers and targeting. Reduce repeating sound overlap, forced-distance particles, dense sphere emissions and Veil clouds. Keep essential marks, web/petrification overlays and aquatic feedback.
-- Default cosmetic lightning to a compact light cue with a reduced-flash switch. Update the reviewed Selkie cosmetic baseline only after verifying that all power mechanics remain identical.
+- Restore a balanced enhanced presentation across all standard/Champion Origins: Standard and Cinematic use textured MRPG/Spell Engine water, bubbles, mist, sparks and family effects at moderated density, with clean animated contours as accents/fallbacks. Minimal stays restrained. Every preset has finite effects and per-entity burst limits; optional libraries remain optional.
+- Keep Fenrkin Hunt’s original activation howl, remove unintended fallback growls from silent repeated pulses, and make standard/Champion Hunt sniffing quieter and less frequent. Preserve the existing highlight and gameplay.
+- Fix `/andromedaorigins_visuals` closing immediately after typed chat submission. The client-only Fzzy menu now opens after chat closes and retains local contour, Afterimages and impact-frame preferences.
+- Restore core ability sound signatures outside the optional-layer limiter. Give Dawnbreaker Transference and Sovereign Gaze clearer cast cues plus target-position impacts that remain audible to distant victims. Preserve sound opt-out independently of particles, including resource-pack sound support.
+- Make Begone immediately displace its player or living-mob target exactly 500 horizontal blocks at unchanged height, without a safe-landing search or search text. Restore “Begone.” for the caster and “You have been banished.” for the player target. Add a tiny caster-only teleport cue and retain the recipient-only heartbeat, without public endpoint particles or sound.
+- Make grounded Measured Step follow facing direction across terrain rather than shortening when looking down. Render its 450 ms departure silhouette independently of arrival visibility, including the first-person world pass, with optional Afterimages compositing and a bundled fallback. Add brief Step and Stillwater activation/first-capture/volley sounds without idle audio loops.
+- Animate family contours, wings and Guard accents. Replace line-based Dawnbreaker impact frames with filled gold/black eclipse, pressure and rupture compositions, preserving server switches and local opt-in, intensity and duration.
+- Retain native particle/sound codecs and essential marks, web/petrification overlays and aquatic feedback. Bound sphere/trail density and particle viewing distance, provide reduced-flash cosmetic lightning, and update the reviewed Selkie cosmetic baseline without changing its powers or hydration mechanics.
 
 ## [1.4.84] - 2026-11-15
 

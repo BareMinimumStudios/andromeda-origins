@@ -4,35 +4,36 @@
       {
         "id": "more_rpg_classes:rage_particle",
         "preset": "impact",
-        "count": 6,
-        "speed": 0.08,
-        "scale": 0.7,
+        "count": 13,
+        "speed": 0.15,
+        "scale": 1.1,
         "motion": "burst",
         "requires_mod": "more_rpg_classes",
-        "scale_to": 0.5,
-        "opacity": 0.68,
-        "glow": false,
-        "fade_out_hold": 0.12,
-        "color": "#B86C8E"
+        "opacity": 0.85
       },
       {
         "id": "more_rpg_classes:dragon_claw",
         "preset": "placed",
         "count": 1,
-        "scale": 0.7,
+        "scale": 1.1,
         "requires_mod": "more_rpg_classes",
-        "scale_to": 0.5,
-        "opacity": 0.68,
+        "opacity": 0.85
+      },
+      {
+        "id": "spell_engine:dripping_blood",
+        "preset": "cloud",
+        "count": 6,
         "speed": 0.03,
-        "glow": false,
-        "fade_out_hold": 0.12,
-        "color": "#B86C8E"
+        "scale": 0.8,
+        "color": "#B11328",
+        "motion": "drift",
+        "opacity": 0.85
       }
     ],
     "sounds": [
       {
         "id": "more_rpg_classes:strong_attack",
-        "volume": 0.32,
+        "volume": 0.36,
         "pitch": 0.78,
         "requires_mod": "more_rpg_classes"
       }
@@ -40,8 +41,8 @@
     "mrpg": {
       "preset": "mrpg_lib:preset/cast",
       "radius": 0.65,
-      "intensity": 0.2,
-      "color": "B86C8E",
+      "intensity": 0.38,
+      "color": "B11328",
       "duration": 8,
       "attach": false
     }
@@ -52,34 +53,45 @@
         "id": "more_rpg_classes:slash_claw",
         "preset": "placed",
         "count": 1,
-        "scale": 0.7,
+        "scale": 1.2,
         "requires_mod": "more_rpg_classes",
-        "scale_to": 0.5,
-        "opacity": 0.68,
-        "speed": 0.03,
-        "glow": false,
-        "fade_out_hold": 0.12,
-        "color": "#B86C8E"
+        "opacity": 0.85
       },
       {
         "id": "more_rpg_classes:blood_drop",
         "preset": "impact",
-        "count": 6,
-        "speed": 0.08,
-        "scale": 0.7,
+        "count": 14,
+        "speed": 0.14,
+        "scale": 1.0,
         "motion": "burst",
         "requires_mod": "more_rpg_classes",
-        "scale_to": 0.5,
-        "opacity": 0.68,
-        "glow": false,
+        "opacity": 0.85
+      },
+      {
+        "id": "spell_engine:dripping_blood",
+        "preset": "impact",
+        "count": 8,
+        "speed": 0.08,
+        "scale": 0.9,
+        "color": "#A90E1F",
+        "motion": "drift",
+        "opacity": 0.85
+      },
+      {
+        "id": "spell_engine:area_circle_1",
+        "preset": "ground",
+        "count": 1,
+        "scale": 1.5,
+        "color": "#8A0C16",
+        "opacity": 0.72,
         "fade_out_hold": 0.12,
-        "color": "#B86C8E"
+        "glow": true
       }
     ],
     "sounds": [
       {
         "id": "more_rpg_classes:decapitate_impact",
-        "volume": 0.32,
+        "volume": 0.42,
         "pitch": 0.76,
         "requires_mod": "more_rpg_classes"
       }
@@ -87,8 +99,8 @@
     "mrpg": {
       "preset": "mrpg_lib:preset/impact",
       "radius": 1.2,
-      "intensity": 0.2,
-      "color": "B86C8E",
+      "intensity": 0.38,
+      "color": "A90E1F",
       "duration": 8,
       "attach": false
     }
@@ -98,45 +110,52 @@
       {
         "id": "more_rpg_classes:rage_particle",
         "preset": "casting",
-        "count": 6,
+        "count": 16,
         "speed": 0.08,
-        "scale": 0.7,
+        "scale": 1.15,
         "motion": "ascend",
         "attached": true,
         "requires_mod": "more_rpg_classes",
-        "scale_to": 0.5,
-        "opacity": 0.68,
-        "glow": false,
-        "fade_out_hold": 0.12,
-        "color": "#B86C8E"
+        "opacity": 0.85
       },
       {
         "id": "spell_engine:ground_glow",
         "preset": "ground",
         "count": 1,
-        "scale": 0.7,
-        "color": "#B86C8E",
-        "opacity": 0.68,
-        "fade_out_hold": 0.12,
-        "glow": false,
-        "attached_to_ground": true,
-        "scale_to": 0.5,
-        "speed": 0.03
+        "scale": 1.8,
+        "color": "#8E091B",
+        "opacity": 0.8,
+        "fade_out_hold": 0.35,
+        "glow": true,
+        "attached_to_ground": true
+      },
+      {
+        "id": "spell_engine:magic_stripe",
+        "preset": "helix",
+        "count": 7,
+        "speed": 0.05,
+        "degrees_per_tick": 24,
+        "offset": 0,
+        "scale": 0.72,
+        "color": "#FF7F7F",
+        "opacity": 0.72,
+        "glow": true,
+        "motion": "float"
       }
     ],
     "sounds": [
       {
         "id": "more_rpg_classes:strong_attack",
-        "volume": 0.32,
+        "volume": 0.38,
         "pitch": 0.7,
         "requires_mod": "more_rpg_classes"
       }
     ],
     "mrpg": {
       "preset": "mrpg_lib:preset/shockwave",
-      "radius": 1.25,
-      "intensity": 0.2,
-      "color": "B86C8E",
+      "radius": 2.2,
+      "intensity": 0.38,
+      "color": "8E091B",
       "duration": 8,
       "attach": false
     }
@@ -147,37 +166,41 @@
         "id": "spell_engine:ground_glow",
         "preset": "ground",
         "count": 1,
-        "scale": 0.45,
-        "color": "#B86C8E",
-        "opacity": 0.48,
-        "fade_out_hold": 0.12,
-        "glow": false,
-        "attached_to_ground": true,
-        "scale_to": 0.5,
-        "speed": 0.03
+        "scale": 1.65,
+        "color": "#7B0D16",
+        "opacity": 0.56,
+        "fade_out_hold": 0.18,
+        "glow": true,
+        "attached_to_ground": true
       },
       {
         "id": "more_rpg_classes:rage_particle",
         "preset": "casting",
-        "count": 3,
-        "speed": 0.035,
-        "scale": 0.45,
+        "count": 4,
+        "speed": 0.045,
+        "scale": 0.82,
         "motion": "ascend",
         "attached": true,
         "requires_mod": "more_rpg_classes",
-        "scale_to": 0.5,
-        "opacity": 0.48,
-        "glow": false,
-        "fade_out_hold": 0.12,
-        "color": "#B86C8E"
+        "opacity": 0.65
+      },
+      {
+        "id": "spell_engine:dripping_blood",
+        "preset": "cloud",
+        "count": 2,
+        "speed": 0.025,
+        "scale": 0.75,
+        "color": "#A3151D",
+        "opacity": 0.65,
+        "motion": "float"
       }
     ],
     "sounds": [],
     "mrpg": {
       "preset": "mrpg_lib:preset/aura",
-      "radius": 0.55,
-      "intensity": 0.1,
-      "color": "B86C8E",
+      "radius": 0.65,
+      "intensity": 0.18,
+      "color": "7B0D16",
       "duration": 4,
       "attach": true
     }
@@ -188,36 +211,40 @@
         "id": "more_rpg_classes:rage_particle",
         "preset": "travel",
         "count": 3,
-        "speed": 0.035,
-        "scale": 0.45,
+        "speed": 0.09,
+        "scale": 0.72,
         "motion": "decelerate",
         "requires_mod": "more_rpg_classes",
-        "scale_to": 0.5,
-        "opacity": 0.48,
-        "glow": false,
-        "fade_out_hold": 0.12,
-        "color": "#B86C8E"
+        "opacity": 0.65
       },
       {
         "id": "spell_engine:dripping_blood",
         "preset": "cloud",
-        "count": 3,
+        "count": 2,
         "speed": 0.03,
-        "scale": 0.45,
-        "color": "#B86C8E",
-        "opacity": 0.48,
-        "motion": "float",
-        "scale_to": 0.5,
-        "glow": false,
-        "fade_out_hold": 0.12
+        "scale": 0.68,
+        "color": "#B21E26",
+        "opacity": 0.65,
+        "motion": "float"
+      },
+      {
+        "id": "spell_engine:magic_stripe",
+        "preset": "travel",
+        "count": 2,
+        "speed": 0.11,
+        "scale": 0.58,
+        "color": "#FF857D",
+        "opacity": 0.6,
+        "glow": true,
+        "motion": "decelerate"
       }
     ],
     "sounds": [],
     "mrpg": {
-      "preset": "mrpg_lib:preset/slash",
-      "radius": 0.55,
-      "intensity": 0.1,
-      "color": "B86C8E",
+      "preset": "mrpg_lib:preset/burst",
+      "radius": 0.65,
+      "intensity": 0.18,
+      "color": "B21E26",
       "duration": 4,
       "attach": false
     }
@@ -228,32 +255,52 @@
         "id": "spell_engine:ground_glow",
         "preset": "ground",
         "count": 1,
-        "scale": 0.7,
-        "scale_to": 0.65,
-        "color": "#B86C8E",
-        "opacity": 0.68,
-        "fade_out_hold": 0.12,
-        "glow": false,
-        "attached_to_ground": true,
-        "speed": 0.03
+        "scale": 1.7,
+        "scale_to": 1.1,
+        "color": "#690611",
+        "opacity": 0.82,
+        "fade_out_hold": 0.18,
+        "glow": true,
+        "attached_to_ground": true
       },
       {
         "id": "spell_engine:area_circle_1",
         "preset": "ground",
         "count": 1,
-        "scale": 0.7,
-        "scale_to": 0.65,
-        "color": "#B86C8E",
-        "opacity": 0.68,
-        "fade_out_hold": 0.12,
-        "glow": false,
-        "speed": 0.03
+        "scale": 1.8,
+        "scale_to": 1.2,
+        "color": "#9A0F1E",
+        "opacity": 0.85,
+        "fade_out_hold": 0.22,
+        "glow": true
+      },
+      {
+        "id": "spell_engine:magic_stripe",
+        "preset": "impact",
+        "count": 11,
+        "speed": 0.11,
+        "scale": 0.92,
+        "color": "#FFC4C4",
+        "opacity": 0.82,
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "more_rpg_classes:rage_particle",
+        "preset": "casting",
+        "count": 13,
+        "speed": 0.06,
+        "scale": 0.96,
+        "motion": "ascend",
+        "attached": true,
+        "requires_mod": "more_rpg_classes",
+        "opacity": 0.85
       }
     ],
     "sounds": [
       {
         "id": "more_rpg_classes:strong_attack",
-        "volume": 0.32,
+        "volume": 0.42,
         "pitch": 0.62,
         "requires_mod": "more_rpg_classes"
       }
@@ -261,8 +308,8 @@
     "mrpg": {
       "preset": "mrpg_lib:preset/swirl",
       "radius": 1.2,
-      "intensity": 0.2,
-      "color": "B86C8E",
+      "intensity": 0.38,
+      "color": "690611",
       "duration": 8,
       "attach": true
     }
@@ -273,33 +320,65 @@
         "id": "more_rpg_classes:slash_claw",
         "preset": "placed",
         "count": 1,
-        "scale": 0.7,
+        "scale": 1.35,
         "requires_mod": "more_rpg_classes",
-        "scale_to": 0.5,
-        "opacity": 0.68,
-        "speed": 0.03,
-        "glow": false,
-        "fade_out_hold": 0.12,
-        "color": "#B86C8E"
+        "opacity": 0.85
       },
       {
         "id": "more_rpg_classes:dragon_claw",
         "preset": "placed",
         "count": 1,
-        "scale": 0.7,
+        "scale": 1.16,
         "requires_mod": "more_rpg_classes",
-        "scale_to": 0.5,
-        "opacity": 0.68,
-        "speed": 0.03,
-        "glow": false,
-        "fade_out_hold": 0.12,
-        "color": "#B86C8E"
+        "opacity": 0.85
+      },
+      {
+        "id": "spell_engine:magic_stripe",
+        "preset": "impact",
+        "count": 13,
+        "speed": 0.13,
+        "scale": 0.98,
+        "color": "#FFE1E1",
+        "opacity": 0.84,
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "spell_engine:smoke_medium",
+        "preset": "impact",
+        "count": 10,
+        "speed": 0.08,
+        "scale": 0.95,
+        "motion": "decelerate",
+        "opacity": 0.85
+      },
+      {
+        "id": "spell_engine:dripping_blood",
+        "preset": "impact",
+        "count": 7,
+        "speed": 0.08,
+        "scale": 0.82,
+        "color": "#AC1120",
+        "motion": "burst",
+        "opacity": 0.85
+      },
+      {
+        "id": "spell_engine:magic_stripe",
+        "preset": "cone",
+        "count": 8,
+        "speed": 0.13,
+        "scale": 0.82,
+        "angle": 22,
+        "color": "#FFD0D0",
+        "opacity": 0.82,
+        "glow": true,
+        "motion": "burst"
       }
     ],
     "sounds": [
       {
         "id": "more_rpg_classes:decapitate_impact",
-        "volume": 0.32,
+        "volume": 0.4,
         "pitch": 0.68,
         "requires_mod": "more_rpg_classes"
       }
@@ -307,8 +386,8 @@
     "mrpg": {
       "preset": "mrpg_lib:preset/slash",
       "radius": 1.2,
-      "intensity": 0.2,
-      "color": "B86C8E",
+      "intensity": 0.38,
+      "color": "FFE1E1",
       "duration": 8,
       "attach": false
     }
@@ -319,41 +398,62 @@
         "id": "spell_engine:area_circle_1",
         "preset": "ground",
         "count": 1,
-        "scale": 0.7,
-        "scale_to": 0.65,
-        "color": "#B86C8E",
-        "opacity": 0.68,
-        "fade_out_hold": 0.12,
-        "glow": false,
-        "speed": 0.03
+        "scale": 1.35,
+        "scale_to": 2.15,
+        "color": "#A30F21",
+        "opacity": 0.85,
+        "fade_out_hold": 0.16,
+        "glow": true
       },
       {
         "id": "spell_engine:ground_glow",
         "preset": "ground",
         "count": 1,
-        "scale": 0.7,
-        "color": "#B86C8E",
-        "opacity": 0.68,
-        "fade_out_hold": 0.12,
-        "glow": false,
-        "attached_to_ground": true,
-        "scale_to": 0.5,
-        "speed": 0.03
+        "scale": 1.55,
+        "color": "#7B0918",
+        "opacity": 0.78,
+        "fade_out_hold": 0.14,
+        "glow": true,
+        "attached_to_ground": true
+      },
+      {
+        "id": "more_rpg_classes:rage_particle",
+        "preset": "impact",
+        "count": 15,
+        "speed": 0.14,
+        "scale": 1.02,
+        "motion": "burst",
+        "requires_mod": "more_rpg_classes",
+        "opacity": 0.85
+      },
+      {
+        "id": "spell_engine:smoke_medium",
+        "preset": "impact",
+        "count": 11,
+        "speed": 0.09,
+        "scale": 1.0,
+        "motion": "decelerate",
+        "opacity": 0.85
       }
     ],
     "sounds": [
       {
         "id": "more_rpg_classes:strong_attack",
-        "volume": 0.32,
+        "volume": 0.45,
         "pitch": 0.58,
         "requires_mod": "more_rpg_classes"
+      },
+      {
+        "id": "spell_engine:signal_spell_crit",
+        "volume": 0.22,
+        "pitch": 0.7
       }
     ],
     "mrpg": {
-      "preset": "mrpg_lib:preset/slash",
+      "preset": "mrpg_lib:preset/burst",
       "radius": 1.2,
-      "intensity": 0.2,
-      "color": "B86C8E",
+      "intensity": 0.38,
+      "color": "A30F21",
       "duration": 8,
       "attach": false
     }
@@ -364,43 +464,60 @@
         "id": "spell_engine:area_circle_1",
         "preset": "ground",
         "count": 1,
-        "scale": 0.7,
-        "scale_to": 0.65,
-        "color": "#B86C8E",
-        "opacity": 0.68,
-        "fade_out_hold": 0.12,
-        "glow": false,
-        "speed": 0.03
+        "scale": 1.8,
+        "scale_to": 1.25,
+        "color": "#C41527",
+        "opacity": 0.85,
+        "fade_out_hold": 0.18,
+        "glow": true
       },
       {
         "id": "more_rpg_classes:rage_particle",
         "preset": "casting",
-        "count": 6,
+        "count": 11,
         "speed": 0.08,
-        "scale": 0.7,
+        "scale": 0.92,
         "motion": "ascend",
         "attached": true,
         "requires_mod": "more_rpg_classes",
-        "scale_to": 0.5,
-        "opacity": 0.68,
-        "glow": false,
-        "fade_out_hold": 0.12,
-        "color": "#B86C8E"
+        "opacity": 0.85
+      },
+      {
+        "id": "spell_engine:magic_stripe",
+        "preset": "shockwave",
+        "count": 13,
+        "speed": 0.16,
+        "pre_travel": 0.08,
+        "scale": 0.88,
+        "color": "#FFD2D2",
+        "opacity": 0.82,
+        "glow": true,
+        "motion": "burst"
+      },
+      {
+        "id": "spell_engine:dripping_blood",
+        "preset": "cloud",
+        "count": 7,
+        "speed": 0.03,
+        "scale": 0.78,
+        "color": "#B11328",
+        "opacity": 0.8,
+        "motion": "float"
       }
     ],
     "sounds": [
       {
         "id": "more_rpg_classes:decapitate_impact",
-        "volume": 0.32,
+        "volume": 0.34,
         "pitch": 0.78,
         "requires_mod": "more_rpg_classes"
       }
     ],
     "mrpg": {
       "preset": "mrpg_lib:preset/shockwave",
-      "radius": 1.25,
-      "intensity": 0.2,
-      "color": "B86C8E",
+      "radius": 2.2,
+      "intensity": 0.38,
+      "color": "C41527",
       "duration": 8,
       "attach": false
     }
