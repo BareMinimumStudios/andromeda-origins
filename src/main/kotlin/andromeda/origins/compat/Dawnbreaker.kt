@@ -322,6 +322,9 @@ object Dawnbreaker {
         target.deltaMovement = Vec3.ZERO
         target.fallDistance = 0f
         say(player, "Begone.")
+        if (EnhancedFxConfig.enabled() && EnhancedFxConfig.sounds())
+            player.playNotifySound(net.minecraft.sounds.SoundEvents.ENDERMAN_TELEPORT, net.minecraft.sounds.SoundSource.PLAYERS,
+                .12f * DawnbreakerPresentation.soundScale(), 1.7f)
         if (target is ServerPlayer) target.sendSystemMessage(Component.literal("You have been banished."))
         if (target is ServerPlayer && EnhancedFxConfig.enabled() && EnhancedFxConfig.sounds() &&
             Platform.canReceiveCosmetic(target, andromeda.origins.network.BanishmentHeartbeatPayload.TYPE.id()))

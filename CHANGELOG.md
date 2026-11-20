@@ -2,6 +2,8 @@
 
 ## [1.4.85] - 2026-11-19
 
+- Add a tiny caster-only teleport cue on successful Begone, quieter than Measured Step. Preserve silent public endpoints, the recipient heartbeat, instant displacement and sound opt-out.
+
 - Make Dawnbreaker Transference and Sovereign Gaze audio clearer: use distinct cast cues and brief target-position siphon/petrification impacts, so affected players hear successful casts beyond the caster’s sound radius. Retain the sound switch and keep audio independent of particle settings; no repeating loops or gameplay changes.
 
 - Make Begone immediately displace its player or living-mob target exactly 500 horizontal blocks at the same height. Remove the asynchronous safe-landing search, cancellation window and search/status text; keep silent endpoints and the recipient-only heartbeat. Restore the caster’s “Begone.” and the recipient’s post-arrival “You have been banished.” messages independently of optional success chatter. Add restrained Measured Step and Stillwater activation/first-capture/volley sounds, respecting the sound switch without looping wing or Guard audio.
