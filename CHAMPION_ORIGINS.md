@@ -129,3 +129,10 @@ Under **Champion Origins → Dawnbreaker**, choose **Minimal**, **Standard** or 
 Measured Step teleports in the same tick, with a two-tick endpoint cue and geometric light afterimage without duplicating the Figura avatar. The bow's full-screen white flash is replaced by a small muzzle cue, and close-up projectile glow is bounded for readability. Begone retains no public particles/sound and its recipient-only heartbeat.
 
 Gaze and Transference keep per-caster contributions. Disabling one caster releases their own boosts/control without erasing another caster's contribution or unrelated grants. Gaze escape input still shortens the remaining control. Gorgon and Dawnbreaker Transference effects do not multiply into a 4x speed boost or duplicate weakness modifiers. Existing Gorgon powers retain their own original behavior.
+
+
+### Optional afterimages and impact frames
+
+Installing Afterimages on a client enables its native transparent compositing for a gold silhouette at Measured Step’s departure point, fading over 200 ms. The bundled outline remains the fallback. No global player trails or resource-pack overrides are installed. Other Origins and normal movement are unaffected.
+
+Server switches under Champion Origins → Dawnbreaker control Afterimages compatibility, the impact-frame master switch (off by default), and Step/Guard/bow events separately. Each player opens `/andromedaorigins_visuals` for local Afterimages preferences, impact-frame opt-in (off by default), Low/Standard/Strong intensity and 35–140 ms duration. Original angular gold/black graphics only appear for the caster, with a 300 ms retrigger limit. They do not lock the camera, freeze time, affect cooldowns or require the unrelated Impact Frames mod. Bow frames require confirmed damage rather than mere projectile contact. Temporary visuals clear on disconnect, world change or death.

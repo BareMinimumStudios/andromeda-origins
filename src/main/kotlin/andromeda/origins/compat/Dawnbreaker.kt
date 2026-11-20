@@ -157,6 +157,7 @@ object Dawnbreaker {
         val from = player.position()
         if (!player.teleportTo(level, destination.x, destination.y, destination.z, mutableSetOf<RelativeMovement>(), player.yRot, player.xRot)) return
         player.deltaMovement = Vec3.ZERO; player.fallDistance = 0f
+        DawnbreakerFx.cue(player, 0, from)
         set(player, id("dawnbreaker/presentation"), "step_x", from.x)
         set(player, id("dawnbreaker/presentation"), "step_y", from.y)
         set(player, id("dawnbreaker/presentation"), "step_z", from.z)

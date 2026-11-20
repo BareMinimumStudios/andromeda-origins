@@ -23,6 +23,7 @@ object DawnbreakerVisuals {
         val viewer = Minecraft.getInstance().player ?: return
         if (entity.isInvisibleTo(viewer) || viewer.distanceToSqr(entity) > 48.0 * 48.0) return
         val c = PowerContainer.of(entity) ?: return
+        val nativeGhost = DawnbreakerFxClient.renderGhost(entity, delta, pose, buffers)
         SovereignVisuals.render(entity, x, y, z, delta, pose, buffers)
         fun resource(path: String) = PowerResources.read(c, ResourceLocation.parse("andromeda_origins:dawnbreaker/" + path)).orElse(0.0)
         val stepping = (resource("presentation_step").toFloat() / 2f).coerceIn(0f, 1f)
@@ -40,7 +41,7 @@ object DawnbreakerVisuals {
         pose.pushPose()
         pose.translate(x, y, z)
         val vertices = buffers.getBuffer(RenderType.debugQuads())
-        if (stepping > 0 && resource("presentation_animation") > 0 && andromeda.origins.compat.DawnbreakerPresentation.settings().animatedWings.get()) {
+        if (!nativeGhost && stepping > 0 && resource("presentation_animation") > 0 && andromeda.origins.compat.DawnbreakerPresentation.settings().animatedWings.get()) {
             pose.pushPose()
             pose.translate(resource("presentation_step_x") - entity.x, resource("presentation_step_y") - entity.y, resource("presentation_step_z") - entity.z)
             pose.mulPose(Axis.YP.rotationDegrees(-entity.yRot))

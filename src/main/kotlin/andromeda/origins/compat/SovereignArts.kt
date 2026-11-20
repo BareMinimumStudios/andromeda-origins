@@ -98,6 +98,7 @@ object SovereignArts {
     }
     private fun finish(player: ServerPlayer?, state: Guard, fire: Boolean) {
         if (fire && player != null) {
+            if (state.held.isNotEmpty()) DawnbreakerFx.cue(player, 2)
             val target = if (state.held.isNotEmpty()) aim(player) else player.eyePosition
             state.held.forEach { held -> releasing.add(Release(player.uuid, held, player.serverLevel(), player.server.tickCount, target)) }
         } else state.held.forEach(::restore)
@@ -162,6 +163,7 @@ object SovereignArts {
             for (p in player.serverLevel().getEntitiesOfClass(Projectile::class.java, player.boundingBox.inflate(6.0)) { eligible(it, player) }.sortedBy { it.distanceToSqr(player) }) {
                 if (state.held.size + releasing.count { it.caster == uuid } >= 8) break
                 if (!player.hasLineOfSight(p)) continue
+                if (state.held.isEmpty()) DawnbreakerFx.cue(player, 1)
                 state.held.add(Held(p, p.deltaMovement, p.owner, p.position())); frozen.add(p)
                 if (!p.isNoGravity) { p.addTag(RECOVER_GRAVITY); p.setNoGravity(true) }
             }

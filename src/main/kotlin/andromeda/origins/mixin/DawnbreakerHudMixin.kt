@@ -7,5 +7,6 @@ abstract class DawnbreakerHudMixin {
         ci: org.spongepowered.asm.mixin.injection.callback.CallbackInfo) {
         andromeda.origins.client.DawnquiverClientCompat.renderHud(graphics, delta)
         andromeda.origins.client.SovereignVisuals.renderHud(graphics)
+        andromeda.origins.client.DawnbreakerFxClient.renderImpact(graphics)
     }
 }

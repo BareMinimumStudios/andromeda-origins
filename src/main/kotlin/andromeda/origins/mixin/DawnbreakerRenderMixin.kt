@@ -8,6 +8,7 @@ abstract class DawnbreakerRenderMixin {
         pose: com.mojang.blaze3d.vertex.PoseStack, buffers: net.minecraft.client.renderer.MultiBufferSource, light: Int,
         ci: org.spongepowered.asm.mixin.injection.callback.CallbackInfo
     ) {
+        if (andromeda.origins.client.DawnbreakerFxClient.renderingGhost) return
         andromeda.origins.client.DawnbreakerVisuals.renderProjectile(entity, x, y, z, pose, buffers)
         val living = entity as? net.minecraft.world.entity.LivingEntity ?: return
         andromeda.origins.client.DawnbreakerVisuals.render(living, x, y, z, delta, pose, buffers)

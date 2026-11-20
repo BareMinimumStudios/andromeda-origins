@@ -67,6 +67,7 @@ class FabricPlatform : PlatformBackend {
     }
     override fun registerNetworking() {
         PayloadTypeRegistry.playS2C().register(OpenConfigPayload.TYPE, OpenConfigPayload.CODEC)
+        PayloadTypeRegistry.playS2C().register(andromeda.origins.network.DawnbreakerFxPayload.TYPE, andromeda.origins.network.DawnbreakerFxPayload.CODEC)
         PayloadTypeRegistry.playS2C().register(andromeda.origins.network.BanishmentHeartbeatPayload.TYPE, andromeda.origins.network.BanishmentHeartbeatPayload.CODEC)
     }
     override fun canReceiveCosmetic(player: ServerPlayer, channel: ResourceLocation): Boolean = ServerPlayNetworking.canSend(player, channel)

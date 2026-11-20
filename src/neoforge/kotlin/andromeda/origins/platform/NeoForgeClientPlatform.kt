@@ -24,6 +24,10 @@ class NeoForgeClientPlatform : ClientPlatformBackend {
     }
     override fun startTick(callback: Consumer<Minecraft>) { NeoForge.EVENT_BUS.addListener(Consumer<ClientTickEvent.Pre> { callback.accept(Minecraft.getInstance()) }) }
     override fun endTick(callback: Consumer<Minecraft>) { NeoForge.EVENT_BUS.addListener(Consumer<ClientTickEvent.Post> { callback.accept(Minecraft.getInstance()) }) }
-    override fun configReceiver() { /* Registered on the mod bus by the server bridge. */ }
+    override fun configReceiver() {
+        NeoForge.EVENT_BUS.addListener(Consumer<net.neoforged.neoforge.client.event.RegisterClientCommandsEvent> { event ->
+            event.dispatcher.register(net.minecraft.commands.Commands.literal("andromedaorigins_visuals").executes { andromeda.origins.client.DawnbreakerFxClient.openConfig(); 1 })
+        })
+    }
     override fun versionHandshake() { /* Exact-version payload negotiation is loader-owned. */ }
 }

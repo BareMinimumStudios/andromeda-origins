@@ -342,6 +342,12 @@ class AndromedaGameplayConfig : me.fzzyhmstrs.fzzy_config.config.Config(net.mine
     class DawnbreakerSection : OriginToggleSection() {
         var presentationPreset = me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedEnum(andromeda.origins.compat.DawnbreakerPresentation.Preset.STANDARD)
         var animatedWings = AndromedaGameplayConfig.Companion.enabled()
+        var afterimagesCompat = AndromedaGameplayConfig.Companion.enabled()
+        @me.fzzyhmstrs.fzzy_config.annotations.Comment("Allow gold/black impact frames. Each client must also opt in under Dawnbreaker Visuals; never pauses gameplay.")
+        var impactFrames = me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean(false)
+        var stepImpactFrames = AndromedaGameplayConfig.Companion.enabled()
+        var guardImpactFrames = AndromedaGameplayConfig.Companion.enabled()
+        var bowImpactFrames = AndromedaGameplayConfig.Companion.enabled()
         var guardHud = AndromedaGameplayConfig.Companion.enabled()
         var successMessages = me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean(false)
         @me.fzzyhmstrs.fzzy_config.annotations.Comment("Enable Measured Step: a cooldown-free blink up to 16 blocks to safe visible solid ground.")

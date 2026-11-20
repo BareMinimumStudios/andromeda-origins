@@ -20,6 +20,12 @@ class FabricClientPlatform : ClientPlatformBackend {
     override fun startTick(callback: Consumer<Minecraft>) = ClientTickEvents.START_CLIENT_TICK.register { callback.accept(it) }
     override fun endTick(callback: Consumer<Minecraft>) = ClientTickEvents.END_CLIENT_TICK.register { callback.accept(it) }
     override fun configReceiver() {
+        net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback.EVENT.register { dispatcher, _ ->
+            dispatcher.register(net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal("andromedaorigins_visuals").executes { andromeda.origins.client.DawnbreakerFxClient.openConfig(); 1 })
+        }
+        ClientPlayNetworking.registerGlobalReceiver(andromeda.origins.network.DawnbreakerFxPayload.TYPE) { payload, context ->
+            context.client().execute { andromeda.origins.client.DawnbreakerFxClient.receive(payload) }
+        }
         ClientPlayNetworking.registerGlobalReceiver(OpenConfigPayload.TYPE) { _, context ->
             context.client().execute { ConfigApiJava.openScreen(AndromedaGameplayConfig.SCREEN_SCOPE) }
         }

@@ -87,6 +87,7 @@ cloche {
                 dependency { modId = "fzzy_config"; version(fzzyVersion) }
                 dependency { modId = "additionalentityattributes"; version(aeaVersion) }
                 // Informational optional integrations; never installed or required by the build.
+                dependency { modId = "afterimages"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Optional gold departure silhouettes for Measured Step"); environment.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Environment.Client) }
                 dependency { modId = "spell_engine"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Extra ability particles and audiovisual layers") }
                 dependency { modId = "mrpg_lib"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Additional ability particle and sound assets") }
                 dependency { modId = "incapacitated"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Downed-player revival and golden-food policy") }
@@ -125,6 +126,7 @@ cloche {
                 dependency { modId = "fzzy_config"; version("$fzzyVersion+neoforge") }
                 dependency { modId = "additionalentityattributes"; version(aeaVersion) }
                 // Informational optional integrations; never installed or required by the build.
+                dependency { modId = "afterimages"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Optional gold departure silhouettes for Measured Step"); environment.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Environment.Client) }
                 dependency { modId = "spell_engine"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Extra ability particles and audiovisual layers") }
                 dependency { modId = "mrpg_lib"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Additional ability particle and sound assets") }
                 dependency { modId = "incapacitated"; type.set(earth.terrarium.cloche.api.metadata.CommonMetadata.Dependency.Type.Suggested); reason.set("Downed-player revival and golden-food policy") }

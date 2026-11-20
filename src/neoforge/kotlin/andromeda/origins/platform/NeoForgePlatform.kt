@@ -107,6 +107,9 @@ class NeoForgePlatform(private val modBus: IEventBus) : PlatformBackend {
     override fun registerNetworking() {
         modBus.addListener(Consumer<RegisterPayloadHandlersEvent> { event ->
             // Required, exact-version payload negotiation rejects missing or mismatched clients.
+            event.registrar(version()).playToClient(andromeda.origins.network.DawnbreakerFxPayload.TYPE, andromeda.origins.network.DawnbreakerFxPayload.CODEC) { payload, context ->
+                context.enqueueWork { andromeda.origins.client.DawnbreakerFxClient.receive(payload) }
+            }
             event.registrar(version()).playToClient(OpenConfigPayload.TYPE, OpenConfigPayload.CODEC) { _, context ->
                 context.enqueueWork { NeoForgeClientPlatform.openConfig() }
             }

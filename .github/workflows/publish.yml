@@ -195,6 +195,7 @@ jobs:
             mrpg_lib(optional){modrinth:Wkc3lwHo}
             incapacitated(optional){modrinth:CmDgNtOI}
             figura(optional){modrinth:s9gIPDom}
+            afterimages(optional){modrinth:W7xRcWxh}
             iris(optional){modrinth:YL57xq9U}
             simplyswords(optional){modrinth:bK3Ubu9p}
             simplymore(optional){modrinth:zhpyD8Y0}
@@ -252,6 +253,7 @@ jobs:
             mrpg_lib(optional){modrinth:Wkc3lwHo}
             incapacitated(optional){modrinth:CmDgNtOI}
             figura(optional){modrinth:s9gIPDom}
+            afterimages(optional){modrinth:W7xRcWxh}
             iris(optional){modrinth:YL57xq9U}
             simplyswords(optional){modrinth:bK3Ubu9p}
             simplymore(optional){modrinth:zhpyD8Y0}
