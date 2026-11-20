@@ -184,7 +184,9 @@ object Dawnbreaker {
                 player.serverLevel().sendParticles(gold, at.x, at.y, at.z, 1, .015, .015, .015, 0.0)
             }
         }
-        sound(player.serverLevel(), player.position(), net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_CHIME, .22f, .8f)
+        sound(player.serverLevel(), player.position(), net.minecraft.sounds.SoundEvents.BEACON_POWER_SELECT, .45f, 1.2f)
+        // A target can be 32 blocks away, outside the caster cue's audible radius.
+        sound(player.serverLevel(), target.position(), net.minecraft.sounds.SoundEvents.AMETHYST_CLUSTER_HIT, .65f, .75f)
         success(player, "Transference.")
     }
     private fun castAura(player: ServerPlayer) {
@@ -223,8 +225,10 @@ object Dawnbreaker {
             }
             c.markDirty()
             if (radiant(player)) shards(target)
+            // One short impact per target, including players beyond the caster sound's radius.
+            sound(player.serverLevel(), target.position(), net.minecraft.sounds.SoundEvents.STONE_BREAK, .45f, .7f)
         }
-        sound(player.serverLevel(), player.position(), net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_RESONATE, .7f, .6f)
+        sound(player.serverLevel(), player.position(), net.minecraft.sounds.SoundEvents.AMETHYST_CLUSTER_BREAK, .55f, .8f)
         ring(player, player.serverLevel(), player.position(), 2.0, 12)
         success(player, "Sovereign Gaze — ${targets.size} petrified")
     }
