@@ -25,20 +25,5 @@
     "hud_render": {
       "should_render": false
     }
-  },
-  "tick": {
-    "type": "origins:action_over_time",
-    "interval": 1,
-    "condition": {
-      "type": "origins:resource",
-      "resource": "*:*_cooldown",
-      "comparison": ">",
-      "compare_to": 0
-    },
-    "entity_action": {
-      "type": "origins:change_resource",
-      "resource": "*:*_cooldown",
-      "change": -1
-    }
   }
 }

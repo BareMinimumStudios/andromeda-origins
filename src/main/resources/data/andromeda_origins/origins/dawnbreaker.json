@@ -4,7 +4,7 @@
     "andromeda_origins:common/champion",
     "andromeda_origins:common/champion_cooldowns",
     "andromeda_origins:dawnbreaker/primary",
-    "andromeda_origins:gorgon/secondary",
+    "andromeda_origins:dawnbreaker/secondary",
     "andromeda_origins:gorgon/figura",
     "andromeda_origins:common/figura",
     "andromeda_origins:dawnbreaker/presence",
@@ -14,7 +14,8 @@
     "andromeda_origins:dawnbreaker/bow",
     "andromeda_origins:dawnbreaker/kneel",
     "andromeda_origins:dawnbreaker/stillwater",
-    "andromeda_origins:dawnbreaker/gradual_petrification"
+    "andromeda_origins:dawnbreaker/gradual_petrification",
+    "andromeda_origins:dawnbreaker/measured_step"
   ],
   "icon": {
     "id": "andromeda_origins:gorgon_icon"
@@ -23,7 +24,7 @@
   "order": 114,
   "impact": 3,
   "name": "Dawnbreaker",
-  "description": "A command-only radiant sovereign descended from the Gorgon. Wields Sovereign Ophidian Gaze, a golden-jade Dawnbreaker aura and safe targeted banishment. Retains Transference and Champion Gorgon passive benefits. New ability descriptions list effective cooldowns.",
+  "description": "A command-only radiant sovereign with gold-light wings, group petrification, Transference, safe banishment, Measured Step, a projectile guard and a conjured light bow. Champion Gorgon passive benefits remain. Abilities and visual features have individual config switches.",
   "tags": [
     "andromeda_origins:mystic",
     "andromeda_origins:champion",

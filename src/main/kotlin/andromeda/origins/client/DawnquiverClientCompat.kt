@@ -112,6 +112,7 @@ object DawnquiverClientCompat {
         val player = client.player ?: return
         val c = PowerContainer.of(player) ?: return
         if (client.options.hideGui || player.isSpectator || !c.hasPower(bow) || c.isSuppressed(bow) || !Platform.isModLoaded("simplyswords")) return
+        if (value(player, "draw") <= 0 && value(player, "afterglow") <= 0) return
         if (!hudAttempted) {
             hudAttempted = true
             try { hudApi = HudApi() } catch (error: ReflectiveOperationException) { logger.warn("Dawnquiver HUD API unavailable", error) }
@@ -134,11 +135,6 @@ object DawnquiverClientCompat {
             if (value(player, "draw") > 0) {
                 api.push.invoke(null, g)
                 api.draw.invoke(null, g, client, delta, stack, chorus)
-                g.pose().popPose()
-            } else if (value(player, "cooldown") > 0) {
-                api.push.invoke(null, g)
-                val label = "Seraph’s Draw: ${String.format(java.util.Locale.ROOT, "%.1f", value(player, "cooldown") / 20)}s"
-                g.drawString(client.font, label, -client.font.width(label) / 2, 12, 0xffe9c764.toInt(), true)
                 g.pose().popPose()
             }
         } catch (error: ReflectiveOperationException) {

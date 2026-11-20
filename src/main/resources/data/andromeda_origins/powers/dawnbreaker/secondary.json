@@ -1,0 +1,20 @@
+{
+  "type": "origins:multiple",
+  "name": "Transference",
+  "description": "Secondary: aim at a visible, unprotected creature within 32 blocks. Reduce its damage by 30% for 15 seconds (extendable to 60) and double your movement speed for 15 seconds. Recasts refresh speed rather than stacking it. No charges or cooldown.",
+  "active": {
+    "type": "origins:active_self",
+    "cooldown": 1,
+    "hud_render": {
+      "should_render": false
+    },
+    "key": {
+      "key": "key.origins.secondary_active",
+      "continuous": false
+    },
+    "entity_action": {
+      "type": "andromeda_origins:dawnbreaker",
+      "kind": "transference"
+    }
+  }
+}

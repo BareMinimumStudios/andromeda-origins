@@ -18,27 +18,6 @@
     "start_value": 0,
     "hud_render": {
       "should_render": false
-    },
-    "min_action": {
-      "type": "origins:change_resource",
-      "resource": "*:*_charges",
-      "operation": "set",
-      "change": 2
-    }
-  },
-  "recharge_tick": {
-    "type": "origins:action_over_time",
-    "interval": 1,
-    "condition": {
-      "type": "origins:resource",
-      "resource": "*:*_recharge",
-      "comparison": ">",
-      "compare_to": 0
-    },
-    "entity_action": {
-      "type": "origins:change_resource",
-      "resource": "*:*_recharge",
-      "change": -1
     }
   },
   "cast": {

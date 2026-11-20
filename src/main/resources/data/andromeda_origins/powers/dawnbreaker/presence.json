@@ -11,21 +11,6 @@
       "should_render": false
     }
   },
-  "cooldown_tick": {
-    "type": "origins:action_over_time",
-    "interval": 1,
-    "condition": {
-      "type": "origins:resource",
-      "resource": "*:*_cooldown",
-      "comparison": ">",
-      "compare_to": 0
-    },
-    "entity_action": {
-      "type": "origins:change_resource",
-      "resource": "*:*_cooldown",
-      "change": -1
-    }
-  },
   "cast": {
     "type": "origins:active_self",
     "cooldown": 1,

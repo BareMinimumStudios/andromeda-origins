@@ -37,31 +37,45 @@ object DawnbreakerVisuals {
         val scale = (entity.bbHeight / 1.8f).coerceIn(.65f, 1.6f)
         pose.scale(scale, scale, scale)
         pose.translate(0.0, 0.0, -.70)
-        val vertices = buffers.getBuffer(RenderType.lightning())
+        val vertices = buffers.getBuffer(RenderType.debugQuads())
         val matrix = pose.last().pose()
         val breath = .94f + sin(age * .025f) * .06f
-        // Distinct concentric bands, with no core/glow quads occupying the same surface.
-        halo(vertices, matrix, .695, .709, 0.0, Math.PI * 2, 255, 209, 104, fade * .85f * breath)
-        halo(vertices, matrix, .566, .574, 0.0, Math.PI * 2, 255, 244, 202, fade * .65f)
-        val phase = age * .0012
+        // A broad amber annulus with separate ivory/gold edges; no additive washout in daylight.
+        halo(vertices, matrix, .72, .82, 0.0, Math.PI * 2, 224, 136, 22, fade * .25f)
+        halo(vertices, matrix, .816, .834, 0.0, Math.PI * 2, 255, 199, 70, fade * .88f * breath)
+        halo(vertices, matrix, .704, .716, 0.0, Math.PI * 2, 255, 239, 180, fade * .75f)
+        val phase = age * .002
         for (i in 0..2) {
             val start = phase + i * Math.PI * 2 / 3
-            halo(vertices, matrix, .814, .822, start, start + 1.35, 126, 206, 160, fade * .46f)
+            halo(vertices, matrix, .91, .928, start, start + 1.15, 255, 174, 45, fade * .55f)
         }
-        // Both planes are behind the wearer: halo at -.70, wings at -.46.
-        // Separating their depth prevents intersecting projected outlines from z-fighting.
-        pose.pushPose()
-        pose.translate(0.0, 0.0, .24)
-        val wingMatrix = pose.last().pose()
-        for (side in listOf(-1.0, 1.0)) for (feather in 0..3) {
-            stroke(vertices, wingMatrix, side * (.34 + feather * .04), 1.04 + feather * .16,
-                side * (1.84 + feather * .08), 1.18 + feather * .44, .045, .012, fade)
+        // Tapered feathers have filled surfaces, separated spines and angled banks for side views.
+        for (side in listOf(-1.0, 1.0)) {
+            pose.pushPose(); pose.translate(0.0, 0.0, .16)
+            pose.mulPose(Axis.YP.rotationDegrees((side * 16).toFloat()))
+            for (f in 0..5) {
+                pose.pushPose(); pose.translate(0.0, 0.0, -f * .018)
+                val wing = pose.last().pose()
+                val sweep = sin(age * .018 + f * .18) * .025
+                val rootX = side * (.23 + f * .05)
+                val rootY = .92 + f * .14
+                val tipX = side * (2.45 - f * .12)
+                val tipY = .85 + f * .40 + sweep
+                val midX = rootX + (tipX - rootX) * .58
+                val midY = rootY + (tipY - rootY) * .58
+                val width = .13 + f * .012
+                quad(vertices, wing, listOf(rootX to rootY, midX to midY - width, tipX to tipY, midX to midY + width),
+                    255, 179, 43, fade * (.40f + f * .035f))
+                line(vertices, wing, rootX, rootY, tipX, tipY, .019, 255, 242, 190, fade * .92f)
+                pose.popPose()
+            }
+            pose.popPose()
         }
-        pose.popPose()
         for (i in 0..7) {
             val angle = i * Math.PI / 4 + Math.PI / 8
-            line(vertices, matrix, cos(angle) * .90, 1.55 + sin(angle) * .90,
-                cos(angle) * .99, 1.55 + sin(angle) * .99, .012, 255, 220, 143, fade * .6f)
+            val x = cos(angle); val y = sin(angle)
+            line(vertices, matrix, x * .97, 1.55 + y * .97, x * 1.12, 1.55 + y * 1.12,
+                .025, 255, 193, 66, fade * .85f)
         }
         pose.popPose()
     }
@@ -76,18 +90,9 @@ object DawnbreakerVisuals {
                 cos(a) * outer to 1.55 + sin(a) * outer), r, g, b, alpha)
         }
     }
-    private fun stroke(v: VertexConsumer, m: Matrix4f, x1: Double, y1: Double, x2: Double, y2: Double,
-        outer: Double, core: Double, alpha: Float) {
-        val length = hypot(x2 - x1, y2 - y1).coerceAtLeast(.0001)
-        val nx = -(y2 - y1) / length; val ny = (x2 - x1) / length
-        for ((lo, hi) in listOf(-outer / 2 to -core / 2, core / 2 to outer / 2))
-            quad(v, m, listOf(x1 + nx * lo to y1 + ny * lo, x2 + nx * lo to y2 + ny * lo,
-                x2 + nx * hi to y2 + ny * hi, x1 + nx * hi to y1 + ny * hi), 232, 179, 70, alpha * .3f)
-        line(v, m, x1, y1, x2, y2, core, 255, 238, 182, alpha * .88f)
-    }
     private fun quad(v: VertexConsumer, m: Matrix4f, points: List<Pair<Double, Double>>, r: Int, g: Int, b: Int, alpha: Float) {
         val a = (alpha.coerceIn(0f, 1f) * 255).toInt()
-        for (face in listOf(points, points.reversed())) for ((x, y) in face)
+        for ((x, y) in points)
             v.addVertex(m, x.toFloat(), y.toFloat(), 0f).setColor(r, g, b, a)
     }
     private val projectileVisuals = java.util.WeakHashMap<net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity>()
@@ -127,7 +132,7 @@ object DawnbreakerVisuals {
         val dy = (x2 - x1) / length * width / 2
         val a = (alpha.coerceIn(0f, 1f) * 255).toInt()
         val points = listOf(x1 + dx to y1 + dy, x2 + dx to y2 + dy, x2 - dx to y2 - dy, x1 - dx to y1 - dy)
-        for (face in listOf(points, points.reversed())) for ((x, y) in face)
+        for ((x, y) in points)
             v.addVertex(m, x.toFloat(), y.toFloat(), 0f).setColor(r, g, b, a)
     }
 }

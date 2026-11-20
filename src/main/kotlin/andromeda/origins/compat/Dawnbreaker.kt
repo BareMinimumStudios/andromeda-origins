@@ -55,6 +55,8 @@ object Dawnbreaker {
     private val stone = id("dawnbreaker/helper/stone")
     private val petrify = id("dawnbreaker/helper/ophidianed")
     private val oppressed = id("dawnbreaker/helper/oppressed")
+    private val unsafeBlocks = listOf(Blocks.MAGMA_BLOCK, Blocks.CACTUS, Blocks.CAMPFIRE, Blocks.SOUL_CAMPFIRE,
+        Blocks.SWEET_BERRY_BUSH, Blocks.POWDER_SNOW, Blocks.WITHER_ROSE, Blocks.NETHER_PORTAL, Blocks.END_PORTAL, Blocks.END_GATEWAY)
     private val pumpkin = TagKey.create(Registries.ITEM, ResourceLocation.parse("origins:pumpkin_like/equipment"))
     private val gold = DustParticleOptions(Vector3f(1f, .78f, .23f), .55f)
     private val jade = DustParticleOptions(Vector3f(.32f, .81f, .55f), .45f)
@@ -70,6 +72,8 @@ object Dawnbreaker {
                 val player = ctx.raw() as? ServerPlayer ?: return
                 when (cfg) {
                     "gaze" -> castGaze(player)
+                    "transference" -> castTransference(player)
+                    "measured_step" -> measuredStep(player)
                     "dawnbreaker" -> castAura(player)
                     "begone" -> castBanish(player)
                     "bow" -> holdBow(player)
@@ -128,6 +132,90 @@ object Dawnbreaker {
         target is ServerPlayer && !actor.canHarmPlayer(target) -> "Gaze blocked: player PvP or friendly-fire protection."
         PowerContainer.of(target)?.let { it.hasPower(id("common/unstoppable")) && !it.isSuppressed(id("common/unstoppable")) } == true -> "Gaze blocked: target has Unstoppable."
         else -> "Gaze blocked: target is protected."
+    }
+    private fun measuredStep(player: ServerPlayer) {
+        if (!usable(player, id("dawnbreaker/measured_step")) || player.isPassenger || player.isVehicle) return
+        val level = player.serverLevel()
+        val eye = player.eyePosition
+        val look = player.lookAngle
+        fun loadedSpan(a: Vec3, b: Vec3): Boolean =
+            (floor(min(a.x, b.x)).toInt().shr(4)..floor(max(a.x, b.x)).toInt().shr(4)).all { x ->
+                (floor(min(a.z, b.z)).toInt().shr(4)..floor(max(a.z, b.z)).toInt().shr(4)).all { z -> level.chunkSource.getChunkNow(x, z) != null }
+            }
+        var available = 0.0
+        for (quarter in 1..64) {
+            val distance = quarter / 4.0
+            if (!loadedSpan(eye, eye.add(look.scale(distance)))) break
+            available = distance
+        }
+        val wall = level.clip(ClipContext(eye, eye.add(look.scale(available)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player))
+        val reach = min(available, eye.distanceTo(wall.location) - .55)
+        var landing: Vec3? = null
+        for (half in floor(reach * 2).toInt() downTo 3) {
+            val aim = eye.add(look.scale(half / 2.0))
+            for (drop in 0..3) {
+                val feet = BlockPos.containing(aim).below(drop)
+                if (level.chunkSource.getChunkNow(feet.x shr 4, feet.z shr 4) == null || !level.worldBorder.isWithinBounds(feet)) continue
+                val ground = level.getBlockState(feet.below())
+                if (!ground.isFaceSturdy(level, feet.below(), Direction.UP) || !ground.fluidState.isEmpty ||
+                    unsafeBlocks.any { ground.`is`(it) }) continue
+                val pos = Vec3(aim.x, feet.y.toDouble(), aim.z)
+                if (player.distanceToSqr(pos) < 1.0 || player.distanceToSqr(pos) > 256.0) continue
+                val box = player.boundingBox.move(pos.subtract(player.position()))
+                if (!loadedSpan(Vec3(box.minX, box.minY, box.minZ), Vec3(box.maxX, box.maxY, box.maxZ)) ||
+                    !level.worldBorder.isWithinBounds(box) || !level.noCollision(player, box) ||
+                    BlockPos.betweenClosed(BlockPos.containing(box.minX, box.minY, box.minZ), BlockPos.containing(box.maxX, box.maxY, box.maxZ)).any { !level.getFluidState(it).isEmpty || level.getBlockState(it).`is`(BlockTags.FIRE) || unsafeBlocks.any { block -> level.getBlockState(it).`is`(block) } }) continue
+                val sight = pos.add(0.0, player.eyeHeight.toDouble(), 0.0)
+                val hit = level.clip(ClipContext(eye, sight, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player))
+                if (eye.distanceToSqr(hit.location) + .01 < eye.distanceToSqr(sight)) continue
+                landing = pos; break
+            }
+            if (landing != null) break
+        }
+        val destination = landing ?: run { say(player, "Measured Step — no safe visible landing."); return }
+        val from = player.position()
+        if (!player.teleportTo(level, destination.x, destination.y, destination.z, mutableSetOf<RelativeMovement>(), player.yRot, player.xRot)) return
+        player.deltaMovement = Vec3.ZERO; player.fallDistance = 0f
+        if (radiant(player)) {
+            for (i in 0..12) {
+                val p = from.lerp(destination, i / 12.0).add(0.0, 1.0, 0.0)
+                level.sendParticles(gold, p.x, p.y, p.z, 1, .025, .06, .025, 0.0)
+            }
+        }
+    }
+    private fun castTransference(player: ServerPlayer) {
+        if (!usable(player, id("dawnbreaker/secondary"))) return
+        val eye = player.eyePosition
+        val end = eye.add(player.lookAngle.scale(32.0))
+        val wall = player.serverLevel().clip(ClipContext(eye, end, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player))
+        val target = player.serverLevel().getEntitiesOfClass(LivingEntity::class.java, player.boundingBox.expandTowards(player.lookAngle.scale(32.0)).inflate(1.0)) {
+            validTarget(player, it) && !it.getItemBySlot(EquipmentSlot.HEAD).`is`(pumpkin)
+        }.mapNotNull { e -> e.boundingBox.inflate(.15).clip(eye, end).orElse(null)?.let { e to it } }
+            .filter { eye.distanceToSqr(it.second) <= eye.distanceToSqr(wall.location) }
+            .minByOrNull { eye.distanceToSqr(it.second) }?.first
+        if (target == null) { say(player, "Transference — look directly at an eligible target within 32 blocks."); return }
+        val speed = id("gorgon/helper/speedup")
+        val weakened = id("gorgon/helper/intimidated")
+        PowerContainerAttachment.getOrCreate(player)?.let { c ->
+            c.addPower(speed, ResourceLocation.parse("minecraft:buff")); set(player, speed, "remove", 15.0)
+            val cue = id("gorgon/helper/intimidating")
+            c.addPower(cue, ResourceLocation.parse("minecraft:state")); set(player, cue, "remove", 1.0)
+            set(player, id("common/figura"), "2", 1.0); c.markDirty()
+        }
+        PowerContainerAttachment.getOrCreate(target)?.let { c ->
+            val old = if (c.hasPower(weakened)) resource(target, weakened, "remove") else 0.0
+            c.addPower(weakened, ResourceLocation.parse("minecraft:debuff"))
+            set(target, weakened, "remove", (old + 15.0).coerceAtMost(60.0)); c.markDirty()
+        }
+        if (radiant(player)) {
+            val ray = target.eyePosition.subtract(eye)
+            for (i in 1..20) {
+                val at = eye.add(ray.scale(i / 20.0))
+                player.serverLevel().sendParticles(gold, at.x, at.y, at.z, 1, .015, .015, .015, 0.0)
+            }
+        }
+        sound(player.serverLevel(), player.position(), net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_CHIME, .22f, .8f)
+        say(player, "Transference.")
     }
     private fun castAura(player: ServerPlayer) {
         if (!usable(player, aura)) return
@@ -324,12 +412,10 @@ object Dawnbreaker {
         val floor = BlockPos(column.x, y - 1, column.z)
         val ground = level.getBlockState(floor)
         if (!ground.isFaceSturdy(level, floor, Direction.UP) || !ground.fluidState.isEmpty) return null
-        val hazards = listOf(Blocks.MAGMA_BLOCK, Blocks.CACTUS, Blocks.CAMPFIRE, Blocks.SOUL_CAMPFIRE, Blocks.SWEET_BERRY_BUSH,
-            Blocks.POWDER_SNOW, Blocks.WITHER_ROSE, Blocks.NETHER_PORTAL, Blocks.END_PORTAL, Blocks.END_GATEWAY)
         for (dy in -1..ceil(victim.bbHeight.toDouble()).toInt()) {
             val at = BlockPos(column.x, y + dy, column.z)
             val state = level.getBlockState(at)
-            if (!state.fluidState.isEmpty || state.`is`(BlockTags.FIRE) || hazards.any { state.`is`(it) }) return null
+            if (!state.fluidState.isEmpty || state.`is`(BlockTags.FIRE) || unsafeBlocks.any { state.`is`(it) }) return null
         }
         val pos = Vec3(column.x + .5, y.toDouble(), column.z + .5)
         val box = victim.boundingBox.move(pos.subtract(victim.position()))

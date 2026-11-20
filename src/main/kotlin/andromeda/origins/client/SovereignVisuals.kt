@@ -26,23 +26,26 @@ object SovereignVisuals {
         pose.pushPose(); pose.translate(x, y, z)
         val v = buffers.getBuffer(RenderType.debugQuads())
         if (guard) {
-            pose.pushPose(); pose.mulPose(Axis.YP.rotationDegrees(-net.minecraft.util.Mth.rotLerp(delta, e.yBodyRotO, e.yBodyRot)))
+            pose.pushPose(); pose.mulPose(Axis.YP.rotationDegrees(-net.minecraft.util.Mth.rotLerp(delta, e.yRotO, e.yRot)))
             val m = pose.last().pose(); val count = read(e, "stillwater_count").toInt()
             // Eight distinct solar lenses trace a crown behind the shoulders, leaving the face clear.
-            for (j in 0 until 64) {
-                val a = Math.toRadians(-54.0 + j * 108.0 / 64)
-                val b = Math.toRadians(-54.0 + (j + 1) * 108.0 / 64)
-                if (j % 8 < 6) beam(v, m, Vec3(sin(a) * 2.2, 1.15 + cos(a) * .65, -1.15), Vec3(sin(b) * 2.2, 1.15 + cos(b) * .65, -1.15), .018, .35f)
+            for (side in listOf(-1.0, 1.0)) {
+                beam(v, m, Vec3(side * .8, 1.0, -1.1), Vec3(side * 2.6, 2.8, -1.7), .025, .22f)
             }
             for (i in 0 until count) {
-                val a = Math.toRadians((i - 3.5) * 13.0)
-                val centre = Vec3(sin(a) * 2.2, 1.15 + cos(a) * .65, -1.15)
-                val lit = true
+                val centre = andromeda.origins.compat.DawnbreakerLayout.guardSlot(i)
+                val phase = (e.tickCount + delta) * .012 + i * .3
                 for (j in 0 until 24) {
-                    val t = j * PI / 12; val u = (j + 1) * PI / 12
-                    beam(v, m, centre.add(cos(t) * .18, sin(t) * .18, 0.0), centre.add(cos(u) * .18, sin(u) * .18, 0.0), .012, if (lit) .9f else .2f)
+                    val t = j * PI / 12 + phase; val u = (j + 1) * PI / 12 + phase
+                    beam(v, m, centre.add(cos(t) * .28, sin(t) * .28, 0.0), centre.add(cos(u) * .28, sin(u) * .28, 0.0), .025, .85f)
                 }
-                if (lit) for (axis in listOf(Vec3(.32, 0.0, 0.0), Vec3(0.0, .32, 0.0))) beam(v, m, centre.subtract(axis), centre.add(axis), .008, .8f)
+                for (axis in listOf(Vec3(.43, 0.0, 0.0), Vec3(0.0, .43, 0.0))) beam(v, m, centre.subtract(axis), centre.add(axis), .025, .9f)
+                // Filled solar diamonds give each captured shot a readable silhouette.
+                for (axis in listOf(Vec3(.39, 0.0, 0.0), Vec3(0.0, .39, 0.0))) {
+                    val across = Vec3(-axis.y, axis.x, 0.0).normalize().scale(.07)
+                    for (p in listOf(centre.add(axis), centre.add(across), centre.subtract(axis), centre.subtract(across)))
+                        v.addVertex(m, p.x.toFloat(), p.y.toFloat(), p.z.toFloat()).setColor(255, 191, 57, 125)
+                }
             }
             pose.popPose()
         }
@@ -57,19 +60,19 @@ object SovereignVisuals {
         }
         if (stone) {
             val progress = ((read(e, "helper/stone_progress") + delta) / 40).coerceIn(0.0, 1.0)
-            val height = e.bbHeight * progress; val w = (e.bbWidth * .52).toDouble()
+            val height = e.bbHeight * progress; val w = (e.bbWidth * .56).toDouble()
             // Three rising mineral bands, with branching gold seams instead of overlapping body quads.
-            for (band in 0..2) {
+            for (band in 0..1) {
                 val h = height - band * .09
-                if (h <= 0) continue
+                if (h <= 0 || progress >= 1.0) continue
                 for (side in 0..3) {
                     val a = side * PI / 2 + PI / 4; val b = a + PI / 2
                     beam(v, m, Vec3(cos(a) * w, h, sin(a) * w), Vec3(cos(b) * w, h, sin(b) * w), .015 - band * .003, if (band == 0) .8f else .26f)
                 }
             }
             for (i in 0..7) {
-                val a = i * PI / 4; val foot = Vec3(cos(a) * w, .06, sin(a) * w)
-                val mid = Vec3(cos(a + .13) * w, height * .48, sin(a + .13) * w)
+                val a = i * PI / 4; val foot = Vec3(cos(a) * w, .06 + (i % 3) * .13, sin(a) * w)
+                val mid = Vec3(cos(a + .13) * w, height * (.30 + (i % 3) * .16), sin(a + .13) * w)
                 val top = Vec3(cos(a - .1) * w, height, sin(a - .1) * w)
                 beam(v, m, foot, mid, .009, .48f); beam(v, m, mid, top, .009, .48f)
             }

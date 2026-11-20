@@ -2,6 +2,8 @@
 
 ## [1.4.84] - 2026-11-15
 
+- Refine Dawnbreaker into a cohesive gold-light kit: filled, angled light-feather wings, a layered solar halo, separated Stillwater solar lenses aligned with two rear projectile banks, and less rigid petrification seams. Hide the light-bow HUD while idle, remove obsolete cooldown tick machinery, and give Dawnbreaker its own cooldown-free Transference without changing Gorgon charge/recharge behavior. Add Measured Step on a dedicated key with an individual Fzzy switch: a cooldown-free blink up to 16 blocks with loaded-chunk, collision, sightline, world-border, fluid, portal and hazard checks. Keep effect durations, bow draw and Guard bounds; Begone remains silent.
+
 - Update the complete Gradle wrapper to stable 9.9.1, pin the official distribution checksum and modernize verification-task registration. Fabric and NeoForge build successfully on Java 21; mod version remains 1.4.84.
 
 - Add Dawnbreaker-only Kneel and Stillwater Guard with separate keybinds and Fzzy switches. Kneel grounds visible enemies within 12 blocks for three seconds, blocks jump/gliding and halves movement without camera locks. Stillwater holds up to eight incoming vanilla arrows/spectral arrows/snowballs/eggs in a golden shoulder arc, redirecting them on release and restoring owner/motion on cancellation. Bound the hold to eight seconds and clear temporary state on death, logout, suppression, Origin change and shutdown. Add independently configurable two-second rising stone seams and gold bands for Sovereign Gaze. Remove Kneel cooldown and Gaze charge/recharge limits; retain cooldown-free Presence, Begone, Seraph’s Draw and Guard. Standard and Champion Gorgon remain unchanged.

@@ -74,11 +74,11 @@ object SovereignArts {
         return v.lengthSqr() > .01 && v.dot(actor.eyePosition.subtract(p.position())) > 0
     }
     private fun slot(player: ServerPlayer, i: Int): Vec3 {
-        val angle = Math.toRadians((i - 3.5) * 13.0)
-        val yaw = Math.toRadians(player.yBodyRot.toDouble())
+        val local = DawnbreakerLayout.guardSlot(i)
+        val yaw = Math.toRadians(player.yRot.toDouble())
         val right = Vec3(cos(yaw), 0.0, sin(yaw))
         val back = Vec3(sin(yaw), 0.0, -cos(yaw))
-        return player.position().add(right.scale(sin(angle) * 2.2)).add(back.scale(1.15)).add(0.0, 1.15 + cos(angle) * .65, 0.0)
+        return player.position().add(right.scale(local.x)).add(back.scale(-local.z)).add(0.0, local.y, 0.0)
     }
     private fun finish(player: ServerPlayer?, state: Guard, fire: Boolean) {
         var aim: Vec3? = null
