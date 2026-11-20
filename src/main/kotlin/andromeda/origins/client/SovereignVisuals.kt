@@ -54,13 +54,13 @@ object SovereignVisuals {
             }
             for (i in 0 until count) {
                 val centre = andromeda.origins.compat.DawnbreakerLayout.guardSlot(i)
-                val phase = (e.tickCount + delta) * .012 + i * .3
+                val phase = (e.tickCount + delta) * .055 + i * .3
                 val segments = when (andromeda.origins.compat.DawnbreakerPresentation.tier(e)) { 0 -> 12; 2 -> 32; else -> 24 }
                 for (j in 0 until segments) {
-                    val t = j * 2 * PI / segments + phase; val u = (j + 1) * 2 * PI / segments + phase
+                    val t = j * 1.65 * PI / segments + phase; val u = (j + 1) * 1.65 * PI / segments + phase
                     beam(v, m, centre.add(cos(t) * .28, sin(t) * .28, 0.0), centre.add(cos(u) * .28, sin(u) * .28, 0.0), .025, .85f)
                 }
-                for (axis in listOf(Vec3(.43, 0.0, 0.0), Vec3(0.0, .43, 0.0))) beam(v, m, centre.subtract(axis), centre.add(axis), .025, .9f)
+                for (axis in listOf(Vec3(cos(phase)*.43, sin(phase)*.43, 0.0), Vec3(-sin(phase)*.43, cos(phase)*.43, 0.0))) beam(v, m, centre.subtract(axis), centre.add(axis), .025, .9f)
                 // Filled solar diamonds give each captured shot a readable silhouette.
                 for (axis in listOf(Vec3(.39, 0.0, 0.0), Vec3(0.0, .39, 0.0))) {
                     val across = Vec3(-axis.y, axis.x, 0.0).normalize().scale(.07)

@@ -24,8 +24,9 @@ object RefinedCosmeticActions {
         ActionTypes.ENTITY.register(ResourceLocation.parse("andromeda_origins:refined_sound"), object : ActionType<EntityCtx, PlaySoundAction.Cfg> {
             override fun codec() = sound.codec()
             override fun run(c: PlaySoundAction.Cfg, ctx: EntityCtx) {
-                if (!OriginFxStyle.sound(ctx.raw(), c.sound().toString() + ":" + c.pitch())) return
-                sound.run(PlaySoundAction.Cfg(c.sound(), c.category(), OriginFxStyle.volume(c.volume()), c.pitch(), c.followEntity(), c.global(), c.internal(), c.index()), ctx)
+                // Core ability cues already have power-specific timers. Do not let optional FX
+                // consume their slots or collapse intentional multi-sound signatures.
+                sound.run(PlaySoundAction.Cfg(c.sound(), c.category(), c.volume().coerceIn(0f, 1.5f), c.pitch(), c.followEntity(), c.global(), c.internal(), c.index()), ctx)
             }
         })
     }

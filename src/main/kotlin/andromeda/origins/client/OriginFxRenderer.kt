@@ -34,6 +34,12 @@ object OriginFxRenderer {
                 val yaw = if (attached) net.minecraft.util.Mth.rotLerp(context.delta,actor!!.yRotO,actor.yRot) else fx.yaw
                 context.pose.mulPose(com.mojang.math.Axis.YP.rotationDegrees(-yaw))
                 context.pose.scale(scale,scale,scale)
+                val mode = fx.packet.mode and 3
+                val sweep = if (mode == 1) t * 55f else t * 105f
+                context.pose.mulPose(com.mojang.math.Axis.YP.rotationDegrees(sweep))
+                val expansion = if (mode == 2) .45f + t * .85f else .72f + .3f * sin(t * PI.toFloat() / 2)
+                context.pose.scale(expansion, 1f, expansion)
+                context.pose.translate(0.0, (if (mode == 1) sin(t * PI) * .08 else t * .18).toDouble(), 0.0)
                 draw(fx.packet,t,context.pose.last().pose(),context.buffers.getBuffer(RenderType.debugQuads()))
                 context.pose.popPose()
             }
@@ -58,7 +64,12 @@ object OriginFxRenderer {
         val detail = min(p.detail,DawnbreakerFxClient.config.contourDetail.get().ordinal)
         val r = p.radius.coerceIn(.35f,1.1f);val n=when(detail){0->20;1->32;else->48}
         fun ribbon(width: Float=.021f, curve: (Double)->DoubleArray) {
-            for(i in 0 until n){val a=curve(i.toDouble()/n);val b=curve((i+1.0)/n)
+            for(i in 0 until n){fun flowing(u:Double):DoubleArray {
+                    val q=curve(u); val phase=u*PI*2-t*PI*2
+                    q[0]+=sin(phase)*.025; q[1]+=sin(phase+PI/2)*.035; q[2]+=cos(phase)*.025
+                    return q
+                }
+                val a=flowing(i.toDouble()/n);val b=flowing((i+1.0)/n)
                 val dx=b[0]-a[0];val dz=b[2]-a[2];val len=sqrt(dx*dx+dz*dz).coerceAtLeast(.0001)
                 val nx=-dz/len*width;val nz=dx/len*width
                 fun point(q:DoubleArray,s:Double,opacity:Float){v.addVertex(m,(q[0]+nx*s).toFloat(),q[1].toFloat(),(q[2]+nz*s).toFloat()).setColor((p.color shr 16)and 255,(p.color shr 8)and 255,p.color and 255,(255*opacity).toInt())}

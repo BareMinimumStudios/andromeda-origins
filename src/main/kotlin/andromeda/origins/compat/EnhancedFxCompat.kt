@@ -85,11 +85,28 @@ object EnhancedFxCompat {
             val x: kotlin.Double = if (position != null) position.x else entity.getX()
             val y: kotlin.Double = if (position != null) position.y else entity.getY()
             val z: kotlin.Double = if (position != null) position.z else entity.getZ()
-            for (sound in definition.sounds.take(1)) {
-                if (EnhancedFxCompat.requirementPresent(sound.requiresMod)) {
-                    EnhancedFxCompat.playSound(entity, x, y, z, sound)
-                }
+            val available = definition.sounds.firstOrNull { sound ->
+                requirementPresent(sound.requiresMod) && effectId(sound.id)?.let {
+                    sound.resourcePack || net.minecraft.core.registries.BuiltInRegistries.SOUND_EVENT.containsKey(it)
+                } == true
             }
+            // Native contours must not depend on an optional sound library being installed.
+            val fallback = when (event.substringBefore('.')) {
+                "arachne" -> "minecraft:block.azalea_leaves.step"
+                "faerie", "gorgon" -> "minecraft:block.amethyst_block.chime"
+                "fenrkin" -> "minecraft:entity.wolf.growl"
+                "humanity" -> "minecraft:block.beacon.power_select"
+                "lichling" -> "minecraft:block.soul_sand.step"
+                "manticore" -> "minecraft:entity.phantom.flap"
+                "nereid", "selkie", "siren" -> "minecraft:entity.player.splash"
+                "satyr" -> "minecraft:block.azalea.step"
+                "veilborn" -> "minecraft:block.amethyst_block.resonate"
+                "wyverian" -> "minecraft:item.firecharge.use"
+                else -> null
+            }
+            if (available != null) playSound(entity, x, y, z, available)
+            else if (fallback != null) playSound(entity, x, y, z,
+                EnhancedFxDefinitions.SoundDefinition(fallback, .45f, 1f, "", false))
         }
         return true
     }

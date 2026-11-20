@@ -23,7 +23,7 @@ object DawnbreakerVisuals {
         val viewer = Minecraft.getInstance().player ?: return
         if (entity.isInvisibleTo(viewer) || viewer.distanceToSqr(entity) > 48.0 * 48.0) return
         val c = PowerContainer.of(entity) ?: return
-        val nativeGhost = DawnbreakerFxClient.renderGhost(entity, delta, pose, buffers)
+        val nativeGhost = DawnbreakerFxClient.hasGhost(entity)
         SovereignVisuals.render(entity, x, y, z, delta, pose, buffers)
         fun resource(path: String) = PowerResources.read(c, ResourceLocation.parse("andromeda_origins:dawnbreaker/" + path)).orElse(0.0)
         val stepping = (resource("presentation_step").toFloat() / 2f).coerceIn(0f, 1f)
@@ -61,12 +61,12 @@ object DawnbreakerVisuals {
         pose.scale(scale, scale, scale)
         pose.translate(0.0, 0.0, -.70)
         val matrix = pose.last().pose()
-        val breath = .94f + sin(age * .025f) * .06f
+        val breath = .94f + sin(age * .07f) * .08f
         // A broad amber annulus with separate ivory/gold edges; no additive washout in daylight.
         halo(vertices, matrix, .72, .82, 0.0, Math.PI * 2, 224, 136, 22, fade * .25f)
         halo(vertices, matrix, .816, .834, 0.0, Math.PI * 2, 255, 199, 70, fade * .88f * breath)
         halo(vertices, matrix, .704, .716, 0.0, Math.PI * 2, 255, 239, 180, fade * .75f)
-        val phase = age * .002
+        val phase = age * .018
         for (i in 0..2) {
             val start = phase + i * Math.PI * 2 / 3
             halo(vertices, matrix, .91, .928, start, start + 1.15, 255, 174, 45, fade * .55f)
@@ -84,7 +84,7 @@ object DawnbreakerVisuals {
                 val f = index * 5.0 / (featherCount - 1)
                 pose.pushPose(); pose.translate(0.0, 0.0, -f * .018)
                 val wing = pose.last().pose()
-                val sweep = if (animate) sin(age * .025 + f * .25) * .065 else 0.0
+                val sweep = if (animate) sin(age * .07 + f * .35) * .10 else 0.0
                 val rootX = side * (.23 + f * .05)
                 val rootY = .92 + f * .14
                 val tipX = side * (2.45 - f * .12)

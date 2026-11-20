@@ -20,7 +20,11 @@ object MeasuredStepLanding {
             (floor(box.minZ).toInt().shr(4)..floor(box.maxZ).toInt().shr(4)).all { z -> level.chunkSource.getChunkNow(x, z) != null }
         }
     fun find(player: ServerPlayer): Result {
-        val level = player.serverLevel(); val eye = player.eyePosition; val look = player.lookAngle
+        val level = player.serverLevel(); val eye = player.eyePosition
+        // A grounded blink follows heading rather than intersecting the floor beside the caster
+        // whenever the camera is tilted down. Pitch still influences which elevation is preferred.
+        val yaw = Math.toRadians(player.yRot.toDouble())
+        val look = Vec3(-sin(yaw), 0.0, cos(yaw))
         var available = 0.0
         for (quarter in 1..64) {
             val distance = quarter / 4.0
@@ -31,9 +35,11 @@ object MeasuredStepLanding {
         val wall = level.clip(ClipContext(eye, eye.add(look.scale(available)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player))
         val reach = min(available, eye.distanceTo(wall.location) - .45)
         for (half in floor(reach * 2).toInt() downTo 3) {
-            val aim = eye.add(look.scale(half / 2.0))
-            for (drop in 0..ceil(player.eyeHeight.toDouble()).toInt() + 2) {
-                val floor = BlockPos.containing(aim).below(drop)
+            val aim = player.position().add(look.scale(half / 2.0))
+            val preferred = (player.lookAngle.y * half / 2.0).coerceIn(-3.0, 2.0)
+            val heights = (-6..2).sortedBy { abs(it - preferred) }
+            for (offset in heights) {
+                val floor = BlockPos.containing(aim).above(offset)
                 if (level.chunkSource.getChunkNow(floor.x shr 4, floor.z shr 4) == null) continue
                 val state = level.getBlockState(floor)
                 if (!state.fluidState.isEmpty || state.block in hazards || state.`is`(BlockTags.FIRE)) continue

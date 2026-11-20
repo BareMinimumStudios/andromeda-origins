@@ -2,6 +2,8 @@
 
 ## [1.4.85] - 2026-11-19
 
+- Restore distinct core ability sounds without the shared optional-layer limiter swallowing them; provide native family sound fallbacks when optional libraries are absent. Render Measured Step departure silhouettes independently of arrival visibility, including first-person casters, with a readable 450 ms fade and a bundled fallback. Make grounded Step follow facing direction across terrain instead of shortening when looking down. Add clear expanding, sweeping and flowing motion to all family contours; animate visible Guard arc gaps, rotating accents and wing breathing without extra particle emitters.
+
 - Add bounded client-rendered silk arcs, currents, soul wisps, ripples and family-specific ribbon compositions as the default enhanced layer, with optional-library fallbacks. Scale and interpolate attached effects with the caster; avoid opaque billboard clouds.
 - Refine the presentation of every standard and Champion Origin plus Dawnbreaker: lean family palettes, fewer complementary layers, small particles and shorter finite effects. Add shared Minimal/Standard/Cinematic quality controls and bounded per-entity cosmetic budgets; Cinematic adds smoother detail without increasing burst limits.
 - Replace line-based Dawnbreaker impact frames with filled gold/black eclipse, pressure and rupture compositions for Step, Guard and confirmed bow hits. Preserve independent server switches and client opt-in, intensity and duration.
