@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:cobweb",
+    {
+      "id": "#chipped:cobweb",
+      "required": false
+    }
+  ]
+}

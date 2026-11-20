@@ -166,10 +166,12 @@ for path in (ROOT/'src/main/kotlin/andromeda/origins/mixin').rglob('*.kt'):
 spheres=data.get(RES/'assets/andromeda_origins/particle_spheres.json',{})
 check(set(spheres)=={'soul','water'},'Particle sphere presets missing')
 for name,points in spheres.items():check(len(points)==200 and all(len(p)==3 for p in points),f'{name}: incorrect sphere geometry')
+# Git normalizes JSON to LF; local Windows edits may still use CRLF.
+# Preserve exact JSON content hashes except checkout line endings; keep binary hashes exact.
 manifest=json.loads((ROOT/'tools/selkie-baseline.json').read_text())
 for name,digest in manifest.items():
     path=ROOT/name
-    check(path.exists() and hashlib.sha256(path.read_bytes()).hexdigest()==digest,f'Selkie data changed: {name}')
+    check(path.exists() and hashlib.sha256(path.read_bytes().replace(b'\r\n', b'\n') if path.suffix == '.json' else path.read_bytes()).hexdigest()==digest,f'Selkie data changed: {name}')
 for name in ('big_sphere','big_sphere2','web_nest','fireball','dragon_charge'):
     check(not list((RES/'data/andromeda_origins/function').rglob(name+'.mcfunction')),f'Retired helper remains: {name}')
 # Explicit custom HUD textures must be bundled; upstream community artwork is not a stable dependency.

@@ -2,6 +2,9 @@
 
 ## [1.4.85] - 2026-11-19
 
+- Extend standard and Champion Arachne cobweb movement, climbing, sensing and attack-through checks to Chipped cobweb variants through an optional shared block tag. Chipped remains optional.
+- Fix Selkie preservation validation failing on GitHub Linux runners due to Windows JSON line endings; actual JSON content and binary asset edits remain protected.
+
 - Remove coplanar overlap between Dawnbreaker feather fills/spines and halo bands without reducing wing detail or animation. Separate Wyverian gust layers along their travel direction and move the vacuum layer outward instead of stacking stationary billboards at the caster. Particle counts, ability costs and cooldowns are unchanged.
 
 - Restore a balanced enhanced presentation across all standard/Champion Origins: Standard and Cinematic use textured MRPG/Spell Engine water, bubbles, mist, sparks and family effects at moderated density, with clean animated contours as accents/fallbacks. Minimal stays restrained. Every preset has finite effects and per-entity burst limits; optional libraries remain optional.

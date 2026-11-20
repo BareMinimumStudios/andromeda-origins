@@ -109,8 +109,8 @@
             {
               "type": "origins:in_block_anywhere",
               "block_condition": {
-                "type": "origins:block",
-                "block": "minecraft:cobweb"
+                "type": "origins:in_tag",
+                "tag": "andromeda_origins:cobwebs"
               }
             },
             {
@@ -146,8 +146,8 @@
             {
               "type": "origins:in_block_anywhere",
               "block_condition": {
-                "type": "origins:block",
-                "block": "minecraft:cobweb"
+                "type": "origins:in_tag",
+                "tag": "andromeda_origins:cobwebs"
               }
             },
             {
@@ -192,8 +192,8 @@
   "no_slowdown": {
     "type": "origins:modify_block_stuck_speed",
     "block_condition": {
-      "type": "origins:block",
-      "block": "minecraft:cobweb"
+      "type": "origins:in_tag",
+      "tag": "andromeda_origins:cobwebs"
     },
     "multiplier": 1.0
   },
@@ -230,8 +230,8 @@
                 {
                   "type": "origins:in_block_anywhere",
                   "block_condition": {
-                    "type": "origins:block",
-                    "block": "minecraft:cobweb"
+                    "type": "origins:in_tag",
+                    "tag": "andromeda_origins:cobwebs"
                   }
                 },
                 {
@@ -286,8 +286,8 @@
   "punch_through": {
     "type": "origins:prevent_block_selection",
     "block_condition": {
-      "type": "origins:block",
-      "block": "minecraft:cobweb"
+      "type": "origins:in_tag",
+      "tag": "andromeda_origins:cobwebs"
     },
     "condition": {
       "type": "origins:sneaking",
@@ -312,8 +312,8 @@
                 {
                   "type": "origins:in_block_anywhere",
                   "block_condition": {
-                    "type": "origins:block",
-                    "block": "minecraft:cobweb"
+                    "type": "origins:in_tag",
+                    "tag": "andromeda_origins:cobwebs"
                   }
                 },
                 {
