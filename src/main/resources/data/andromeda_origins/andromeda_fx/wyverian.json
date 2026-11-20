@@ -5,52 +5,40 @@
         "id": "spell_engine:fire_explosion",
         "preset": "placed",
         "count": 1,
-        "scale": 1.2
+        "scale": 0.7,
+        "scale_to": 0.5,
+        "opacity": 0.68,
+        "speed": 0.03,
+        "glow": false,
+        "fade_out_hold": 0.12,
+        "color": "#DFA56B"
       },
       {
         "id": "spell_engine:flame_medium_a",
         "preset": "impact",
-        "count": 22,
-        "speed": 0.12,
-        "scale": 1.05,
-        "glow": true,
-        "motion": "burst"
-      },
-      {
-        "id": "spell_engine:flame_spark",
-        "preset": "impact",
-        "count": 34,
-        "speed": 0.18,
-        "scale": 1.15,
-        "glow": true,
-        "motion": "burst"
-      },
-      {
-        "id": "more_rpg_classes:dragon_claw",
-        "preset": "placed",
-        "count": 1,
-        "scale": 1.0,
-        "requires_mod": "more_rpg_classes"
+        "count": 6,
+        "speed": 0.08,
+        "scale": 0.7,
+        "glow": false,
+        "motion": "burst",
+        "scale_to": 0.5,
+        "opacity": 0.68,
+        "fade_out_hold": 0.12,
+        "color": "#DFA56B"
       }
     ],
     "sounds": [
       {
         "id": "spell_engine:generic_fire_release",
-        "volume": 0.48,
+        "volume": 0.32,
         "pitch": 0.88
-      },
-      {
-        "id": "more_rpg_classes:strong_attack",
-        "volume": 0.16,
-        "pitch": 1.1,
-        "requires_mod": "more_rpg_classes"
       }
     ],
     "mrpg": {
-      "preset": "mrpg_lib:preset/burst",
+      "preset": "mrpg_lib:preset/cast",
       "radius": 1.2,
-      "intensity": 0.5,
-      "color": "FF8C40",
+      "intensity": 0.2,
+      "color": "DFA56B",
       "duration": 8,
       "attach": false
     }
@@ -60,31 +48,30 @@
       {
         "id": "more_rpg_classes:small_gust",
         "preset": "cone",
-        "count": 18,
-        "speed": 0.14,
-        "scale": 1.0,
+        "count": 6,
+        "speed": 0.08,
+        "scale": 0.7,
         "angle": 38,
         "motion": "burst",
-        "requires_mod": "more_rpg_classes"
+        "requires_mod": "more_rpg_classes",
+        "scale_to": 0.5,
+        "opacity": 0.68,
+        "glow": false,
+        "fade_out_hold": 0.12,
+        "color": "#DFA56B"
       },
       {
         "id": "more_rpg_classes:wind_vacuum",
         "preset": "placed",
         "count": 1,
-        "scale": 1.1,
-        "requires_mod": "more_rpg_classes"
-      },
-      {
-        "id": "spell_engine:magic_stripe",
-        "preset": "cone",
-        "count": 12,
-        "speed": 0.14,
-        "scale": 0.8,
-        "angle": 28,
-        "color": "#E7F8FF",
-        "opacity": 0.75,
-        "glow": true,
-        "motion": "burst"
+        "scale": 0.7,
+        "requires_mod": "more_rpg_classes",
+        "scale_to": 0.5,
+        "opacity": 0.68,
+        "speed": 0.03,
+        "glow": false,
+        "fade_out_hold": 0.12,
+        "color": "#DFA56B"
       }
     ],
     "sounds": [
@@ -92,19 +79,13 @@
         "id": "spell_engine:generic_wind_gust",
         "volume": 0.32,
         "pitch": 0.92
-      },
-      {
-        "id": "more_rpg_classes:air_magic_cast1",
-        "volume": 0.16,
-        "pitch": 1.08,
-        "requires_mod": "more_rpg_classes"
       }
     ],
     "mrpg": {
       "preset": "mrpg_lib:preset/shockwave",
-      "radius": 2.2,
-      "intensity": 0.5,
-      "color": "E7F8FF",
+      "radius": 1.25,
+      "intensity": 0.2,
+      "color": "DFA56B",
       "duration": 8,
       "attach": false
     }
@@ -114,34 +95,42 @@
       {
         "id": "spell_engine:flame_spark",
         "preset": "casting",
-        "count": 12,
+        "count": 6,
         "speed": 0.056999999999999995,
-        "scale": 0.76,
-        "glow": true,
-        "motion": "ascend"
+        "scale": 0.7,
+        "glow": false,
+        "motion": "ascend",
+        "scale_to": 0.5,
+        "opacity": 0.68,
+        "fade_out_hold": 0.12,
+        "color": "#DFA56B"
       },
       {
         "id": "spell_engine:flame_medium_a",
         "preset": "casting",
         "count": 6,
         "speed": 0.041,
-        "scale": 0.71,
-        "glow": true,
-        "motion": "float"
+        "scale": 0.7,
+        "glow": false,
+        "motion": "float",
+        "scale_to": 0.5,
+        "opacity": 0.68,
+        "fade_out_hold": 0.12,
+        "color": "#DFA56B"
       }
     ],
     "sounds": [
       {
         "id": "spell_engine:generic_fire_release",
-        "volume": 0.16999999999999998,
+        "volume": 0.17,
         "pitch": 1.1199999999999999
       }
     ],
     "mrpg": {
       "preset": "mrpg_lib:preset/cast",
       "radius": 0.65,
-      "intensity": 0.32,
-      "color": "FF8C40",
+      "intensity": 0.2,
+      "color": "DFA56B",
       "duration": 8,
       "attach": false
     }
@@ -151,20 +140,28 @@
       {
         "id": "spell_engine:flame_spark",
         "preset": "casting",
-        "count": 18,
+        "count": 6,
         "speed": 0.069,
-        "scale": 0.87,
-        "glow": true,
-        "motion": "ascend"
+        "scale": 0.7,
+        "glow": false,
+        "motion": "ascend",
+        "scale_to": 0.5,
+        "opacity": 0.68,
+        "fade_out_hold": 0.12,
+        "color": "#DFA56B"
       },
       {
         "id": "spell_engine:flame_medium_a",
         "preset": "casting",
-        "count": 8,
+        "count": 6,
         "speed": 0.047,
-        "scale": 0.8,
-        "glow": true,
-        "motion": "float"
+        "scale": 0.7,
+        "glow": false,
+        "motion": "float",
+        "scale_to": 0.5,
+        "opacity": 0.68,
+        "fade_out_hold": 0.12,
+        "color": "#DFA56B"
       }
     ],
     "sounds": [
@@ -177,8 +174,8 @@
     "mrpg": {
       "preset": "mrpg_lib:preset/cast",
       "radius": 0.65,
-      "intensity": 0.39,
-      "color": "FF8C40",
+      "intensity": 0.2,
+      "color": "DFA56B",
       "duration": 8,
       "attach": false
     }
@@ -188,26 +185,28 @@
       {
         "id": "spell_engine:flame_spark",
         "preset": "casting",
-        "count": 24,
-        "speed": 0.081,
-        "scale": 0.98,
-        "glow": true,
-        "motion": "ascend"
+        "count": 6,
+        "speed": 0.08,
+        "scale": 0.7,
+        "glow": false,
+        "motion": "ascend",
+        "scale_to": 0.5,
+        "opacity": 0.68,
+        "fade_out_hold": 0.12,
+        "color": "#DFA56B"
       },
       {
         "id": "spell_engine:flame_medium_a",
         "preset": "casting",
-        "count": 10,
+        "count": 6,
         "speed": 0.053000000000000005,
-        "scale": 0.89,
-        "glow": true,
-        "motion": "float"
-      },
-      {
-        "id": "spell_engine:fire_explosion",
-        "preset": "placed",
-        "count": 1,
-        "scale": 1.06
+        "scale": 0.7,
+        "glow": false,
+        "motion": "float",
+        "scale_to": 0.5,
+        "opacity": 0.68,
+        "fade_out_hold": 0.12,
+        "color": "#DFA56B"
       }
     ],
     "sounds": [
@@ -220,8 +219,8 @@
     "mrpg": {
       "preset": "mrpg_lib:preset/cast",
       "radius": 0.65,
-      "intensity": 0.46,
-      "color": "FF8C40",
+      "intensity": 0.2,
+      "color": "DFA56B",
       "duration": 8,
       "attach": false
     }
@@ -231,37 +230,28 @@
       {
         "id": "spell_engine:flame_spark",
         "preset": "casting",
-        "count": 30,
-        "speed": 0.093,
-        "scale": 1.09,
-        "glow": true,
-        "motion": "ascend"
+        "count": 6,
+        "speed": 0.08,
+        "scale": 0.7,
+        "glow": false,
+        "motion": "ascend",
+        "scale_to": 0.5,
+        "opacity": 0.68,
+        "fade_out_hold": 0.12,
+        "color": "#DFA56B"
       },
       {
         "id": "spell_engine:flame_medium_a",
         "preset": "casting",
-        "count": 12,
+        "count": 6,
         "speed": 0.059000000000000004,
-        "scale": 0.98,
-        "glow": true,
-        "motion": "float"
-      },
-      {
-        "id": "spell_engine:fire_explosion",
-        "preset": "placed",
-        "count": 1,
-        "scale": 1.18
-      },
-      {
-        "id": "spell_engine:magic_stripe",
-        "preset": "casting",
-        "count": 12,
-        "speed": 0.06,
-        "scale": 0.86,
-        "color": "#FFD9A3",
-        "opacity": 0.82,
-        "glow": true,
-        "motion": "float"
+        "scale": 0.7,
+        "glow": false,
+        "motion": "float",
+        "scale_to": 0.5,
+        "opacity": 0.68,
+        "fade_out_hold": 0.12,
+        "color": "#DFA56B"
       }
     ],
     "sounds": [
@@ -274,8 +264,8 @@
     "mrpg": {
       "preset": "mrpg_lib:preset/cast",
       "radius": 0.65,
-      "intensity": 0.53,
-      "color": "FFD9A3",
+      "intensity": 0.2,
+      "color": "DFA56B",
       "duration": 8,
       "attach": false
     }
@@ -286,65 +276,40 @@
         "id": "spell_engine:fire_explosion",
         "preset": "placed",
         "count": 1,
-        "scale": 1.8
+        "scale": 0.7,
+        "scale_to": 0.5,
+        "opacity": 0.68,
+        "speed": 0.03,
+        "glow": false,
+        "fade_out_hold": 0.12,
+        "color": "#DFA56B"
       },
       {
         "id": "spell_engine:flame_medium_a",
         "preset": "impact",
-        "count": 32,
-        "speed": 0.16,
-        "scale": 1.22,
-        "glow": true,
-        "motion": "burst"
-      },
-      {
-        "id": "spell_engine:flame_spark",
-        "preset": "shockwave",
-        "count": 42,
-        "speed": 0.2,
-        "pre_travel": 0.12,
-        "scale": 1.15,
-        "glow": true,
-        "motion": "burst"
-      },
-      {
-        "id": "more_rpg_classes:dragon_claw",
-        "preset": "placed",
-        "count": 1,
-        "scale": 1.35,
-        "requires_mod": "more_rpg_classes"
-      },
-      {
-        "id": "spell_engine:magic_stripe",
-        "preset": "shockwave",
-        "count": 24,
-        "speed": 0.18,
-        "pre_travel": 0.1,
-        "scale": 0.96,
-        "color": "#FFF1D8",
-        "opacity": 0.82,
-        "glow": true,
-        "motion": "burst"
+        "count": 6,
+        "speed": 0.08,
+        "scale": 0.7,
+        "glow": false,
+        "motion": "burst",
+        "scale_to": 0.5,
+        "opacity": 0.68,
+        "fade_out_hold": 0.12,
+        "color": "#DFA56B"
       }
     ],
     "sounds": [
       {
         "id": "spell_engine:generic_fire_release",
-        "volume": 0.62,
+        "volume": 0.32,
         "pitch": 0.76
-      },
-      {
-        "id": "more_rpg_classes:strong_attack",
-        "volume": 0.28,
-        "pitch": 0.8,
-        "requires_mod": "more_rpg_classes"
       }
     ],
     "mrpg": {
       "preset": "mrpg_lib:preset/shockwave",
-      "radius": 2.2,
-      "intensity": 0.5,
-      "color": "FFF1D8",
+      "radius": 1.25,
+      "intensity": 0.2,
+      "color": "DFA56B",
       "duration": 8,
       "attach": false
     }
@@ -354,36 +319,36 @@
       {
         "id": "more_rpg_classes:small_gust",
         "preset": "ground",
-        "count": 10,
-        "scale": 0.82,
-        "requires_mod": "more_rpg_classes"
+        "count": 3,
+        "scale": 0.45,
+        "requires_mod": "more_rpg_classes",
+        "scale_to": 0.5,
+        "opacity": 0.48,
+        "speed": 0.03,
+        "glow": false,
+        "fade_out_hold": 0.12,
+        "color": "#DFA56B"
       },
       {
         "id": "more_rpg_classes:wind_vacuum",
         "preset": "placed",
         "count": 1,
-        "scale": 0.72,
-        "requires_mod": "more_rpg_classes"
-      },
-      {
-        "id": "spell_engine:magic_stripe",
-        "preset": "cone",
-        "count": 8,
-        "speed": 0.11,
-        "angle": 24,
-        "scale": 0.62,
-        "color": "#E8FAFF",
-        "opacity": 0.65,
-        "glow": true,
-        "motion": "decelerate"
+        "scale": 0.45,
+        "requires_mod": "more_rpg_classes",
+        "scale_to": 0.5,
+        "opacity": 0.48,
+        "speed": 0.03,
+        "glow": false,
+        "fade_out_hold": 0.12,
+        "color": "#DFA56B"
       }
     ],
     "sounds": [],
     "mrpg": {
       "preset": "mrpg_lib:preset/aura",
-      "radius": 0.65,
-      "intensity": 0.18,
-      "color": "E8FAFF",
+      "radius": 0.55,
+      "intensity": 0.1,
+      "color": "DFA56B",
       "duration": 4,
       "attach": true
     }
@@ -394,59 +359,40 @@
         "id": "spell_engine:area_swirl",
         "preset": "ground",
         "count": 1,
-        "scale": 1.35,
+        "scale": 0.45,
         "color": "#9B5CFF",
-        "opacity": 0.72,
-        "fade_out_hold": 0.18,
-        "glow": true
+        "opacity": 0.48,
+        "fade_out_hold": 0.12,
+        "glow": false,
+        "scale_to": 0.5,
+        "speed": 0.03
       },
       {
         "id": "spell_engine:magic_arcane",
         "preset": "casting",
-        "count": 18,
-        "speed": 0.14,
-        "scale": 0.88,
-        "color": "#C58CFF",
-        "opacity": 0.86,
-        "glow": true,
-        "motion": "burst"
-      },
-      {
-        "id": "spell_engine:magic_stripe",
-        "preset": "casting",
-        "count": 12,
-        "speed": 0.16,
-        "scale": 0.72,
-        "color": "#F0D5FF",
-        "opacity": 0.8,
-        "glow": true,
-        "motion": "decelerate"
-      },
-      {
-        "id": "more_rpg_classes:dragon_claw",
-        "preset": "placed",
-        "count": 1,
-        "scale": 0.9,
-        "requires_mod": "more_rpg_classes"
+        "count": 3,
+        "speed": 0.035,
+        "scale": 0.45,
+        "color": "#9B5CFF",
+        "opacity": 0.48,
+        "glow": false,
+        "motion": "burst",
+        "scale_to": 0.5,
+        "fade_out_hold": 0.12
       }
     ],
     "sounds": [
       {
         "id": "more_rpg_classes:arcane_strong_impact",
-        "volume": 0.24,
+        "volume": 0.16,
         "pitch": 0.95,
         "requires_mod": "more_rpg_classes"
-      },
-      {
-        "id": "spell_engine:generic_arcane_release",
-        "volume": 0.22,
-        "pitch": 0.82
       }
     ],
     "mrpg": {
-      "preset": "mrpg_lib:preset/burst",
-      "radius": 0.65,
-      "intensity": 0.18,
+      "preset": "mrpg_lib:preset/cast",
+      "radius": 0.55,
+      "intensity": 0.1,
       "color": "9B5CFF",
       "duration": 4,
       "attach": false
@@ -457,37 +403,41 @@
       {
         "id": "spell_engine:magic_arcane",
         "preset": "casting",
-        "count": 12,
+        "count": 6,
         "speed": 0.055,
-        "scale": 0.76,
+        "scale": 0.7,
         "color": "#B16EFF",
-        "opacity": 0.82,
-        "glow": true,
-        "motion": "float"
+        "opacity": 0.68,
+        "glow": false,
+        "motion": "float",
+        "scale_to": 0.5,
+        "fade_out_hold": 0.12
       },
       {
         "id": "spell_engine:magic_stripe",
         "preset": "casting",
         "count": 6,
         "speed": 0.0495,
-        "scale": 0.6232,
-        "color": "#F0D8FF",
-        "opacity": 0.76,
-        "glow": true,
-        "motion": "float"
+        "scale": 0.623,
+        "color": "#B16EFF",
+        "opacity": 0.68,
+        "glow": false,
+        "motion": "float",
+        "scale_to": 0.5,
+        "fade_out_hold": 0.12
       }
     ],
     "sounds": [
       {
         "id": "spell_engine:generic_arcane_release",
-        "volume": 0.17500000000000002,
+        "volume": 0.175,
         "pitch": 1.12
       }
     ],
     "mrpg": {
       "preset": "mrpg_lib:preset/cast",
       "radius": 0.65,
-      "intensity": 0.32,
+      "intensity": 0.2,
       "color": "B16EFF",
       "duration": 8,
       "attach": false
@@ -498,37 +448,41 @@
       {
         "id": "spell_engine:magic_arcane",
         "preset": "casting",
-        "count": 18,
+        "count": 6,
         "speed": 0.065,
-        "scale": 0.88,
+        "scale": 0.7,
         "color": "#B16EFF",
-        "opacity": 0.82,
-        "glow": true,
-        "motion": "float"
+        "opacity": 0.68,
+        "glow": false,
+        "motion": "float",
+        "scale_to": 0.5,
+        "fade_out_hold": 0.12
       },
       {
         "id": "spell_engine:magic_stripe",
         "preset": "casting",
-        "count": 9,
+        "count": 6,
         "speed": 0.0585,
-        "scale": 0.7215999999999999,
-        "color": "#F0D8FF",
-        "opacity": 0.76,
-        "glow": true,
-        "motion": "float"
+        "scale": 0.7,
+        "color": "#B16EFF",
+        "opacity": 0.68,
+        "glow": false,
+        "motion": "float",
+        "scale_to": 0.5,
+        "fade_out_hold": 0.12
       }
     ],
     "sounds": [
       {
         "id": "spell_engine:generic_arcane_release",
-        "volume": 0.21000000000000002,
+        "volume": 0.21,
         "pitch": 1.02
       }
     ],
     "mrpg": {
       "preset": "mrpg_lib:preset/cast",
       "radius": 0.65,
-      "intensity": 0.39,
+      "intensity": 0.2,
       "color": "B16EFF",
       "duration": 8,
       "attach": false
@@ -539,47 +493,41 @@
       {
         "id": "spell_engine:magic_arcane",
         "preset": "casting",
-        "count": 24,
+        "count": 6,
         "speed": 0.075,
-        "scale": 1.0,
+        "scale": 0.7,
         "color": "#B16EFF",
-        "opacity": 0.82,
-        "glow": true,
-        "motion": "float"
+        "opacity": 0.68,
+        "glow": false,
+        "motion": "float",
+        "scale_to": 0.5,
+        "fade_out_hold": 0.12
       },
       {
         "id": "spell_engine:magic_stripe",
         "preset": "casting",
-        "count": 12,
+        "count": 6,
         "speed": 0.0675,
-        "scale": 0.82,
-        "color": "#F0D8FF",
-        "opacity": 0.76,
-        "glow": true,
-        "motion": "float"
-      },
-      {
-        "id": "spell_engine:area_swirl",
-        "preset": "ground",
-        "count": 1,
-        "scale": 1.54,
-        "color": "#7C35D8",
-        "opacity": 0.72,
-        "fade_out_hold": 0.14,
-        "glow": true
+        "scale": 0.7,
+        "color": "#B16EFF",
+        "opacity": 0.68,
+        "glow": false,
+        "motion": "float",
+        "scale_to": 0.5,
+        "fade_out_hold": 0.12
       }
     ],
     "sounds": [
       {
         "id": "spell_engine:generic_arcane_release",
-        "volume": 0.24500000000000002,
+        "volume": 0.245,
         "pitch": 0.94
       }
     ],
     "mrpg": {
       "preset": "mrpg_lib:preset/cast",
       "radius": 0.65,
-      "intensity": 0.46,
+      "intensity": 0.2,
       "color": "B16EFF",
       "duration": 8,
       "attach": false
@@ -590,34 +538,28 @@
       {
         "id": "spell_engine:magic_arcane",
         "preset": "casting",
-        "count": 32,
-        "speed": 0.09,
-        "scale": 1.14,
+        "count": 6,
+        "speed": 0.08,
+        "scale": 0.7,
         "color": "#B16EFF",
-        "opacity": 0.82,
-        "glow": true,
-        "motion": "float"
+        "opacity": 0.68,
+        "glow": false,
+        "motion": "float",
+        "scale_to": 0.5,
+        "fade_out_hold": 0.12
       },
       {
         "id": "spell_engine:magic_stripe",
         "preset": "casting",
-        "count": 16,
-        "speed": 0.081,
-        "scale": 0.9347999999999999,
-        "color": "#F0D8FF",
-        "opacity": 0.76,
-        "glow": true,
-        "motion": "float"
-      },
-      {
-        "id": "spell_engine:area_swirl",
-        "preset": "ground",
-        "count": 1,
-        "scale": 1.72,
-        "color": "#7C35D8",
-        "opacity": 0.72,
-        "fade_out_hold": 0.14,
-        "glow": true
+        "count": 6,
+        "speed": 0.08,
+        "scale": 0.7,
+        "color": "#B16EFF",
+        "opacity": 0.68,
+        "glow": false,
+        "motion": "float",
+        "scale_to": 0.5,
+        "fade_out_hold": 0.12
       }
     ],
     "sounds": [
@@ -630,7 +572,7 @@
     "mrpg": {
       "preset": "mrpg_lib:preset/cast",
       "radius": 0.65,
-      "intensity": 0.53,
+      "intensity": 0.2,
       "color": "B16EFF",
       "duration": 8,
       "attach": false
@@ -642,73 +584,40 @@
         "id": "spell_engine:area_swirl",
         "preset": "ground",
         "count": 1,
-        "scale": 2.0,
-        "scale_to": 1.15,
+        "scale": 0.7,
+        "scale_to": 0.65,
         "color": "#7A2FD0",
-        "opacity": 0.9,
-        "fade_out_hold": 0.16,
-        "glow": true
+        "opacity": 0.68,
+        "fade_out_hold": 0.12,
+        "glow": false,
+        "speed": 0.03
       },
       {
         "id": "spell_engine:magic_arcane",
         "preset": "impact",
-        "count": 36,
-        "speed": 0.17,
-        "scale": 1.2,
-        "color": "#C285FF",
-        "glow": true,
-        "motion": "burst"
-      },
-      {
-        "id": "spell_engine:magic_stripe",
-        "preset": "shockwave",
-        "count": 28,
-        "speed": 0.2,
-        "pre_travel": 0.1,
-        "scale": 1.02,
-        "color": "#F7E5FF",
-        "opacity": 0.86,
-        "glow": true,
-        "motion": "burst"
-      },
-      {
-        "id": "more_rpg_classes:dragon_claw",
-        "preset": "placed",
-        "count": 1,
-        "scale": 1.25,
-        "requires_mod": "more_rpg_classes"
-      },
-      {
-        "id": "spell_engine:smoke_medium",
-        "preset": "impact",
-        "count": 10,
+        "count": 6,
         "speed": 0.08,
-        "scale": 0.95,
-        "color": "#5A2B75",
-        "opacity": 0.55,
-        "motion": "decelerate",
-        "fade_out_hold": 0.04,
-        "playback_speed": 1.8,
-        "lifetime_variance": 0.1
+        "scale": 0.7,
+        "color": "#7A2FD0",
+        "glow": false,
+        "motion": "burst",
+        "scale_to": 0.5,
+        "opacity": 0.68,
+        "fade_out_hold": 0.12
       }
     ],
     "sounds": [
       {
         "id": "more_rpg_classes:arcane_strong_impact",
-        "volume": 0.48,
+        "volume": 0.32,
         "pitch": 0.82,
         "requires_mod": "more_rpg_classes"
-      },
-      {
-        "id": "spell_engine:signal_spell_crit",
-        "volume": 0.24,
-        "pitch": 0.72
       }
     ],
     "mrpg": {
       "preset": "mrpg_lib:preset/cast",
       "radius": 0.65,
-      "intensity": 0.5,
+      "intensity": 0.2,
       "color": "7A2FD0",
       "duration": 8,
       "attach": false

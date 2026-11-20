@@ -110,6 +110,9 @@ class NeoForgePlatform(private val modBus: IEventBus) : PlatformBackend {
             event.registrar(version()).playToClient(andromeda.origins.network.DawnbreakerFxPayload.TYPE, andromeda.origins.network.DawnbreakerFxPayload.CODEC) { payload, context ->
                 context.enqueueWork { andromeda.origins.client.DawnbreakerFxClient.receive(payload) }
             }
+            event.registrar(version()).playToClient(andromeda.origins.network.OriginFxPayload.TYPE, andromeda.origins.network.OriginFxPayload.CODEC) { payload, context ->
+                context.enqueueWork { andromeda.origins.client.OriginFxRenderer.receive(payload) }
+            }
             event.registrar(version()).playToClient(OpenConfigPayload.TYPE, OpenConfigPayload.CODEC) { _, context ->
                 context.enqueueWork { NeoForgeClientPlatform.openConfig() }
             }

@@ -206,9 +206,9 @@ object VeilStepManager {
         val spreadXZ: kotlin.Double = kotlin.math.max(0.18, player.getBbWidth() * 0.42)
         val spreadY: kotlin.Double = kotlin.math.max(0.28, player.getBbHeight() * 0.32)
         level.sendParticles<net.minecraft.core.particles.SimpleParticleType>(net.minecraft.core.particles.ParticleTypes.SMOKE, center.x, center.y, center.z,
-        6, spreadXZ, spreadY, spreadXZ, 0.012)
+        3, spreadXZ, spreadY, spreadXZ, 0.006)
         level.sendParticles<net.minecraft.core.particles.SimpleParticleType>(net.minecraft.core.particles.ParticleTypes.REVERSE_PORTAL, center.x, center.y, center.z,
-        3, spreadXZ * 0.8, spreadY * 0.8, spreadXZ * 0.8, 0.018)
+        1, spreadXZ * 0.8, spreadY * 0.8, spreadXZ * 0.8, 0.018)
     }
 
     private fun shatterCrossedEntities(player: net.minecraft.server.level.ServerPlayer, state: VeilStepManager.State, fromFeet: net.minecraft.world.phys.Vec3, toFeet: net.minecraft.world.phys.Vec3) {
@@ -407,9 +407,9 @@ object VeilStepManager {
         EnhancedFxCompat.playAt(source, fx, position)
         val level: net.minecraft.server.level.ServerLevel = source.serverLevel()
         level.sendParticles<net.minecraft.core.particles.SimpleParticleType>(net.minecraft.core.particles.ParticleTypes.REVERSE_PORTAL, position.x, position.y, position.z,
-        if (compact) 10 else 18, if (compact) 0.28 else 0.4, if (compact) 0.45 else 0.65, if (compact) 0.28 else 0.4, 0.035)
+        if (compact) 4 else 6, if (compact) 0.28 else 0.4, if (compact) 0.45 else 0.65, if (compact) 0.28 else 0.4, 0.035)
         level.sendParticles<net.minecraft.core.particles.SimpleParticleType>(net.minecraft.core.particles.ParticleTypes.DRAGON_BREATH, position.x, position.y, position.z,
-        if (compact) 4 else 7, 0.25, 0.4, 0.25, 0.015)
+        if (compact) 2 else 3, 0.25, 0.4, 0.25, 0.015)
     }
 
     private fun playSound(source: net.minecraft.server.level.ServerPlayer, id: net.minecraft.resources.ResourceLocation, volume: kotlin.Float, pitch: kotlin.Float, pos: net.minecraft.world.phys.Vec3) {

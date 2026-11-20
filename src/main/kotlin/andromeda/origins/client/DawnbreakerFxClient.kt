@@ -18,6 +18,7 @@ object DawnbreakerFxClient {
     private val ghosts = java.util.WeakHashMap<LivingEntity, Ghost>()
     var renderingGhost = false; private set
     private var world: Any? = null
+    private var impactKind = 0
     private var impactAt = 0L
     private var nextImpact = 0L
     fun openConfig() { me.fzzyhmstrs.fzzy_config.api.ConfigApiJava.openScreen("andromeda_origins.dawnbreaker_visuals") }
@@ -39,6 +40,7 @@ object DawnbreakerFxClient {
         }
         val allowed = packet.flags and 2 != 0
         if (actor === player && allowed && config.impactFrames.get() && !player.isSpectator && c.screen == null && now >= nextImpact) {
+            impactKind = packet.kind
             impactAt = now; nextImpact = now + 300_000_000L
         }
     }
@@ -58,18 +60,6 @@ object DawnbreakerFxClient {
         val age = (System.nanoTime() - start) / 1_000_000.0
         if (age >= config.durationMs.get()) { impactAt = 0; return }
         val scale = when (config.intensity.get()) { DawnbreakerVisualConfig.Intensity.LOW -> .3; DawnbreakerVisualConfig.Intensity.STANDARD -> .55; else -> .8 }
-        val fade = (1 - age / config.durationMs.get()).coerceIn(0.0, 1.0)
-        val alpha = (255 * scale * fade).toInt(); val w = g.guiWidth(); val h = g.guiHeight()
-        g.fill(0, 0, w, h, (alpha shl 24) or 0x090807)
-        val p = g.pose(); p.pushPose(); p.translate(w / 2.0, h / 2.0, 0.0)
-        // Original angular gold/black cuts. No copied sprites, camera freeze or gameplay time changes.
-        for (i in 0..7) {
-            p.pushPose(); p.mulPose(Axis.ZP.rotationDegrees(i * 45f + if (age < config.durationMs.get() * .45) 8f else -8f))
-            val edge = maxOf(w, h)
-            g.fill(w / 9, -2, edge, 2, ((alpha * .9).toInt() shl 24) or 0xffda76)
-            g.fill(w / 6, 3, edge, 7, (alpha shl 24) or 0x080705)
-            p.popPose()
-        }
-        p.popPose()
+        ImpactComposition.render(g, impactKind, (age / config.durationMs.get()).toFloat(), scale.toFloat())
     }
 }

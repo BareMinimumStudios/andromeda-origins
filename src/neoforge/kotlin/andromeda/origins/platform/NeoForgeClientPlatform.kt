@@ -22,6 +22,9 @@ class NeoForgeClientPlatform : ClientPlatformBackend {
         }
         fun openConfig() { ConfigApiJava.openScreen(AndromedaGameplayConfig.SCREEN_SCOPE) }
     }
+    override fun worldFx(callback: Consumer<WorldFxContext>) { NeoForge.EVENT_BUS.addListener(Consumer<net.neoforged.neoforge.client.event.RenderLevelStageEvent> { event ->
+        if (event.stage == net.neoforged.neoforge.client.event.RenderLevelStageEvent.Stage.AFTER_ENTITIES) callback.accept(WorldFxContext(event.poseStack ?: com.mojang.blaze3d.vertex.PoseStack().also { it.last().pose().set(event.modelViewMatrix) }, Minecraft.getInstance().renderBuffers().bufferSource(), event.partialTick.getGameTimeDeltaPartialTick(false)))
+    }) }
     override fun startTick(callback: Consumer<Minecraft>) { NeoForge.EVENT_BUS.addListener(Consumer<ClientTickEvent.Pre> { callback.accept(Minecraft.getInstance()) }) }
     override fun endTick(callback: Consumer<Minecraft>) { NeoForge.EVENT_BUS.addListener(Consumer<ClientTickEvent.Post> { callback.accept(Minecraft.getInstance()) }) }
     override fun configReceiver() {

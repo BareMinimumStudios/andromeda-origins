@@ -26,7 +26,7 @@
             "type": "origins:delay",
             "ticks": 4,
             "action": {
-              "type": "origins:play_sound",
+              "type": "andromeda_origins:refined_sound",
               "sound": "minecraft:entity.illusioner.prepare_mirror",
               "volume": 0.65,
               "pitch": 0.2
@@ -38,7 +38,7 @@
             "source": "minecraft:state"
           },
           {
-            "type": "origins:spawn_particles",
+            "type": "andromeda_origins:refined_particles",
             "particle": {
               "type": "minecraft:ash"
             },
@@ -56,14 +56,14 @@
             "type": "origins:delay",
             "ticks": 2,
             "action": {
-              "type": "origins:play_sound",
+              "type": "andromeda_origins:refined_sound",
               "sound": "minecraft:block.tuff.break",
               "volume": 0.6,
               "pitch": 0.6
             }
           },
           {
-            "type": "origins:spawn_particles",
+            "type": "andromeda_origins:refined_particles",
             "particle": {
               "type": "minecraft:witch"
             },
@@ -78,7 +78,7 @@
             "offset_y": 1
           },
           {
-            "type": "origins:spawn_particles",
+            "type": "andromeda_origins:refined_particles",
             "particle": {
               "type": "minecraft:smoke"
             },
@@ -105,7 +105,7 @@
             "type": "origins:delay",
             "ticks": 3,
             "action": {
-              "type": "origins:play_sound",
+              "type": "andromeda_origins:refined_sound",
               "sound": "minecraft:entity.warden.roar",
               "volume": 0.85,
               "pitch": 1.5
@@ -135,7 +135,7 @@
             }
           },
           {
-            "type": "origins:spawn_particles",
+            "type": "andromeda_origins:refined_particles",
             "particle": {
               "type": "minecraft:white_ash"
             },
@@ -171,7 +171,7 @@
               "type": "origins:delay",
               "ticks": 5,
               "action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.rabbit.hurt",
                 "volume": 0.7,
                 "pitch": 0.4
@@ -198,14 +198,14 @@
               "type": "origins:delay",
               "ticks": 2,
               "action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:block.stone.place",
                 "volume": 0.6,
                 "pitch": 0.5
               }
             },
             {
-              "type": "origins:spawn_particles",
+              "type": "andromeda_origins:refined_particles",
               "particle": {
                 "type": "minecraft:ash"
               },

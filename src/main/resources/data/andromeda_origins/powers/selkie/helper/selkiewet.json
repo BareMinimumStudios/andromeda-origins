@@ -142,7 +142,7 @@
   },
   "visual": {
     "type": "origins:particle",
-    "count": 5,
+    "count": 3,
     "particle": "minecraft:falling_water",
     "spread": {
       "x": 0.25,
@@ -150,6 +150,6 @@
       "z": 0.25
     },
     "offset_y": 1,
-    "frequency": 10
+    "frequency": 12
   }
 }

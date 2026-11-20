@@ -17,6 +17,7 @@ import java.util.function.BiFunction
  */
 object AndromedaActions {
     fun register() {
+        andromeda.origins.compat.RefinedCosmeticActions.register()
         andromeda.origins.compat.Dawnbreaker.registerActions()
         andromeda.origins.compat.HelperSpawner.registerActions()
         andromeda.origins.compat.ManticoreTether.registerActions()
@@ -105,6 +106,10 @@ object AndromedaActions {
         override fun run(cfg: NoConfig, ctx: dev.overgrown.apoli.condition.context.EntityCtx) {
             val player = ctx.raw() as? net.minecraft.server.level.ServerPlayer
             if (player == null) {
+                return
+            }
+            if (andromeda.origins.config.AndromedaConfigBootstrap.config().visuals.reducedFlashes.get()) {
+                player.serverLevel().sendParticles(net.minecraft.core.particles.ParticleTypes.END_ROD, player.x, player.y + 1.0, player.z, 6, .1, .6, .1, .01)
                 return
             }
             val lightning: net.minecraft.world.entity.LightningBolt? = net.minecraft.world.entity.EntityType.LIGHTNING_BOLT.create(player.serverLevel())

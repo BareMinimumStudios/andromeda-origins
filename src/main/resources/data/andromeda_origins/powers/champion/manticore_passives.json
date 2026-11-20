@@ -320,7 +320,7 @@
         "type": "origins:and",
         "actions": [
           {
-            "type": "origins:play_sound",
+            "type": "andromeda_origins:refined_sound",
             "sound": "andromeda_origins:ability.manticore.beast_of_blood",
             "volume": 1.05,
             "pitch": 0.85
@@ -382,7 +382,7 @@
             "type": "origins:delay",
             "ticks": 2,
             "action": {
-              "type": "origins:play_sound",
+              "type": "andromeda_origins:refined_sound",
               "sound": "andromeda_origins:ability.manticore.ravenous_lunge",
               "volume": 1.2,
               "pitch": 0.78
@@ -499,7 +499,7 @@
           "type": "origins:delay",
           "ticks": 2,
           "action": {
-            "type": "origins:play_sound",
+            "type": "andromeda_origins:refined_sound",
             "sound": "andromeda_origins:ability.manticore.ravenous_lunge",
             "volume": 1.2,
             "pitch": 0.78
@@ -582,7 +582,7 @@
           "type": "origins:delay",
           "ticks": 2,
           "action": {
-            "type": "origins:play_sound",
+            "type": "andromeda_origins:refined_sound",
             "sound": "andromeda_origins:ability.manticore.ravenous_lunge",
             "volume": 1.2,
             "pitch": 0.78

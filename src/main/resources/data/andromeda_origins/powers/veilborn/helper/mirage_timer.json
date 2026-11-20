@@ -39,7 +39,7 @@
             "type": "origins:and",
             "actions": [
               {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "andromeda_origins:ability.veilborn.veil_close",
                 "volume": 1.05,
                 "pitch": 1.0
@@ -52,7 +52,7 @@
                 "type": "origins:delay",
                 "ticks": 3,
                 "action": {
-                  "type": "origins:play_sound",
+                  "type": "andromeda_origins:refined_sound",
                   "sound": "minecraft:block.amethyst_cluster.break",
                   "volume": 0.7,
                   "pitch": 1.3
@@ -125,7 +125,7 @@
                 }
               },
               {
-                "type": "origins:spawn_particles",
+                "type": "andromeda_origins:refined_particles",
                 "particle": {
                   "type": "minecraft:flash"
                 },
@@ -139,7 +139,7 @@
                 }
               },
               {
-                "type": "origins:spawn_particles",
+                "type": "andromeda_origins:refined_particles",
                 "particle": {
                   "type": "minecraft:end_rod"
                 },
@@ -153,7 +153,7 @@
                 }
               },
               {
-                "type": "origins:spawn_particles",
+                "type": "andromeda_origins:refined_particles",
                 "particle": {
                   "type": "minecraft:reverse_portal"
                 },
@@ -168,7 +168,7 @@
                 "offset_y": 1
               },
               {
-                "type": "origins:spawn_particles",
+                "type": "andromeda_origins:refined_particles",
                 "particle": {
                   "type": "minecraft:dragon_breath"
                 },

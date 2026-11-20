@@ -17,6 +17,10 @@ class FabricClientEntrypoint : ClientModInitializer {
     }
 }
 class FabricClientPlatform : ClientPlatformBackend {
+    override fun worldFx(callback: Consumer<WorldFxContext>) = net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents.AFTER_ENTITIES.register { context ->
+        val pose = context.matrixStack(); val buffers = context.consumers()
+        if (pose != null && buffers != null) callback.accept(WorldFxContext(pose, buffers, context.tickCounter().getGameTimeDeltaPartialTick(false)))
+    }
     override fun startTick(callback: Consumer<Minecraft>) = ClientTickEvents.START_CLIENT_TICK.register { callback.accept(it) }
     override fun endTick(callback: Consumer<Minecraft>) = ClientTickEvents.END_CLIENT_TICK.register { callback.accept(it) }
     override fun configReceiver() {
@@ -25,6 +29,9 @@ class FabricClientPlatform : ClientPlatformBackend {
         }
         ClientPlayNetworking.registerGlobalReceiver(andromeda.origins.network.DawnbreakerFxPayload.TYPE) { payload, context ->
             context.client().execute { andromeda.origins.client.DawnbreakerFxClient.receive(payload) }
+        }
+        ClientPlayNetworking.registerGlobalReceiver(andromeda.origins.network.OriginFxPayload.TYPE) { payload, context ->
+            context.client().execute { andromeda.origins.client.OriginFxRenderer.receive(payload) }
         }
         ClientPlayNetworking.registerGlobalReceiver(OpenConfigPayload.TYPE) { _, context ->
             context.client().execute { ConfigApiJava.openScreen(AndromedaGameplayConfig.SCREEN_SCOPE) }

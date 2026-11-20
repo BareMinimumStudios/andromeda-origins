@@ -62,7 +62,7 @@
   },
   "visual": {
     "type": "origins:particle",
-    "count": 5,
+    "count": 3,
     "particle": "minecraft:electric_spark",
     "spread": {
       "x": 0.25,
@@ -70,7 +70,7 @@
       "z": 0.25
     },
     "offset_y": 1,
-    "frequency": 10
+    "frequency": 12
   },
   "w_detect": {
     "type": "origins:active_self",
@@ -87,7 +87,7 @@
           "change": -1
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:smoke"
           },
@@ -102,7 +102,7 @@
           }
         },
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "minecraft:block.stone.hit",
           "volume": 1,
           "pitch": 0.2
@@ -129,7 +129,7 @@
           "change": -1
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:smoke"
           },
@@ -144,7 +144,7 @@
           }
         },
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "minecraft:block.stone.hit",
           "volume": 1,
           "pitch": 0.2
@@ -171,7 +171,7 @@
           "change": -1
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:smoke"
           },
@@ -186,7 +186,7 @@
           }
         },
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "minecraft:block.stone.hit",
           "volume": 1,
           "pitch": 0.2
@@ -213,7 +213,7 @@
           "change": -1
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:smoke"
           },
@@ -228,7 +228,7 @@
           }
         },
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "minecraft:block.stone.hit",
           "volume": 1,
           "pitch": 0.2

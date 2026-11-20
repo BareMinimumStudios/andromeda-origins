@@ -56,7 +56,7 @@
           "command": "stopsound @a[distance=..48] player andromeda_origins:ability.siren.infatuation_whisper"
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:poof"
           },
@@ -104,7 +104,7 @@
   },
   "visual": {
     "type": "origins:particle",
-    "count": 5,
+    "count": 3,
     "particle": "minecraft:heart",
     "spread": {
       "x": 0.25,
@@ -112,7 +112,7 @@
       "z": 0.25
     },
     "offset_y": 1,
-    "frequency": 10
+    "frequency": 12
   },
   "visual2": {
     "type": "origins:particle",

@@ -14,6 +14,7 @@ object AndromedaOriginsClient {
         VeilStepVisuals.register()
         DawnquiverClientCompat.register()
         DawnbreakerFxClient.register()
+        OriginFxRenderer.register()
             // Origin Toggle is data-driven at data/andromeda_origins/keybinds/toggle.json.
         // Opoli registers it as key.andromeda_origins.toggle and preserves saved rebinds.
     }

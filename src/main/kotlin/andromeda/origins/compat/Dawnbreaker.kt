@@ -58,8 +58,8 @@ object Dawnbreaker {
     private val unsafeBlocks = listOf(Blocks.MAGMA_BLOCK, Blocks.CACTUS, Blocks.CAMPFIRE, Blocks.SOUL_CAMPFIRE,
         Blocks.SWEET_BERRY_BUSH, Blocks.POWDER_SNOW, Blocks.WITHER_ROSE, Blocks.NETHER_PORTAL, Blocks.END_PORTAL, Blocks.END_GATEWAY)
     private val pumpkin = TagKey.create(Registries.ITEM, ResourceLocation.parse("origins:pumpkin_like/equipment"))
-    private val gold = DustParticleOptions(Vector3f(1f, .78f, .23f), .55f)
-    private val jade = DustParticleOptions(Vector3f(.32f, .81f, .55f), .45f)
+    private val gold = DustParticleOptions(Vector3f(1f, .78f, .23f), .25f)
+    private val jade = DustParticleOptions(Vector3f(.32f, .81f, .55f), .22f)
     private val affected = mutableSetOf<LivingEntity>()
     private data class Statue(val owners: MutableMap<UUID, Double>, var lastTimer: Double)
     private val statues = mutableMapOf<LivingEntity, Statue>()
@@ -234,7 +234,7 @@ object Dawnbreaker {
             if (radiant(player)) shards(target)
         }
         sound(player.serverLevel(), player.position(), net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_RESONATE, .7f, .6f)
-        ring(player, player.serverLevel(), player.position(), 2.0, 40)
+        ring(player, player.serverLevel(), player.position(), 2.0, 12)
         success(player, "Sovereign Gaze — ${targets.size} petrified")
     }
 
@@ -380,7 +380,7 @@ object Dawnbreaker {
         val caster = arrow.owner as? ServerPlayer ?: return
         bowSound(level, at, "elemental_bow_holy_shoot_impact_01", net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_BREAK, .55f, 1f)
         if (radiant(caster)) {
-            level.sendParticles(ParticleTypes.END_ROD, at.x, at.y, at.z, 12, .18, .18, .18, .07)
+            level.sendParticles(ParticleTypes.END_ROD, at.x, at.y, at.z, 4, .12, .12, .12, .035)
             MrpgFxBridge.play(level, at, EnhancedFxDefinitions.MrpgDefinition("mrpg_lib:preset/impact", .55f, .3f, 0xffd878, DawnbreakerPresentation.particles(4)), caster, false)
         }
     }

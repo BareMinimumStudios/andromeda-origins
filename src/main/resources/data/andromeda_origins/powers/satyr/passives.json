@@ -95,13 +95,13 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "entity.wind_charge.wind_burst",
           "volume": 0.8,
           "pitch": 1.6
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:flash"
           },
@@ -448,7 +448,7 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "andromeda_origins:ability.satyr.hoof_launch",
           "volume": 0.95,
           "pitch": 1.0
@@ -475,7 +475,7 @@
           "change": -1
         },
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "entity.wind_charge.wind_burst",
           "volume": 0.8,
           "pitch": 0.6
@@ -484,14 +484,14 @@
           "type": "origins:delay",
           "ticks": 4,
           "action": {
-            "type": "origins:play_sound",
+            "type": "andromeda_origins:refined_sound",
             "sound": "entity.goat.long_jump",
             "volume": 0.7,
             "pitch": 1.0
           }
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:cloud"
           },
@@ -506,7 +506,7 @@
           }
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:gust_emitter_small"
           },
@@ -588,7 +588,7 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "entity.wind_charge.wind_burst",
           "volume": 0.8,
           "pitch": 1.6
@@ -643,7 +643,7 @@
           "change": 1
         },
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "minecraft:entity.horse.step",
           "volume": 0.55,
           "pitch": 1.05

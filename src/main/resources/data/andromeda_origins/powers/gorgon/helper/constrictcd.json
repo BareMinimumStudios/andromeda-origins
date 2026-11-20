@@ -25,7 +25,7 @@
   },
   "visual": {
     "type": "origins:particle",
-    "count": 5,
+    "count": 3,
     "particle": "minecraft:trial_spawner_detection_ominous",
     "spread": {
       "x": 0.25,
@@ -33,6 +33,6 @@
       "z": 0.25
     },
     "offset_y": 1,
-    "frequency": 10
+    "frequency": 12
   }
 }

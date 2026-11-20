@@ -44,13 +44,13 @@
                     "event": "wyverian.hover"
                   },
                   {
-                    "type": "origins:play_sound",
+                    "type": "andromeda_origins:refined_sound",
                     "sound": "entity.ender_dragon.flap",
                     "volume": 1,
                     "pitch": 0.8
                   },
                   {
-                    "type": "origins:spawn_particles",
+                    "type": "andromeda_origins:refined_particles",
                     "particle": {
                       "type": "minecraft:cloud"
                     },

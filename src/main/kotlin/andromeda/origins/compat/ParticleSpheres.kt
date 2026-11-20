@@ -51,9 +51,13 @@ object ParticleSpheres {
                         else -> return
                     }
                     val source = entity.createCommandSourceStack()
-                    for (position in positions(cfg.preset, source)) {
-                        for (viewer in level.server.playerList.players) {
-                            level.sendParticles(viewer, particle, true, position.x, position.y, position.z, 1, 0.0, 0.0, 0.0, 0.0)
+                    val all = positions(cfg.preset, source)
+                    val count = when (OriginFxStyle.quality()) { OriginFxStyle.Quality.MINIMAL -> 40; OriginFxStyle.Quality.STANDARD -> 56; OriginFxStyle.Quality.CINEMATIC -> 56 }
+                    val viewers = level.players().filter { it.distanceToSqr(entity) <= 32.0 * 32.0 }
+                    for (i in 0 until count) {
+                        val position = all[i * all.size / count]
+                        for (viewer in viewers) {
+                            level.sendParticles(viewer, particle, false, position.x, position.y, position.z, 1, 0.0, 0.0, 0.0, 0.0)
                         }
                     }
                 }

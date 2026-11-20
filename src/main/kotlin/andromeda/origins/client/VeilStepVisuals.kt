@@ -25,7 +25,7 @@ object VeilStepVisuals {
 
                     // Every other client tick is enough to maintain a continuous smoky silhouette while
             // keeping dense mob areas from turning into an unnecessary particle flood.
-        if ((VeilStepVisuals.veilTicks++ and 1) != 0) return@callback
+        if ((VeilStepVisuals.veilTicks++ and 3) != 0) return@callback
         VeilStepVisuals.emitLivingEchoes(client)
 
         })
@@ -49,9 +49,9 @@ object VeilStepVisuals {
             val entity: net.minecraft.world.entity.LivingEntity = living.get(i)
             val distanceSqr: kotlin.Double = viewer.distanceToSqr(entity)
             val particles: kotlin.Int = if (distanceSqr <= 16.0 * 16.0)
-            7
+            4
             else
-            if (distanceSqr <= 32.0 * 32.0) 5 else 3
+            if (distanceSqr <= 32.0 * 32.0) 3 else 2
             VeilStepVisuals.emitEcho(level, entity, particles, VeilStepVisuals.veilTicks)
         }
     }

@@ -61,7 +61,7 @@
             "type": "origins:delay",
             "ticks": 3,
             "action": {
-              "type": "origins:play_sound",
+              "type": "andromeda_origins:refined_sound",
               "sound": "minecraft:entity.illusioner.prepare_mirror",
               "volume": 0.65,
               "pitch": 0.2
@@ -73,7 +73,7 @@
             "source": "minecraft:state"
           },
           {
-            "type": "origins:spawn_particles",
+            "type": "andromeda_origins:refined_particles",
             "particle": {
               "type": "minecraft:reverse_portal"
             },
@@ -88,7 +88,7 @@
             "offset_y": 1
           },
           {
-            "type": "origins:spawn_particles",
+            "type": "andromeda_origins:refined_particles",
             "particle": {
               "type": "minecraft:dragon_breath"
             },
@@ -135,7 +135,7 @@
               "type": "origins:and",
               "actions": [
                 {
-                  "type": "origins:play_sound",
+                  "type": "andromeda_origins:refined_sound",
                   "sound": "andromeda_origins:ability.veilborn.transposition",
                   "volume": 1.1,
                   "pitch": 1.0
@@ -148,7 +148,7 @@
                   "type": "origins:delay",
                   "ticks": 3,
                   "action": {
-                    "type": "origins:play_sound",
+                    "type": "andromeda_origins:refined_sound",
                     "sound": "minecraft:entity.illusioner.cast_spell",
                     "volume": 0.65,
                     "pitch": 0.2
@@ -171,7 +171,7 @@
                   "source": "minecraft:state"
                 },
                 {
-                  "type": "origins:spawn_particles",
+                  "type": "andromeda_origins:refined_particles",
                   "particle": {
                     "type": "minecraft:portal"
                   },
@@ -194,7 +194,7 @@
               "type": "origins:and",
               "actions": [
                 {
-                  "type": "origins:play_sound",
+                  "type": "andromeda_origins:refined_sound",
                   "sound": "andromeda_origins:ability.veilborn.reality_fracture",
                   "volume": 1.05,
                   "pitch": 1.0
@@ -212,7 +212,7 @@
                   "type": "origins:delay",
                   "ticks": 4,
                   "action": {
-                    "type": "origins:play_sound",
+                    "type": "andromeda_origins:refined_sound",
                     "sound": "minecraft:entity.illusioner.mirror_move",
                     "volume": 0.65,
                     "pitch": 0.2
@@ -229,7 +229,7 @@
                   "change": 4
                 },
                 {
-                  "type": "origins:spawn_particles",
+                  "type": "andromeda_origins:refined_particles",
                   "particle": {
                     "type": "minecraft:dragon_breath"
                   },

@@ -25,7 +25,8 @@ object MrpgFxBridge {
     private val warned = mutableSetOf<String>()
     private val logger = org.slf4j.LoggerFactory.getLogger("Andromeda Origins/MRPG FX")
 
-    fun play(level: ServerLevel, position: Vec3, definition: EnhancedFxDefinitions.MrpgDefinition, entity: net.minecraft.world.entity.Entity, atSource: Boolean): Boolean {
+    fun play(level: ServerLevel, position: Vec3, requested: EnhancedFxDefinitions.MrpgDefinition, entity: net.minecraft.world.entity.Entity, atSource: Boolean): Boolean {
+        val definition = OriginFxStyle.mrpg(requested)
         if (!Platform.isModLoaded("mrpg_lib")) return false
         if (!attempted) {
             attempted = true
@@ -44,6 +45,7 @@ object MrpgFxBridge {
                 if (warned.add(id.toString())) logger.warn("Unknown MRPG preset {}; retaining existing particles.", id)
                 return false
             }
+            if (OriginFxStyle.particles(entity, 4) == null) return true
             val parameters = api.at.invoke(null, position)
             if (definition.attach && atSource) api.attach.invoke(parameters, entity)
             api.direction.invoke(parameters, entity.lookAngle)

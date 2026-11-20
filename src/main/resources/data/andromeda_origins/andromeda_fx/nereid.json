@@ -5,37 +5,28 @@
         "id": "more_rpg_classes:water_circle",
         "preset": "ground",
         "count": 1,
-        "scale": 2.2,
-        "opacity": 0.9,
-        "fade_out_hold": 0.4,
-        "requires_mod": "more_rpg_classes"
+        "scale": 0.7,
+        "opacity": 0.68,
+        "fade_out_hold": 0.12,
+        "requires_mod": "more_rpg_classes",
+        "scale_to": 0.5,
+        "speed": 0.03,
+        "glow": false,
+        "color": "#7BC8D1"
       },
       {
         "id": "more_rpg_classes:water_heal",
         "preset": "casting",
-        "count": 20,
+        "count": 6,
         "speed": 0.06,
-        "scale": 1.05,
+        "scale": 0.7,
         "motion": "ascend",
-        "requires_mod": "more_rpg_classes"
-      },
-      {
-        "id": "more_rpg_classes:water_mist",
-        "preset": "cloud",
-        "count": 14,
-        "speed": 0.03,
-        "scale": 0.95,
-        "motion": "float",
-        "requires_mod": "more_rpg_classes"
-      },
-      {
-        "id": "more_rpg_classes:bubble",
-        "preset": "cloud",
-        "count": 12,
-        "speed": 0.04,
-        "scale": 0.9,
-        "motion": "ascend",
-        "requires_mod": "more_rpg_classes"
+        "requires_mod": "more_rpg_classes",
+        "scale_to": 0.5,
+        "opacity": 0.68,
+        "glow": false,
+        "fade_out_hold": 0.12,
+        "color": "#7BC8D1"
       }
     ],
     "sounds": [
@@ -48,9 +39,9 @@
     ],
     "mrpg": {
       "preset": "mrpg_lib:preset/shockwave",
-      "radius": 2.2,
-      "intensity": 0.5,
-      "color": "77DDFF",
+      "radius": 1.25,
+      "intensity": 0.2,
+      "color": "7BC8D1",
       "duration": 8,
       "attach": false
     }
@@ -61,32 +52,34 @@
         "id": "more_rpg_classes:big_splash",
         "preset": "placed",
         "count": 1,
-        "scale": 1.2,
-        "requires_mod": "more_rpg_classes"
+        "scale": 0.7,
+        "requires_mod": "more_rpg_classes",
+        "scale_to": 0.5,
+        "opacity": 0.68,
+        "speed": 0.03,
+        "glow": false,
+        "fade_out_hold": 0.12,
+        "color": "#7BC8D1"
       },
       {
         "id": "more_rpg_classes:water_splash",
         "preset": "impact",
-        "count": 18,
-        "speed": 0.12,
-        "scale": 1.05,
+        "count": 6,
+        "speed": 0.08,
+        "scale": 0.7,
         "motion": "burst",
-        "requires_mod": "more_rpg_classes"
-      },
-      {
-        "id": "more_rpg_classes:bubble",
-        "preset": "cloud",
-        "count": 12,
-        "speed": 0.05,
-        "scale": 0.95,
-        "motion": "ascend",
-        "requires_mod": "more_rpg_classes"
+        "requires_mod": "more_rpg_classes",
+        "scale_to": 0.5,
+        "opacity": 0.68,
+        "glow": false,
+        "fade_out_hold": 0.12,
+        "color": "#7BC8D1"
       }
     ],
     "sounds": [
       {
         "id": "more_rpg_classes:water_release_1",
-        "volume": 0.42,
+        "volume": 0.32,
         "pitch": 0.9,
         "requires_mod": "more_rpg_classes"
       }
@@ -94,8 +87,8 @@
     "mrpg": {
       "preset": "mrpg_lib:preset/swirl",
       "radius": 1.2,
-      "intensity": 0.5,
-      "color": "77DDFF",
+      "intensity": 0.2,
+      "color": "7BC8D1",
       "duration": 8,
       "attach": false
     }
@@ -106,37 +99,37 @@
         "id": "more_rpg_classes:water_circle",
         "preset": "ground",
         "count": 1,
-        "scale": 1.85,
-        "opacity": 0.72,
-        "fade_out_hold": 0.2,
+        "scale": 0.45,
+        "opacity": 0.48,
+        "fade_out_hold": 0.12,
         "attached_to_ground": true,
-        "requires_mod": "more_rpg_classes"
+        "requires_mod": "more_rpg_classes",
+        "scale_to": 0.5,
+        "speed": 0.03,
+        "glow": false,
+        "color": "#7BC8D1"
       },
       {
         "id": "more_rpg_classes:water_mist",
         "preset": "cloud",
-        "count": 10,
+        "count": 3,
         "speed": 0.025,
-        "scale": 0.82,
+        "scale": 0.45,
         "motion": "float",
-        "requires_mod": "more_rpg_classes"
-      },
-      {
-        "id": "more_rpg_classes:bubble",
-        "preset": "cloud",
-        "count": 7,
-        "speed": 0.035,
-        "scale": 0.75,
-        "motion": "ascend",
-        "requires_mod": "more_rpg_classes"
+        "requires_mod": "more_rpg_classes",
+        "scale_to": 0.5,
+        "opacity": 0.48,
+        "glow": false,
+        "fade_out_hold": 0.12,
+        "color": "#7BC8D1"
       }
     ],
     "sounds": [],
     "mrpg": {
       "preset": "mrpg_lib:preset/aura",
-      "radius": 0.65,
-      "intensity": 0.18,
-      "color": "77DDFF",
+      "radius": 0.55,
+      "intensity": 0.1,
+      "color": "7BC8D1",
       "duration": 4,
       "attach": true
     }
@@ -146,11 +139,16 @@
       {
         "id": "more_rpg_classes:water_heal",
         "preset": "casting",
-        "count": 12,
+        "count": 6,
         "speed": 0.055,
-        "scale": 0.95,
+        "scale": 0.7,
         "motion": "ascend",
-        "requires_mod": "more_rpg_classes"
+        "requires_mod": "more_rpg_classes",
+        "scale_to": 0.5,
+        "opacity": 0.68,
+        "glow": false,
+        "fade_out_hold": 0.12,
+        "color": "#7BC8D1"
       },
       {
         "id": "spell_engine:magic_star",
@@ -158,18 +156,20 @@
         "count": 6,
         "speed": 0.045,
         "scale": 0.7,
-        "color": "#A8F4FF",
-        "opacity": 0.75,
-        "glow": true,
-        "motion": "float"
+        "color": "#7BC8D1",
+        "opacity": 0.68,
+        "glow": false,
+        "motion": "float",
+        "scale_to": 0.5,
+        "fade_out_hold": 0.12
       }
     ],
     "sounds": [],
     "mrpg": {
-      "preset": "mrpg_lib:preset/burst",
+      "preset": "mrpg_lib:preset/swirl",
       "radius": 1.2,
-      "intensity": 0.5,
-      "color": "A8F4FF",
+      "intensity": 0.2,
+      "color": "7BC8D1",
       "duration": 8,
       "attach": false
     }
@@ -180,51 +180,42 @@
         "id": "more_rpg_classes:water_circle",
         "preset": "ground",
         "count": 1,
-        "scale": 2.8,
-        "scale_to": 1.15,
-        "opacity": 0.9,
-        "fade_out_hold": 0.18,
-        "requires_mod": "more_rpg_classes"
+        "scale": 0.7,
+        "scale_to": 0.65,
+        "opacity": 0.68,
+        "fade_out_hold": 0.12,
+        "requires_mod": "more_rpg_classes",
+        "speed": 0.03,
+        "glow": false,
+        "color": "#7BC8D1"
       },
       {
         "id": "more_rpg_classes:big_splash",
         "preset": "placed",
         "count": 1,
-        "scale": 1.4,
-        "requires_mod": "more_rpg_classes"
-      },
-      {
-        "id": "more_rpg_classes:water_heal",
-        "preset": "impact",
-        "count": 26,
-        "speed": 0.13,
-        "scale": 1.1,
-        "motion": "burst",
-        "requires_mod": "more_rpg_classes"
-      },
-      {
-        "id": "more_rpg_classes:bubble",
-        "preset": "impact",
-        "count": 18,
-        "speed": 0.09,
-        "scale": 0.9,
-        "motion": "ascend",
-        "requires_mod": "more_rpg_classes"
+        "scale": 0.7,
+        "requires_mod": "more_rpg_classes",
+        "scale_to": 0.5,
+        "opacity": 0.68,
+        "speed": 0.03,
+        "glow": false,
+        "fade_out_hold": 0.12,
+        "color": "#7BC8D1"
       }
     ],
     "sounds": [
       {
         "id": "more_rpg_classes:water_release_2",
-        "volume": 0.38,
+        "volume": 0.32,
         "pitch": 1.06,
         "requires_mod": "more_rpg_classes"
       }
     ],
     "mrpg": {
       "preset": "mrpg_lib:preset/shockwave",
-      "radius": 2.2,
-      "intensity": 0.5,
-      "color": "77DDFF",
+      "radius": 1.25,
+      "intensity": 0.2,
+      "color": "7BC8D1",
       "duration": 8,
       "attach": false
     }
@@ -235,28 +226,28 @@
         "id": "more_rpg_classes:water_circle",
         "preset": "ground",
         "count": 1,
-        "scale": 1.15,
-        "opacity": 0.78,
-        "fade_out_hold": 0.16,
-        "requires_mod": "more_rpg_classes"
+        "scale": 0.7,
+        "opacity": 0.68,
+        "fade_out_hold": 0.12,
+        "requires_mod": "more_rpg_classes",
+        "scale_to": 0.5,
+        "speed": 0.03,
+        "glow": false,
+        "color": "#7BC8D1"
       },
       {
         "id": "more_rpg_classes:water_splash",
         "preset": "impact",
-        "count": 14,
-        "speed": 0.12,
-        "scale": 0.95,
+        "count": 6,
+        "speed": 0.08,
+        "scale": 0.7,
         "motion": "burst",
-        "requires_mod": "more_rpg_classes"
-      },
-      {
-        "id": "more_rpg_classes:bubble",
-        "preset": "cloud",
-        "count": 9,
-        "speed": 0.04,
-        "scale": 0.8,
-        "motion": "ascend",
-        "requires_mod": "more_rpg_classes"
+        "requires_mod": "more_rpg_classes",
+        "scale_to": 0.5,
+        "opacity": 0.68,
+        "glow": false,
+        "fade_out_hold": 0.12,
+        "color": "#7BC8D1"
       }
     ],
     "sounds": [
@@ -268,10 +259,10 @@
       }
     ],
     "mrpg": {
-      "preset": "mrpg_lib:preset/cloud",
+      "preset": "mrpg_lib:preset/swirl",
       "radius": 1.2,
-      "intensity": 0.5,
-      "color": "77DDFF",
+      "intensity": 0.2,
+      "color": "7BC8D1",
       "duration": 8,
       "attach": false
     }

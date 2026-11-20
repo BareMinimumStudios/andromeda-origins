@@ -47,7 +47,7 @@
           "command": "playsound andromeda_origins:ability.nereid.convalescing_aura player @a[distance=0.1..40] ~ ~ ~ 0.35 1.0 0"
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:glow"
           },
@@ -62,7 +62,7 @@
           "offset_y": 1
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:nautilus"
           },
@@ -109,7 +109,7 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:nautilus"
           },
@@ -150,7 +150,7 @@
                     "change": 1
                   },
                   {
-                    "type": "origins:spawn_particles",
+                    "type": "andromeda_origins:refined_particles",
                     "particle": {
                       "type": "minecraft:flash"
                     },
@@ -344,7 +344,7 @@
                     }
                   },
                   {
-                    "type": "origins:spawn_particles",
+                    "type": "andromeda_origins:refined_particles",
                     "particle": {
                       "type": "minecraft:bubble"
                     },
@@ -359,7 +359,7 @@
                     "offset_y": 1
                   },
                   {
-                    "type": "origins:spawn_particles",
+                    "type": "andromeda_origins:refined_particles",
                     "particle": {
                       "type": "minecraft:nautilus"
                     },
@@ -374,7 +374,7 @@
                     "offset_y": 1
                   },
                   {
-                    "type": "origins:spawn_particles",
+                    "type": "andromeda_origins:refined_particles",
                     "particle": {
                       "type": "minecraft:glow"
                     },
@@ -389,7 +389,7 @@
                     "offset_y": 1
                   },
                   {
-                    "type": "origins:spawn_particles",
+                    "type": "andromeda_origins:refined_particles",
                     "particle": {
                       "type": "minecraft:splash"
                     },

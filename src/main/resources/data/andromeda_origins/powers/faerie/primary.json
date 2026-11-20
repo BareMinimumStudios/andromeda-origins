@@ -45,7 +45,7 @@
           }
         },
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "andromeda_origins:ability.faerie.dust_depleted",
           "volume": 0.75,
           "pitch": 1.0
@@ -85,7 +85,7 @@
         "type": "origins:and",
         "actions": [
           {
-            "type": "origins:play_sound",
+            "type": "andromeda_origins:refined_sound",
             "sound": "andromeda_origins:ability.faerie.fae_chime",
             "volume": 0.55,
             "pitch": 1.0
@@ -171,13 +171,13 @@
                     "change": -1
                   },
                   {
-                    "type": "origins:play_sound",
+                    "type": "andromeda_origins:refined_sound",
                     "sound": "minecraft:entity.parrot.fly",
                     "volume": 2,
                     "pitch": 0.8
                   },
                   {
-                    "type": "origins:play_sound",
+                    "type": "andromeda_origins:refined_sound",
                     "sound": "minecraft:block.amethyst_cluster.hit",
                     "volume": 0.6,
                     "pitch": 1.6
@@ -187,7 +187,7 @@
                     "event": "faerie.flutter"
                   },
                   {
-                    "type": "origins:spawn_particles",
+                    "type": "andromeda_origins:refined_particles",
                     "particle": {
                       "type": "minecraft:end_rod"
                     },
@@ -202,7 +202,7 @@
                     "offset_y": 0.8
                   },
                   {
-                    "type": "origins:spawn_particles",
+                    "type": "andromeda_origins:refined_particles",
                     "particle": {
                       "type": "minecraft:glow"
                     },
@@ -217,7 +217,7 @@
                     "offset_y": 0.8
                   },
                   {
-                    "type": "origins:spawn_particles",
+                    "type": "andromeda_origins:refined_particles",
                     "particle": {
                       "type": "minecraft:wax_on"
                     },

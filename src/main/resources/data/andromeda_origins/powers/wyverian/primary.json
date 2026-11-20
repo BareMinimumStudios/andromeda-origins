@@ -35,7 +35,7 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:flash"
           },
@@ -50,7 +50,7 @@
           "offset_y": 0.35
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:flame"
           },
@@ -65,7 +65,7 @@
           "offset_y": 0.35
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:lava"
           },
@@ -91,7 +91,7 @@
           "operation": "set"
         },
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "minecraft:entity.wither.shoot",
           "volume": 0.4,
           "pitch": 0.6
@@ -294,7 +294,7 @@
         "type": "origins:and",
         "actions": [
           {
-            "type": "origins:play_sound",
+            "type": "andromeda_origins:refined_sound",
             "sound": "andromeda_origins:ability.wyverian.roar",
             "volume": 1.1,
             "pitch": 1.0
@@ -376,13 +376,13 @@
                           "change": -1
                         },
                         {
-                          "type": "origins:play_sound",
+                          "type": "andromeda_origins:refined_sound",
                           "sound": "minecraft:block.candle.extinguish",
                           "volume": 4,
                           "pitch": 0.5
                         },
                         {
-                          "type": "origins:spawn_particles",
+                          "type": "andromeda_origins:refined_particles",
                           "particle": {
                             "type": "minecraft:smoke"
                           },
@@ -397,7 +397,7 @@
                           }
                         },
                         {
-                          "type": "origins:spawn_particles",
+                          "type": "andromeda_origins:refined_particles",
                           "particle": {
                             "type": "minecraft:flame"
                           },
@@ -436,7 +436,7 @@
                 "command_along_ray_only_on_hit": false
               },
               {
-                "type": "origins:spawn_particles",
+                "type": "andromeda_origins:refined_particles",
                 "particle": {
                   "type": "minecraft:small_flame"
                 },
@@ -464,7 +464,7 @@
             "type": "origins:and",
             "actions": [
               {
-                "type": "origins:spawn_particles",
+                "type": "andromeda_origins:refined_particles",
                 "particle": {
                   "type": "minecraft:smoke"
                 },
@@ -479,7 +479,7 @@
                 "offset_y": 0.25
               },
               {
-                "type": "origins:spawn_particles",
+                "type": "andromeda_origins:refined_particles",
                 "particle": {
                   "type": "minecraft:flame"
                 },
@@ -567,7 +567,7 @@
                 "change": 1
               },
               {
-                "type": "origins:spawn_particles",
+                "type": "andromeda_origins:refined_particles",
                 "particle": {
                   "type": "minecraft:small_flame"
                 },

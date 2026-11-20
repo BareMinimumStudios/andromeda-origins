@@ -11,6 +11,8 @@ import net.minecraft.resources.ResourceLocation
 @RootConfig
 class DawnbreakerVisualConfig : Config(ResourceLocation.parse("andromeda_origins:dawnbreaker_visuals")) {
     enum class Intensity { LOW, STANDARD, STRONG }
+    var originContours = ValidatedBoolean(true)
+    var contourDetail = ValidatedEnum(andromeda.origins.compat.OriginFxStyle.Quality.CINEMATIC)
     var afterimages = ValidatedBoolean(true)
     var impactFrames = ValidatedBoolean(false)
     var intensity = ValidatedEnum(Intensity.LOW)

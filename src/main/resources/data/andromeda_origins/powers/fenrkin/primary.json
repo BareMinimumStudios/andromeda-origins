@@ -21,7 +21,7 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "andromeda_origins:ability.fenrkin.on_the_hunt_howl",
           "volume": 1.0,
           "pitch": 1.0
@@ -47,7 +47,7 @@
           "source": "minecraft:buff"
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:cloud"
           },
@@ -62,7 +62,7 @@
           "offset_y": 0.2
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:crit"
           },
@@ -77,7 +77,7 @@
           "offset_y": 1
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:sweep_attack"
           },
@@ -92,7 +92,7 @@
           "offset_y": 0.9
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:smoke"
           },
@@ -171,7 +171,7 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:cloud"
           },
@@ -186,7 +186,7 @@
           "offset_y": 0.8
         },
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "minecraft:entity.sniffer.scenting",
           "volume": 1,
           "pitch": 1.3

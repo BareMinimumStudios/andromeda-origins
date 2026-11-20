@@ -39,7 +39,7 @@
                 "type": "origins:and",
                 "actions": [
                   {
-                    "type": "origins:play_sound",
+                    "type": "andromeda_origins:refined_sound",
                     "sound": "block.enchantment_table.use",
                     "volume": 1,
                     "pitch": 0.7
@@ -64,7 +64,7 @@
                     "effect": "minecraft:darkness"
                   },
                   {
-                    "type": "origins:spawn_particles",
+                    "type": "andromeda_origins:refined_particles",
                     "particle": {
                       "type": "minecraft:glow"
                     },
@@ -79,7 +79,7 @@
                     "offset_y": 1
                   },
                   {
-                    "type": "origins:spawn_particles",
+                    "type": "andromeda_origins:refined_particles",
                     "particle": {
                       "type": "minecraft:end_rod"
                     },
@@ -94,7 +94,7 @@
                     "offset_y": 1
                   },
                   {
-                    "type": "origins:spawn_particles",
+                    "type": "andromeda_origins:refined_particles",
                     "particle": {
                       "type": "minecraft:enchanted_hit"
                     },
@@ -122,7 +122,7 @@
                 "type": "origins:and",
                 "actions": [
                   {
-                    "type": "origins:play_sound",
+                    "type": "andromeda_origins:refined_sound",
                     "sound": "block.beacon.deactivate",
                     "volume": 1,
                     "pitch": 2
@@ -139,7 +139,7 @@
                     "change": -1
                   },
                   {
-                    "type": "origins:spawn_particles",
+                    "type": "andromeda_origins:refined_particles",
                     "particle": {
                       "type": "minecraft:poof"
                     },
@@ -154,7 +154,7 @@
                     "offset_y": 1
                   },
                   {
-                    "type": "origins:spawn_particles",
+                    "type": "andromeda_origins:refined_particles",
                     "particle": {
                       "type": "minecraft:enchanted_hit"
                     },

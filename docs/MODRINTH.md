@@ -61,9 +61,17 @@ Champion variants are hidden from normal selection. Operators can assign one wit
 
 **Dawnbreaker** is a separate command-only Origin; Champion Gorgon keeps its original kit. Dawnbreaker combines a golden-jade aura, group petrification, safe banishment and a conjured light bow with three Dawn Chorus stages. Assign it with `/origin set <player> origins:origin andromeda_origins:dawnbreaker`. Bind Presence, Begone, Measured Step, Kneel, Stillwater Guard (Hold) and Seraph’s Draw (Hold) in Controls. Measured Step is a safe short blink; Transference no longer has a charge/recharge wait. Kneel grounds nearby enemies; Stillwater suspends and redirects incoming arrows, snowballs and eggs. Petrification gains a rising gold-seamed stone transition. Wings breathe, fold on Step and flare with bow release. Guard freezes shots at their interception points and releases a simultaneous high-speed volley, with an active-only count indicator. Minimal/Standard/Cinematic presets and individual Fzzy switches control the presentation. Optional Afterimages adds a brief gold departure silhouette. Original gold/black impact frames require both the server switch and local opt-in; use `/andromedaorigins_visuals` to set local preferences, intensity and duration. They never pause gameplay. The bow, Chorus HUD and bow sounds use installed Simply Swords’ Dawnquiver rendering. Abilities and radiant/stone visuals have independent switches under **Champion Origins → Dawnbreaker** in Fzzy Config.
 
+## Visual presentation
+
+Every standard and Champion Origin shares the **Shared Origin presentation** settings in Fzzy Config. **Minimal** keeps essential motifs, **Standard** adds restrained complementary detail, and **Cinematic** uses smoother finite effects and geometry without raising the Standard burst limits. Finite family-specific ribbon/contour effects replace the default library billboard bursts. They scale with the caster and have bounded lifetimes and per-view limits. Per-entity budgets reduce stacked sound/particle spam; optional libraries retain the same family palettes and bundled effects remain available without them. Reduced cosmetic flashes are enabled by default. Gameplay values, targeting and ability timings are unchanged.
+
+Use `/andromedaorigins_visuals` for a local contour opt-out and maximum detail preference.
+
+Dawnbreaker's opt-in impact frames use filled gold/black eclipse, pressure and rupture compositions instead of spokes. Local intensity and duration remain available through `/andromedaorigins_visuals`.
+
 ## Optional integrations
 
-**Your installed mods can change how abilities look and sound.** Andromeda includes its own sounds and base particle effects. [Spell Engine](https://modrinth.com/mod/spell-engine) adds enhanced particle layers, and [More RPG Library](https://modrinth.com/mod/more-rpg-library) supplies additional particle and sound assets. Install both libraries for the full enhanced layer. These are optional enhancements: missing or unsupported assets are skipped while the bundled effects continue. Cosmetic layers do not change ability damage, cooldowns or resource costs.
+**Your installed mods can change how abilities look and sound.** The refined contour compositions, bundled sounds and vanilla-particle cues work without extra effect libraries. [Spell Engine](https://modrinth.com/mod/spell-engine) and [More RPG Library](https://modrinth.com/mod/more-rpg-library) provide optional sound assets and the restrained library-particle fallback, available when refined contours are disabled or unavailable. Resource packs can customize supported sound events and effect palettes. Cosmetic layers do not change ability damage, cooldowns or resource costs.
 
 | Optional mod | What it adds or connects |
 | --- | --- |

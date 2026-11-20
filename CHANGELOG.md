@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.85] - 2026-11-19
+
+- Add bounded client-rendered silk arcs, currents, soul wisps, ripples and family-specific ribbon compositions as the default enhanced layer, with optional-library fallbacks. Scale and interpolate attached effects with the caster; avoid opaque billboard clouds.
+- Refine the presentation of every standard and Champion Origin plus Dawnbreaker: lean family palettes, fewer complementary layers, small particles and shorter finite effects. Add shared Minimal/Standard/Cinematic quality controls and bounded per-entity cosmetic budgets; Cinematic adds smoother detail without increasing burst limits.
+- Replace line-based Dawnbreaker impact frames with filled gold/black eclipse, pressure and rupture compositions for Step, Guard and confirmed bow hits. Preserve independent server switches and client opt-in, intensity and duration.
+- Route bundled sound and particle actions through native-codec cosmetic wrappers, retaining gameplay actions, resource costs, timers and targeting. Reduce repeating sound overlap, forced-distance particles, dense sphere emissions and Veil clouds. Keep essential marks, web/petrification overlays and aquatic feedback.
+- Default cosmetic lightning to a compact light cue with a reduced-flash switch. Update the reviewed Selkie cosmetic baseline only after verifying that all power mechanics remain identical.
+
 ## [1.4.84] - 2026-11-15
 
 - Add optional Afterimages compositing for a short gold Measured Step departure silhouette, preserving the bundled outline without the optional mod. Add original caster-only gold/black impact frames for Step, Guard’s first capture/volley release and confirmed light-arrow damage. Provide independent server switches and local Fzzy preferences via `/andromedaorigins_visuals`, including opt-in, intensity and duration; impact frames default off, are rate-limited and never pause gameplay. No cooldown, damage or teleport-range changes.

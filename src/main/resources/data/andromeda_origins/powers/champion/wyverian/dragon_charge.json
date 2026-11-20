@@ -42,7 +42,7 @@
                   "type": "origins:and",
                   "actions": [
                     {
-                      "type": "origins:spawn_particles",
+                      "type": "andromeda_origins:refined_particles",
                       "particle": {
                         "type": "minecraft:dragon_breath"
                       },

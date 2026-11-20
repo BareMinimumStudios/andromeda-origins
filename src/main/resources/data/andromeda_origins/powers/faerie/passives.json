@@ -465,7 +465,7 @@
           ]
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:flash"
           },
@@ -479,7 +479,7 @@
           }
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:end_rod"
           },
@@ -501,13 +501,13 @@
           "effect": "slow_falling"
         },
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "minecraft:block.amethyst_block.chime",
           "volume": 2,
           "pitch": 0.5
         },
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "minecraft:entity.parrot.fly",
           "volume": 2,
           "pitch": 0.8

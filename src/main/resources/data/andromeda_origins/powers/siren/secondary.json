@@ -17,7 +17,7 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "andromeda_origins:ability.siren.shrieking_wail",
           "volume": 1.0,
           "pitch": 1.0
@@ -43,13 +43,13 @@
           }
         },
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "minecraft:block.amethyst_cluster.hit",
           "volume": 0.9,
           "pitch": 0.5
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:sonic_boom"
           },
@@ -64,7 +64,7 @@
           "offset_y": 1
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:note"
           },
@@ -79,7 +79,7 @@
           "offset_y": 1
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:glow"
           },
@@ -94,7 +94,7 @@
           "offset_y": 1
         },
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "minecraft:block.sculk_shrieker.shriek",
           "volume": 1,
           "pitch": 0.8

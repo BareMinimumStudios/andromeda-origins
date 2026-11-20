@@ -177,13 +177,13 @@
           "operation": "set"
         },
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "minecraft:entity.wolf.shake",
           "volume": 1,
           "pitch": 1.6
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:falling_water"
           },

@@ -6,19 +6,19 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "minecraft:entity.enderman.teleport",
           "volume": 1,
           "pitch": 1.5
         },
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "minecraft:block.amethyst_cluster.break",
           "volume": 1,
           "pitch": 1.3
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:flash"
           },
@@ -32,7 +32,7 @@
           }
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:end_rod"
           },

@@ -21,6 +21,13 @@ import java.util.LinkedHashSet
 class AndromedaGameplayConfig : me.fzzyhmstrs.fzzy_config.config.Config(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(AndromedaOrigins.MOD_ID, "gameplay")) {
     @me.fzzyhmstrs.fzzy_config.annotations.Comment("Standard Andromeda Origins. Open an Origin to configure its availability, powers, diets, and weaknesses. Changes apply immediately; no restart is normally required.")
     var standardOrigins: StandardOriginsSection = StandardOriginsSection()
+    @me.fzzyhmstrs.fzzy_config.annotations.Comment("Shared presentation for every standard/Champion Origin. Cinematic adds smoother persistence, not larger particle clouds. Gameplay is unaffected.")
+    var visuals = SharedVisualsSection()
+    class SharedVisualsSection : me.fzzyhmstrs.fzzy_config.config.ConfigSection() {
+        var quality = me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedEnum(andromeda.origins.compat.OriginFxStyle.Quality.STANDARD)
+        var refinedContours = me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean(true)
+        var reducedFlashes = me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean(true)
+    }
 
     @me.fzzyhmstrs.fzzy_config.annotations.Comment("Champion variants. Champion-only infrastructure such as cooldown acceleration is intentionally not exposed as a toggle.")
     var championOrigins: ChampionOriginsSection = ChampionOriginsSection()

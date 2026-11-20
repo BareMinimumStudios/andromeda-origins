@@ -41,7 +41,7 @@
                 "operation": "set"
               },
               {
-                "type": "origins:spawn_particles",
+                "type": "andromeda_origins:refined_particles",
                 "particle": {
                   "type": "minecraft:spit"
                 },
@@ -56,7 +56,7 @@
                 }
               },
               {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.spider.ambient",
                 "volume": 1,
                 "pitch": 0.2
@@ -71,7 +71,7 @@
                 "source": "minecraft:state"
               },
               {
-                "type": "origins:spawn_particles",
+                "type": "andromeda_origins:refined_particles",
                 "particle": {
                   "type": "minecraft:enchanted_hit"
                 },
@@ -126,13 +126,13 @@
                   "operation": "set"
                 },
                 {
-                  "type": "origins:play_sound",
+                  "type": "andromeda_origins:refined_sound",
                   "sound": "minecraft:entity.llama.spit",
                   "volume": 2,
                   "pitch": 1.5
                 },
                 {
-                  "type": "origins:play_sound",
+                  "type": "andromeda_origins:refined_sound",
                   "sound": "item.armor.equip_leather",
                   "volume": 2,
                   "pitch": 0.7
@@ -142,7 +142,7 @@
                   "event": "arachne.eightfold_grapple"
                 },
                 {
-                  "type": "origins:spawn_particles",
+                  "type": "andromeda_origins:refined_particles",
                   "particle": {
                     "type": "minecraft:cloud"
                   },

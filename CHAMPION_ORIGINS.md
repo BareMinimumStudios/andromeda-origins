@@ -136,3 +136,10 @@ Gaze and Transference keep per-caster contributions. Disabling one caster releas
 Installing Afterimages on a client enables its native transparent compositing for a gold silhouette at Measured Step’s departure point, fading over 200 ms. The bundled outline remains the fallback. No global player trails or resource-pack overrides are installed. Other Origins and normal movement are unaffected.
 
 Server switches under Champion Origins → Dawnbreaker control Afterimages compatibility, the impact-frame master switch (off by default), and Step/Guard/bow events separately. Each player opens `/andromedaorigins_visuals` for local Afterimages preferences, impact-frame opt-in (off by default), Low/Standard/Strong intensity and 35–140 ms duration. Original angular gold/black graphics only appear for the caster, with a 300 ms retrigger limit. They do not lock the camera, freeze time, affect cooldowns or require the unrelated Impact Frames mod. Bow frames require confirmed damage rather than mere projectile contact. Temporary visuals clear on disconnect, world change or death.
+
+
+### Shared presentation — 1.4.85
+
+All 27 Origins are covered by the shared Fzzy presentation policy, including standard and Champion variants. Minimal reduces density; Standard and Cinematic share the same particle burst ceiling. Cinematic increases finite animation smoothness/detail rather than cloud size. Thirteen family palettes cover all 112 enhanced events, with at most two complementary particle layers and one sound layer per event. Bundled native-codec sound and burst actions use per-entity cosmetic budgets, preserving conditions, positioning, directed particles and all gameplay/resource logic. Essential mark, web, petrification and aquatic cues remain.
+
+Dawnbreaker impact frames now use original filled eclipse (Step), opposing pressure crescents (Guard), and a four-lobed rupture (confirmed bow hit). No radial spokes or extra camera effects are used. Screen effects remain opt-in and bounded.

@@ -997,7 +997,7 @@
                     "change": -1
                   },
                   {
-                    "type": "origins:spawn_particles",
+                    "type": "andromeda_origins:refined_particles",
                     "particle": {
                       "type": "minecraft:soul"
                     },
@@ -1012,7 +1012,7 @@
                     "offset_y": 1
                   },
                   {
-                    "type": "origins:spawn_particles",
+                    "type": "andromeda_origins:refined_particles",
                     "particle": {
                       "type": "minecraft:sculk_soul"
                     },
@@ -1027,7 +1027,7 @@
                     "offset_y": 1
                   },
                   {
-                    "type": "origins:spawn_particles",
+                    "type": "andromeda_origins:refined_particles",
                     "particle": {
                       "type": "minecraft:reverse_portal"
                     },

@@ -41,7 +41,7 @@
           "source": "minecraft:state"
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:witch"
           },
@@ -56,7 +56,7 @@
           "offset_y": 1
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:end_rod"
           },
@@ -71,7 +71,7 @@
           "offset_y": 1
         },
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "andromeda_origins:ability.faerie.fae_chime",
           "volume": 0.8,
           "pitch": 1.05
@@ -115,7 +115,7 @@
           }
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:wax_on"
           },
@@ -168,13 +168,13 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "minecraft:block.amethyst_cluster.hit",
           "volume": 0.7,
           "pitch": 1.4
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:glow"
           },
@@ -189,7 +189,7 @@
           "offset_y": 1
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:end_rod"
           },

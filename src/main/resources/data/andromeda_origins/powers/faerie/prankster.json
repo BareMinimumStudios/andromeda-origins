@@ -27,11 +27,11 @@
                 "type": "origins:sneaking"
               },
               "if_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:ambient.underwater.enter"
               },
               "else_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:block.bubble_column.whirlpool_inside"
               }
             },
@@ -77,11 +77,11 @@
                 "type": "origins:sneaking"
               },
               "if_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.warden.nearby_closest"
               },
               "else_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:block.sculk_shrieker.shriek"
               }
             },
@@ -127,11 +127,11 @@
                 "type": "origins:sneaking"
               },
               "if_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.skeleton.ambient"
               },
               "else_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.skeleton.step"
               }
             },
@@ -177,11 +177,11 @@
                 "type": "origins:sneaking"
               },
               "if_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.stray.ambient"
               },
               "else_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.stray.step"
               }
             },
@@ -227,11 +227,11 @@
                 "type": "origins:sneaking"
               },
               "if_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.drowned.ambient"
               },
               "else_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.drowned.swim"
               }
             },
@@ -277,11 +277,11 @@
                 "type": "origins:sneaking"
               },
               "if_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.wither_skeleton.ambient"
               },
               "else_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.wither_skeleton.step"
               }
             },
@@ -327,11 +327,11 @@
                 "type": "origins:sneaking"
               },
               "if_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.cow.ambient"
               },
               "else_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.cow.step"
               }
             },
@@ -377,11 +377,11 @@
                 "type": "origins:sneaking"
               },
               "if_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.strider.ambient"
               },
               "else_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.strider.step"
               }
             },
@@ -427,11 +427,11 @@
                 "type": "origins:sneaking"
               },
               "if_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.blaze.ambient"
               },
               "else_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.blaze.shoot"
               }
             },
@@ -477,11 +477,11 @@
                 "type": "origins:sneaking"
               },
               "if_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.puffer_fish.blow_out"
               },
               "else_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.puffer_fish.blow_up"
               }
             },
@@ -527,11 +527,11 @@
                 "type": "origins:sneaking"
               },
               "if_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.creeper.primed"
               },
               "else_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.creeper.hurt"
               }
             },
@@ -577,11 +577,11 @@
                 "type": "origins:sneaking"
               },
               "if_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.zombie.ambient"
               },
               "else_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.zombie.step"
               }
             },
@@ -627,11 +627,11 @@
                 "type": "origins:sneaking"
               },
               "if_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.spider.ambient"
               },
               "else_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.spider.step"
               }
             },
@@ -677,11 +677,11 @@
                 "type": "origins:sneaking"
               },
               "if_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.breeze.charge"
               },
               "else_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.breeze.shoot"
               }
             },
@@ -727,11 +727,11 @@
                 "type": "origins:sneaking"
               },
               "if_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.phantom.swoop"
               },
               "else_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.phantom.flap"
               }
             },
@@ -777,11 +777,11 @@
                 "type": "origins:sneaking"
               },
               "if_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.shulker.ambient"
               },
               "else_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.shulker.open"
               }
             },
@@ -827,11 +827,11 @@
                 "type": "origins:sneaking"
               },
               "if_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.enderman.ambient"
               },
               "else_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.enderman.teleport"
               }
             },
@@ -877,11 +877,11 @@
                 "type": "origins:sneaking"
               },
               "if_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.axolotl.idle_air"
               },
               "else_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:entity.axolotl.swim"
               }
             },
@@ -927,11 +927,11 @@
                 "type": "origins:sneaking"
               },
               "if_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:block.amethyst_cluster.break"
               },
               "else_action": {
-                "type": "origins:play_sound",
+                "type": "andromeda_origins:refined_sound",
                 "sound": "minecraft:block.trial_spawner.spawn_item"
               }
             },

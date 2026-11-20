@@ -35,7 +35,7 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:flash"
           },
@@ -50,7 +50,7 @@
           "offset_y": 0.35
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:dragon_breath"
           },
@@ -65,7 +65,7 @@
           "offset_y": 0.35
         },
         {
-          "type": "origins:spawn_particles",
+          "type": "andromeda_origins:refined_particles",
           "particle": {
             "type": "minecraft:portal"
           },
@@ -91,7 +91,7 @@
           "operation": "set"
         },
         {
-          "type": "origins:play_sound",
+          "type": "andromeda_origins:refined_sound",
           "sound": "minecraft:entity.ender_dragon.shoot",
           "volume": 0.85,
           "pitch": 0.9
@@ -304,7 +304,7 @@
         "type": "origins:and",
         "actions": [
           {
-            "type": "origins:play_sound",
+            "type": "andromeda_origins:refined_sound",
             "sound": "andromeda_origins:ability.wyverian.roar",
             "volume": 1.1,
             "pitch": 1.0
@@ -386,13 +386,13 @@
                           "change": -1
                         },
                         {
-                          "type": "origins:play_sound",
+                          "type": "andromeda_origins:refined_sound",
                           "sound": "minecraft:entity.ender_dragon.shoot",
                           "volume": 0.22,
                           "pitch": 1.45
                         },
                         {
-                          "type": "origins:spawn_particles",
+                          "type": "andromeda_origins:refined_particles",
                           "particle": {
                             "type": "minecraft:portal"
                           },
@@ -407,7 +407,7 @@
                           }
                         },
                         {
-                          "type": "origins:spawn_particles",
+                          "type": "andromeda_origins:refined_particles",
                           "particle": {
                             "type": "minecraft:dragon_breath"
                           },
@@ -457,7 +457,7 @@
                 "operation": "remove"
               },
               {
-                "type": "origins:spawn_particles",
+                "type": "andromeda_origins:refined_particles",
                 "particle": {
                   "type": "minecraft:dragon_breath"
                 },
@@ -485,7 +485,7 @@
             "type": "origins:and",
             "actions": [
               {
-                "type": "origins:spawn_particles",
+                "type": "andromeda_origins:refined_particles",
                 "particle": {
                   "type": "minecraft:portal"
                 },
@@ -500,7 +500,7 @@
                 "offset_y": 0.35
               },
               {
-                "type": "origins:spawn_particles",
+                "type": "andromeda_origins:refined_particles",
                 "particle": {
                   "type": "minecraft:dragon_breath"
                 },
@@ -588,7 +588,7 @@
                 "change": 1
               },
               {
-                "type": "origins:spawn_particles",
+                "type": "andromeda_origins:refined_particles",
                 "particle": {
                   "type": "minecraft:dragon_breath"
                 },

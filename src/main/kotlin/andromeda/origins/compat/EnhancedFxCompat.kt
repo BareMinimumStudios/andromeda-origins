@@ -61,15 +61,17 @@ object EnhancedFxCompat {
             return false
         }
 
+        if (!OriginFxStyle.event(entity, event)) return true
         val definition: EventDefinition? = EnhancedFxDefinitions.get(event)
         if (definition == null) {
             EnhancedFxCompat.warnOnce("event:" + event, "Enhanced FX event '{}' is not defined; bundled fallback FX will continue.", event)
             return false
         }
 
-        val nativeParticles = EnhancedFxConfig.particles() && definition.mrpg?.let {
+        val contours = EnhancedFxConfig.particles() && OriginContourBridge.play(entity, event, position, definition)
+        val nativeParticles = contours || (EnhancedFxConfig.particles() && definition.mrpg?.let {
             MrpgFxBridge.play(entity.level() as net.minecraft.server.level.ServerLevel, position ?: entity.position(), it, entity, position == null)
-        } == true
+        } == true)
         if (EnhancedFxConfig.particles() && !nativeParticles && EnhancedFxCompat.spellEngineLoaded) {
             val particles: kotlin.collections.MutableList<EnhancedFxDefinitions.ParticleDefinition> = definition.particles.stream()
             .filter { p: EnhancedFxDefinitions.ParticleDefinition -> EnhancedFxCompat.requirementPresent(p.requiresMod)}
@@ -83,7 +85,7 @@ object EnhancedFxCompat {
             val x: kotlin.Double = if (position != null) position.x else entity.getX()
             val y: kotlin.Double = if (position != null) position.y else entity.getY()
             val z: kotlin.Double = if (position != null) position.z else entity.getZ()
-            for (sound in definition.sounds) {
+            for (sound in definition.sounds.take(1)) {
                 if (EnhancedFxCompat.requirementPresent(sound.requiresMod)) {
                     EnhancedFxCompat.playSound(entity, x, y, z, sound)
                 }
@@ -119,6 +121,7 @@ object EnhancedFxCompat {
             EnhancedFxCompat.warnOnce("sound:" + definition.id, "Invalid enhanced sound '{}'; skipping optional sound layer.", definition.id)
             return
         }
+        if (!OriginFxStyle.sound(entity, id.toString() + ":" + definition.pitch)) return
         val sound = (if (net.minecraft.core.registries.BuiltInRegistries.SOUND_EVENT.containsKey(id)) {
             net.minecraft.core.registries.BuiltInRegistries.SOUND_EVENT.get(id)
         } else if (definition.resourcePack) {
@@ -133,7 +136,7 @@ object EnhancedFxCompat {
         x, y, z,
         sound,
         net.minecraft.sounds.SoundSource.PLAYERS,
-        definition.volume.coerceIn(0f, 4f),
+        OriginFxStyle.volume(definition.volume),
         definition.pitch.coerceIn(0.5f, 2f)
         )
     }
@@ -240,7 +243,9 @@ object EnhancedFxCompat {
             }
             try {
                 val effects: kotlin.collections.MutableList<kotlin.Any> = java.util.ArrayList<kotlin.Any>(specs.size)
-                for (spec in specs) {
+                for (original in specs.take(if (OriginFxStyle.quality() == OriginFxStyle.Quality.MINIMAL) 1 else 2)) {
+                    val count = OriginFxStyle.particles(entity, original.count.toInt()) ?: continue
+                    val spec = original.copy(count = count.toFloat(), scale = original.scale.coerceIn(.05f,.7f), scaleTo = original.scaleTo.coerceIn(.05f,.75f), scaleVariance = original.scaleVariance.coerceIn(0f,.1f), opacity = original.opacity.coerceIn(0f,.68f))
                     val id: net.minecraft.resources.ResourceLocation? = effectId(spec.id)
                     if (id == null || !net.minecraft.core.registries.BuiltInRegistries.PARTICLE_TYPE.containsKey(id)) {
                         EnhancedFxCompat.warnOnce("particle:" + spec.id,
