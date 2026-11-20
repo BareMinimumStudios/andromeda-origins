@@ -17,12 +17,32 @@ import kotlin.math.*
 object SovereignVisuals {
     private fun id(s: String) = ResourceLocation.parse("andromeda_origins:dawnbreaker/$s")
     private fun read(e: LivingEntity, path: String) = PowerContainer.of(e)?.let { PowerResources.read(it, id(path)).orElse(0.0) } ?: 0.0
+    private data class StoneFade(val until: Float, val progress: Double)
+    private val stones = java.util.WeakHashMap<LivingEntity, StoneFade>()
+    fun renderHud(g: net.minecraft.client.gui.GuiGraphics) {
+        val mc = net.minecraft.client.Minecraft.getInstance(); val player = mc.player ?: return
+        if (mc.options.hideGui || player.isSpectator || !andromeda.origins.compat.DawnbreakerPresentation.settings().guardHud.get()) return
+        val c = PowerContainer.of(player) ?: return
+        if (!c.hasPower(id("stillwater")) || c.isSuppressed(id("stillwater")) || read(player, "stillwater_active") <= 0 || read(player, "presentation_hud") <= 0) return
+        val count = read(player, "stillwater_count").toInt().coerceIn(0, 8)
+        val text = "Stillwater · $count/8"; val width = mc.font.width(text)
+        val x = minOf(g.guiWidth() - width - 8, g.guiWidth() / 2 + 104); val y = g.guiHeight() - 46
+        g.fill(x - 4, y - 3, x + width + 4, y + 14, 0xb014141b.toInt())
+        g.drawString(mc.font, text, x, y, 0xffffd078.toInt(), true)
+        g.fill(x, y + 11, x + width, y + 12, 0xff50452c.toInt())
+        g.fill(x, y + 11, x + width * count / 8, y + 12, 0xffffca62.toInt())
+    }
     fun render(e: LivingEntity, x: Double, y: Double, z: Double, delta: Float, pose: PoseStack, buffers: MultiBufferSource) {
         val c = PowerContainer.of(e) ?: return
         val guard = read(e, "stillwater_active") > 0 && read(e, "stillwater_radiance") > 0
         val stone = c.hasPower(id("helper/stone")) && read(e, "helper/stone_gradual") > 0
+        val age = e.tickCount + delta
+        if (stone) stones[e] = StoneFade(age + 8, (read(e, "helper/stone_progress") / 40).coerceIn(0.0, 1.0))
+        else if (c.hasPower(id("helper/stone")) || c.hasPower(id("helper/ophidianed"))) stones.remove(e)
+        val fading = stones[e]?.takeIf { !stone && age < it.until }
+        if (!stone && fading == null) stones.remove(e)
         val kneeling = c.hasPower(id("helper/kneeling")) && read(e, "helper/kneeling_radiance") > 0
-        if (!guard && !stone && !kneeling) return
+        if (!guard && !stone && fading == null && !kneeling) return
         pose.pushPose(); pose.translate(x, y, z)
         val v = buffers.getBuffer(RenderType.debugQuads())
         if (guard) {
@@ -35,8 +55,9 @@ object SovereignVisuals {
             for (i in 0 until count) {
                 val centre = andromeda.origins.compat.DawnbreakerLayout.guardSlot(i)
                 val phase = (e.tickCount + delta) * .012 + i * .3
-                for (j in 0 until 24) {
-                    val t = j * PI / 12 + phase; val u = (j + 1) * PI / 12 + phase
+                val segments = when (andromeda.origins.compat.DawnbreakerPresentation.tier(e)) { 0 -> 12; 2 -> 32; else -> 24 }
+                for (j in 0 until segments) {
+                    val t = j * 2 * PI / segments + phase; val u = (j + 1) * 2 * PI / segments + phase
                     beam(v, m, centre.add(cos(t) * .28, sin(t) * .28, 0.0), centre.add(cos(u) * .28, sin(u) * .28, 0.0), .025, .85f)
                 }
                 for (axis in listOf(Vec3(.43, 0.0, 0.0), Vec3(0.0, .43, 0.0))) beam(v, m, centre.subtract(axis), centre.add(axis), .025, .9f)
@@ -58,8 +79,9 @@ object SovereignVisuals {
                 beam(v, m, Vec3(cos(a) * radius, .035, sin(a) * radius), Vec3(cos(b) * radius, .035, sin(b) * radius), .018, (lease / 12).coerceIn(0.0, .7).toFloat())
             }
         }
-        if (stone) {
-            val progress = ((read(e, "helper/stone_progress") + delta) / 40).coerceIn(0.0, 1.0)
+        if (stone || fading != null) {
+            val stoneAlpha = if (stone) 1f else ((fading!!.until - age) / 8).coerceIn(0f, 1f)
+            val progress = if (stone) ((read(e, "helper/stone_progress") + delta) / 40).coerceIn(0.0, 1.0) else fading!!.progress
             val height = e.bbHeight * progress; val w = (e.bbWidth * .56).toDouble()
             // Three rising mineral bands, with branching gold seams instead of overlapping body quads.
             for (band in 0..1) {
@@ -70,11 +92,13 @@ object SovereignVisuals {
                     beam(v, m, Vec3(cos(a) * w, h, sin(a) * w), Vec3(cos(b) * w, h, sin(b) * w), .015 - band * .003, if (band == 0) .8f else .26f)
                 }
             }
-            for (i in 0..7) {
-                val a = i * PI / 4; val foot = Vec3(cos(a) * w, .06 + (i % 3) * .13, sin(a) * w)
-                val mid = Vec3(cos(a + .13) * w, height * (.30 + (i % 3) * .16), sin(a + .13) * w)
-                val top = Vec3(cos(a - .1) * w, height, sin(a - .1) * w)
-                beam(v, m, foot, mid, .009, .48f); beam(v, m, mid, top, .009, .48f)
+            val seams = if (andromeda.origins.compat.DawnbreakerPresentation.tier(e) == 0) 4 else 8
+            fun radius(t: Double) = w * when { t < .4 -> .72; t < .75 -> 1.0; else -> .78 }
+            for (i in 0 until seams) {
+                val a = i * 2 * PI / seams; val foot = Vec3(cos(a) * radius(.1), .06 + (i % 3) * .13, sin(a) * radius(.1))
+                val mid = Vec3(cos(a + .13) * radius(.5), height * (.30 + (i % 3) * .16), sin(a + .13) * radius(.5))
+                val top = Vec3(cos(a - .1) * radius(progress), height, sin(a - .1) * radius(progress))
+                beam(v, m, foot, mid, .009, .48f * stoneAlpha); beam(v, m, mid, top, .009, .48f * stoneAlpha)
             }
         }
         pose.popPose()

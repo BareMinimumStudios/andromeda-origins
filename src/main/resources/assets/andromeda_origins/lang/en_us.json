@@ -409,5 +409,13 @@
   "andromeda_origins.gameplay.championOrigins.dawnbreaker.gradualPetrification": "Gradual Petrification",
   "andromeda_origins.gameplay.championOrigins.dawnbreaker.gradualPetrification.desc": "Animate the stone appearance rising from the feet. Disable for immediate tint.",
   "andromeda_origins.gameplay.championOrigins.dawnbreaker.measuredStep": "Measured Step",
-  "andromeda_origins.gameplay.championOrigins.dawnbreaker.measuredStep.desc": "Enable the safe, cooldown-free short blink."
+  "andromeda_origins.gameplay.championOrigins.dawnbreaker.measuredStep.desc": "Enable the safe, cooldown-free short blink.",
+  "andromeda_origins.gameplay.championOrigins.dawnbreaker.presentationPreset": "Visual intensity",
+  "andromeda_origins.gameplay.championOrigins.dawnbreaker.presentationPreset.desc": "Minimal, Standard or Cinematic. Changes detail and sound intensity only; gameplay stays identical.",
+  "andromeda_origins.gameplay.championOrigins.dawnbreaker.animatedWings": "Animated wings",
+  "andromeda_origins.gameplay.championOrigins.dawnbreaker.animatedWings.desc": "Fold on Measured Step, flare with the light bow and breathe slowly during Presence.",
+  "andromeda_origins.gameplay.championOrigins.dawnbreaker.guardHud": "Stillwater indicator",
+  "andromeda_origins.gameplay.championOrigins.dawnbreaker.guardHud.desc": "Show the captured projectile count while Guard is active.",
+  "andromeda_origins.gameplay.championOrigins.dawnbreaker.successMessages": "Successful-cast messages",
+  "andromeda_origins.gameplay.championOrigins.dawnbreaker.successMessages.desc": "Show successful-cast action-bar messages. Failed casts still explain why they were blocked."
 }

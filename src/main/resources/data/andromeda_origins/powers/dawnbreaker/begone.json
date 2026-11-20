@@ -30,13 +30,13 @@
     {
       "type": "origins:tooltip",
       "sprite": "origins:textures/gui/badge/toggle.png",
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png",
       "text": [
         "Activate with ",
         {
           "keybind": "key.andromeda_origins.begone"
         }
-      ],
-      "fallback": "andromeda_origins:textures/gui/badge/fallback.png"
+      ]
     }
   ]
 }

@@ -24,20 +24,41 @@ object DawnbreakerVisuals {
         if (entity.isInvisibleTo(viewer) || viewer.distanceToSqr(entity) > 48.0 * 48.0) return
         val c = PowerContainer.of(entity) ?: return
         SovereignVisuals.render(entity, x, y, z, delta, pose, buffers)
-        if (!c.hasPower(feature) || c.isSuppressed(feature) || PowerResources.read(c, active).orElse(0.0) <= 0 ||
-            PowerResources.read(c, visible).orElse(0.0) <= 0) { appearing.remove(entity); return }
+        fun resource(path: String) = PowerResources.read(c, ResourceLocation.parse("andromeda_origins:dawnbreaker/" + path)).orElse(0.0)
+        val stepping = resource("presentation_step").toFloat() / 10f
+        val shot = resource("presentation_shot").toFloat() / 12f
+        val drawing = resource("bow_draw").toFloat() / 60f
+        val presence = PowerResources.read(c, active).orElse(0.0)
+        val radiance = PowerResources.read(c, visible).orElse(0.0) > 0 || resource("bow_radiance") > 0
+        if (!c.hasPower(feature) || c.isSuppressed(feature) || !radiance ||
+            (presence <= 0 && stepping <= 0 && shot <= 0 && drawing <= 0)) { appearing.remove(entity); return }
         val age = entity.tickCount + delta
         val started = appearing.getOrPut(entity) { age }
-        val remaining = PowerResources.read(c, active).orElse(0.0).toFloat()
+        val remaining = max(presence.toFloat(), max(stepping * 20, max(shot * 20, drawing * 20)))
         val fade = min(1f, min((age - started) / 10f, remaining / 12f)).coerceIn(0f, 1f)
         if (fade <= 0) return
         pose.pushPose()
         pose.translate(x, y, z)
+        val vertices = buffers.getBuffer(RenderType.debugQuads())
+        if (stepping > 0 && resource("presentation_animation") > 0 && andromeda.origins.compat.DawnbreakerPresentation.settings().animatedWings.get()) {
+            pose.pushPose()
+            pose.translate(resource("presentation_step_x") - entity.x, resource("presentation_step_y") - entity.y, resource("presentation_step_z") - entity.z)
+            pose.mulPose(Axis.YP.rotationDegrees(-entity.yRot))
+            val ghostScale = (entity.bbHeight / 1.8f).coerceIn(.5f, 2f); pose.scale(ghostScale, ghostScale, ghostScale)
+            val ghost = pose.last().pose()
+            for (side in listOf(-1.0, 1.0)) line(vertices, ghost, side * .2, .1, side * .36, 1.7, .035, 255, 218, 135, stepping * .45f)
+            line(vertices, ghost, -.36, 1.7, .36, 1.7, .024, 255, 218, 135, stepping * .45f)
+            for (i in 0 until 16) {
+                val a = i * Math.PI / 8; val b = (i + 1) * Math.PI / 8
+                line(vertices, ghost, cos(a) * .13, 1.85 + sin(a) * .13, cos(b) * .13, 1.85 + sin(b) * .13,
+                    .018, 255, 218, 135, stepping * .4f)
+            }
+            pose.popPose()
+        }
         pose.mulPose(Axis.YP.rotationDegrees(-net.minecraft.util.Mth.rotLerp(delta, entity.yBodyRotO, entity.yBodyRot)))
         val scale = (entity.bbHeight / 1.8f).coerceIn(.65f, 1.6f)
         pose.scale(scale, scale, scale)
         pose.translate(0.0, 0.0, -.70)
-        val vertices = buffers.getBuffer(RenderType.debugQuads())
         val matrix = pose.last().pose()
         val breath = .94f + sin(age * .025f) * .06f
         // A broad amber annulus with separate ivory/gold edges; no additive washout in daylight.
@@ -49,14 +70,20 @@ object DawnbreakerVisuals {
             val start = phase + i * Math.PI * 2 / 3
             halo(vertices, matrix, .91, .928, start, start + 1.15, 255, 174, 45, fade * .55f)
         }
-        // Tapered feathers have filled surfaces, separated spines and angled banks for side views.
+        val animate = resource("presentation_animation") > 0 && andromeda.origins.compat.DawnbreakerPresentation.settings().animatedWings.get()
+        val fold = if (animate) stepping * stepping * (3 - 2 * stepping) else 0f
+        val flare = if (animate) sin(shot * Math.PI).toFloat() * .22f + drawing * .10f else 0f
+        val featherCount = when (andromeda.origins.compat.DawnbreakerPresentation.tier(entity)) { 0 -> 3; 2 -> 8; else -> 6 }
+        // Tapered feathers breathe, fold on Step and flare on bow release. Their roots stay behind the body.
         for (side in listOf(-1.0, 1.0)) {
             pose.pushPose(); pose.translate(0.0, 0.0, .16)
-            pose.mulPose(Axis.YP.rotationDegrees((side * 16).toFloat()))
-            for (f in 0..5) {
+            pose.mulPose(Axis.YP.rotationDegrees((side * (16 + fold * 58)).toFloat()))
+            pose.scale(1f - fold * .55f + flare, 1f + flare * .18f, 1f)
+            for (index in 0 until featherCount) {
+                val f = index * 5.0 / (featherCount - 1)
                 pose.pushPose(); pose.translate(0.0, 0.0, -f * .018)
                 val wing = pose.last().pose()
-                val sweep = sin(age * .018 + f * .18) * .025
+                val sweep = if (animate) sin(age * .025 + f * .25) * .065 else 0.0
                 val rootX = side * (.23 + f * .05)
                 val rootY = .92 + f * .14
                 val tipX = side * (2.45 - f * .12)
@@ -65,7 +92,7 @@ object DawnbreakerVisuals {
                 val midY = rootY + (tipY - rootY) * .58
                 val width = .13 + f * .012
                 quad(vertices, wing, listOf(rootX to rootY, midX to midY - width, tipX to tipY, midX to midY + width),
-                    255, 179, 43, fade * (.40f + f * .035f))
+                    255, 179, 43, fade * (.40f + f * .035f).toFloat())
                 line(vertices, wing, rootX, rootY, tipX, tipY, .019, 255, 242, 190, fade * .92f)
                 pose.popPose()
             }
@@ -103,12 +130,18 @@ object DawnbreakerVisuals {
         if (!c.hasPower(feature) || c.isSuppressed(feature) || PowerResources.read(c, ResourceLocation.parse("andromeda_origins:dawnbreaker/bow_radiance")).orElse(0.0) <= 0) return
         val client = Minecraft.getInstance()
         val type = net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.parse("simplyswords:dawnquiver_arrow"))
+        val distance = sqrt(x * x + y * y + z * z)
+        // Let the ordinary shaft remain visible at point-blank range without a screen-filling light mesh.
+        if (distance < 1.2) return
         val native = projectileVisuals[entity] ?: type?.create(entity.level())?.also { projectileVisuals[entity] = it }
         if (native != null && native.javaClass.simpleName == "DawnquiverArrowEntity") {
             native.setPos(entity.x, entity.y, entity.z)
             native.deltaMovement = entity.deltaMovement
             native.tickCount = entity.tickCount
-            client.entityRenderDispatcher.render(native, x, y, z, entity.yRot, 0f, pose, buffers, 15728880)
+            pose.pushPose(); pose.translate(x, y, z)
+            val size = (distance / 8.0).coerceIn(.18, 1.0).toFloat(); pose.scale(size, size, size)
+            client.entityRenderDispatcher.render(native, 0.0, 0.0, 0.0, entity.yRot, 0f, pose, buffers, 15728880)
+            pose.popPose()
             return
         }
         pose.pushPose(); pose.translate(x, y, z); pose.mulPose(Axis.YP.rotationDegrees(180 - entity.yRot)); pose.mulPose(Axis.XP.rotationDegrees(entity.xRot))

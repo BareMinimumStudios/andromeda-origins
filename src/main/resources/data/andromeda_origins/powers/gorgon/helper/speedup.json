@@ -48,11 +48,6 @@
       "z": 0.25
     },
     "offset_y": 1,
-    "frequency": 10,
-    "condition": {
-      "type": "origins:power",
-      "power": "andromeda_origins:dawnbreaker/secondary",
-      "inverted": true
-    }
+    "frequency": 10
   }
 }

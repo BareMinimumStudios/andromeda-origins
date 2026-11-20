@@ -25,5 +25,18 @@
     "hud_render": {
       "should_render": false
     }
-  }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "fallback": "andromeda_origins:textures/gui/badge/fallback.png",
+      "text": [
+        "Activate with ",
+        {
+          "keybind": "key.andromeda_origins.kneel"
+        }
+      ]
+    }
+  ]
 }

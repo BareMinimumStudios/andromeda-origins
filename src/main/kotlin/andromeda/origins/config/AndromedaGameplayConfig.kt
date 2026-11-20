@@ -340,6 +340,10 @@ class AndromedaGameplayConfig : me.fzzyhmstrs.fzzy_config.config.Config(net.mine
     }
 
     class DawnbreakerSection : OriginToggleSection() {
+        var presentationPreset = me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedEnum(andromeda.origins.compat.DawnbreakerPresentation.Preset.STANDARD)
+        var animatedWings = AndromedaGameplayConfig.Companion.enabled()
+        var guardHud = AndromedaGameplayConfig.Companion.enabled()
+        var successMessages = me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean(false)
         @me.fzzyhmstrs.fzzy_config.annotations.Comment("Enable Measured Step: a cooldown-free blink up to 16 blocks to safe visible solid ground.")
         var measuredStep: me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean = AndromedaGameplayConfig.Companion.enabled()
         @me.fzzyhmstrs.fzzy_config.annotations.Comment("Enable Kneel: a three-second grounding command within 12 blocks, with no cooldown.")

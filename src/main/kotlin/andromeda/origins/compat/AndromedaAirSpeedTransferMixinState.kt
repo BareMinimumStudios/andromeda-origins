@@ -7,7 +7,8 @@ internal object AndromedaAirSpeedTransferMixinState {
         AndromedaAirSpeedTransferMixinState.id("champion/arachne_passives"),
         AndromedaAirSpeedTransferMixinState.id("faerie/passives"),
         AndromedaAirSpeedTransferMixinState.id("champion/faerie_passives"),
-        AndromedaAirSpeedTransferMixinState.id("gorgon/helper/speedup")
+        AndromedaAirSpeedTransferMixinState.id("gorgon/helper/speedup"),
+        AndromedaAirSpeedTransferMixinState.id("dawnbreaker/helper/transference_boost")
         )
 
         fun id(path: kotlin.String): net.minecraft.resources.ResourceLocation {

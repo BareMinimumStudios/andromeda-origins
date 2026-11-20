@@ -3,9 +3,9 @@
   "hidden": true,
   "color": {
     "type": "origins:model_color",
-    "red": 0.58,
-    "green": 0.61,
-    "blue": 0.55,
+    "red": 0.66,
+    "green": 0.67,
+    "blue": 0.63,
     "alpha": 1,
     "condition": {
       "type": "origins:or",

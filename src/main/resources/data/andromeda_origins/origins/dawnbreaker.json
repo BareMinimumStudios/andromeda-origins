@@ -15,7 +15,8 @@
     "andromeda_origins:dawnbreaker/kneel",
     "andromeda_origins:dawnbreaker/stillwater",
     "andromeda_origins:dawnbreaker/gradual_petrification",
-    "andromeda_origins:dawnbreaker/measured_step"
+    "andromeda_origins:dawnbreaker/measured_step",
+    "andromeda_origins:dawnbreaker/presentation"
   ],
   "icon": {
     "id": "andromeda_origins:gorgon_icon"

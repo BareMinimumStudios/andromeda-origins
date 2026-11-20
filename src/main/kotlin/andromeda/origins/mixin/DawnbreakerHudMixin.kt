@@ -6,5 +6,6 @@ abstract class DawnbreakerHudMixin {
     private fun renderChorus(graphics: net.minecraft.client.gui.GuiGraphics, delta: net.minecraft.client.DeltaTracker,
         ci: org.spongepowered.asm.mixin.injection.callback.CallbackInfo) {
         andromeda.origins.client.DawnquiverClientCompat.renderHud(graphics, delta)
+        andromeda.origins.client.SovereignVisuals.renderHud(graphics)
     }
 }

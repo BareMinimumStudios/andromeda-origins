@@ -61,7 +61,19 @@ object Dawnbreaker {
     private val gold = DustParticleOptions(Vector3f(1f, .78f, .23f), .55f)
     private val jade = DustParticleOptions(Vector3f(.32f, .81f, .55f), .45f)
     private val affected = mutableSetOf<LivingEntity>()
-    private val statues = mutableMapOf<LivingEntity, MutableSet<UUID>>()
+    private data class Statue(val owners: MutableMap<UUID, Double>, var lastTimer: Double)
+    private val statues = mutableMapOf<LivingEntity, Statue>()
+    private fun syncStatue(target: LivingEntity, state: Statue) {
+        val timer = resource(target, petrify, "remove")
+        val elapsed = (state.lastTimer - timer).coerceAtLeast(0.0)
+        if (elapsed > 0) state.owners.replaceAll { _, remaining -> (remaining - elapsed).coerceAtLeast(0.0) }
+        state.owners.entries.removeIf { it.value <= 0 }
+        state.lastTimer = timer
+    }
+    private fun publishStatue(target: LivingEntity, state: Statue) {
+        val timer = state.owners.values.maxOrNull() ?: 0.0
+        set(target, petrify, "remove", timer); state.lastTimer = timer
+    }
     private data class Pending(val target: UUID, val level: ServerLevel, val from: Vec3, val expires: Int)
     private val pending = mutableMapOf<UUID, Pending>()
 
@@ -105,6 +117,9 @@ object Dawnbreaker {
         }
     }
     private fun say(player: ServerPlayer, text: String) = player.displayClientMessage(Component.literal(text), true)
+    internal fun success(player: ServerPlayer, text: String) {
+        if (DawnbreakerPresentation.settings().successMessages.get()) say(player, text)
+    }
     private fun ally(actor: LivingEntity, target: LivingEntity): Boolean {
         if (actor === target) return true
         // Rank/nameplate teams may intentionally allow PvP; membership alone is not protection.
@@ -134,51 +149,22 @@ object Dawnbreaker {
         else -> "Gaze blocked: target is protected."
     }
     private fun measuredStep(player: ServerPlayer) {
-        if (!usable(player, id("dawnbreaker/measured_step")) || player.isPassenger || player.isVehicle) return
+        if (!usable(player, id("dawnbreaker/measured_step"))) return
+        if (player.isPassenger || player.isVehicle) { say(player, "Measured Step — dismount and release passengers first."); return }
         val level = player.serverLevel()
-        val eye = player.eyePosition
-        val look = player.lookAngle
-        fun loadedSpan(a: Vec3, b: Vec3): Boolean =
-            (floor(min(a.x, b.x)).toInt().shr(4)..floor(max(a.x, b.x)).toInt().shr(4)).all { x ->
-                (floor(min(a.z, b.z)).toInt().shr(4)..floor(max(a.z, b.z)).toInt().shr(4)).all { z -> level.chunkSource.getChunkNow(x, z) != null }
-            }
-        var available = 0.0
-        for (quarter in 1..64) {
-            val distance = quarter / 4.0
-            if (!loadedSpan(eye, eye.add(look.scale(distance)))) break
-            available = distance
-        }
-        val wall = level.clip(ClipContext(eye, eye.add(look.scale(available)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player))
-        val reach = min(available, eye.distanceTo(wall.location) - .55)
-        var landing: Vec3? = null
-        for (half in floor(reach * 2).toInt() downTo 3) {
-            val aim = eye.add(look.scale(half / 2.0))
-            for (drop in 0..3) {
-                val feet = BlockPos.containing(aim).below(drop)
-                if (level.chunkSource.getChunkNow(feet.x shr 4, feet.z shr 4) == null || !level.worldBorder.isWithinBounds(feet)) continue
-                val ground = level.getBlockState(feet.below())
-                if (!ground.isFaceSturdy(level, feet.below(), Direction.UP) || !ground.fluidState.isEmpty ||
-                    unsafeBlocks.any { ground.`is`(it) }) continue
-                val pos = Vec3(aim.x, feet.y.toDouble(), aim.z)
-                if (player.distanceToSqr(pos) < 1.0 || player.distanceToSqr(pos) > 256.0) continue
-                val box = player.boundingBox.move(pos.subtract(player.position()))
-                if (!loadedSpan(Vec3(box.minX, box.minY, box.minZ), Vec3(box.maxX, box.maxY, box.maxZ)) ||
-                    !level.worldBorder.isWithinBounds(box) || !level.noCollision(player, box) ||
-                    BlockPos.betweenClosed(BlockPos.containing(box.minX, box.minY, box.minZ), BlockPos.containing(box.maxX, box.maxY, box.maxZ)).any { !level.getFluidState(it).isEmpty || level.getBlockState(it).`is`(BlockTags.FIRE) || unsafeBlocks.any { block -> level.getBlockState(it).`is`(block) } }) continue
-                val sight = pos.add(0.0, player.eyeHeight.toDouble(), 0.0)
-                val hit = level.clip(ClipContext(eye, sight, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player))
-                if (eye.distanceToSqr(hit.location) + .01 < eye.distanceToSqr(sight)) continue
-                landing = pos; break
-            }
-            if (landing != null) break
-        }
-        val destination = landing ?: run { say(player, "Measured Step — no safe visible landing."); return }
+        val result = MeasuredStepLanding.find(player)
+        val destination = result.position ?: run { say(player, result.reason); return }
         val from = player.position()
         if (!player.teleportTo(level, destination.x, destination.y, destination.z, mutableSetOf<RelativeMovement>(), player.yRot, player.xRot)) return
         player.deltaMovement = Vec3.ZERO; player.fallDistance = 0f
+        set(player, id("dawnbreaker/presentation"), "step_x", from.x)
+        set(player, id("dawnbreaker/presentation"), "step_y", from.y)
+        set(player, id("dawnbreaker/presentation"), "step_z", from.z)
+        set(player, id("dawnbreaker/presentation"), "step", 10.0)
         if (radiant(player)) {
-            for (i in 0..12) {
-                val p = from.lerp(destination, i / 12.0).add(0.0, 1.0, 0.0)
+            val samples = DawnbreakerPresentation.particles(12)
+            for (i in 0..samples) {
+                val p = from.lerp(destination, i.toDouble() / samples).add(0.0, 1.0, 0.0)
                 level.sendParticles(gold, p.x, p.y, p.z, 1, .025, .06, .025, 0.0)
             }
         }
@@ -194,28 +180,22 @@ object Dawnbreaker {
             .filter { eye.distanceToSqr(it.second) <= eye.distanceToSqr(wall.location) }
             .minByOrNull { eye.distanceToSqr(it.second) }?.first
         if (target == null) { say(player, "Transference — look directly at an eligible target within 32 blocks."); return }
-        val speed = id("gorgon/helper/speedup")
-        val weakened = id("gorgon/helper/intimidated")
+        DawnbreakerTransference.apply(player, target)
         PowerContainerAttachment.getOrCreate(player)?.let { c ->
-            c.addPower(speed, ResourceLocation.parse("minecraft:buff")); set(player, speed, "remove", 15.0)
             val cue = id("gorgon/helper/intimidating")
             c.addPower(cue, ResourceLocation.parse("minecraft:state")); set(player, cue, "remove", 1.0)
             set(player, id("common/figura"), "2", 1.0); c.markDirty()
         }
-        PowerContainerAttachment.getOrCreate(target)?.let { c ->
-            val old = if (c.hasPower(weakened)) resource(target, weakened, "remove") else 0.0
-            c.addPower(weakened, ResourceLocation.parse("minecraft:debuff"))
-            set(target, weakened, "remove", (old + 15.0).coerceAtMost(60.0)); c.markDirty()
-        }
         if (radiant(player)) {
             val ray = target.eyePosition.subtract(eye)
-            for (i in 1..20) {
-                val at = eye.add(ray.scale(i / 20.0))
+            val samples = DawnbreakerPresentation.particles(20)
+            for (i in 1..samples) {
+                val at = eye.add(ray.scale(i.toDouble() / samples))
                 player.serverLevel().sendParticles(gold, at.x, at.y, at.z, 1, .015, .015, .015, 0.0)
             }
         }
         sound(player.serverLevel(), player.position(), net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_CHIME, .22f, .8f)
-        say(player, "Transference.")
+        success(player, "Transference.")
     }
     private fun castAura(player: ServerPlayer) {
         if (!usable(player, aura)) return
@@ -223,7 +203,7 @@ object Dawnbreaker {
         set(player, aura, "active", 400.0)
         set(player, aura, "cooldown", 0.0)
         if (!refreshing) sound(player.serverLevel(), player.position(), net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_RESONATE, .18f, .65f)
-        say(player, "Dawnbreaker’s Presence — 20 seconds")
+        success(player, "Dawnbreaker’s Presence — 20 seconds")
     }
     private fun castGaze(player: ServerPlayer) {
         if (!usable(player, gaze)) return
@@ -240,9 +220,11 @@ object Dawnbreaker {
         if (targets.isEmpty()) { say(player, gazeBlockReason(player, visibleTargets.firstOrNull())); return }
         for (target in targets) {
             val c = PowerContainerAttachment.getOrCreate(target) ?: continue
-            val old = if (c.hasPower(petrify)) resource(target, petrify, "remove") else 0.0
+            val state = statues.getOrPut(target) { Statue(mutableMapOf(), resource(target, petrify, "remove")) }
+            syncStatue(target, state)
+            state.owners[player.uuid] = ((state.owners[player.uuid] ?: 0.0) + 30.0).coerceAtMost(60.0)
             c.addPower(petrify, cc)
-            set(target, petrify, "remove", (old + 30.0).coerceAtMost(60.0))
+            publishStatue(target, state)
             if (owns(player, stoneAppearance)) {
                 val beginning = source !in c.sourcesOf(stone)
                 c.addPower(stone, source)
@@ -250,12 +232,11 @@ object Dawnbreaker {
                 set(target, stone, "gradual", if (owns(player, id("dawnbreaker/gradual_petrification"))) 1.0 else 0.0)
             }
             c.markDirty()
-            statues.getOrPut(target) { mutableSetOf() }.add(player.uuid)
             if (radiant(player)) shards(target)
         }
         sound(player.serverLevel(), player.position(), net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_RESONATE, .7f, .6f)
         ring(player, player.serverLevel(), player.position(), 2.0, 40)
-        say(player, "Sovereign Gaze — ${targets.size} petrified")
+        success(player, "Sovereign Gaze — ${targets.size} petrified")
     }
 
     private val lightBowAvailable by lazy {
@@ -278,7 +259,7 @@ object Dawnbreaker {
         set(player, bow, "display_draw", 0.0)
     }
     private fun tickBow(player: ServerPlayer) {
-        if (!usable(player, bow)) { if (player.uuid in held || resource(player, bow, "draw") > 0 || resource(player, bow, "afterglow") > 0) cancelBow(player); return }
+        if (!usable(player, bow)) { set(player, id("dawnbreaker/presentation"), "shot", 0.0); set(player, bow, "radiance", 0.0); if (player.uuid in held || resource(player, bow, "draw") > 0 || resource(player, bow, "afterglow") > 0) cancelBow(player); return }
         val visuals = if (radiant(player)) 1.0 else 0.0
         if (resource(player, bow, "radiance") != visuals) set(player, bow, "radiance", visuals)
         val last = held[player.uuid] ?: return
@@ -305,15 +286,16 @@ object Dawnbreaker {
             arrow.addTag("andromeda_dawn_chorus_$chorus")
             arrow.shootFromRotation(player, player.xRot, player.yRot, 0f, 3f, 0f)
             if (!player.serverLevel().addFreshEntity(arrow)) return
+            set(player, id("dawnbreaker/presentation"), "shot", 12.0)
             set(player, bow, "cooldown", 0.0)
             sound(player.serverLevel(), player.position(), net.minecraft.sounds.SoundEvents.ARROW_SHOOT, .65f, 1.3f)
             bowSound(player.serverLevel(), player.position(), "elemental_bow_holy_shoot_flyby_01", net.minecraft.sounds.SoundEvents.TRIDENT_THROW.value(), .65f, 1f)
             bowSound(player.serverLevel(), player.position(), "magic_bow_shoot_flyby_02", net.minecraft.sounds.SoundEvents.TRIDENT_THROW.value(), .8f, 1f)
             if (radiant(player)) {
-                MrpgFxBridge.play(player.serverLevel(), player.eyePosition.add(player.lookAngle), EnhancedFxDefinitions.MrpgDefinition("mrpg_lib:preset/cast", .65f, .45f, 0xffd878, 6), player, false)
-                player.serverLevel().sendParticles(ParticleTypes.FLASH, arrow.x, arrow.y, arrow.z, 1, 0.0, 0.0, 0.0, 0.0)
+                MrpgFxBridge.play(player.serverLevel(), player.eyePosition.add(player.lookAngle), EnhancedFxDefinitions.MrpgDefinition("mrpg_lib:preset/cast", .4f, .22f, 0xffd878, DawnbreakerPresentation.particles(3)), player, false)
+                player.serverLevel().sendParticles(ParticleTypes.END_ROD, arrow.x, arrow.y, arrow.z, 3, .035, .035, .035, .01)
             }
-            say(player, "Seraph’s Draw — ${chorus} Chorus released")
+            success(player, "Seraph’s Draw — ${chorus} Chorus released")
         }
     }
 
@@ -370,7 +352,7 @@ object Dawnbreaker {
                 if (victim is ServerPlayer && EnhancedFxConfig.enabled() && EnhancedFxConfig.sounds() &&
                     Platform.canReceiveCosmetic(victim, andromeda.origins.network.BanishmentHeartbeatPayload.TYPE.id()))
                     Platform.sendCosmetic(victim, andromeda.origins.network.BanishmentHeartbeatPayload.INSTANCE)
-                say(player, "Begone.")
+                success(player, "Begone.")
             }
         }
     }
@@ -400,7 +382,7 @@ object Dawnbreaker {
         bowSound(level, at, "elemental_bow_holy_shoot_impact_01", net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_BREAK, .55f, 1f)
         if (radiant(caster)) {
             level.sendParticles(ParticleTypes.END_ROD, at.x, at.y, at.z, 12, .18, .18, .18, .07)
-            MrpgFxBridge.play(level, at, EnhancedFxDefinitions.MrpgDefinition("mrpg_lib:preset/impact", .8f, .5f, 0xffd878, 6), caster, false)
+            MrpgFxBridge.play(level, at, EnhancedFxDefinitions.MrpgDefinition("mrpg_lib:preset/impact", .55f, .3f, 0xffd878, DawnbreakerPresentation.particles(4)), caster, false)
         }
     }
 
@@ -427,7 +409,7 @@ object Dawnbreaker {
         Platform.disconnect { handler, _ -> clear(handler.player) }
         Platform.respawn { old, player, _ -> clear(old); clear(player) }
         Platform.death { entity, _, _ -> if (entity is ServerPlayer) clear(entity); true }
-        Platform.serverStopped { affected.clear(); statues.clear(); pending.clear(); held.clear(); SovereignArts.stop() }
+        Platform.serverStopped { server -> affected.clear(); statues.clear(); pending.clear(); held.clear(); SovereignArts.stop(); DawnbreakerTransference.stop(server) }
         Platform.damage { entity, damage, _ ->
             val arrow = damage.directEntity
             val caster = damage.entity as? ServerPlayer
@@ -444,14 +426,26 @@ object Dawnbreaker {
         set(player, aura, "active", 0.0)
         cancelBow(player)
         SovereignArts.clear(player)
+        DawnbreakerTransference.clear(player)
+        PowerContainer.of(player)?.let { c ->
+            if (c.hasPower(id("dawnbreaker/secondary")) && !c.hasPower(id("gorgon/secondary"))) {
+                val legacy = id("gorgon/helper/speedup")
+                if (c.removePower(legacy, ResourceLocation.parse("minecraft:buff"))) {
+                    if (!c.hasPower(id("gorgon/helper/speedup_speed"))) AttributePower.purge(player, id("gorgon/helper/speedup_speed"))
+                    c.markDirty()
+                }
+            }
+        }
+        set(player, id("dawnbreaker/presentation"), "step", 0.0)
+        set(player, id("dawnbreaker/presentation"), "shot", 0.0)
         pending.remove(player.uuid)
-        remove(player, oppressed, source)
-        remove(player, stone, source)
-        affected.remove(player)
+        if (!player.isAlive || player !in affected) remove(player, oppressed, source)
+        if (!player.isAlive || player !in statues) remove(player, stone, source)
+        if (!player.isAlive) affected.remove(player)
         // A caster's logout/death/change must not leave their own statues behind.
-        for ((target, owners) in statues.toMap()) {
-            owners.remove(player.uuid)
-            if (owners.isEmpty()) releaseStatue(target)
+        for ((target, state) in statues.toMap()) {
+            syncStatue(target, state); state.owners.remove(player.uuid)
+            if (state.owners.isEmpty()) releaseStatue(target) else publishStatue(target, state)
         }
     }
     private fun remove(entity: LivingEntity, power: ResourceLocation, grant: ResourceLocation) {
@@ -471,14 +465,18 @@ object Dawnbreaker {
     }
     private fun tick(server: MinecraftServer) {
         SovereignArts.tick(server)
+        DawnbreakerTransference.tick(server)
         for ((owner, request) in pending.toMap()) if (server.tickCount >= request.expires) {
             pending.remove(owner); server.playerList.getPlayer(owner)?.let { say(it, "Landing search expired.") }
         }
-        for ((target, owners) in statues.toMap()) {
-            owners.removeIf { owner -> server.playerList.getPlayer(owner)?.let { owns(it, gaze) && it.level() === target.level() } != true }
+        for ((target, state) in statues.toMap()) {
+            syncStatue(target, state)
+            state.owners.keys.removeIf { owner -> server.playerList.getPlayer(owner)?.let { usable(it, gaze) && it.level() === target.level() } != true }
+            val owners = state.owners.keys
             val c = PowerContainer.of(target)
             if (owners.isEmpty() || !target.isAlive || target.isRemoved || c?.hasPower(petrify) != true) releaseStatue(target)
             else {
+                publishStatue(target, state)
                 if (owners.any { server.playerList.getPlayer(it)?.let { p -> owns(p, stoneAppearance) } == true }) {
                     val c = PowerContainer.of(target)
                     if (c != null) {
@@ -490,6 +488,10 @@ object Dawnbreaker {
         }
         val desired = mutableSetOf<LivingEntity>()
         for (caster in server.playerList.players) {
+            set(caster, id("dawnbreaker/presentation"), "tier", DawnbreakerPresentation.current().ordinal.toDouble())
+            set(caster, id("dawnbreaker/presentation"), "animation", if (DawnbreakerPresentation.settings().animatedWings.get()) 1.0 else 0.0)
+            set(caster, id("dawnbreaker/presentation"), "hud", if (DawnbreakerPresentation.settings().guardHud.get()) 1.0 else 0.0)
+            if (!owns(caster, id("dawnbreaker/measured_step"))) set(caster, id("dawnbreaker/presentation"), "step", 0.0)
             tickBow(caster)
             if (!usable(caster, aura)) {
                 if (resource(caster, aura, "active") > 0) set(caster, aura, "active", 0.0)
@@ -536,6 +538,6 @@ object Dawnbreaker {
     }
     private fun sound(level: ServerLevel, pos: Vec3, sound: net.minecraft.sounds.SoundEvent, volume: Float, pitch: Float) {
         if (EnhancedFxConfig.enabled() && EnhancedFxConfig.sounds())
-            level.playSound(null, pos.x, pos.y, pos.z, sound, net.minecraft.sounds.SoundSource.PLAYERS, volume, pitch)
+            level.playSound(null, pos.x, pos.y, pos.z, sound, net.minecraft.sounds.SoundSource.PLAYERS, volume * DawnbreakerPresentation.soundScale(), pitch)
     }
 }
