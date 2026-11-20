@@ -1,7 +1,7 @@
 {
   "type": "origins:multiple",
   "name": "Begone",
-  "description": "Silently banish the player or living mob you look at within 32 blocks approximately 500 blocks away from you, relative to their current position. No departure or arrival particles, public sound, or warning to the target; a successfully banished player alone hears a low heartbeat. Same dimension only; searches for a safe nearby landing within 8 blocks of the destination. No cooldown.",
+  "description": "Silently banish the player or living mob you look at within 32 blocks exactly 500 blocks away from you, relative to their current position. No departure or arrival particles, public sound, or warning to the target; after arrival, the target is told they have been banished and alone hears a low heartbeat; the caster sees Begone. Same dimension and height; teleports immediately without checking terrain, collisions or hazards. No cooldown.",
   "cooldown": {
     "type": "origins:resource",
     "min": 0,

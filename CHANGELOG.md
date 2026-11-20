@@ -2,6 +2,8 @@
 
 ## [1.4.85] - 2026-11-19
 
+- Make Begone immediately displace its player or living-mob target exactly 500 horizontal blocks at the same height. Remove the asynchronous safe-landing search, cancellation window and search/status text; keep silent endpoints and the recipient-only heartbeat. Restore the caster’s “Begone.” and the recipient’s post-arrival “You have been banished.” messages independently of optional success chatter. Add restrained Measured Step and Stillwater activation/first-capture/volley sounds, respecting the sound switch without looping wing or Guard audio.
+
 - Restore distinct core ability sounds without the shared optional-layer limiter swallowing them; provide native family sound fallbacks when optional libraries are absent. Render Measured Step departure silhouettes independently of arrival visibility, including first-person casters, with a readable 450 ms fade and a bundled fallback. Make grounded Step follow facing direction across terrain instead of shortening when looking down. Add clear expanding, sweeping and flowing motion to all family contours; animate visible Guard arc gaps, rotating accents and wing breathing without extra particle emitters.
 
 - Add bounded client-rendered silk arcs, currents, soul wisps, ripples and family-specific ribbon compositions as the default enhanced layer, with optional-library fallbacks. Scale and interpolate attached effects with the caster; avoid opaque billboard clouds.

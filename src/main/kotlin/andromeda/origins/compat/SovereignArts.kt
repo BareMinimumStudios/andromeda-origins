@@ -58,7 +58,10 @@ object SovereignArts {
     fun hold(player: ServerPlayer) {
         if (!Dawnbreaker.usable(player, guard)) return
         val now = player.server.tickCount
-        guards.getOrPut(player.uuid) { Guard(now, now) }.refreshed = now
+        guards.getOrPut(player.uuid) {
+            Dawnbreaker.abilitySound(player, net.minecraft.sounds.SoundEvents.BEACON_ACTIVATE, .2f, 1.6f)
+            Guard(now, now)
+        }.refreshed = now
     }
     private const val RECOVER_GRAVITY = "andromeda_stillwater_restore_gravity"
     fun isFrozen(projectile: Projectile): Boolean {
@@ -98,7 +101,10 @@ object SovereignArts {
     }
     private fun finish(player: ServerPlayer?, state: Guard, fire: Boolean) {
         if (fire && player != null) {
-            if (state.held.isNotEmpty()) DawnbreakerFx.cue(player, 2)
+            if (state.held.isNotEmpty()) {
+                DawnbreakerFx.cue(player, 2)
+                Dawnbreaker.abilitySound(player, net.minecraft.sounds.SoundEvents.TRIDENT_THROW.value(), .5f, 1.4f)
+            }
             val target = if (state.held.isNotEmpty()) aim(player) else player.eyePosition
             state.held.forEach { held -> releasing.add(Release(player.uuid, held, player.serverLevel(), player.server.tickCount, target)) }
         } else state.held.forEach(::restore)
@@ -163,7 +169,10 @@ object SovereignArts {
             for (p in player.serverLevel().getEntitiesOfClass(Projectile::class.java, player.boundingBox.inflate(6.0)) { eligible(it, player) }.sortedBy { it.distanceToSqr(player) }) {
                 if (state.held.size + releasing.count { it.caster == uuid } >= 8) break
                 if (!player.hasLineOfSight(p)) continue
-                if (state.held.isEmpty()) DawnbreakerFx.cue(player, 1)
+                if (state.held.isEmpty()) {
+                    DawnbreakerFx.cue(player, 1)
+                    Dawnbreaker.abilitySound(player, net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_CHIME, .35f, 1.4f)
+                }
                 state.held.add(Held(p, p.deltaMovement, p.owner, p.position())); frozen.add(p)
                 if (!p.isNoGravity) { p.addTag(RECOVER_GRAVITY); p.setNoGravity(true) }
             }

@@ -11,8 +11,6 @@ import dev.overgrown.apoli.power.PowerContainer
 import dev.overgrown.apoli.power.PowerResources
 import dev.overgrown.apoli.power.builtin.AttributePower
 import dev.overgrown.origins.component.PlayerOriginsAttachment
-import net.minecraft.core.BlockPos
-import net.minecraft.core.Direction
 import net.minecraft.core.particles.BlockParticleOption
 import net.minecraft.core.particles.DustParticleOptions
 import net.minecraft.core.particles.ParticleTypes
@@ -21,7 +19,6 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.MinecraftServer
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
-import net.minecraft.tags.BlockTags
 import net.minecraft.tags.TagKey
 import net.minecraft.core.registries.Registries
 import net.minecraft.world.entity.EquipmentSlot
@@ -31,12 +28,9 @@ import net.minecraft.world.entity.RelativeMovement
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.ClipContext
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.chunk.status.ChunkStatus
-import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.phys.Vec3
 import org.joml.Vector3f
 import java.util.UUID
-import java.util.concurrent.CompletableFuture
 import kotlin.math.*
 
 /** Champion-only casts. Persistent costs live in native resource powers; world mutation stays on the server. */
@@ -55,8 +49,6 @@ object Dawnbreaker {
     private val stone = id("dawnbreaker/helper/stone")
     private val petrify = id("dawnbreaker/helper/ophidianed")
     private val oppressed = id("dawnbreaker/helper/oppressed")
-    private val unsafeBlocks = listOf(Blocks.MAGMA_BLOCK, Blocks.CACTUS, Blocks.CAMPFIRE, Blocks.SOUL_CAMPFIRE,
-        Blocks.SWEET_BERRY_BUSH, Blocks.POWDER_SNOW, Blocks.WITHER_ROSE, Blocks.NETHER_PORTAL, Blocks.END_PORTAL, Blocks.END_GATEWAY)
     private val pumpkin = TagKey.create(Registries.ITEM, ResourceLocation.parse("origins:pumpkin_like/equipment"))
     private val gold = DustParticleOptions(Vector3f(1f, .78f, .23f), .25f)
     private val jade = DustParticleOptions(Vector3f(.32f, .81f, .55f), .22f)
@@ -74,8 +66,6 @@ object Dawnbreaker {
         val timer = state.owners.values.maxOrNull() ?: 0.0
         set(target, petrify, "remove", timer); state.lastTimer = timer
     }
-    private data class Pending(val target: UUID, val level: ServerLevel, val from: Vec3, val expires: Int)
-    private val pending = mutableMapOf<UUID, Pending>()
 
     fun registerActions() {
         ActionTypes.ENTITY.register(id("dawnbreaker"), object : ActionType<EntityCtx, String> {
@@ -157,6 +147,7 @@ object Dawnbreaker {
         val from = player.position()
         if (!player.teleportTo(level, destination.x, destination.y, destination.z, mutableSetOf<RelativeMovement>(), player.yRot, player.xRot)) return
         player.deltaMovement = Vec3.ZERO; player.fallDistance = 0f
+        sound(level, from, net.minecraft.sounds.SoundEvents.ENDERMAN_TELEPORT, .32f, 1.7f)
         DawnbreakerFx.cue(player, 0, from)
         set(player, id("dawnbreaker/presentation"), "step_x", from.x)
         set(player, id("dawnbreaker/presentation"), "step_y", from.y)
@@ -299,7 +290,7 @@ object Dawnbreaker {
     }
 
     private fun castBanish(player: ServerPlayer) {
-        if (!usable(player, begone) || player.uuid in pending) return
+        if (!usable(player, begone)) return
         set(player, begone, "cooldown", 0.0)
         val eye = player.eyePosition
         val end = eye.add(player.lookAngle.scale(32.0))
@@ -316,45 +307,23 @@ object Dawnbreaker {
         if (away.lengthSqr() < .0001) away = Vec3(0.0, 0.0, 1.0)
         val destination = target.position().add(away.normalize().scale(500.0))
         val level = player.serverLevel()
-        val columns = listOf(0 to 0, 4 to 0, -4 to 0, 0 to 4, 0 to -4, 8 to 0, -8 to 0, 0 to 8, 0 to -8, 8 to 8, 8 to -8, -8 to 8, -8 to -8)
-            .map { BlockPos(floor(destination.x).toInt() + it.first, 0, floor(destination.z).toInt() + it.second) }
-            .filter { level.worldBorder.isWithinBounds(it) }
-        if (columns.isEmpty() || pending.size >= 4) { say(player, "No safe destination is available; try again shortly."); return }
-        val request = Pending(target.uuid, level, target.position(), player.server.tickCount + 200)
-        pending[player.uuid] = request
-        say(player, "Seeking a safe landing…")
-        val chunks = columns.map { it.x shr 4 to (it.z shr 4) }.distinct().map { (x, z) ->
-            level.chunkSource.getChunkFuture(x, z, ChunkStatus.FULL, true)
+        // Exact displacement at the target's current height: no surface search, hazard test,
+        // alternative columns, warning, pending request or asynchronous cancellation.
+        val vehicle = target.vehicle
+        target.stopRiding()
+        if (!target.teleportTo(level, destination.x, destination.y, destination.z, mutableSetOf<RelativeMovement>(), target.yRot, target.xRot)) {
+            if (vehicle != null && !vehicle.isRemoved) target.startRiding(vehicle, true)
+            say(player, "Banishment failed."); return
         }
-        CompletableFuture.allOf(*chunks.toTypedArray()).whenComplete { _, error ->
-            player.server.execute {
-                if (pending[player.uuid] !== request) return@execute
-                pending.remove(player.uuid)
-                val victim = level.getEntity(request.target) as? LivingEntity
-                if (error != null || victim == null || !usable(player, begone) ||
-                    victim.level() !== level || player.serverLevel() !== level || !victim.isAlive || victim.isSpectator ||
-                    victim.distanceToSqr(request.from) > 16.0 || player.distanceToSqr(victim) > 36.0 * 36.0 || !player.hasLineOfSight(victim)) {
-                    say(player, "Banishment cancelled."); return@execute
-                }
-                val landing = columns.firstNotNullOfOrNull { safeLanding(level, victim, it) }
-                if (landing == null) { say(player, "No safe landing found."); return@execute }
-                val vehicle = victim.vehicle
-                victim.stopRiding()
-                if (!victim.teleportTo(level, landing.x, landing.y, landing.z, mutableSetOf<RelativeMovement>(), victim.yRot, victim.xRot)) {
-                    if (vehicle != null && !vehicle.isRemoved) victim.startRiding(vehicle, true)
-                    say(player, "Banishment failed."); return@execute
-                }
-                victim.deltaMovement = Vec3.ZERO
-                victim.fallDistance = 0f
-                set(player, begone, "cooldown", 0.0)
-                // Notify only the recipient. No world sound, particle dispatch or victim warning text.
-                if (victim is ServerPlayer && EnhancedFxConfig.enabled() && EnhancedFxConfig.sounds() &&
-                    Platform.canReceiveCosmetic(victim, andromeda.origins.network.BanishmentHeartbeatPayload.TYPE.id()))
-                    Platform.sendCosmetic(victim, andromeda.origins.network.BanishmentHeartbeatPayload.INSTANCE)
-                success(player, "Begone.")
-            }
-        }
+        target.deltaMovement = Vec3.ZERO
+        target.fallDistance = 0f
+        say(player, "Begone.")
+        if (target is ServerPlayer) target.sendSystemMessage(Component.literal("You have been banished."))
+        if (target is ServerPlayer && EnhancedFxConfig.enabled() && EnhancedFxConfig.sounds() &&
+            Platform.canReceiveCosmetic(target, andromeda.origins.network.BanishmentHeartbeatPayload.TYPE.id()))
+            Platform.sendCosmetic(target, andromeda.origins.network.BanishmentHeartbeatPayload.INSTANCE)
     }
+
     fun prepareLightArrowDamage(arrow: net.minecraft.world.entity.projectile.AbstractArrow) {
         if (arrow.level().isClientSide || "andromeda_dawn_light" !in arrow.tags) return
         val chorus = (1..3).firstOrNull { "andromeda_dawn_chorus_$it" in arrow.tags } ?: return
@@ -385,30 +354,12 @@ object Dawnbreaker {
         }
     }
 
-    private fun safeLanding(level: ServerLevel, victim: LivingEntity, column: BlockPos): Vec3? {
-        if (!level.hasChunk(column.x shr 4, column.z shr 4)) return null
-        val y = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, column.x, column.z)
-        if (y <= level.minBuildHeight || y + ceil(victim.bbHeight.toDouble()).toInt() >= level.maxBuildHeight ||
-            (level.dimensionType().hasCeiling() && y >= 125)) return null
-        val floor = BlockPos(column.x, y - 1, column.z)
-        val ground = level.getBlockState(floor)
-        if (!ground.isFaceSturdy(level, floor, Direction.UP) || !ground.fluidState.isEmpty) return null
-        for (dy in -1..ceil(victim.bbHeight.toDouble()).toInt()) {
-            val at = BlockPos(column.x, y + dy, column.z)
-            val state = level.getBlockState(at)
-            if (!state.fluidState.isEmpty || state.`is`(BlockTags.FIRE) || unsafeBlocks.any { state.`is`(it) }) return null
-        }
-        val pos = Vec3(column.x + .5, y.toDouble(), column.z + .5)
-        val box = victim.boundingBox.move(pos.subtract(victim.position()))
-        return if (level.worldBorder.isWithinBounds(box) && level.noCollision(victim, box)) pos else null
-    }
-
     fun register() {
         Platform.join { handler, _, _ -> clear(handler.player) }
         Platform.disconnect { handler, _ -> clear(handler.player) }
         Platform.respawn { old, player, _ -> clear(old); clear(player) }
         Platform.death { entity, _, _ -> if (entity is ServerPlayer) clear(entity); true }
-        Platform.serverStopped { server -> affected.clear(); statues.clear(); pending.clear(); held.clear(); SovereignArts.stop(); DawnbreakerTransference.stop(server) }
+        Platform.serverStopped { server -> affected.clear(); statues.clear(); held.clear(); SovereignArts.stop(); DawnbreakerTransference.stop(server) }
         Platform.damage { entity, damage, _ ->
             val arrow = damage.directEntity
             val caster = damage.entity as? ServerPlayer
@@ -437,7 +388,6 @@ object Dawnbreaker {
         }
         set(player, id("dawnbreaker/presentation"), "step", 0.0)
         set(player, id("dawnbreaker/presentation"), "shot", 0.0)
-        pending.remove(player.uuid)
         if (!player.isAlive || player !in affected) remove(player, oppressed, source)
         if (!player.isAlive || player !in statues) remove(player, stone, source)
         if (!player.isAlive) affected.remove(player)
@@ -465,9 +415,6 @@ object Dawnbreaker {
     private fun tick(server: MinecraftServer) {
         SovereignArts.tick(server)
         DawnbreakerTransference.tick(server)
-        for ((owner, request) in pending.toMap()) if (server.tickCount >= request.expires) {
-            pending.remove(owner); server.playerList.getPlayer(owner)?.let { say(it, "Landing search expired.") }
-        }
         for ((target, state) in statues.toMap()) {
             syncStatue(target, state)
             state.owners.keys.removeIf { owner -> server.playerList.getPlayer(owner)?.let { usable(it, gaze) && it.level() === target.level() } != true }
@@ -535,6 +482,8 @@ object Dawnbreaker {
         val registry = net.minecraft.core.registries.BuiltInRegistries.SOUND_EVENT
         sound(level, pos, if (registry.containsKey(key)) registry.get(key) ?: fallback else fallback, volume, pitch)
     }
+    internal fun abilitySound(player: ServerPlayer, cue: net.minecraft.sounds.SoundEvent, volume: Float, pitch: Float) =
+        sound(player.serverLevel(), player.position(), cue, volume, pitch)
     private fun sound(level: ServerLevel, pos: Vec3, sound: net.minecraft.sounds.SoundEvent, volume: Float, pitch: Float) {
         if (EnhancedFxConfig.enabled() && EnhancedFxConfig.sounds())
             level.playSound(null, pos.x, pos.y, pos.z, sound, net.minecraft.sounds.SoundSource.PLAYERS, volume * DawnbreakerPresentation.soundScale(), pitch)
