@@ -63,7 +63,7 @@ object DawnbreakerVisuals {
         val matrix = pose.last().pose()
         val breath = .94f + sin(age * .07f) * .08f
         // A broad amber annulus with separate ivory/gold edges; no additive washout in daylight.
-        halo(vertices, matrix, .72, .82, 0.0, Math.PI * 2, 224, 136, 22, fade * .25f)
+        halo(vertices, matrix, .72, .812, 0.0, Math.PI * 2, 224, 136, 22, fade * .25f)
         halo(vertices, matrix, .816, .834, 0.0, Math.PI * 2, 255, 199, 70, fade * .88f * breath)
         halo(vertices, matrix, .704, .716, 0.0, Math.PI * 2, 255, 239, 180, fade * .75f)
         val phase = age * .018
@@ -92,9 +92,15 @@ object DawnbreakerVisuals {
                 val midX = rootX + (tipX - rootX) * .58
                 val midY = rootY + (tipY - rootY) * .58
                 val width = .13 + f * .012
-                quad(vertices, wing, listOf(rootX to rootY, midX to midY - width, tipX to tipY, midX to midY + width),
-                    255, 179, 43, fade * (.40f + f * .035f).toFloat())
-                line(vertices, wing, rootX, rootY, tipX, tipY, .019, 255, 242, 190, fade * .92f)
+                // Partition the feather into disjoint fill bands and a bright centre.
+                // Rotating each concave band gives QUADS an interior triangulation diagonal.
+                // No brighter quad lies on top of the translucent feather plane.
+                val root = rootX to rootY; val tip = tipX to tipY
+                val lower = midX to midY - .0095; val upper = midX to midY + .0095
+                val fillAlpha = fade * (.40f + f * .035f).toFloat()
+                quad(vertices, wing, listOf(midX to midY - width, tip, lower, root), 255, 179, 43, fillAlpha)
+                quad(vertices, wing, listOf(upper, tip, midX to midY + width, root), 255, 179, 43, fillAlpha)
+                quad(vertices, wing, listOf(root, lower, tip, upper), 255, 242, 190, fade * .92f)
                 pose.popPose()
             }
             pose.popPose()

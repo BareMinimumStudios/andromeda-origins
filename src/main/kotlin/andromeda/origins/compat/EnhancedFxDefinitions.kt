@@ -81,7 +81,7 @@ object EnhancedFxDefinitions {
             EnhancedFxDefinitions.number(p, "scale_variance", 0f),
             EnhancedFxDefinitions.number(p, "scale_to", 1f),
             EnhancedFxDefinitions.number(p, "angle", 40f),
-            EnhancedFxDefinitions.number(p, "pre_travel", 0.15f),
+            EnhancedFxDefinitions.number(p, "pre_travel", if (EnhancedFxDefinitions.string(p, "preset", "impact") == "shockwave") .15f else 0f),
             EnhancedFxDefinitions.number(p, "degrees_per_tick", 16f),
             EnhancedFxDefinitions.number(p, "offset", 0f),
             EnhancedFxDefinitions.string(p, "motion", ""),
@@ -98,7 +98,8 @@ object EnhancedFxDefinitions {
             EnhancedFxDefinitions.bool(p, "collides", false),
             EnhancedFxDefinitions.bool(p, "attached", false),
             EnhancedFxDefinitions.bool(p, "attached_to_ground", false),
-            EnhancedFxDefinitions.string(p, "requires_mod", "")
+            EnhancedFxDefinitions.string(p, "requires_mod", ""),
+            EnhancedFxDefinitions.string(p, "render", "")
             ))
         }
 
@@ -193,7 +194,8 @@ object EnhancedFxDefinitions {
     val collides: kotlin.Boolean,
     val attached: kotlin.Boolean,
     val attachedToGround: kotlin.Boolean,
-    val requiresMod: kotlin.String
+    val requiresMod: kotlin.String,
+    val render: kotlin.String = ""
     ) {
     }
 

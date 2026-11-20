@@ -70,15 +70,22 @@
         "angle": 38,
         "motion": "burst",
         "requires_mod": "more_rpg_classes",
-        "opacity": 0.85
+        "opacity": 0.85,
+        "pre_travel": 0.75,
+        "render": "translucent"
       },
       {
         "id": "more_rpg_classes:wind_vacuum",
-        "preset": "placed",
+        "preset": "cone",
         "count": 1,
         "scale": 1.1,
         "requires_mod": "more_rpg_classes",
-        "opacity": 0.85
+        "opacity": 0.85,
+        "angle": 0,
+        "speed": 0.06,
+        "motion": "burst",
+        "pre_travel": 0.3,
+        "render": "translucent"
       },
       {
         "id": "spell_engine:magic_stripe",
@@ -90,7 +97,9 @@
         "color": "#E7F8FF",
         "opacity": 0.75,
         "glow": true,
-        "motion": "burst"
+        "motion": "burst",
+        "pre_travel": 1.15,
+        "render": "translucent"
       }
     ],
     "sounds": [

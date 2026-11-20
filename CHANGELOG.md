@@ -2,6 +2,8 @@
 
 ## [1.4.85] - 2026-11-19
 
+- Remove coplanar overlap between Dawnbreaker feather fills/spines and halo bands without reducing wing detail or animation. Separate Wyverian gust layers along their travel direction and move the vacuum layer outward instead of stacking stationary billboards at the caster. Particle counts, ability costs and cooldowns are unchanged.
+
 - Restore a balanced enhanced presentation across all standard/Champion Origins: Standard and Cinematic use textured MRPG/Spell Engine water, bubbles, mist, sparks and family effects at moderated density, with clean animated contours as accents/fallbacks. Minimal stays restrained. Every preset has finite effects and per-entity burst limits; optional libraries remain optional.
 - Keep Fenrkin Hunt’s original activation howl, remove unintended fallback growls from silent repeated pulses, and make standard/Champion Hunt sniffing quieter and less frequent. Preserve the existing highlight and gameplay.
 - Fix `/andromedaorigins_visuals` closing immediately after typed chat submission. The client-only Fzzy menu now opens after chat closes and retains local contour, Afterimages and impact-frame preferences.

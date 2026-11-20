@@ -188,6 +188,8 @@ object EnhancedFxCompat {
         var attempted: kotlin.Boolean = false
         var available: kotlin.Boolean = false
         lateinit var easingClass: java.lang.Class<out kotlin.Enum<*>>
+        lateinit var renderClass: java.lang.Class<out kotlin.Enum<*>>
+        lateinit var builderRender: java.lang.reflect.Method
         lateinit var motionClass: java.lang.Class<out kotlin.Enum<*>>
         lateinit var builderOf: java.lang.reflect.Method
         lateinit var builderScale: java.lang.reflect.Method
@@ -210,6 +212,7 @@ object EnhancedFxCompat {
         lateinit var builderBatch: java.lang.reflect.Method
         lateinit var sendBatches: java.lang.reflect.Method
         lateinit var sendBatchesAt: java.lang.reflect.Method
+        lateinit var batchPreTravel: java.lang.reflect.Method
         lateinit var batchesImpact: java.lang.reflect.Method
         lateinit var batchesCasting: java.lang.reflect.Method
         lateinit var batchesTravel: java.lang.reflect.Method
@@ -231,6 +234,8 @@ object EnhancedFxCompat {
                 val batchesClass: java.lang.Class<*> = java.lang.Class.forName("net.spell_engine.api.spell.fx.ParticleGroupBuilder\$Batches")
                 val helperClass: java.lang.Class<*> = java.lang.Class.forName("net.spell_engine.fx.ParticleHelper")
                 ParticleBridge.easingClass = java.lang.Class.forName("net.spell_engine.api.spell.fx.Easing") as java.lang.Class<out kotlin.Enum<*>>
+                ParticleBridge.renderClass = java.lang.Class.forName("net.spell_engine.api.spell.fx.ParticleGroup\$Render") as java.lang.Class<out kotlin.Enum<*>>
+                ParticleBridge.builderRender = builderClass.getMethod("render", ParticleBridge.renderClass)
                 ParticleBridge.motionClass = java.lang.Class.forName("net.spell_engine.api.spell.fx.ParticleGroup\$Motion") as java.lang.Class<out kotlin.Enum<*>>
 
                 ParticleBridge.builderOf = builderClass.getMethod("of", net.minecraft.resources.ResourceLocation::class.java)
@@ -255,6 +260,8 @@ object EnhancedFxCompat {
                 ParticleBridge.sendBatches = helperClass.getMethod("sendBatches", net.minecraft.world.entity.Entity::class.java, kotlin.collections.MutableList::class.java)
                 ParticleBridge.sendBatchesAt = helperClass.getMethod("sendBatches", net.minecraft.world.phys.Vec3::class.java, net.minecraft.world.entity.LivingEntity::class.java, kotlin.collections.MutableList::class.java)
 
+                ParticleBridge.batchPreTravel = java.lang.Class.forName("net.spell_engine.api.spell.fx.ParticleGroup\$Batch")
+                    .getMethod("preTravel", kotlin.Float::class.javaPrimitiveType)
                 ParticleBridge.batchesImpact = batchesClass.getMethod("impact", kotlin.Float::class.javaPrimitiveType, kotlin.Float::class.javaPrimitiveType)
                 ParticleBridge.batchesCasting = batchesClass.getMethod("casting", kotlin.Float::class.javaPrimitiveType, kotlin.Float::class.javaPrimitiveType)
                 ParticleBridge.batchesTravel = batchesClass.getMethod("travel", kotlin.Float::class.javaPrimitiveType, kotlin.Float::class.javaPrimitiveType)
@@ -345,6 +352,9 @@ object EnhancedFxCompat {
             if (spec.lifetimeVariance > 0f) {
                 builder = ParticleBridge.builderLifetimeVariance.invoke(builder, spec.lifetimeVariance)
             }
+            if (spec.render.isNotBlank()) {
+                ParticleBridge.enumValue(ParticleBridge.renderClass, spec.render)?.let { ParticleBridge.builderRender.invoke(builder, it) }
+            }
             if (spec.glow) {
                 builder = ParticleBridge.builderGlow.invoke(builder, true)
             }
@@ -372,7 +382,7 @@ object EnhancedFxCompat {
 
         @kotlin.Throws(java.lang.ReflectiveOperationException::class) fun batchPreset(spec: EnhancedFxDefinitions.ParticleDefinition): kotlin.Any? {
             val preset: kotlin.String = spec.preset.lowercase()
-            return when (preset){"casting" -> ParticleBridge.batchesCasting.invoke(null, spec.count, spec.speed)
+            val base = when (preset){"casting" -> ParticleBridge.batchesCasting.invoke(null, spec.count, spec.speed)
                 "travel" -> ParticleBridge.batchesTravel.invoke(null, spec.count, spec.speed)
                 "cloud" -> ParticleBridge.batchesCloud.invoke(null, spec.count, spec.speed)
                 "shockwave" -> ParticleBridge.batchesShockwave.invoke(null, spec.count, spec.speed, spec.preTravel)
@@ -382,6 +392,13 @@ object EnhancedFxCompat {
                 "helix" -> ParticleBridge.batchesHelix.invoke(null, spec.count, spec.speed, spec.degreesPerTick, spec.offset)
                 "pop_up", "popup" -> ParticleBridge.batchesPopUp.invoke(null)
                 else -> ParticleBridge.batchesImpact.invoke(null, spec.count, spec.speed)}
+            if (spec.preTravel <= 0f || preset == "shockwave") return base
+            @Suppress("UNCHECKED_CAST")
+            val consumer = base as java.util.function.Consumer<Any>
+            return java.util.function.Consumer<Any> { batch ->
+                consumer.accept(batch)
+                ParticleBridge.batchPreTravel.invoke(batch, spec.preTravel.coerceIn(0f, 3f))
+            }
         }
 
         fun parseColor(input: kotlin.String): kotlin.Long {
