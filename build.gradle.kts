@@ -50,7 +50,7 @@ cloche {
         modId = "andromeda_origins"
         name = "Andromeda Origins"
         description = "Thirteen custom Origins, Champion variants, and a rich Origin reader for Andromeda MC."
-        license = "BML-1.0"
+        license = "BML-1.1"
         icon = "assets/andromeda_origins/icon.png"
         author { name = "jaselumena" }
         author { name = "pokesmells" }

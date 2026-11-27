@@ -91,7 +91,7 @@ Choose versions for your loader. Install gameplay integrations and shared effect
 - [Gameplay, controls and configuration](https://github.com/BareMinimumStudios/andromeda-origins/blob/overgrown-1.21.1/docs/GAMEPLAY.md)
 - [Compatibility](https://github.com/BareMinimumStudios/andromeda-origins/blob/overgrown-1.21.1/COMPATIBILITY.md) · [Customize ability effects and sounds](https://github.com/BareMinimumStudios/andromeda-origins/blob/overgrown-1.21.1/ENHANCED_FX.md) · [Release history](https://github.com/BareMinimumStudios/andromeda-origins/blob/overgrown-1.21.1/CHANGELOG.md)
 
-Andromeda's code and artwork use [The Bare Minimum License v1.0](https://github.com/BareMinimumStudios/andromeda-origins/blob/overgrown-1.21.1/LICENSE). Bundled third-party components retain their own licenses.
+Andromeda's code and artwork use [The Bare Minimum License v1.1](https://github.com/BareMinimumStudios/andromeda-origins/blob/overgrown-1.21.1/LICENSE). Bundled third-party components retain their own licenses.
 
 ## Sponsor
 

@@ -4,6 +4,10 @@ Notable changes are recorded here using [Keep a Changelog 1.1.0](https://keepach
 
 ## [Unreleased]
 
+### Changed
+
+- Update the project license to The Bare Minimum License v1.1.
+
 ## [1.4.86] - 2026-11-27
 
 ### Changed
