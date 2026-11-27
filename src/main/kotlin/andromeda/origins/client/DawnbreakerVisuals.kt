@@ -25,6 +25,15 @@ object DawnbreakerVisuals {
     private val active = ResourceLocation.parse("andromeda_origins:dawnbreaker/presence_active")
     private val visible = ResourceLocation.parse("andromeda_origins:dawnbreaker/presence_radiance")
     private val feature = ResourceLocation.parse("andromeda_origins:dawnbreaker/radiance")
+    private val presentationStep = ResourceLocation.parse("andromeda_origins:dawnbreaker/presentation_step")
+    private val presentationShot = ResourceLocation.parse("andromeda_origins:dawnbreaker/presentation_shot")
+    private val bowDraw = ResourceLocation.parse("andromeda_origins:dawnbreaker/bow_draw")
+    private val bowRadiance = ResourceLocation.parse("andromeda_origins:dawnbreaker/bow_radiance")
+    private val presentationAnimation = ResourceLocation.parse("andromeda_origins:dawnbreaker/presentation_animation")
+    private val stepX = ResourceLocation.parse("andromeda_origins:dawnbreaker/presentation_step_x")
+    private val stepY = ResourceLocation.parse("andromeda_origins:dawnbreaker/presentation_step_y")
+    private val stepZ = ResourceLocation.parse("andromeda_origins:dawnbreaker/presentation_step_z")
+    private val dawnquiverArrow = ResourceLocation.parse("simplyswords:dawnquiver_arrow")
     private val appearing = WeakHashMap<LivingEntity, Float>()
     fun render(entity: LivingEntity, x: Double, y: Double, z: Double, delta: Float, pose: PoseStack, buffers: MultiBufferSource) {
         val viewer = Minecraft.getInstance().player ?: return
@@ -32,12 +41,12 @@ object DawnbreakerVisuals {
         val c = PowerContainer.of(entity) ?: return
         val nativeGhost = DawnbreakerFxClient.hasGhost(entity)
         SovereignVisuals.render(entity, x, y, z, delta, pose, buffers)
-        fun resource(path: String) = PowerResources.read(c, ResourceLocation.parse("andromeda_origins:dawnbreaker/" + path)).orElse(0.0)
-        val stepping = (resource("presentation_step").toFloat() / 2f).coerceIn(0f, 1f)
-        val shot = resource("presentation_shot").toFloat() / 12f
-        val drawing = resource("bow_draw").toFloat() / 60f
+        fun resource(id: ResourceLocation) = PowerResources.read(c, id).orElse(0.0)
+        val stepping = (resource(presentationStep).toFloat() / 2f).coerceIn(0f, 1f)
+        val shot = resource(presentationShot).toFloat() / 12f
+        val drawing = resource(bowDraw).toFloat() / 60f
         val presence = PowerResources.read(c, active).orElse(0.0)
-        val radiance = PowerResources.read(c, visible).orElse(0.0) > 0 || resource("bow_radiance") > 0
+        val radiance = PowerResources.read(c, visible).orElse(0.0) > 0 || resource(bowRadiance) > 0
         if (!c.hasPower(feature) || c.isSuppressed(feature) || !radiance ||
             (presence <= 0 && stepping <= 0 && shot <= 0 && drawing <= 0)) { appearing.remove(entity); return }
         val age = entity.tickCount + delta
@@ -48,9 +57,9 @@ object DawnbreakerVisuals {
         pose.pushPose()
         pose.translate(x, y, z)
         val vertices = buffers.getBuffer(RenderType.debugQuads())
-        if (!nativeGhost && stepping > 0 && resource("presentation_animation") > 0 && DawnbreakerPresentation.settings().animatedWings.get()) {
+        if (!nativeGhost && stepping > 0 && resource(presentationAnimation) > 0 && DawnbreakerPresentation.settings().animatedWings.get()) {
             pose.pushPose()
-            pose.translate(resource("presentation_step_x") - entity.x, resource("presentation_step_y") - entity.y, resource("presentation_step_z") - entity.z)
+            pose.translate(resource(stepX) - entity.x, resource(stepY) - entity.y, resource(stepZ) - entity.z)
             pose.mulPose(Axis.YP.rotationDegrees(-entity.yRot))
             val ghostScale = (entity.bbHeight / 1.8f).coerceIn(.5f, 2f); pose.scale(ghostScale, ghostScale, ghostScale)
             val ghost = pose.last().pose()
@@ -78,7 +87,7 @@ object DawnbreakerVisuals {
             val start = phase + i * Math.PI * 2 / 3
             halo(vertices, matrix, .91, .928, start, start + 1.15, 255, 174, 45, fade * .55f)
         }
-        val animate = resource("presentation_animation") > 0 && DawnbreakerPresentation.settings().animatedWings.get()
+        val animate = resource(presentationAnimation) > 0 && DawnbreakerPresentation.settings().animatedWings.get()
         val fold = if (animate) stepping * stepping * (3 - 2 * stepping) else 0f
         val flare = if (animate) sin(shot * Math.PI).toFloat() * .22f + drawing * .10f else 0f
         val featherCount = when (DawnbreakerPresentation.tier(entity)) { 0 -> 3; 2 -> 8; else -> 6 }
@@ -141,9 +150,9 @@ object DawnbreakerVisuals {
         if (entity !is AbstractArrow || entity.customName?.string != "Dawnbreaker Light Arrow") return
         val owner = entity.owner as? LivingEntity ?: return
         val c = PowerContainer.of(owner) ?: return
-        if (!c.hasPower(feature) || c.isSuppressed(feature) || PowerResources.read(c, ResourceLocation.parse("andromeda_origins:dawnbreaker/bow_radiance")).orElse(0.0) <= 0) return
+        if (!c.hasPower(feature) || c.isSuppressed(feature) || PowerResources.read(c, bowRadiance).orElse(0.0) <= 0) return
         val client = Minecraft.getInstance()
-        val type = BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.parse("simplyswords:dawnquiver_arrow"))
+        val type = BuiltInRegistries.ENTITY_TYPE.get(dawnquiverArrow)
         val distance = sqrt(x * x + y * y + z * z)
         // Let the ordinary shaft remain visible at point-blank range without a screen-filling light mesh.
         if (distance < 1.2) return

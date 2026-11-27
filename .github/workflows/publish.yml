@@ -96,6 +96,7 @@ jobs:
 
       - name: Build release artifacts
         run: |
+          python3 tools/release_notes.py
           python3 tools/validate_resources.py
           ./gradlew clean build --stacktrace
 
@@ -107,7 +108,7 @@ jobs:
           set -euo pipefail
           python3 - <<'PY'
           from pathlib import Path
-          import os, re, shutil, zipfile, json
+          import os, shutil, zipfile, json
           version = os.environ['MOD_VERSION']
           mc = os.environ['MINECRAFT_VERSION']
           dest = Path('build/release')
@@ -130,14 +131,6 @@ jobs:
               target = dest / f'andromeda-origins-{version}+{mc}-{loader}.jar'
               shutil.copy2(matches[0], target)
               print(f'{matches[0]} -> {target}')
-          text = Path('CHANGELOG.md').read_text(encoding='utf-8')
-          heading = re.search(r'^## \[' + re.escape(version) + r'\] - \d{4}-\d{2}-\d{2}\s*$', text, re.M)
-          if not heading:
-              raise SystemExit(f'CHANGELOG.md is missing a dated [{version}] release section')
-          rest = text[heading.end():]
-          end = re.search(r'^## |^\[Unreleased\]:', rest, re.M)
-          notes = rest[:end.start()] if end else rest
-          (dest / 'RELEASE-NOTES.md').write_text(heading.group().strip() + '\n\n' + notes.strip() + '\n', encoding='utf-8')
           PY
           python3 tools/package_source.py
 

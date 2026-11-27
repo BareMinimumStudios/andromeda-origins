@@ -1,13 +1,16 @@
 """Create a flat, portable source ZIP and release checksums without development caches."""
 from pathlib import Path
 import hashlib, re, zipfile
+from release_notes import release_notes
 
 ROOT=Path(__file__).resolve().parents[1]
 properties=(ROOT/'gradle.properties').read_text(encoding='utf-8')
 version=re.search(r'^mod_version=(.+)$',properties,re.M)[1].strip()
 minecraft=re.search(r'^minecraft_version=(.+)$',properties,re.M)[1].strip()
+notes = release_notes()
 release=ROOT/'build/release'
 release.mkdir(parents=True,exist_ok=True)
+(release/'RELEASE-NOTES.md').write_text(notes, encoding='utf-8', newline='\n')
 source=release/f'andromeda-origins-{version}+{minecraft}-source.zip'
 exclude={'.git','.idea','.gradle','.kotlin','build','run','out','__pycache__'}
 paths=[p for p in ROOT.rglob('*') if p.is_file() and not p.is_symlink() and not any(part in exclude for part in p.relative_to(ROOT).parts)]

@@ -38,6 +38,7 @@ jobs:
 
       - name: Build and validate Fabric and NeoForge jars
         run: |
+          python3 tools/release_notes.py
           python3 tools/validate_resources.py
           ./gradlew clean build --stacktrace
 

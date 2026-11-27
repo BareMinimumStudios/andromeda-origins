@@ -24,7 +24,7 @@ Set `MODRINTH_TOKEN` and `CURSEFORGE_TOKEN` as repository or organization Action
 
 Modrinth and CurseForge version numbers and display titles use `<mod_version>+<minecraft_version>-<loader>`, for example `1.4.76+1.21.1-fabric`. The workflow validates Modrinth's 32-character limit before building.
 
-Tag releases as `v<mod_version>+1.21.1` after adding a dated version section to `CHANGELOG.md`. Manual publication supports the same destination choices as the other studio mods. No token is stored in the repository.
+Tag releases as `v<mod_version>+1.21.1` after moving the upcoming changes from `[Unreleased]` into a dated version section in `CHANGELOG.md`. Use the applicable Keep a Changelog categories: Added, Changed, Deprecated, Removed, Fixed, or Security. Both workflows validate the section with `python tools/release_notes.py`. Manual publication supports the same destination choices as the other studio mods. No token is stored in the repository.
 
 The root README is the GitHub description. Store descriptions live in `docs/MODRINTH.md` and `docs/CURSEFORGE.md`. Their banner uses the public GitHub URL: push the matching branch and image before copying either description to a store.
 
@@ -32,7 +32,7 @@ The root README is the GitHub description. Store descriptions live in `docs/MODR
 
 Distribute source ZIPs with the project files directly at the ZIP root. Exclude `.git`, `.idea`, `.gradle`, `build`, `run`, and local test worlds.
 
-`python tools/package_source.py` creates a flat ZIP and checksums under `build/release`. The publishing workflow includes these with the GitHub release; the store uploads contain only the matching loader jar.
+`python tools/package_source.py` creates a flat ZIP, checksums, and the current release notes under `build/release`. The publishing workflow includes these with the GitHub release; the store uploads contain only the matching loader jar.
 
 Static-only Kotlin Mixin objects are stripped of singleton scaffolding after compilation. The verification task checks the compiled callback bytecode to prevent target constructors from receiving Kotlin singleton initialization. Helpers live outside the reserved Mixin package.
 
