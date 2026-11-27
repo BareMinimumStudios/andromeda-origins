@@ -1,12 +1,23 @@
 package andromeda.origins.mixin
 
-@org.spongepowered.asm.mixin.Mixin(net.minecraft.client.gui.Gui::class)
+import andromeda.origins.client.DawnbreakerFxClient
+import andromeda.origins.client.DawnquiverClientCompat
+import andromeda.origins.client.SovereignVisuals
+import net.minecraft.client.DeltaTracker
+import net.minecraft.client.gui.Gui
+import net.minecraft.client.gui.GuiGraphics
+import org.spongepowered.asm.mixin.Mixin
+import org.spongepowered.asm.mixin.injection.At
+import org.spongepowered.asm.mixin.injection.Inject
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
+
+@Mixin(Gui::class)
 abstract class DawnbreakerHudMixin {
-    @org.spongepowered.asm.mixin.injection.Inject(method = ["render"], at = [org.spongepowered.asm.mixin.injection.At("TAIL")])
-    private fun renderChorus(graphics: net.minecraft.client.gui.GuiGraphics, delta: net.minecraft.client.DeltaTracker,
-        ci: org.spongepowered.asm.mixin.injection.callback.CallbackInfo) {
-        andromeda.origins.client.DawnquiverClientCompat.renderHud(graphics, delta)
-        andromeda.origins.client.SovereignVisuals.renderHud(graphics)
-        andromeda.origins.client.DawnbreakerFxClient.renderImpact(graphics)
+    @Inject(method = ["render"], at = [At("TAIL")])
+    private fun renderChorus(graphics: GuiGraphics, delta: DeltaTracker,
+        ci: CallbackInfo) {
+        DawnquiverClientCompat.renderHud(graphics, delta)
+        SovereignVisuals.renderHud(graphics)
+        DawnbreakerFxClient.renderImpact(graphics)
     }
 }

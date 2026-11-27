@@ -14,6 +14,7 @@ import net.minecraft.commands.Commands
 import net.minecraft.commands.arguments.EntityArgument
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
+import dev.overgrown.apoli.power.PowerResources
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -53,7 +54,7 @@ object PlayerOriginRepair {
                         val report = "${player.gameProfile.name}: origins=$selection; " +
                             "gills loaded=${ApoliPowers.get(gills) != null}, granted=${container?.hasPower(gills)}, suppressed=${container?.isSuppressed(gills)}; " +
                             "wet=${container?.hasPower(wet)}, wet sources=${container?.sourcesOf(wet)}, " +
-                            "reserve=${container?.let { dev.overgrown.apoli.power.PowerResources.read(it, ResourceLocation.parse("andromeda_origins:nereid/helper/nereidwet_remove")) }}; " +
+                            "reserve=${container?.let { PowerResources.read(it, ResourceLocation.parse("andromeda_origins:nereid/helper/nereidwet_remove")) }}; " +
                             "air=${player.airSupply}/${player.maxAirSupply}, " +
                             "land suffocation=$dry"
                         context.source.sendSuccess({ Component.literal(report) }, false)
@@ -71,7 +72,7 @@ object PlayerOriginRepair {
                             "absorption=${player.absorptionAmount}; speed=${player.getAttributeValue(Attributes.MOVEMENT_SPEED)}; " +
                             "position=${player.position()}, velocity=${player.deltaMovement}; " +
                             "webbed=${container?.hasPower(webbed)}, sources=${container?.sourcesOf(webbed)}, " +
-                            "remaining=${container?.let { dev.overgrown.apoli.power.PowerResources.read(it, reserve) }}; " +
+                            "remaining=${container?.let { PowerResources.read(it, reserve) }}; " +
                             "restrained=${container?.hasPower(restrained)}, sources=${container?.sourcesOf(restrained)}"
                         context.source.sendSuccess({ Component.literal(report) }, false)
                         1

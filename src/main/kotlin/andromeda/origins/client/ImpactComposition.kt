@@ -1,10 +1,11 @@
 package andromeda.origins.client
 
+import andromeda.origins.compat.OriginFxStyle
 import com.mojang.blaze3d.vertex.VertexConsumer
+import kotlin.math.*
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
 import org.joml.Matrix4f
-import kotlin.math.*
 
 /** Original filled compositions, not radial speed lines or borrowed sprites. */
 object ImpactComposition {
@@ -17,10 +18,10 @@ object ImpactComposition {
         val p = g.pose(); p.pushPose(); p.translate(w * .5, h * .49, 0.0)
         val m = p.last().pose(); val v = g.bufferSource().getBuffer(RenderType.gui())
         val radius = min(w, h) * (.42f + .035f * progress)
-        val detail = when (andromeda.origins.compat.OriginFxStyle.quality()) {
-            andromeda.origins.compat.OriginFxStyle.Quality.MINIMAL -> 48
-            andromeda.origins.compat.OriginFxStyle.Quality.STANDARD -> 64
-            andromeda.origins.compat.OriginFxStyle.Quality.CINEMATIC -> 96
+        val detail = when (OriginFxStyle.quality()) {
+            OriginFxStyle.Quality.MINIMAL -> 48
+            OriginFxStyle.Quality.STANDARD -> 64
+            OriginFxStyle.Quality.CINEMATIC -> 96
         }
         when (kind) {
             0 -> { // Instant Step: a swept eclipse, opening into negative space.

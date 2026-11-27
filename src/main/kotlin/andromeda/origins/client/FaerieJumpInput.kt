@@ -2,11 +2,12 @@ package andromeda.origins.client
 
 import andromeda.origins.compat.FaerieJumpPress
 import net.minecraft.client.Minecraft
+import net.minecraft.client.player.LocalPlayer
 import net.minecraft.resources.ResourceLocation
 
 object FaerieJumpInput {
     private var state = FaerieJumpPress()
-    private var player: net.minecraft.client.player.LocalPlayer? = null
+    private var player: LocalPlayer? = null
 
     fun beginTick(client: Minecraft) {
         if (player !== client.player) {

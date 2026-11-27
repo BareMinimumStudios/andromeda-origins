@@ -1,5 +1,6 @@
 package andromeda.origins.client
 
+import andromeda.origins.compat.DawnbreakerPresentation
 import net.minecraft.client.Minecraft
 import net.minecraft.client.resources.sounds.SimpleSoundInstance
 import net.minecraft.core.registries.BuiltInRegistries
@@ -11,6 +12,6 @@ object DawnbreakerAudio {
         if (client.player == null || client.level == null) return
         val sound = BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("andromeda_origins:ability.dawnbreaker.banishment_heartbeat")) ?: return
         // Non-positional: listener/camera coordinates can still be settling after the 500-block snap.
-        client.soundManager.play(SimpleSoundInstance.forUI(sound, .85f, .7f * andromeda.origins.compat.DawnbreakerPresentation.soundScale(andromeda.origins.compat.DawnbreakerPresentation.tier(client.player!!))))
+        client.soundManager.play(SimpleSoundInstance.forUI(sound, .85f, .7f * DawnbreakerPresentation.soundScale(DawnbreakerPresentation.tier(client.player!!))))
     }
 }

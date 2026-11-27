@@ -1,8 +1,10 @@
 package andromeda.origins.client
 
+import andromeda.origins.platform.ClientPlatform
+
 
 
 object VersionHandshakeClient {
     fun register() {
-        andromeda.origins.platform.ClientPlatform.versionHandshake()}
+        ClientPlatform.versionHandshake()}
 }

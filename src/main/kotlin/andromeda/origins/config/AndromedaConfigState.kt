@@ -1,5 +1,7 @@
 package andromeda.origins.config
 
+import java.util.Map as JavaMap
+import java.util.Set as JavaSet
 import net.minecraft.resources.ResourceLocation
 
 /** Immutable server-authoritative gameplay configuration snapshot. */
@@ -13,10 +15,10 @@ class AndromedaConfigState(
     val logoutDiagnostics: Boolean = false,
     val weaponBalance: WeaponBalanceState = WeaponBalanceState()
 ) {
-    val disabledStockOrigins: Set<ResourceLocation> = java.util.Set.copyOf(disabledStockOrigins)
-    val disabledAndromedaOrigins: Set<ResourceLocation> = java.util.Set.copyOf(disabledAndromedaOrigins)
+    val disabledStockOrigins: Set<ResourceLocation> = JavaSet.copyOf(disabledStockOrigins)
+    val disabledAndromedaOrigins: Set<ResourceLocation> = JavaSet.copyOf(disabledAndromedaOrigins)
     val disabledPowersByOrigin: Map<ResourceLocation, Set<ResourceLocation>> =
-        java.util.Map.copyOf(disabledPowersByOrigin.mapValues { java.util.Set.copyOf(it.value) })
+        JavaMap.copyOf(disabledPowersByOrigin.mapValues { JavaSet.copyOf(it.value) })
 
     fun powerDisabled(originId: ResourceLocation, powerId: ResourceLocation): Boolean =
         powerId in disabledPowersByOrigin[originId].orEmpty()

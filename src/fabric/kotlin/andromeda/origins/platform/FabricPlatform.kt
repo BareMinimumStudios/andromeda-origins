@@ -1,7 +1,13 @@
 package andromeda.origins.platform
 
 import andromeda.origins.AndromedaOrigins
+import andromeda.origins.compat.EntityUnloadDiagnostics
+import andromeda.origins.network.BanishmentHeartbeatPayload
+import andromeda.origins.network.DawnbreakerFxPayload
 import andromeda.origins.network.OpenConfigPayload
+import andromeda.origins.network.OriginFxPayload
+import java.util.function.BiConsumer
+import java.util.function.Consumer
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents
@@ -14,29 +20,32 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener
 import net.fabricmc.loader.api.FabricLoader
+import net.minecraft.core.Registry
+import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.MinecraftServer
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.server.network.ServerGamePacketListenerImpl
 import net.minecraft.server.packs.PackType
 import net.minecraft.server.packs.resources.ResourceManager
-import java.util.function.Consumer
-import java.util.function.BiConsumer
+import net.minecraft.sounds.SoundEvent
+import net.minecraft.world.item.Item
 
 class FabricEntrypoint : ModInitializer {
     override fun onInitialize() {
         Platform.install(FabricPlatform())
         AndromedaOrigins.initialize()
-        andromeda.origins.compat.EntityUnloadDiagnostics.register()
+        EntityUnloadDiagnostics.register()
     }
 }
 
 class FabricPlatform : PlatformBackend {
     override fun registerItem(id: ResourceLocation) {
-        net.minecraft.core.Registry.register(net.minecraft.core.registries.BuiltInRegistries.ITEM, id, net.minecraft.world.item.Item(net.minecraft.world.item.Item.Properties()))
+        Registry.register(BuiltInRegistries.ITEM, id, Item(Item.Properties()))
     }
     override fun registerSound(id: ResourceLocation) {
-        net.minecraft.core.Registry.register(net.minecraft.core.registries.BuiltInRegistries.SOUND_EVENT, id, net.minecraft.sounds.SoundEvent.createVariableRangeEvent(id))
+        Registry.register(BuiltInRegistries.SOUND_EVENT, id, SoundEvent.createVariableRangeEvent(id))
     }
     override fun isModLoaded(id: String) = FabricLoader.getInstance().isModLoaded(id)
     override fun configDir() = FabricLoader.getInstance().configDir
@@ -67,12 +76,12 @@ class FabricPlatform : PlatformBackend {
     }
     override fun registerNetworking() {
         PayloadTypeRegistry.playS2C().register(OpenConfigPayload.TYPE, OpenConfigPayload.CODEC)
-        PayloadTypeRegistry.playS2C().register(andromeda.origins.network.OriginFxPayload.TYPE, andromeda.origins.network.OriginFxPayload.CODEC)
-        PayloadTypeRegistry.playS2C().register(andromeda.origins.network.DawnbreakerFxPayload.TYPE, andromeda.origins.network.DawnbreakerFxPayload.CODEC)
-        PayloadTypeRegistry.playS2C().register(andromeda.origins.network.BanishmentHeartbeatPayload.TYPE, andromeda.origins.network.BanishmentHeartbeatPayload.CODEC)
+        PayloadTypeRegistry.playS2C().register(OriginFxPayload.TYPE, OriginFxPayload.CODEC)
+        PayloadTypeRegistry.playS2C().register(DawnbreakerFxPayload.TYPE, DawnbreakerFxPayload.CODEC)
+        PayloadTypeRegistry.playS2C().register(BanishmentHeartbeatPayload.TYPE, BanishmentHeartbeatPayload.CODEC)
     }
     override fun canReceiveCosmetic(player: ServerPlayer, channel: ResourceLocation): Boolean = ServerPlayNetworking.canSend(player, channel)
-    override fun sendCosmetic(player: ServerPlayer, payload: net.minecraft.network.protocol.common.custom.CustomPacketPayload) { ServerPlayNetworking.send(player, payload) }
+    override fun sendCosmetic(player: ServerPlayer, payload: CustomPacketPayload) { ServerPlayNetworking.send(player, payload) }
 
     override fun openConfig(player: ServerPlayer) { ServerPlayNetworking.send(player, OpenConfigPayload.INSTANCE) }
     override fun versionHandshake() = FabricVersionHandshake.registerServer()

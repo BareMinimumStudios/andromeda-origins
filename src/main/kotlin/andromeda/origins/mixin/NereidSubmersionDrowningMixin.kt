@@ -1,24 +1,32 @@
 package andromeda.origins.mixin
 
 import andromeda.origins.compat.NereidSubmersionDrowningMixinState
+import dev.overgrown.apoli.mixin.flag.LivingEntityAirAccessor
+import kotlin.math.max
+import net.minecraft.server.level.ServerPlayer
+import org.spongepowered.asm.mixin.Mixin
+import org.spongepowered.asm.mixin.Unique
+import org.spongepowered.asm.mixin.injection.At
+import org.spongepowered.asm.mixin.injection.Inject
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
 
 import andromeda.origins.compat.NereidGills
 
 
  /** Drain after the player air update so vanilla recovery cannot undo Submersion. */
-@org.spongepowered.asm.mixin.Mixin(net.minecraft.server.level.ServerPlayer::class)
+@Mixin(ServerPlayer::class)
 abstract class NereidSubmersionDrowningMixin {
-    @org.spongepowered.asm.mixin.Unique
-    var `andromeda$airAtStart`: kotlin.Int = 0
-    @org.spongepowered.asm.mixin.Unique
-    var `andromeda$active`: kotlin.Boolean = false
-    @org.spongepowered.asm.mixin.Unique
-    var `andromeda$gills`: kotlin.Boolean = false
-    @org.spongepowered.asm.mixin.Unique
-    var `andromeda$damageTicks`: kotlin.Int = 0
+    @Unique
+    var `andromeda$airAtStart`: Int = 0
+    @Unique
+    var `andromeda$active`: Boolean = false
+    @Unique
+    var `andromeda$gills`: Boolean = false
+    @Unique
+    var `andromeda$damageTicks`: Int = 0
 
-    @org.spongepowered.asm.mixin.injection.Inject(method = ["doTick"], at = [org.spongepowered.asm.mixin.injection.At("HEAD")]) fun `andromeda$capture`(ci: org.spongepowered.asm.mixin.injection.callback.CallbackInfo?) {
-        val player: net.minecraft.server.level.ServerPlayer = this as kotlin.Any as net.minecraft.server.level.ServerPlayer
+    @Inject(method = ["doTick"], at = [At("HEAD")]) fun `andromeda$capture`(ci: CallbackInfo?) {
+        val player: ServerPlayer = this as Any as ServerPlayer
         val gills = NereidGills.isDry(player)
         val hostile = player.tags.contains(NereidSubmersionDrowningMixinState.`ANDROMEDA$TAG`) &&
             NereidSubmersionDrowningMixinState.`andromeda$shouldDrown`(player)
@@ -33,15 +41,15 @@ abstract class NereidSubmersionDrowningMixin {
         `andromeda$airAtStart` = player.getAirSupply()
     }
 
-    @org.spongepowered.asm.mixin.injection.Inject(method = ["doTick"], at = [org.spongepowered.asm.mixin.injection.At("TAIL")]) fun `andromeda$apply`(ci: org.spongepowered.asm.mixin.injection.callback.CallbackInfo?) {
+    @Inject(method = ["doTick"], at = [At("TAIL")]) fun `andromeda$apply`(ci: CallbackInfo?) {
         if (!`andromeda$active`) return
-        val player: net.minecraft.server.level.ServerPlayer = this as kotlin.Any as net.minecraft.server.level.ServerPlayer
+        val player: ServerPlayer = this as Any as ServerPlayer
         if (!player.isAlive() || if (`andromeda$gills`) !NereidGills.isDry(player) else !player.getTags().contains(NereidSubmersionDrowningMixinState.`ANDROMEDA$TAG`)) {
             `andromeda$damageTicks` = 0
             return
         }
-        val nextAir = kotlin.math.max(0, if (`andromeda$gills`)
-            (player as dev.overgrown.apoli.mixin.flag.LivingEntityAirAccessor).`apoli$decreaseAirSupply`(`andromeda$airAtStart`)
+        val nextAir = max(0, if (`andromeda$gills`)
+            (player as LivingEntityAirAccessor).`apoli$decreaseAirSupply`(`andromeda$airAtStart`)
             else `andromeda$airAtStart` - 5)
         player.setAirSupply(nextAir)
         if (nextAir > 0) {

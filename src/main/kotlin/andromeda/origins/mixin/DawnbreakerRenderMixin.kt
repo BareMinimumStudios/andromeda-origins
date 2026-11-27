@@ -1,16 +1,28 @@
 package andromeda.origins.mixin
 
-@org.spongepowered.asm.mixin.Mixin(net.minecraft.client.renderer.entity.EntityRenderDispatcher::class)
+import andromeda.origins.client.DawnbreakerFxClient
+import andromeda.origins.client.DawnbreakerVisuals
+import com.mojang.blaze3d.vertex.PoseStack
+import net.minecraft.client.renderer.MultiBufferSource
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.LivingEntity
+import org.spongepowered.asm.mixin.Mixin
+import org.spongepowered.asm.mixin.injection.At
+import org.spongepowered.asm.mixin.injection.Inject
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
+
+@Mixin(EntityRenderDispatcher::class)
 abstract class DawnbreakerRenderMixin {
-    @org.spongepowered.asm.mixin.injection.Inject(method = ["render"], at = [org.spongepowered.asm.mixin.injection.At("TAIL")])
-    private fun <E : net.minecraft.world.entity.Entity> dawnbreakerRender(
+    @Inject(method = ["render"], at = [At("TAIL")])
+    private fun <E : Entity> dawnbreakerRender(
         entity: E, x: Double, y: Double, z: Double, yaw: Float, delta: Float,
-        pose: com.mojang.blaze3d.vertex.PoseStack, buffers: net.minecraft.client.renderer.MultiBufferSource, light: Int,
-        ci: org.spongepowered.asm.mixin.injection.callback.CallbackInfo
+        pose: PoseStack, buffers: MultiBufferSource, light: Int,
+        ci: CallbackInfo
     ) {
-        if (andromeda.origins.client.DawnbreakerFxClient.renderingGhost) return
-        andromeda.origins.client.DawnbreakerVisuals.renderProjectile(entity, x, y, z, pose, buffers)
-        val living = entity as? net.minecraft.world.entity.LivingEntity ?: return
-        andromeda.origins.client.DawnbreakerVisuals.render(living, x, y, z, delta, pose, buffers)
+        if (DawnbreakerFxClient.renderingGhost) return
+        DawnbreakerVisuals.renderProjectile(entity, x, y, z, pose, buffers)
+        val living = entity as? LivingEntity ?: return
+        DawnbreakerVisuals.render(living, x, y, z, delta, pose, buffers)
     }
 }

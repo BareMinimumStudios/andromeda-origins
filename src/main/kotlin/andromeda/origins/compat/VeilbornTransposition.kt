@@ -1,27 +1,32 @@
 package andromeda.origins.compat
 
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.RelativeMovement
+import net.minecraft.world.phys.Vec3
+
 
 
 
  /** Performs Veil Transposition as a same-tick exchange of the exact Opoli raycast actor/target pair.  */
 object VeilbornTransposition {
-    fun transpose(actor: net.minecraft.world.entity.Entity?, target: net.minecraft.world.entity.Entity?): kotlin.Boolean {
+    fun transpose(actor: Entity?, target: Entity?): Boolean {
         if (actor == null || target == null || actor === target) return false
-        val level = actor.level() as? net.minecraft.server.level.ServerLevel
+        val level = actor.level() as? ServerLevel
         if (level == null || target.level() !== level) return false
         if (actor.isRemoved() || target.isRemoved()) return false
 
-        val actorPos: net.minecraft.world.phys.Vec3 = actor.position()
-        val targetPos: net.minecraft.world.phys.Vec3 = target.position()
-        val actorYaw: kotlin.Float = actor.getYRot()
-        val actorPitch: kotlin.Float = actor.getXRot()
-        val targetYaw: kotlin.Float = target.getYRot()
-        val targetPitch: kotlin.Float = target.getXRot()
+        val actorPos: Vec3 = actor.position()
+        val targetPos: Vec3 = target.position()
+        val actorYaw: Float = actor.getYRot()
+        val actorPitch: Float = actor.getXRot()
+        val targetYaw: Float = target.getYRot()
+        val targetPitch: Float = target.getXRot()
 
                 // A passenger is continuously repositioned by its vehicle. Detach only the entity being
         // transposed; vehicles that are themselves targeted keep their passengers and move normally.
-        val actorVehicle: net.minecraft.world.entity.Entity? = actor.getVehicle()
-        val targetVehicle: net.minecraft.world.entity.Entity? = target.getVehicle()
+        val actorVehicle: Entity? = actor.getVehicle()
+        val targetVehicle: Entity? = target.getVehicle()
         if (actorVehicle != null) actor.stopRiding()
         if (targetVehicle != null) target.stopRiding()
 
@@ -42,11 +47,11 @@ object VeilbornTransposition {
         return true
     }
 
-    private fun teleport(entity: net.minecraft.world.entity.Entity, level: net.minecraft.server.level.ServerLevel, pos: net.minecraft.world.phys.Vec3, yaw: kotlin.Float, pitch: kotlin.Float): kotlin.Boolean {
-        return entity.teleportTo(level, pos.x, pos.y, pos.z, kotlin.collections.mutableSetOf<net.minecraft.world.entity.RelativeMovement>(), yaw, pitch)
+    private fun teleport(entity: Entity, level: ServerLevel, pos: Vec3, yaw: Float, pitch: Float): Boolean {
+        return entity.teleportTo(level, pos.x, pos.y, pos.z, mutableSetOf<RelativeMovement>(), yaw, pitch)
     }
 
-    private fun restoreRide(passenger: net.minecraft.world.entity.Entity, vehicle: net.minecraft.world.entity.Entity?) {
+    private fun restoreRide(passenger: Entity, vehicle: Entity?) {
         if (vehicle != null && !vehicle.isRemoved() && passenger.getVehicle() == null) {
             passenger.startRiding(vehicle, true)
         }

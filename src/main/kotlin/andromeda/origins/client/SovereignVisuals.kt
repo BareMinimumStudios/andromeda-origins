@@ -1,27 +1,33 @@
 package andromeda.origins.client
 
+import andromeda.origins.compat.DawnbreakerLayout
+import andromeda.origins.compat.DawnbreakerPresentation
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import com.mojang.math.Axis
 import dev.overgrown.apoli.power.PowerContainer
 import dev.overgrown.apoli.power.PowerResources
+import java.util.WeakHashMap
+import kotlin.math.*
+import net.minecraft.client.Minecraft
+import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.util.Mth
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.phys.Vec3
 import org.joml.Matrix4f
-import kotlin.math.*
 
 /** Thin, double-sided light geometry. No full-screen flashes, textures or dependence on an avatar model. */
 object SovereignVisuals {
     private fun id(s: String) = ResourceLocation.parse("andromeda_origins:dawnbreaker/$s")
     private fun read(e: LivingEntity, path: String) = PowerContainer.of(e)?.let { PowerResources.read(it, id(path)).orElse(0.0) } ?: 0.0
     private data class StoneFade(val until: Float, val progress: Double)
-    private val stones = java.util.WeakHashMap<LivingEntity, StoneFade>()
-    fun renderHud(g: net.minecraft.client.gui.GuiGraphics) {
-        val mc = net.minecraft.client.Minecraft.getInstance(); val player = mc.player ?: return
-        if (mc.options.hideGui || player.isSpectator || !andromeda.origins.compat.DawnbreakerPresentation.settings().guardHud.get()) return
+    private val stones = WeakHashMap<LivingEntity, StoneFade>()
+    fun renderHud(g: GuiGraphics) {
+        val mc = Minecraft.getInstance(); val player = mc.player ?: return
+        if (mc.options.hideGui || player.isSpectator || !DawnbreakerPresentation.settings().guardHud.get()) return
         val c = PowerContainer.of(player) ?: return
         if (!c.hasPower(id("stillwater")) || c.isSuppressed(id("stillwater")) || read(player, "stillwater_active") <= 0 || read(player, "presentation_hud") <= 0) return
         val count = read(player, "stillwater_count").toInt().coerceIn(0, 8)
@@ -46,16 +52,16 @@ object SovereignVisuals {
         pose.pushPose(); pose.translate(x, y, z)
         val v = buffers.getBuffer(RenderType.debugQuads())
         if (guard) {
-            pose.pushPose(); pose.mulPose(Axis.YP.rotationDegrees(-net.minecraft.util.Mth.rotLerp(delta, e.yRotO, e.yRot)))
+            pose.pushPose(); pose.mulPose(Axis.YP.rotationDegrees(-Mth.rotLerp(delta, e.yRotO, e.yRot)))
             val m = pose.last().pose(); val count = read(e, "stillwater_count").toInt()
             // Eight distinct solar lenses trace a crown behind the shoulders, leaving the face clear.
             for (side in listOf(-1.0, 1.0)) {
                 beam(v, m, Vec3(side * .8, 1.0, -1.1), Vec3(side * 2.6, 2.8, -1.7), .025, .22f)
             }
             for (i in 0 until count) {
-                val centre = andromeda.origins.compat.DawnbreakerLayout.guardSlot(i)
+                val centre = DawnbreakerLayout.guardSlot(i)
                 val phase = (e.tickCount + delta) * .055 + i * .3
-                val segments = when (andromeda.origins.compat.DawnbreakerPresentation.tier(e)) { 0 -> 12; 2 -> 32; else -> 24 }
+                val segments = when (DawnbreakerPresentation.tier(e)) { 0 -> 12; 2 -> 32; else -> 24 }
                 for (j in 0 until segments) {
                     val t = j * 1.65 * PI / segments + phase; val u = (j + 1) * 1.65 * PI / segments + phase
                     beam(v, m, centre.add(cos(t) * .28, sin(t) * .28, 0.0), centre.add(cos(u) * .28, sin(u) * .28, 0.0), .025, .85f)
@@ -92,7 +98,7 @@ object SovereignVisuals {
                     beam(v, m, Vec3(cos(a) * w, h, sin(a) * w), Vec3(cos(b) * w, h, sin(b) * w), .015 - band * .003, if (band == 0) .8f else .26f)
                 }
             }
-            val seams = if (andromeda.origins.compat.DawnbreakerPresentation.tier(e) == 0) 4 else 8
+            val seams = if (DawnbreakerPresentation.tier(e) == 0) 4 else 8
             fun radius(t: Double) = w * when { t < .4 -> .72; t < .75 -> 1.0; else -> .78 }
             for (i in 0 until seams) {
                 val a = i * 2 * PI / seams; val foot = Vec3(cos(a) * radius(.1), .06 + (i % 3) * .13, sin(a) * radius(.1))

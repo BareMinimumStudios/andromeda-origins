@@ -1,6 +1,8 @@
 package andromeda.origins
 
 import andromeda.origins.AndromedaOrigins
+import andromeda.origins.platform.Platform
+import net.minecraft.resources.ResourceLocation
 
 
  /**
@@ -11,7 +13,7 @@ import andromeda.origins.AndromedaOrigins
  * playsound/stopsound commands resolve them server-side.
  */
 object AndromedaSounds {
-    val IDS: kotlin.Array<kotlin.String> = kotlin.arrayOf<kotlin.String>("ability.arachne.silk_snap",
+    val IDS: Array<String> = arrayOf<String>("ability.arachne.silk_snap",
     "ability.arachne.web_pull",
     "ability.faerie.fae_chime",
     "ability.faerie.dust_depleted",
@@ -50,8 +52,8 @@ object AndromedaSounds {
 
     fun register() {
         for (path in AndromedaSounds.IDS) {
-            val id: net.minecraft.resources.ResourceLocation = net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(AndromedaOrigins.MOD_ID, path)
-            andromeda.origins.platform.Platform.registerSound(id)
+            val id: ResourceLocation = ResourceLocation.fromNamespaceAndPath(AndromedaOrigins.MOD_ID, path)
+            Platform.registerSound(id)
         }
     }
 }

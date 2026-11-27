@@ -1,6 +1,9 @@
 package andromeda.origins.compat
 
 import andromeda.origins.compat.EnhancedFxCompat
+import net.minecraft.commands.CommandSource
+import net.minecraft.commands.CommandSourceStack
+import net.minecraft.server.level.ServerPlayer
 
 
  /**
@@ -11,17 +14,17 @@ import andromeda.origins.compat.EnhancedFxCompat
  * cosmetic particles/sounds.
  */
 object MortalResolveEffects {
-    private fun run(player: net.minecraft.server.level.ServerPlayer, command: kotlin.String) {
-        val silentSource: net.minecraft.commands.CommandSourceStack = player.createCommandSourceStack()
+    private fun run(player: ServerPlayer, command: String) {
+        val silentSource: CommandSourceStack = player.createCommandSourceStack()
         .withPermission(4)
-        .withSource(net.minecraft.commands.CommandSource.NULL)
+        .withSource(CommandSource.NULL)
 
         player.serverLevel().getServer().getCommands()
         .performPrefixedCommand(silentSource, command)
     }
 
      /** Dramatic one-time burst when the downed Human rises.  */
-    fun playActivation(player: net.minecraft.server.level.ServerPlayer) {
+    fun playActivation(player: ServerPlayer) {
         // The custom heartbeat is a short pulse. Replaying it from the player during the final
         // stand keeps it audible while the Human moves instead of leaving a 60-second sound
         // source behind at the revival location.
@@ -39,7 +42,7 @@ object MortalResolveEffects {
 
 
      /** Repositions the custom heartbeat on the Human so it remains audible while moving.  */
-    fun playHeartbeatPulse(player: net.minecraft.server.level.ServerPlayer) {
+    fun playHeartbeatPulse(player: ServerPlayer) {
         // Play a guaranteed local pulse to the Human first, then a normal positional copy for
         // nearby listeners. Keeping the self copy on MASTER with minimum volume 1 avoids the
         // heartbeat disappearing because of player-category attenuation or selector edge cases.
@@ -48,19 +51,19 @@ object MortalResolveEffects {
     }
 
      /** Sparse rising particles during the first moments after activation.  */
-    fun playAfterglow(player: net.minecraft.server.level.ServerPlayer) {
+    fun playAfterglow(player: ServerPlayer) {
         MortalResolveEffects.run(player, "particle minecraft:flame ~ ~1 ~ 0.32 0.65 0.32 0.012 3 force @a[distance=..48]")
         MortalResolveEffects.run(player, "particle minecraft:end_rod ~ ~1 ~ 0.30 0.70 0.30 0.015 2 force @a[distance=..48]")
     }
 
      /** Stops any in-progress custom heartbeat pulse when the final stand ends.  */
-    fun stopHeartbeat(player: net.minecraft.server.level.ServerPlayer) {
+    fun stopHeartbeat(player: ServerPlayer) {
         MortalResolveEffects.run(player, "stopsound @s master andromeda_origins:ability.humanity.mortal_resolve_heartbeat")
         MortalResolveEffects.run(player, "stopsound @a[distance=..40] player andromeda_origins:ability.humanity.mortal_resolve_heartbeat")
     }
 
      /** Contrasting cue for the forced death when the borrowed minute runs out.  */
-    fun playExpiry(player: net.minecraft.server.level.ServerPlayer) {
+    fun playExpiry(player: ServerPlayer) {
         MortalResolveEffects.stopHeartbeat(player)
         EnhancedFxCompat.play(player, "humanity.mortal_resolve_expiry")
         MortalResolveEffects.run(player, "playsound minecraft:entity.warden.heartbeat player @a[distance=..40] ~ ~ ~ 0.55 0.55 0")

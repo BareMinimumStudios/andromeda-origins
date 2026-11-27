@@ -4,17 +4,22 @@ import dev.overgrown.apoli.PowerContainerAttachment
 import dev.overgrown.apoli.power.PowerContainer
 import dev.overgrown.apoli.power.PowerResources
 import dev.overgrown.apoli.power.builtin.AttributePower
+import java.util.UUID
+import kotlin.math.*
+import net.minecraft.core.particles.ParticleTypes
+import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.MinecraftServer
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
+import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.projectile.AbstractArrow
 import net.minecraft.world.entity.projectile.Projectile
-import net.minecraft.world.phys.Vec3
 import net.minecraft.world.level.ClipContext
-import java.util.UUID
-import kotlin.math.*
+import net.minecraft.world.phys.Vec3
 
 /** Bounded, server-owned temporary state. Never serializes a frozen projectile or edits player abilities. */
 object SovereignArts {
@@ -27,7 +32,7 @@ object SovereignArts {
     private val grounded = mutableMapOf<LivingEntity, Grounded>()
     private data class Held(val projectile: Projectile, val velocity: Vec3, val owner: Entity?, val from: Vec3)
     private data class Guard(val started: Int, var refreshed: Int, val held: MutableList<Held> = mutableListOf())
-    private data class Release(val caster: UUID, val held: Held, val level: net.minecraft.server.level.ServerLevel, val at: Int, val aim: Vec3)
+    private data class Release(val caster: UUID, val held: Held, val level: ServerLevel, val at: Int, val aim: Vec3)
     private val releasing = mutableListOf<Release>()
     private val guards = mutableMapOf<UUID, Guard>()
     private val frozen = mutableSetOf<Projectile>()
@@ -41,7 +46,7 @@ object SovereignArts {
             Dawnbreaker.validTarget(player, it) && it.distanceToSqr(player) <= 144 && player.hasLineOfSight(it) &&
                 !(it is ServerPlayer && it.isCreative)
         }.sortedBy { it.distanceToSqr(player) }.take(32)
-        if (targets.isEmpty()) { player.displayClientMessage(net.minecraft.network.chat.Component.literal("Kneel — no eligible enemies within 12 blocks."), true); return }
+        if (targets.isEmpty()) { player.displayClientMessage(Component.literal("Kneel — no eligible enemies within 12 blocks."), true); return }
         for (target in targets) {
             val c = PowerContainerAttachment.getOrCreate(target) ?: continue
             c.addPower(helper, source); c.markDirty()
@@ -53,13 +58,13 @@ object SovereignArts {
         }
         write(player, "kneel_cooldown", 0.0)
         Dawnbreaker.success(player, "Kneel.")
-        if (Dawnbreaker.radiant(player)) player.serverLevel().sendParticles(net.minecraft.core.particles.ParticleTypes.END_ROD, player.x, player.y + .12, player.z, 6, .12, .01, .12, .015)
+        if (Dawnbreaker.radiant(player)) player.serverLevel().sendParticles(ParticleTypes.END_ROD, player.x, player.y + .12, player.z, 6, .12, .01, .12, .015)
     }
     fun hold(player: ServerPlayer) {
         if (!Dawnbreaker.usable(player, guard)) return
         val now = player.server.tickCount
         guards.getOrPut(player.uuid) {
-            Dawnbreaker.abilitySound(player, net.minecraft.sounds.SoundEvents.BEACON_ACTIVATE, .2f, 1.6f)
+            Dawnbreaker.abilitySound(player, SoundEvents.BEACON_ACTIVATE, .2f, 1.6f)
             Guard(now, now)
         }.refreshed = now
     }
@@ -103,7 +108,7 @@ object SovereignArts {
         if (fire && player != null) {
             if (state.held.isNotEmpty()) {
                 DawnbreakerFx.cue(player, 2)
-                Dawnbreaker.abilitySound(player, net.minecraft.sounds.SoundEvents.TRIDENT_THROW.value(), .5f, 1.4f)
+                Dawnbreaker.abilitySound(player, SoundEvents.TRIDENT_THROW.value(), .5f, 1.4f)
             }
             val target = if (state.held.isNotEmpty()) aim(player) else player.eyePosition
             state.held.forEach { held -> releasing.add(Release(player.uuid, held, player.serverLevel(), player.server.tickCount, target)) }
@@ -127,7 +132,7 @@ object SovereignArts {
             val previousSpeed = release.held.velocity.length().coerceIn(1.0, 3.0)
             val returnSpeed = (previousSpeed * 3.0).coerceIn(6.0, 8.0)
             // Arrow damage multiplies base damage by speed: acceleration must not silently multiply damage.
-            if (p is net.minecraft.world.entity.projectile.AbstractArrow) p.setBaseDamage(p.baseDamage * previousSpeed / returnSpeed)
+            if (p is AbstractArrow) p.setBaseDamage(p.baseDamage * previousSpeed / returnSpeed)
             p.shoot(d.x, d.y, d.z, returnSpeed.toFloat(), 0f)
             p.hurtMarked = true
         }
@@ -171,7 +176,7 @@ object SovereignArts {
                 if (!player.hasLineOfSight(p)) continue
                 if (state.held.isEmpty()) {
                     DawnbreakerFx.cue(player, 1)
-                    Dawnbreaker.abilitySound(player, net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_CHIME, .35f, 1.4f)
+                    Dawnbreaker.abilitySound(player, SoundEvents.AMETHYST_BLOCK_CHIME, .35f, 1.4f)
                 }
                 state.held.add(Held(p, p.deltaMovement, p.owner, p.position())); frozen.add(p)
                 if (!p.isNoGravity) { p.addTag(RECOVER_GRAVITY); p.setNoGravity(true) }

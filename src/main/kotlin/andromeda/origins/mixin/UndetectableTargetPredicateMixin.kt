@@ -1,12 +1,19 @@
 package andromeda.origins.mixin
 
 import andromeda.origins.compat.UndetectableCompat
+import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.Mob
+import net.minecraft.world.entity.ai.targeting.TargetingConditions
+import org.spongepowered.asm.mixin.Mixin
+import org.spongepowered.asm.mixin.injection.At
+import org.spongepowered.asm.mixin.injection.Inject
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable
 
 
-@org.spongepowered.asm.mixin.Mixin(net.minecraft.world.entity.ai.targeting.TargetingConditions::class)
+@Mixin(TargetingConditions::class)
 abstract class UndetectableTargetPredicateMixin {
-    @org.spongepowered.asm.mixin.injection.Inject(method = ["test"], at = [org.spongepowered.asm.mixin.injection.At("HEAD")], cancellable = true) private fun `andromeda$rejectUndetectableMobTarget`(baseEntity: net.minecraft.world.entity.LivingEntity, targetEntity: net.minecraft.world.entity.LivingEntity, cir: org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable<kotlin.Boolean>) {
-        if (baseEntity is net.minecraft.world.entity.Mob && UndetectableCompat.isUndetectable(targetEntity)) {
+    @Inject(method = ["test"], at = [At("HEAD")], cancellable = true) private fun `andromeda$rejectUndetectableMobTarget`(baseEntity: LivingEntity, targetEntity: LivingEntity, cir: CallbackInfoReturnable<Boolean>) {
+        if (baseEntity is Mob && UndetectableCompat.isUndetectable(targetEntity)) {
             cir.setReturnValue(false)
         }
     }

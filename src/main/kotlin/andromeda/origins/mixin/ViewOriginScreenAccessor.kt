@@ -1,21 +1,31 @@
 package andromeda.origins.mixin
 
+import dev.overgrown.origins.client.screen.ViewOriginScreen
+import dev.overgrown.origins.origin.Origin
+import dev.overgrown.origins.origin.OriginLayer
+import java.util.ArrayList
+import net.minecraft.client.gui.components.Button
+import net.minecraft.util.Tuple
+import org.spongepowered.asm.mixin.Mixin
+import org.spongepowered.asm.mixin.gen.Accessor
+import org.spongepowered.asm.mixin.gen.Invoker
 
 
 
-@org.spongepowered.asm.mixin.Mixin(dev.overgrown.origins.client.screen.ViewOriginScreen::class)
+
+@Mixin(ViewOriginScreen::class)
 interface ViewOriginScreenAccessor {
-    @org.spongepowered.asm.mixin.gen.Accessor("originLayers") fun `andromeda$getOriginLayers`(): java.util.ArrayList<net.minecraft.util.Tuple<dev.overgrown.origins.origin.OriginLayer, dev.overgrown.origins.origin.Origin>>
+    @Accessor("originLayers") fun `andromeda$getOriginLayers`(): ArrayList<Tuple<OriginLayer, Origin>>
 
-    @org.spongepowered.asm.mixin.gen.Accessor("currentLayer") fun `andromeda$getCurrentLayerIndex`(): kotlin.Int
+    @Accessor("currentLayer") fun `andromeda$getCurrentLayerIndex`(): Int
 
-    @org.spongepowered.asm.mixin.gen.Accessor("currentLayer") fun `andromeda$setCurrentLayerIndex`(index: kotlin.Int)
+    @Accessor("currentLayer") fun `andromeda$setCurrentLayerIndex`(index: Int)
 
-    @org.spongepowered.asm.mixin.gen.Accessor("chooseOriginButton") fun `andromeda$setChooseOriginButton`(button: net.minecraft.client.gui.components.Button?)
+    @Accessor("chooseOriginButton") fun `andromeda$setChooseOriginButton`(button: Button?)
 
-    @org.spongepowered.asm.mixin.gen.Accessor("swapButton") fun `andromeda$setSwapButton`(button: net.minecraft.client.gui.components.Button?)
+    @Accessor("swapButton") fun `andromeda$setSwapButton`(button: Button?)
 
-    @org.spongepowered.asm.mixin.gen.Invoker("refreshChooseButton") fun `andromeda$invokeRefreshChooseButton`()
+    @Invoker("refreshChooseButton") fun `andromeda$invokeRefreshChooseButton`()
 
-    @org.spongepowered.asm.mixin.gen.Invoker("refreshSwapButton") fun `andromeda$invokeRefreshSwapButton`()
+    @Invoker("refreshSwapButton") fun `andromeda$invokeRefreshSwapButton`()
 }

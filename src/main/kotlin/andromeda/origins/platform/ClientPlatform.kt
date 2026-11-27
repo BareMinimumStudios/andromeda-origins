@@ -1,9 +1,11 @@
 package andromeda.origins.platform
 
-import net.minecraft.client.Minecraft
+import com.mojang.blaze3d.vertex.PoseStack
 import java.util.function.Consumer
+import net.minecraft.client.Minecraft
+import net.minecraft.client.renderer.MultiBufferSource
 
-data class WorldFxContext(val pose: com.mojang.blaze3d.vertex.PoseStack, val buffers: net.minecraft.client.renderer.MultiBufferSource, val delta: Float = 1f)
+data class WorldFxContext(val pose: PoseStack, val buffers: MultiBufferSource, val delta: Float = 1f)
 
 interface ClientPlatformBackend {
     fun worldFx(callback: Consumer<WorldFxContext>)

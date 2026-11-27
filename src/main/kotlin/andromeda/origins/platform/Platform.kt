@@ -1,9 +1,13 @@
 package andromeda.origins.platform
 
 import com.mojang.brigadier.CommandDispatcher
+import java.nio.file.Path
+import java.util.function.BiConsumer
+import java.util.function.Consumer
 import net.minecraft.commands.CommandBuildContext
 import net.minecraft.commands.CommandSourceStack
 import net.minecraft.commands.Commands
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.MinecraftServer
 import net.minecraft.server.level.ServerPlayer
@@ -11,9 +15,6 @@ import net.minecraft.server.network.ServerGamePacketListenerImpl
 import net.minecraft.server.packs.resources.ResourceManager
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.LivingEntity
-import java.nio.file.Path
-import java.util.function.Consumer
-import java.util.function.BiConsumer
 
 fun interface JoinCallback { fun run(handler: ServerGamePacketListenerImpl, sender: Any?, server: MinecraftServer) }
 fun interface RespawnCallback { fun run(oldPlayer: ServerPlayer, newPlayer: ServerPlayer, alive: Boolean) }
@@ -39,7 +40,7 @@ interface PlatformBackend {
     fun commands(callback: CommandCallback)
     fun resourceReload(id: ResourceLocation, callback: Consumer<ResourceManager>)
     fun canReceiveCosmetic(player: ServerPlayer, channel: ResourceLocation): Boolean
-    fun sendCosmetic(player: ServerPlayer, payload: net.minecraft.network.protocol.common.custom.CustomPacketPayload)
+    fun sendCosmetic(player: ServerPlayer, payload: CustomPacketPayload)
     fun registerNetworking()
     fun openConfig(player: ServerPlayer)
     fun versionHandshake()
@@ -66,7 +67,7 @@ object Platform {
     @JvmStatic fun commands(callback: CommandCallback) = backend.commands(callback)
     @JvmStatic fun resourceReload(id: ResourceLocation, callback: Consumer<ResourceManager>) = backend.resourceReload(id, callback)
     @JvmStatic fun canReceiveCosmetic(player: ServerPlayer, channel: ResourceLocation) = backend.canReceiveCosmetic(player, channel)
-    @JvmStatic fun sendCosmetic(player: ServerPlayer, payload: net.minecraft.network.protocol.common.custom.CustomPacketPayload) = backend.sendCosmetic(player, payload)
+    @JvmStatic fun sendCosmetic(player: ServerPlayer, payload: CustomPacketPayload) = backend.sendCosmetic(player, payload)
     @JvmStatic fun registerNetworking() = backend.registerNetworking()
     @JvmStatic fun openConfig(player: ServerPlayer) = backend.openConfig(player)
     @JvmStatic fun versionHandshake() = backend.versionHandshake()

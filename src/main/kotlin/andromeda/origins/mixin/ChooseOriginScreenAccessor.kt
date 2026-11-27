@@ -1,27 +1,35 @@
 package andromeda.origins.mixin
 
+import dev.overgrown.origins.client.screen.ChooseOriginScreen
+import dev.overgrown.origins.origin.Origin
+import dev.overgrown.origins.origin.OriginLayer
+import java.util.ArrayList
+import org.spongepowered.asm.mixin.Mixin
+import org.spongepowered.asm.mixin.gen.Accessor
+import org.spongepowered.asm.mixin.gen.Invoker
 
 
 
-@org.spongepowered.asm.mixin.Mixin(dev.overgrown.origins.client.screen.ChooseOriginScreen::class)
+
+@Mixin(ChooseOriginScreen::class)
 interface ChooseOriginScreenAccessor {
-    @org.spongepowered.asm.mixin.gen.Accessor("originSelection") fun `andromeda$getOriginSelection`(): kotlin.collections.MutableList<dev.overgrown.origins.origin.Origin>
+    @Accessor("originSelection") fun `andromeda$getOriginSelection`(): MutableList<Origin>
 
-    @org.spongepowered.asm.mixin.gen.Accessor("currentOrigin") fun `andromeda$getCurrentOriginIndex`(): kotlin.Int
+    @Accessor("currentOrigin") fun `andromeda$getCurrentOriginIndex`(): Int
 
-    @org.spongepowered.asm.mixin.gen.Accessor("currentOrigin") fun `andromeda$setCurrentOriginIndex`(index: kotlin.Int)
+    @Accessor("currentOrigin") fun `andromeda$setCurrentOriginIndex`(index: Int)
 
-    @org.spongepowered.asm.mixin.gen.Accessor("maxSelection") fun `andromeda$getMaxSelection`(): kotlin.Int
+    @Accessor("maxSelection") fun `andromeda$getMaxSelection`(): Int
 
-    @org.spongepowered.asm.mixin.gen.Accessor("maxSelection") fun `andromeda$setMaxSelection`(value: kotlin.Int)
+    @Accessor("maxSelection") fun `andromeda$setMaxSelection`(value: Int)
 
-    @org.spongepowered.asm.mixin.gen.Accessor("layerList") fun `andromeda$getLayerList`(): java.util.ArrayList<dev.overgrown.origins.origin.OriginLayer>
+    @Accessor("layerList") fun `andromeda$getLayerList`(): ArrayList<OriginLayer>
 
-    @org.spongepowered.asm.mixin.gen.Accessor("currentLayerIndex") fun `andromeda$getCurrentLayerIndex`(): kotlin.Int
+    @Accessor("currentLayerIndex") fun `andromeda$getCurrentLayerIndex`(): Int
 
-    @org.spongepowered.asm.mixin.gen.Accessor("fromOrb") fun `andromeda$isFromOrb`(): kotlin.Boolean
+    @Accessor("fromOrb") fun `andromeda$isFromOrb`(): Boolean
 
-    @org.spongepowered.asm.mixin.gen.Invoker("getCurrentOriginInternal") fun `andromeda$invokeGetCurrentOriginInternal`(): dev.overgrown.origins.origin.Origin?
+    @Invoker("getCurrentOriginInternal") fun `andromeda$invokeGetCurrentOriginInternal`(): Origin?
 
-    @org.spongepowered.asm.mixin.gen.Invoker("openNextLayerScreen") fun `andromeda$invokeOpenNextLayerScreen`()
+    @Invoker("openNextLayerScreen") fun `andromeda$invokeOpenNextLayerScreen`()
 }

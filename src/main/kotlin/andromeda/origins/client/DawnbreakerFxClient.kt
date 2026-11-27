@@ -4,18 +4,25 @@ import andromeda.origins.client.config.DawnbreakerVisualConfig
 import andromeda.origins.compat.DawnbreakerPresentation
 import andromeda.origins.network.DawnbreakerFxPayload
 import andromeda.origins.platform.ClientPlatform
-import net.minecraft.client.Minecraft
-import net.minecraft.client.gui.GuiGraphics
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.phys.Vec3
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.math.Axis
+import java.util.WeakHashMap
+import java.util.function.Supplier
+import kotlin.math.cos
+import kotlin.math.sin
+import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava
+import me.fzzyhmstrs.fzzy_config.api.RegisterType
+import net.minecraft.client.Minecraft
+import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.MultiBufferSource
+import net.minecraft.client.renderer.RenderType
+import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.phys.Vec3
 
 object DawnbreakerFxClient {
     lateinit var config: DawnbreakerVisualConfig
     private data class Ghost(val at: Vec3, val yaw: Float, val pitch: Float, val body: Float, val head: Float, val until: Long)
-    private val ghosts = java.util.WeakHashMap<LivingEntity, Ghost>()
+    private val ghosts = WeakHashMap<LivingEntity, Ghost>()
     var renderingGhost = false; private set
     private var world: Any? = null
     private var impactKind = 0
@@ -24,12 +31,12 @@ object DawnbreakerFxClient {
     private var openMenuRequested = false
     fun openConfig() { openMenuRequested = true }
     fun register() {
-        config = me.fzzyhmstrs.fzzy_config.api.ConfigApiJava.registerAndLoadConfig(java.util.function.Supplier { DawnbreakerVisualConfig() }, me.fzzyhmstrs.fzzy_config.api.RegisterType.CLIENT)
+        config = ConfigApiJava.registerAndLoadConfig(Supplier { DawnbreakerVisualConfig() }, RegisterType.CLIENT)
         ClientPlatform.endTick { c ->
             // ChatScreen closes itself after executing a command. Open after that close, not inside it.
             if (openMenuRequested) {
                 openMenuRequested = false
-                me.fzzyhmstrs.fzzy_config.api.ConfigApiJava.openScreen("andromeda_origins.dawnbreaker_visuals")
+                ConfigApiJava.openScreen("andromeda_origins.dawnbreaker_visuals")
             }
             if (world !== c.level || c.player?.isAlive != true) { ghosts.clear(); impactAt = 0; nextImpact = 0; world = c.level }
             ghosts.entries.removeIf { it.key.isRemoved || System.nanoTime() >= it.value.until }
@@ -68,7 +75,7 @@ object DawnbreakerFxClient {
                 pose.pushPose(); pose.translate(ghost.at.x-camera.x, ghost.at.y-camera.y, ghost.at.z-camera.z)
                 pose.mulPose(Axis.YP.rotationDegrees(-ghost.yaw))
                 val scale=(entity.bbHeight/1.8f).coerceIn(.35f,1.8f);pose.scale(scale,scale,scale)
-                val vertices=buffers.getBuffer(net.minecraft.client.renderer.RenderType.debugQuads())
+                val vertices=buffers.getBuffer(RenderType.debugQuads())
                 val matrix=pose.last().pose()
                 fun band(x:Double,y:Double,bx:Double,by:Double) {
                     fun point(a:Double,b:Double){vertices.addVertex(matrix,a.toFloat(),b.toFloat(),0f).setColor(255,216,120,(opacity*255).toInt())}
@@ -76,11 +83,11 @@ object DawnbreakerFxClient {
                 }
                 for(side in listOf(-1.0,1.0)) for(i in 0 until 16) {
                     val u=i/16.0;val v=(i+1)/16.0
-                    band(side*(.15+.18*kotlin.math.sin(u*Math.PI)),.1+u*1.5,side*(.15+.18*kotlin.math.sin(v*Math.PI)),.1+v*1.5)
+                    band(side*(.15+.18*sin(u*Math.PI)),.1+u*1.5,side*(.15+.18*sin(v*Math.PI)),.1+v*1.5)
                 }
-                for(i in 0 until 24) {val a=i*Math.PI/12;val b=(i+1)*Math.PI/12;band(kotlin.math.cos(a)*.13,1.75+kotlin.math.sin(a)*.13,kotlin.math.cos(b)*.13,1.75+kotlin.math.sin(b)*.13)}
+                for(i in 0 until 24) {val a=i*Math.PI/12;val b=(i+1)*Math.PI/12;band(cos(a)*.13,1.75+sin(a)*.13,cos(b)*.13,1.75+sin(b)*.13)}
                 pose.popPose()
-                (buffers as? MultiBufferSource.BufferSource)?.endBatch(net.minecraft.client.renderer.RenderType.debugQuads())
+                (buffers as? MultiBufferSource.BufferSource)?.endBatch(RenderType.debugQuads())
             }
             true
         } finally { renderingGhost = false }

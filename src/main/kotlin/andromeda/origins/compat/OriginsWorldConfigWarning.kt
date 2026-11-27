@@ -1,6 +1,18 @@
 package andromeda.origins.compat
 
+import andromeda.origins.platform.Platform
 import andromeda.origins.platform.ReloadCallback
+import com.google.gson.JsonElement
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
+import java.nio.file.Files
+import java.nio.file.Path
+import java.util.function.Consumer
+import net.minecraft.server.MinecraftServer
+import net.minecraft.server.packs.resources.ResourceManager
+import net.minecraft.world.level.storage.LevelResource
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 
  /**
@@ -12,25 +24,25 @@ import andromeda.origins.platform.ReloadCallback
  * entries that were disabled there. We intentionally do not overwrite the upstream file.
  */
 object OriginsWorldConfigWarning {
-    val LOGGER: org.slf4j.Logger = org.slf4j.LoggerFactory.getLogger("Andromeda Origins/Origins World Config")
+    val LOGGER: Logger = LoggerFactory.getLogger("Andromeda Origins/Origins World Config")
 
     fun register() {
-        andromeda.origins.platform.Platform.serverStarted(java.util.function.Consumer callback@ { obj: net.minecraft.server.MinecraftServer -> OriginsWorldConfigWarning.check(obj)})
-        andromeda.origins.platform.Platform.reload(ReloadCallback callback@ { server: net.minecraft.server.MinecraftServer, resourceManager: net.minecraft.server.packs.resources.ResourceManager, success: kotlin.Boolean -> if (success) OriginsWorldConfigWarning.check(server)
+        Platform.serverStarted(Consumer callback@ { obj: MinecraftServer -> OriginsWorldConfigWarning.check(obj)})
+        Platform.reload(ReloadCallback callback@ { server: MinecraftServer, resourceManager: ResourceManager, success: Boolean -> if (success) OriginsWorldConfigWarning.check(server)
         })
     }
 
-    private fun check(server: net.minecraft.server.MinecraftServer) {
-        val path: java.nio.file.Path = server.getWorldPath(net.minecraft.world.level.storage.LevelResource.ROOT).resolve("origins/config.json")
-        if (!java.nio.file.Files.isRegularFile(path)) return
+    private fun check(server: MinecraftServer) {
+        val path: Path = server.getWorldPath(LevelResource.ROOT).resolve("origins/config.json")
+        if (!Files.isRegularFile(path)) return
 
         try {
-            val parsed: com.google.gson.JsonElement = com.google.gson.JsonParser.parseString(java.nio.file.Files.readString(path))
+            val parsed: JsonElement = JsonParser.parseString(Files.readString(path))
             if (!parsed.isJsonObject()) return
-            val root: com.google.gson.JsonObject = parsed.getAsJsonObject()
-            val disabledOrigins: kotlin.Int = OriginsWorldConfigWarning.disabledAndromedaOrigins(root)
-            val disabledPowers: kotlin.Int = OriginsWorldConfigWarning.disabledAndromedaPowers(root)
-            val layerBlocks: kotlin.Int = OriginsWorldConfigWarning.disabledAndromedaLayerEntries(root)
+            val root: JsonObject = parsed.getAsJsonObject()
+            val disabledOrigins: Int = OriginsWorldConfigWarning.disabledAndromedaOrigins(root)
+            val disabledPowers: Int = OriginsWorldConfigWarning.disabledAndromedaPowers(root)
+            val layerBlocks: Int = OriginsWorldConfigWarning.disabledAndromedaLayerEntries(root)
             if (disabledOrigins == 0 && disabledPowers == 0 && layerBlocks == 0) return
 
             OriginsWorldConfigWarning.LOGGER.warn(
@@ -40,31 +52,31 @@ object OriginsWorldConfigWarning {
             + "Config for Andromeda Origins unless this double-filtering is intentional."),
             path, disabledOrigins, disabledPowers, layerBlocks
             )
-        }catch (exception: java.lang.Exception) {
+        }catch (exception: Exception) {
             OriginsWorldConfigWarning.LOGGER.warn("Could not inspect Overgrown Origins world config {} for Andromeda conflicts.", path, exception)
         }
     }
 
-    private fun disabledAndromedaOrigins(root: com.google.gson.JsonObject): kotlin.Int {
-        val origins: com.google.gson.JsonObject? = OriginsWorldConfigWarning.`object`(root, "origins")
+    private fun disabledAndromedaOrigins(root: JsonObject): Int {
+        val origins: JsonObject? = OriginsWorldConfigWarning.`object`(root, "origins")
         if (origins == null) return 0
-        var count: kotlin.Int = 0
+        var count: Int = 0
         for (entry in origins.entrySet()) {
             if (!OriginsWorldConfigWarning.isAndromeda(entry.key) || !entry.value.isJsonObject()) continue
-            val toggle: com.google.gson.JsonObject = entry.value.getAsJsonObject()
-            val enabled: com.google.gson.JsonElement? = toggle.get("enabled")
+            val toggle: JsonObject = entry.value.getAsJsonObject()
+            val enabled: JsonElement? = toggle.get("enabled")
             if (enabled != null && enabled.isJsonPrimitive() && !enabled.getAsBoolean()) count++
         }
         return count
     }
 
-    private fun disabledAndromedaPowers(root: com.google.gson.JsonObject): kotlin.Int {
-        val origins: com.google.gson.JsonObject? = OriginsWorldConfigWarning.`object`(root, "origins")
+    private fun disabledAndromedaPowers(root: JsonObject): Int {
+        val origins: JsonObject? = OriginsWorldConfigWarning.`object`(root, "origins")
         if (origins == null) return 0
-        var count: kotlin.Int = 0
+        var count: Int = 0
         for (entry in origins.entrySet()) {
             if (!OriginsWorldConfigWarning.isAndromeda(entry.key) || !entry.value.isJsonObject()) continue
-            val powers: com.google.gson.JsonObject? = OriginsWorldConfigWarning.`object`(entry.value.getAsJsonObject(), "powers")
+            val powers: JsonObject? = OriginsWorldConfigWarning.`object`(entry.value.getAsJsonObject(), "powers")
             if (powers == null) continue
             for (power in powers.entrySet()) {
                 if (power.value.isJsonPrimitive() && !power.value.getAsBoolean()) count++
@@ -73,13 +85,13 @@ object OriginsWorldConfigWarning {
         return count
     }
 
-    private fun disabledAndromedaLayerEntries(root: com.google.gson.JsonObject): kotlin.Int {
-        val layers: com.google.gson.JsonObject? = OriginsWorldConfigWarning.`object`(root, "layers")
+    private fun disabledAndromedaLayerEntries(root: JsonObject): Int {
+        val layers: JsonObject? = OriginsWorldConfigWarning.`object`(root, "layers")
         if (layers == null) return 0
-        var count: kotlin.Int = 0
+        var count: Int = 0
         for (layer in layers.entrySet()) {
             if (!layer.value.isJsonObject()) continue
-            val origins: com.google.gson.JsonObject? = OriginsWorldConfigWarning.`object`(layer.value.getAsJsonObject(), "origins")
+            val origins: JsonObject? = OriginsWorldConfigWarning.`object`(layer.value.getAsJsonObject(), "origins")
             if (origins == null) continue
             for (origin in origins.entrySet()) {
                 if (OriginsWorldConfigWarning.isAndromeda(origin.key) && origin.value.isJsonPrimitive()
@@ -89,12 +101,12 @@ object OriginsWorldConfigWarning {
         return count
     }
 
-    private fun `object`(parent: com.google.gson.JsonObject, key: kotlin.String?): com.google.gson.JsonObject? {
-        val value: com.google.gson.JsonElement? = parent.get(key)
+    private fun `object`(parent: JsonObject, key: String?): JsonObject? {
+        val value: JsonElement? = parent.get(key)
         return if (value != null && value.isJsonObject()) value.getAsJsonObject() else null
     }
 
-    private fun isAndromeda(id: kotlin.String?): kotlin.Boolean {
+    private fun isAndromeda(id: String?): Boolean {
         return id != null && id.startsWith("andromeda_origins:")
     }
 }

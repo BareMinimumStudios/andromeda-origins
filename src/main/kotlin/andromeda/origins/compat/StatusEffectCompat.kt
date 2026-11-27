@@ -1,5 +1,11 @@
 package andromeda.origins.compat
 
+import java.util.ArrayList
+import net.minecraft.core.Holder
+import net.minecraft.server.level.ServerPlayer
+import net.minecraft.world.effect.MobEffect
+import net.minecraft.world.effect.MobEffectCategory
+
 
 
 
@@ -15,17 +21,17 @@ object StatusEffectCompat {
  *
  * @return the number of status effects removed
  */
-    fun clearHarmfulEffects(player: net.minecraft.server.level.ServerPlayer): kotlin.Int {
-        val harmful: kotlin.collections.MutableList<net.minecraft.core.Holder<net.minecraft.world.effect.MobEffect>> = java.util.ArrayList<net.minecraft.core.Holder<net.minecraft.world.effect.MobEffect>>()
+    fun clearHarmfulEffects(player: ServerPlayer): Int {
+        val harmful: MutableList<Holder<MobEffect>> = ArrayList<Holder<MobEffect>>()
 
         for (instance in player.getActiveEffects()) {
-            val effect: net.minecraft.core.Holder<net.minecraft.world.effect.MobEffect> = instance.getEffect()
-            if (effect.value().getCategory() == net.minecraft.world.effect.MobEffectCategory.HARMFUL) {
+            val effect: Holder<MobEffect> = instance.getEffect()
+            if (effect.value().getCategory() == MobEffectCategory.HARMFUL) {
                 harmful.add(effect)
             }
         }
 
-        var removed: kotlin.Int = 0
+        var removed: Int = 0
         for (effect in harmful) {
             if (player.removeEffect(effect)) {
                 removed++

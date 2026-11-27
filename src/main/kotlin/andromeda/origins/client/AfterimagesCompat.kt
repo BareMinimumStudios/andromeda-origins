@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.phys.Vec3
+import org.slf4j.LoggerFactory
 
 /** Optional native Afterimages compositing, with no linked classes or global resource-pack overrides. */
 object AfterimagesCompat {
@@ -31,7 +32,7 @@ object AfterimagesCompat {
             true
         } catch (e: Exception) {
             failed = true
-            org.slf4j.LoggerFactory.getLogger("andromeda_origins").warn("Optional Afterimages compositing unavailable; using the light-outline fallback.", e)
+            LoggerFactory.getLogger("andromeda_origins").warn("Optional Afterimages compositing unavailable; using the light-outline fallback.", e)
             false
         } finally {
             bridge.current.set(null, previous)

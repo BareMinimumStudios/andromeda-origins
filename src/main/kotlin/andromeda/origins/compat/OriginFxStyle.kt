@@ -1,13 +1,15 @@
 package andromeda.origins.compat
 
 import andromeda.origins.config.AndromedaConfigBootstrap
+import java.util.WeakHashMap
+import kotlin.math.ceil
 import net.minecraft.world.entity.Entity
 
 /** Cosmetic budgets are per emitting entity; unrelated mods and gameplay actions are untouched. */
 object OriginFxStyle {
     enum class Quality { MINIMAL, STANDARD, CINEMATIC }
     private class Budget(var tick: Int, var particles: Int = 0, var sounds: Int = 0, val recent: MutableMap<String, Int> = mutableMapOf())
-    private val budgets = java.util.WeakHashMap<Entity, Budget>()
+    private val budgets = WeakHashMap<Entity, Budget>()
     fun quality() = AndromedaConfigBootstrap.config().visuals.quality.get()
     private fun budget(e: Entity): Budget {
         val b = budgets.getOrPut(e) { Budget(e.tickCount) }
@@ -23,7 +25,7 @@ object OriginFxStyle {
         if (requested == 0) { b.particles++; return 0 }
         val factor = when (quality()) { Quality.MINIMAL -> .45; Quality.STANDARD -> .85; Quality.CINEMATIC -> 1.0 }
         val burst = when (quality()) { Quality.MINIMAL -> 6; Quality.STANDARD -> 12; Quality.CINEMATIC -> 16 }
-        val n = kotlin.math.ceil(requested.coerceAtLeast(1) * factor).toInt().coerceIn(1, minOf(burst, remaining))
+        val n = ceil(requested.coerceAtLeast(1) * factor).toInt().coerceIn(1, minOf(burst, remaining))
         b.particles += n; return n
     }
     @Synchronized fun sound(e: Entity, id: String): Boolean {

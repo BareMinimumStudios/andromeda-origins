@@ -1,10 +1,12 @@
 package andromeda.origins.compat
 
+import andromeda.origins.platform.Platform
+
 
 
 object VersionHandshake {
-    fun currentVersion(): kotlin.String {
-        return andromeda.origins.platform.Platform.version()}
+    fun currentVersion(): String {
+        return Platform.version()}
     fun registerServer() {
-        andromeda.origins.platform.Platform.versionHandshake()}
+        Platform.versionHandshake()}
 }

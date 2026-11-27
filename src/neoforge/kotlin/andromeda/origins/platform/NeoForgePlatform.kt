@@ -1,7 +1,26 @@
 package andromeda.origins.platform
 
 import andromeda.origins.AndromedaOrigins
+import andromeda.origins.client.DawnbreakerAudio
+import andromeda.origins.client.DawnbreakerFxClient
+import andromeda.origins.client.OriginFxRenderer
+import andromeda.origins.network.BanishmentHeartbeatPayload
+import andromeda.origins.network.DawnbreakerFxPayload
 import andromeda.origins.network.OpenConfigPayload
+import andromeda.origins.network.OriginFxPayload
+import java.util.UUID
+import java.util.function.BiConsumer
+import java.util.function.Consumer
+import net.minecraft.core.registries.Registries
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.server.MinecraftServer
+import net.minecraft.server.level.ServerPlayer
+import net.minecraft.server.network.ServerGamePacketListenerImpl
+import net.minecraft.server.packs.resources.ResourceManager
+import net.minecraft.server.packs.resources.ResourceManagerReloadListener
+import net.minecraft.sounds.SoundEvent
+import net.minecraft.world.item.Item
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.IEventBus
 import net.neoforged.fml.ModList
@@ -20,14 +39,7 @@ import net.neoforged.neoforge.event.server.ServerStoppedEvent
 import net.neoforged.neoforge.event.tick.ServerTickEvent
 import net.neoforged.neoforge.network.PacketDistributor
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
-import net.minecraft.resources.ResourceLocation
-import net.minecraft.server.MinecraftServer
-import net.minecraft.server.level.ServerPlayer
-import net.minecraft.server.network.ServerGamePacketListenerImpl
-import net.minecraft.server.packs.resources.ResourceManager
-import net.minecraft.server.packs.resources.ResourceManagerReloadListener
-import java.util.function.Consumer
-import java.util.function.BiConsumer
+import net.neoforged.neoforge.registries.RegisterEvent
 
 @Mod(AndromedaOrigins.MOD_ID)
 class NeoForgeEntrypoint(bus: IEventBus) {
@@ -40,16 +52,16 @@ class NeoForgeEntrypoint(bus: IEventBus) {
 
 class NeoForgePlatform(private val modBus: IEventBus) : PlatformBackend {
     override fun registerItem(id: ResourceLocation) {
-        modBus.addListener(Consumer<net.neoforged.neoforge.registries.RegisterEvent> { event ->
-            event.register(net.minecraft.core.registries.Registries.ITEM, id) {
-                net.minecraft.world.item.Item(net.minecraft.world.item.Item.Properties())
+        modBus.addListener(Consumer<RegisterEvent> { event ->
+            event.register(Registries.ITEM, id) {
+                Item(Item.Properties())
             }
         })
     }
     override fun registerSound(id: ResourceLocation) {
-        modBus.addListener(Consumer<net.neoforged.neoforge.registries.RegisterEvent> { event ->
-            event.register(net.minecraft.core.registries.Registries.SOUND_EVENT, id) {
-                net.minecraft.sounds.SoundEvent.createVariableRangeEvent(id)
+        modBus.addListener(Consumer<RegisterEvent> { event ->
+            event.register(Registries.SOUND_EVENT, id) {
+                SoundEvent.createVariableRangeEvent(id)
             }
         })
     }
@@ -78,7 +90,7 @@ class NeoForgePlatform(private val modBus: IEventBus) : PlatformBackend {
         })
     }
     override fun respawn(callback: RespawnCallback) {
-        val originals = mutableMapOf<java.util.UUID, Pair<ServerPlayer, Boolean>>()
+        val originals = mutableMapOf<UUID, Pair<ServerPlayer, Boolean>>()
         NeoForge.EVENT_BUS.addListener(Consumer<PlayerEvent.Clone> { event ->
             val new = event.entity as? ServerPlayer ?: return@Consumer
             val old = event.original as? ServerPlayer ?: return@Consumer
@@ -107,22 +119,22 @@ class NeoForgePlatform(private val modBus: IEventBus) : PlatformBackend {
     override fun registerNetworking() {
         modBus.addListener(Consumer<RegisterPayloadHandlersEvent> { event ->
             // Required, exact-version payload negotiation rejects missing or mismatched clients.
-            event.registrar(version()).playToClient(andromeda.origins.network.DawnbreakerFxPayload.TYPE, andromeda.origins.network.DawnbreakerFxPayload.CODEC) { payload, context ->
-                context.enqueueWork { andromeda.origins.client.DawnbreakerFxClient.receive(payload) }
+            event.registrar(version()).playToClient(DawnbreakerFxPayload.TYPE, DawnbreakerFxPayload.CODEC) { payload, context ->
+                context.enqueueWork { DawnbreakerFxClient.receive(payload) }
             }
-            event.registrar(version()).playToClient(andromeda.origins.network.OriginFxPayload.TYPE, andromeda.origins.network.OriginFxPayload.CODEC) { payload, context ->
-                context.enqueueWork { andromeda.origins.client.OriginFxRenderer.receive(payload) }
+            event.registrar(version()).playToClient(OriginFxPayload.TYPE, OriginFxPayload.CODEC) { payload, context ->
+                context.enqueueWork { OriginFxRenderer.receive(payload) }
             }
             event.registrar(version()).playToClient(OpenConfigPayload.TYPE, OpenConfigPayload.CODEC) { _, context ->
                 context.enqueueWork { NeoForgeClientPlatform.openConfig() }
             }
-            event.registrar(version()).playToClient(andromeda.origins.network.BanishmentHeartbeatPayload.TYPE, andromeda.origins.network.BanishmentHeartbeatPayload.CODEC) { _, context ->
-                context.enqueueWork { andromeda.origins.client.DawnbreakerAudio.playBanishmentHeartbeat() }
+            event.registrar(version()).playToClient(BanishmentHeartbeatPayload.TYPE, BanishmentHeartbeatPayload.CODEC) { _, context ->
+                context.enqueueWork { DawnbreakerAudio.playBanishmentHeartbeat() }
             }
         })
     }
     override fun canReceiveCosmetic(player: ServerPlayer, channel: ResourceLocation): Boolean = player.connection.hasChannel(channel)
-    override fun sendCosmetic(player: ServerPlayer, payload: net.minecraft.network.protocol.common.custom.CustomPacketPayload) { PacketDistributor.sendToPlayer(player, payload) }
+    override fun sendCosmetic(player: ServerPlayer, payload: CustomPacketPayload) { PacketDistributor.sendToPlayer(player, payload) }
 
     override fun openConfig(player: ServerPlayer) = PacketDistributor.sendToPlayer(player, OpenConfigPayload.INSTANCE)
     override fun versionHandshake() { /* NeoForge negotiates the required payload version. */ }

@@ -1,10 +1,13 @@
 package andromeda.origins.network
 
+import andromeda.origins.platform.Platform
+import net.minecraft.server.level.ServerPlayer
+
 
 
 object AndromedaConfigOpenNetworking {
     fun registerServer() {
-        andromeda.origins.platform.Platform.registerNetworking()}
-    fun open(player: net.minecraft.server.level.ServerPlayer) {
-        andromeda.origins.platform.Platform.openConfig(player)}
+        Platform.registerNetworking()}
+    fun open(player: ServerPlayer) {
+        Platform.openConfig(player)}
 }

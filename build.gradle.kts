@@ -2,6 +2,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.ClassWriter
 import org.objectweb.asm.ClassVisitor
+import org.objectweb.asm.FieldVisitor
+import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
 import groovy.json.JsonSlurper
 
@@ -238,11 +240,11 @@ val verifyStaticMixinBytecode = tasks.register("verifyStaticMixinBytecode") {
                 val output = task.destinationDirectory.get().asFile.resolve(relative)
                 if (output.exists()) {
                     ClassReader(output.readBytes()).accept(object : ClassVisitor(Opcodes.ASM9) {
-                        override fun visitField(access: Int, name: String, descriptor: String, signature: String?, value: Any?): org.objectweb.asm.FieldVisitor? {
+                        override fun visitField(access: Int, name: String, descriptor: String, signature: String?, value: Any?): FieldVisitor? {
                             check(name != "INSTANCE") { "Mixin singleton field remains: $output" }
                             return null
                         }
-                        override fun visitMethod(access: Int, name: String, descriptor: String, signature: String?, exceptions: Array<out String>?): org.objectweb.asm.MethodVisitor? {
+                        override fun visitMethod(access: Int, name: String, descriptor: String, signature: String?, exceptions: Array<out String>?): MethodVisitor? {
                             check(name != "<init>" && name != "<clinit>") { "Mixin initializer remains: $output" }
                             check(access and Opcodes.ACC_STATIC != 0) { "Static Mixin callback became an instance method: $output::$name" }
                             return null

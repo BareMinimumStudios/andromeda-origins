@@ -1,28 +1,38 @@
 package andromeda.origins
 
-import andromeda.origins.action.AndromedaActions
-import andromeda.origins.compat.EnhancedFxCompat
-import andromeda.origins.compat.VeilStepManager
-import andromeda.origins.compat.MortalResolveManager
-import andromeda.origins.config.AndromedaConfigBootstrap
-import andromeda.origins.network.AndromedaConfigOpenNetworking
-import andromeda.origins.config.OriginConfigCatalog
 import andromeda.origins.AndromedaSounds
-import andromeda.origins.compat.VersionHandshake
+import andromeda.origins.action.AndromedaActions
+import andromeda.origins.action.AndromedaConditions
 import andromeda.origins.command.AndromedaOriginsCommands
-import andromeda.origins.compat.OriginsWorldConfigWarning
-import andromeda.origins.compat.VeilbornShimmer
+import andromeda.origins.compat.CrowdControlLifecycle
+import andromeda.origins.compat.Dawnbreaker
+import andromeda.origins.compat.EnhancedFxCompat
 import andromeda.origins.compat.FiguraCompatManager
+import andromeda.origins.compat.FoodBalanceCompat
+import andromeda.origins.compat.LichlingSunlight
+import andromeda.origins.compat.MortalResolveManager
+import andromeda.origins.compat.OriginsWorldConfigWarning
+import andromeda.origins.compat.PlayerOriginRepair
+import andromeda.origins.compat.RestraintCleanup
+import andromeda.origins.compat.VeilStepManager
+import andromeda.origins.compat.VeilbornShimmer
+import andromeda.origins.compat.VersionHandshake
+import andromeda.origins.compat.WebbedLifecycle
+import andromeda.origins.config.AndromedaConfigBootstrap
+import andromeda.origins.config.OriginConfigCatalog
+import andromeda.origins.network.AndromedaConfigOpenNetworking
+import andromeda.origins.platform.Platform
+import net.minecraft.resources.ResourceLocation
 
 
 object AndromedaOrigins {
-    const val MOD_ID: kotlin.String = "andromeda_origins"
+    const val MOD_ID: String = "andromeda_origins"
 
      // Datapack, asset, registry, power, tag, and Figura-facing content uses the mod namespace.
-    val CONTENT_NAMESPACE: kotlin.String = AndromedaOrigins.MOD_ID
+    val CONTENT_NAMESPACE: String = AndromedaOrigins.MOD_ID
 
-    private fun registerIcon(path: kotlin.String) {
-        andromeda.origins.platform.Platform.registerItem(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(CONTENT_NAMESPACE, path))
+    private fun registerIcon(path: String) {
+        Platform.registerItem(ResourceLocation.fromNamespaceAndPath(CONTENT_NAMESPACE, path))
     }
 
     fun initialize() {
@@ -36,22 +46,22 @@ object AndromedaOrigins {
         AndromedaSounds.register()
         VersionHandshake.registerServer()
         EnhancedFxCompat.initialize()
-        andromeda.origins.action.AndromedaConditions.register()
+        AndromedaConditions.register()
         AndromedaActions.register()
         AndromedaOriginsCommands.register()
-        andromeda.origins.compat.Dawnbreaker.register()
+        Dawnbreaker.register()
         MortalResolveManager.register()
         OriginsWorldConfigWarning.register()
         VeilStepManager.register()
         VeilbornShimmer.register()
 
-        andromeda.origins.compat.PlayerOriginRepair.register()
+        PlayerOriginRepair.register()
         FiguraCompatManager.register()
-        andromeda.origins.compat.CrowdControlLifecycle.register()
-        andromeda.origins.compat.WebbedLifecycle.register()
-        andromeda.origins.compat.RestraintCleanup.register()
-        andromeda.origins.compat.LichlingSunlight.register()
-        andromeda.origins.compat.FoodBalanceCompat.register()
+        CrowdControlLifecycle.register()
+        WebbedLifecycle.register()
+        RestraintCleanup.register()
+        LichlingSunlight.register()
+        FoodBalanceCompat.register()
 
     }
 }

@@ -3,10 +3,14 @@ package andromeda.origins.client
 import andromeda.origins.network.OriginFxPayload
 import andromeda.origins.platform.ClientPlatform
 import com.mojang.blaze3d.vertex.VertexConsumer
-import net.minecraft.client.Minecraft
-import net.minecraft.client.renderer.RenderType
-import org.joml.Matrix4f
+import com.mojang.math.Axis
 import kotlin.math.*
+import net.minecraft.client.Minecraft
+import net.minecraft.client.renderer.MultiBufferSource
+import net.minecraft.client.renderer.RenderType
+import net.minecraft.util.Mth
+import net.minecraft.world.entity.LivingEntity
+import org.joml.Matrix4f
 
 /** Small finite ribbon compositions. Never creates billboard clouds or world entities. */
 object OriginFxRenderer {
@@ -30,20 +34,20 @@ object OriginFxRenderer {
                 if (actor?.isInvisibleTo(player) == true || camera.distanceToSqr(at) > 32.0 * 32.0) continue
                 val t = ((now - fx.started).toDouble() / fx.duration).toFloat(); if (t !in 0f..1f) continue
                 context.pose.pushPose(); context.pose.translate(at.x-camera.x,at.y-camera.y,at.z-camera.z)
-                val scale = if (attached && actor is net.minecraft.world.entity.LivingEntity) (actor.bbHeight / 1.8f).coerceIn(.35f,1.8f) else fx.scale
-                val yaw = if (attached) net.minecraft.util.Mth.rotLerp(context.delta,actor!!.yRotO,actor.yRot) else fx.yaw
-                context.pose.mulPose(com.mojang.math.Axis.YP.rotationDegrees(-yaw))
+                val scale = if (attached && actor is LivingEntity) (actor.bbHeight / 1.8f).coerceIn(.35f,1.8f) else fx.scale
+                val yaw = if (attached) Mth.rotLerp(context.delta,actor!!.yRotO,actor.yRot) else fx.yaw
+                context.pose.mulPose(Axis.YP.rotationDegrees(-yaw))
                 context.pose.scale(scale,scale,scale)
                 val mode = fx.packet.mode and 3
                 val sweep = if (mode == 1) t * 55f else t * 105f
-                context.pose.mulPose(com.mojang.math.Axis.YP.rotationDegrees(sweep))
+                context.pose.mulPose(Axis.YP.rotationDegrees(sweep))
                 val expansion = if (mode == 2) .45f + t * .85f else .72f + .3f * sin(t * PI.toFloat() / 2)
                 context.pose.scale(expansion, 1f, expansion)
                 context.pose.translate(0.0, (if (mode == 1) sin(t * PI) * .08 else t * .18).toDouble(), 0.0)
                 draw(fx.packet,t,context.pose.last().pose(),context.buffers.getBuffer(RenderType.debugQuads()))
                 context.pose.popPose()
             }
-            (context.buffers as? net.minecraft.client.renderer.MultiBufferSource.BufferSource)?.endBatch(RenderType.debugQuads())
+            (context.buffers as? MultiBufferSource.BufferSource)?.endBatch(RenderType.debugQuads())
         }
     }
     fun receive(p: OriginFxPayload) {
@@ -57,7 +61,7 @@ object OriginFxRenderer {
         effects.removeIf { it.packet.actor==p.actor && it.packet.family==p.family && it.packet.mode==p.mode }
         while (effects.count { it.packet.actor==p.actor }>=2) effects.removeAt(effects.indexOfFirst { it.packet.actor==p.actor })
         if (effects.size>=24) effects.removeAt(0)
-        effects.add(Effect(p,System.nanoTime(),if(p.mode and 3==1) 450_000_000L else if(p.mode and 3==2) 550_000_000L else 700_000_000L,actor?.yRot ?: 0f,if(actor is net.minecraft.world.entity.LivingEntity) (actor.bbHeight / 1.8f).coerceIn(.35f,1.8f) else 1f))
+        effects.add(Effect(p,System.nanoTime(),if(p.mode and 3==1) 450_000_000L else if(p.mode and 3==2) 550_000_000L else 700_000_000L,actor?.yRot ?: 0f,if(actor is LivingEntity) (actor.bbHeight / 1.8f).coerceIn(.35f,1.8f) else 1f))
     }
     private fun draw(p: OriginFxPayload, t: Float, m: Matrix4f, v: VertexConsumer) {
         val fade = min(1f,t/.08f) * (1f-t).pow(1.4f); val alpha = (.7f*fade).coerceIn(0f,.7f)

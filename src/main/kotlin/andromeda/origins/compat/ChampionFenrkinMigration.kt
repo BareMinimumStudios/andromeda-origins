@@ -3,6 +3,7 @@ package andromeda.origins.compat
 import dev.overgrown.apoli.power.PowerContainer
 import dev.overgrown.apoli.power.PowerResources
 import dev.overgrown.origins.component.PlayerOriginsAttachment
+import kotlin.math.ceil
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.level.ServerPlayer
 
@@ -25,7 +26,7 @@ object ChampionFenrkinMigration {
             val saved = transfers.mapNotNull { (child, scale) ->
                 val from = id("fenrkin/${ability}_$child")
                 if (!c.hasPower(from)) null else id("champion/fenrkin_${ability}_$child") to
-                    kotlin.math.ceil(PowerResources.read(c, from).asDouble * scale).toInt()
+                    ceil(PowerResources.read(c, from).asDouble * scale).toInt()
             }
             for (owner in obsolete) c.removePower(old, owner)
             for ((resource, value) in saved) PowerResources.write(c, resource, value.toDouble())

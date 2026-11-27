@@ -1,5 +1,6 @@
 package andromeda.origins.compat
 
+import andromeda.origins.network.BanishmentHeartbeatPayload
 import andromeda.origins.platform.Platform
 import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
@@ -11,27 +12,38 @@ import dev.overgrown.apoli.power.PowerContainer
 import dev.overgrown.apoli.power.PowerResources
 import dev.overgrown.apoli.power.builtin.AttributePower
 import dev.overgrown.origins.component.PlayerOriginsAttachment
+import java.util.UUID
+import kotlin.math.*
 import net.minecraft.core.particles.BlockParticleOption
 import net.minecraft.core.particles.DustParticleOptions
 import net.minecraft.core.particles.ParticleTypes
+import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.core.registries.Registries
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.MinecraftServer
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
+import net.minecraft.sounds.SoundEvent
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.sounds.SoundSource
 import net.minecraft.tags.TagKey
-import net.minecraft.core.registries.Registries
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.TamableAnimal
 import net.minecraft.world.entity.RelativeMovement
+import net.minecraft.world.entity.TamableAnimal
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.entity.projectile.AbstractArrow
+import net.minecraft.world.entity.projectile.Arrow
+import net.minecraft.world.entity.projectile.Projectile
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 import net.minecraft.world.level.ClipContext
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.phys.Vec3
 import org.joml.Vector3f
-import java.util.UUID
-import kotlin.math.*
 
 /** Champion-only casts. Persistent costs live in native resource powers; world mutation stays on the server. */
 object Dawnbreaker {
@@ -113,7 +125,7 @@ object Dawnbreaker {
     private fun ally(actor: LivingEntity, target: LivingEntity): Boolean {
         if (actor === target) return true
         // Rank/nameplate teams may intentionally allow PvP; membership alone is not protection.
-        if (actor is net.minecraft.world.entity.player.Player && target is net.minecraft.world.entity.player.Player) {
+        if (actor is Player && target is Player) {
             val team = actor.team
             if (team != null && team.isAlliedTo(target.team)) return !team.isAllowFriendlyFire
         }
@@ -147,7 +159,7 @@ object Dawnbreaker {
         val from = player.position()
         if (!player.teleportTo(level, destination.x, destination.y, destination.z, mutableSetOf<RelativeMovement>(), player.yRot, player.xRot)) return
         player.deltaMovement = Vec3.ZERO; player.fallDistance = 0f
-        sound(level, from, net.minecraft.sounds.SoundEvents.ENDERMAN_TELEPORT, .32f, 1.7f)
+        sound(level, from, SoundEvents.ENDERMAN_TELEPORT, .32f, 1.7f)
         DawnbreakerFx.cue(player, 0, from)
         set(player, id("dawnbreaker/presentation"), "step_x", from.x)
         set(player, id("dawnbreaker/presentation"), "step_y", from.y)
@@ -184,9 +196,9 @@ object Dawnbreaker {
                 player.serverLevel().sendParticles(gold, at.x, at.y, at.z, 1, .015, .015, .015, 0.0)
             }
         }
-        sound(player.serverLevel(), player.position(), net.minecraft.sounds.SoundEvents.BEACON_POWER_SELECT, .45f, 1.2f)
+        sound(player.serverLevel(), player.position(), SoundEvents.BEACON_POWER_SELECT, .45f, 1.2f)
         // A target can be 32 blocks away, outside the caster cue's audible radius.
-        sound(player.serverLevel(), target.position(), net.minecraft.sounds.SoundEvents.AMETHYST_CLUSTER_HIT, .65f, .75f)
+        sound(player.serverLevel(), target.position(), SoundEvents.AMETHYST_CLUSTER_HIT, .65f, .75f)
         success(player, "Transference.")
     }
     private fun castAura(player: ServerPlayer) {
@@ -194,7 +206,7 @@ object Dawnbreaker {
         val refreshing = resource(player, aura, "active") > 0
         set(player, aura, "active", 400.0)
         set(player, aura, "cooldown", 0.0)
-        if (!refreshing) sound(player.serverLevel(), player.position(), net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_RESONATE, .18f, .65f)
+        if (!refreshing) sound(player.serverLevel(), player.position(), SoundEvents.AMETHYST_BLOCK_RESONATE, .18f, .65f)
         success(player, "Dawnbreaker’s Presence — 20 seconds")
     }
     private fun castGaze(player: ServerPlayer) {
@@ -226,9 +238,9 @@ object Dawnbreaker {
             c.markDirty()
             if (radiant(player)) shards(target)
             // One short impact per target, including players beyond the caster sound's radius.
-            sound(player.serverLevel(), target.position(), net.minecraft.sounds.SoundEvents.STONE_BREAK, .45f, .7f)
+            sound(player.serverLevel(), target.position(), SoundEvents.STONE_BREAK, .45f, .7f)
         }
-        sound(player.serverLevel(), player.position(), net.minecraft.sounds.SoundEvents.AMETHYST_CLUSTER_BREAK, .55f, .8f)
+        sound(player.serverLevel(), player.position(), SoundEvents.AMETHYST_CLUSTER_BREAK, .55f, .8f)
         ring(player, player.serverLevel(), player.position(), 2.0, 12)
         success(player, "Sovereign Gaze — ${targets.size} petrified")
     }
@@ -242,7 +254,7 @@ object Dawnbreaker {
 
         if (!usable(player, bow)) return
         set(player, bow, "cooldown", 0.0)
-        if (player.uuid !in held) bowSound(player.serverLevel(), player.position(), "magic_bow_charge_long_version", net.minecraft.sounds.SoundEvents.BEACON_POWER_SELECT, .45f, 1f)
+        if (player.uuid !in held) bowSound(player.serverLevel(), player.position(), "magic_bow_charge_long_version", SoundEvents.BEACON_POWER_SELECT, .45f, 1f)
         held[player.uuid] = player.server.tickCount
     }
     private fun cancelBow(player: ServerPlayer) {
@@ -261,7 +273,7 @@ object Dawnbreaker {
             val draw = (resource(player, bow, "draw") + 1).coerceAtMost(60.0)
             val chorus = floor(draw / 20.0)
             if (chorus > resource(player, bow, "chorus")) {
-                sound(player.serverLevel(), player.position(), net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_CHIME, .45f, .8f + chorus.toFloat() * .2f)
+                sound(player.serverLevel(), player.position(), SoundEvents.AMETHYST_BLOCK_CHIME, .45f, .8f + chorus.toFloat() * .2f)
             }
             set(player, bow, "draw", draw); set(player, bow, "display_draw", draw); set(player, bow, "chorus", chorus)
         } else {
@@ -269,9 +281,9 @@ object Dawnbreaker {
             val chorus = resource(player, bow, "chorus").toInt()
             set(player, bow, "draw", 0.0); set(player, bow, "chorus", 0.0); set(player, bow, "afterglow", 6.0)
             if (chorus < 1) return
-            val arrow = net.minecraft.world.entity.projectile.Arrow(player.serverLevel(), player,
-                net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.ARROW), null)
-            arrow.pickup = net.minecraft.world.entity.projectile.AbstractArrow.Pickup.DISALLOWED
+            val arrow = Arrow(player.serverLevel(), player,
+                ItemStack(Items.ARROW), null)
+            arrow.pickup = AbstractArrow.Pickup.DISALLOWED
             arrow.setNoGravity(true)
             arrow.setBaseDamage(chorus * 10.0 / 3.0)
             arrow.customName = Component.literal("Dawnbreaker Light Arrow")
@@ -282,9 +294,9 @@ object Dawnbreaker {
             if (!player.serverLevel().addFreshEntity(arrow)) return
             set(player, id("dawnbreaker/presentation"), "shot", 12.0)
             set(player, bow, "cooldown", 0.0)
-            sound(player.serverLevel(), player.position(), net.minecraft.sounds.SoundEvents.ARROW_SHOOT, .65f, 1.3f)
-            bowSound(player.serverLevel(), player.position(), "elemental_bow_holy_shoot_flyby_01", net.minecraft.sounds.SoundEvents.TRIDENT_THROW.value(), .65f, 1f)
-            bowSound(player.serverLevel(), player.position(), "magic_bow_shoot_flyby_02", net.minecraft.sounds.SoundEvents.TRIDENT_THROW.value(), .8f, 1f)
+            sound(player.serverLevel(), player.position(), SoundEvents.ARROW_SHOOT, .65f, 1.3f)
+            bowSound(player.serverLevel(), player.position(), "elemental_bow_holy_shoot_flyby_01", SoundEvents.TRIDENT_THROW.value(), .65f, 1f)
+            bowSound(player.serverLevel(), player.position(), "magic_bow_shoot_flyby_02", SoundEvents.TRIDENT_THROW.value(), .8f, 1f)
             if (radiant(player)) {
                 MrpgFxBridge.play(player.serverLevel(), player.eyePosition.add(player.lookAngle), EnhancedFxDefinitions.MrpgDefinition("mrpg_lib:preset/cast", .4f, .22f, 0xffd878, DawnbreakerPresentation.particles(3)), player, false)
                 player.serverLevel().sendParticles(ParticleTypes.END_ROD, arrow.x, arrow.y, arrow.z, 3, .035, .035, .035, .01)
@@ -323,15 +335,15 @@ object Dawnbreaker {
         target.fallDistance = 0f
         say(player, "Begone.")
         if (EnhancedFxConfig.enabled() && EnhancedFxConfig.sounds())
-            player.playNotifySound(net.minecraft.sounds.SoundEvents.ENDERMAN_TELEPORT, net.minecraft.sounds.SoundSource.PLAYERS,
+            player.playNotifySound(SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS,
                 .12f * DawnbreakerPresentation.soundScale(), 1.7f)
         if (target is ServerPlayer) target.sendSystemMessage(Component.literal("You have been banished."))
         if (target is ServerPlayer && EnhancedFxConfig.enabled() && EnhancedFxConfig.sounds() &&
-            Platform.canReceiveCosmetic(target, andromeda.origins.network.BanishmentHeartbeatPayload.TYPE.id()))
-            Platform.sendCosmetic(target, andromeda.origins.network.BanishmentHeartbeatPayload.INSTANCE)
+            Platform.canReceiveCosmetic(target, BanishmentHeartbeatPayload.TYPE.id()))
+            Platform.sendCosmetic(target, BanishmentHeartbeatPayload.INSTANCE)
     }
 
-    fun prepareLightArrowDamage(arrow: net.minecraft.world.entity.projectile.AbstractArrow) {
+    fun prepareLightArrowDamage(arrow: AbstractArrow) {
         if (arrow.level().isClientSide || "andromeda_dawn_light" !in arrow.tags) return
         val chorus = (1..3).firstOrNull { "andromeda_dawn_chorus_$it" in arrow.tags } ?: return
         val speed = arrow.deltaMovement.length()
@@ -339,7 +351,7 @@ object Dawnbreaker {
         // so air drag cannot turn the promised 10/20/30 into lower damage at longer ranges.
         if (speed.isFinite() && speed > .0001) arrow.setBaseDamage((chorus * 10.0 - .00001) / speed)
     }
-    fun lightArrowTrail(arrow: net.minecraft.world.entity.projectile.AbstractArrow) {
+    fun lightArrowTrail(arrow: AbstractArrow) {
         if ("andromeda_dawn_light" !in arrow.tags) return
         val level = arrow.level() as? ServerLevel ?: return
         val caster = arrow.owner as? ServerPlayer ?: return
@@ -350,11 +362,11 @@ object Dawnbreaker {
             level.sendParticles(gold, at.x, at.y, at.z, 1, .015, .015, .015, 0.0)
         }
     }
-    fun lightArrowImpact(arrow: net.minecraft.world.entity.projectile.AbstractArrow, at: Vec3) {
+    fun lightArrowImpact(arrow: AbstractArrow, at: Vec3) {
         if ("andromeda_dawn_light" !in arrow.tags) return
         val level = arrow.level() as? ServerLevel ?: return
         val caster = arrow.owner as? ServerPlayer ?: return
-        bowSound(level, at, "elemental_bow_holy_shoot_impact_01", net.minecraft.sounds.SoundEvents.AMETHYST_BLOCK_BREAK, .55f, 1f)
+        bowSound(level, at, "elemental_bow_holy_shoot_impact_01", SoundEvents.AMETHYST_BLOCK_BREAK, .55f, 1f)
         if (radiant(caster)) {
             level.sendParticles(ParticleTypes.END_ROD, at.x, at.y, at.z, 4, .12, .12, .12, .035)
             MrpgFxBridge.play(level, at, EnhancedFxDefinitions.MrpgDefinition("mrpg_lib:preset/impact", .55f, .3f, 0xffd878, DawnbreakerPresentation.particles(4)), caster, false)
@@ -370,7 +382,7 @@ object Dawnbreaker {
         Platform.damage { entity, damage, _ ->
             val arrow = damage.directEntity
             val caster = damage.entity as? ServerPlayer
-            if (arrow is net.minecraft.world.entity.projectile.Projectile && ("andromeda_dawn_light" in arrow.tags || "andromeda_stillwater_returned" in arrow.tags) &&
+            if (arrow is Projectile && ("andromeda_dawn_light" in arrow.tags || "andromeda_stillwater_returned" in arrow.tags) &&
                 caster != null && ally(caster, entity)) false else true
         }
         Platform.serverTick(::tick)
@@ -408,7 +420,7 @@ object Dawnbreaker {
         val c = PowerContainer.of(entity) ?: return
         val changed = c.removePower(power, grant)
         val speed = id(power.path + "_speed")
-        val orphan = power == oppressed && entity.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED)
+        val orphan = power == oppressed && entity.getAttribute(Attributes.MOVEMENT_SPEED)
             ?.hasModifier(id("dawnbreaker_oppression")) == true
         if (!c.hasPower(speed) && (changed || orphan)) AttributePower.purge(entity, speed)
         if (changed) c.markDirty()
@@ -484,15 +496,15 @@ object Dawnbreaker {
             level.sendParticles(if (i % 2 == 0) gold else jade, pos.x + cos(angle) * radius, pos.y + .12, pos.z + sin(angle) * radius, 1, 0.0, .025, 0.0, 0.0)
         }
     }
-    private fun bowSound(level: ServerLevel, pos: Vec3, path: String, fallback: net.minecraft.sounds.SoundEvent, volume: Float, pitch: Float) {
+    private fun bowSound(level: ServerLevel, pos: Vec3, path: String, fallback: SoundEvent, volume: Float, pitch: Float) {
         val key = ResourceLocation.fromNamespaceAndPath("simplyswords", path)
-        val registry = net.minecraft.core.registries.BuiltInRegistries.SOUND_EVENT
+        val registry = BuiltInRegistries.SOUND_EVENT
         sound(level, pos, if (registry.containsKey(key)) registry.get(key) ?: fallback else fallback, volume, pitch)
     }
-    internal fun abilitySound(player: ServerPlayer, cue: net.minecraft.sounds.SoundEvent, volume: Float, pitch: Float) =
+    internal fun abilitySound(player: ServerPlayer, cue: SoundEvent, volume: Float, pitch: Float) =
         sound(player.serverLevel(), player.position(), cue, volume, pitch)
-    private fun sound(level: ServerLevel, pos: Vec3, sound: net.minecraft.sounds.SoundEvent, volume: Float, pitch: Float) {
+    private fun sound(level: ServerLevel, pos: Vec3, sound: SoundEvent, volume: Float, pitch: Float) {
         if (EnhancedFxConfig.enabled() && EnhancedFxConfig.sounds())
-            level.playSound(null, pos.x, pos.y, pos.z, sound, net.minecraft.sounds.SoundSource.PLAYERS, volume * DawnbreakerPresentation.soundScale(), pitch)
+            level.playSound(null, pos.x, pos.y, pos.z, sound, SoundSource.PLAYERS, volume * DawnbreakerPresentation.soundScale(), pitch)
     }
 }

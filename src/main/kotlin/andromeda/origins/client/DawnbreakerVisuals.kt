@@ -1,24 +1,31 @@
 package andromeda.origins.client
 
+import andromeda.origins.compat.DawnbreakerPresentation
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import com.mojang.math.Axis
 import dev.overgrown.apoli.power.PowerContainer
 import dev.overgrown.apoli.power.PowerResources
+import java.util.WeakHashMap
+import kotlin.math.*
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
+import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.util.Mth
+import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.projectile.AbstractArrow
+import net.minecraft.world.phys.Vec3
 import org.joml.Matrix4f
-import kotlin.math.*
 
 /** Independent, texture-free radiant geometry inspired by Dawnquiver's layered light presentation. */
 object DawnbreakerVisuals {
     private val active = ResourceLocation.parse("andromeda_origins:dawnbreaker/presence_active")
     private val visible = ResourceLocation.parse("andromeda_origins:dawnbreaker/presence_radiance")
     private val feature = ResourceLocation.parse("andromeda_origins:dawnbreaker/radiance")
-    private val appearing = java.util.WeakHashMap<LivingEntity, Float>()
+    private val appearing = WeakHashMap<LivingEntity, Float>()
     fun render(entity: LivingEntity, x: Double, y: Double, z: Double, delta: Float, pose: PoseStack, buffers: MultiBufferSource) {
         val viewer = Minecraft.getInstance().player ?: return
         if (entity.isInvisibleTo(viewer) || viewer.distanceToSqr(entity) > 48.0 * 48.0) return
@@ -41,7 +48,7 @@ object DawnbreakerVisuals {
         pose.pushPose()
         pose.translate(x, y, z)
         val vertices = buffers.getBuffer(RenderType.debugQuads())
-        if (!nativeGhost && stepping > 0 && resource("presentation_animation") > 0 && andromeda.origins.compat.DawnbreakerPresentation.settings().animatedWings.get()) {
+        if (!nativeGhost && stepping > 0 && resource("presentation_animation") > 0 && DawnbreakerPresentation.settings().animatedWings.get()) {
             pose.pushPose()
             pose.translate(resource("presentation_step_x") - entity.x, resource("presentation_step_y") - entity.y, resource("presentation_step_z") - entity.z)
             pose.mulPose(Axis.YP.rotationDegrees(-entity.yRot))
@@ -56,7 +63,7 @@ object DawnbreakerVisuals {
             }
             pose.popPose()
         }
-        pose.mulPose(Axis.YP.rotationDegrees(-net.minecraft.util.Mth.rotLerp(delta, entity.yBodyRotO, entity.yBodyRot)))
+        pose.mulPose(Axis.YP.rotationDegrees(-Mth.rotLerp(delta, entity.yBodyRotO, entity.yBodyRot)))
         val scale = (entity.bbHeight / 1.8f).coerceIn(.65f, 1.6f)
         pose.scale(scale, scale, scale)
         pose.translate(0.0, 0.0, -.70)
@@ -71,10 +78,10 @@ object DawnbreakerVisuals {
             val start = phase + i * Math.PI * 2 / 3
             halo(vertices, matrix, .91, .928, start, start + 1.15, 255, 174, 45, fade * .55f)
         }
-        val animate = resource("presentation_animation") > 0 && andromeda.origins.compat.DawnbreakerPresentation.settings().animatedWings.get()
+        val animate = resource("presentation_animation") > 0 && DawnbreakerPresentation.settings().animatedWings.get()
         val fold = if (animate) stepping * stepping * (3 - 2 * stepping) else 0f
         val flare = if (animate) sin(shot * Math.PI).toFloat() * .22f + drawing * .10f else 0f
-        val featherCount = when (andromeda.origins.compat.DawnbreakerPresentation.tier(entity)) { 0 -> 3; 2 -> 8; else -> 6 }
+        val featherCount = when (DawnbreakerPresentation.tier(entity)) { 0 -> 3; 2 -> 8; else -> 6 }
         // Tapered feathers breathe, fold on Step and flare on bow release. Their roots stay behind the body.
         for (side in listOf(-1.0, 1.0)) {
             pose.pushPose(); pose.translate(0.0, 0.0, .16)
@@ -129,14 +136,14 @@ object DawnbreakerVisuals {
         for ((x, y) in points)
             v.addVertex(m, x.toFloat(), y.toFloat(), 0f).setColor(r, g, b, a)
     }
-    private val projectileVisuals = java.util.WeakHashMap<net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity>()
-    fun renderProjectile(entity: net.minecraft.world.entity.Entity, x: Double, y: Double, z: Double, pose: PoseStack, buffers: MultiBufferSource) {
-        if (entity !is net.minecraft.world.entity.projectile.AbstractArrow || entity.customName?.string != "Dawnbreaker Light Arrow") return
+    private val projectileVisuals = WeakHashMap<Entity, Entity>()
+    fun renderProjectile(entity: Entity, x: Double, y: Double, z: Double, pose: PoseStack, buffers: MultiBufferSource) {
+        if (entity !is AbstractArrow || entity.customName?.string != "Dawnbreaker Light Arrow") return
         val owner = entity.owner as? LivingEntity ?: return
         val c = PowerContainer.of(owner) ?: return
         if (!c.hasPower(feature) || c.isSuppressed(feature) || PowerResources.read(c, ResourceLocation.parse("andromeda_origins:dawnbreaker/bow_radiance")).orElse(0.0) <= 0) return
         val client = Minecraft.getInstance()
-        val type = net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.parse("simplyswords:dawnquiver_arrow"))
+        val type = BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.parse("simplyswords:dawnquiver_arrow"))
         val distance = sqrt(x * x + y * y + z * z)
         // Let the ordinary shaft remain visible at point-blank range without a screen-filling light mesh.
         if (distance < 1.2) return
@@ -153,14 +160,14 @@ object DawnbreakerVisuals {
         }
         pose.pushPose(); pose.translate(x, y, z); pose.mulPose(Axis.YP.rotationDegrees(180 - entity.yRot)); pose.mulPose(Axis.XP.rotationDegrees(entity.xRot))
         val v = buffers.getBuffer(RenderType.lightning()); val m = pose.last().pose()
-        val a = net.minecraft.world.phys.Vec3(0.0, 0.0, .3); val b = net.minecraft.world.phys.Vec3(0.0, 0.0, -.65)
+        val a = Vec3(0.0, 0.0, .3); val b = Vec3(0.0, 0.0, -.65)
         segment(v, m, a, b, .11, 255, 186, 37, .35f); segment(v, m, a, b, .025, 255, 255, 226, 1f)
         pose.popPose()
     }
-    private fun segment(v: VertexConsumer, m: Matrix4f, a: net.minecraft.world.phys.Vec3, b: net.minecraft.world.phys.Vec3, width: Double, r: Int, g: Int, blue: Int, alpha: Float) {
+    private fun segment(v: VertexConsumer, m: Matrix4f, a: Vec3, b: Vec3, width: Double, r: Int, g: Int, blue: Int, alpha: Float) {
         val direction = b.subtract(a).normalize()
-        var side = direction.cross(net.minecraft.world.phys.Vec3(0.0, 1.0, 0.0))
-        if (side.lengthSqr() < .001) side = net.minecraft.world.phys.Vec3(1.0, 0.0, 0.0)
+        var side = direction.cross(Vec3(0.0, 1.0, 0.0))
+        if (side.lengthSqr() < .001) side = Vec3(1.0, 0.0, 0.0)
         side = side.normalize().scale(width / 2)
         val other = direction.cross(side).normalize().scale(width / 2)
         for (offset in listOf(side, other)) for (p in listOf(a.add(offset), b.add(offset), b.subtract(offset), a.subtract(offset)))

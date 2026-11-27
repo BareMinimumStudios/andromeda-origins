@@ -1,5 +1,11 @@
 package andromeda.origins.util
 
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.inventory.CraftingContainer
+import net.minecraft.world.inventory.ResultContainer
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
+
 
 
 
@@ -11,29 +17,29 @@ package andromeda.origins.util
  */
 object ArachneCraftingSafety {
     fun shouldBlockQuickMove(
-    player: net.minecraft.world.entity.player.Player,
-    slotId: kotlin.Int,
-    input: net.minecraft.world.inventory.CraftingContainer,
-    result: net.minecraft.world.inventory.ResultContainer
-    ): kotlin.Boolean {
+    player: Player,
+    slotId: Int,
+    input: CraftingContainer,
+    result: ResultContainer
+    ): Boolean {
         if (slotId != 0 || !player.getTags().contains("arachne")) {
             return false
         }
 
-        val output: net.minecraft.world.item.ItemStack = result.getItem(0)
-        if (!output.`is`(net.minecraft.world.item.Items.COBWEB)) {
+        val output: ItemStack = result.getItem(0)
+        if (!output.`is`(Items.COBWEB)) {
             return false
         }
 
-        var stringSlots: kotlin.Int = 0
-        var occupied: kotlin.Int = 0
+        var stringSlots: Int = 0
+        var occupied: Int = 0
         for (i in 0 ..< input.getContainerSize()) {
-            val stack: net.minecraft.world.item.ItemStack = input.getItem(i)
+            val stack: ItemStack = input.getItem(i)
             if (stack.isEmpty()) {
                 continue
             }
             occupied++
-            if (stack.`is`(net.minecraft.world.item.Items.STRING)) {
+            if (stack.`is`(Items.STRING)) {
                 stringSlots++
             }
         }

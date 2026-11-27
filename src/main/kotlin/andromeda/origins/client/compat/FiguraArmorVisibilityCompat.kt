@@ -1,5 +1,14 @@
 package andromeda.origins.client.compat
 
+import andromeda.origins.platform.Platform
+import java.lang.reflect.Field
+import java.lang.reflect.Method
+import kotlin.concurrent.Volatile
+import net.minecraft.world.entity.EquipmentSlot
+import net.minecraft.world.entity.LivingEntity
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+
 
 
 
@@ -13,29 +22,29 @@ package andromeda.origins.client.compat
  * available, the bridge disables itself and custom armor renders normally.
  */
 object FiguraArmorVisibilityCompat {
-    val LOGGER: org.slf4j.Logger = org.slf4j.LoggerFactory.getLogger("Andromeda Origins/Figura Armor Compat")
-    private const val FIGURA_MOD_ID: kotlin.String = "figura"
+    val LOGGER: Logger = LoggerFactory.getLogger("Andromeda Origins/Figura Armor Compat")
+    private const val FIGURA_MOD_ID: String = "figura"
 
-    @kotlin.concurrent.Volatile
+    @Volatile
     private var access: FiguraArmorVisibilityCompat.Access? = null
-    @kotlin.concurrent.Volatile
-    var initialized: kotlin.Boolean = false
-    @kotlin.concurrent.Volatile
-    var warned: kotlin.Boolean = false
+    @Volatile
+    var initialized: Boolean = false
+    @Volatile
+    var warned: Boolean = false
 
      /**
  * Returns true when Figura has a loaded avatar for `entity`, vanilla
  * model editing is permitted, and the Figura armor group for `slot`
  * is hidden.
  */
-    fun shouldHideArmor(entity: net.minecraft.world.entity.LivingEntity?, slot: net.minecraft.world.entity.EquipmentSlot?): kotlin.Boolean {
-        if (entity == null || slot == null || !andromeda.origins.platform.Platform.isModLoaded(FiguraArmorVisibilityCompat.FIGURA_MOD_ID)) {
+    fun shouldHideArmor(entity: LivingEntity?, slot: EquipmentSlot?): Boolean {
+        if (entity == null || slot == null || !Platform.isModLoaded(FiguraArmorVisibilityCompat.FIGURA_MOD_ID)) {
             return false
         }
 
         var current: FiguraArmorVisibilityCompat.Access? = FiguraArmorVisibilityCompat.access
         if (!FiguraArmorVisibilityCompat.initialized) {
-            kotlin.synchronized(FiguraArmorVisibilityCompat::class.java) {if (!FiguraArmorVisibilityCompat.initialized) {
+            synchronized(FiguraArmorVisibilityCompat::class.java) {if (!FiguraArmorVisibilityCompat.initialized) {
                 current = FiguraArmorVisibilityCompat.resolve()
                 FiguraArmorVisibilityCompat.access = current
                 FiguraArmorVisibilityCompat.initialized = true
@@ -50,50 +59,50 @@ object FiguraArmorVisibilityCompat {
         }
 
         try {
-            val avatar: kotlin.Any? = current.getAvatar.invoke(null, entity)
+            val avatar: Any? = current.getAvatar.invoke(null, entity)
             if (avatar == null) {
                 return false
             }
 
-            val permissionPack: kotlin.Any? = current.permissions.get(avatar)
+            val permissionPack: Any? = current.permissions.get(avatar)
             if (permissionPack == null) {
                 return false
             }
 
-            val permissionValue: kotlin.Any? = current.permissionGet.invoke(permissionPack, current.vanillaModelEditPermission)
-            val number = permissionValue as? kotlin.Number
+            val permissionValue: Any? = current.permissionGet.invoke(permissionPack, current.vanillaModelEditPermission)
+            val number = permissionValue as? Number
             if (number == null || permissionValue.toInt() < 1) {
                 return false
             }
 
-            val runtime: kotlin.Any? = current.luaRuntime.get(avatar)
+            val runtime: Any? = current.luaRuntime.get(avatar)
             if (runtime == null) {
                 return false
             }
 
-            val vanillaModel: kotlin.Any? = current.vanillaModel.get(runtime)
+            val vanillaModel: Any? = current.vanillaModel.get(runtime)
             if (vanillaModel == null) {
                 return false
             }
 
-            val slotField: java.lang.reflect.Field? = when (slot){net.minecraft.world.entity.EquipmentSlot.HEAD -> current.helmet
-                net.minecraft.world.entity.EquipmentSlot.CHEST -> current.chestplate
-                net.minecraft.world.entity.EquipmentSlot.LEGS -> current.leggings
-                net.minecraft.world.entity.EquipmentSlot.FEET -> current.boots
+            val slotField: Field? = when (slot){EquipmentSlot.HEAD -> current.helmet
+                EquipmentSlot.CHEST -> current.chestplate
+                EquipmentSlot.LEGS -> current.leggings
+                EquipmentSlot.FEET -> current.boots
                 else -> null}
             if (slotField == null) {
                 return false
             }
 
-            val part: kotlin.Any? = slotField.get(vanillaModel)
+            val part: Any? = slotField.get(vanillaModel)
             if (part == null) {
                 return false
             }
 
-            val visible: kotlin.Any? = current.checkVisible.invoke(part)
-            val bool = visible as? kotlin.Boolean
+            val visible: Any? = current.checkVisible.invoke(part)
+            val bool = visible as? Boolean
             return bool != null && !visible
-        }catch (throwable: kotlin.Throwable) {
+        }catch (throwable: Throwable) {
             FiguraArmorVisibilityCompat.disableWithWarning(throwable)
             return false
         }
@@ -101,34 +110,34 @@ object FiguraArmorVisibilityCompat {
 
     private fun resolve(): FiguraArmorVisibilityCompat.Access? {
         try {
-            val avatarManagerClass: java.lang.Class<*> = java.lang.Class.forName("org.figuramc.figura.avatar.AvatarManager")
-            val avatarClass: java.lang.Class<*> = java.lang.Class.forName("org.figuramc.figura.avatar.Avatar")
-            val runtimeClass: java.lang.Class<*> = java.lang.Class.forName("org.figuramc.figura.lua.FiguraLuaRuntime")
-            val vanillaModelApiClass: java.lang.Class<*> = java.lang.Class.forName("org.figuramc.figura.lua.api.vanilla_model.VanillaModelAPI")
-            val vanillaPartClass: java.lang.Class<*> = java.lang.Class.forName("org.figuramc.figura.lua.api.vanilla_model.VanillaPart")
-            val permissionsClass: java.lang.Class<*> = java.lang.Class.forName("org.figuramc.figura.permissions.Permissions")
-            val permissionPackClass: java.lang.Class<*> = java.lang.Class.forName("org.figuramc.figura.permissions.PermissionPack")
+            val avatarManagerClass: Class<*> = Class.forName("org.figuramc.figura.avatar.AvatarManager")
+            val avatarClass: Class<*> = Class.forName("org.figuramc.figura.avatar.Avatar")
+            val runtimeClass: Class<*> = Class.forName("org.figuramc.figura.lua.FiguraLuaRuntime")
+            val vanillaModelApiClass: Class<*> = Class.forName("org.figuramc.figura.lua.api.vanilla_model.VanillaModelAPI")
+            val vanillaPartClass: Class<*> = Class.forName("org.figuramc.figura.lua.api.vanilla_model.VanillaPart")
+            val permissionsClass: Class<*> = Class.forName("org.figuramc.figura.permissions.Permissions")
+            val permissionPackClass: Class<*> = Class.forName("org.figuramc.figura.permissions.PermissionPack")
 
             val getAvatar = avatarManagerClass.methods.firstOrNull {
-                it.name == "getAvatar" && it.parameterCount == 1 && it.parameterTypes[0].isAssignableFrom(net.minecraft.world.entity.LivingEntity::class.java)
-            } ?: throw java.lang.NoSuchMethodException("AvatarManager.getAvatar(entity)")
+                it.name == "getAvatar" && it.parameterCount == 1 && it.parameterTypes[0].isAssignableFrom(LivingEntity::class.java)
+            } ?: throw NoSuchMethodException("AvatarManager.getAvatar(entity)")
 
-            val luaRuntime: java.lang.reflect.Field = avatarClass.getField("luaRuntime")
-            val permissions: java.lang.reflect.Field = avatarClass.getField("permissions")
-            val vanillaModel: java.lang.reflect.Field = runtimeClass.getField("vanilla_model")
+            val luaRuntime: Field = avatarClass.getField("luaRuntime")
+            val permissions: Field = avatarClass.getField("permissions")
+            val vanillaModel: Field = runtimeClass.getField("vanilla_model")
 
-            val helmet: java.lang.reflect.Field = vanillaModelApiClass.getField("HELMET")
-            val chestplate: java.lang.reflect.Field = vanillaModelApiClass.getField("CHESTPLATE")
-            val leggings: java.lang.reflect.Field = vanillaModelApiClass.getField("LEGGINGS")
-            val boots: java.lang.reflect.Field = vanillaModelApiClass.getField("BOOTS")
+            val helmet: Field = vanillaModelApiClass.getField("HELMET")
+            val chestplate: Field = vanillaModelApiClass.getField("CHESTPLATE")
+            val leggings: Field = vanillaModelApiClass.getField("LEGGINGS")
+            val boots: Field = vanillaModelApiClass.getField("BOOTS")
 
-            val checkVisible: java.lang.reflect.Method = vanillaPartClass.getMethod("checkVisible")
-            val vanillaModelEdit: java.lang.reflect.Field = permissionsClass.getField("VANILLA_MODEL_EDIT")
-            val vanillaModelEditPermission: kotlin.Any? = vanillaModelEdit.get(null)
+            val checkVisible: Method = vanillaPartClass.getMethod("checkVisible")
+            val vanillaModelEdit: Field = permissionsClass.getField("VANILLA_MODEL_EDIT")
+            val vanillaModelEditPermission: Any? = vanillaModelEdit.get(null)
 
             val permissionGet = permissionPackClass.methods.firstOrNull {
                 it.name == "get" && it.parameterCount == 1 && it.parameterTypes[0] == permissionsClass
-            } ?: throw java.lang.NoSuchMethodException("PermissionPack.get(Permissions)")
+            } ?: throw NoSuchMethodException("PermissionPack.get(Permissions)")
 
             FiguraArmorVisibilityCompat.LOGGER.info("Figura detected: Armor Model API armor will respect Figura vanilla_model armor visibility when compatibility is active")
             return FiguraArmorVisibilityCompat.Access(
@@ -144,13 +153,13 @@ object FiguraArmorVisibilityCompat {
             permissionGet,
             vanillaModelEditPermission
             )
-        }catch (throwable: kotlin.Throwable) {
+        }catch (throwable: Throwable) {
             FiguraArmorVisibilityCompat.disableWithWarning(throwable)
             return null
         }
     }
 
-    @kotlin.jvm.Synchronized private fun disableWithWarning(throwable: kotlin.Throwable?) {
+    @Synchronized private fun disableWithWarning(throwable: Throwable?) {
         FiguraArmorVisibilityCompat.access = null
         FiguraArmorVisibilityCompat.initialized = true
         if (!FiguraArmorVisibilityCompat.warned) {
@@ -163,17 +172,17 @@ object FiguraArmorVisibilityCompat {
     }
 
 
-    private data class Access (val getAvatar: java.lang.reflect.Method,
-    val luaRuntime: java.lang.reflect.Field,
-    val permissions: java.lang.reflect.Field,
-    val vanillaModel: java.lang.reflect.Field,
-    val helmet: java.lang.reflect.Field,
-    val chestplate: java.lang.reflect.Field,
-    val leggings: java.lang.reflect.Field,
-    val boots: java.lang.reflect.Field,
-    val checkVisible: java.lang.reflect.Method,
-    val permissionGet: java.lang.reflect.Method,
-    val vanillaModelEditPermission: kotlin.Any?
+    private data class Access (val getAvatar: Method,
+    val luaRuntime: Field,
+    val permissions: Field,
+    val vanillaModel: Field,
+    val helmet: Field,
+    val chestplate: Field,
+    val leggings: Field,
+    val boots: Field,
+    val checkVisible: Method,
+    val permissionGet: Method,
+    val vanillaModelEditPermission: Any?
     ) {
     }
 }

@@ -1,23 +1,30 @@
 package andromeda.origins.mixin
 
-import andromeda.origins.config.AndromedaConfigRuntime
 import andromeda.origins.config.AndromedaConfigPolicy
+import andromeda.origins.config.AndromedaConfigRuntime
+import dev.overgrown.origins.origin.OriginLayer
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.entity.player.Player
+import org.spongepowered.asm.mixin.Mixin
+import org.spongepowered.asm.mixin.injection.At
+import org.spongepowered.asm.mixin.injection.Inject
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable
 
 
  /**
  * Server/client-consistent filtering for the primary species layer. This intentionally operates
  * after Overgrown's datapack merge so mod resource-pack order cannot reintroduce stock Origins.
  */
-@org.spongepowered.asm.mixin.Mixin(dev.overgrown.origins.origin.OriginLayer::class)
+@Mixin(OriginLayer::class)
 abstract class OriginLayerConfigMixin {
-    @org.spongepowered.asm.mixin.injection.Inject(method = ["availableOrigins"], at = [org.spongepowered.asm.mixin.injection.At("RETURN")], cancellable = true) private fun `andromeda$filterAvailable`(player: net.minecraft.world.entity.player.Player, cir: org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable<kotlin.collections.MutableList<net.minecraft.resources.ResourceLocation>>) {
-        val self: dev.overgrown.origins.origin.OriginLayer = this as kotlin.Any as dev.overgrown.origins.origin.OriginLayer
+    @Inject(method = ["availableOrigins"], at = [At("RETURN")], cancellable = true) private fun `andromeda$filterAvailable`(player: Player, cir: CallbackInfoReturnable<MutableList<ResourceLocation>>) {
+        val self: OriginLayer = this as Any as OriginLayer
         if (AndromedaConfigPolicy.ORIGIN_LAYER != self.id()) return
         cir.setReturnValue(AndromedaConfigRuntime.filterPrimaryLayer(cir.getReturnValue()))
     }
 
-    @org.spongepowered.asm.mixin.injection.Inject(method = ["allOrigins"], at = [org.spongepowered.asm.mixin.injection.At("RETURN")], cancellable = true) private fun `andromeda$filterAll`(cir: org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable<kotlin.collections.MutableList<net.minecraft.resources.ResourceLocation>>) {
-        val self: dev.overgrown.origins.origin.OriginLayer = this as kotlin.Any as dev.overgrown.origins.origin.OriginLayer
+    @Inject(method = ["allOrigins"], at = [At("RETURN")], cancellable = true) private fun `andromeda$filterAll`(cir: CallbackInfoReturnable<MutableList<ResourceLocation>>) {
+        val self: OriginLayer = this as Any as OriginLayer
         if (AndromedaConfigPolicy.ORIGIN_LAYER != self.id()) return
         cir.setReturnValue(AndromedaConfigRuntime.filterPrimaryLayer(cir.getReturnValue()))
     }

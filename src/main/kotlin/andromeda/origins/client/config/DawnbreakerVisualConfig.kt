@@ -1,5 +1,6 @@
 package andromeda.origins.client.config
 
+import andromeda.origins.compat.OriginFxStyle
 import me.fzzyhmstrs.fzzy_config.annotations.RootConfig
 import me.fzzyhmstrs.fzzy_config.config.Config
 import me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean
@@ -12,7 +13,7 @@ import net.minecraft.resources.ResourceLocation
 class DawnbreakerVisualConfig : Config(ResourceLocation.parse("andromeda_origins:dawnbreaker_visuals")) {
     enum class Intensity { LOW, STANDARD, STRONG }
     var originContours = ValidatedBoolean(true)
-    var contourDetail = ValidatedEnum(andromeda.origins.compat.OriginFxStyle.Quality.CINEMATIC)
+    var contourDetail = ValidatedEnum(OriginFxStyle.Quality.CINEMATIC)
     var afterimages = ValidatedBoolean(true)
     var impactFrames = ValidatedBoolean(false)
     var intensity = ValidatedEnum(Intensity.LOW)

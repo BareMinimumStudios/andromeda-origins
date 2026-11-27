@@ -1,14 +1,42 @@
 package andromeda.origins.action
 
 import andromeda.origins.AndromedaOrigins
-import andromeda.origins.compat.IncapacitatedCompat
-import andromeda.origins.compat.StatusEffectCompat
-import andromeda.origins.compat.OriginStateCleanup
+import andromeda.origins.compat.Dawnbreaker
 import andromeda.origins.compat.EnhancedFxCompat
+import andromeda.origins.compat.HelperSpawner
+import andromeda.origins.compat.IncapacitatedCompat
+import andromeda.origins.compat.ManticoreTether
+import andromeda.origins.compat.MortalResolveManager
+import andromeda.origins.compat.OriginStateCleanup
+import andromeda.origins.compat.ParticleSpheres
+import andromeda.origins.compat.RefinedCosmeticActions
+import andromeda.origins.compat.StatusEffectCompat
 import andromeda.origins.compat.VeilStepManager
 import andromeda.origins.compat.VeilbornTransposition
-import andromeda.origins.compat.MortalResolveManager
+import andromeda.origins.config.AndromedaConfigBootstrap
+import com.mojang.datafixers.util.Function4
+import com.mojang.serialization.Codec
+import com.mojang.serialization.MapCodec
+import com.mojang.serialization.codecs.RecordCodecBuilder
+import dev.overgrown.apoli.action.ActionType
+import dev.overgrown.apoli.action.ActionTypes
+import dev.overgrown.apoli.condition.context.BiEntityCtx
+import dev.overgrown.apoli.condition.context.EntityCtx
+import dev.overgrown.apoli.data.TextComponent
+import dev.overgrown.apoli.data.expr.ExprContext
 import java.util.function.BiFunction
+import java.util.function.Function
+import kotlin.math.min
+import net.minecraft.commands.arguments.coordinates.LocalCoordinates
+import net.minecraft.core.particles.ParticleTypes
+import net.minecraft.network.chat.Component
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.server.level.ServerPlayer
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.LightningBolt
+import net.minecraft.world.entity.ai.attributes.AttributeInstance
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.phys.Vec3
 
 
  /**
@@ -17,11 +45,11 @@ import java.util.function.BiFunction
  */
 object AndromedaActions {
     fun register() {
-        andromeda.origins.compat.RefinedCosmeticActions.register()
-        andromeda.origins.compat.Dawnbreaker.registerActions()
-        andromeda.origins.compat.HelperSpawner.registerActions()
-        andromeda.origins.compat.ManticoreTether.registerActions()
-        andromeda.origins.compat.ParticleSpheres.register()
+        RefinedCosmeticActions.register()
+        Dawnbreaker.registerActions()
+        HelperSpawner.registerActions()
+        ManticoreTether.registerActions()
+        ParticleSpheres.register()
         AndromedaActions.register<NoConfig>("safe_revive", SafeReviveAction())
         AndromedaActions.register<NoConfig>("clear_harmful_effects", ClearHarmfulEffectsAction())
         AndromedaActions.register<OriginCfg>("cleanup_origin_state", CleanupOriginStateAction())
@@ -41,31 +69,31 @@ object AndromedaActions {
         AndromedaActions.register<NoConfig>("discard", AndromedaActions.DiscardAction())
     }
 
-    private fun <C>register(path: kotlin.String, action: dev.overgrown.apoli.action.ActionType<dev.overgrown.apoli.condition.context.EntityCtx, C>?) {
-        dev.overgrown.apoli.action.ActionTypes.ENTITY.register<C>(AndromedaActions.id(path), action)
+    private fun <C>register(path: String, action: ActionType<EntityCtx, C>?) {
+        ActionTypes.ENTITY.register<C>(AndromedaActions.id(path), action)
     }
 
-    private fun <C>registerBi(path: kotlin.String, action: dev.overgrown.apoli.action.ActionType<dev.overgrown.apoli.condition.context.BiEntityCtx, C>?) {
-        dev.overgrown.apoli.action.ActionTypes.BI_ENTITY.register<C>(AndromedaActions.id(path), action)
+    private fun <C>registerBi(path: String, action: ActionType<BiEntityCtx, C>?) {
+        ActionTypes.BI_ENTITY.register<C>(AndromedaActions.id(path), action)
     }
 
-    private fun id(path: kotlin.String): net.minecraft.resources.ResourceLocation {
-        return net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(AndromedaOrigins.MOD_ID, path)
+    private fun id(path: String): ResourceLocation {
+        return ResourceLocation.fromNamespaceAndPath(AndromedaOrigins.MOD_ID, path)
     }
 
     private enum class NoConfig {
         INSTANCE
     }
 
-    private abstract class NoConfigAction : dev.overgrown.apoli.action.ActionType<dev.overgrown.apoli.condition.context.EntityCtx, NoConfig> {
-        override fun codec(): com.mojang.serialization.MapCodec<NoConfig>? {
-            return com.mojang.serialization.MapCodec.unit<NoConfig>(NoConfig.INSTANCE)
+    private abstract class NoConfigAction : ActionType<EntityCtx, NoConfig> {
+        override fun codec(): MapCodec<NoConfig>? {
+            return MapCodec.unit<NoConfig>(NoConfig.INSTANCE)
         }
     }
 
     private class SafeReviveAction : NoConfigAction() {
-        override fun run(cfg: NoConfig, ctx: dev.overgrown.apoli.condition.context.EntityCtx) {
-            val player = ctx.raw() as? net.minecraft.server.level.ServerPlayer
+        override fun run(cfg: NoConfig, ctx: EntityCtx) {
+            val player = ctx.raw() as? ServerPlayer
             if (player != null) {
                 IncapacitatedCompat.safeRevive(player)
             }
@@ -73,8 +101,8 @@ object AndromedaActions {
     }
 
     private class ClearHarmfulEffectsAction : NoConfigAction() {
-        override fun run(cfg: NoConfig, ctx: dev.overgrown.apoli.condition.context.EntityCtx) {
-            val player = ctx.raw() as? net.minecraft.server.level.ServerPlayer
+        override fun run(cfg: NoConfig, ctx: EntityCtx) {
+            val player = ctx.raw() as? ServerPlayer
             if (player != null) {
                 StatusEffectCompat.clearHarmfulEffects(player)
             }
@@ -82,37 +110,37 @@ object AndromedaActions {
     }
 
 
-    private data class OriginCfg (val origin: kotlin.String) {
+    private data class OriginCfg (val origin: String) {
     }
 
-    private class CleanupOriginStateAction : dev.overgrown.apoli.action.ActionType<dev.overgrown.apoli.condition.context.EntityCtx, OriginCfg> {
-        override fun codec(): com.mojang.serialization.MapCodec<OriginCfg>? {
+    private class CleanupOriginStateAction : ActionType<EntityCtx, OriginCfg> {
+        override fun codec(): MapCodec<OriginCfg>? {
             return CleanupOriginStateAction.Companion.CODEC
         }
 
-        override fun run(cfg: OriginCfg, ctx: dev.overgrown.apoli.condition.context.EntityCtx) {
-            val player = ctx.raw() as? net.minecraft.server.level.ServerPlayer
+        override fun run(cfg: OriginCfg, ctx: EntityCtx) {
+            val player = ctx.raw() as? ServerPlayer
             if (player != null) {
                 OriginStateCleanup.cleanup(player, cfg.origin)
             }
         }
         companion object {
-            val CODEC: com.mojang.serialization.MapCodec<OriginCfg>? = com.mojang.serialization.Codec.STRING.fieldOf("origin")
-            .xmap<OriginCfg>(java.util.function.Function { origin: kotlin.String -> OriginCfg(origin)}, OriginCfg::origin)
+            val CODEC: MapCodec<OriginCfg>? = Codec.STRING.fieldOf("origin")
+            .xmap<OriginCfg>(Function { origin: String -> OriginCfg(origin)}, OriginCfg::origin)
 
         }}
 
     private class CosmeticLightningAction : NoConfigAction() {
-        override fun run(cfg: NoConfig, ctx: dev.overgrown.apoli.condition.context.EntityCtx) {
-            val player = ctx.raw() as? net.minecraft.server.level.ServerPlayer
+        override fun run(cfg: NoConfig, ctx: EntityCtx) {
+            val player = ctx.raw() as? ServerPlayer
             if (player == null) {
                 return
             }
-            if (andromeda.origins.config.AndromedaConfigBootstrap.config().visuals.reducedFlashes.get()) {
-                player.serverLevel().sendParticles(net.minecraft.core.particles.ParticleTypes.END_ROD, player.x, player.y + 1.0, player.z, 6, .1, .6, .1, .01)
+            if (AndromedaConfigBootstrap.config().visuals.reducedFlashes.get()) {
+                player.serverLevel().sendParticles(ParticleTypes.END_ROD, player.x, player.y + 1.0, player.z, 6, .1, .6, .1, .01)
                 return
             }
-            val lightning: net.minecraft.world.entity.LightningBolt? = net.minecraft.world.entity.EntityType.LIGHTNING_BOLT.create(player.serverLevel())
+            val lightning: LightningBolt? = EntityType.LIGHTNING_BOLT.create(player.serverLevel())
             if (lightning == null) {
                 return
             }
@@ -123,16 +151,16 @@ object AndromedaActions {
     }
 
     private class SetHealthEightAction : NoConfigAction() {
-        override fun run(cfg: NoConfig, ctx: dev.overgrown.apoli.condition.context.EntityCtx) {
-            val player = ctx.raw() as? net.minecraft.server.level.ServerPlayer
+        override fun run(cfg: NoConfig, ctx: EntityCtx) {
+            val player = ctx.raw() as? ServerPlayer
             if (player != null) {
-                player.setHealth(kotlin.math.min(8.0f, player.getMaxHealth()))
+                player.setHealth(min(8.0f, player.getMaxHealth()))
             }
         }
     }
 
     private class DiscardAction : NoConfigAction() {
-        override fun run(cfg: NoConfig, ctx: dev.overgrown.apoli.condition.context.EntityCtx) {
+        override fun run(cfg: NoConfig, ctx: EntityCtx) {
             // Temporary helper entities have no death/drop gameplay; remove them immediately
             // instead of routing through /kill followed by an out-of-world teleport.
             ctx.raw().discard()
@@ -140,15 +168,15 @@ object AndromedaActions {
     }
 
     private class ClearFenrkinStalkingSlowAction : NoConfigAction() {
-        override fun run(cfg: NoConfig, ctx: dev.overgrown.apoli.condition.context.EntityCtx) {
+        override fun run(cfg: NoConfig, ctx: EntityCtx) {
             if (ctx.living() == null) return
-            val movementSpeed: net.minecraft.world.entity.ai.attributes.AttributeInstance? = ctx.living().getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED)
+            val movementSpeed: AttributeInstance? = ctx.living().getAttribute(Attributes.MOVEMENT_SPEED)
             if (movementSpeed != null) {
                 movementSpeed.removeModifier(ClearFenrkinStalkingSlowAction.Companion.MODIFIER_ID)
             }
         }
         companion object {
-            val MODIFIER_ID: net.minecraft.resources.ResourceLocation = net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(
+            val MODIFIER_ID: ResourceLocation = ResourceLocation.fromNamespaceAndPath(
             AndromedaOrigins.MOD_ID,
             "fenrkin_primary_stalking_slow"
             )
@@ -156,87 +184,87 @@ object AndromedaActions {
         }}
 
 
-    private data class FxCfg (val event: kotlin.String) {
+    private data class FxCfg (val event: String) {
     }
 
-    private class EnhancedFxAction : dev.overgrown.apoli.action.ActionType<dev.overgrown.apoli.condition.context.EntityCtx, FxCfg> {
-        override fun codec(): com.mojang.serialization.MapCodec<FxCfg>? {
+    private class EnhancedFxAction : ActionType<EntityCtx, FxCfg> {
+        override fun codec(): MapCodec<FxCfg>? {
             return EnhancedFxAction.Companion.CODEC
         }
 
-        override fun run(cfg: FxCfg, ctx: dev.overgrown.apoli.condition.context.EntityCtx) {
+        override fun run(cfg: FxCfg, ctx: EntityCtx) {
             EnhancedFxCompat.play(ctx.raw(), cfg.event)
         }
         companion object {
-            val CODEC: com.mojang.serialization.MapCodec<FxCfg>? = com.mojang.serialization.Codec.STRING.fieldOf("event")
-            .xmap<FxCfg>(java.util.function.Function { event: kotlin.String -> FxCfg(event)}, FxCfg::event)
+            val CODEC: MapCodec<FxCfg>? = Codec.STRING.fieldOf("event")
+            .xmap<FxCfg>(Function { event: String -> FxCfg(event)}, FxCfg::event)
 
         }}
 
 
-    private data class LocalFxCfg (val event: kotlin.String, val left: kotlin.Double, val up: kotlin.Double, val forwards: kotlin.Double) {
+    private data class LocalFxCfg (val event: String, val left: Double, val up: Double, val forwards: Double) {
     }
 
-    private class EnhancedFxLocalAction : dev.overgrown.apoli.action.ActionType<dev.overgrown.apoli.condition.context.EntityCtx, LocalFxCfg> {
-        override fun codec(): com.mojang.serialization.MapCodec<LocalFxCfg>? {
+    private class EnhancedFxLocalAction : ActionType<EntityCtx, LocalFxCfg> {
+        override fun codec(): MapCodec<LocalFxCfg>? {
             return EnhancedFxLocalAction.Companion.CODEC
         }
 
-        override fun run(cfg: LocalFxCfg, ctx: dev.overgrown.apoli.condition.context.EntityCtx) {
-            val position: net.minecraft.world.phys.Vec3 = net.minecraft.commands.arguments.coordinates.LocalCoordinates(cfg.left, cfg.up, cfg.forwards)
+        override fun run(cfg: LocalFxCfg, ctx: EntityCtx) {
+            val position: Vec3 = LocalCoordinates(cfg.left, cfg.up, cfg.forwards)
             .getPosition(ctx.raw().createCommandSourceStack())
             EnhancedFxCompat.playAt(ctx.raw(), cfg.event, position)
         }
         companion object {
-            val CODEC: com.mojang.serialization.MapCodec<LocalFxCfg>? = com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec<LocalFxCfg>(java.util.function.Function { i: com.mojang.serialization.codecs.RecordCodecBuilder.Instance<LocalFxCfg> -> i.group<kotlin.String, kotlin.Double, kotlin.Double, kotlin.Double>(
-            com.mojang.serialization.Codec.STRING.fieldOf("event").forGetter<LocalFxCfg>(LocalFxCfg::event),
-            com.mojang.serialization.Codec.DOUBLE.optionalFieldOf("left", 0.0).forGetter<LocalFxCfg>(LocalFxCfg::left),
-            com.mojang.serialization.Codec.DOUBLE.optionalFieldOf("up", 0.0).forGetter<LocalFxCfg>(LocalFxCfg::up),
-            com.mojang.serialization.Codec.DOUBLE.optionalFieldOf("forwards", 0.0).forGetter<LocalFxCfg>(LocalFxCfg::forwards)
-            ).apply<LocalFxCfg>(i, com.mojang.datafixers.util.Function4 { event: kotlin.String, left: kotlin.Double, up: kotlin.Double, forwards: kotlin.Double -> LocalFxCfg(event, left, up, forwards)})})
+            val CODEC: MapCodec<LocalFxCfg>? = RecordCodecBuilder.mapCodec<LocalFxCfg>(Function { i: RecordCodecBuilder.Instance<LocalFxCfg> -> i.group<String, Double, Double, Double>(
+            Codec.STRING.fieldOf("event").forGetter<LocalFxCfg>(LocalFxCfg::event),
+            Codec.DOUBLE.optionalFieldOf("left", 0.0).forGetter<LocalFxCfg>(LocalFxCfg::left),
+            Codec.DOUBLE.optionalFieldOf("up", 0.0).forGetter<LocalFxCfg>(LocalFxCfg::up),
+            Codec.DOUBLE.optionalFieldOf("forwards", 0.0).forGetter<LocalFxCfg>(LocalFxCfg::forwards)
+            ).apply<LocalFxCfg>(i, Function4 { event: String, left: Double, up: Double, forwards: Double -> LocalFxCfg(event, left, up, forwards)})})
 
         }}
 
-    private class EnhancedFxHitAction : dev.overgrown.apoli.action.ActionType<dev.overgrown.apoli.condition.context.EntityCtx, FxCfg> {
-        override fun codec(): com.mojang.serialization.MapCodec<FxCfg>? {
+    private class EnhancedFxHitAction : ActionType<EntityCtx, FxCfg> {
+        override fun codec(): MapCodec<FxCfg>? {
             return EnhancedFxHitAction.Companion.CODEC
         }
 
-        override fun run(cfg: FxCfg, ctx: dev.overgrown.apoli.condition.context.EntityCtx) {
-            val position: net.minecraft.world.phys.Vec3 = net.minecraft.world.phys.Vec3(dev.overgrown.apoli.data.expr.ExprContext.get(EnhancedFxHitAction.Companion.HIT_X), dev.overgrown.apoli.data.expr.ExprContext.get(EnhancedFxHitAction.Companion.HIT_Y), dev.overgrown.apoli.data.expr.ExprContext.get(EnhancedFxHitAction.Companion.HIT_Z))
+        override fun run(cfg: FxCfg, ctx: EntityCtx) {
+            val position: Vec3 = Vec3(ExprContext.get(EnhancedFxHitAction.Companion.HIT_X), ExprContext.get(EnhancedFxHitAction.Companion.HIT_Y), ExprContext.get(EnhancedFxHitAction.Companion.HIT_Z))
             EnhancedFxCompat.playAt(ctx.raw(), cfg.event, position)
         }
         companion object {
-            val HIT_X: kotlin.Int = dev.overgrown.apoli.data.expr.ExprContext.slot("hit_x")
-            val HIT_Y: kotlin.Int = dev.overgrown.apoli.data.expr.ExprContext.slot("hit_y")
-            val HIT_Z: kotlin.Int = dev.overgrown.apoli.data.expr.ExprContext.slot("hit_z")
-            val CODEC: com.mojang.serialization.MapCodec<FxCfg>? = com.mojang.serialization.Codec.STRING.fieldOf("event")
-            .xmap<FxCfg>(java.util.function.Function { event: kotlin.String -> FxCfg(event)}, FxCfg::event)
+            val HIT_X: Int = ExprContext.slot("hit_x")
+            val HIT_Y: Int = ExprContext.slot("hit_y")
+            val HIT_Z: Int = ExprContext.slot("hit_z")
+            val CODEC: MapCodec<FxCfg>? = Codec.STRING.fieldOf("event")
+            .xmap<FxCfg>(Function { event: String -> FxCfg(event)}, FxCfg::event)
 
         }}
 
     private class VeilStepToggleAction : NoConfigAction() {
-        override fun run(cfg: NoConfig, ctx: dev.overgrown.apoli.condition.context.EntityCtx) {
-            val player = ctx.raw() as? net.minecraft.server.level.ServerPlayer
+        override fun run(cfg: NoConfig, ctx: EntityCtx) {
+            val player = ctx.raw() as? ServerPlayer
             if (player != null) {
                 VeilStepManager.toggle(player)
             }
         }
     }
 
-    private class VeilTranspositionAction : dev.overgrown.apoli.action.ActionType<dev.overgrown.apoli.condition.context.BiEntityCtx, NoConfig> {
-        override fun codec(): com.mojang.serialization.MapCodec<NoConfig>? {
-            return com.mojang.serialization.MapCodec.unit<NoConfig>(NoConfig.INSTANCE)
+    private class VeilTranspositionAction : ActionType<BiEntityCtx, NoConfig> {
+        override fun codec(): MapCodec<NoConfig>? {
+            return MapCodec.unit<NoConfig>(NoConfig.INSTANCE)
         }
 
-        override fun run(cfg: NoConfig, ctx: dev.overgrown.apoli.condition.context.BiEntityCtx) {
+        override fun run(cfg: NoConfig, ctx: BiEntityCtx) {
             VeilbornTransposition.transpose(ctx.actor(), ctx.target())
         }
     }
 
     private class MortalResolveAction : NoConfigAction() {
-        override fun run(cfg: NoConfig, ctx: dev.overgrown.apoli.condition.context.EntityCtx) {
-            val player = ctx.raw() as? net.minecraft.server.level.ServerPlayer
+        override fun run(cfg: NoConfig, ctx: EntityCtx) {
+            val player = ctx.raw() as? ServerPlayer
             if (player != null) {
                 IncapacitatedCompat.beginMortalResolve(player)
             }
@@ -244,8 +272,8 @@ object AndromedaActions {
     }
 
     private class ChampionMortalResolveAction : NoConfigAction() {
-        override fun run(cfg: NoConfig, ctx: dev.overgrown.apoli.condition.context.EntityCtx) {
-            val player = ctx.raw() as? net.minecraft.server.level.ServerPlayer
+        override fun run(cfg: NoConfig, ctx: EntityCtx) {
+            val player = ctx.raw() as? ServerPlayer
             if (player != null) {
                 IncapacitatedCompat.beginChampionMortalResolve(player)
             }
@@ -253,8 +281,8 @@ object AndromedaActions {
     }
 
     private class StopChampionMortalResolveAction : NoConfigAction() {
-        override fun run(cfg: NoConfig, ctx: dev.overgrown.apoli.condition.context.EntityCtx) {
-            val player = ctx.raw() as? net.minecraft.server.level.ServerPlayer
+        override fun run(cfg: NoConfig, ctx: EntityCtx) {
+            val player = ctx.raw() as? ServerPlayer
             if (player != null) {
                 MortalResolveManager.stopChampion(player)
             }
@@ -262,46 +290,46 @@ object AndromedaActions {
     }
 
 
-    private data class TagCfg (val tag: kotlin.String, val operation: kotlin.String) {
+    private data class TagCfg (val tag: String, val operation: String) {
     }
 
-    private class TagAction : dev.overgrown.apoli.action.ActionType<dev.overgrown.apoli.condition.context.EntityCtx, TagCfg> {
-        override fun codec(): com.mojang.serialization.MapCodec<TagCfg>? {
-            return andromeda.origins.action.AndromedaActions.TagAction.Companion.CODEC
+    private class TagAction : ActionType<EntityCtx, TagCfg> {
+        override fun codec(): MapCodec<TagCfg>? {
+            return TagAction.CODEC
         }
 
-        override fun run(cfg: TagCfg, ctx: dev.overgrown.apoli.condition.context.EntityCtx) {
+        override fun run(cfg: TagCfg, ctx: EntityCtx) {
             when (cfg.operation){"add" -> ctx.raw().addTag(cfg.tag)
                 "remove" -> ctx.raw().removeTag(cfg.tag)
                 else -> {}}
         }
         companion object {
-            val CODEC: com.mojang.serialization.MapCodec<TagCfg>? = com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec<TagCfg>(java.util.function.Function { i: com.mojang.serialization.codecs.RecordCodecBuilder.Instance<TagCfg> -> i.group<kotlin.String, kotlin.String>(
-            com.mojang.serialization.Codec.STRING.fieldOf("tag").forGetter<TagCfg>(TagCfg::tag),
-            com.mojang.serialization.Codec.STRING.fieldOf("operation").forGetter<TagCfg>(TagCfg::operation)
-            ).apply<TagCfg>(i, BiFunction { tag: kotlin.String, operation: kotlin.String -> TagCfg(tag, operation)})})
+            val CODEC: MapCodec<TagCfg>? = RecordCodecBuilder.mapCodec<TagCfg>(Function { i: RecordCodecBuilder.Instance<TagCfg> -> i.group<String, String>(
+            Codec.STRING.fieldOf("tag").forGetter<TagCfg>(TagCfg::tag),
+            Codec.STRING.fieldOf("operation").forGetter<TagCfg>(TagCfg::operation)
+            ).apply<TagCfg>(i, BiFunction { tag: String, operation: String -> TagCfg(tag, operation)})})
 
         }}
 
 
-    private data class ActionbarCfg (val text: net.minecraft.network.chat.Component) {
+    private data class ActionbarCfg (val text: Component) {
     }
 
-    private class ActionbarAction : dev.overgrown.apoli.action.ActionType<dev.overgrown.apoli.condition.context.EntityCtx, ActionbarCfg> {
-        override fun codec(): com.mojang.serialization.MapCodec<ActionbarCfg>? {
+    private class ActionbarAction : ActionType<EntityCtx, ActionbarCfg> {
+        override fun codec(): MapCodec<ActionbarCfg>? {
             return ActionbarAction.Companion.CODEC
         }
 
-        override fun run(cfg: ActionbarCfg, ctx: dev.overgrown.apoli.condition.context.EntityCtx) {
-            val player = ctx.raw() as? net.minecraft.server.level.ServerPlayer
+        override fun run(cfg: ActionbarCfg, ctx: EntityCtx) {
+            val player = ctx.raw() as? ServerPlayer
             if (player != null) {
                 // Uses the same vanilla action-bar packet path as /title @s actionbar.
                 player.displayClientMessage(cfg.text, true)
             }
         }
         companion object {
-            val CODEC: com.mojang.serialization.MapCodec<ActionbarCfg>? = dev.overgrown.apoli.data.TextComponent.CODEC.fieldOf("text")
-            .xmap<ActionbarCfg>(java.util.function.Function { text: net.minecraft.network.chat.Component -> ActionbarCfg(text)}, ActionbarCfg::text)
+            val CODEC: MapCodec<ActionbarCfg>? = TextComponent.CODEC.fieldOf("text")
+            .xmap<ActionbarCfg>(Function { text: Component -> ActionbarCfg(text)}, ActionbarCfg::text)
 
         }}
 }

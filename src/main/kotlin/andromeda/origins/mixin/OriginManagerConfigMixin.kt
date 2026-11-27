@@ -1,16 +1,25 @@
 package andromeda.origins.mixin
 
 import andromeda.origins.config.AndromedaConfigApplier
-import andromeda.origins.config.AndromedaConfigRuntime
 import andromeda.origins.config.AndromedaConfigPolicy
+import andromeda.origins.config.AndromedaConfigRuntime
+import dev.overgrown.origins.origin.OriginManager
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.server.level.ServerPlayer
+import net.minecraft.world.entity.player.Player
+import org.spongepowered.asm.mixin.Mixin
+import org.spongepowered.asm.mixin.injection.At
+import org.spongepowered.asm.mixin.injection.Inject
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable
 
 
  /** Server-side backstop so a disabled primary-layer Origin cannot be selected by a crafted packet.  */
-@org.spongepowered.asm.mixin.Mixin(dev.overgrown.origins.origin.OriginManager::class)
+@Mixin(OriginManager::class)
 object OriginManagerConfigMixin {
-    @org.spongepowered.asm.mixin.injection.Inject(method = ["availableTo"], at = [org.spongepowered.asm.mixin.injection.At("HEAD")], cancellable = true) @JvmStatic private fun `andromeda$rejectDisabledOrigin`(player: net.minecraft.world.entity.player.Player, layerId: net.minecraft.resources.ResourceLocation,
-    originId: net.minecraft.resources.ResourceLocation,
-    cir: org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable<kotlin.Boolean>) {
+    @Inject(method = ["availableTo"], at = [At("HEAD")], cancellable = true) @JvmStatic private fun `andromeda$rejectDisabledOrigin`(player: Player, layerId: ResourceLocation,
+    originId: ResourceLocation,
+    cir: CallbackInfoReturnable<Boolean>) {
         if (AndromedaConfigPolicy.ORIGIN_LAYER == layerId
         && !AndromedaConfigRuntime.originEnabled(originId)) {
             cir.setReturnValue(false)
@@ -18,9 +27,9 @@ object OriginManagerConfigMixin {
     }
 
      /** Re-evaluate per-Origin shared power toggles after every successful Origin choice.  */
-    @org.spongepowered.asm.mixin.injection.Inject(method = ["chooseOrigin"], at = [org.spongepowered.asm.mixin.injection.At("RETURN")]) @JvmStatic private fun `andromeda$refreshPowerSuppression`(player: net.minecraft.server.level.ServerPlayer, layerId: net.minecraft.resources.ResourceLocation,
-    originId: net.minecraft.resources.ResourceLocation, fromOrb: kotlin.Boolean,
-    ci: org.spongepowered.asm.mixin.injection.callback.CallbackInfo?) {
+    @Inject(method = ["chooseOrigin"], at = [At("RETURN")]) @JvmStatic private fun `andromeda$refreshPowerSuppression`(player: ServerPlayer, layerId: ResourceLocation,
+    originId: ResourceLocation, fromOrb: Boolean,
+    ci: CallbackInfo?) {
         if (AndromedaConfigPolicy.ORIGIN_LAYER == layerId) {
             AndromedaConfigApplier.applyPowerSuppression(player)
         }

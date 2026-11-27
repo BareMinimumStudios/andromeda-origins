@@ -4,8 +4,11 @@ import andromeda.origins.platform.ClientPlatform
 import andromeda.origins.platform.Platform
 import dev.overgrown.apoli.power.PowerContainer
 import dev.overgrown.apoli.power.PowerResources
-import net.minecraft.client.Minecraft
+import java.util.UUID
+import java.util.function.Supplier
+import kotlin.math.roundToInt
 import net.minecraft.client.DeltaTracker
+import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.Gui
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.multiplayer.ClientLevel
@@ -16,9 +19,7 @@ import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.ItemStack
-import java.util.UUID
-import java.util.function.Supplier
-import kotlin.math.roundToInt
+import org.slf4j.LoggerFactory
 
 /** Optional library integration: execute Simply Swords' own visuals/HUD; never bundle its implementation or assets. */
 object DawnquiverClientCompat {
@@ -55,7 +56,7 @@ object DawnquiverClientCompat {
     private var attempted = false
     private var hudAttempted = false
     private val hudRemaining = ThreadLocal<Int?>()
-    private val logger = org.slf4j.LoggerFactory.getLogger("Andromeda Origins/Dawnquiver")
+    private val logger = LoggerFactory.getLogger("Andromeda Origins/Dawnquiver")
     fun remainingForHud(): Int? = hudRemaining.get()
     fun register() { ClientPlatform.endTick { client -> update(client) } }
     private fun value(entity: LivingEntity, name: String) = PowerContainer.of(entity)?.let { PowerResources.read(it, id("bow_" + name)).orElse(0.0) } ?: 0.0

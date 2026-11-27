@@ -1,9 +1,15 @@
 package andromeda.origins.platform
 
 import andromeda.origins.platform.FabricVersionHandshake
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
+import java.util.concurrent.CompletableFuture
+import java.util.function.Consumer
 import net.fabricmc.fabric.api.client.networking.v1.ClientLoginNetworking
 import net.fabricmc.fabric.api.client.networking.v1.ClientLoginNetworking.LoginQueryRequestHandler
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
+import net.minecraft.client.Minecraft
+import net.minecraft.client.multiplayer.ClientHandshakePacketListenerImpl
+import net.minecraft.network.FriendlyByteBuf
+import net.minecraft.network.PacketSendListener
 
 
 
@@ -11,15 +17,15 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientLoginNetworking.LoginQ
 object FabricVersionHandshakeClient {
     fun register() {
         ClientLoginNetworking.registerGlobalReceiver(FabricVersionHandshake.CHANNEL,
-        LoginQueryRequestHandler { client: net.minecraft.client.Minecraft, handler: net.minecraft.client.multiplayer.ClientHandshakePacketListenerImpl, request: net.minecraft.network.FriendlyByteBuf, callbacksConsumer: java.util.function.Consumer<net.minecraft.network.PacketSendListener> ->
+        LoginQueryRequestHandler { client: Minecraft, handler: ClientHandshakePacketListenerImpl, request: FriendlyByteBuf, callbacksConsumer: Consumer<PacketSendListener> ->
                 // Consume the server's protocol/version fields so malformed queries do not silently
                 // look valid. The server remains authoritative and performs the actual comparison.
         request.readVarInt()
         request.readUtf(128)
-        val response: net.minecraft.network.FriendlyByteBuf = PacketByteBufs.create()
+        val response: FriendlyByteBuf = PacketByteBufs.create()
         response.writeVarInt(FabricVersionHandshake.PROTOCOL_VERSION)
         response.writeUtf(FabricVersionHandshake.currentVersion())
-        java.util.concurrent.CompletableFuture.completedFuture<net.minecraft.network.FriendlyByteBuf>(response)
+        CompletableFuture.completedFuture<FriendlyByteBuf>(response)
         })
     }
 }

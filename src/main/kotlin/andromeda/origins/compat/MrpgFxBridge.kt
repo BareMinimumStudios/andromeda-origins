@@ -1,9 +1,12 @@
 package andromeda.origins.compat
 
 import andromeda.origins.platform.Platform
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.entity.Entity
 import net.minecraft.world.phys.Vec3
+import org.slf4j.LoggerFactory
 
 /** Optional client-built MRPG presets. No library classes are linked by the base mod. */
 object MrpgFxBridge {
@@ -12,7 +15,7 @@ object MrpgFxBridge {
         private val params = Class.forName("com.mrpg_lib.fx.FxParams")
         val get = fx.getMethod("get", ResourceLocation::class.java)
         val at = params.getMethod("at", Vec3::class.java)
-        val attach = params.getMethod("attach", net.minecraft.world.entity.Entity::class.java)
+        val attach = params.getMethod("attach", Entity::class.java)
         val direction = params.getMethod("direction", Vec3::class.java)
         val radius = params.getMethod("radius", Float::class.javaPrimitiveType)
         val intensity = params.getMethod("intensity", Float::class.javaPrimitiveType)
@@ -23,9 +26,9 @@ object MrpgFxBridge {
     private var attempted = false
     private var access: Access? = null
     private val warned = mutableSetOf<String>()
-    private val logger = org.slf4j.LoggerFactory.getLogger("Andromeda Origins/MRPG FX")
+    private val logger = LoggerFactory.getLogger("Andromeda Origins/MRPG FX")
 
-    fun play(level: ServerLevel, position: Vec3, requested: EnhancedFxDefinitions.MrpgDefinition, entity: net.minecraft.world.entity.Entity, atSource: Boolean): Boolean {
+    fun play(level: ServerLevel, position: Vec3, requested: EnhancedFxDefinitions.MrpgDefinition, entity: Entity, atSource: Boolean): Boolean {
         val definition = OriginFxStyle.mrpg(requested)
         if (!Platform.isModLoaded("mrpg_lib")) return false
         if (!attempted) {
@@ -58,7 +61,7 @@ object MrpgFxBridge {
             val channel = ResourceLocation.parse("mrpg_lib:fx_play")
             // Use the previous particle path for mixed/older clients; never send an unknown payload.
             if (viewers.isEmpty() || viewers.any { !Platform.canReceiveCosmetic(it, channel) }) return false
-            val packet = api.packet.newInstance(id, parameters, 0) as net.minecraft.network.protocol.common.custom.CustomPacketPayload
+            val packet = api.packet.newInstance(id, parameters, 0) as CustomPacketPayload
             for (viewer in viewers) Platform.sendCosmetic(viewer, packet)
             return true
         } catch (error: ReflectiveOperationException) {

@@ -1,38 +1,57 @@
 package andromeda.origins.compat
 
 import andromeda.origins.AndromedaOrigins
-import java.util.HashMap
+import andromeda.origins.platform.Platform
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.nio.charset.StandardCharsets
+import java.util.ArrayList
+import java.util.Comparator
+import java.util.HashMap
+import java.util.List as JavaList
+import java.util.Map as JavaMap
+import java.util.function.Consumer
+import java.util.function.Function
+import java.util.function.Predicate
+import kotlin.concurrent.Volatile
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.server.packs.resources.Resource
+import net.minecraft.server.packs.resources.ResourceManager
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 
  /**
  * Datapack-backed Enhanced FX definitions.
  */
 object EnhancedFxDefinitions {
-    val LOGGER: org.slf4j.Logger = org.slf4j.LoggerFactory.getLogger("Andromeda Origins/Enhanced FX")
-    val RELOAD_ID: net.minecraft.resources.ResourceLocation = net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(AndromedaOrigins.MOD_ID, "enhanced_fx")
-    @kotlin.concurrent.Volatile
-    var events: kotlin.collections.MutableMap<kotlin.String, EventDefinition> = java.util.Map.of<kotlin.String, EventDefinition>()
-    var registered: kotlin.Boolean = false
+    val LOGGER: Logger = LoggerFactory.getLogger("Andromeda Origins/Enhanced FX")
+    val RELOAD_ID: ResourceLocation = ResourceLocation.fromNamespaceAndPath(AndromedaOrigins.MOD_ID, "enhanced_fx")
+    @Volatile
+    var events: MutableMap<String, EventDefinition> = JavaMap.of<String, EventDefinition>()
+    var registered: Boolean = false
 
     fun register() {
         if (EnhancedFxDefinitions.registered) {
             return
         }
         EnhancedFxDefinitions.registered = true
-        andromeda.origins.platform.Platform.resourceReload(EnhancedFxDefinitions.RELOAD_ID, java.util.function.Consumer callback@ { manager: net.minecraft.server.packs.resources.ResourceManager -> val loaded: kotlin.collections.MutableMap<kotlin.String, EventDefinition> = HashMap<kotlin.String, EventDefinition>()
-        val resources: kotlin.collections.MutableMap<net.minecraft.resources.ResourceLocation, net.minecraft.server.packs.resources.Resource> = manager.listResources(
+        Platform.resourceReload(EnhancedFxDefinitions.RELOAD_ID, Consumer callback@ { manager: ResourceManager -> val loaded: MutableMap<String, EventDefinition> = HashMap<String, EventDefinition>()
+        val resources: MutableMap<ResourceLocation, Resource> = manager.listResources(
         "andromeda_fx",
-        java.util.function.Predicate { id: net.minecraft.resources.ResourceLocation -> id.getNamespace() == AndromedaOrigins.MOD_ID && id.getPath().endsWith(".json")}
+        Predicate { id: ResourceLocation -> id.getNamespace() == AndromedaOrigins.MOD_ID && id.getPath().endsWith(".json")}
         )
 
-        val ids: kotlin.collections.MutableList<net.minecraft.resources.ResourceLocation> = java.util.ArrayList<net.minecraft.resources.ResourceLocation>(resources.keys)
-        ids.sortWith(java.util.Comparator.comparing<net.minecraft.resources.ResourceLocation, kotlin.String>(java.util.function.Function { obj: net.minecraft.resources.ResourceLocation -> obj.toString()}))
+        val ids: MutableList<ResourceLocation> = ArrayList<ResourceLocation>(resources.keys)
+        ids.sortWith(Comparator.comparing<ResourceLocation, String>(Function { obj: ResourceLocation -> obj.toString()}))
         for (id in ids) {
             val resource = resources.getValue(id)
             try {
-                BufferedReader(java.io.InputStreamReader(resource.open(), java.nio.charset.StandardCharsets.UTF_8)).use {
-                reader -> val root: com.google.gson.JsonObject = com.google.gson.JsonParser.parseReader(reader).getAsJsonObject()
+                BufferedReader(InputStreamReader(resource.open(), StandardCharsets.UTF_8)).use {
+                reader -> val root: JsonObject = JsonParser.parseReader(reader).getAsJsonObject()
                 for (entry in root.entrySet()) {
                     if (!entry.value.isJsonObject()) {
                         continue
@@ -41,36 +60,36 @@ object EnhancedFxDefinitions {
                     loaded.put(entry.key, definition)
                 }
 
-                } }catch (exception: java.lang.Exception) {
+                } }catch (exception: Exception) {
                         // Cosmetic definitions remain fail-soft, but surface the broken resource for maintainers.
                 EnhancedFxDefinitions.LOGGER.warn("Skipping malformed Enhanced FX definition {}. Bundled fallback FX remain active.", id, exception)
             }
         }
-        EnhancedFxDefinitions.events = java.util.Map.copyOf<kotlin.String, EventDefinition>(loaded)
+        EnhancedFxDefinitions.events = JavaMap.copyOf<String, EventDefinition>(loaded)
 
         })
     }
 
-    fun get(event: kotlin.String?): EventDefinition? {
+    fun get(event: String?): EventDefinition? {
         return EnhancedFxDefinitions.events.get(event)
     }
 
-    fun count(): kotlin.Int {
+    fun count(): Int {
         return EnhancedFxDefinitions.events.size
     }
 
-    private fun parseEvent(`object`: com.google.gson.JsonObject): EventDefinition {
-        val particles: kotlin.collections.MutableList<EnhancedFxDefinitions.ParticleDefinition> = java.util.ArrayList<EnhancedFxDefinitions.ParticleDefinition>()
-        val sounds: kotlin.collections.MutableList<EnhancedFxDefinitions.SoundDefinition> = java.util.ArrayList<EnhancedFxDefinitions.SoundDefinition>()
+    private fun parseEvent(`object`: JsonObject): EventDefinition {
+        val particles: MutableList<EnhancedFxDefinitions.ParticleDefinition> = ArrayList<EnhancedFxDefinitions.ParticleDefinition>()
+        val sounds: MutableList<EnhancedFxDefinitions.SoundDefinition> = ArrayList<EnhancedFxDefinitions.SoundDefinition>()
 
-        val particleArray: com.google.gson.JsonArray = if (`object`.has("particles") && `object`.get("particles").isJsonArray())
+        val particleArray: JsonArray = if (`object`.has("particles") && `object`.get("particles").isJsonArray())
         `object`.getAsJsonArray("particles")
         else
-        com.google.gson.JsonArray()
+        JsonArray()
         for (element in particleArray) {
             if (!element.isJsonObject()) continue
-            val p: com.google.gson.JsonObject = element.getAsJsonObject()
-            val id: kotlin.String = EnhancedFxDefinitions.string(p, "id", "")
+            val p: JsonObject = element.getAsJsonObject()
+            val id: String = EnhancedFxDefinitions.string(p, "id", "")
             if (id.isBlank()) continue
             particles.add(EnhancedFxDefinitions.ParticleDefinition(
             id,
@@ -103,14 +122,14 @@ object EnhancedFxDefinitions {
             ))
         }
 
-        val soundArray: com.google.gson.JsonArray = if (`object`.has("sounds") && `object`.get("sounds").isJsonArray())
+        val soundArray: JsonArray = if (`object`.has("sounds") && `object`.get("sounds").isJsonArray())
         `object`.getAsJsonArray("sounds")
         else
-        com.google.gson.JsonArray()
+        JsonArray()
         for (element in soundArray) {
             if (!element.isJsonObject()) continue
-            val s: com.google.gson.JsonObject = element.getAsJsonObject()
-            val id: kotlin.String = EnhancedFxDefinitions.string(s, "id", "")
+            val s: JsonObject = element.getAsJsonObject()
+            val id: String = EnhancedFxDefinitions.string(s, "id", "")
             if (id.isBlank()) continue
             sounds.add(EnhancedFxDefinitions.SoundDefinition(
             id,
@@ -127,79 +146,79 @@ object EnhancedFxDefinitions {
                 number(definition, "intensity", 0.5f), string(definition, "color", "FFFFFF").removePrefix("#").toIntOrNull(16) ?: 0xffffff,
                 number(definition, "duration", 8f).toInt(), bool(definition, "attach", false))
         } else null
-        return EventDefinition(java.util.List.copyOf<EnhancedFxDefinitions.ParticleDefinition>(particles), java.util.List.copyOf<EnhancedFxDefinitions.SoundDefinition>(sounds), mrpg)
+        return EventDefinition(JavaList.copyOf<EnhancedFxDefinitions.ParticleDefinition>(particles), JavaList.copyOf<EnhancedFxDefinitions.SoundDefinition>(sounds), mrpg)
     }
 
-    private fun string(`object`: com.google.gson.JsonObject, key: kotlin.String, fallback: kotlin.String): kotlin.String {
+    private fun string(`object`: JsonObject, key: String, fallback: String): String {
         try {
             return if (`object`.has(key)) `object`.get(key).getAsString() else fallback
-        }catch (ignored: java.lang.Exception) {
+        }catch (ignored: Exception) {
             return fallback
         }
     }
 
-    private fun number(`object`: com.google.gson.JsonObject, key: kotlin.String, fallback: kotlin.Float): kotlin.Float {
+    private fun number(`object`: JsonObject, key: String, fallback: Float): Float {
         try {
             return if (`object`.has(key)) `object`.get(key).getAsFloat() else fallback
-        }catch (ignored: java.lang.Exception) {
+        }catch (ignored: Exception) {
             return fallback
         }
     }
 
-    private fun nullableNumber(`object`: com.google.gson.JsonObject, key: kotlin.String?): kotlin.Float? {
+    private fun nullableNumber(`object`: JsonObject, key: String?): Float? {
         try {
             return if (`object`.has(key)) `object`.get(key).getAsFloat() else null
-        }catch (ignored: java.lang.Exception) {
+        }catch (ignored: Exception) {
             return null
         }
     }
 
-    private fun bool(`object`: com.google.gson.JsonObject, key: kotlin.String, fallback: kotlin.Boolean): kotlin.Boolean {
+    private fun bool(`object`: JsonObject, key: String, fallback: Boolean): Boolean {
         try {
             return if (`object`.has(key)) `object`.get(key).getAsBoolean() else fallback
-        }catch (ignored: java.lang.Exception) {
+        }catch (ignored: Exception) {
             return fallback
         }
     }
 
 
-    data class EventDefinition (val particles: kotlin.collections.MutableList<EnhancedFxDefinitions.ParticleDefinition>, val sounds: kotlin.collections.MutableList<EnhancedFxDefinitions.SoundDefinition>, val mrpg: MrpgDefinition? = null) {
+    data class EventDefinition (val particles: MutableList<EnhancedFxDefinitions.ParticleDefinition>, val sounds: MutableList<EnhancedFxDefinitions.SoundDefinition>, val mrpg: MrpgDefinition? = null) {
     }
 
 
     data class MrpgDefinition(val preset: String, val radius: Float, val intensity: Float, val color: Int, val duration: Int, val attach: Boolean = false)
 
-    data class ParticleDefinition (val id: kotlin.String,
-    val preset: kotlin.String,
-    val count: kotlin.Float,
-    val speed: kotlin.Float,
-    val scale: kotlin.Float,
-    val scaleVariance: kotlin.Float,
-    val scaleTo: kotlin.Float,
-    val angle: kotlin.Float,
-    val preTravel: kotlin.Float,
-    val degreesPerTick: kotlin.Float,
-    val offset: kotlin.Float,
-    val motion: kotlin.String,
-    val color: kotlin.String,
-    val colorVariance: kotlin.Float,
-    val opacity: kotlin.Float,
-    val fadeOutHold: kotlin.Float,
-    val fadeInOutHold: kotlin.Float,
-    val playbackSpeed: kotlin.Float,
-    val lifetimeVariance: kotlin.Float,
-    val gravity: kotlin.Float?,
-    val drag: kotlin.Float?,
-    val glow: kotlin.Boolean,
-    val collides: kotlin.Boolean,
-    val attached: kotlin.Boolean,
-    val attachedToGround: kotlin.Boolean,
-    val requiresMod: kotlin.String,
-    val render: kotlin.String = ""
+    data class ParticleDefinition (val id: String,
+    val preset: String,
+    val count: Float,
+    val speed: Float,
+    val scale: Float,
+    val scaleVariance: Float,
+    val scaleTo: Float,
+    val angle: Float,
+    val preTravel: Float,
+    val degreesPerTick: Float,
+    val offset: Float,
+    val motion: String,
+    val color: String,
+    val colorVariance: Float,
+    val opacity: Float,
+    val fadeOutHold: Float,
+    val fadeInOutHold: Float,
+    val playbackSpeed: Float,
+    val lifetimeVariance: Float,
+    val gravity: Float?,
+    val drag: Float?,
+    val glow: Boolean,
+    val collides: Boolean,
+    val attached: Boolean,
+    val attachedToGround: Boolean,
+    val requiresMod: String,
+    val render: String = ""
     ) {
     }
 
 
-    data class SoundDefinition (val id: kotlin.String, val volume: kotlin.Float, val pitch: kotlin.Float, val requiresMod: kotlin.String, val resourcePack: kotlin.Boolean = false) {
+    data class SoundDefinition (val id: String, val volume: Float, val pitch: Float, val requiresMod: String, val resourcePack: Boolean = false) {
     }
 }

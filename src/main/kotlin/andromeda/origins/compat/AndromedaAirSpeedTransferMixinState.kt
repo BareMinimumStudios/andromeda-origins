@@ -1,8 +1,11 @@
 package andromeda.origins.compat
 
+import java.util.Set as JavaSet
+import net.minecraft.resources.ResourceLocation
+
 internal object AndromedaAirSpeedTransferMixinState {
 
-        val `ANDROMEDA$TRANSFER_OWNERS`: kotlin.collections.MutableSet<net.minecraft.resources.ResourceLocation> = java.util.Set.of<net.minecraft.resources.ResourceLocation>(
+        val `ANDROMEDA$TRANSFER_OWNERS`: MutableSet<ResourceLocation> = JavaSet.of<ResourceLocation>(
         AndromedaAirSpeedTransferMixinState.id("arachne/passives"),
         AndromedaAirSpeedTransferMixinState.id("champion/arachne_passives"),
         AndromedaAirSpeedTransferMixinState.id("faerie/passives"),
@@ -11,8 +14,8 @@ internal object AndromedaAirSpeedTransferMixinState {
         AndromedaAirSpeedTransferMixinState.id("dawnbreaker/helper/transference_boost")
         )
 
-        fun id(path: kotlin.String): net.minecraft.resources.ResourceLocation {
-            return net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("andromeda_origins", path)
+        fun id(path: String): ResourceLocation {
+            return ResourceLocation.fromNamespaceAndPath("andromeda_origins", path)
         }
 
 }

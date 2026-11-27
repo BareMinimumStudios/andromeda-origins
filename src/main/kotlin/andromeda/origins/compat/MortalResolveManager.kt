@@ -1,14 +1,25 @@
 package andromeda.origins.compat
 
-import andromeda.origins.compat.IncapacitatedCompat
 import andromeda.origins.compat.EnhancedFxCompat
 import andromeda.origins.compat.FiguraCompatManager
-import java.util.HashMap
-import andromeda.origins.platform.RespawnCallback
+import andromeda.origins.compat.IncapacitatedCompat
 import andromeda.origins.compat.MortalResolveEffects
-import java.util.HashSet
 import andromeda.origins.platform.DamageCallback
 import andromeda.origins.platform.JoinCallback
+import andromeda.origins.platform.Platform
+import andromeda.origins.platform.RespawnCallback
+import dev.overgrown.origins.storage.OriginStorage
+import java.util.HashMap
+import java.util.HashSet
+import java.util.UUID
+import java.util.function.Consumer
+import kotlin.math.max
+import kotlin.math.min
+import net.minecraft.server.MinecraftServer
+import net.minecraft.server.level.ServerPlayer
+import net.minecraft.server.network.ServerGamePacketListenerImpl
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.LivingEntity
 
 
  /**
@@ -19,48 +30,48 @@ import andromeda.origins.platform.JoinCallback
  * A command tag mirrors the active state while the runtime maps drive per-tick effects.
  */
 object MortalResolveManager {
-    const val ACTIVE_TAG: kotlin.String = "andromeda_mortal_resolve"
-    const val CHAMPION_ACTIVE_TAG: kotlin.String = "andromeda_champion_mortal_resolve"
-    private const val FINAL_DEATH_PENDING_TAG: kotlin.String = "andromeda_mortal_resolve_restore_incap"
-    val DURATION_TICKS: kotlin.Int = 20 * 60
+    const val ACTIVE_TAG: String = "andromeda_mortal_resolve"
+    const val CHAMPION_ACTIVE_TAG: String = "andromeda_champion_mortal_resolve"
+    private const val FINAL_DEATH_PENDING_TAG: String = "andromeda_mortal_resolve_restore_incap"
+    val DURATION_TICKS: Int = 20 * 60
 
-    val ACTIVE: kotlin.collections.MutableMap<java.util.UUID, kotlin.Int> = HashMap<java.util.UUID, kotlin.Int>()
-    val CHAMPION_ACTIVE: kotlin.collections.MutableMap<java.util.UUID, kotlin.Int> = HashMap<java.util.UUID, kotlin.Int>()
-    val FINAL_DEATH_PENDING: kotlin.collections.MutableSet<java.util.UUID> = HashSet<java.util.UUID>()
+    val ACTIVE: MutableMap<UUID, Int> = HashMap<UUID, Int>()
+    val CHAMPION_ACTIVE: MutableMap<UUID, Int> = HashMap<UUID, Int>()
+    val FINAL_DEATH_PENDING: MutableSet<UUID> = HashSet<UUID>()
 
-    private const val DEADLINE_KEY: kotlin.String = "andromeda_mortal_resolve_deadline"
-    private const val CHAMPION_DEADLINE_KEY: kotlin.String = "andromeda_champion_mortal_resolve_deadline"
+    private const val DEADLINE_KEY: String = "andromeda_mortal_resolve_deadline"
+    private const val CHAMPION_DEADLINE_KEY: String = "andromeda_champion_mortal_resolve_deadline"
 
-    private fun remaining(player: net.minecraft.server.level.ServerPlayer, key: kotlin.String?): kotlin.Int {
+    private fun remaining(player: ServerPlayer, key: String?): Int {
         try {
-            val value: kotlin.String? = dev.overgrown.origins.storage.OriginStorage.value(player, key)
+            val value: String? = OriginStorage.value(player, key)
             if (value == null) return 0
-            return kotlin.math.max(0L, kotlin.math.min(MortalResolveManager.DURATION_TICKS.toLong(), value.toLong() - player.server.overworld().getGameTime())).toInt()
-        }catch (exception: java.lang.NumberFormatException) {
+            return max(0L, min(MortalResolveManager.DURATION_TICKS.toLong(), value.toLong() - player.server.overworld().getGameTime())).toInt()
+        }catch (exception: NumberFormatException) {
             return 0
         }
     }
 
     fun register() {
-        andromeda.origins.platform.Platform.serverStopped(java.util.function.Consumer callback@ { server: net.minecraft.server.MinecraftServer -> MortalResolveManager.ACTIVE.clear()
+        Platform.serverStopped(Consumer callback@ { server: MinecraftServer -> MortalResolveManager.ACTIVE.clear()
         MortalResolveManager.CHAMPION_ACTIVE.clear()
         MortalResolveManager.FINAL_DEATH_PENDING.clear()
 
         })
-        andromeda.origins.platform.Platform.disconnect { handler, _ ->
+        Platform.disconnect { handler, _ ->
             // Tags and stored deadlines retain offline finality; runtime effects need no offline entry.
             ACTIVE.remove(handler.player.uuid)
             CHAMPION_ACTIVE.remove(handler.player.uuid)
             FINAL_DEATH_PENDING.remove(handler.player.uuid)
         }
-        andromeda.origins.platform.Platform.serverTick(java.util.function.Consumer callback@ { server: net.minecraft.server.MinecraftServer ->
+        Platform.serverTick(Consumer callback@ { server: MinecraftServer ->
             // Only active final-stand entries are visited here. Restart recovery is handled by the
             // player-join event below, avoiding an all-online-player scan every server tick.
-        val iterator: kotlin.collections.MutableIterator<kotlin.collections.MutableMap.MutableEntry<java.util.UUID, kotlin.Int>> = MortalResolveManager.ACTIVE.entries.iterator()
+        val iterator: MutableIterator<MutableMap.MutableEntry<UUID, Int>> = MortalResolveManager.ACTIVE.entries.iterator()
         while (iterator.hasNext()) {
-            val entry: kotlin.collections.MutableMap.MutableEntry<java.util.UUID, kotlin.Int> = iterator.next()
-            val player: net.minecraft.server.level.ServerPlayer? = server.getPlayerList().getPlayer(entry.key)
-            val remaining: kotlin.Int = entry.value
+            val entry: MutableMap.MutableEntry<UUID, Int> = iterator.next()
+            val player: ServerPlayer? = server.getPlayerList().getPlayer(entry.key)
+            val remaining: Int = entry.value
 
                             // Time continues to pass while disconnected. Once the player returns, an expired
                 // final stand resolves immediately instead of allowing logout to avoid the death.
@@ -72,7 +83,7 @@ object MortalResolveManager {
                             // A real death before the timer expires already fulfills Mortal Resolve's finality.
                 // The respawn callback below also clears the mirrored command tag.
             if (!player.isAlive()) {
-                dev.overgrown.origins.storage.OriginStorage.clear(player, DEADLINE_KEY)
+                OriginStorage.clear(player, DEADLINE_KEY)
                 player.removeTag(MortalResolveManager.ACTIVE_TAG)
                 FiguraCompatManager.setResource(player, FiguraCompatManager.MORTAL_RESOLVE_RESOURCE, 0)
                 iterator.remove()
@@ -80,7 +91,7 @@ object MortalResolveManager {
             }
 
             if (!player.getTags().contains(MortalResolveManager.ACTIVE_TAG)) {
-                dev.overgrown.origins.storage.OriginStorage.clear(player, DEADLINE_KEY)
+                OriginStorage.clear(player, DEADLINE_KEY)
                 MortalResolveEffects.stopHeartbeat(player)
                 FiguraCompatManager.setResource(player, FiguraCompatManager.MORTAL_RESOLVE_RESOURCE, 0)
                 iterator.remove()
@@ -89,7 +100,7 @@ object MortalResolveManager {
 
                             // Let the initial burst breathe for a moment, then leave a sparse upward trail
                 // for the first 1.5 seconds. Five-tick spacing keeps this cosmetic effect cheap.
-            val elapsed: kotlin.Int = MortalResolveManager.DURATION_TICKS - remaining
+            val elapsed: Int = MortalResolveManager.DURATION_TICKS - remaining
             if (elapsed >= 5 && elapsed <= 30 && elapsed % 5 == 0) {
                 MortalResolveEffects.playAfterglow(player)
             }
@@ -111,7 +122,7 @@ object MortalResolveManager {
 
             if (remaining <= 1) {
                 iterator.remove()
-                dev.overgrown.origins.storage.OriginStorage.clear(player, DEADLINE_KEY)
+                OriginStorage.clear(player, DEADLINE_KEY)
                 MortalResolveManager.FINAL_DEATH_PENDING.add(player.getUUID())
                 player.addTag(MortalResolveManager.FINAL_DEATH_PENDING_TAG)
                                     // Keep ACTIVE_TAG present until the death attempt has been evaluated.
@@ -123,11 +134,11 @@ object MortalResolveManager {
             }
         }
 
-        val championIterator: kotlin.collections.MutableIterator<kotlin.collections.MutableMap.MutableEntry<java.util.UUID, kotlin.Int>> = MortalResolveManager.CHAMPION_ACTIVE.entries.iterator()
+        val championIterator: MutableIterator<MutableMap.MutableEntry<UUID, Int>> = MortalResolveManager.CHAMPION_ACTIVE.entries.iterator()
         while (championIterator.hasNext()) {
-            val entry: kotlin.collections.MutableMap.MutableEntry<java.util.UUID, kotlin.Int> = championIterator.next()
-            val player: net.minecraft.server.level.ServerPlayer? = server.getPlayerList().getPlayer(entry.key)
-            val remaining: kotlin.Int = entry.value
+            val entry: MutableMap.MutableEntry<UUID, Int> = championIterator.next()
+            val player: ServerPlayer? = server.getPlayerList().getPlayer(entry.key)
+            val remaining: Int = entry.value
 
             if (player == null) {
                 championIterator.remove()
@@ -135,7 +146,7 @@ object MortalResolveManager {
             }
 
             if (!player.isAlive() || !player.getTags().contains(MortalResolveManager.CHAMPION_ACTIVE_TAG)) {
-                dev.overgrown.origins.storage.OriginStorage.clear(player, CHAMPION_DEADLINE_KEY)
+                OriginStorage.clear(player, CHAMPION_DEADLINE_KEY)
                 player.removeTag(MortalResolveManager.CHAMPION_ACTIVE_TAG)
                 MortalResolveEffects.stopHeartbeat(player)
                 FiguraCompatManager.setResource(player, FiguraCompatManager.MORTAL_RESOLVE_RESOURCE, 0)
@@ -143,7 +154,7 @@ object MortalResolveManager {
                 continue
             }
 
-            val elapsed: kotlin.Int = MortalResolveManager.DURATION_TICKS - remaining
+            val elapsed: Int = MortalResolveManager.DURATION_TICKS - remaining
             if (elapsed >= 5 && elapsed <= 30 && elapsed % 5 == 0) {
                 MortalResolveEffects.playAfterglow(player)
             }
@@ -160,7 +171,7 @@ object MortalResolveManager {
 
             if (remaining <= 1) {
                 championIterator.remove()
-                dev.overgrown.origins.storage.OriginStorage.clear(player, CHAMPION_DEADLINE_KEY)
+                OriginStorage.clear(player, CHAMPION_DEADLINE_KEY)
                 player.removeTag(MortalResolveManager.CHAMPION_ACTIVE_TAG)
                 MortalResolveEffects.stopHeartbeat(player)
                 FiguraCompatManager.setResource(player, FiguraCompatManager.MORTAL_RESOLVE_RESOURCE, 0)
@@ -174,9 +185,9 @@ object MortalResolveManager {
                 // Fabric fires this before ServerPlayer's death processing. Preparing Incapacitated's
         // counter here means its own death hook sees Mortal Resolve deaths as final without needing
         // a cross-mod Mixin-order dependency.
-        andromeda.origins.platform.Platform.death(DamageCallback callback@ {
-        entity: net.minecraft.world.entity.LivingEntity, damageSource: net.minecraft.world.damagesource.DamageSource, damageAmount: kotlin.Float ->
-         if (entity !is net.minecraft.server.level.ServerPlayer) {
+        Platform.death(DamageCallback callback@ {
+        entity: LivingEntity, damageSource: DamageSource, damageAmount: Float ->
+         if (entity !is ServerPlayer) {
             return@callback true
         }
         if (entity.getTags().contains(MortalResolveManager.ACTIVE_TAG)) {
@@ -191,7 +202,7 @@ object MortalResolveManager {
         true
         })
 
-        andromeda.origins.platform.Platform.respawn(RespawnCallback callback@ { oldPlayer: net.minecraft.server.level.ServerPlayer, newPlayer: net.minecraft.server.level.ServerPlayer, alive: kotlin.Boolean -> val mortalResolveDeath: kotlin.Boolean = MortalResolveManager.FINAL_DEATH_PENDING.remove(oldPlayer.getUUID())
+        Platform.respawn(RespawnCallback callback@ { oldPlayer: ServerPlayer, newPlayer: ServerPlayer, alive: Boolean -> val mortalResolveDeath: Boolean = MortalResolveManager.FINAL_DEATH_PENDING.remove(oldPlayer.getUUID())
         || oldPlayer.getTags().contains(MortalResolveManager.ACTIVE_TAG)
         || oldPlayer.getTags().contains(MortalResolveManager.FINAL_DEATH_PENDING_TAG)
         || newPlayer.getTags().contains(MortalResolveManager.FINAL_DEATH_PENDING_TAG)
@@ -209,7 +220,7 @@ object MortalResolveManager {
 
                 // Normalize Incapacitated's unlimited-down sentinel when the server play handler is ready. Using the long-lived
         // networking join event keeps this compatible with the project's Fabric API baseline.
-        andromeda.origins.platform.Platform.join(JoinCallback callback@ { handler: net.minecraft.server.network.ServerGamePacketListenerImpl, sender: kotlin.Any?, server: net.minecraft.server.MinecraftServer -> val player: net.minecraft.server.level.ServerPlayer = handler.getPlayer()
+        Platform.join(JoinCallback callback@ { handler: ServerGamePacketListenerImpl, sender: Any?, server: MinecraftServer -> val player: ServerPlayer = handler.getPlayer()
         if (player.getTags().contains(MortalResolveManager.FINAL_DEATH_PENDING_TAG)) {
             player.removeTag(MortalResolveManager.FINAL_DEATH_PENDING_TAG)
             MortalResolveManager.stop(player)
@@ -237,45 +248,45 @@ object MortalResolveManager {
         })
     }
 
-    fun isActive(player: net.minecraft.server.level.ServerPlayer): kotlin.Boolean {
+    fun isActive(player: ServerPlayer): Boolean {
         return MortalResolveManager.ACTIVE.containsKey(player.getUUID()) || player.getTags().contains(MortalResolveManager.ACTIVE_TAG)
     }
 
-    fun start(player: net.minecraft.server.level.ServerPlayer) {
-        dev.overgrown.origins.storage.OriginStorage.storeValue(player, MortalResolveManager.DEADLINE_KEY, (player.server.overworld().getGameTime() + MortalResolveManager.DURATION_TICKS).toString())
+    fun start(player: ServerPlayer) {
+        OriginStorage.storeValue(player, MortalResolveManager.DEADLINE_KEY, (player.server.overworld().getGameTime() + MortalResolveManager.DURATION_TICKS).toString())
         MortalResolveManager.ACTIVE.put(player.getUUID(), MortalResolveManager.DURATION_TICKS)
         player.addTag(MortalResolveManager.ACTIVE_TAG)
         FiguraCompatManager.setResource(player, FiguraCompatManager.MORTAL_RESOLVE_RESOURCE, 1)
     }
 
-    fun isChampionActive(player: net.minecraft.server.level.ServerPlayer): kotlin.Boolean {
+    fun isChampionActive(player: ServerPlayer): Boolean {
         return MortalResolveManager.CHAMPION_ACTIVE.containsKey(player.getUUID())
         || player.getTags().contains(MortalResolveManager.CHAMPION_ACTIVE_TAG)
     }
 
-    fun startChampion(player: net.minecraft.server.level.ServerPlayer) {
-        dev.overgrown.origins.storage.OriginStorage.storeValue(player, MortalResolveManager.CHAMPION_DEADLINE_KEY, (player.server.overworld().getGameTime() + MortalResolveManager.DURATION_TICKS).toString())
+    fun startChampion(player: ServerPlayer) {
+        OriginStorage.storeValue(player, MortalResolveManager.CHAMPION_DEADLINE_KEY, (player.server.overworld().getGameTime() + MortalResolveManager.DURATION_TICKS).toString())
         MortalResolveManager.CHAMPION_ACTIVE.put(player.getUUID(), MortalResolveManager.DURATION_TICKS)
         player.addTag(MortalResolveManager.CHAMPION_ACTIVE_TAG)
         FiguraCompatManager.setResource(player, FiguraCompatManager.MORTAL_RESOLVE_RESOURCE, 1)
     }
 
-    fun stopChampion(player: net.minecraft.server.level.ServerPlayer) {
+    fun stopChampion(player: ServerPlayer) {
         if (MortalResolveManager.CHAMPION_ACTIVE.containsKey(player.getUUID())
         || player.getTags().contains(MortalResolveManager.CHAMPION_ACTIVE_TAG)) {
             MortalResolveEffects.stopHeartbeat(player)
         }
-        dev.overgrown.origins.storage.OriginStorage.clear(player, MortalResolveManager.CHAMPION_DEADLINE_KEY)
+        OriginStorage.clear(player, MortalResolveManager.CHAMPION_DEADLINE_KEY)
         MortalResolveManager.CHAMPION_ACTIVE.remove(player.getUUID())
         player.removeTag(MortalResolveManager.CHAMPION_ACTIVE_TAG)
         FiguraCompatManager.setResource(player, FiguraCompatManager.MORTAL_RESOLVE_RESOURCE, 0)
     }
 
-    fun stop(player: net.minecraft.server.level.ServerPlayer) {
+    fun stop(player: ServerPlayer) {
         if (MortalResolveManager.ACTIVE.containsKey(player.getUUID()) || player.getTags().contains(MortalResolveManager.ACTIVE_TAG)) {
             MortalResolveEffects.stopHeartbeat(player)
         }
-        dev.overgrown.origins.storage.OriginStorage.clear(player, MortalResolveManager.DEADLINE_KEY)
+        OriginStorage.clear(player, MortalResolveManager.DEADLINE_KEY)
         MortalResolveManager.ACTIVE.remove(player.getUUID())
         player.removeTag(MortalResolveManager.ACTIVE_TAG)
         FiguraCompatManager.setResource(player, FiguraCompatManager.MORTAL_RESOLVE_RESOURCE, 0)

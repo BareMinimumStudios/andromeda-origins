@@ -1,12 +1,14 @@
 package andromeda.origins.compat
 
+import andromeda.origins.config.AndromedaConfigRuntime
+import andromeda.origins.platform.Platform
+import java.util.concurrent.atomic.AtomicInteger
 import net.minecraft.world.level.ChunkPos
 import org.slf4j.LoggerFactory
-import java.util.concurrent.atomic.AtomicInteger
 
 /** Diagnostic only: retain Minecraft's original queue and propagate its failures. */
 object EntityUnloadDiagnostics {
-    val enabled: Boolean get() = andromeda.origins.config.AndromedaConfigRuntime.get().logoutDiagnostics
+    val enabled: Boolean get() = AndromedaConfigRuntime.get().logoutDiagnostics
     private val logger = LoggerFactory.getLogger("Andromeda Origins/Entity Unload Trace")
     private val reports = AtomicInteger()
     private val entries = AtomicInteger()
@@ -15,9 +17,9 @@ object EntityUnloadDiagnostics {
     private var announced = false
 
     fun register() {
-        andromeda.origins.platform.Platform.serverStarted { announce() }
-        andromeda.origins.platform.Platform.serverTick { announce() }
-        andromeda.origins.platform.Platform.serverStopped { announced = false }
+        Platform.serverStarted { announce() }
+        Platform.serverTick { announce() }
+        Platform.serverStopped { announced = false }
     }
 
     private fun announce() {

@@ -1,17 +1,25 @@
 package andromeda.origins.mixin
 
 import andromeda.origins.compat.UndetectableCompat
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation
+import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.Mob
+import org.spongepowered.asm.mixin.Mixin
+import org.spongepowered.asm.mixin.injection.At
+import org.spongepowered.asm.mixin.injection.Inject
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable
 
 
-@org.spongepowered.asm.mixin.Mixin(net.minecraft.world.entity.Mob::class)
+@Mixin(Mob::class)
 abstract class UndetectableMobTargetMixin {
-    @com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod(method = ["setTarget"])
-    private fun `andromeda$denyUndetectableTarget`(target: net.minecraft.world.entity.LivingEntity?,
-        original: com.llamalad7.mixinextras.injector.wrapoperation.Operation<Void>) {
+    @WrapMethod(method = ["setTarget"])
+    private fun `andromeda$denyUndetectableTarget`(target: LivingEntity?,
+        original: Operation<Void>) {
         original.call(if (UndetectableCompat.isUndetectable(target)) null else target)
     }
 
-    @org.spongepowered.asm.mixin.injection.Inject(method = ["getTarget"], at = [org.spongepowered.asm.mixin.injection.At("RETURN")], cancellable = true) private fun `andromeda$forgetUndetectableTarget`(cir: org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable<net.minecraft.world.entity.LivingEntity>) {
+    @Inject(method = ["getTarget"], at = [At("RETURN")], cancellable = true) private fun `andromeda$forgetUndetectableTarget`(cir: CallbackInfoReturnable<LivingEntity>) {
         if (UndetectableCompat.isUndetectable(cir.getReturnValue())) {
             cir.setReturnValue(null)
         }
