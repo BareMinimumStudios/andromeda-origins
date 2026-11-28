@@ -3,12 +3,12 @@
 </p>
 
 <p align="center" style="text-align: center;">
-<a href="https://modrinth.com/mod/andromeda-origins"><img src="https://img.shields.io/badge/Modrinth-133329?logo=modrinth&amp;logoColor=8CFFCF&amp;style=for-the-badge" alt="Modrinth" height="28"></a>
-<a href="https://www.curseforge.com/minecraft/mc-mods/andromeda-origins"><img src="https://img.shields.io/badge/CurseForge-39232B?logo=curseforge&amp;logoColor=FFA880&amp;style=for-the-badge" alt="CurseForge" height="28"></a>
-<a href="https://github.com/BareMinimumStudios/andromeda-origins"><img src="https://img.shields.io/badge/Source-242B49?logo=github&amp;logoColor=EAF0FF&amp;style=for-the-badge" alt="GitHub source" height="28"></a>
-<a href="https://github.com/BareMinimumStudios/andromeda-origins/issues"><img src="https://img.shields.io/github/issues/BareMinimumStudios/andromeda-origins?style=for-the-badge&amp;labelColor=242B49&amp;color=364775" alt="Report an issue" height="28"></a>
-<a href="https://github.com/BareMinimumStudios/andromeda-origins/forks"><img src="https://img.shields.io/github/forks/BareMinimumStudios/andromeda-origins?style=for-the-badge&amp;labelColor=242B49&amp;color=364775" alt="Forks" height="28"></a>
-<a href="https://github.com/BareMinimumStudios/andromeda-origins/stargazers"><img src="https://img.shields.io/github/stars/BareMinimumStudios/andromeda-origins?style=for-the-badge&amp;labelColor=242B49&amp;color=364775" alt="Stars" height="28"></a>
+<a href="https://modrinth.com/mod/andromeda-origins"><img src="https://img.shields.io/badge/Modrinth-111D35?logo=modrinth&amp;logoColor=F6D36E&amp;style=for-the-badge" alt="Modrinth" height="28"></a>
+<a href="https://www.curseforge.com/minecraft/mc-mods/andromeda-origins"><img src="https://img.shields.io/badge/CurseForge-302439?logo=curseforge&amp;logoColor=F8E4AD&amp;style=for-the-badge" alt="CurseForge" height="28"></a>
+<a href="https://github.com/BareMinimumStudios/andromeda-origins"><img src="https://img.shields.io/badge/Source-14182E?logo=github&amp;logoColor=C8D5F3&amp;style=for-the-badge" alt="GitHub source" height="28"></a>
+<a href="https://github.com/BareMinimumStudios/andromeda-origins/issues"><img src="https://img.shields.io/github/issues/BareMinimumStudios/andromeda-origins?style=for-the-badge&amp;labelColor=14182E&amp;color=302439" alt="Report an issue" height="28"></a>
+<a href="https://github.com/BareMinimumStudios/andromeda-origins/forks"><img src="https://img.shields.io/github/forks/BareMinimumStudios/andromeda-origins?style=for-the-badge&amp;labelColor=14182E&amp;color=302439" alt="Forks" height="28"></a>
+<a href="https://github.com/BareMinimumStudios/andromeda-origins/stargazers"><img src="https://img.shields.io/github/stars/BareMinimumStudios/andromeda-origins?style=for-the-badge&amp;labelColor=14182E&amp;color=302439" alt="Stars" height="28"></a>
 </p>
 
 # Andromeda Origins
