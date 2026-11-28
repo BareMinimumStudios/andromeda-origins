@@ -1,4 +1,15 @@
-![Andromeda Origins — thirteen species, from sea to sky](https://raw.githubusercontent.com/BareMinimumStudios/andromeda-origins/overgrown-1.21.1/docs/assets/andromeda-banner.png)
+<p align="center" style="text-align: center;">
+<img src="https://raw.githubusercontent.com/BareMinimumStudios/andromeda-origins/overgrown-1.21.1/docs/assets/andromeda-banner.png" alt="Andromeda Origins — thirteen species, from sea to sky" width="1080">
+</p>
+
+<p align="center" style="text-align: center;">
+<a href="https://modrinth.com/mod/andromeda-origins"><img src="https://img.shields.io/badge/Modrinth-133329?logo=modrinth&amp;logoColor=8CFFCF&amp;style=for-the-badge" alt="Modrinth" height="28"></a>
+<a href="https://www.curseforge.com/minecraft/mc-mods/andromeda-origins"><img src="https://img.shields.io/badge/CurseForge-39232B?logo=curseforge&amp;logoColor=FFA880&amp;style=for-the-badge" alt="CurseForge" height="28"></a>
+<a href="https://github.com/BareMinimumStudios/andromeda-origins"><img src="https://img.shields.io/badge/Source-242B49?logo=github&amp;logoColor=EAF0FF&amp;style=for-the-badge" alt="GitHub source" height="28"></a>
+<a href="https://github.com/BareMinimumStudios/andromeda-origins/issues"><img src="https://img.shields.io/github/issues/BareMinimumStudios/andromeda-origins?style=for-the-badge&amp;labelColor=242B49&amp;color=364775" alt="Report an issue" height="28"></a>
+<a href="https://github.com/BareMinimumStudios/andromeda-origins/forks"><img src="https://img.shields.io/github/forks/BareMinimumStudios/andromeda-origins?style=for-the-badge&amp;labelColor=242B49&amp;color=364775" alt="Forks" height="28"></a>
+<a href="https://github.com/BareMinimumStudios/andromeda-origins/stargazers"><img src="https://img.shields.io/github/stars/BareMinimumStudios/andromeda-origins?style=for-the-badge&amp;labelColor=242B49&amp;color=364775" alt="Stars" height="28"></a>
+</p>
 
 # Andromeda Origins
 
@@ -6,7 +17,7 @@
 
 Weave traps as an Arachne, track prey as a Fenrkin, or slip through the Veil. Built for Andromeda MC, Andromeda Origins adds **13 playable Origins**, each with its own abilities and weaknesses. The in-game Origin reader explains your kit, and custom HUD bars track resources, cooldowns and status.
 
-[Modrinth downloads](https://modrinth.com/mod/andromeda-origins/versions) · [Source and issues](https://github.com/BareMinimumStudios/andromeda-origins) · [Community](https://discord.gg/pcRw79hwey)
+[Join the Andromeda community](https://discord.gg/pcRw79hwey)
 
 ## Origin roster
 
@@ -93,8 +104,9 @@ Choose versions for your loader. Install gameplay integrations and shared effect
 
 Andromeda's code and artwork use [The Bare Minimum License v1.1](https://github.com/BareMinimumStudios/andromeda-origins/blob/overgrown-1.21.1/LICENSE). Bundled third-party components retain their own licenses.
 
+
 ## Sponsor
 
-[![BisectHosting](https://www.bisecthosting.com/partners/custom-banners/db76a74a-a111-4660-98b7-5a75c15a5951.png)](https://bisecthosting.com/bareminimum)
+[![Sponsor Banner](https://www.bisecthosting.com/partners/custom-banners/db76a74a-a111-4660-98b7-5a75c15a5951.png)](https://bisecthosting.com/bareminimum)
 
-Use code `bareminimum` to get 25% off your first month.
+Use code **`bareminimum`** to get **25% off your first month**!
